@@ -37,8 +37,8 @@ class TapServiceTitan(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://api.mysample.com",
-            description="The url for the API service",
+            default="https://api-integration.servicetitan.io",
+            description="The url for the ServiceTitan API",
         ),
     ).to_dict()
 

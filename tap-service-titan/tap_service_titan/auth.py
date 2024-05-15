@@ -17,14 +17,10 @@ class ServiceTitanAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         Returns:
             A dict with the request body
         """
-        # TODO: Define the request body needed for the API.
         return {
-            "resource": "https://analysis.windows.net/powerbi/api",
-            "scope": self.oauth_scopes,
             "client_id": self.config["client_id"],
-            "username": self.config["username"],
-            "password": self.config["password"],
-            "grant_type": "password",
+            "client_secret": self.config["client_secret"],
+            "grant_type": "client_credentials",
         }
 
     @classmethod
