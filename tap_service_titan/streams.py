@@ -27,7 +27,7 @@ class AppointmentsStream(ServiceTitanStream):
 
     name = "appointments"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    replication_key = None
+    replication_key: str = "modifiedOn"
     # Optionally, you may also use `schema_filepath` in place of `schema`:
     # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
     schema = th.PropertiesList(
@@ -35,14 +35,14 @@ class AppointmentsStream(ServiceTitanStream):
         th.Property("id", th.IntegerType),
         th.Property("jobId", th.IntegerType),
         th.Property("appointmentNumber", th.StringType),
-        th.Property("start", th.StringType),
-        th.Property("end", th.StringType),
-        th.Property("arrivalWindowStart", th.StringType),
-        th.Property("arrivalWindowEnd", th.StringType),
+        th.Property("start", th.DateTimeType),
+        th.Property("end", th.DateTimeType),
+        th.Property("arrivalWindowStart", th.DateTimeType),
+        th.Property("arrivalWindowEnd", th.DateTimeType),
         th.Property("status", th.StringType),
         th.Property("specialInstructions", th.StringType),
-        th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
         th.Property("customerId", th.IntegerType),
         th.Property("unused", th.BooleanType),
     ).to_dict()

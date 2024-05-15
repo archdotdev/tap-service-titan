@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sys
+from datetime import timedelta
 from functools import cached_property
 from typing import Any, Callable, Iterable
 
@@ -12,7 +13,6 @@ from singer_sdk.pagination import BaseAPIPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
-
 
 if sys.version_info >= (3, 9):
     import importlib.resources as importlib_resources
@@ -76,7 +76,7 @@ class ServiceTitanStream(RESTStream):
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: dict | None,
         next_page_token: Any | None,  # noqa: ANN401
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
@@ -89,11 +89,19 @@ class ServiceTitanStream(RESTStream):
             A dictionary of URL query parameters.
         """
         params: dict = {}
+        starting_date = self.get_starting_timestamp(context)
+
         if next_page_token:
             params["from"] = next_page_token
-        if self.replication_key:
-            params["sort"] = "asc"
-            params["order_by"] = self.replication_key
+
+        # The Service Titan API uses the "from" param for both continuation tokens
+        # and for the starting timestamp for the first request of an export
+        if self.replication_key and starting_date and (next_page_token is None):
+            # "from" param is inclusive of start date
+            # this prevents duplicating of single record in each run
+            starting_date += timedelta(milliseconds=1)
+            params["from"] = starting_date.isoformat()
+
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
