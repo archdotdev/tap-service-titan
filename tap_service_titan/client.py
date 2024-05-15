@@ -32,7 +32,7 @@ class ServiceTitanStream(RESTStream):
         """Return the API URL root, configurable via tap settings."""
         return self.config["api_url"]
 
-    records_jsonpath = "$[*]"  # Or override `parse_response`.
+    records_jsonpath = "$.data[*]"  # Or override `parse_response`.
 
     # Set this value or override `get_new_paginator`.
     next_page_token_jsonpath = "$.next_page"  # noqa: S105
@@ -56,6 +56,7 @@ class ServiceTitanStream(RESTStream):
         headers = {}
         if "user_agent" in self.config:
             headers["User-Agent"] = self.config.get("user_agent")
+        headers["ST-App-Key"] = self.config["st_app_key"]
         return headers
 
     def get_new_paginator(self) -> BaseAPIPaginator:

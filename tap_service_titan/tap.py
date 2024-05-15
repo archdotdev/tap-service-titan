@@ -14,31 +14,45 @@ class TapServiceTitan(Tap):
 
     name = "tap-service-titan"
 
-    # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "auth_token",
+            "client_id",
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The token to authenticate against the API service",
+            description="The client ID to use in authenticating.",
         ),
         th.Property(
-            "project_ids",
-            th.ArrayType(th.StringType),
+            "client_secret",
+            th.StringType,
             required=True,
-            description="Project IDs to replicate",
+            secret=True,  # Flag config as protected.
+            description="The client secret to use in authenticating.",
         ),
         th.Property(
-            "start_date",
-            th.DateTimeType,
-            description="The earliest record date to sync",
+            "st_app_key",
+            th.StringType,
+            required=True,
+            secret=True,  # Flag config as protected.
+            description="The app key for the Service Titan app used to authenticate.",
+        ),
+        th.Property(
+            "tenant_id",
+            th.StringType,
+            required=True,
+            description="Tenant ID to pull records for.",
         ),
         th.Property(
             "api_url",
             th.StringType,
             default="https://api-integration.servicetitan.io",
             description="The url for the ServiceTitan API",
+        ),
+        th.Property(
+            "auth_url",
+            th.StringType,
+            default="https://auth-integration.servicetitan.io/connect/token",
+            description="The url for the ServiceTitan OAuth API",
         ),
     ).to_dict()
 
@@ -49,8 +63,7 @@ class TapServiceTitan(Tap):
             A list of discovered streams.
         """
         return [
-            streams.GroupsStream(self),
-            streams.UsersStream(self),
+            streams.AppointmentsStream(self),
         ]
 
 
