@@ -8,6 +8,7 @@ plugins:
   extractors:
   - name: "tap-service-titan"
     namespace: "tap_service_titan"
+    executable: "tap-service-titan"
     pip_url: -e .
     capabilities:
     - state
@@ -16,15 +17,24 @@ plugins:
     - about
     - stream-maps
     config:
-      start_date: '2010-01-01T00:00:00Z'
+      api_url: 'https://api-integration.servicetitan.io'
+      auth_url: 'https://auth-integration.servicetitan.io/connect/token'
     settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
-    - name: username
-    - name: password
-      kind: password
-      sensitive: true
-    - name: start_date
-      value: '2010-01-01T00:00:00Z'
+      - name: client_id
+        kind: string
+        sensitive: true
+      - name: client_secret
+        kind: string
+        sensitive: true
+      - name: st_app_key
+        kind: string
+        sensitive: true
+      - name: tenant_id
+        kind: string
+      - name: api_url
+        kind: string
+      - name: auth_url
+        kind: string
   loaders:
   - name: target-jsonl
     variant: andyh1203
