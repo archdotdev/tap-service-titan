@@ -114,3 +114,50 @@ class JobsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/jobs"
+
+
+class ProjectsStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "projects"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    # Optionally, you may also use `schema_filepath` in place of `schema`:
+    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+    schema = th.PropertiesList(
+        th.Property("active", th.BooleanType),
+        th.Property("id", th.IntegerType),
+        th.Property("number", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("summary", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("statusId", th.IntegerType),
+        th.Property("subStatus", th.StringType),
+        th.Property("subStatusId", th.IntegerType),
+        th.Property("customerId", th.IntegerType),
+        th.Property("locationId", th.IntegerType),
+        th.Property("projectManagerIds", th.ArrayType(th.IntegerType())),
+        th.Property("businessUnitIds", th.ArrayType(th.IntegerType())),
+        th.Property("startDate", th.DateTimeType),
+        th.Property("targetCompletionDate", th.DateTimeType),
+        th.Property("actualCompletionDate", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property("externalData", th.StringType),
+        th.Property("jobIds", th.ArrayType(th.IntegerType())),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/projects"
