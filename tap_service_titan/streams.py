@@ -256,42 +256,62 @@ class CallsStream(ServiceTitanStream):
         th.Property("duration", th.StringType),
         th.Property("from", th.StringType),
         th.Property("to", th.StringType),
-        th.Property("direction", th.StringType),  # Assuming it's a nested object, no properties specified
-        th.Property("status", th.StringType),     # Assuming it's a nested object, no properties specified
-        th.Property("type", th.StringType),       # Assuming it's a nested object, no properties specified
+        th.Property(
+            "direction", th.StringType
+        ),  # Assuming it's a nested object, no properties specified
+        th.Property(
+            "status", th.StringType
+        ),  # Assuming it's a nested object, no properties specified
+        th.Property(
+            "type", th.StringType
+        ),  # Assuming it's a nested object, no properties specified
         th.Property("recordingUrl", th.StringType),
         th.Property("voiceMailPath", th.StringType),
         th.Property("createdOn", th.DateTimeType),
         th.Property("modifiedOn", th.DateTimeType),
-        th.Property("reason", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("customer", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("location", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("campaign", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("job", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("number", th.StringType)
-        )),
-        th.Property("agent", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("createdBy", th.ObjectType(
-            th.Property("id", th.IntegerType),
-            th.Property("name", th.StringType)
-        )),
-        th.Property("active", th.BooleanType)
+        th.Property(
+            "reason",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property(
+            "customer",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property(
+            "location",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property(
+            "campaign",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property(
+            "job",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("number", th.StringType)
+            ),
+        ),
+        th.Property(
+            "agent",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property(
+            "createdBy",
+            th.ObjectType(
+                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
+            ),
+        ),
+        th.Property("active", th.BooleanType),
     ).to_dict()
 
     @cached_property
@@ -299,3 +319,60 @@ class CallsStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/telecom/v2/tenant/{self._tap.config['tenant_id']}/export/calls"
 
+
+class LocationsStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "locations"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("customerId", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("name", th.StringType),
+        th.Property(
+            "address",
+            th.ObjectType(
+                th.Property("street", th.StringType),
+                th.Property("unit", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property("state", th.StringType),
+                th.Property("zip", th.StringType),
+                th.Property("country", th.StringType),
+                th.Property("latitude", th.NumberType),
+                th.Property("longitude", th.NumberType),
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("mergedToId", th.IntegerType),
+        th.Property("zoneId", th.IntegerType),
+        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property("taxZoneId", th.IntegerType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations"
