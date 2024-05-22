@@ -256,15 +256,9 @@ class CallsStream(ServiceTitanStream):
         th.Property("duration", th.StringType),
         th.Property("from", th.StringType),
         th.Property("to", th.StringType),
-        th.Property(
-            "direction", th.StringType
-        ),  # Assuming it's a nested object, no properties specified
-        th.Property(
-            "status", th.StringType
-        ),  # Assuming it's a nested object, no properties specified
-        th.Property(
-            "type", th.StringType
-        ),  # Assuming it's a nested object, no properties specified
+        th.Property("direction", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("type", th.StringType),
         th.Property("recordingUrl", th.StringType),
         th.Property("voiceMailPath", th.StringType),
         th.Property("createdOn", th.DateTimeType),
