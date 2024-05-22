@@ -558,7 +558,7 @@ class InvoicesStream(ServiceTitanStream):
         ),
         th.Property("depositedOn", th.StringType),
         th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
         th.Property("adjustmentToId", th.IntegerType),
         th.Property(
             "job",
@@ -583,7 +583,7 @@ class InvoicesStream(ServiceTitanStream):
             th.ObjectType(
                 th.Property("id", th.IntegerType),
                 th.Property("name", th.StringType),
-                th.Property("modifiedOn", th.StringType),
+                th.Property("modifiedOn", th.DateTimeType),
             ),
         ),
         th.Property("commissionEligibilityDate", th.StringType),
