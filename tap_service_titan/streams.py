@@ -369,7 +369,7 @@ class LocationsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations"
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations"
 
 
 class CustomersStream(ServiceTitanStream):
@@ -428,4 +428,4 @@ class CustomersStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers"
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/customers"
