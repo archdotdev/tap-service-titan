@@ -66,6 +66,8 @@ class TapServiceTitan(Tap):
             streams.AppointmentsStream(self),
             streams.JobsStream(self),
             streams.ProjectsStream(self),
+            streams.EstimatesStream(self),
+            streams.CallsStream(self),
         ]
 
 

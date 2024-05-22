@@ -161,3 +161,141 @@ class ProjectsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/projects"
+
+
+class EstimatesStream(ServiceTitanStream):
+    """Define custom stream for estimates."""
+
+    name = "estimates"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("jobId", th.IntegerType),
+        th.Property("projectId", th.IntegerType),
+        th.Property("locationId", th.IntegerType),
+        th.Property("customerId", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("jobNumber", th.StringType),
+        th.Property(
+            "status",
+            th.ObjectType(
+                th.Property("value", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property("reviewStatus", th.StringType),
+        th.Property("summary", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("soldOn", th.DateTimeType),
+        th.Property("soldBy", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property(
+            "items",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property(
+                        "sku",
+                        th.ObjectType(
+                            th.Property("id", th.IntegerType),
+                            th.Property("name", th.StringType),
+                            th.Property("displayName", th.StringType),
+                            th.Property("type", th.StringType),
+                            th.Property("soldHours", th.NumberType),
+                            th.Property("generalLedgerAccountId", th.IntegerType),
+                            th.Property("generalLedgerAccountName", th.StringType),
+                            th.Property("modifiedOn", th.DateTimeType),
+                        ),
+                    ),
+                    th.Property("skuAccount", th.StringType),
+                    th.Property("description", th.StringType),
+                    th.Property("membershipTypeId", th.IntegerType),
+                    th.Property("qty", th.NumberType),
+                    th.Property("unitRate", th.NumberType),
+                    th.Property("total", th.NumberType),
+                    th.Property("unitCost", th.NumberType),
+                    th.Property("totalCost", th.NumberType),
+                    th.Property("itemGroupName", th.StringType),
+                    th.Property("itemGroupRootId", th.IntegerType),
+                    th.Property("createdOn", th.DateTimeType),
+                    th.Property("modifiedOn", th.DateTimeType),
+                    th.Property("chargeable", th.BooleanType),
+                ),
+            ),
+        ),
+        th.Property(
+            "externalLinks",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("name", th.StringType),
+                    th.Property("url", th.StringType),
+                )
+            ),
+        ),
+        th.Property("subtotal", th.NumberType),
+        th.Property("businessUnitId", th.IntegerType),
+        th.Property("businessUnitName", th.StringType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/sales/v2/tenant/{self._tap.config['tenant_id']}/estimates/export"
+
+
+class CallsStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "calls"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("duration", th.StringType),
+        th.Property("from", th.StringType),
+        th.Property("to", th.StringType),
+        th.Property("direction", th.StringType),  # Assuming it's a nested object, no properties specified
+        th.Property("status", th.StringType),     # Assuming it's a nested object, no properties specified
+        th.Property("type", th.StringType),       # Assuming it's a nested object, no properties specified
+        th.Property("recordingUrl", th.StringType),
+        th.Property("voiceMailPath", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("reason", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("customer", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("location", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("campaign", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("job", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("number", th.StringType)
+        )),
+        th.Property("agent", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("createdBy", th.ObjectType(
+            th.Property("id", th.IntegerType),
+            th.Property("name", th.StringType)
+        )),
+        th.Property("active", th.BooleanType)
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/telecom/v2/tenant/{self._tap.config['tenant_id']}/export/calls"
+
