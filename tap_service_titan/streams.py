@@ -370,3 +370,62 @@ class LocationsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations"
+
+
+class CustomersStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "customers"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("name", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property(
+            "address",
+            th.ObjectType(
+                th.Property("street", th.StringType),
+                th.Property("unit", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property("state", th.StringType),
+                th.Property("zip", th.StringType),
+                th.Property("country", th.StringType),
+                th.Property("latitude", th.NumberType),
+                th.Property("longitude", th.NumberType),
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property("balance", th.NumberType),
+        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
+        th.Property("doNotMail", th.BooleanType),
+        th.Property("doNotService", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("mergedToId", th.IntegerType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers"
