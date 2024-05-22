@@ -476,7 +476,7 @@ class InvoicesStream(ServiceTitanStream):
 
     name = "invoices"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    #     replication_key: str = "modifiedOn"
+    replication_key: str = "modifiedOn"
     # Optionally, you may also use `schema_filepath` in place of `schema`:
     # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
     schema = th.PropertiesList(
