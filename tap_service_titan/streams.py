@@ -655,7 +655,7 @@ class InvoicesStream(ServiceTitanStream):
                     ),
                     th.Property("displayName", th.StringType),
                     th.Property("soldHours", th.NumberType),
-                    th.Property("modifiedOn", th.StringType),
+                    th.Property("modifiedOn", th.DateTimeType),
                     th.Property("serviceDate", th.StringType),
                     th.Property("order", th.IntegerType),
                     th.Property(
