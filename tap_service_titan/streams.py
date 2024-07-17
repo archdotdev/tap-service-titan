@@ -8,7 +8,7 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import ServiceTitanStream
+from tap_service_titan.client import ServiceTitanStream, ServiceTitanExportStream
 
 if sys.version_info >= (3, 9):
     import importlib.resources as importlib_resources
@@ -23,7 +23,7 @@ SCHEMAS_DIR = importlib_resources.files(__package__) / "schemas"
 
 
 # JPM Streams
-class AppointmentsStream(ServiceTitanStream):
+class AppointmentsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "appointments"
@@ -54,7 +54,7 @@ class AppointmentsStream(ServiceTitanStream):
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/appointments"
 
 
-class JobsStream(ServiceTitanStream):
+class JobsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "jobs"
@@ -117,7 +117,7 @@ class JobsStream(ServiceTitanStream):
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/jobs"
 
 
-class ProjectsStream(ServiceTitanStream):
+class ProjectsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "projects"
@@ -164,7 +164,7 @@ class ProjectsStream(ServiceTitanStream):
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/projects"
 
 
-class JobCancelledLogsStream(ServiceTitanStream):
+class JobCancelledLogsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "job_canceled_logs"
@@ -191,7 +191,7 @@ class JobCancelledLogsStream(ServiceTitanStream):
 
 
 # CRM Streams
-class BookingsStream(ServiceTitanStream):
+class BookingsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "bookings"
@@ -246,7 +246,7 @@ class BookingsStream(ServiceTitanStream):
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/bookings"
 
 
-class CustomersStream(ServiceTitanStream):
+class CustomersStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "customers"
@@ -307,7 +307,7 @@ class CustomersStream(ServiceTitanStream):
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/customers"
 
 
-class CustomerContactsStream(ServiceTitanStream):
+class CustomerContactsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "customer_contacts"
@@ -341,7 +341,7 @@ class CustomerContactsStream(ServiceTitanStream):
         )
 
 
-class LeadsStream(ServiceTitanStream):
+class LeadsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "leads"
@@ -377,7 +377,7 @@ class LeadsStream(ServiceTitanStream):
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/leads"
 
 
-class LocationsStream(ServiceTitanStream):
+class LocationsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "locations"
@@ -437,7 +437,7 @@ class LocationsStream(ServiceTitanStream):
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations"
 
 
-class LocationContactsStream(ServiceTitanStream):
+class LocationContactsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "location_contacts"
@@ -471,7 +471,7 @@ class LocationContactsStream(ServiceTitanStream):
 
 
 # Accounting Streams
-class InvoicesStream(ServiceTitanStream):
+class InvoicesStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "invoices"
@@ -686,7 +686,7 @@ class InvoicesStream(ServiceTitanStream):
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/export/invoices"
 
 
-class EstimatesStream(ServiceTitanStream):
+class EstimatesStream(ServiceTitanExportStream):
     """Define custom stream for estimates."""
 
     name = "estimates"
@@ -768,7 +768,7 @@ class EstimatesStream(ServiceTitanStream):
         return f"/sales/v2/tenant/{self._tap.config['tenant_id']}/estimates/export"
 
 
-class CallsStream(ServiceTitanStream):
+class CallsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "calls"
@@ -837,7 +837,7 @@ class CallsStream(ServiceTitanStream):
         return f"/telecom/v2/tenant/{self._tap.config['tenant_id']}/export/calls"
 
 
-class PaymentsStream(ServiceTitanStream):
+class PaymentsStream(ServiceTitanExportStream):
     """Define custom stream."""
 
     name = "payments"
@@ -917,3 +917,177 @@ class PaymentsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/export/payments"
+
+
+class EmployeesStream(ServiceTitanExportStream):
+    """Define custom stream."""
+
+    name = "employees"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("userId", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("role", th.StringType),
+        th.Property("roleIds", th.ArrayType(th.IntegerType)),
+        th.Property("businessUnitId", th.IntegerType, required=False),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("email", th.StringType, required=False),
+        th.Property("phoneNumber", th.StringType, required=False),
+        th.Property("loginName", th.StringType, required=False),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+            required=False,
+        ),
+        th.Property("active", th.BooleanType),
+        th.Property("aadUserId", th.StringType, required=False),
+        th.Property(
+            "permissions",
+            th.ArrayType(
+                th.OneOf(
+                    th.ObjectType(
+                        th.Property("id", th.IntegerType),
+                        th.Property("value", th.StringType),
+                    ),
+                    # Array may contain Nones -- falling back to AnyType for now
+                    th.AnyType,
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/export/employees"
+
+
+class JobCancelReasonsStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "job_cancel_reasons"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-cancel-reasons"
+
+
+class JobHoldReasonsStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "job_hold_reasons"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-hold-reasons"
+
+
+class JobTypesStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "job_types"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
+        th.Property("skills", th.ArrayType(th.StringType)),
+        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
+        th.Property("priority", th.StringType),
+        th.Property("duration", th.IntegerType),
+        th.Property("soldThreshold", th.NumberType),
+        th.Property("class", th.StringType),
+        th.Property("summary", th.StringType),
+        th.Property("noCharge", th.BooleanType),
+        th.Property("enforceRecurringServiceEventSelection", th.BooleanType),
+        th.Property("invoiceSignaturesRequired", th.BooleanType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-types"
+
+
+class ProjectStatusesStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "project_statuses"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("order", th.IntegerType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-statuses"
+
+
+class ProjectSubStatusesStream(ServiceTitanStream):
+    """Define custom stream."""
+
+    name = "project_sub_statuses"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("statusId", th.IntegerType),
+        th.Property("order", th.IntegerType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-substatuses"
