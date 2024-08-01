@@ -878,7 +878,7 @@ class EstimateItemsStream(ServiceTitanStream):
                 th.Property("soldHours", th.NumberType),
                 th.Property("generalLedgerAccountId", th.IntegerType),
                 th.Property("generalLedgerAccountName", th.StringType),
-                th.Property("modifiedOn", th.StringType),
+                th.Property("modifiedOn", th.DateTimeType),
             ),
         ),
         th.Property("skuAccount", th.StringType),
@@ -891,8 +891,10 @@ class EstimateItemsStream(ServiceTitanStream):
         th.Property("totalCost", th.NumberType),
         th.Property("itemGroupName", th.StringType),
         th.Property("itemGroupRootId", th.IntegerType),
-        th.Property("createdOn", th.StringType),  # Assuming datetime format as string
-        th.Property("modifiedOn", th.StringType),  # Assuming datetime format as string
+        th.Property("createdOn", th.DateTimeType),
+        th.Property(
+            "modifiedOn", th.DateTimeType
+        ),  # Assuming datetime format as string
         th.Property("chargeable", th.BooleanType),
     ).to_dict()
 

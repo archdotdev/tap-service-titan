@@ -155,8 +155,8 @@ class ServiceTitanStream(ServiceTitanBaseStream):
             # this prevents duplicating of single record in each run
             starting_date += timedelta(milliseconds=1)
             params["modifiedOnOrAfter"] = starting_date.isoformat()
+        params["pageSize"] = 5000
         params["page"] = next_page_token
-
         return params
 
     def get_new_paginator(self) -> ServiceTitanPaginator:
