@@ -9,7 +9,7 @@ from typing import Any, Callable, Iterable
 
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import BaseAPIPaginator  # noqa: TCH002
+from singer_sdk.pagination import BaseAPIPaginator, BasePageNumberPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
@@ -25,8 +25,8 @@ _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = importlib_resources.files(__package__) / "schemas"
 
 
-class ServiceTitanStream(RESTStream):
-    """ServiceTitan stream class."""
+class ServiceTitanBaseStream(RESTStream):
+    """ServiceTitan base stream class."""
 
     @property
     def url_base(self) -> str:
@@ -34,8 +34,6 @@ class ServiceTitanStream(RESTStream):
         return self.config["api_url"]
 
     records_jsonpath = "$.data[*]"  # Or override `parse_response`.
-
-    next_page_token_jsonpath = "$.continueFrom"  # noqa: S105
 
     @cached_property
     def authenticator(self) -> _Auth:
@@ -74,6 +72,23 @@ class ServiceTitanStream(RESTStream):
         """
         return super().get_new_paginator()
 
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result records.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each record from the source.
+        """
+        yield from extract_jsonpath(self.records_jsonpath, input=response.json())
+
+
+class ServiceTitanExportStream(ServiceTitanBaseStream):
+    """ServiceTitan stream class for export endpoints."""
+
+    next_page_token_jsonpath = "$.continueFrom"  # noqa: S105
+
     def get_url_params(
         self,
         context: dict | None,
@@ -104,13 +119,46 @@ class ServiceTitanStream(RESTStream):
 
         return params
 
-    def parse_response(self, response: requests.Response) -> Iterable[dict]:
-        """Parse the response and return an iterator of result records.
+
+class ServiceTitanPaginator(BasePageNumberPaginator):
+    """ServiceTitan paginator class."""
+
+    def has_more(self, response: Response) -> bool:
+        """Return True if there are more pages available."""
+        return response.json().get("hasMore", False)
+
+
+class ServiceTitanStream(ServiceTitanBaseStream):
+    """ServiceTitan stream class for endpoints without export support."""
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,  # noqa: ANN401
+    ) -> dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization.
 
         Args:
-            response: The HTTP ``requests.Response`` object.
+            context: The stream context.
+            next_page_token: The next page index or value.
 
-        Yields:
-            Each record from the source.
+        Returns:
+            A dictionary of URL query parameters.
         """
-        yield from extract_jsonpath(self.records_jsonpath, input=response.json())
+        params: dict = {}
+        starting_date = self.get_starting_timestamp(context)
+
+        # The Service Titan API uses the "from" param for both continuation tokens
+        # and for the starting timestamp for the first request of an export
+        if self.replication_key and starting_date:
+            # "from" param is inclusive of start date
+            # this prevents duplicating of single record in each run
+            starting_date += timedelta(milliseconds=1)
+            params["modifiedOnOrAfter"] = starting_date.isoformat()
+        params["pageSize"] = 5000
+        params["page"] = next_page_token
+        return params
+
+    def get_new_paginator(self) -> ServiceTitanPaginator:
+        """Create a new pagination helper instance."""
+        return ServiceTitanPaginator(start_value=1)
