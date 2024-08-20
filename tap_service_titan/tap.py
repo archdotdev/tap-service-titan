@@ -88,6 +88,10 @@ class TapServiceTitan(Tap):
             streams.BusinessUnitsStream(self),
             streams.InvoiceItemsStream(self),
             streams.EstimateItemsStream(self),
+            streams.PurchaseOrdersStream(self),
+            streams.PurchaseOrderMarkupsStream(self),
+            streams.PurchaseOrderTypesStream(self),
+            streams.ReceiptsStream(self),
         ]
 
 
