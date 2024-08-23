@@ -1440,7 +1440,7 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
         th.Property("sentOn", th.StringType),
         th.Property("receivedOn", th.StringType),
         th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
         th.Property("total", th.NumberType),
         th.Property("tax", th.NumberType),
         th.Property("shipping", th.NumberType),
