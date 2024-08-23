@@ -1510,6 +1510,7 @@ class PurchaseOrderMarkupsStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/purchase-order-markups"
 
+
 class PurchaseOrderTypesStream(ServiceTitanStream):
     """Define custom stream."""
 
@@ -1529,14 +1530,16 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
         th.Property("skipWeekends", th.BooleanType),
         th.Property("excludeTaxFromJobCosting", th.BooleanType),
         th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
     ).to_dict()
-
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/purchase-order-types"
+        return (
+            f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/purchase-order-types"
+        )
+
 
 class ReceiptsStream(ServiceTitanStream):
     """Define custom stream."""
@@ -1631,7 +1634,6 @@ class ReceiptsStream(ServiceTitanStream):
             ),
         ),
     ).to_dict()
-
 
     @cached_property
     def path(self) -> str:
