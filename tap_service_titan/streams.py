@@ -130,7 +130,7 @@ class JobHistoryStream(ServiceTitanExportStream):
         th.Property("id", th.IntegerType),
         th.Property("employeeId", th.IntegerType, required=False),
         th.Property("eventType", th.StringType),
-        th.Property("date", th.DateTimeType),
+        th.Property("date", th.DateType),
         th.Property(
             "usedSchedulingTool",
             th.StringType,
