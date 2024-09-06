@@ -22,21 +22,14 @@ else:
     import importlib_resources
 
 
-# TODO: Delete this is if not using json files for schema definition
-SCHEMAS_DIR = importlib_resources.files(__package__) / "schemas"
-# TODO: - Override `UsersStream` and `GroupsStream` with your own stream definition.
-#       - Copy-paste as many times as needed to create multiple stream types.
-
-
 # JPM Streams
 class AppointmentsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define appointments stream."""
 
     name = "appointments"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
@@ -61,13 +54,12 @@ class AppointmentsStream(ServiceTitanExportStream):
 
 
 class JobsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define jobs stream."""
 
     name = "jobs"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
@@ -127,14 +119,37 @@ class JobsStream(ServiceTitanExportStream):
         return {"job_id": record["id"]}
 
 
+class JobHistoryStream(ServiceTitanExportStream):
+    """Define job history stream."""
+
+    name = "job_history"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "date"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("employeeId", th.IntegerType, required=False),
+        th.Property("eventType", th.StringType),
+        th.Property("date", th.DateType),
+        th.Property(
+            "usedSchedulingTool",
+            th.StringType,
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-history"
+
+
 class ProjectsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define projects stream."""
 
     name = "projects"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
@@ -175,13 +190,12 @@ class ProjectsStream(ServiceTitanExportStream):
 
 
 class JobCancelledLogsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define cancelled job stream."""
 
     name = "job_canceled_logs"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "createdOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("jobId", th.IntegerType),
@@ -202,13 +216,12 @@ class JobCancelledLogsStream(ServiceTitanExportStream):
 
 # CRM Streams
 class BookingsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define bookings stream."""
 
     name = "bookings"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("source", th.StringType),
@@ -257,13 +270,12 @@ class BookingsStream(ServiceTitanExportStream):
 
 
 class CustomersStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define customers stream."""
 
     name = "customers"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("active", th.BooleanType),
@@ -318,13 +330,11 @@ class CustomersStream(ServiceTitanExportStream):
 
 
 class CustomerContactsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define contacts stream."""
 
     name = "customer_contacts"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
 
     schema = th.PropertiesList(
         th.Property("modifiedOn", th.DateTimeType),
@@ -352,13 +362,12 @@ class CustomerContactsStream(ServiceTitanExportStream):
 
 
 class LeadsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define leads stream."""
 
     name = "leads"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("status", th.StringType),  # Enum values are treated as strings
@@ -388,13 +397,12 @@ class LeadsStream(ServiceTitanExportStream):
 
 
 class LocationsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define locations stream."""
 
     name = "locations"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("taxZoneId", th.IntegerType),
         th.Property("id", th.IntegerType),
@@ -448,13 +456,12 @@ class LocationsStream(ServiceTitanExportStream):
 
 
 class LocationContactsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define location contacts stream."""
 
     name = "location_contacts"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("type", th.StringType),  # Enum values are treated as strings
@@ -482,13 +489,12 @@ class LocationContactsStream(ServiceTitanExportStream):
 
 # Accounting Streams
 class InvoicesStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define invoices stream."""
 
     name = "invoices"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("syncStatus", th.StringType),
@@ -697,13 +703,12 @@ class InvoicesStream(ServiceTitanExportStream):
 
 
 class InvoiceItemsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define invoice items stream."""
 
     name = "invoice_items"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"  # noqa: ERA001
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("description", th.StringType),
@@ -779,7 +784,7 @@ class InvoiceItemsStream(ServiceTitanExportStream):
 
 
 class EstimatesStream(ServiceTitanExportStream):
-    """Define custom stream for estimates."""
+    """Define estimates stream."""
 
     name = "estimates"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -861,7 +866,7 @@ class EstimatesStream(ServiceTitanExportStream):
 
 
 class EstimateItemsStream(ServiceTitanStream):
-    """Define custom stream for estimate items."""
+    """Define estimate items stream."""
 
     name = "estimate_items"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -905,7 +910,7 @@ class EstimateItemsStream(ServiceTitanStream):
 
 
 class CallsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define calls stream."""
 
     name = "calls"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -974,7 +979,7 @@ class CallsStream(ServiceTitanExportStream):
 
 
 class PaymentsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define payments stream."""
 
     name = "payments"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1056,7 +1061,7 @@ class PaymentsStream(ServiceTitanExportStream):
 
 
 class EmployeesStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define employees stream."""
 
     name = "employees"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1108,7 +1113,7 @@ class EmployeesStream(ServiceTitanExportStream):
 
 
 class BusinessUnitsStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define business units stream."""
 
     name = "business_units"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1179,7 +1184,7 @@ class BusinessUnitsStream(ServiceTitanExportStream):
 
 
 class TechniciansStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define technicians stream."""
 
     name = "technicians"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1247,7 +1252,7 @@ class TechniciansStream(ServiceTitanExportStream):
 
 
 class JobCancelReasonsStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define job cancel reasons stream."""
 
     name = "job_cancel_reasons"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1268,7 +1273,7 @@ class JobCancelReasonsStream(ServiceTitanStream):
 
 
 class JobHoldReasonsStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define job hold reasons stream."""
 
     name = "job_hold_reasons"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1289,7 +1294,7 @@ class JobHoldReasonsStream(ServiceTitanStream):
 
 
 class JobTypesStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define job types stream."""
 
     name = "job_types"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1328,7 +1333,7 @@ class JobTypesStream(ServiceTitanStream):
 
 
 class ProjectStatusesStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define project statuses stream."""
 
     name = "project_statuses"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1348,7 +1353,7 @@ class ProjectStatusesStream(ServiceTitanStream):
 
 
 class ProjectSubStatusesStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define project substatuses stream."""
 
     name = "project_sub_statuses"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1369,7 +1374,7 @@ class ProjectSubStatusesStream(ServiceTitanStream):
 
 
 class CampaignsStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define campaigns stream."""
 
     name = "campaigns"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1404,7 +1409,7 @@ class CampaignsStream(ServiceTitanStream):
 
 
 class PurchaseOrdersStream(ServiceTitanExportStream):
-    """Define custom stream."""
+    """Define purchase orders stream."""
 
     name = "purchase_orders"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1493,7 +1498,7 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
 
 
 class PurchaseOrderMarkupsStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define purchase order markups stream."""
 
     name = "purchase_order_markups"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1512,7 +1517,7 @@ class PurchaseOrderMarkupsStream(ServiceTitanStream):
 
 
 class PurchaseOrderTypesStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define purchase order types stream."""
 
     name = "purchase_order_types"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1542,7 +1547,7 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
 
 
 class ReceiptsStream(ServiceTitanStream):
-    """Define custom stream."""
+    """Define receipts stream."""
 
     name = "receipts"
     primary_keys: t.ClassVar[list[str]] = ["id"]
@@ -1639,3 +1644,42 @@ class ReceiptsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/receipts"
+
+
+class ReviewsStream(ServiceTitanStream):
+    """Define reviews stream."""
+
+    name = "reviews"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "publishDate"
+
+    schema = th.PropertiesList(
+        th.Property("address", th.StringType),
+        th.Property("platform", th.StringType),
+        th.Property("authorEmail", th.StringType),
+        th.Property("authorName", th.StringType),
+        th.Property("review", th.StringType),
+        th.Property("reviewResponse", th.StringType),
+        th.Property("publishDate", th.DateTimeType),
+        th.Property("rating", th.NumberType),
+        th.Property("recommendationStatus", th.IntegerType),
+        th.Property("verificationStatus", th.BooleanType),
+        th.Property("jobId", th.IntegerType),
+        th.Property("verifiedByUserId", th.IntegerType),
+        th.Property("verifiedOn", th.DateTimeType),
+        th.Property("isAutoVerified", th.BooleanType),
+        th.Property("businessUnitId", th.IntegerType),
+        th.Property("completedDate", th.StringType),
+        th.Property("customerName", th.StringType),
+        th.Property("customerId", th.IntegerType),
+        th.Property("dispatchedDate", th.StringType),
+        th.Property("jobStatus", th.IntegerType),
+        th.Property("jobTypeName", th.StringType),
+        th.Property("technicianFullName", th.StringType),
+        th.Property("technicianId", th.IntegerType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/marketingreputation/v2/tenant/{self._tap.config['tenant_id']}/reviews"
