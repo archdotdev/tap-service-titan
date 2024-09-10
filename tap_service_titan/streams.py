@@ -1650,38 +1650,32 @@ class ReviewsStream(ServiceTitanStream):
     """Define reviews stream."""
 
     name = "reviews"
-    primary_keys: t.ClassVar[list[str]] = [
-        "customerId",
-        "jobId",
-        "technicianId",
-        "completedDate",
-    ]
     replication_key: str = "publishDate"
 
     schema = th.PropertiesList(
-        th.Property("address", th.StringType),
-        th.Property("platform", th.StringType),
-        th.Property("authorEmail", th.StringType),
-        th.Property("authorName", th.StringType),
+        th.Property("address", th.StringType, required=False),
+        th.Property("platform", th.StringType, required=False),
+        th.Property("authorEmail", th.StringType, required=False),
+        th.Property("authorName", th.StringType, required=False),
         th.Property("review", th.StringType),
-        th.Property("reviewResponse", th.StringType),
-        th.Property("publishDate", th.DateTimeType),
-        th.Property("rating", th.NumberType),
-        th.Property("recommendationStatus", th.IntegerType),
-        th.Property("verificationStatus", th.BooleanType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("verifiedByUserId", th.IntegerType),
-        th.Property("verifiedOn", th.DateTimeType),
-        th.Property("isAutoVerified", th.BooleanType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("completedDate", th.StringType),
-        th.Property("customerName", th.StringType),
-        th.Property("customerId", th.IntegerType),
-        th.Property("dispatchedDate", th.StringType),
-        th.Property("jobStatus", th.IntegerType),
-        th.Property("jobTypeName", th.StringType),
-        th.Property("technicianFullName", th.StringType),
-        th.Property("technicianId", th.IntegerType),
+        th.Property("reviewResponse", th.StringType, required=False),
+        th.Property("publishDate", th.DateTimeType, required=False),
+        th.Property("rating", th.NumberType, required=False),
+        th.Property("recommendationStatus", th.IntegerType, required=False),
+        th.Property("verificationStatus", th.BooleanType, required=False),
+        th.Property("jobId", th.IntegerType, required=False),
+        th.Property("verifiedByUserId", th.IntegerType, required=False),
+        th.Property("verifiedOn", th.DateTimeType, required=False),
+        th.Property("isAutoVerified", th.BooleanType, required=False),
+        th.Property("businessUnitId", th.IntegerType, required=False),
+        th.Property("completedDate", th.StringType, required=False),
+        th.Property("customerName", th.StringType, required=False),
+        th.Property("customerId", th.IntegerType, required=False),
+        th.Property("dispatchedDate", th.StringType, required=False),
+        th.Property("jobStatus", th.IntegerType, required=False),
+        th.Property("jobTypeName", th.StringType, required=False),
+        th.Property("technicianFullName", th.StringType, required=False),
+        th.Property("technicianId", th.IntegerType, required=False),
     ).to_dict()
 
     @cached_property
