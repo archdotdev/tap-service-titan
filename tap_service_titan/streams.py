@@ -1650,6 +1650,12 @@ class ReviewsStream(ServiceTitanStream):
     """Define reviews stream."""
 
     name = "reviews"
+    primary_keys: t.ClassVar[list[str]] = [
+        "customerId",
+        "jobId",
+        "technicianId",
+        "completedDate",
+    ]
     replication_key: str = "publishDate"
 
     schema = th.PropertiesList(
