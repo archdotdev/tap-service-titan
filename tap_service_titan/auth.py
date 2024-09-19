@@ -36,5 +36,5 @@ class ServiceTitanAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         return cls(
             stream=stream,
             auth_endpoint=stream.config.get("auth_url"),
-            oauth_scopes="TODO: OAuth Scopes",
+            oauth_scopes="",
         )
