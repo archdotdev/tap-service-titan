@@ -54,6 +54,12 @@ class TapServiceTitan(Tap):
             default="https://auth-integration.servicetitan.io/connect/token",
             description="The url for the ServiceTitan OAuth API",
         ),
+        th.Property(
+            "start_date",
+            th.DateTimeType,
+            default="2024-01-01T00:00:00Z",
+            description="The start date for the records to pull.",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[streams.ServiceTitanStream]:
@@ -94,6 +100,7 @@ class TapServiceTitan(Tap):
             streams.PurchaseOrderTypesStream(self),
             streams.ReceiptsStream(self),
             streams.ReviewsStream(self),
+            streams.CapacitiesStream(self),
         ]
 
 
