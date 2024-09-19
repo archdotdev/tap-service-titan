@@ -1709,7 +1709,7 @@ class CapacitiesStream(ServiceTitanStream):
     """Define capacities stream."""
 
     name = "capacities"
-    primary_keys = ["startUtc", "businessUnitIds"]
+    primary_keys = ["startUtc", "businessUnitIds", "technician_id"]
     replication_key = "startUtc"
     rest_method = "POST"
     records_jsonpath = "$.availabilities[*]"
