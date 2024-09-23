@@ -3,20 +3,22 @@
 from __future__ import annotations
 
 import sys
-from datetime import timedelta, datetime, timezone
 import typing as t
+from datetime import datetime, timedelta, timezone
 from functools import cached_property
-from singer_sdk.pagination import BaseAPIPaginator
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+
 from singer_sdk import typing as th  # JSON Schema typing helpers
+from singer_sdk.helpers import types
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.pagination import BaseAPIPaginator
 
 from tap_service_titan.client import (
-    ServiceTitanStream,
     ServiceTitanExportStream,
-    ServiceTitanBaseStream,
+    ServiceTitanStream,
 )
 
-from singer_sdk.pagination import SinglePagePaginator
+if t.TYPE_CHECKING:
+    import requests
 
 if sys.version_info >= (3, 9):
     import importlib.resources as importlib_resources
@@ -116,7 +118,7 @@ class JobsStream(ServiceTitanExportStream):
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/jobs"
 
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+    def get_child_context(self, record: dict, context: t.Optional[dict]) -> dict:
         """Return a context dictionary for a child stream."""
         return {"job_id": record["id"]}
 
@@ -126,13 +128,14 @@ class JobHistoryStream(ServiceTitanExportStream):
 
     name = "job_history"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    replication_key: str = "date"
+    replication_key: th.DateTimeType = "date"
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
+        th.Property("jobId", th.IntegerType),
         th.Property("employeeId", th.IntegerType, required=False),
         th.Property("eventType", th.StringType),
-        th.Property("date", th.DateType),
+        th.Property("date", th.DateTimeType),
         th.Property(
             "usedSchedulingTool",
             th.StringType,
@@ -143,6 +146,22 @@ class JobHistoryStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-history"
+
+    # Parse the default 'data' path for response records but the real contents are in
+    # the nested history array. Keep the jobID from the top level then yield
+    # each history item as its own record.
+    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
+        """Parse the response and return an iterator of result records.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each record from the source.
+        """
+        for record in super().parse_response(response):
+            for hist_record in record.get("history", []):
+                yield {"jobId": record.get("jobId"), **hist_record}
 
 
 class ProjectsStream(ServiceTitanExportStream):
@@ -1696,7 +1715,7 @@ class CapacitiesPaginator(BaseAPIPaginator):
         super().__init__(start_value=start_value, *args, **kwargs)
         self.end_value = datetime.now(timezone.utc) + timedelta(days=7)
 
-    def has_more(self, response: Response) -> bool:
+    def has_more(self, response: requests.Response) -> bool:
         """Check if there are more requests to make."""
         return self.current_value <= self.end_value
 
