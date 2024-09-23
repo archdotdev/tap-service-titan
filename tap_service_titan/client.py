@@ -9,7 +9,10 @@ from typing import Any, Callable, Iterable
 
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import BaseAPIPaginator, BasePageNumberPaginator  # noqa: TCH002
+from singer_sdk.pagination import (  # noqa: TCH002
+    BaseAPIPaginator,
+    BasePageNumberPaginator,
+)
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
@@ -123,7 +126,7 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
 class ServiceTitanPaginator(BasePageNumberPaginator):
     """ServiceTitan paginator class."""
 
-    def has_more(self, response: Response) -> bool:
+    def has_more(self, response: requests.Response) -> bool:
         """Return True if there are more pages available."""
         return response.json().get("hasMore", False)
 

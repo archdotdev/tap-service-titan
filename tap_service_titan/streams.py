@@ -1666,6 +1666,111 @@ class ReceiptsStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/receipts"
 
+class ReturnsStream(ServiceTitanStream):
+    """Define returns stream."""
+
+    name = "returns"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("number", th.StringType),
+        th.Property("referenceNumber", th.StringType),
+        th.Property("status", th.ObjectType()),  # Empty object in the input
+        th.Property("vendorId", th.IntegerType),
+        th.Property("purchaseOrderId", th.IntegerType),
+        th.Property("jobId", th.IntegerType),
+        th.Property("businessUnitId", th.IntegerType),
+        th.Property("inventoryLocationId", th.IntegerType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("memo", th.StringType),
+        th.Property("returnAmount", th.NumberType),
+        th.Property("taxAmount", th.NumberType),
+        th.Property("shippingAmount", th.NumberType),
+        th.Property("returnDate", th.DateTimeType),
+        th.Property("returnedOn", th.DateTimeType),
+        th.Property("creditReceivedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("batchId", th.IntegerType),
+        th.Property(
+            "batch",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property("syncStatus", th.ObjectType()),  # Empty object in the input
+        th.Property(
+            "items",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("skuId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("code", th.StringType),
+                    th.Property("description", th.StringType),
+                    th.Property("quantity", th.NumberType),
+                    th.Property("cost", th.NumberType),
+                    th.Property(
+                        "generalLedgerAccount",
+                        th.ObjectType(
+                            th.Property("name", th.StringType),
+                            th.Property("number", th.StringType),
+                            th.Property("type", th.StringType),
+                            th.Property("detailType", th.StringType),
+                        ),
+                    ),
+                    th.Property(
+                        "costOfSaleAccount",
+                        th.ObjectType(
+                            th.Property("name", th.StringType),
+                            th.Property("number", th.StringType),
+                            th.Property("type", th.StringType),
+                            th.Property("detailType", th.StringType),
+                        ),
+                    ),
+                    th.Property(
+                        "assetAccount",
+                        th.ObjectType(
+                            th.Property("name", th.StringType),
+                            th.Property("number", th.StringType),
+                            th.Property("type", th.StringType),
+                            th.Property("detailType", th.StringType),
+                        ),
+                    ),
+                )
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/returns"
+
 
 class ReviewsStream(ServiceTitanStream):
     """Define reviews stream."""

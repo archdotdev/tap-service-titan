@@ -99,6 +99,7 @@ class TapServiceTitan(Tap):
             streams.PurchaseOrderMarkupsStream(self),
             streams.PurchaseOrderTypesStream(self),
             streams.ReceiptsStream(self),
+            streams.ReturnsStream(self),
             streams.ReviewsStream(self),
             streams.CapacitiesStream(self),
         ]
