@@ -129,7 +129,6 @@ class JobHistoryStream(ServiceTitanExportStream):
     name = "job_history"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: th.DateTimeType = "date"
-    records_jsonpath = "$.data[*]"  # Or override `parse_response`.
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -148,9 +147,9 @@ class JobHistoryStream(ServiceTitanExportStream):
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-history"
 
-    # We want it to parse out the default data path but the real contents are in the
-    # nested history array. Keep the jobID from the top level then yield
-    # the history items.
+    # Parse the default 'data' path for response records but the real contents are in
+    # the nested history array. Keep the jobID from the top level then yield
+    # each history item as its own record.
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result records.
 
