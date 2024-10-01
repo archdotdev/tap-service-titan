@@ -53,6 +53,9 @@ A full list of supported settings and capabilities is available by running: `tap
 
 ### Custom Reports
 
+An example of the input for the custom reports array config is below.
+The values can be found in the Service Titan UI when the custom report is created.
+
 ```json
   "custom_reports": [
       {
