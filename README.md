@@ -1,48 +1,75 @@
-# tap-service-titan
+# `tap-service-titan`
 
-`tap-service-titan` is a Singer tap for ServiceTitan.
+ServiceTitan tap class.
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
-<!--
+## Capabilities
 
-Developer TODO: Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
+* `catalog`
+* `state`
+* `discover`
+* `about`
+* `stream-maps`
+* `schema-flattening`
+* `batch`
 
-## Installation
+## Supported Python Versions
 
-Install from PyPi:
+* 3.8
+* 3.9
+* 3.10
+* 3.11
+* 3.12
 
-```bash
-pipx install tap-service-titan
-```
+## Settings
 
-Install from GitHub:
+| Setting | Required | Default | Description |
+|:--------|:--------:|:-------:|:------------|
+| client_id | True     | None    | The client ID to use in authenticating. |
+| client_secret | True     | None    | The client secret to use in authenticating. |
+| st_app_key | True     | None    | The app key for the Service Titan app used to authenticate. |
+| tenant_id | True     | None    | Tenant ID to pull records for. |
+| api_url | False    | https://api-integration.servicetitan.io | The url for the ServiceTitan API |
+| auth_url | False    | https://auth-integration.servicetitan.io/connect/token | The url for the ServiceTitan OAuth API |
+| start_date | False    | 2024-01-01T00:00:00Z | The start date for the records to pull. |
+| custom_reports | False    | None    | Custom reports to extract. |
+| stream_maps | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config | False    | None    | User-defined config values to be used within map expressions. |
+| faker_config | False    | None    | Config for the [`Faker`](https://faker.readthedocs.io/en/master/) instance variable `fake` used within map expressions. Only applicable if the plugin specifies `faker` as an addtional dependency (through the `singer-sdk` `faker` extra or directly). |
+| faker_config.seed | False    | None    | Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator |
+| faker_config.locale | False    | None    | One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization |
+| flattening_enabled | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth | False    | None    | The max depth to flatten schemas. |
+| batch_config | False    | None    |             |
+| batch_config.encoding | False    | None    | Specifies the format and compression of the batch files. |
+| batch_config.encoding.format | False    | None    | Format to use for batch files. |
+| batch_config.encoding.compression | False    | None    | Compression format to use for batch files. |
+| batch_config.storage | False    | None    | Defines the storage layer to use when writing batch files |
+| batch_config.storage.root | False    | None    | Root path to use when writing batch files. |
+| batch_config.storage.prefix | False    | None    | Prefix to use when writing batch files. |
 
-```bash
-pipx install git+https://github.com/ORG_NAME/tap-service-titan.git@main
-```
+A full list of supported settings and capabilities is available by running: `tap-service-titan --about`
 
--->
+### Custom Reports
 
-## Configuration
+An example of the input for the custom reports array config is below.
+The values can be found in the Service Titan UI when the custom report is created.
 
-### Accepted Config Options
-
-<!--
-Developer TODO: Provide a list of config options accepted by the tap.
-
-This section can be created by copy-pasting the CLI output from:
-
-```
-tap-service-titan --about --format=markdown
-```
--->
-
-A full list of supported settings and capabilities for this
-tap is available by running:
-
-```bash
-tap-service-titan --about
+```json
+  "custom_reports": [
+      {
+          "report_category": "accounting",
+          "report_name": "my_custom_accounting_report",
+          "report_id": "123",
+          "parameters": [
+              {
+                  "name": "AsOfDate",
+                  "value": "2024-09-01"
+              }
+          ]
+      }
+  ]
 ```
 
 ### Configure using environment variables
@@ -50,12 +77,6 @@ tap-service-titan --about
 This Singer tap will automatically import any environment variables within the working directory's
 `.env` if the `--config=ENV` is provided, such that config values will be considered if a matching
 environment variable is set either in the terminal context or in the `.env` file.
-
-### Source Authentication and Authorization
-
-<!--
-Developer TODO: If your tap requires special access on the source system, or any special authentication requirements, provide those here.
--->
 
 ## Usage
 
@@ -99,12 +120,6 @@ poetry run tap-service-titan --help
 
 _**Note:** This tap will work in any Singer environment and does not require Meltano.
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
-
-<!--
-Developer TODO:
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any "TODO" items listed in
-the file.
--->
 
 Next, install Meltano (if you haven't already) and any needed plugins:
 

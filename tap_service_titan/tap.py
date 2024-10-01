@@ -14,6 +14,8 @@ class TapServiceTitan(Tap):
 
     name = "tap-service-titan"
 
+    dynamic_catalog: bool = True
+
     config_jsonschema = th.PropertiesList(
         th.Property(
             "client_id",
@@ -60,6 +62,53 @@ class TapServiceTitan(Tap):
             default="2024-01-01T00:00:00Z",
             description="The start date for the records to pull.",
         ),
+        th.Property(
+            "custom_reports",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property(
+                        "report_category",
+                        th.StringType,
+                        required=True,
+                        description="The category of the report to pull.",
+                    ),
+                    th.Property(
+                        "report_name",
+                        th.StringType,
+                        required=True,
+                        description="The name of the report to pull.",
+                    ),
+                    th.Property(
+                        "report_id",
+                        th.StringType,
+                        required=True,
+                        description="The ID of the report to pull.",
+                    ),
+                    th.Property(
+                        "parameters",
+                        th.ArrayType(
+                            th.ObjectType(
+                                th.Property(
+                                    "name",
+                                    th.StringType,
+                                    required=True,
+                                    description="The name of the parameter.",
+                                ),
+                                th.Property(
+                                    "value",
+                                    th.StringType,
+                                    required=True,
+                                    description="The value of the parameter.",
+                                ),
+                            ),
+                        ),
+                        required=True,
+                        description="The parameters to pass to the report.",
+                    ),
+                )
+            ),
+            description="Custom reports to extract.",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[streams.ServiceTitanStream]:
@@ -68,7 +117,7 @@ class TapServiceTitan(Tap):
         Returns:
             A list of discovered streams.
         """
-        return [
+        streams_list = [
             streams.AppointmentsStream(self),
             streams.JobsStream(self),
             streams.JobHistoryStream(self),
@@ -103,6 +152,13 @@ class TapServiceTitan(Tap):
             streams.ReviewsStream(self),
             streams.CapacitiesStream(self),
         ]
+        streams_list.extend(
+            [
+                streams.CustomReports(self, report=report)
+                for report in self.config.get("custom_reports")
+            ]
+        )
+        return streams_list
 
 
 if __name__ == "__main__":
