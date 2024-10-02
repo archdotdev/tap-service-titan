@@ -1962,7 +1962,7 @@ class CustomReports(ServiceTitanStream):
         report_id = self._report["report_id"]
         return (
             f"/reporting/v2/tenant/{self._tap.config['tenant_id']}/report-category"
-            f"{report_category}/reports/{report_id}/data"
+            f"/{report_category}/reports/{report_id}/data"
         )
 
     def get_url_params(
