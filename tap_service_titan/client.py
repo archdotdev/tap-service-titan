@@ -86,6 +86,23 @@ class ServiceTitanBaseStream(RESTStream):
         """
         yield from extract_jsonpath(self.records_jsonpath, input=response.json())
 
+    def response_error_message(self, response: requests.Response) -> str:
+        """Build error message for invalid http statuses.
+
+        WARNING - Override this method when the URL path may contain secrets or PII
+
+        Args:
+            response: A :class:`requests.Response` object.
+
+        Returns:
+            str: The error message
+        """
+        default = super().response_error_message(response)
+        if "title" in response.json():
+            title = response.json()["title"]
+            return f"{default}. {title}"
+        return default
+
 
 class ServiceTitanExportStream(ServiceTitanBaseStream):
     """ServiceTitan stream class for export endpoints."""
