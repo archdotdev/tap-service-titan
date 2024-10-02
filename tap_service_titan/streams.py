@@ -1931,7 +1931,7 @@ class CustomReports(ServiceTitanStream):
         report_category = self._report["report_category"]
         report_id = self._report["report_id"]
         resp = requests.get(
-            f"{self.url_base}/reporting/v2/tenant/{self.config["tenant_id"]}/report-category/{report_category}/reports/{report_id}?pageSize=5000&page=1",
+            f"{self.url_base}/reporting/v2/tenant/{self.config['tenant_id']}/report-category/{report_category}/reports/{report_id}?pageSize=5000&page=1",
             headers={**self.http_headers, **self.authenticator.auth_headers},
             timeout=self.timeout,
         )
