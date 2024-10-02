@@ -1922,7 +1922,7 @@ class CustomReports(ServiceTitanStream):
             "String": th.StringType(),
             "Number": th.NumberType(),
             "Boolean": th.BooleanType(),
-            "Date": th.DateType(),
+            "Date": th.DateTimeType(),
             "Time": th.StringType(),
         }
         return mapping.get(string_type, th.StringType())
