@@ -152,12 +152,13 @@ class TapServiceTitan(Tap):
             streams.ReviewsStream(self),
             streams.CapacitiesStream(self),
         ]
-        streams_list.extend(
+        custom_reports = self.config.get("custom_reports", [])
+        if custom_reports:
+            streams_list.extend(
             [
                 streams.CustomReports(self, report=report)
-                for report in self.config.get("custom_reports")
-            ]
-        )
+                for report in custom_reports
+            ]            )
         return streams_list
 
 
