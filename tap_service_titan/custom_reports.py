@@ -180,7 +180,7 @@ class CustomReports(ServiceTitanStream):
             if "backfill_date_parameter" in self._report:
                 data[self._report["backfill_date_parameter"]] = (
                     self._curr_backfill_date_param.strftime("%Y-%m-%d")
-                    + "T00:00:00-04:00"
+                    + "T00:00:00-00:00"
                 )
             yield data
 
