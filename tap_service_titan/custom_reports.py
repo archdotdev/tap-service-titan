@@ -49,11 +49,17 @@ class CustomReports(ServiceTitanStream):
         )
         self._curr_backfill_date_param = None
         if len(backfill_params) == 1:
-            self._curr_backfill_date_param = datetime.strptime(
-                backfill_params[0], "%Y-%m-%d"
-            ).date()
             self.replication_method = REPLICATION_INCREMENTAL
             self.replication_key = self._report["backfill_date_parameter"]
+            configured_date_param = datetime.strptime(
+                backfill_params[0], "%Y-%m-%d"
+            ).date()
+            bookmark = self.get_starting_timestamp(self.context)
+            if bookmark:
+                bookmark = bookmark.date()
+                self._curr_backfill_date_param = max(configured_date_param, bookmark)
+            else:
+                self._curr_backfill_date_param = configured_date_param
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:
