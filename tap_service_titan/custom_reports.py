@@ -7,12 +7,10 @@ import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
-import backoff
 import requests
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers import types
 from singer_sdk.helpers.types import Context
-from singer_sdk.pagination import BaseAPIPaginator
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import (

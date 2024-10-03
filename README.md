@@ -72,6 +72,27 @@ The values can be found in the Service Titan UI when the custom report is create
   ]
 ```
 
+Optionally add a `backfill_date_parameter` entry in the custom report item that references a date parameter which should be used to retrieve historical reports.
+The parameter will be used to iterate that date value and extract the report for every day until the current date.
+The backfill_date_parameter value must be in the parameters list.
+
+```json
+  "custom_reports": [
+      {
+          "report_category": "accounting",
+          "report_name": "my_custom_accounting_report",
+          "report_id": "123",
+          "backfill_date_parameter": "AsOfDate",
+          "parameters": [
+              {
+                  "name": "AsOfDate",
+                  "value": "2024-09-01"
+              }
+          ]
+      }
+  ]
+```
+
 ### Configure using environment variables
 
 This Singer tap will automatically import any environment variables within the working directory's
