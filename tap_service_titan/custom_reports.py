@@ -7,6 +7,7 @@ import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
+import backoff
 import requests
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers import types
@@ -38,14 +39,20 @@ class CustomReports(ServiceTitanStream):
     def __init__(self, *args, **kwargs) -> None:
         self._report = kwargs.pop("report")
         # Retrieve the backfill date parameter value for iterating
-        backfill_params = [obj["value"] for obj in self._report["parameters"] if obj["name"] == self._report.get("backfill_date_parameter", "")]
+        backfill_params = [
+            obj["value"]
+            for obj in self._report["parameters"]
+            if obj["name"] == self._report.get("backfill_date_parameter", "")
+        ]
         super().__init__(
             *args,
             **kwargs,
             name=f"custom_report_{self._report['report_name']}",
         )
         if len(backfill_params) == 1:
-            self._curr_backfill_date_param = datetime.strptime(backfill_params[0], "%Y-%m-%d").date()
+            self._curr_backfill_date_param = datetime.strptime(
+                backfill_params[0], "%Y-%m-%d"
+            ).date()
             self.replication_method = REPLICATION_INCREMENTAL
             self.replication_key = self._report["backfill_date_parameter"]
 
@@ -90,7 +97,7 @@ class CustomReports(ServiceTitanStream):
             properties.append(
                 th.Property(
                     self._report["backfill_date_parameter"],
-                    th.DateType(),
+                    th.DateTimeType(),
                 )
             )
         return th.PropertiesList(*properties).to_dict()
@@ -143,7 +150,11 @@ class CustomReports(ServiceTitanStream):
         """
         params = self._report["parameters"]
         if self._curr_backfill_date_param:
-            params = [param for param in self._report["parameters"] if param["name"] != self._report["backfill_date_parameter"]]
+            params = [
+                param
+                for param in self._report["parameters"]
+                if param["name"] != self._report["backfill_date_parameter"]
+            ]
             params.append(
                 {
                     "name": self._report["backfill_date_parameter"],
@@ -167,7 +178,10 @@ class CustomReports(ServiceTitanStream):
             data = dict(zip(field_names, record))
             # Add the backfill date to the record if configured
             if "backfill_date_parameter" in self._report:
-                data[self._report["backfill_date_parameter"]] = self._curr_backfill_date_param.strftime("%Y-%m-%d")
+                data[self._report["backfill_date_parameter"]] = (
+                    self._curr_backfill_date_param.strftime("%Y-%m-%d")
+                    + "T00:00:00-04:00"
+                )
             yield data
 
     def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
@@ -188,4 +202,13 @@ class CustomReports(ServiceTitanStream):
             while datetime.now(timezone.utc).date() >= self._curr_backfill_date_param:
                 yield from super().get_records(context)
                 # Increment date for next iteration
-                self._curr_backfill_date_param = self._curr_backfill_date_param + timedelta(days=1)
+                self._curr_backfill_date_param = (
+                    self._curr_backfill_date_param + timedelta(days=1)
+                )
+
+    def backoff_wait_generator(self) -> t.Callable[..., t.Generator[int, t.Any, None]]:
+        def _backoff_from_headers(retriable_api_error):
+            response_headers = retriable_api_error.response.headers
+            return int(response_headers.get("Retry-After", 0))
+
+        return self.backoff_runtime(value=_backoff_from_headers)
