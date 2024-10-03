@@ -49,6 +49,7 @@ class CustomReports(ServiceTitanStream):
             **kwargs,
             name=f"custom_report_{self._report['report_name']}",
         )
+        self._curr_backfill_date_param = None
         if len(backfill_params) == 1:
             self._curr_backfill_date_param = datetime.strptime(
                 backfill_params[0], "%Y-%m-%d"
