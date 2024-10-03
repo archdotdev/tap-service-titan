@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import sys
 import typing as t
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 import requests
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers import types
+from singer_sdk.helpers.types import Context
+from singer_sdk.pagination import BaseAPIPaginator
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import (
@@ -37,14 +39,15 @@ class CustomReports(ServiceTitanStream):
         self._report = kwargs.pop("report")
         # Retrieve the backfill date parameter value for iterating
         backfill_params = [obj["value"] for obj in self._report["parameters"] if obj["name"] == self._report.get("backfill_date_parameter", "")]
-        if len(backfill_params) == 1:
-            self._curr_backfill_date_param = datetime.strptime(backfill_params[0], "%Y-%m-%d").date()
-            self.replication_method = REPLICATION_INCREMENTAL
         super().__init__(
             *args,
             **kwargs,
             name=f"custom_report_{self._report['report_name']}",
         )
+        if len(backfill_params) == 1:
+            self._curr_backfill_date_param = datetime.strptime(backfill_params[0], "%Y-%m-%d").date()
+            self.replication_method = REPLICATION_INCREMENTAL
+            self.replication_key = self._report["backfill_date_parameter"]
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:
@@ -83,7 +86,7 @@ class CustomReports(ServiceTitanStream):
             th.Property(field["name"], self._get_datatype(field["dataType"]))
             for field in metadata["fields"]
         ]
-        if self._report("backfill_date_parameter"):
+        if self._report.get("backfill_date_parameter"):
             properties.append(
                 th.Property(
                     self._report["backfill_date_parameter"],
@@ -138,9 +141,16 @@ class CustomReports(ServiceTitanStream):
             next_page_token: Token, page number or any request argument to request the
                 next page of data.
         """
+        params = self._report["parameters"]
+        if self._curr_backfill_date_param:
+            params = [param for param in self._report["parameters"] if param["name"] != self._report["backfill_date_parameter"]]
+            params.append(
+                {
+                    "name": self._report["backfill_date_parameter"],
+                    "value": self._curr_backfill_date_param.strftime("%Y-%m-%d"),
+                }
+            )
         return {"parameters": self._report["parameters"]}
-
-    # Implement looping with paginator
 
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result records.
@@ -155,6 +165,27 @@ class CustomReports(ServiceTitanStream):
         field_names = [field["name"] for field in resp["fields"]]
         for record in resp["data"]:
             data = dict(zip(field_names, record))
-            if self._report("backfill_date_parameter"):
-                data[self._report["backfill_date_parameter"]] = self._curr_backfill_date_param
+            # Add the backfill date to the record if configured
+            if "backfill_date_parameter" in self._report:
+                data[self._report["backfill_date_parameter"]] = self._curr_backfill_date_param.strftime("%Y-%m-%d")
             yield data
+
+    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
+        """Return a generator of record-type dictionary objects.
+
+        Each record emitted should be a dictionary of property names to their values.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            One item per (possibly processed) record in the API.
+        """
+        if self._curr_backfill_date_param is None:
+            # No backfill date parameter, just get the records
+            yield from super().get_records(context)
+        else:
+            while datetime.now(timezone.utc).date() >= self._curr_backfill_date_param:
+                yield from super().get_records(context)
+                # Increment date for next iteration
+                self._curr_backfill_date_param = self._curr_backfill_date_param + timedelta(days=1)
