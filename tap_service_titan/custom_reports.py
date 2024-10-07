@@ -68,11 +68,14 @@ class CustomReports(ServiceTitanStream):
         configured_date_param = datetime.strptime(
             self._backfill_params[0], "%Y-%m-%d"
         ).date()
-        bookmark = datetime.strptime(
-            self.stream_state.get("replication_key_value"), "%Y-%m-%dT%H:%M:%S%z"
-        ).date()
+        bookmark = self.stream_state.get("replication_key_value")
         if bookmark:
-            return max(configured_date_param, bookmark)
+            return max(
+                configured_date_param,
+                datetime.strptime(
+                    bookmark, "%Y-%m-%dT%H:%M:%S%z"
+                ).date()
+            )
         return configured_date_param
 
     @staticmethod
