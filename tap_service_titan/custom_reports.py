@@ -33,11 +33,11 @@ class CustomReports(ServiceTitanStream):
     name = "custom_report"
     rest_method = "POST"
     replication_method = REPLICATION_FULL_TABLE
+    is_sorted = True
 
     def __init__(self, *args, **kwargs) -> None:
         self._report = kwargs.pop("report")
-        # Retrieve the backfill date parameter value for iterating
-        backfill_params = [
+        self._backfill_params = [
             obj["value"]
             for obj in self._report["parameters"]
             if obj["name"] == self._report.get("backfill_date_parameter", "")
@@ -48,18 +48,32 @@ class CustomReports(ServiceTitanStream):
             name=f"custom_report_{self._report['report_name']}",
         )
         self._curr_backfill_date_param = None
-        if len(backfill_params) == 1:
+
+    @property
+    def curr_backfill_date_param(self):
+        # This is the first iteration.
+        # Retrieve the backfill date parameter value for iterating.
+        # We cant do this in the init due to timing with the state file.
+        if len(self._backfill_params) == 1 and self._curr_backfill_date_param is None:
             self.replication_method = REPLICATION_INCREMENTAL
             self.replication_key = self._report["backfill_date_parameter"]
-            configured_date_param = datetime.strptime(
-                backfill_params[0], "%Y-%m-%d"
-            ).date()
-            bookmark = self.get_starting_timestamp(self.context)
-            if bookmark:
-                bookmark = bookmark.date()
-                self._curr_backfill_date_param = max(configured_date_param, bookmark)
-            else:
-                self._curr_backfill_date_param = configured_date_param
+            self._curr_backfill_date_param = self._get_initial_date_param()
+        return self._curr_backfill_date_param
+
+    @curr_backfill_date_param.setter
+    def curr_backfill_date_param(self, value):
+        self._curr_backfill_date_param = value
+
+    def _get_initial_date_param(self) -> th.JSONTypeHelper:
+        configured_date_param = datetime.strptime(
+            self._backfill_params[0], "%Y-%m-%d"
+        ).date()
+        bookmark = datetime.strptime(
+            self.stream_state.get("replication_key_value"), "%Y-%m-%dT%H:%M:%S%z"
+        ).date()
+        if bookmark:
+            return max(configured_date_param, bookmark)
+        return configured_date_param
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:
@@ -154,7 +168,7 @@ class CustomReports(ServiceTitanStream):
                 next page of data.
         """
         params = self._report["parameters"]
-        if self._curr_backfill_date_param:
+        if self.curr_backfill_date_param:
             params = [
                 param
                 for param in self._report["parameters"]
@@ -163,7 +177,7 @@ class CustomReports(ServiceTitanStream):
             params.append(
                 {
                     "name": self._report["backfill_date_parameter"],
-                    "value": self._curr_backfill_date_param.strftime("%Y-%m-%d"),
+                    "value": self.curr_backfill_date_param.strftime("%Y-%m-%d"),
                 }
             )
         return {"parameters": self._report["parameters"]}
@@ -184,7 +198,7 @@ class CustomReports(ServiceTitanStream):
             # Add the backfill date to the record if configured
             if "backfill_date_parameter" in self._report:
                 data[self._report["backfill_date_parameter"]] = (
-                    self._curr_backfill_date_param.strftime("%Y-%m-%d")
+                    self.curr_backfill_date_param.strftime("%Y-%m-%d")
                     + "T00:00:00-00:00"
                 )
             yield data
@@ -200,15 +214,15 @@ class CustomReports(ServiceTitanStream):
         Yields:
             One item per (possibly processed) record in the API.
         """
-        if self._curr_backfill_date_param is None:
+        if self.curr_backfill_date_param is None:
             # No backfill date parameter, just get the records
             yield from super().get_records(context)
         else:
-            while datetime.now(timezone.utc).date() >= self._curr_backfill_date_param:
+            while datetime.now(timezone.utc).date() >= self.curr_backfill_date_param:
                 yield from super().get_records(context)
                 # Increment date for next iteration
-                self._curr_backfill_date_param = (
-                    self._curr_backfill_date_param + timedelta(days=1)
+                self.curr_backfill_date_param = (
+                    self.curr_backfill_date_param + timedelta(days=1)
                 )
 
     def backoff_wait_generator(self) -> t.Callable[..., t.Generator[int, t.Any, None]]:
