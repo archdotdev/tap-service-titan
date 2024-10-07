@@ -6,7 +6,7 @@ from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 # TODO: Import your custom stream types here:
-from tap_service_titan import streams
+from tap_service_titan import custom_reports, streams
 
 
 class TapServiceTitan(Tap):
@@ -85,6 +85,11 @@ class TapServiceTitan(Tap):
                         description="The ID of the report to pull.",
                     ),
                     th.Property(
+                        "backfill_date_parameter",
+                        th.StringType,
+                        description="The date parameter to use for backfilling. The report will be retrieved for each date until the current date.",
+                    ),
+                    th.Property(
                         "parameters",
                         th.ArrayType(
                             th.ObjectType(
@@ -152,12 +157,12 @@ class TapServiceTitan(Tap):
             streams.ReviewsStream(self),
             streams.CapacitiesStream(self),
         ]
-        custom_reports = self.config.get("custom_reports", [])
-        if custom_reports:
+        custom_reports_config = self.config.get("custom_reports", [])
+        if custom_reports_config:
             streams_list.extend(
             [
-                streams.CustomReports(self, report=report)
-                for report in custom_reports
+                custom_reports.CustomReports(self, report=report)
+                for report in custom_reports_config
             ]            )
         return streams_list
 
