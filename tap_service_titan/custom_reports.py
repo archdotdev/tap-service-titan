@@ -183,9 +183,9 @@ class CustomReports(ServiceTitanStream):
                     "value": self.curr_backfill_date_param.strftime("%Y-%m-%d"),
                 }
             )
-            msg = f"Custom report request parameters {self._report['parameters']}"
+            msg = f"Custom report request parameters {params}"
             self.logger.info(msg)
-        return {"parameters": self._report["parameters"]}
+        return {"parameters": params}
 
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result records.
