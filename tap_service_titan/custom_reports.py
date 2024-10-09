@@ -183,6 +183,8 @@ class CustomReports(ServiceTitanStream):
                     "value": self.curr_backfill_date_param.strftime("%Y-%m-%d"),
                 }
             )
+            msg = f"Custom report request parameters {self._report['parameters']}"
+            self.logger.info(msg)
         return {"parameters": self._report["parameters"]}
 
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
