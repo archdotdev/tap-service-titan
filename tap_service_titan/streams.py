@@ -1136,10 +1136,10 @@ class EmployeesStream(ServiceTitanExportStream):
         return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/export/employees"
 
 
-class BusinessUnitsStream(ServiceTitanExportStream):
-    """Define business units stream."""
+class BusinessUnitsExportStream(ServiceTitanExportStream):
+    """Define business units export stream."""
 
-    name = "business_units"
+    name = "business_units_export"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
 
@@ -1147,14 +1147,15 @@ class BusinessUnitsStream(ServiceTitanExportStream):
         th.Property("id", th.IntegerType),
         th.Property("active", th.BooleanType),
         th.Property("name", th.StringType),
-        th.Property("officialName", th.StringType, required=False),
-        th.Property("email", th.StringType, required=False),
-        th.Property("phoneNumber", th.StringType, required=False),
-        th.Property("invoiceHeader", th.StringType, required=False),
-        th.Property("invoiceMessage", th.StringType, required=False),
-        th.Property("defaultTaxRate", th.NumberType, required=False),
-        th.Property("authorizationParagraph", th.StringType, required=False),
-        th.Property("acknowledgementParagraph", th.StringType, required=False),
+        th.Property("officialName", th.StringType),
+        th.Property("email", th.StringType),
+        th.Property("currency", th.StringType),
+        th.Property("phoneNumber", th.StringType),
+        th.Property("invoiceHeader", th.StringType),
+        th.Property("invoiceMessage", th.StringType),
+        th.Property("defaultTaxRate", th.NumberType),
+        th.Property("authorizationParagraph", th.StringType),
+        th.Property("acknowledgementParagraph", th.StringType),
         th.Property(
             "address",
             th.ObjectType(
@@ -1165,14 +1166,13 @@ class BusinessUnitsStream(ServiceTitanExportStream):
                 th.Property("zip", th.StringType),
                 th.Property("country", th.StringType),
             ),
-            required=False,
         ),
-        th.Property("materialSku", th.StringType, required=False),
-        th.Property("quickbooksClass", th.StringType, required=False),
-        th.Property("accountCode", th.StringType, required=False),
-        th.Property("franchiseId", th.StringType, required=False),
-        th.Property("conceptCode", th.StringType, required=False),
-        th.Property("corporateContractNumber", th.StringType, required=False),
+        th.Property("materialSku", th.StringType),
+        th.Property("quickbooksClass", th.StringType),
+        th.Property("accountCode", th.StringType),
+        th.Property("franchiseId", th.StringType),
+        th.Property("conceptCode", th.StringType),
+        th.Property("corporateContractNumber", th.StringType),
         th.Property(
             "tenant",
             th.ObjectType(
@@ -1183,7 +1183,6 @@ class BusinessUnitsStream(ServiceTitanExportStream):
                 th.Property("conceptCode", th.StringType),
                 th.Property("modifiedOn", th.DateTimeType),
             ),
-            required=False,
         ),
         th.Property("createdOn", th.DateTimeType),
         th.Property("modifiedOn", th.DateTimeType),
@@ -1195,16 +1194,13 @@ class BusinessUnitsStream(ServiceTitanExportStream):
                     th.Property("value", th.StringType),
                 )
             ),
-            required=False,
         ),
     ).to_dict()
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/settings/v2/tenant/{self._tap.config['tenant_id']}/export/business-units"
-        )
+        return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/export/business-units"
 
 
 class TechniciansStream(ServiceTitanExportStream):
