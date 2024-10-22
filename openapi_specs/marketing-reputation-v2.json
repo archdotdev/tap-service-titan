@@ -1,0 +1,536 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Marketing Reputation",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/marketingreputation/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "reviews",
+                "operationId": "reviews",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportType",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewsReportType"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "fromDate",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "toDate",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "responseTypes",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ResponseType"
+                            }
+                        }
+                    },
+                    {
+                        "name": "locationIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "reviewStatuses",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewMatchConfidenceLevel"
+                            }
+                        }
+                    },
+                    {
+                        "name": "technicianIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    },
+                    {
+                        "name": "campaignIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    },
+                    {
+                        "name": "fromRating",
+                        "in": "query",
+                        "description": "Format - float.",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "toRating",
+                        "in": "query",
+                        "description": "Format - float.",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "includeReviewsWithoutLocation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "includeReviewsWithoutCampaign",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "includeReviewsWithoutTechnician",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "address": "string",
+                                            "platform": "string",
+                                            "authorEmail": "string",
+                                            "authorName": "string",
+                                            "review": "string",
+                                            "reviewResponse": "string",
+                                            "publishDate": "string",
+                                            "rating": 0,
+                                            "recommendationStatus": 0,
+                                            "verificationStatus": true,
+                                            "jobId": 0,
+                                            "verifiedByUserId": 0,
+                                            "verifiedOn": "string",
+                                            "isAutoVerified": true,
+                                            "businessUnitId": 0,
+                                            "completedDate": "string",
+                                            "customerName": "string",
+                                            "customerId": 0,
+                                            "dispatchedDate": "string",
+                                            "jobStatus": 0,
+                                            "jobTypeName": "string",
+                                            "technicianFullName": "string",
+                                            "technicianId": 0
+                                        }
+                                    ]
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "address": "string",
+                                            "platform": "string",
+                                            "authorEmail": "string",
+                                            "authorName": "string",
+                                            "review": "string",
+                                            "reviewResponse": "string",
+                                            "publishDate": "string",
+                                            "rating": 0,
+                                            "recommendationStatus": 0,
+                                            "verificationStatus": true,
+                                            "jobId": 0,
+                                            "verifiedByUserId": 0,
+                                            "verifiedOn": "string",
+                                            "isAutoVerified": true,
+                                            "businessUnitId": 0,
+                                            "completedDate": "string",
+                                            "customerName": "string",
+                                            "customerId": 0,
+                                            "dispatchedDate": "string",
+                                            "jobStatus": 0,
+                                            "jobTypeName": "string",
+                                            "technicianFullName": "string",
+                                            "technicianId": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.JobStatus": {
+                "enum": [
+                    0,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "type": "integer",
+                "format": "int32"
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.PulledReviewRecommendationStatus": {
+                "enum": [
+                    0,
+                    1
+                ],
+                "type": "integer",
+                "format": "int32"
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ResponseType": {
+                "enum": [
+                    0,
+                    1,
+                    2
+                ],
+                "type": "integer",
+                "format": "int32"
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewMatchConfidenceLevel": {
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "type": "integer",
+                "format": "int32"
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "platform": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "authorEmail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "authorName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "review": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "reviewResponse": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "publishDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "recommendationStatus": {
+                        "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.PulledReviewRecommendationStatus"
+                    },
+                    "verificationStatus": {
+                        "type": "boolean"
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "verifiedByUserId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "verifiedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "isAutoVerified": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "completedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "customerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "dispatchedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobStatus": {
+                        "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.JobStatus"
+                    },
+                    "jobTypeName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "technicianFullName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "technicianId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewsReportType": {
+                "enum": [
+                    0,
+                    1,
+                    2
+                ],
+                "type": "integer",
+                "format": "int32"
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

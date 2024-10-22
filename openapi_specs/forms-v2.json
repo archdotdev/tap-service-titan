@@ -1,0 +1,1627 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Forms",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/forms/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/forms": {
+            "get": {
+                "tags": [
+                    "Form"
+                ],
+                "summary": "Retrieve Form data",
+                "description": "Retrieve Form data",
+                "operationId": "Form_GetForms",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "hasConditionalLogic",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "hasTriggers",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Values: [Any, Published, Unpublished]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Forms.V2.StatusField"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Forms.V2.FormResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "active": true,
+                                            "name": "string",
+                                            "published": true,
+                                            "hasConditionalLogic": true,
+                                            "hasTriggers": true,
+                                            "createdById": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/submissions": {
+            "get": {
+                "tags": [
+                    "FormSubmission"
+                ],
+                "summary": "Retrieve Form Submission Data",
+                "description": "Retrieve Form Submission Data",
+                "operationId": "FormSubmission_GetFormSubmissions",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "formIds",
+                        "in": "query",
+                        "description": "Form Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdById",
+                        "in": "query",
+                        "description": "Format - int64. Creator user Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Values: [Started, Completed, Any]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SubmissionStatus"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "submittedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Submission modified date on or after",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "submittedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Submission modified date before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ownerType",
+                        "in": "query",
+                        "description": "Values: [Job, Call, Customer, Location, Equipment, Technician, JobAppointment, Membership, Truck]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwnerType"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "owners",
+                        "in": "query",
+                        "description": "List of owner object (one of Job,Customer,Location,Equipment,Call,Technician) {'type': 'xxx', 'id': 0000}\\\n\\\nExample: owners[0].type=Location&owners[0].id=2689281&\\\nowners[1].type=Customer&owners[1].id=2703496",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwner"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, SubmittedOn, CreatedBy.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Forms.V2.FormSubmissionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "formId": 0,
+                                            "formName": "string",
+                                            "submittedOn": "string",
+                                            "createdById": 0,
+                                            "status": "Started",
+                                            "owners": [
+                                                {
+                                                    "type": "Job",
+                                                    "id": 0
+                                                }
+                                            ],
+                                            "units": [
+                                                {
+                                                    "id": "string",
+                                                    "name": "string",
+                                                    "type": "string",
+                                                    "description": "string",
+                                                    "units": [
+                                                        {
+                                                            "id": "string",
+                                                            "name": "string",
+                                                            "type": "string",
+                                                            "comment": "string",
+                                                            "attachments": [
+                                                                {
+                                                                    "fileName": "string",
+                                                                    "createdFrom": "string",
+                                                                    "originalFileName": "string",
+                                                                    "thumbnail": "string"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/jobs/{id}/attachments": {
+            "post": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Creates a Attachment on the specified Job",
+                "description": "Creates a Attachment on the specified Job",
+                "operationId": "Jobs_CreateAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Job Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "file": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Forms.V2.AttachmentResponse"
+                                },
+                                "example": {
+                                    "fileName": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/jobs/{jobId}/attachments": {
+            "get": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Gets Attachments on the specified Job",
+                "description": "Gets Attachments on the specified Job",
+                "operationId": "Jobs_GetJobAttachments",
+                "parameters": [
+                    {
+                        "name": "jobId",
+                        "in": "path",
+                        "description": "Format - int64. Job Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/jobs/attachment/{id}": {
+            "get": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Downloads a specified job attachment.",
+                "description": "Downloads a specified job attachment.",
+                "operationId": "Jobs_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. The id of the job attachment to retrieve, as returned by other job API endpoints.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_Forms.V2.FormResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.V2.FormResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Forms.V2.FormResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "published",
+                    "hasConditionalLogic",
+                    "hasTriggers",
+                    "createdById",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "published": {
+                        "type": "boolean"
+                    },
+                    "hasConditionalLogic": {
+                        "type": "boolean"
+                    },
+                    "hasTriggers": {
+                        "type": "boolean"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "Forms.V2.StatusField": {
+                "enum": [
+                    "Any",
+                    "Published",
+                    "Unpublished"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Any",
+                    "Published",
+                    "Unpublished"
+                ]
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "PaginatedResponse_Of_Forms.V2.FormSubmissionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.V2.FormSubmissionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Forms.V2.FormSubmissionResponse": {
+                "required": [
+                    "id",
+                    "formId",
+                    "submittedOn",
+                    "createdById",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "formId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "formName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "submittedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SubmissionStatus"
+                    },
+                    "owners": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwner"
+                        },
+                        "nullable": true
+                    },
+                    "units": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormSectionApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormStaticElementApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.DropdownFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.NumberFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.TextFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.CheckboxFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.DateFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.PictureFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.RadioFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SignatureFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.StoplightFieldApiDto"
+                                }
+                            ]
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.SubmissionStatus": {
+                "enum": [
+                    "Started",
+                    "Completed",
+                    "Any"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Started",
+                    "Completed",
+                    "Any"
+                ]
+            },
+            "Forms.Contracts.FormSubmissions.FormOwner": {
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/Forms.Client.Contracts.OwnerType"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Client.Contracts.OwnerType": {
+                "enum": [
+                    "Job",
+                    "Call",
+                    "Customer",
+                    "Location",
+                    "Equipment",
+                    "Technician",
+                    "JobAppointment",
+                    "Membership",
+                    "Truck",
+                    "Project",
+                    "ServiceAgreement"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Job",
+                    "Call",
+                    "Customer",
+                    "Location",
+                    "Equipment",
+                    "Technician",
+                    "JobAppointment",
+                    "Membership",
+                    "Truck",
+                    "Project",
+                    "ServiceAgreement"
+                ]
+            },
+            "Forms.Contracts.FormSubmissions.FormUnitApiDto": {
+                "required": [
+                    "id",
+                    "name",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.FormSectionApiDto": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "description",
+                    "units"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "units": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormStaticElementApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.DropdownFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.NumberFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.TextFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.CheckboxFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.DateFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.PictureFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.RadioFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SignatureFieldApiDto"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.StoplightFieldApiDto"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.FormFieldApiDto": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "comment",
+                    "attachments"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Client.Contracts.FormAttachment": {
+                "required": [
+                    "fileName",
+                    "createdFrom",
+                    "originalFileName",
+                    "thumbnail"
+                ],
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "createdFrom": {
+                        "type": "string"
+                    },
+                    "originalFileName": {
+                        "type": "string"
+                    },
+                    "thumbnail": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.DropdownFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name",
+                    "options",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "options": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.NumberFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.TextFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.CheckboxFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name",
+                    "values",
+                    "options"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "options": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.DateFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.PictureFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.RadioFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name",
+                    "options",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "options": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.SignatureFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name",
+                    "value",
+                    "isRefused",
+                    "refusalReason"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    },
+                    "isRefused": {
+                        "type": "boolean"
+                    },
+                    "refusalReason": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.StoplightFieldApiDto": {
+                "required": [
+                    "type",
+                    "comment",
+                    "attachments",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Forms.Client.Contracts.StoplightValue"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Client.Contracts.StoplightValue": {
+                "enum": [
+                    "Red",
+                    "Yellow",
+                    "Green"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Red",
+                    "Yellow",
+                    "Green"
+                ]
+            },
+            "Forms.Contracts.FormSubmissions.FormStaticElementApiDto": {
+                "required": [
+                    "id",
+                    "name",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Forms.Contracts.FormSubmissions.FormOwnerType": {
+                "enum": [
+                    "Job",
+                    "Call",
+                    "Customer",
+                    "Location",
+                    "Equipment",
+                    "Technician",
+                    "JobAppointment",
+                    "Membership",
+                    "Truck"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Job",
+                    "Call",
+                    "Customer",
+                    "Location",
+                    "Equipment",
+                    "Technician",
+                    "JobAppointment",
+                    "Membership",
+                    "Truck"
+                ]
+            },
+            "Forms.V2.AttachmentResponse": {
+                "required": [
+                    "fileName"
+                ],
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "type": "string",
+                        "description": "Original filename"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

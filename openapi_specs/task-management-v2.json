@@ -1,0 +1,1888 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Task Management",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/taskmanagement/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/data": {
+            "get": {
+                "tags": [
+                    "ClientSideData"
+                ],
+                "summary": "ClientSideData_Get",
+                "operationId": "ClientSideData_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskManagement.V2.ClientSideDataResponse"
+                                },
+                                "example": {
+                                    "employees": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true
+                                        }
+                                    ],
+                                    "businessUnits": [
+                                        {
+                                            "name": "string",
+                                            "value": 0
+                                        }
+                                    ],
+                                    "taskPriorities": [
+                                        {
+                                            "name": "string"
+                                        }
+                                    ],
+                                    "taskResolutionTypes": [
+                                        {
+                                            "name": "string"
+                                        }
+                                    ],
+                                    "taskStatuses": [
+                                        {
+                                            "name": "string"
+                                        }
+                                    ],
+                                    "taskTypes": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true,
+                                            "excludedTaskResolutionIds": [
+                                                0
+                                            ]
+                                        }
+                                    ],
+                                    "taskSources": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true
+                                        }
+                                    ],
+                                    "taskResolutions": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "type": "Custom",
+                                            "active": true,
+                                            "excludedTaskTypeIds": [
+                                                0
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get a list of tasks",
+                "description": "Get a list of tasks",
+                "operationId": "Tasks_GetTasks",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Created date before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Created date on or after",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Modified date before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Modified date on or after",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reportedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Reported date before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reportedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Reported On or After",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "completeBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Completed Before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "completeOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Completed On or After",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "isClosed",
+                        "in": "query",
+                        "description": "Is Closed",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Task Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeSubtasks",
+                        "in": "query",
+                        "description": "Include Subtasks",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "description": "Business Unit Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "employeeTaskTypeIds",
+                        "in": "query",
+                        "description": "EmployeeTaskType Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "employeeTaskSourceIds",
+                        "in": "query",
+                        "description": "EmployeeTaskSource Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "employeeTaskResolutionIds",
+                        "in": "query",
+                        "description": "EmployeeTaskResolution Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reportedById",
+                        "in": "query",
+                        "description": "Format - int64. Reported By Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "assignedToId",
+                        "in": "query",
+                        "description": "Format - int64. Assigned to Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "involvedEmployeeIdList",
+                        "in": "query",
+                        "description": "Involved Employee Ids (comma separated Ids)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Format - int64. Customer Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "Format - int64. Job Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "query",
+                        "description": "Format - int64. Project Id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "priorities",
+                        "in": "query",
+                        "description": "Priorities (comma separated values)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "taskNumber",
+                        "in": "query",
+                        "description": "Format - int64. Task Number",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "jobNumber",
+                        "in": "query",
+                        "description": "Job Number",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn, CompletedBy, Priority",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_TaskManagement.V2.TaskGetResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "reportedById": 0,
+                                            "assignedToId": 0,
+                                            "active": true,
+                                            "isClosed": true,
+                                            "closedOn": "string",
+                                            "name": "string",
+                                            "businessUnitId": 0,
+                                            "employeeTaskTypeId": 0,
+                                            "employeeTaskSourceId": 0,
+                                            "employeeTaskResolutionId": 0,
+                                            "reportedOn": "string",
+                                            "completeBy": "string",
+                                            "involvedEmployeeIdList": [
+                                                0
+                                            ],
+                                            "customerId": 0,
+                                            "jobId": 0,
+                                            "projectId": 0,
+                                            "description": "string",
+                                            "priority": "string",
+                                            "id": 0,
+                                            "taskNumber": 0,
+                                            "customerName": "string",
+                                            "jobNumber": "string",
+                                            "refundIssued": 0,
+                                            "descriptionModifiedOn": "string",
+                                            "descriptionModifiedById": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "comments": [
+                                                {
+                                                    "employeeId": 0,
+                                                    "comment": "string",
+                                                    "createdOn": "string"
+                                                }
+                                            ],
+                                            "attachments": [
+                                                {
+                                                    "createdOn": "string",
+                                                    "createdBy": 0,
+                                                    "count": 0,
+                                                    "files": [
+                                                        {
+                                                            "url": "string",
+                                                            "filename": "string"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "subTasksData": {
+                                                "count": 0,
+                                                "subTasks": [
+                                                    {
+                                                        "assignedToId": 0,
+                                                        "reportedById": 0,
+                                                        "active": true,
+                                                        "isClosed": true,
+                                                        "closedOn": "string",
+                                                        "name": "string",
+                                                        "createdOn": "string",
+                                                        "dueDateTime": "string",
+                                                        "subtaskNumber": 0,
+                                                        "isViewed": true,
+                                                        "assignedDateTime": "string",
+                                                        "comments": [
+                                                            {
+                                                                "employeeId": 0,
+                                                                "comment": "string",
+                                                                "createdOn": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Tasks_Create",
+                "operationId": "Tasks_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskManagement.V2.TaskCreateRequest"
+                            },
+                            "example": {
+                                "reportedById": 0,
+                                "assignedToId": 0,
+                                "isClosed": true,
+                                "name": "string",
+                                "businessUnitId": 0,
+                                "employeeTaskTypeId": 0,
+                                "employeeTaskSourceId": 0,
+                                "employeeTaskResolutionId": 0,
+                                "reportedDate": "string",
+                                "completeBy": "string",
+                                "involvedEmployeeIdList": [
+                                    0
+                                ],
+                                "customerId": 0,
+                                "jobId": 0,
+                                "projectId": 0,
+                                "description": "string",
+                                "priority": "Low"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskManagement.V2.TaskCreateResponse"
+                                },
+                                "example": {
+                                    "reportedById": 0,
+                                    "assignedToId": 0,
+                                    "isClosed": true,
+                                    "name": "string",
+                                    "businessUnitId": 0,
+                                    "employeeTaskTypeId": 0,
+                                    "employeeTaskSourceId": 0,
+                                    "employeeTaskResolutionId": 0,
+                                    "reportedDate": "string",
+                                    "completeBy": "string",
+                                    "involvedEmployeeIdList": [
+                                        0
+                                    ],
+                                    "customerId": 0,
+                                    "jobId": 0,
+                                    "projectId": 0,
+                                    "description": "string",
+                                    "priority": "Low",
+                                    "id": 0,
+                                    "taskNumber": 0,
+                                    "customerName": "string",
+                                    "jobNumber": "string",
+                                    "refundIssued": 0,
+                                    "descriptionModifiedOn": "string",
+                                    "descriptionModifiedBy": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get a Task by Id",
+                "description": "Get a Task by Id",
+                "operationId": "Tasks_GetTask",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "includeSubtasks",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskManagement.V2.TaskGetResponse"
+                                },
+                                "example": {
+                                    "reportedById": 0,
+                                    "assignedToId": 0,
+                                    "active": true,
+                                    "isClosed": true,
+                                    "closedOn": "string",
+                                    "name": "string",
+                                    "businessUnitId": 0,
+                                    "employeeTaskTypeId": 0,
+                                    "employeeTaskSourceId": 0,
+                                    "employeeTaskResolutionId": 0,
+                                    "reportedOn": "string",
+                                    "completeBy": "string",
+                                    "involvedEmployeeIdList": [
+                                        0
+                                    ],
+                                    "customerId": 0,
+                                    "jobId": 0,
+                                    "projectId": 0,
+                                    "description": "string",
+                                    "priority": "string",
+                                    "id": 0,
+                                    "taskNumber": 0,
+                                    "customerName": "string",
+                                    "jobNumber": "string",
+                                    "refundIssued": 0,
+                                    "descriptionModifiedOn": "string",
+                                    "descriptionModifiedById": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "comments": [
+                                        {
+                                            "employeeId": 0,
+                                            "comment": "string",
+                                            "createdOn": "string"
+                                        }
+                                    ],
+                                    "attachments": [
+                                        {
+                                            "createdOn": "string",
+                                            "createdBy": 0,
+                                            "count": 0,
+                                            "files": [
+                                                {
+                                                    "url": "string",
+                                                    "filename": "string"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "subTasksData": {
+                                        "count": 0,
+                                        "subTasks": [
+                                            {
+                                                "assignedToId": 0,
+                                                "reportedById": 0,
+                                                "active": true,
+                                                "isClosed": true,
+                                                "closedOn": "string",
+                                                "name": "string",
+                                                "createdOn": "string",
+                                                "dueDateTime": "string",
+                                                "subtaskNumber": 0,
+                                                "isViewed": true,
+                                                "assignedDateTime": "string",
+                                                "comments": [
+                                                    {
+                                                        "employeeId": 0,
+                                                        "comment": "string",
+                                                        "createdOn": "string"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/tasks/{id}/subtasks": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Tasks_CreateSubtask",
+                "operationId": "Tasks_CreateSubtask",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskManagement.V2.SubtaskCreateRequest"
+                            },
+                            "example": {
+                                "isClosed": true,
+                                "name": "string",
+                                "assignedToId": 0,
+                                "dueDateTime": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskManagement.V2.SubtaskCreateResponse"
+                                },
+                                "example": {
+                                    "isClosed": true,
+                                    "name": "string",
+                                    "assignedToId": 0,
+                                    "dueDateTime": "string",
+                                    "parentTaskId": 0,
+                                    "subtaskNumber": "string",
+                                    "isViewed": true,
+                                    "assignedDateTime": "string",
+                                    "createdOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TaskManagement.V2.ClientSideDataResponse": {
+                "required": [
+                    "employees",
+                    "businessUnits",
+                    "taskPriorities",
+                    "taskResolutionTypes",
+                    "taskStatuses",
+                    "taskTypes",
+                    "taskSources",
+                    "taskResolutions"
+                ],
+                "type": "object",
+                "properties": {
+                    "employees": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideEmployeeResponse"
+                        }
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideBusinessUnitResponse"
+                        }
+                    },
+                    "taskPriorities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskPriorityResponse"
+                        }
+                    },
+                    "taskResolutionTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskResolutionTypeResponse"
+                        }
+                    },
+                    "taskStatuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskStatusResponse"
+                        }
+                    },
+                    "taskTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskTypeResponse"
+                        }
+                    },
+                    "taskSources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskSourceResponse"
+                        }
+                    },
+                    "taskResolutions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.ClientSideTaskResolutionResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideEmployeeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideBusinessUnitResponse": {
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskPriorityResponse": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskResolutionTypeResponse": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskStatusResponse": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "excludedTaskResolutionIds"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "excludedTaskResolutionIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskSourceResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.ClientSideTaskResolutionResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "active",
+                    "excludedTaskTypeIds"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/TaskManagement.V2.TaskResolutionType"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "excludedTaskTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.TaskResolutionType": {
+                "enum": [
+                    "Custom",
+                    "Refund"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Custom",
+                    "Refund"
+                ]
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_TaskManagement.V2.TaskGetResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.V2.TaskGetResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "TaskManagement.V2.TaskGetResponse": {
+                "required": [
+                    "reportedById",
+                    "assignedToId",
+                    "active",
+                    "isClosed",
+                    "businessUnitId",
+                    "employeeTaskTypeId",
+                    "employeeTaskSourceId",
+                    "employeeTaskResolutionId",
+                    "reportedOn",
+                    "id",
+                    "taskNumber",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "reportedById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "closedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskTypeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskSourceId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskResolutionId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "reportedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "completeBy": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "involvedEmployeeIdList": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "priority": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "taskNumber": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "customerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "jobNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "refundIssued": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "descriptionModifiedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "descriptionModifiedById": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskComment"
+                        },
+                        "nullable": true
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskAttachmentGroup"
+                        },
+                        "nullable": true
+                    },
+                    "subTasksData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.SubTasksInfo"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.Contracts.ApiModels.Tasks.TaskComment": {
+                "required": [
+                    "employeeId",
+                    "comment",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.Contracts.ApiModels.Tasks.TaskAttachmentGroup": {
+                "required": [
+                    "createdOn",
+                    "createdBy",
+                    "count",
+                    "files"
+                ],
+                "type": "object",
+                "properties": {
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskAttachment"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.Contracts.ApiModels.Tasks.TaskAttachment": {
+                "required": [
+                    "url",
+                    "filename"
+                ],
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.Contracts.ApiModels.Tasks.SubTasksInfo": {
+                "required": [
+                    "count",
+                    "subTasks"
+                ],
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "subTasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.SubTaskGet"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.Contracts.ApiModels.Tasks.SubTaskGet": {
+                "required": [
+                    "active",
+                    "isClosed",
+                    "name",
+                    "createdOn",
+                    "subtaskNumber",
+                    "isViewed",
+                    "assignedDateTime",
+                    "comments"
+                ],
+                "type": "object",
+                "properties": {
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "reportedById": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "closedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dueDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "subtaskNumber": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "isViewed": {
+                        "type": "boolean"
+                    },
+                    "assignedDateTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskComment"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "TaskManagement.V2.TaskCreateResponse": {
+                "required": [
+                    "reportedById",
+                    "assignedToId",
+                    "isClosed",
+                    "name",
+                    "businessUnitId",
+                    "employeeTaskTypeId",
+                    "employeeTaskSourceId",
+                    "reportedDate",
+                    "priority",
+                    "id",
+                    "taskNumber",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "reportedById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskTypeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskSourceId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskResolutionId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "reportedDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "completeBy": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "involvedEmployeeIdList": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "priority": {
+                        "$ref": "#/components/schemas/TaskManagement.V2.TaskPriority"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "taskNumber": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "customerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "jobNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "refundIssued": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "descriptionModifiedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "descriptionModifiedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.TaskPriority": {
+                "enum": [
+                    "Low",
+                    "Normal",
+                    "High",
+                    "Urgent"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Low",
+                    "Normal",
+                    "High",
+                    "Urgent"
+                ]
+            },
+            "TaskManagement.V2.TaskCreateRequest": {
+                "required": [
+                    "reportedById",
+                    "assignedToId",
+                    "isClosed",
+                    "name",
+                    "businessUnitId",
+                    "employeeTaskTypeId",
+                    "employeeTaskSourceId",
+                    "reportedDate",
+                    "priority"
+                ],
+                "type": "object",
+                "properties": {
+                    "reportedById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskTypeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskSourceId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "employeeTaskResolutionId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "reportedDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "completeBy": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "involvedEmployeeIdList": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "priority": {
+                        "$ref": "#/components/schemas/TaskManagement.V2.TaskPriority"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.SubtaskCreateResponse": {
+                "required": [
+                    "isClosed",
+                    "name",
+                    "assignedToId",
+                    "parentTaskId",
+                    "subtaskNumber",
+                    "isViewed",
+                    "assignedDateTime",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "dueDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "parentTaskId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "subtaskNumber": {
+                        "type": "string"
+                    },
+                    "isViewed": {
+                        "type": "boolean"
+                    },
+                    "assignedDateTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TaskManagement.V2.SubtaskCreateRequest": {
+                "required": [
+                    "isClosed",
+                    "name",
+                    "assignedToId"
+                ],
+                "type": "object",
+                "properties": {
+                    "isClosed": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "assignedToId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "dueDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
