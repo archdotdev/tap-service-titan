@@ -35,6 +35,10 @@ plugins:
     config:
       api_url: https://api-integration.servicetitan.io
       auth_url: https://auth-integration.servicetitan.io/connect/token
+    select:
+    - '*.*'
+    - '!job_history.*'
+    - '!capacities.*'
   loaders:
   - name: target-jsonl
     variant: andyh1203
