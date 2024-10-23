@@ -1,0 +1,1143 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Reporting",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/reporting/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/dynamic-value-sets/{dynamicSetId}": {
+            "get": {
+                "tags": [
+                    "DynamicValueSets"
+                ],
+                "summary": "List values of given dynamic set including key and display name",
+                "description": "List values of given dynamic set including key and display name",
+                "operationId": "DynamicValueSets_GetDynamicSet",
+                "parameters": [
+                    {
+                        "name": "dynamicSetId",
+                        "in": "path",
+                        "description": "ID of dynamic set taken from a report description ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.DynamicSetResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        [
+                                            {}
+                                        ]
+                                    ],
+                                    "fields": [
+                                        {
+                                            "name": "string",
+                                            "label": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "There is no such dynamic value set",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/report-categories": {
+            "get": {
+                "tags": [
+                    "ReportCategories"
+                ],
+                "summary": "List categories for existing  reports",
+                "description": "List categories for existing  reports",
+                "operationId": "ReportCategories_GetCategories",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Reporting.V2.ReportCategoryListItem"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "name": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/report-category/{report_category}/reports": {
+            "get": {
+                "tags": [
+                    "ReportCategoryReports"
+                ],
+                "summary": "List reports within given category",
+                "description": "List reports within given category",
+                "operationId": "ReportCategoryReports_GetReports",
+                "parameters": [
+                    {
+                        "name": "report_category",
+                        "in": "path",
+                        "description": "ID of category taken from the category list endpoint ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Reporting.V2.ReportListItem"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "description": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "There is no such category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/report-category/{report_category}/reports/{reportId}": {
+            "get": {
+                "tags": [
+                    "ReportCategoryReports"
+                ],
+                "summary": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
+                "description": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
+                "operationId": "ReportCategoryReports_Get",
+                "parameters": [
+                    {
+                        "name": "report_category",
+                        "in": "path",
+                        "description": "ID of category taken from the category list endpoint ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportId",
+                        "in": "path",
+                        "description": "Format - int64. ID of report within the category ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "modifiedOn": "string",
+                                    "parameters": [
+                                        {
+                                            "name": "string",
+                                            "label": "string",
+                                            "dataType": {},
+                                            "isArray": true,
+                                            "isRequired": true,
+                                            "acceptValues": {
+                                                "fields": [
+                                                    {
+                                                        "name": "string",
+                                                        "label": "string"
+                                                    }
+                                                ],
+                                                "dynamicSetId": "string",
+                                                "values": [
+                                                    [
+                                                        {}
+                                                    ]
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "fields": [
+                                        {
+                                            "name": "string",
+                                            "label": "string",
+                                            "dataType": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "There is no such category / There is no such report with the category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/report-category/{report_category}/reports/{reportId}/data": {
+            "post": {
+                "tags": [
+                    "ReportCategoryReports"
+                ],
+                "summary": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
+                "description": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
+                "operationId": "ReportCategoryReports_GetData",
+                "parameters": [
+                    {
+                        "name": "report_category",
+                        "in": "path",
+                        "description": "ID of category taken from the category list endpoint ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportId",
+                        "in": "path",
+                        "description": "Format - int64. ID of report within the category ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (1000 by default)",
+                        "schema": {
+                            "maximum": 25000,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Report input parameter values ",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reporting.V2.ReportDataRequest"
+                            },
+                            "example": {
+                                "parameters": [
+                                    {
+                                        "name": "string",
+                                        "value": {}
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportDataResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        [
+                                            {}
+                                        ]
+                                    ],
+                                    "fields": [
+                                        {
+                                            "name": "string",
+                                            "label": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "There is no such category / There is no such report with the category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Reporting.V2.DynamicSetResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data",
+                    "fields"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.HeaderField"
+                        },
+                        "description": "Describes header row of data "
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Rows of corresponding standard dynamic set. Types of columns are generally arbitrary\nand defined by the dynamic set (may be number or string etc)"
+            },
+            "Reporting.V2.HeaderField": {
+                "required": [
+                    "name",
+                    "label"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Unique name of the field "
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Display name of the field "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_Reporting.V2.ReportCategoryListItem": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.ReportCategoryListItem"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Reporting.V2.ReportCategoryListItem": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID of report catogory for safe use in report endpoints "
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Display name of the report category "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Reporting.V2.ReportListItem": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.ReportListItem"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Reporting.V2.ReportListItem": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Report unique identifier.\nUse this value to request detailed report information, the actual data, etc.\nOnce the report is created the ID cannot be changed",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Display name of the report.\nDo not use the name as the report identifier because it can be modified\nand any references based on the old value would stop working"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description about the report ",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.ReportResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "modifiedOn",
+                    "parameters",
+                    "fields"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Report unique identifier ",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Display name of the report "
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description about the report ",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Time when the report structure was changed  ",
+                        "format": "date-time"
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.ReportParameter"
+                        },
+                        "description": "Defines the parameters that the report expects when requesting data "
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.ReportField"
+                        },
+                        "description": "Describes fields/columns returned by the report when requesting data "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.ReportParameter": {
+                "required": [
+                    "name",
+                    "label",
+                    "dataType",
+                    "isArray",
+                    "isRequired"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Unique name "
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Display name "
+                    },
+                    "dataType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Reporting.V2.DataType"
+                            }
+                        ],
+                        "description": "Data type of element for the parameter "
+                    },
+                    "isArray": {
+                        "type": "boolean",
+                        "description": "Determines whether the filter expects array of elements "
+                    },
+                    "isRequired": {
+                        "type": "boolean",
+                        "description": "Indicater if the parameter has to be specified of not "
+                    },
+                    "acceptValues": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Reporting.V2.ParameterPossibleValues"
+                            }
+                        ],
+                        "description": "If the filter accepts only certain values as the input this object defines what those values should be",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.DataType": {
+                "enum": [
+                    "String",
+                    "Number",
+                    "Boolean",
+                    "Date",
+                    "Time"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "String",
+                    "Number",
+                    "Boolean",
+                    "Date",
+                    "Time"
+                ]
+            },
+            "Reporting.V2.ParameterPossibleValues": {
+                "required": [
+                    "fields"
+                ],
+                "type": "object",
+                "properties": {
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.HeaderField"
+                        },
+                        "description": "Describes key column and then value column of possible value rows "
+                    },
+                    "dynamicSetId": {
+                        "type": "string",
+                        "description": "If values are based on a dynamic list (e.g. a list of the existing Business Units or Technicians)\nthen this object defines identifier of the value set to get from the corresponding endpoint",
+                        "nullable": true
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "description": "A predefined list of the values accepted ",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.ReportField": {
+                "required": [
+                    "name",
+                    "label",
+                    "dataType"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Field unique identifier "
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Display name of the field. This is the same label that is displayed in the reporting UI "
+                    },
+                    "dataType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Reporting.V2.DataType"
+                            }
+                        ],
+                        "description": "Value data type for the field/column "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.ReportDataResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data",
+                    "fields"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.HeaderField"
+                        },
+                        "description": "Describes row headers/columns of returned rows "
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Rows of the requested report. Types of columns are defined by the report fields' definition."
+            },
+            "Reporting.V2.ReportDataRequest": {
+                "required": [
+                    "parameters"
+                ],
+                "type": "object",
+                "properties": {
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Reporting.V2.ReportDataParameter"
+                        },
+                        "description": "List of name/value for input parameters of the report "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Reporting.V2.ReportDataParameter": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Parameter name "
+                    },
+                    "value": {
+                        "description": "Value of the parameter based of its descrition (data type etc.) ",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
