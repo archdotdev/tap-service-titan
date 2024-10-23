@@ -9,7 +9,7 @@ from typing import Any, Callable, Iterable
 
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import (  # noqa: TCH002
+from singer_sdk.pagination import (
     BaseAPIPaginator,
     BasePageNumberPaginator,
 )
@@ -18,14 +18,11 @@ from singer_sdk.streams import RESTStream
 from tap_service_titan.auth import ServiceTitanAuthenticator
 
 if sys.version_info >= (3, 9):
-    import importlib.resources as importlib_resources
+    pass
 else:
-    import importlib_resources
+    pass
 
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
-
-# TODO: Delete this is if not using json files for schema definition
-SCHEMAS_DIR = importlib_resources.files(__package__) / "schemas"
 
 
 class ServiceTitanBaseStream(RESTStream):

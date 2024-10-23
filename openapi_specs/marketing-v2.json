@@ -1,0 +1,2195 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Marketing",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/marketing/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/categories": {
+            "get": {
+                "tags": [
+                    "CampaignCategories"
+                ],
+                "summary": "Gets a paginated list of campaign categories",
+                "description": "Gets a paginated list of campaign categories",
+                "operationId": "CampaignCategories_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, Name",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.CampaignCategoryResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true,
+                                            "type": "Regular",
+                                            "createdOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CampaignCategories"
+                ],
+                "summary": "Creates new campaign category",
+                "description": "Creates new campaign category",
+                "operationId": "CampaignCategories_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryCreateRequest"
+                            },
+                            "example": {
+                                "name": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/categories/{id}": {
+            "get": {
+                "tags": [
+                    "CampaignCategories"
+                ],
+                "summary": "Gets campaign category specified by ID",
+                "description": "Gets campaign category specified by ID",
+                "operationId": "CampaignCategories_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "type": "Regular",
+                                    "createdOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "CampaignCategories"
+                ],
+                "summary": "Updates specified campaign category in \"patch\" mode",
+                "description": "Updates specified campaign category in \"patch\" mode",
+                "operationId": "CampaignCategories_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryUpdateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/costs": {
+            "get": {
+                "tags": [
+                    "CampaignCosts"
+                ],
+                "summary": "Gets a paginated list of campaign costs",
+                "description": "Gets a paginated list of campaign costs",
+                "operationId": "CampaignCosts_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Format - int32. Year",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Format - int32. Month",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "campaignId",
+                        "in": "query",
+                        "description": "Format - int64. Campaign ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Date (Year + Month)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.CampaignCostResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "year": 0,
+                                            "month": 0,
+                                            "dailyCost": 0,
+                                            "campaignId": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CampaignCosts"
+                ],
+                "summary": "Creates new campaign cost",
+                "description": "Creates new campaign cost",
+                "operationId": "CampaignCosts_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.CreateCampaignCostRequest"
+                            },
+                            "example": {
+                                "campaignId": 0,
+                                "year": 0,
+                                "month": 0,
+                                "dailyCost": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignCostResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "year": 0,
+                                    "month": 0,
+                                    "dailyCost": 0,
+                                    "campaignId": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/costs/{id}": {
+            "get": {
+                "tags": [
+                    "CampaignCosts"
+                ],
+                "summary": "Gets campaign cost specified by ID",
+                "description": "Gets campaign cost specified by ID",
+                "operationId": "CampaignCosts_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignCostResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "year": 0,
+                                    "month": 0,
+                                    "dailyCost": 0,
+                                    "campaignId": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "CampaignCosts"
+                ],
+                "summary": "Updates specified campaign cost in \"patch\" mode",
+                "description": "Updates specified campaign cost in \"patch\" mode",
+                "operationId": "CampaignCosts_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.UpdateCampaignCostRequest"
+                            },
+                            "example": {
+                                "dailyCost": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/campaigns": {
+            "get": {
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Gets a paginated list of campaigns",
+                "description": "Gets a paginated list of campaigns",
+                "operationId": "Campaigns_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "campaignPhoneNumber",
+                        "in": "query",
+                        "description": "Filters campaigns by phone number (as string).",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.CampaignResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "modifiedOn": "string",
+                                            "createdOn": "string",
+                                            "active": true,
+                                            "category": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "active": true
+                                            },
+                                            "source": "string",
+                                            "otherSource": "string",
+                                            "businessUnit": "string",
+                                            "medium": "string",
+                                            "otherMedium": "string",
+                                            "campaignPhoneNumbers": [
+                                                "string"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Creates new campaign",
+                "description": "Creates new campaign",
+                "operationId": "Campaigns_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.CampaignUpsertRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "businessUnitId": 0,
+                                "dnis": "string",
+                                "categoryId": 0,
+                                "active": true,
+                                "source": "string",
+                                "medium": "string",
+                                "otherSource": "string",
+                                "otherMedium": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "modifiedOn": "string",
+                                    "createdOn": "string",
+                                    "active": true,
+                                    "category": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "active": true
+                                    },
+                                    "source": "string",
+                                    "otherSource": "string",
+                                    "businessUnit": "string",
+                                    "medium": "string",
+                                    "otherMedium": "string",
+                                    "campaignPhoneNumbers": [
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/campaigns/{id}": {
+            "get": {
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Gets campaign specified by ID",
+                "description": "Gets campaign specified by ID",
+                "operationId": "Campaigns_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "modifiedOn": "string",
+                                    "createdOn": "string",
+                                    "active": true,
+                                    "category": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "active": true
+                                    },
+                                    "source": "string",
+                                    "otherSource": "string",
+                                    "businessUnit": "string",
+                                    "medium": "string",
+                                    "otherMedium": "string",
+                                    "campaignPhoneNumbers": [
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Updates specified campaign in \"patch\" mode",
+                "description": "Updates specified campaign in \"patch\" mode",
+                "operationId": "Campaigns_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.CampaignUpsertRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "businessUnitId": 0,
+                                "dnis": "string",
+                                "categoryId": 0,
+                                "active": true,
+                                "source": "string",
+                                "medium": "string",
+                                "otherSource": "string",
+                                "otherMedium": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "modifiedOn": "string",
+                                    "createdOn": "string",
+                                    "active": true,
+                                    "category": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "active": true
+                                    },
+                                    "source": "string",
+                                    "otherSource": "string",
+                                    "businessUnit": "string",
+                                    "medium": "string",
+                                    "otherMedium": "string",
+                                    "campaignPhoneNumbers": [
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/campaigns/{id}/costs": {
+            "get": {
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Gets a paginated list of campaign costs",
+                "description": "Gets a paginated list of campaign costs",
+                "operationId": "Campaigns_GetCosts",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Date (Year + Month)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.CampaignCostResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "year": 0,
+                                            "month": 0,
+                                            "dailyCost": 0,
+                                            "campaignId": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/suppressions": {
+            "get": {
+                "tags": [
+                    "Suppressions"
+                ],
+                "summary": "Gets a paginated list of suppression",
+                "description": "Gets a paginated list of suppression",
+                "operationId": "Suppressions_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.SuppressionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "email": "string",
+                                            "reason": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/suppressions/{email}": {
+            "get": {
+                "tags": [
+                    "Suppressions"
+                ],
+                "summary": "Gets suppression specified by an email",
+                "description": "Gets suppression specified by an email",
+                "operationId": "Suppressions_Get",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "Format - email.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.SuppressionResponse"
+                                },
+                                "example": {
+                                    "email": "string",
+                                    "reason": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/suppressions/unsuppress": {
+            "post": {
+                "tags": [
+                    "Suppressions"
+                ],
+                "summary": "Remove emails from a suppression list",
+                "description": "Remove emails from a suppression list",
+                "operationId": "Suppressions_Remove",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.RemoveSuppressionsRequest"
+                            },
+                            "example": {
+                                "emails": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/suppressions/suppress": {
+            "post": {
+                "tags": [
+                    "Suppressions"
+                ],
+                "summary": "Add emails to a suppression list",
+                "description": "Add emails to a suppression list",
+                "operationId": "Suppressions_Add",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.AddSuppressionsRequest"
+                            },
+                            "example": {
+                                "emails": [
+                                    "string"
+                                ],
+                                "reason": "Unsubscribe"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_Marketing.V2.CampaignCategoryResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.V2.CampaignCategoryResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "type",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryType"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.CampaignCategoryType": {
+                "enum": [
+                    "Regular",
+                    "GoogleHomeServices"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Regular",
+                    "GoogleHomeServices"
+                ]
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "ModificationResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of created/updated object",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Default response when creating object with a new ID, or updating object by specified ID."
+            },
+            "Marketing.V2.CampaignCategoryUpdateRequest": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.CampaignCategoryCreateRequest": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Marketing.V2.CampaignCostResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.V2.CampaignCostResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.V2.CampaignCostResponse": {
+                "required": [
+                    "id",
+                    "year",
+                    "month",
+                    "dailyCost",
+                    "campaignId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "month": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dailyCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "campaignId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.CreateCampaignCostRequest": {
+                "required": [
+                    "campaignId",
+                    "year",
+                    "month",
+                    "dailyCost"
+                ],
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "month": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dailyCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.UpdateCampaignCostRequest": {
+                "required": [
+                    "dailyCost"
+                ],
+                "type": "object",
+                "properties": {
+                    "dailyCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Marketing.V2.CampaignResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.V2.CampaignResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.V2.CampaignResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "modifiedOn",
+                    "createdOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "category": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.V2.CampaignResponseCategory"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherSource": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "medium": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherMedium": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "campaignPhoneNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.CampaignResponseCategory": {
+                "required": [
+                    "id",
+                    "name",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "Marketing.V2.CampaignUpsertRequest": {
+                "required": [
+                    "name",
+                    "businessUnitId",
+                    "categoryId",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "dnis": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "categoryId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "source": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "medium": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherSource": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherMedium": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Marketing.V2.SuppressionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.V2.SuppressionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.V2.SuppressionResponse": {
+                "required": [
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "reason": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.V2.SuppressionType"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.SuppressionType": {
+                "enum": [
+                    "Unsubscribe",
+                    "Bounce",
+                    "SpamReport",
+                    "ManualUnsubscribe",
+                    "NeverEmail"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Unsubscribe",
+                    "Bounce",
+                    "SpamReport",
+                    "ManualUnsubscribe",
+                    "NeverEmail"
+                ]
+            },
+            "Marketing.V2.RemoveSuppressionsRequest": {
+                "required": [
+                    "emails"
+                ],
+                "type": "object",
+                "properties": {
+                    "emails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Email addresses to remove from the suppression list, max items: 1000 "
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.AddSuppressionsRequest": {
+                "required": [
+                    "emails",
+                    "reason"
+                ],
+                "type": "object",
+                "properties": {
+                    "emails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Email addresses to add to the suppression list, max items: 1000 "
+                    },
+                    "reason": {
+                        "$ref": "#/components/schemas/Marketing.V2.SuppressionType"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

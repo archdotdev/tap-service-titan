@@ -1,0 +1,1611 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Marketing Ads",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/marketingads/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/attributed-leads": {
+            "get": {
+                "tags": [
+                    "AttributedLeads"
+                ],
+                "summary": "Returns attributed leads data.",
+                "description": "Returns attributed leads data.",
+                "operationId": "AttributedLeads_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "fromUtc",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the start date and time in UTC for the filtering period.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "toUtc",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the end date and time in UTC for the filtering period.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "leadType",
+                        "in": "query",
+                        "description": "Gets or sets the type of lead for filtering purposes. Possible values are:\n\nLeadType.Call\nLeadType.WebBooking\nLeadType.WebLeadForm\nLeadType.ManualJob\n\nIf null, data for all lead types is returned.\\\nValues: [Call, WebBooking, WebLeadForm, ManualJob]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Marketing.Ads.Client.LeadType"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "dateTime": "string",
+                                            "leadType": "Call",
+                                            "attribution": {
+                                                "utmSource": "string",
+                                                "utmMedium": "string",
+                                                "utmCampaign": "string",
+                                                "landingPageUrl": "string",
+                                                "referrerUrl": "string",
+                                                "clickId": "string",
+                                                "stCampaignId": 0,
+                                                "originalCampaign": "string",
+                                                "attributionOverwriteType": {},
+                                                "attributionOverwriteId": 0,
+                                                "overwrittenBookingJobId": 0,
+                                                "adGroupId": "string",
+                                                "adGroupName": "string",
+                                                "keywordId": "string",
+                                                "keywordName": "string"
+                                            },
+                                            "job": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "call": {
+                                                "duration": "string",
+                                                "id": 0,
+                                                "type": "string",
+                                                "source": "string",
+                                                "callerNumber": "string",
+                                                "trackingNumber": "string",
+                                                "excusedReason": "string"
+                                            },
+                                            "leadForm": {
+                                                "leadNumber": 0,
+                                                "leadStatus": "string",
+                                                "notes": "string"
+                                            },
+                                            "booking": {
+                                                "id": 0
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/capacity-warnings": {
+            "get": {
+                "tags": [
+                    "CapacityAwarenessWarning"
+                ],
+                "summary": "Returns all capacity awareness warnings.",
+                "description": "Returns all capacity awareness warnings.",
+                "operationId": "CapacityAwarenessWarning_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.Ads.Contracts.CapacityAwarenessWarningQueryResult"
+                                },
+                                "example": {
+                                    "tenantId": 0,
+                                    "tenantName": "string",
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "campaignName": "string",
+                                            "warningType": "string",
+                                            "businessUnits": [
+                                                "string"
+                                            ],
+                                            "lookaheadWindow": 0,
+                                            "thresholdValue": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/external-call-attributions": {
+            "post": {
+                "tags": [
+                    "ExternalCallAttributions"
+                ],
+                "summary": "Attributes an external call (possibly coming from Call Tracking Software) to a web session.",
+                "description": "Attributes an external call (possibly coming from Call Tracking Software) to a web session.",
+                "operationId": "ExternalCallAttributions_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.CreateExternalCallAttributionRequest"
+                            },
+                            "example": {
+                                "webSessionData": {
+                                    "landingPageUrl": "string",
+                                    "referrerUrl": "string",
+                                    "gclid": "string",
+                                    "fbclid": "string",
+                                    "msclkid": "string",
+                                    "utmSource": "string",
+                                    "utmMedium": "string",
+                                    "utmCampaign": "string",
+                                    "utmAdgroup": "string",
+                                    "utmTerm": "string",
+                                    "utmContent": "string",
+                                    "googleAnalyticsClientId": "string"
+                                },
+                                "externalCallData": {
+                                    "customerPhoneNumber": "string",
+                                    "forwardingPhoneNumber": "string",
+                                    "trackingPhoneNumber": "string",
+                                    "callStartedOnUtc": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/performance": {
+            "get": {
+                "tags": [
+                    "Performance"
+                ],
+                "summary": "Returns performance data.",
+                "description": "Returns performance data.",
+                "operationId": "Performance_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "fromUtc",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the start date and time in UTC for the filtering period.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "toUtc",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the end date and time in UTC for the filtering period.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "performanceSegmentationType",
+                        "in": "query",
+                        "description": "Gets or sets the type of performance segmentation for filtering purposes. Possible values are:\n\nPerformanceSegmentationType.Campaign\nPerformanceSegmentationType.AdGroup\nPerformanceSegmentationType.Keyword\\\nValues: [Campaign, AdGroup, Keyword]",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.PerformanceSegmentationType"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.Ads.Contracts.Performance.GetPerformanceResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "campaign": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "category": "string",
+                                                "launchDate": "string",
+                                                "status": "None"
+                                            },
+                                            "adGroup": {
+                                                "id": "string",
+                                                "name": "string",
+                                                "status": {}
+                                            },
+                                            "keyword": {
+                                                "id": "string",
+                                                "name": "string",
+                                                "status": {}
+                                            },
+                                            "digitalStats": {
+                                                "impressionShare": 0,
+                                                "impressions": 0,
+                                                "clicks": 0,
+                                                "averageCPC": 0,
+                                                "conversions": 0,
+                                                "allConversions": 0,
+                                                "cost": 0,
+                                                "clickRate": 0,
+                                                "costPerConversion": 0,
+                                                "conversionRate": 0
+                                            },
+                                            "leadStats": {
+                                                "leads": 0,
+                                                "leadCalls": 0,
+                                                "onlineBooking": 0,
+                                                "manualBooking": 0,
+                                                "bookedJobs": 0,
+                                                "ranJobs": 0,
+                                                "soldJobs": 0,
+                                                "revenue": 0,
+                                                "bookingRate": 0,
+                                                "avgTicket": 0
+                                            },
+                                            "returnOnInvestment": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/job-attributions": {
+            "post": {
+                "tags": [
+                    "ScheduledJobAttributions"
+                ],
+                "summary": "Attributes a job to a web session.",
+                "description": "Attributes a job to a web session.",
+                "operationId": "ScheduledJobAttributions_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.CreateScheduledJobAttributionRequest"
+                            },
+                            "example": {
+                                "webSessionData": {
+                                    "landingPageUrl": "string",
+                                    "referrerUrl": "string",
+                                    "gclid": "string",
+                                    "fbclid": "string",
+                                    "msclkid": "string",
+                                    "utmSource": "string",
+                                    "utmMedium": "string",
+                                    "utmCampaign": "string",
+                                    "utmAdgroup": "string",
+                                    "utmTerm": "string",
+                                    "utmContent": "string",
+                                    "googleAnalyticsClientId": "string"
+                                },
+                                "jobId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/web-booking-attributions": {
+            "post": {
+                "tags": [
+                    "WebBookingAttributions"
+                ],
+                "summary": "Attributes a web booking to a web session.",
+                "description": "Attributes a web booking to a web session.",
+                "operationId": "WebBookingAttributions_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.CreateWebBookingAttributionRequest"
+                            },
+                            "example": {
+                                "webSessionData": {
+                                    "landingPageUrl": "string",
+                                    "referrerUrl": "string",
+                                    "gclid": "string",
+                                    "fbclid": "string",
+                                    "msclkid": "string",
+                                    "utmSource": "string",
+                                    "utmMedium": "string",
+                                    "utmCampaign": "string",
+                                    "utmAdgroup": "string",
+                                    "utmTerm": "string",
+                                    "utmContent": "string",
+                                    "googleAnalyticsClientId": "string"
+                                },
+                                "bookingId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/web-lead-form-attributions": {
+            "post": {
+                "tags": [
+                    "WebLeadFormAttributions"
+                ],
+                "summary": "Attributes a web lead form to a web session.",
+                "description": "Attributes a web lead form to a web session.",
+                "operationId": "WebLeadFormAttributions_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.CreateWebLeadFormAttributionRequest"
+                            },
+                            "example": {
+                                "webSessionData": {
+                                    "landingPageUrl": "string",
+                                    "referrerUrl": "string",
+                                    "gclid": "string",
+                                    "fbclid": "string",
+                                    "msclkid": "string",
+                                    "utmSource": "string",
+                                    "utmMedium": "string",
+                                    "utmCampaign": "string",
+                                    "utmAdgroup": "string",
+                                    "utmTerm": "string",
+                                    "utmContent": "string",
+                                    "googleAnalyticsClientId": "string"
+                                },
+                                "leadId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse": {
+                "required": [
+                    "dateTime",
+                    "leadType",
+                    "attribution",
+                    "job",
+                    "customer",
+                    "call",
+                    "leadForm",
+                    "booking"
+                ],
+                "type": "object",
+                "properties": {
+                    "dateTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "leadType": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Client.LeadType"
+                    },
+                    "attribution": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Attribution"
+                    },
+                    "job": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Job"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Customer"
+                    },
+                    "call": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Call"
+                    },
+                    "leadForm": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.LeadForm"
+                    },
+                    "booking": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Booking"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Client.LeadType": {
+                "enum": [
+                    "Call",
+                    "WebBooking",
+                    "WebLeadForm",
+                    "ManualJob"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Call",
+                    "WebBooking",
+                    "WebLeadForm",
+                    "ManualJob"
+                ]
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.Attribution": {
+                "required": [
+                    "utmSource",
+                    "utmMedium",
+                    "utmCampaign",
+                    "landingPageUrl",
+                    "referrerUrl",
+                    "clickId",
+                    "originalCampaign",
+                    "adGroupId",
+                    "adGroupName",
+                    "keywordId",
+                    "keywordName"
+                ],
+                "type": "object",
+                "properties": {
+                    "utmSource": {
+                        "type": "string"
+                    },
+                    "utmMedium": {
+                        "type": "string"
+                    },
+                    "utmCampaign": {
+                        "type": "string"
+                    },
+                    "landingPageUrl": {
+                        "type": "string"
+                    },
+                    "referrerUrl": {
+                        "type": "string"
+                    },
+                    "clickId": {
+                        "type": "string"
+                    },
+                    "stCampaignId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "originalCampaign": {
+                        "type": "string"
+                    },
+                    "attributionOverwriteType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.EntityType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "attributionOverwriteId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "overwrittenBookingJobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "adGroupId": {
+                        "type": "string"
+                    },
+                    "adGroupName": {
+                        "type": "string"
+                    },
+                    "keywordId": {
+                        "type": "string"
+                    },
+                    "keywordName": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.EntityType": {
+                "enum": [
+                    "Call",
+                    "Booking",
+                    "Lead"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Call",
+                    "Booking",
+                    "Lead"
+                ]
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.Job": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.Customer": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.Call": {
+                "required": [
+                    "duration",
+                    "type",
+                    "source",
+                    "callerNumber",
+                    "trackingNumber",
+                    "excusedReason"
+                ],
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "callerNumber": {
+                        "type": "string"
+                    },
+                    "trackingNumber": {
+                        "type": "string"
+                    },
+                    "excusedReason": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.LeadForm": {
+                "required": [
+                    "leadStatus",
+                    "notes"
+                ],
+                "type": "object",
+                "properties": {
+                    "leadNumber": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "leadStatus": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.AttributedLeads.Booking": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "Marketing.Ads.Contracts.CapacityAwarenessWarningQueryResult": {
+                "required": [
+                    "tenantId",
+                    "tenantName",
+                    "totalCount",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "tenantId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.Ads.Client.CapacityAwarenessWarning"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Client.CapacityAwarenessWarning": {
+                "required": [
+                    "campaignName",
+                    "warningType",
+                    "businessUnits",
+                    "lookaheadWindow",
+                    "thresholdValue"
+                ],
+                "type": "object",
+                "properties": {
+                    "campaignName": {
+                        "type": "string"
+                    },
+                    "warningType": {
+                        "type": "string"
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "lookaheadWindow": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "thresholdValue": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.V2.CreateExternalCallAttributionRequest": {
+                "required": [
+                    "webSessionData",
+                    "externalCallData"
+                ],
+                "type": "object",
+                "properties": {
+                    "webSessionData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
+                            }
+                        ],
+                        "description": "The web session that the entity should be attributed to"
+                    },
+                    "externalCallData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.ExternalCallData"
+                            }
+                        ],
+                        "description": "The external call."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.V2.WebSessionData": {
+                "required": [
+                    "landingPageUrl",
+                    "referrerUrl"
+                ],
+                "type": "object",
+                "properties": {
+                    "landingPageUrl": {
+                        "type": "string",
+                        "description": "The url of the web page that the user first landed on"
+                    },
+                    "referrerUrl": {
+                        "type": "string",
+                        "description": "The url of the web page that referred to the website"
+                    },
+                    "gclid": {
+                        "type": "string",
+                        "description": "Google Click Identifier",
+                        "nullable": true
+                    },
+                    "fbclid": {
+                        "type": "string",
+                        "description": "Facebook Click Identifier",
+                        "nullable": true
+                    },
+                    "msclkid": {
+                        "type": "string",
+                        "description": "Microsoft Click ID",
+                        "nullable": true
+                    },
+                    "utmSource": {
+                        "type": "string",
+                        "description": "UTM source",
+                        "nullable": true
+                    },
+                    "utmMedium": {
+                        "type": "string",
+                        "description": "UTM medium",
+                        "nullable": true
+                    },
+                    "utmCampaign": {
+                        "type": "string",
+                        "description": "UTM campaign",
+                        "nullable": true
+                    },
+                    "utmAdgroup": {
+                        "type": "string",
+                        "description": "UTM ad group",
+                        "nullable": true
+                    },
+                    "utmTerm": {
+                        "type": "string",
+                        "description": "UTM term",
+                        "nullable": true
+                    },
+                    "utmContent": {
+                        "type": "string",
+                        "description": "UTM content",
+                        "nullable": true
+                    },
+                    "googleAnalyticsClientId": {
+                        "type": "string",
+                        "description": "An id used by Google Analytics to track unique visitors",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Data from the web session used by the attribution system to determine the marketing campaign that\nled the user to this particular web session."
+            },
+            "Marketing.Ads.V2.ExternalCallData": {
+                "required": [
+                    "customerPhoneNumber",
+                    "forwardingPhoneNumber",
+                    "trackingPhoneNumber",
+                    "callStartedOnUtc"
+                ],
+                "type": "object",
+                "properties": {
+                    "customerPhoneNumber": {
+                        "type": "string",
+                        "description": "The phone number of the customer"
+                    },
+                    "forwardingPhoneNumber": {
+                        "type": "string",
+                        "description": "The ServiceTitan phone number that the external call tracking service will forward to"
+                    },
+                    "trackingPhoneNumber": {
+                        "type": "string",
+                        "description": "The tracking phone number that the external call tracking service will display to the customer"
+                    },
+                    "callStartedOnUtc": {
+                        "type": "string",
+                        "description": "Call start time in Utc",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Marketing.Ads.Contracts.Performance.GetPerformanceResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.GetPerformanceResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Marketing.Ads.Contracts.Performance.GetPerformanceResponse": {
+                "required": [
+                    "campaign",
+                    "adGroup",
+                    "keyword",
+                    "digitalStats",
+                    "leadStats"
+                ],
+                "type": "object",
+                "properties": {
+                    "campaign": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Campaign"
+                    },
+                    "adGroup": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.AdGroup"
+                    },
+                    "keyword": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Keyword"
+                    },
+                    "digitalStats": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.DigitalStats"
+                    },
+                    "leadStats": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.LeadStats"
+                    },
+                    "returnOnInvestment": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.Campaign": {
+                "required": [
+                    "name",
+                    "category",
+                    "launchDate",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "launchDate": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Status"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.Status": {
+                "enum": [
+                    "None",
+                    "Live",
+                    "Stopped"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "Live",
+                    "Stopped"
+                ]
+            },
+            "Marketing.Ads.Contracts.Performance.AdGroup": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Status"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.Keyword": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Status"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.DigitalStats": {
+                "required": [
+                    "impressions",
+                    "clicks",
+                    "averageCPC",
+                    "conversions",
+                    "cost"
+                ],
+                "type": "object",
+                "properties": {
+                    "impressionShare": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "impressions": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "clicks": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "averageCPC": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "conversions": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "allConversions": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "cost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "clickRate": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "costPerConversion": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "conversionRate": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.LeadStats": {
+                "required": [
+                    "leads",
+                    "leadCalls",
+                    "onlineBooking",
+                    "manualBooking",
+                    "bookedJobs",
+                    "ranJobs",
+                    "soldJobs",
+                    "revenue"
+                ],
+                "type": "object",
+                "properties": {
+                    "leads": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "leadCalls": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "onlineBooking": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "manualBooking": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "bookedJobs": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ranJobs": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "soldJobs": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "revenue": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "bookingRate": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "avgTicket": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Contracts.Performance.PerformanceSegmentationType": {
+                "enum": [
+                    "Campaign",
+                    "AdGroup",
+                    "Keyword"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Campaign",
+                    "AdGroup",
+                    "Keyword"
+                ]
+            },
+            "Marketing.Ads.V2.CreateScheduledJobAttributionRequest": {
+                "required": [
+                    "webSessionData",
+                    "jobId"
+                ],
+                "type": "object",
+                "properties": {
+                    "webSessionData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
+                            }
+                        ],
+                        "description": "The web session that the entity should be attributed to"
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "The id of the booking entity in ServiceTitan.",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.V2.CreateWebBookingAttributionRequest": {
+                "required": [
+                    "webSessionData",
+                    "bookingId"
+                ],
+                "type": "object",
+                "properties": {
+                    "webSessionData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
+                            }
+                        ],
+                        "description": "The web session that the entity should be attributed to"
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "description": "The id of the booking entity in ServiceTitan.",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.V2.CreateWebLeadFormAttributionRequest": {
+                "required": [
+                    "webSessionData",
+                    "leadId"
+                ],
+                "type": "object",
+                "properties": {
+                    "webSessionData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
+                            }
+                        ],
+                        "description": "The web session that the entity should be attributed to"
+                    },
+                    "leadId": {
+                        "type": "integer",
+                        "description": "The id of the lead entity (captured from a web form) in ServiceTitan.",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
