@@ -160,6 +160,12 @@ class TapServiceTitan(Tap):
             streams.inventory.ReturnsStream(self),
             streams.marketing_reputation.ReviewsStream(self),
             streams.dispatch.CapacitiesStream(self),
+            # New streams
+            streams.accounting.JournalEntriesStream(self),
+            streams.accounting.TaxZonesStream(self),
+            streams.accounting.PaymentTermsStream(self),
+            streams.accounting.PaymentTypesStream(self),
+            streams.accounting.InventoryBillsStream(self),
         ]
         custom_reports_config = self.config.get("custom_reports", [])
         if custom_reports_config:
