@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      TAP_SERVICE_TITAN_CLIENT_ID: ${{secrets.TAP_SERVICE_TITAN_CLIENT_ID}}
+      TAP_SERVICE_TITAN_CLIENT_SECRET: ${{secrets.TAP_SERVICE_TITAN_CLIENT_SECRET}}
+      TAP_SERVICE_TITAN_ST_APP_KEY: ${{secrets.TAP_SERVICE_TITAN_ST_APP_KEY}}
+      TAP_SERVICE_TITAN_TENANT_ID: ${{secrets.TAP_SERVICE_TITAN_TENANT_ID}}
     strategy:
       fail-fast: false
       matrix:
