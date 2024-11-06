@@ -821,13 +821,7 @@ class EstimatesStream(ServiceTitanExportStream):
         th.Property("customerId", th.IntegerType),
         th.Property("name", th.StringType),
         th.Property("jobNumber", th.StringType),
-        th.Property(
-            "status",
-            th.ObjectType(
-                th.Property("value", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
+        th.Property("status", th.StringType),
         th.Property("reviewStatus", th.StringType),
         th.Property("summary", th.StringType),
         th.Property("createdOn", th.DateTimeType),
@@ -882,6 +876,19 @@ class EstimatesStream(ServiceTitanExportStream):
         th.Property("businessUnitId", th.IntegerType),
         th.Property("businessUnitName", th.StringType),
     ).to_dict()
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result records.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each record from the source.
+        """
+        for record in extract_jsonpath(self.records_jsonpath, input=response.json()):
+            record["status"] = str(record.get("status"))
+            yield record
 
     @cached_property
     def path(self) -> str:
