@@ -1682,7 +1682,7 @@ class ReturnsStream(ServiceTitanStream):
         th.Property("active", th.BooleanType),
         th.Property("number", th.StringType),
         th.Property("referenceNumber", th.StringType),
-        th.Property("status", th.ObjectType()),  # Empty object in the input
+        th.Property("status", th.StringType),
         th.Property("vendorId", th.IntegerType),
         th.Property("purchaseOrderId", th.IntegerType),
         th.Property("jobId", th.IntegerType),
