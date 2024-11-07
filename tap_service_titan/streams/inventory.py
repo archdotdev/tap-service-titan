@@ -288,7 +288,7 @@ class ReturnsStream(ServiceTitanStream):
                 th.Property("name", th.StringType),
             ),
         ),
-        th.Property("syncStatus", th.ObjectType()),  # Empty object in the input
+        th.Property("syncStatus", th.StringType),
         th.Property(
             "items",
             th.ArrayType(
