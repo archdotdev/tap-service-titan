@@ -35,6 +35,9 @@ singer-sdk = { version="~=0.39.1", extras = ["testing"] }
 meltano = "^3.5.0"
 beautifulsoup4 = "^4.12.3"
 playwright = "^1.48.0"
+typer = "^0.12.5"
+openapi-core = "^0.19.4"
+jsonref = "^1.1.0"
 
 [tool.poetry.extras]
 s3 = ["fs-s3fs"]

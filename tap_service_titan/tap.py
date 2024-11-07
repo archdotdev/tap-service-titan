@@ -131,6 +131,7 @@ class TapServiceTitan(Tap):
             streams.accounting.InvoiceItemsStream(self),
             streams.accounting.InvoicesStream(self),
             streams.accounting.PaymentsStream(self),
+            streams.accounting.InventoryBillsStream(self),
             streams.crm.BookingsStream(self),
             streams.crm.CustomerContactsStream(self),
             streams.crm.CustomersStream(self),
