@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+import typing as t
+
 from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-# TODO: Import your custom stream types here:
-from tap_service_titan import custom_reports, streams
+from tap_service_titan import streams
+
+if t.TYPE_CHECKING:
+    from tap_service_titan.client import ServiceTitanStream
 
 
 class TapServiceTitan(Tap):
@@ -87,7 +91,7 @@ class TapServiceTitan(Tap):
                     th.Property(
                         "backfill_date_parameter",
                         th.StringType,
-                        description="The date parameter to use for backfilling. The report will be retrieved for each date until the current date.",
+                        description="The date parameter to use for backfilling. The report will be retrieved for each date until the current date.",  # noqa: E501
                     ),
                     th.Property(
                         "parameters",
@@ -116,54 +120,56 @@ class TapServiceTitan(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> list[streams.ServiceTitanStream]:
+    def discover_streams(self) -> list[ServiceTitanStream]:
         """Return a list of discovered streams.
 
         Returns:
             A list of discovered streams.
         """
         streams_list = [
-            streams.AppointmentsStream(self),
-            streams.JobsStream(self),
-            streams.JobHistoryStream(self),
-            streams.ProjectsStream(self),
-            streams.JobCancelledLogsStream(self),
-            streams.BookingsStream(self),
-            streams.CustomersStream(self),
-            streams.CustomerContactsStream(self),
-            streams.LeadsStream(self),
-            streams.LocationsStream(self),
-            streams.LocationContactsStream(self),
-            streams.InvoicesStream(self),
-            streams.EstimatesStream(self),
-            streams.CallsStream(self),
-            streams.PaymentsStream(self),
-            streams.EmployeesStream(self),
-            streams.JobCancelReasonsStream(self),
-            streams.JobHoldReasonsStream(self),
-            streams.JobTypesStream(self),
-            streams.ProjectStatusesStream(self),
-            streams.ProjectSubStatusesStream(self),
-            streams.TechniciansStream(self),
-            streams.CampaignsStream(self),
-            streams.BusinessUnitsStream(self),
-            streams.InvoiceItemsStream(self),
-            streams.EstimateItemsStream(self),
-            streams.PurchaseOrdersStream(self),
-            streams.PurchaseOrderMarkupsStream(self),
-            streams.PurchaseOrderTypesStream(self),
-            streams.ReceiptsStream(self),
-            streams.ReturnsStream(self),
-            streams.ReviewsStream(self),
-            streams.CapacitiesStream(self),
+            streams.accounting.EstimateItemsStream(self),
+            streams.accounting.InvoiceItemsStream(self),
+            streams.accounting.InvoicesStream(self),
+            streams.accounting.PaymentsStream(self),
+            streams.accounting.InventoryBillsStream(self),
+            streams.crm.BookingsStream(self),
+            streams.crm.CustomerContactsStream(self),
+            streams.crm.CustomersStream(self),
+            streams.crm.LeadsStream(self),
+            streams.crm.LocationContactsStream(self),
+            streams.crm.LocationsStream(self),
+            streams.dispatch.CapacitiesStream(self),
+            streams.inventory.PurchaseOrderMarkupsStream(self),
+            streams.inventory.PurchaseOrdersStream(self),
+            streams.inventory.PurchaseOrderTypesStream(self),
+            streams.inventory.ReceiptsStream(self),
+            streams.inventory.ReturnsStream(self),
+            streams.jpm.AppointmentsStream(self),
+            streams.jpm.JobCancelReasonsStream(self),
+            streams.jpm.JobCancelledLogsStream(self),
+            streams.jpm.JobHistoryStream(self),
+            streams.jpm.JobHoldReasonsStream(self),
+            streams.jpm.JobsStream(self),
+            streams.jpm.JobTypesStream(self),
+            streams.jpm.ProjectStatusesStream(self),
+            streams.jpm.ProjectSubStatusesStream(self),
+            streams.jpm.ProjectsStream(self),
+            streams.marketing.CampaignsStream(self),
+            streams.marketing_reputation.ReviewsStream(self),
+            streams.sales_and_estimates.EstimatesStream(self),
+            streams.settings.BusinessUnitsStream(self),
+            streams.settings.EmployeesStream(self),
+            streams.settings.TechniciansStream(self),
+            streams.telecom.CallsStream(self),
         ]
         custom_reports_config = self.config.get("custom_reports", [])
         if custom_reports_config:
             streams_list.extend(
-            [
-                custom_reports.CustomReports(self, report=report)
-                for report in custom_reports_config
-            ]            )
+                [
+                    streams.reporting.CustomReports(self, report=report)
+                    for report in custom_reports_config
+                ]
+            )
         return streams_list
 
 

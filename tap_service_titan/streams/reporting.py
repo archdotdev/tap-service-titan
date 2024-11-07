@@ -1,16 +1,15 @@
-"""Stream type classes for tap-service-titan."""
+"""Custom report streams for the ServiceTitan tap."""
 
 from __future__ import annotations
 
-import sys
 import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 import requests
-from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers import types
-from singer_sdk.helpers.types import Context
+from singer_sdk import typing as th
+from singer_sdk.helpers import types  # noqa: TCH002
+from singer_sdk.helpers.types import Context  # noqa: TCH002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import (
@@ -18,13 +17,9 @@ from tap_service_titan.client import (
 )
 
 if t.TYPE_CHECKING:
-    import requests
-    from singer_sdk.streams.rest import _TToken
+    from datetime import date
 
-if sys.version_info >= (3, 9):
-    import importlib.resources as importlib_resources
-else:
-    import importlib_resources
+    from singer_sdk.streams.rest import _TToken
 
 
 class CustomReports(ServiceTitanStream):
@@ -35,7 +30,8 @@ class CustomReports(ServiceTitanStream):
     replication_method = REPLICATION_FULL_TABLE
     is_sorted = True
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
+        """Initialize the stream."""
         self._report = kwargs.pop("report")
         self._backfill_params = [
             obj["value"]
@@ -47,10 +43,11 @@ class CustomReports(ServiceTitanStream):
             **kwargs,
             name=f"custom_report_{self._report['report_name']}",
         )
-        self._curr_backfill_date_param = None
+        self._curr_backfill_date_param: date | None = None
 
     @property
-    def curr_backfill_date_param(self):
+    def curr_backfill_date_param(self) -> date | None:
+        """Get current backfill date parameter."""
         # This is the first iteration.
         # Retrieve the backfill date parameter value for iterating.
         # We cant do this in the init due to timing with the state file.
@@ -61,20 +58,20 @@ class CustomReports(ServiceTitanStream):
         return self._curr_backfill_date_param
 
     @curr_backfill_date_param.setter
-    def curr_backfill_date_param(self, value):
+    def curr_backfill_date_param(self, value: datetime) -> None:
+        """Set  the current backfill date parameter."""
         self._curr_backfill_date_param = value
 
-    def _get_initial_date_param(self) -> th.JSONTypeHelper:
-        configured_date_param = datetime.strptime(
-            self._backfill_params[0], "%Y-%m-%d"
+    def _get_initial_date_param(self) -> date | None:
+        configured_date_param = datetime.strptime(  # noqa: DTZ007
+            self._backfill_params[0],
+            "%Y-%m-%d",
         ).date()
         bookmark = self.stream_state.get("replication_key_value")
         if bookmark:
             return max(
                 configured_date_param,
-                datetime.strptime(
-                    bookmark, "%Y-%m-%dT%H:%M:%S%z"
-                ).date()
+                datetime.strptime(bookmark, "%Y-%m-%dT%H:%M:%S%z").date(),
             )
         return configured_date_param
 
@@ -95,7 +92,7 @@ class CustomReports(ServiceTitanStream):
         report_id = self._report["report_id"]
         resp = requests.get(
             f"{self.url_base}/reporting/v2/tenant/{self.config['tenant_id']}/report-category/{report_category}/reports/{report_id}?pageSize=5000&page=1",
-            headers={**self.http_headers, **self.authenticator.auth_headers},
+            headers={**self.http_headers, **self.authenticator.auth_headers},  # type: ignore[attr-defined]
             timeout=self.timeout,
         )
         resp.raise_for_status()
@@ -109,7 +106,7 @@ class CustomReports(ServiceTitanStream):
             JSON Schema dictionary for this stream.
         """
         metadata = self._get_report_metadata()
-        msg = f"Available parameters for custom report `{self._report['report_name']}`: {metadata['parameters']}"
+        msg = f"Available parameters for custom report `{self._report['report_name']}`: {metadata['parameters']}"  # noqa: E501
         self.logger.info(msg)
         properties: list[th.Property] = [
             th.Property(field["name"], self._get_datatype(field["dataType"]))
@@ -137,7 +134,7 @@ class CustomReports(ServiceTitanStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
+        next_page_token: _TToken | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -154,8 +151,8 @@ class CustomReports(ServiceTitanStream):
 
     def prepare_request_payload(
         self,
-        context: types.Context | None,
-        next_page_token: _TToken | None,
+        context: types.Context | None,  # noqa: ARG002
+        next_page_token: _TToken | None,  # noqa: ARG002
     ) -> dict | None:
         """Prepare the data payload for the REST API request.
 
@@ -203,7 +200,7 @@ class CustomReports(ServiceTitanStream):
             # Add the backfill date to the record if configured
             if "backfill_date_parameter" in self._report:
                 data[self._report["backfill_date_parameter"]] = (
-                    self.curr_backfill_date_param.strftime("%Y-%m-%d")
+                    self.curr_backfill_date_param.strftime("%Y-%m-%d")  # type: ignore[union-attr]
                     + "T00:00:00-00:00"
                 )
             yield data
@@ -231,7 +228,9 @@ class CustomReports(ServiceTitanStream):
                 )
 
     def backoff_wait_generator(self) -> t.Callable[..., t.Generator[int, t.Any, None]]:
-        def _backoff_from_headers(retriable_api_error):
+        """Return a generator for backoff wait times."""
+
+        def _backoff_from_headers(retriable_api_error) -> int:  # noqa: ANN001
             response_headers = retriable_api_error.response.headers
             return int(response_headers.get("Retry-After", 0))
 

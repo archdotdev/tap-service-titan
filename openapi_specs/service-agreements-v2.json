@@ -1,0 +1,1323 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Service Agreements",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/service-agreements/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/export/service-agreements": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for service agreements",
+                "description": "Provides export feed for service agreements",
+                "operationId": "Export_ServiceAgreements",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_ServiceAgreements.V2.ExportServiceAgreementResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "createdOn": "string",
+                                            "createdById": 0,
+                                            "modifiedOn": "string",
+                                            "modifiedById": 0,
+                                            "templateFields": {
+                                                "originalTemplateId": 0,
+                                                "revenueRecognitionMode": {},
+                                                "generalLedgerAccountId": 0,
+                                                "invoiceCancellationMode": {},
+                                                "billingServiceId": 0,
+                                                "negativeLiabilityServiceId": 0,
+                                                "positiveIncomeServiceId": 0,
+                                                "defaultLaborCostPerHour": 0,
+                                                "defaultExtraTravelCostPerHour": 0,
+                                                "defaultLaborMarkupPercentage": 0,
+                                                "defaultMaterialMarkupPercentage": 0,
+                                                "defaultLaborSurcharge": 0,
+                                                "defaultMaterialSurcharge": 0,
+                                                "defaultRateSheetId": 0,
+                                                "defaultCampaignId": 0
+                                            },
+                                            "customerId": 0,
+                                            "businessUnitId": 0,
+                                            "status": {},
+                                            "locationIds": [
+                                                0
+                                            ],
+                                            "origin": {},
+                                            "summary": "string",
+                                            "importId": "string",
+                                            "importedDeferredAmount": 0,
+                                            "importedRecognizedAmount": 0,
+                                            "durationMonths": 0,
+                                            "autoRenew": true,
+                                            "renewalAgreementId": 0,
+                                            "startDate": "string",
+                                            "endDate": "string",
+                                            "billingSchedule": {},
+                                            "paymentTermId": 0,
+                                            "paymentMethodId": 0,
+                                            "estimatedTravelCost": 0,
+                                            "estimatedLaborCost": 0,
+                                            "estimatedMaterialCost": 0,
+                                            "laborMarkupPercentage": 0,
+                                            "materialMarkupPercentage": 0,
+                                            "laborSurcharge": 0,
+                                            "materialSurcharge": 0,
+                                            "totalAgreementPrice": 0,
+                                            "estimatedGrossMarginAmount": 0,
+                                            "estimatedGrossMarginPercentage": 0,
+                                            "rateSheetId": 0,
+                                            "accountManagerId": 0,
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/service-agreements": {
+            "get": {
+                "tags": [
+                    "ServiceAgreements"
+                ],
+                "summary": "Gets a list of service agreements",
+                "description": "Gets a list of service agreements",
+                "operationId": "ServiceAgreements_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customerIds",
+                        "in": "query",
+                        "description": "Filters by customer IDs",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "description": "Filters by business unit IDs",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filters by service agreement status\\\nValues: [Draft, Sent, Rejected, Accepted, Activated, Canceled, Expired, AutoRenew]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementStatus"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn, StartDate, EndDate",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_ServiceAgreements.V2.ServiceAgreementResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "createdOn": "string",
+                                            "createdById": 0,
+                                            "modifiedOn": "string",
+                                            "modifiedById": 0,
+                                            "templateFields": {
+                                                "originalTemplateId": 0,
+                                                "revenueRecognitionMode": {},
+                                                "generalLedgerAccountId": 0,
+                                                "invoiceCancellationMode": {},
+                                                "billingServiceId": 0,
+                                                "negativeLiabilityServiceId": 0,
+                                                "positiveIncomeServiceId": 0,
+                                                "defaultLaborCostPerHour": 0,
+                                                "defaultExtraTravelCostPerHour": 0,
+                                                "defaultLaborMarkupPercentage": 0,
+                                                "defaultMaterialMarkupPercentage": 0,
+                                                "defaultLaborSurcharge": 0,
+                                                "defaultMaterialSurcharge": 0,
+                                                "defaultRateSheetId": 0,
+                                                "defaultCampaignId": 0
+                                            },
+                                            "customerId": 0,
+                                            "businessUnitId": 0,
+                                            "status": {},
+                                            "locationIds": [
+                                                0
+                                            ],
+                                            "origin": {},
+                                            "summary": "string",
+                                            "importId": "string",
+                                            "importedDeferredAmount": 0,
+                                            "importedRecognizedAmount": 0,
+                                            "durationMonths": 0,
+                                            "autoRenew": true,
+                                            "renewalAgreementId": 0,
+                                            "startDate": "string",
+                                            "endDate": "string",
+                                            "billingSchedule": {},
+                                            "paymentTermId": 0,
+                                            "paymentMethodId": 0,
+                                            "estimatedTravelCost": 0,
+                                            "estimatedLaborCost": 0,
+                                            "estimatedMaterialCost": 0,
+                                            "laborMarkupPercentage": 0,
+                                            "materialMarkupPercentage": 0,
+                                            "laborSurcharge": 0,
+                                            "materialSurcharge": 0,
+                                            "totalAgreementPrice": 0,
+                                            "estimatedGrossMarginAmount": 0,
+                                            "estimatedGrossMarginPercentage": 0,
+                                            "rateSheetId": 0,
+                                            "accountManagerId": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/service-agreements/{id}": {
+            "get": {
+                "tags": [
+                    "ServiceAgreements"
+                ],
+                "summary": "Gets service agreement specified by ID",
+                "description": "Gets service agreement specified by ID",
+                "operationId": "ServiceAgreements_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Service agreement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceAgreements.V2.ServiceAgreementResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "createdOn": "string",
+                                    "createdById": 0,
+                                    "modifiedOn": "string",
+                                    "modifiedById": 0,
+                                    "templateFields": {
+                                        "originalTemplateId": 0,
+                                        "revenueRecognitionMode": {},
+                                        "generalLedgerAccountId": 0,
+                                        "invoiceCancellationMode": {},
+                                        "billingServiceId": 0,
+                                        "negativeLiabilityServiceId": 0,
+                                        "positiveIncomeServiceId": 0,
+                                        "defaultLaborCostPerHour": 0,
+                                        "defaultExtraTravelCostPerHour": 0,
+                                        "defaultLaborMarkupPercentage": 0,
+                                        "defaultMaterialMarkupPercentage": 0,
+                                        "defaultLaborSurcharge": 0,
+                                        "defaultMaterialSurcharge": 0,
+                                        "defaultRateSheetId": 0,
+                                        "defaultCampaignId": 0
+                                    },
+                                    "customerId": 0,
+                                    "businessUnitId": 0,
+                                    "status": {},
+                                    "locationIds": [
+                                        0
+                                    ],
+                                    "origin": {},
+                                    "summary": "string",
+                                    "importId": "string",
+                                    "importedDeferredAmount": 0,
+                                    "importedRecognizedAmount": 0,
+                                    "durationMonths": 0,
+                                    "autoRenew": true,
+                                    "renewalAgreementId": 0,
+                                    "startDate": "string",
+                                    "endDate": "string",
+                                    "billingSchedule": {},
+                                    "paymentTermId": 0,
+                                    "paymentMethodId": 0,
+                                    "estimatedTravelCost": 0,
+                                    "estimatedLaborCost": 0,
+                                    "estimatedMaterialCost": 0,
+                                    "laborMarkupPercentage": 0,
+                                    "materialMarkupPercentage": 0,
+                                    "laborSurcharge": 0,
+                                    "materialSurcharge": 0,
+                                    "totalAgreementPrice": 0,
+                                    "estimatedGrossMarginAmount": 0,
+                                    "estimatedGrossMarginPercentage": 0,
+                                    "rateSheetId": 0,
+                                    "accountManagerId": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service agreement not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ExportResponse_Of_ServiceAgreements.V2.ExportServiceAgreementResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ServiceAgreements.V2.ExportServiceAgreementResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "ServiceAgreements.V2.ExportServiceAgreementResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "createdOn",
+                    "modifiedOn",
+                    "templateFields",
+                    "customerId",
+                    "businessUnitId",
+                    "status",
+                    "locationIds",
+                    "origin",
+                    "importedDeferredAmount",
+                    "importedRecognizedAmount",
+                    "autoRenew",
+                    "laborSurcharge",
+                    "materialSurcharge",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Service agreement ID",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Service agreement name"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the service agreement was created",
+                        "format": "date-time"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "ID of the user that created this agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the service agreement was last modified",
+                        "format": "date-time"
+                    },
+                    "modifiedById": {
+                        "type": "integer",
+                        "description": "ID of the user that modified this agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "templateFields": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.ServiceAgreementTemplateFieldsResponse"
+                            }
+                        ],
+                        "description": "Data fields that were populated from the template"
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "description": "Customer ID of the agreement",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID to which this agreement is assigned",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementStatus"
+                            }
+                        ],
+                        "description": "Current status of the agreement"
+                    },
+                    "locationIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Location IDs covered by the agreement"
+                    },
+                    "origin": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementOrigin"
+                            }
+                        ],
+                        "description": "The method used to create the agreement"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Optional text summary of the agreement",
+                        "nullable": true
+                    },
+                    "importId": {
+                        "type": "string",
+                        "description": "Internal import ID label",
+                        "nullable": true
+                    },
+                    "importedDeferredAmount": {
+                        "type": "number",
+                        "description": "Imported amount already billed for this agreement",
+                        "format": "decimal"
+                    },
+                    "importedRecognizedAmount": {
+                        "type": "number",
+                        "description": "Imported amount of recognized revenue for this agreement",
+                        "format": "decimal"
+                    },
+                    "durationMonths": {
+                        "type": "integer",
+                        "description": "Duration of the agreement in months (can be absent when the agreement is still being built)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "autoRenew": {
+                        "type": "boolean",
+                        "description": "Determines if the agreement automatically renews or expires on its end date"
+                    },
+                    "renewalAgreementId": {
+                        "type": "integer",
+                        "description": "Indicates the next agreement ID that renews the current agreement (null means the agreement was not renewed)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "The start date of the agreement (can be absent when the agreement is still being built)",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "The end date of the agreement (can be absent when the agreement is still being built)",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "billingSchedule": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            }
+                        ],
+                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "ID of the payment terms of the agreement (can be absent when the agreement is still being built)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentMethodId": {
+                        "type": "integer",
+                        "description": "ID of the payment method of the agreement (can be absent when the agreement is still being built).\nNote there is a special hardcoded value of -1 that means \"Cash or Check\".",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "estimatedTravelCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated travel cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedLaborCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated labor cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedMaterialCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated material cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "laborMarkupPercentage": {
+                        "type": "number",
+                        "description": "The markup percentage applied to labor cost of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "materialMarkupPercentage": {
+                        "type": "number",
+                        "description": "The markup percentage applied to material cost of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "laborSurcharge": {
+                        "type": "number",
+                        "description": "The dollar amount added to labor cost of the agreement",
+                        "format": "decimal"
+                    },
+                    "materialSurcharge": {
+                        "type": "number",
+                        "description": "The dollar amount added to material cost of the agreement",
+                        "format": "decimal"
+                    },
+                    "totalAgreementPrice": {
+                        "type": "number",
+                        "description": "The total price of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedGrossMarginAmount": {
+                        "type": "number",
+                        "description": "The estimated gross margin in dollars for the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedGrossMarginPercentage": {
+                        "type": "number",
+                        "description": "The estimated gross margin as a percentage of the Total Agreement Price (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "rateSheetId": {
+                        "type": "integer",
+                        "description": "ID of a rate sheet (Client-Specific Pricing Rule) assigned to the service agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "accountManagerId": {
+                        "type": "integer",
+                        "description": "ID of the employee assigned to the agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether this agreement still exists, or was deleted already."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ServiceAgreements.V2.ServiceAgreementTemplateFieldsResponse": {
+                "required": [
+                    "originalTemplateId",
+                    "revenueRecognitionMode",
+                    "billingServiceId"
+                ],
+                "type": "object",
+                "properties": {
+                    "originalTemplateId": {
+                        "type": "integer",
+                        "description": "ID of the template originally used to create this service agreement.\nNote that the content of the original template may have changed since the agreement's creation.\nThe template fields in this object represent the current state of the service agreement, as they were captured at the time of creation.",
+                        "format": "int64"
+                    },
+                    "revenueRecognitionMode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.RevenueRecognitionMode"
+                            }
+                        ],
+                        "description": "Revenue recognition mode to be used for a new service agreement"
+                    },
+                    "generalLedgerAccountId": {
+                        "type": "integer",
+                        "description": "General ledger account that will hold funds until recognition\n(this is only used for the Deferred revenue recognition)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "invoiceCancellationMode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.CancellationInvoiceMode"
+                            }
+                        ],
+                        "description": "How to resolve the difference with the customer when service agreement is cancelled\n(this is only used for the Deferred revenue recognition)",
+                        "nullable": true
+                    },
+                    "billingServiceId": {
+                        "type": "integer",
+                        "description": "Used for both revenue recognition modes:\nwhen Immediate, the service will be displayed in customer-facing invoices;\nwhen Deferred, the service is tied to the general ledger account chosen for this agreement.",
+                        "format": "int64"
+                    },
+                    "negativeLiabilityServiceId": {
+                        "type": "integer",
+                        "description": "Negative liability services draw money from liability account when services are delivered\n(this is only used for the Deferred revenue recognition)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "positiveIncomeServiceId": {
+                        "type": "integer",
+                        "description": "Positive income services transfer money into the income account when services are delivered\n(this is only used for the Deferred revenue recognition)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "defaultLaborCostPerHour": {
+                        "type": "number",
+                        "description": "The default labor cost / hour to be used in the UI when adding service agreement visits",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultExtraTravelCostPerHour": {
+                        "type": "number",
+                        "description": "The default extra travel cost / hour to be used in the UI when adding service agreement locations",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultLaborMarkupPercentage": {
+                        "type": "number",
+                        "description": "The default percentage value of the labor markup to be used in the UI when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultMaterialMarkupPercentage": {
+                        "type": "number",
+                        "description": "The default percentage value of the material markup to be used in the UI when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultLaborSurcharge": {
+                        "type": "number",
+                        "description": "The default labor surcharge amount to be used in the UI when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultMaterialSurcharge": {
+                        "type": "number",
+                        "description": "The default material surcharge amount to be used in the UI when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultRateSheetId": {
+                        "type": "integer",
+                        "description": "The default rate sheet ID (Client-Specific Pricing Rule) to be used in the UI when creating a service agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "defaultCampaignId": {
+                        "type": "integer",
+                        "description": "The ID of the marketing campaign to be used by default when booking jobs for service agreement visits",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ServiceAgreements.V2.RevenueRecognitionMode": {
+                "enum": [
+                    "Immediate",
+                    "Deferred",
+                    "DeferredStraightLine"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Immediate",
+                    "Deferred",
+                    "DeferredStraightLine"
+                ]
+            },
+            "ServiceAgreements.V2.CancellationInvoiceMode": {
+                "enum": [
+                    "AskToCreateInvoice",
+                    "AlwaysCreateInvoice",
+                    "NeverCreateInvoice"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "AskToCreateInvoice",
+                    "AlwaysCreateInvoice",
+                    "NeverCreateInvoice"
+                ]
+            },
+            "ServiceAgreements.V2.AgreementStatus": {
+                "enum": [
+                    "Draft",
+                    "Sent",
+                    "Rejected",
+                    "Accepted",
+                    "Activated",
+                    "Canceled",
+                    "Expired",
+                    "AutoRenew"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Draft",
+                    "Sent",
+                    "Rejected",
+                    "Accepted",
+                    "Activated",
+                    "Canceled",
+                    "Expired",
+                    "AutoRenew"
+                ]
+            },
+            "ServiceAgreements.V2.AgreementOrigin": {
+                "enum": [
+                    "Initial",
+                    "AutoRenew",
+                    "ManualRenew"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Initial",
+                    "AutoRenew",
+                    "ManualRenew"
+                ]
+            },
+            "ServiceAgreements.V2.BillingScheduleType": {
+                "enum": [
+                    "Upfront",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "Biannual",
+                    "Annual",
+                    "TimeOfService"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Upfront",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "Biannual",
+                    "Annual",
+                    "TimeOfService"
+                ]
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_ServiceAgreements.V2.ServiceAgreementResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ServiceAgreements.V2.ServiceAgreementResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "ServiceAgreements.V2.ServiceAgreementResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "createdOn",
+                    "modifiedOn",
+                    "templateFields",
+                    "customerId",
+                    "businessUnitId",
+                    "status",
+                    "locationIds",
+                    "origin",
+                    "importedDeferredAmount",
+                    "importedRecognizedAmount",
+                    "autoRenew",
+                    "laborSurcharge",
+                    "materialSurcharge"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Service agreement ID",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Service agreement name"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the service agreement was created",
+                        "format": "date-time"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "ID of the user that created this agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the service agreement was last modified",
+                        "format": "date-time"
+                    },
+                    "modifiedById": {
+                        "type": "integer",
+                        "description": "ID of the user that modified this agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "templateFields": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.ServiceAgreementTemplateFieldsResponse"
+                            }
+                        ],
+                        "description": "Data fields that were populated from the template"
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "description": "Customer ID of the agreement",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID to which this agreement is assigned",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementStatus"
+                            }
+                        ],
+                        "description": "Current status of the agreement"
+                    },
+                    "locationIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Location IDs covered by the agreement"
+                    },
+                    "origin": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementOrigin"
+                            }
+                        ],
+                        "description": "The method used to create the agreement"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Optional text summary of the agreement",
+                        "nullable": true
+                    },
+                    "importId": {
+                        "type": "string",
+                        "description": "Internal import ID label",
+                        "nullable": true
+                    },
+                    "importedDeferredAmount": {
+                        "type": "number",
+                        "description": "Imported amount already billed for this agreement",
+                        "format": "decimal"
+                    },
+                    "importedRecognizedAmount": {
+                        "type": "number",
+                        "description": "Imported amount of recognized revenue for this agreement",
+                        "format": "decimal"
+                    },
+                    "durationMonths": {
+                        "type": "integer",
+                        "description": "Duration of the agreement in months (can be absent when the agreement is still being built)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "autoRenew": {
+                        "type": "boolean",
+                        "description": "Determines if the agreement automatically renews or expires on its end date"
+                    },
+                    "renewalAgreementId": {
+                        "type": "integer",
+                        "description": "Indicates the next agreement ID that renews the current agreement (null means the agreement was not renewed)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "The start date of the agreement (can be absent when the agreement is still being built)",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "The end date of the agreement (can be absent when the agreement is still being built)",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "billingSchedule": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            }
+                        ],
+                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "ID of the payment terms of the agreement (can be absent when the agreement is still being built)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentMethodId": {
+                        "type": "integer",
+                        "description": "ID of the payment method of the agreement (can be absent when the agreement is still being built).\nNote there is a special hardcoded value of -1 that means \"Cash or Check\".",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "estimatedTravelCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated travel cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedLaborCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated labor cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedMaterialCost": {
+                        "type": "number",
+                        "description": "The dollar amount of estimated material cost for all visits (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "laborMarkupPercentage": {
+                        "type": "number",
+                        "description": "The markup percentage applied to labor cost of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "materialMarkupPercentage": {
+                        "type": "number",
+                        "description": "The markup percentage applied to material cost of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "laborSurcharge": {
+                        "type": "number",
+                        "description": "The dollar amount added to labor cost of the agreement",
+                        "format": "decimal"
+                    },
+                    "materialSurcharge": {
+                        "type": "number",
+                        "description": "The dollar amount added to material cost of the agreement",
+                        "format": "decimal"
+                    },
+                    "totalAgreementPrice": {
+                        "type": "number",
+                        "description": "The total price of the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedGrossMarginAmount": {
+                        "type": "number",
+                        "description": "The estimated gross margin in dollars for the agreement (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "estimatedGrossMarginPercentage": {
+                        "type": "number",
+                        "description": "The estimated gross margin as a percentage of the Total Agreement Price (can be absent when the agreement is still being built)",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "rateSheetId": {
+                        "type": "integer",
+                        "description": "ID of a rate sheet (Client-Specific Pricing Rule) assigned to the service agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "accountManagerId": {
+                        "type": "integer",
+                        "description": "ID of the employee assigned to the agreement",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

@@ -5,10 +5,19 @@ import datetime
 from singer_sdk.testing import get_tap_test_class
 
 from tap_service_titan.tap import TapServiceTitan
+from os import environ
+import dotenv
+
+dotenv.load_dotenv()
 
 SAMPLE_CONFIG = {
     "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
-    # TODO: Initialize minimal tap config
+    "client_id": environ["TAP_SERVICE_TITAN_CLIENT_ID"],
+    "client_secret": environ["TAP_SERVICE_TITAN_CLIENT_SECRET"],
+    "st_app_key": environ["TAP_SERVICE_TITAN_ST_APP_KEY"],
+    "tenant_id": environ["TAP_SERVICE_TITAN_TENANT_ID"],
+    "api_url": "https://api-integration.servicetitan.io",
+    "auth_url": "https://auth-integration.servicetitan.io/connect/token",
 }
 
 
@@ -17,6 +26,3 @@ TestTapServiceTitan = get_tap_test_class(
     tap_class=TapServiceTitan,
     config=SAMPLE_CONFIG,
 )
-
-
-# TODO: Create additional tests as appropriate for your tap.

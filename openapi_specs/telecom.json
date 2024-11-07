@@ -1,0 +1,3424 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Telecom",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/telecom"
+        }
+    ],
+    "paths": {
+        "/v3/tenant/{tenant}/calls": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Provides a feed for telecom calls",
+                "description": "Provides a feed for telecom calls",
+                "operationId": "Calls_Calls",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "campaignId",
+                        "in": "query",
+                        "description": "Format - int64. Campaign ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentId",
+                        "in": "query",
+                        "description": "Format - int64. Agent ID (number)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "minDuration",
+                        "in": "query",
+                        "description": "Format - int32. Minimum call duration (number of seconds)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "phoneNumberCalled",
+                        "in": "query",
+                        "description": "The phone number that was called (string)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "callerPhoneNumber",
+                        "in": "query",
+                        "description": "The caller's phone number (string)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentName",
+                        "in": "query",
+                        "description": "Agent name (string)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentIsExternal",
+                        "in": "query",
+                        "description": "Is agent external flag (boolean)",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentExternalId",
+                        "in": "query",
+                        "description": "Format - int64. Agent external ID (number)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "The Sorting field, possible values: Id, CreatedOn, ModifiedOn.\nThe Sorting is ascending by default, add the '-' character to use descending (for example -Id)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Telecom.V3.CallResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "jobNumber": "string",
+                                            "projectId": 0,
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "type": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "modifiedOn": "string"
+                                            },
+                                            "leadCall": {
+                                                "createdOn": "string",
+                                                "active": true,
+                                                "id": 0,
+                                                "receivedOn": "string",
+                                                "duration": "string",
+                                                "from": "string",
+                                                "to": "string",
+                                                "direction": "Inbound",
+                                                "callType": {},
+                                                "reason": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "lead": true,
+                                                    "active": true
+                                                },
+                                                "recordingUrl": "string",
+                                                "voiceMailUrl": "string",
+                                                "createdBy": {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                },
+                                                "customer": {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                },
+                                                "campaign": {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                },
+                                                "modifiedOn": "string",
+                                                "agent": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "externalId": 0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v3/tenant/{tenant}/optinouts/optouts": {
+            "get": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "Returns all opt-outs for the tenant",
+                "description": "Numbers are returned in E.164 format.",
+                "operationId": "OptInOut_GetAllOptOuts",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "optOutType": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "Adds opt-outs for the specified phone numbers",
+                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nAll numbers in the request must be valid, otherwise the request will fail.\nIf a number is opted-out globally, you can't opt it out for marketing.",
+                "operationId": "OptInOut_CreateOptOutList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListRequest"
+                            },
+                            "example": {
+                                "optOutType": {},
+                                "contactNumbers": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "status": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v3/tenant/{tenant}/optinouts/optouts/getlist": {
+            "post": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "For each phone number in the request, returns the opt-out status, if it exists",
+                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nIf there's no opt-out info for a phone number, it won't be included in the response.\nAll numbers in the request must be valid (E.164 format is preferred, but not required), otherwise the request will fail.\nThe numbers in the response will be in E.164 format.",
+                "operationId": "OptInOut_GetOptOutList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Telecom.V3.GetOptOutListRequest"
+                            },
+                            "example": {
+                                "contactNumbers": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "optOutType": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/tenant/{tenant}/calls/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Get call's details.",
+                "description": "Get call's details.",
+                "operationId": "Calls_GetDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Id of the call.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DetailedBundleCallModel with the following fields:\nlong Id;\nstring JobNumber;\nlong ProjectId;\nBusinessUnitModel BusinessUnit;\nJobTypeModel Type;\nDetailedCallModel LeadCall;",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Module.Telecom.Shared.DetailedBundleCallModel"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "jobNumber": "string",
+                                    "projectId": 0,
+                                    "businessUnit": {
+                                        "id": 0,
+                                        "active": true,
+                                        "name": "string",
+                                        "officialName": "string",
+                                        "email": "string",
+                                        "currency": "string",
+                                        "phoneNumber": "string",
+                                        "invoiceHeader": "string",
+                                        "invoiceMessage": "string",
+                                        "defaultTaxRate": 0,
+                                        "authorizationParagraph": "string",
+                                        "acknowledgementParagraph": "string",
+                                        "address": {
+                                            "street": "string",
+                                            "unit": "string",
+                                            "city": "string",
+                                            "state": "string",
+                                            "zip": "string",
+                                            "country": "string"
+                                        },
+                                        "materialSku": "string",
+                                        "quickbooksClass": "string",
+                                        "accountCode": "string",
+                                        "franchiseId": "string",
+                                        "conceptCode": "string",
+                                        "corporateContractNumber": "string",
+                                        "tenant": {
+                                            "id": 0,
+                                            "name": "string",
+                                            "quickbooksClass": "string",
+                                            "accountCode": "string",
+                                            "franchiseId": "string",
+                                            "conceptCode": "string",
+                                            "modifiedOn": "string"
+                                        },
+                                        "modifiedOn": "string"
+                                    },
+                                    "type": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "modifiedOn": "string"
+                                    },
+                                    "leadCall": {
+                                        "id": 0,
+                                        "receivedOn": "string",
+                                        "duration": "string",
+                                        "from": "string",
+                                        "to": "string",
+                                        "direction": "Inbound",
+                                        "callType": {},
+                                        "reason": {
+                                            "id": 0,
+                                            "name": "string",
+                                            "lead": true,
+                                            "active": true
+                                        },
+                                        "recordingUrl": "string",
+                                        "voiceMailUrl": "string",
+                                        "createdBy": {
+                                            "id": 0,
+                                            "name": "string"
+                                        },
+                                        "customer": {
+                                            "id": 0,
+                                            "active": true,
+                                            "name": "string",
+                                            "email": "string",
+                                            "balance": 0,
+                                            "doNotMail": true,
+                                            "address": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "country": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "streetAddress": "string",
+                                                "latitude": 0,
+                                                "longitude": 0
+                                            },
+                                            "importId": "string",
+                                            "doNotService": true,
+                                            "type": "Residential",
+                                            "contacts": [
+                                                {
+                                                    "id": 0,
+                                                    "type": "string",
+                                                    "value": "string",
+                                                    "memo": "string",
+                                                    "active": true,
+                                                    "modifiedOn": "string"
+                                                }
+                                            ],
+                                            "mergedToId": 0,
+                                            "modifiedOn": "string",
+                                            "memberships": [
+                                                {
+                                                    "id": 0,
+                                                    "active": true,
+                                                    "type": {
+                                                        "id": 0,
+                                                        "active": true,
+                                                        "name": "string"
+                                                    },
+                                                    "status": "string",
+                                                    "from": "string",
+                                                    "to": "string",
+                                                    "locationId": 0
+                                                }
+                                            ],
+                                            "hasActiveMembership": true,
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "createdOn": "string",
+                                            "createdBy": 0,
+                                            "phoneSettings": [
+                                                {
+                                                    "phoneNumber": "string",
+                                                    "doNotText": true
+                                                }
+                                            ]
+                                        },
+                                        "campaign": {
+                                            "id": 0,
+                                            "name": "string",
+                                            "modifiedOn": "string",
+                                            "createdOn": "string",
+                                            "active": true,
+                                            "category": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "active": true
+                                            },
+                                            "source": "string",
+                                            "otherSource": "string",
+                                            "businessUnit": "string",
+                                            "medium": "string",
+                                            "otherMedium": "string",
+                                            "dnis": "string"
+                                        },
+                                        "modifiedOn": "string",
+                                        "agent": {
+                                            "id": 0,
+                                            "name": "string",
+                                            "externalId": 0
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Update existing call.",
+                "description": "Update existing call.",
+                "operationId": "Calls_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Id of updating call.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "DateTime? CreatedOn;\nTimeSpan? Duration;\nCallDirection? Direction;\nCallStatus? Status;\nCallType? CallType;\nstring ExcuseMemo;\nlong? CampaignId;\nlong? JobId;\nlong? AgentId;\nstring RecordingUrl;\nstring RecordingId;\nReasonInModel Reason;\nCustomerInModel Customer;\nLocationInModel Location;",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Module.Telecom.Shared.CallInUpdateModelV2"
+                            },
+                            "example": {
+                                "callId": 0,
+                                "callType": {},
+                                "excuseMemo": "string",
+                                "campaignId": 0,
+                                "jobId": 0,
+                                "agentId": 0,
+                                "reason": {
+                                    "name": "string",
+                                    "lead": true
+                                },
+                                "customer": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "address": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "country": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "latitude": 0,
+                                        "longitude": 0
+                                    },
+                                    "contacts": [
+                                        {
+                                            "id": 0,
+                                            "type": "string",
+                                            "value": "string",
+                                            "memo": "string"
+                                        }
+                                    ]
+                                },
+                                "location": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "address": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "country": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "latitude": 0,
+                                        "longitude": 0
+                                    },
+                                    "contacts": [
+                                        {
+                                            "id": 0,
+                                            "type": "string",
+                                            "value": "string",
+                                            "memo": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "DetailedCallModel",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Module.Telecom.Shared.DetailedCallModel"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "receivedOn": "string",
+                                    "duration": "string",
+                                    "from": "string",
+                                    "to": "string",
+                                    "direction": "Inbound",
+                                    "callType": {},
+                                    "reason": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "lead": true,
+                                        "active": true
+                                    },
+                                    "recordingUrl": "string",
+                                    "voiceMailUrl": "string",
+                                    "createdBy": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "customer": {
+                                        "id": 0,
+                                        "active": true,
+                                        "name": "string",
+                                        "email": "string",
+                                        "balance": 0,
+                                        "doNotMail": true,
+                                        "address": {
+                                            "street": "string",
+                                            "unit": "string",
+                                            "country": "string",
+                                            "city": "string",
+                                            "state": "string",
+                                            "zip": "string",
+                                            "streetAddress": "string",
+                                            "latitude": 0,
+                                            "longitude": 0
+                                        },
+                                        "importId": "string",
+                                        "doNotService": true,
+                                        "type": "Residential",
+                                        "contacts": [
+                                            {
+                                                "id": 0,
+                                                "type": "string",
+                                                "value": "string",
+                                                "memo": "string",
+                                                "active": true,
+                                                "modifiedOn": "string"
+                                            }
+                                        ],
+                                        "mergedToId": 0,
+                                        "modifiedOn": "string",
+                                        "memberships": [
+                                            {
+                                                "id": 0,
+                                                "active": true,
+                                                "type": {
+                                                    "id": 0,
+                                                    "active": true,
+                                                    "name": "string"
+                                                },
+                                                "status": "string",
+                                                "from": "string",
+                                                "to": "string",
+                                                "locationId": 0
+                                            }
+                                        ],
+                                        "hasActiveMembership": true,
+                                        "customFields": [
+                                            {
+                                                "typeId": 0,
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ],
+                                        "createdOn": "string",
+                                        "createdBy": 0,
+                                        "phoneSettings": [
+                                            {
+                                                "phoneNumber": "string",
+                                                "doNotText": true
+                                            }
+                                        ]
+                                    },
+                                    "campaign": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "modifiedOn": "string",
+                                        "createdOn": "string",
+                                        "active": true,
+                                        "category": {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true
+                                        },
+                                        "source": "string",
+                                        "otherSource": "string",
+                                        "businessUnit": "string",
+                                        "medium": "string",
+                                        "otherMedium": "string",
+                                        "dnis": "string"
+                                    },
+                                    "modifiedOn": "string",
+                                    "agent": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "externalId": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/tenant/{tenant}/calls": {
+            "get": {
+                "tags": [
+                    "Calls (Deprecated)"
+                ],
+                "summary": "Get filtered calls.",
+                "description": "Get filtered calls.",
+                "operationId": "Calls_GetCalls",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Modified before a certain date/time (as date-time in RFC3339), not inclusive",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Modified on or after a certain date/time (as date-time in RFC3339), inclusive",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Created on or after a certain date/time (as date-time in RFC3339), inclusive",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Modified after a certain date/time (as date-time in RFC3339), not inclusive",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "minDuration",
+                        "in": "query",
+                        "description": "Format - int32. Minimum call duration (number)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "phoneNumberCalled",
+                        "in": "query",
+                        "description": "The phone number that was called (string)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "campaignId",
+                        "in": "query",
+                        "description": "Format - int64. Campaign ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentId",
+                        "in": "query",
+                        "description": "Format - int64. Agent ID (number)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentName",
+                        "in": "query",
+                        "description": "Agent name (string)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "agentIsExternal",
+                        "in": "query",
+                        "description": "Is agent external flag (boolean)",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "agentExternalId",
+                        "in": "query",
+                        "description": "Format - int64. Agent external ID (number)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Sorting (string with possible values \"Id\" (default), \"createdOn\", or \"modifiedOn\")",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderByDirection",
+                        "in": "query",
+                        "description": "Sorting direction (string with possible values \"asc\" (default) or \"desc\")",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "activeOnly",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "createdAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of BundleCallModels with the following fields:\nlong Id;\nstring JobNumber;\nlong ProjectId;\nBusinessUnitModel BusinessUnit;\nJobTypeModel Type;\nCallModel LeadCall;",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CollectionResult_Of_Module.Telecom.Shared.V2.BundleCallModel"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "jobNumber": "string",
+                                            "projectId": 0,
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "active": true,
+                                                "name": "string",
+                                                "officialName": "string",
+                                                "email": "string",
+                                                "currency": "string",
+                                                "phoneNumber": "string",
+                                                "invoiceHeader": "string",
+                                                "invoiceMessage": "string",
+                                                "defaultTaxRate": 0,
+                                                "authorizationParagraph": "string",
+                                                "acknowledgementParagraph": "string",
+                                                "address": {
+                                                    "street": "string",
+                                                    "unit": "string",
+                                                    "city": "string",
+                                                    "state": "string",
+                                                    "zip": "string",
+                                                    "country": "string"
+                                                },
+                                                "materialSku": "string",
+                                                "quickbooksClass": "string",
+                                                "accountCode": "string",
+                                                "franchiseId": "string",
+                                                "conceptCode": "string",
+                                                "corporateContractNumber": "string",
+                                                "tenant": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "quickbooksClass": "string",
+                                                    "accountCode": "string",
+                                                    "franchiseId": "string",
+                                                    "conceptCode": "string",
+                                                    "modifiedOn": "string"
+                                                },
+                                                "modifiedOn": "string"
+                                            },
+                                            "type": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "modifiedOn": "string"
+                                            },
+                                            "leadCall": {
+                                                "id": 0,
+                                                "receivedOn": "string",
+                                                "duration": "string",
+                                                "from": "string",
+                                                "to": "string",
+                                                "direction": "Inbound",
+                                                "callType": {},
+                                                "reason": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "lead": true,
+                                                    "active": true
+                                                },
+                                                "recordingUrl": "string",
+                                                "voiceMailUrl": "string",
+                                                "createdBy": {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                },
+                                                "customer": {
+                                                    "id": 0,
+                                                    "active": true,
+                                                    "name": "string",
+                                                    "email": "string",
+                                                    "balance": 0,
+                                                    "doNotMail": true,
+                                                    "address": {
+                                                        "street": "string",
+                                                        "unit": "string",
+                                                        "country": "string",
+                                                        "city": "string",
+                                                        "state": "string",
+                                                        "zip": "string",
+                                                        "streetAddress": "string",
+                                                        "latitude": 0,
+                                                        "longitude": 0
+                                                    },
+                                                    "importId": "string",
+                                                    "doNotService": true,
+                                                    "type": "Residential",
+                                                    "contacts": [
+                                                        {
+                                                            "id": 0,
+                                                            "type": "string",
+                                                            "value": "string",
+                                                            "memo": "string",
+                                                            "active": true,
+                                                            "modifiedOn": "string"
+                                                        }
+                                                    ],
+                                                    "mergedToId": 0,
+                                                    "modifiedOn": "string",
+                                                    "memberships": [
+                                                        {
+                                                            "id": 0,
+                                                            "active": true,
+                                                            "type": {
+                                                                "id": 0,
+                                                                "active": true,
+                                                                "name": "string"
+                                                            },
+                                                            "status": "string",
+                                                            "from": "string",
+                                                            "to": "string",
+                                                            "locationId": 0
+                                                        }
+                                                    ],
+                                                    "hasActiveMembership": true,
+                                                    "customFields": [
+                                                        {
+                                                            "typeId": 0,
+                                                            "name": "string",
+                                                            "value": "string"
+                                                        }
+                                                    ],
+                                                    "createdOn": "string",
+                                                    "createdBy": 0,
+                                                    "phoneSettings": [
+                                                        {
+                                                            "phoneNumber": "string",
+                                                            "doNotText": true
+                                                        }
+                                                    ]
+                                                },
+                                                "campaign": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "modifiedOn": "string",
+                                                    "createdOn": "string",
+                                                    "active": true,
+                                                    "category": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "active": true
+                                                    },
+                                                    "source": "string",
+                                                    "otherSource": "string",
+                                                    "businessUnit": "string",
+                                                    "medium": "string",
+                                                    "otherMedium": "string",
+                                                    "dnis": "string"
+                                                },
+                                                "modifiedOn": "string",
+                                                "agent": {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "externalId": 0
+                                                },
+                                                "createdOn": "string",
+                                                "active": true
+                                            }
+                                        }
+                                    ],
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "totalCount": 0,
+                                    "hasMore": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/tenant/{tenant}/calls/{id}/recording": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Get recording of the call.",
+                "description": "Get recording of the call.",
+                "operationId": "Calls_GetRecording",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Id of the call.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"audio/mpeg\" stream with call recording.",
+                        "content": {
+                            "application/octet-stream": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/tenant/{tenant}/calls/{id}/voicemail": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Get voicemail of the call.",
+                "description": "Get voicemail of the call.",
+                "operationId": "Calls_GetVoiceMail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Format - int64. Id of the call.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"audio/mpeg\" stream with call voicemail.",
+                        "content": {
+                            "application/octet-stream": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/tenant/{tenant}/export/calls": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for telecom calls",
+                "description": "Provides export feed for telecom calls",
+                "operationId": "Export_Calls",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Telecom.V2.ExportCallResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "duration": "string",
+                                            "from": "string",
+                                            "to": "string",
+                                            "direction": {},
+                                            "status": {},
+                                            "type": {},
+                                            "recordingUrl": "string",
+                                            "voiceMailPath": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "reason": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "location": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "campaign": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "job": {
+                                                "id": 0,
+                                                "number": "string"
+                                            },
+                                            "agent": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "createdBy": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_Telecom.V3.CallResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V3.CallResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Telecom.V3.CallResponse": {
+                "required": [
+                    "id",
+                    "jobNumber",
+                    "projectId",
+                    "businessUnit",
+                    "type",
+                    "leadCall"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobNumber": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "businessUnit": {
+                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/Telecom.V3.JobTypeModel"
+                    },
+                    "leadCall": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallModelResponse"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V2.NamedModel": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the entity"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.JobTypeModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the entity"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.CallModelResponse": {
+                "required": [
+                    "createdOn",
+                    "active",
+                    "id",
+                    "receivedOn",
+                    "duration",
+                    "from",
+                    "to",
+                    "direction",
+                    "reason",
+                    "recordingUrl",
+                    "voiceMailUrl",
+                    "createdBy",
+                    "customer",
+                    "campaign",
+                    "modifiedOn",
+                    "agent"
+                ],
+                "type": "object",
+                "properties": {
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "receivedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": "string",
+                        "format": "duration"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "direction": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallDirection"
+                    },
+                    "callType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.CallType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "reason": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallReasonModel"
+                    },
+                    "recordingUrl": {
+                        "type": "string"
+                    },
+                    "voiceMailUrl": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                    },
+                    "campaign": {
+                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "agent": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallAgentModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.CallDirection": {
+                "enum": [
+                    "Inbound",
+                    "Outbound"
+                ],
+                "type": "string",
+                "description": "Indicates the direction of a call",
+                "x-enumNames": [
+                    "Inbound",
+                    "Outbound"
+                ]
+            },
+            "Telecom.V3.CallType": {
+                "enum": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ],
+                "type": "string",
+                "description": "Specifies the type (classification) of the call. If null, the call was not classified yet. Also,\n            outbound calls don't have classification and CallType is always null for outbound calls",
+                "x-enumNames": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ]
+            },
+            "Telecom.V3.CallReasonModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "lead",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the entity"
+                    },
+                    "lead": {
+                        "type": "boolean"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.CallAgentModel": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the entity"
+                    },
+                    "externalId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "Telecom.V3.OptOutListResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V3.OptOutResponse"
+                        },
+                        "description": "The list of opt-out responses."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of opt-outs"
+            },
+            "Telecom.V3.OptOutResponse": {
+                "required": [
+                    "contactNumber",
+                    "optOutType"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumber": {
+                        "type": "string",
+                        "description": "Contact number in E.164 format"
+                    },
+                    "optOutType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
+                            }
+                        ],
+                        "description": "Opt-out type"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Single contact number opt-out status"
+            },
+            "Telecom.V3.OptOutType": {
+                "enum": [
+                    "Unknown",
+                    "Global",
+                    "Marketing",
+                    "Other"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Unknown",
+                    "Global",
+                    "Marketing",
+                    "Other"
+                ]
+            },
+            "Telecom.V3.GetOptOutListRequest": {
+                "required": [
+                    "contactNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of phone numbers to get opt-out status for"
+            },
+            "Telecom.V3.CreateOptOutListResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V3.CreateOptOutResponse"
+                        },
+                        "description": "Individual results for each number"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of creating the opt-outs"
+            },
+            "Telecom.V3.CreateOptOutResponse": {
+                "required": [
+                    "contactNumber",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumber": {
+                        "type": "string",
+                        "description": "Contact number in E.164 format"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutStatus"
+                            }
+                        ],
+                        "description": "Result of opt-out creation"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of creating a single opt-out"
+            },
+            "Telecom.V3.CreateOptOutStatus": {
+                "enum": [
+                    "Ok",
+                    "RetryableError",
+                    "LogicalError"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Ok",
+                    "RetryableError",
+                    "LogicalError"
+                ]
+            },
+            "Telecom.V3.CreateOptOutListRequest": {
+                "required": [
+                    "optOutType",
+                    "contactNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "optOutType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
+                            }
+                        ],
+                        "description": "Type of opt-out to create"
+                    },
+                    "contactNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of phone numbers to create the opt-out status for"
+            },
+            "Module.Telecom.Shared.DetailedBundleCallModel": {
+                "required": [
+                    "id",
+                    "jobNumber",
+                    "projectId",
+                    "businessUnit",
+                    "type",
+                    "leadCall"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobNumber": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "businessUnit": {
+                        "$ref": "#/components/schemas/Module.Admin.Shared.BusinessUnitModel"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/JobTypeModel"
+                    },
+                    "leadCall": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.DetailedCallModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Admin.Shared.BusinessUnitModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "officialName",
+                    "email",
+                    "currency",
+                    "phoneNumber",
+                    "invoiceHeader",
+                    "invoiceMessage",
+                    "defaultTaxRate",
+                    "authorizationParagraph",
+                    "acknowledgementParagraph",
+                    "address",
+                    "materialSku",
+                    "quickbooksClass",
+                    "accountCode",
+                    "franchiseId",
+                    "conceptCode",
+                    "corporateContractNumber",
+                    "tenant",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "officialName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "invoiceHeader": {
+                        "type": "string"
+                    },
+                    "invoiceMessage": {
+                        "type": "string"
+                    },
+                    "defaultTaxRate": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "authorizationParagraph": {
+                        "type": "string"
+                    },
+                    "acknowledgementParagraph": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Module.Admin.Shared.BusinessUnitAddressModel"
+                    },
+                    "materialSku": {
+                        "type": "string"
+                    },
+                    "quickbooksClass": {
+                        "type": "string"
+                    },
+                    "accountCode": {
+                        "type": "string"
+                    },
+                    "franchiseId": {
+                        "type": "string"
+                    },
+                    "conceptCode": {
+                        "type": "string"
+                    },
+                    "corporateContractNumber": {
+                        "type": "string"
+                    },
+                    "tenant": {
+                        "$ref": "#/components/schemas/Module.Admin.Shared.BusinessUnitTenantModel"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Admin.Shared.BusinessUnitAddressModel": {
+                "required": [
+                    "street",
+                    "unit",
+                    "city",
+                    "state",
+                    "zip",
+                    "country"
+                ],
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "zip": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Admin.Shared.BusinessUnitTenantModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "quickbooksClass",
+                    "accountCode",
+                    "franchiseId",
+                    "conceptCode",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "quickbooksClass": {
+                        "type": "string"
+                    },
+                    "accountCode": {
+                        "type": "string"
+                    },
+                    "franchiseId": {
+                        "type": "string"
+                    },
+                    "conceptCode": {
+                        "type": "string"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "JobTypeModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.DetailedCallModel": {
+                "required": [
+                    "id",
+                    "receivedOn",
+                    "duration",
+                    "from",
+                    "to",
+                    "direction",
+                    "reason",
+                    "recordingUrl",
+                    "voiceMailUrl",
+                    "createdBy",
+                    "customer",
+                    "campaign",
+                    "modifiedOn",
+                    "agent"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "receivedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": "string",
+                        "format": "duration"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "direction": {
+                        "$ref": "#/components/schemas/Telecom.CallDirection"
+                    },
+                    "callType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.CallType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "reason": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.CallReasonModel"
+                    },
+                    "recordingUrl": {
+                        "type": "string"
+                    },
+                    "voiceMailUrl": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "$ref": "#/components/schemas/Services.NamedModel"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Crm.Contracts.Customers.CustomerModel"
+                    },
+                    "campaign": {
+                        "$ref": "#/components/schemas/Marketing.Core.CampaignModel"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "agent": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.CallAgentModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.CallDirection": {
+                "enum": [
+                    "Inbound",
+                    "Outbound"
+                ],
+                "type": "string",
+                "description": "Indicates the direction of a call.",
+                "x-enumNames": [
+                    "Inbound",
+                    "Outbound"
+                ]
+            },
+            "Telecom.CallType": {
+                "enum": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ],
+                "type": "string",
+                "description": "See MasterModel.CallType. It should have the same values",
+                "x-enumNames": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ]
+            },
+            "Module.Telecom.Shared.CallReasonModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "lead",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "lead": {
+                        "type": "boolean"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Services.NamedModel": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Crm.Contracts.Customers.CustomerModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "active",
+                    "email",
+                    "doNotMail",
+                    "importId",
+                    "doNotService",
+                    "type",
+                    "contacts",
+                    "modifiedOn",
+                    "memberships",
+                    "customFields",
+                    "createdOn",
+                    "phoneSettings"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "balance": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "doNotMail": {
+                        "type": "boolean"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/AddressOutput"
+                    },
+                    "importId": {
+                        "type": "string"
+                    },
+                    "doNotService": {
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/Crm.Customers.CustomerType"
+                    },
+                    "contacts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Contacts.Contracts.ContactOutputModel"
+                        }
+                    },
+                    "mergedToId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "memberships": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.MembershipModel"
+                        }
+                    },
+                    "hasActiveMembership": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CustomFieldApiModel"
+                        }
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "phoneSettings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Crm.Contracts.Customers.CustomerPhoneModel"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AddressOutput": {
+                "required": [
+                    "street",
+                    "unit",
+                    "country",
+                    "city",
+                    "state",
+                    "zip",
+                    "streetAddress"
+                ],
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "zip": {
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Crm.Customers.CustomerType": {
+                "enum": [
+                    "Residential",
+                    "Commercial"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Residential",
+                    "Commercial"
+                ]
+            },
+            "Contacts.Contracts.ContactOutputModel": {
+                "required": [
+                    "type",
+                    "value",
+                    "memo",
+                    "active",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    },
+                    "memo": {
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.MembershipModel": {
+                "required": [
+                    "id",
+                    "active",
+                    "type",
+                    "status",
+                    "locationId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/Memberships.MembershipTypeModel"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "from": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "to": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "locationId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.MembershipTypeModel": {
+                "required": [
+                    "id",
+                    "active",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomFieldApiModel": {
+                "required": [
+                    "typeId",
+                    "name",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "typeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Crm.Contracts.Customers.CustomerPhoneModel": {
+                "required": [
+                    "phoneNumber",
+                    "doNotText"
+                ],
+                "type": "object",
+                "properties": {
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "doNotText": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Core.CampaignModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "modifiedOn",
+                    "createdOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "category": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Core.CampaignCategoryModel"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherSource": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "medium": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "otherMedium": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "dnis": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Core.CampaignCategoryModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.CallAgentModel": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "externalId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CollectionResult_Of_Module.Telecom.Shared.V2.BundleCallModel": {
+                "required": [
+                    "data",
+                    "page",
+                    "pageSize",
+                    "totalCount",
+                    "hasMore"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Module.Telecom.Shared.V2.BundleCallModel"
+                        }
+                    },
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.V2.BundleCallModel": {
+                "required": [
+                    "id",
+                    "jobNumber",
+                    "projectId",
+                    "businessUnit",
+                    "type",
+                    "leadCall"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobNumber": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "businessUnit": {
+                        "$ref": "#/components/schemas/Module.Admin.Shared.BusinessUnitModel"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/JobTypeModel"
+                    },
+                    "leadCall": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.V2.CallModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.V2.CallModel": {
+                "required": [
+                    "id",
+                    "receivedOn",
+                    "duration",
+                    "from",
+                    "to",
+                    "direction",
+                    "reason",
+                    "recordingUrl",
+                    "voiceMailUrl",
+                    "createdBy",
+                    "customer",
+                    "campaign",
+                    "modifiedOn",
+                    "agent",
+                    "createdOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "receivedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": "string",
+                        "format": "duration"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "direction": {
+                        "$ref": "#/components/schemas/Telecom.CallDirection"
+                    },
+                    "callType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.CallType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "reason": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.CallReasonModel"
+                    },
+                    "recordingUrl": {
+                        "type": "string"
+                    },
+                    "voiceMailUrl": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "$ref": "#/components/schemas/Services.NamedModel"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Crm.Contracts.Customers.CustomerModel"
+                    },
+                    "campaign": {
+                        "$ref": "#/components/schemas/Marketing.Core.CampaignModel"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "agent": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.CallAgentModel"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.CallInUpdateModelV2": {
+                "required": [
+                    "excuseMemo",
+                    "reason",
+                    "customer",
+                    "location"
+                ],
+                "type": "object",
+                "properties": {
+                    "callId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "callType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.CallType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "excuseMemo": {
+                        "type": "string"
+                    },
+                    "campaignId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "reason": {
+                        "$ref": "#/components/schemas/Module.Telecom.Shared.ReasonInModel"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/CustomerInModel"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/LocationInModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.ReasonInModel": {
+                "required": [
+                    "name",
+                    "lead"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "lead": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomerInModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "contacts"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/AddressInput"
+                    },
+                    "contacts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContactInputModel"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AddressInput": {
+                "required": [
+                    "street",
+                    "unit",
+                    "country",
+                    "city",
+                    "state",
+                    "zip"
+                ],
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "zip": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ContactInputModel": {
+                "required": [
+                    "type",
+                    "value",
+                    "memo"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    },
+                    "memo": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LocationInModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "contacts"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/AddressInput"
+                    },
+                    "contacts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContactInputModel"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ExportResponse_Of_Telecom.V2.ExportCallResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V2.ExportCallResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Telecom.V2.ExportCallResponse": {
+                "required": [
+                    "id",
+                    "duration",
+                    "from",
+                    "to",
+                    "direction",
+                    "status",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the call",
+                        "format": "int64"
+                    },
+                    "duration": {
+                        "type": "string",
+                        "description": "The duration of the call",
+                        "format": "duration"
+                    },
+                    "from": {
+                        "type": "string",
+                        "description": "The caller's phone"
+                    },
+                    "to": {
+                        "type": "string",
+                        "description": "The called party's phone"
+                    },
+                    "direction": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.CallDirection"
+                            }
+                        ],
+                        "description": "The direction of the call"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.CallStatus"
+                            }
+                        ],
+                        "description": "The current status of the call"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.CallType"
+                            }
+                        ],
+                        "description": "The type (classification) of the call. Null if the inbound call was not classified yet or this is\n            an outbound call",
+                        "nullable": true
+                    },
+                    "recordingUrl": {
+                        "type": "string",
+                        "description": "The URL for call recording. Can be null if the call hasn't a recording",
+                        "nullable": true
+                    },
+                    "voiceMailPath": {
+                        "type": "string",
+                        "description": "The URL for call voicemail. Can be null if the call hasn't a voicemail. This field may have value only for\nPhones Pro tenants",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The time the call was created (i.e. inbound call was received or outbound call was initiated)\n            ",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last time the call properties were updated",
+                        "format": "date-time"
+                    },
+                    "reason": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the call reason linked to the call",
+                        "nullable": true
+                    },
+                    "customer": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the customer linked to the call",
+                        "nullable": true
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the location linked to the call",
+                        "nullable": true
+                    },
+                    "campaign": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the phone advertising campaign linked to the call",
+                        "nullable": true
+                    },
+                    "job": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.JobModel"
+                            }
+                        ],
+                        "description": "The info about the job linked to the call",
+                        "nullable": true
+                    },
+                    "agent": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the user agent who was assigned to the call. For inbound calls this is the user who\n            clicked the call bubble last time, or outbound calls this is a user who initiated the call. For Phones Pro,\n            this may differ to CreatedBy for outbound calls if the outbound call was transferred between users\n            ",
+                        "nullable": true
+                    },
+                    "createdBy": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            }
+                        ],
+                        "description": "The info about the user who created the outbound call",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Gets or sets whether the entity is active."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V2.CallDirection": {
+                "enum": [
+                    "Inbound",
+                    "Outbound"
+                ],
+                "type": "string",
+                "description": "Indicates the direction of a call",
+                "x-enumNames": [
+                    "Inbound",
+                    "Outbound"
+                ]
+            },
+            "Telecom.V2.CallStatus": {
+                "enum": [
+                    "Ringing",
+                    "Answered",
+                    "Completed",
+                    "Initiated"
+                ],
+                "type": "string",
+                "description": "Indicates the status of a call",
+                "x-enumNames": [
+                    "Ringing",
+                    "Answered",
+                    "Completed",
+                    "Initiated"
+                ]
+            },
+            "Telecom.V2.CallType": {
+                "enum": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ],
+                "type": "string",
+                "description": "Specifies the type (classification) of the call. If null, the call was not classified yet. Also,\n            outbound calls don't have classification and CallType is always null for outbound calls",
+                "x-enumNames": [
+                    "Abandoned",
+                    "Unbooked",
+                    "Excused",
+                    "Booked",
+                    "NotLead"
+                ]
+            },
+            "Telecom.V2.JobModel": {
+                "required": [
+                    "id",
+                    "number"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the job",
+                        "format": "int64"
+                    },
+                    "number": {
+                        "type": "string",
+                        "description": "Human readable number of the job"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
