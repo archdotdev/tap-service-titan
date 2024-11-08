@@ -68,7 +68,7 @@ def get_response_spec_for_path(
     """Get the response schema for a path."""
     full_spec = get_spec_from_path(spec_path)
     response_spec = get_response_spec_from_path(full_spec, url_path)
-    print(response_spe)c
+    print(response_spec)
 
 
 if __name__ == "__main__":
