@@ -90,14 +90,10 @@ def get_prompts(
             process = subprocess.Popen(
                 "pbcopy", env={"LANG": "en_US.UTF-8"}, stdin=subprocess.PIPE
             )
-            process.communicate(text.encode("utf-8"))
-            print(f"Path: {path}")
+            process.communicate(text.encode("utf-8"))           
             click.pause()
         except KeyError:
             pass
-    full_spec = get_spec_from_path(spec_path)
-    response_spec = get_response_spec_from_path(full_spec, url_path)
-    print(response_spec)
 
 
 if __name__ == "__main__":
