@@ -8,7 +8,6 @@ from functools import cached_property
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import (
-    ServiceTitanExportStream,
     ServiceTitanStream,
 )
 
