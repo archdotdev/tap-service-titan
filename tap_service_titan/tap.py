@@ -144,6 +144,7 @@ class TapServiceTitan(Tap):
             streams.inventory.PurchaseOrderTypesStream(self),
             streams.inventory.ReceiptsStream(self),
             streams.inventory.ReturnsStream(self),
+            streams.job_booking.CallReasonsStream(self),
             streams.jpm.AppointmentsStream(self),
             streams.jpm.JobCancelReasonsStream(self),
             streams.jpm.JobCancelledLogsStream(self),
