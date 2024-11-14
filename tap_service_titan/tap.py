@@ -144,6 +144,8 @@ class TapServiceTitan(Tap):
             streams.crm.LocationContactsStream(self),
             streams.crm.LocationsStream(self),
             streams.dispatch.CapacitiesStream(self),
+            streams.forms.FormsStream(self),
+            streams.forms.SubmissionsStream(self),
             streams.inventory.PurchaseOrderMarkupsStream(self),
             streams.inventory.PurchaseOrdersStream(self),
             streams.inventory.PurchaseOrderTypesStream(self),
