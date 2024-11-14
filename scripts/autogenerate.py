@@ -1,6 +1,8 @@
 """Tools for autogenerating streams."""
 
+import subprocess
 import typer
+import click
 from pathlib import Path
 import json
 import jsonref
@@ -58,6 +60,11 @@ def get_export_specs(
             print(items_schema)
 
 
+def _get_response_spec_for_path(spec_path: Path, url_path: str):
+    full_spec = get_spec_from_path(spec_path)
+    return get_response_spec_from_path(full_spec, url_path)
+
+
 @app.command()
 def get_response_spec_for_path(
     spec_path: Annotated[
@@ -66,9 +73,28 @@ def get_response_spec_for_path(
     url_path: str,
 ):
     """Get the response schema for a path."""
-    full_spec = get_spec_from_path(spec_path)
-    response_spec = get_response_spec_from_path(full_spec, url_path)
-    print(response_spe)c
+    print(_get_response_spec_for_path(spec_path, url_path))
+
+
+@app.command()
+def get_prompts(
+    spec_path: Annotated[
+        Path, typer.Option(exists=True, file_okay=True, dir_okay=False, readable=True)
+    ],
+):
+    """Get all prompts for a given spec file."""
+    for path in _get_paths_with_get(get_spec_from_path(spec_path)):
+        try:
+            response_spec = _get_response_spec_for_path(spec_path, path)
+            text = f"URL path segment: {path}\nJSON schema:\n{response_spec}"
+            process = subprocess.Popen(
+                "pbcopy", env={"LANG": "en_US.UTF-8"}, stdin=subprocess.PIPE
+            )
+            process.communicate(text.encode("utf-8"))
+            print(f"Path: {path}")
+            click.pause()
+        except KeyError:
+            pass
 
 
 if __name__ == "__main__":

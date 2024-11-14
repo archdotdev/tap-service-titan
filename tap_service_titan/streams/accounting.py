@@ -553,3 +553,263 @@ class InventoryBillsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/export/inventory-bills"
+
+
+class ApCreditsStream(ServiceTitanStream):
+    """Define ap credits stream."""
+
+    name = "ap_credits"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("inventoryReturnId", th.IntegerType),
+        th.Property("jobId", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("date", th.DateTimeType),
+        th.Property("canceledOn", th.DateTimeType),
+        th.Property("number", th.StringType),
+        th.Property("referenceNumber", th.StringType),
+        th.Property("memo", th.StringType),
+        th.Property("amount", th.NumberType),
+        th.Property("appliedAmount", th.NumberType),
+        th.Property("status", th.StringType),
+        th.Property("syncStatus", th.StringType),
+        th.Property(
+            "batch",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "remittanceVendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "vendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property("paymentStatus", th.StringType),
+        th.Property(
+            "splits",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("active", th.BooleanType),
+                    th.Property("createdOn", th.DateTimeType),
+                    th.Property("inventoryBillId", th.IntegerType),
+                    th.Property("vendorCreditId", th.IntegerType),
+                    th.Property("amount", th.NumberType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/ap-credits"
+
+
+class ApPaymentsStream(ServiceTitanStream):
+    """Define ap payment stream."""
+
+    name = "ap_payments"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("date", th.DateTimeType),
+        th.Property("approvedDate", th.DateTimeType),
+        th.Property("method", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("printCheck", th.BooleanType),
+        th.Property("amount", th.NumberType),
+        th.Property("errorMessage", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("syncStatus", th.StringType),
+        th.Property(
+            "batch",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "glAccount",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+                th.Property("number", th.StringType),
+                th.Property("type", th.StringType),
+                th.Property("detailType", th.StringType),
+            ),
+        ),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "vendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "remittanceVendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "splits",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("active", th.BooleanType),
+                    th.Property("createdOn", th.DateTimeType),
+                    th.Property("documentId", th.IntegerType),
+                    th.Property("inventoryBillId", th.IntegerType),
+                    th.Property("amount", th.NumberType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/ap-payments"
+
+
+class PaymentTermsStream(ServiceTitanStream):
+    """Define payment terms stream."""
+
+    name = "payment_terms"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("dueDayType", th.StringType),
+        th.Property("dueDay", th.IntegerType),
+        th.Property("isCustomerDefault", th.BooleanType),
+        th.Property("isVendorDefault", th.BooleanType),
+        th.Property("active", th.BooleanType),
+        th.Property("inUse", th.BooleanType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property(
+            "paymentTermDiscountModel",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("discountApplyTo", th.StringType),
+                th.Property("discount", th.NumberType),
+                th.Property("discountType", th.StringType),
+                th.Property("account", th.StringType),
+                th.Property("applyBy", th.StringType),
+                th.Property("applyByValue", th.IntegerType),
+            ),
+        ),
+        th.Property(
+            "interestSettings",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("rateType", th.StringType),
+                th.Property("flatRateValue", th.NumberType),
+                th.Property("percentageRateValue", th.NumberType),
+                th.Property("chargeMethod", th.StringType),
+                th.Property("frequency", th.StringType),
+                th.Property("gracePeriod", th.IntegerType),
+                th.Property("targetInvoices", th.ArrayType(th.StringType)),
+                th.Property("taskId", th.IntegerType),
+                th.Property("taskDisplayName", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/payment-terms"
+
+
+class PaymentTypesStream(ServiceTitanStream):
+    """Define payment types stream."""
+
+    name = "payment_types"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/payment-types"
+
+
+class TaxZonesStream(ServiceTitanStream):
+    """Define tax zones stream."""
+
+    name = "tax_zones"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("color", th.IntegerType),
+        th.Property("isTaxRateSeparated", th.BooleanType),
+        th.Property("isMultipleTaxZone", th.BooleanType),
+        th.Property(
+            "rates",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("taxName", th.StringType),
+                    th.Property("taxBaseType", th.ArrayType(th.StringType)),
+                    th.Property("taxRate", th.NumberType),
+                    th.Property("salesTaxItem", th.StringType),
+                )
+            ),
+        ),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/tax-zones"
