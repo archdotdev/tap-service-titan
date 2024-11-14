@@ -7,10 +7,33 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import ServiceTitanExportStream
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 
 
 # CRM Streams
+class BookingProviderTagsStream(ServiceTitanStream):
+    """Define booking provider tags stream."""
+
+    name = "booking_provider_tags"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("tagName", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/booking-provider-tags"
+
+
 class BookingsStream(ServiceTitanExportStream):
     """Define bookings stream."""
 
