@@ -95,6 +95,9 @@ def get_prompts(
             click.pause()
         except KeyError:
             pass
+    full_spec = get_spec_from_path(spec_path)
+    response_spec = get_response_spec_from_path(full_spec, url_path)
+    print(response_spec)
 
 
 if __name__ == "__main__":
