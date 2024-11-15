@@ -147,7 +147,6 @@ class TapServiceTitan(Tap):
             streams.dispatch.CapacitiesStream(self),
             streams.dispatch.AppointmentAssignmentsStream(self),
             streams.dispatch.ArrivalWindowsStream(self),
-            streams.dispatch.AppointmentAssignmentsStream(self),
             streams.dispatch.NonJobAppointmentsStream(self),
             streams.dispatch.TeamsStream(self),
             streams.dispatch.TechnicianShiftsStream(self),
