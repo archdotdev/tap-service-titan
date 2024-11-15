@@ -6,6 +6,7 @@ import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
+import logging
 
 from tap_service_titan.client import (
     ServiceTitanExportStream,
@@ -813,3 +814,62 @@ class TaxZonesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/tax-zones"
+
+
+class JournalEntriesStream(ServiceTitanStream):
+    """Define journal entries stream."""
+
+    name = "journal_entries"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("number", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("postDate", th.DateTimeType),
+        th.Property("exportedOn", th.DateTimeType),
+        th.Property(
+            "exportedBy",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property("url", th.StringType),
+    ).to_dict()
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,  # noqa: ANN401
+    ) -> dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        # This endpoint has an undocumented max page size of 500
+        params["pageSize"] = 500
+        return params
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries"
