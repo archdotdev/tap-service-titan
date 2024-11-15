@@ -91,7 +91,7 @@ def get_prompts(
                 "pbcopy", env={"LANG": "en_US.UTF-8"}, stdin=subprocess.PIPE
             )
             process.communicate(text.encode("utf-8"))
-            print(f"Path: {path}")
+            print(path)
             click.pause()
         except KeyError:
             pass
