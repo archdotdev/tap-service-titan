@@ -138,6 +138,8 @@ class TapServiceTitan(Tap):
             streams.accounting.PaymentTypesStream(self),
             streams.accounting.TaxZonesStream(self),
             streams.accounting.JournalEntriesStream(self),
+            streams.accounting.JournalEntryDetailsStream(self),
+            streams.accounting.JournalEntrySummariesStream(self),
             streams.crm.BookingsStream(self),
             streams.crm.CustomerContactsStream(self),
             streams.crm.CustomersStream(self),

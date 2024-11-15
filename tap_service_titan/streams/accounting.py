@@ -816,7 +816,30 @@ class TaxZonesStream(ServiceTitanStream):
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/tax-zones"
 
 
-class JournalEntriesStream(ServiceTitanStream):
+class JournalEntriesStreamBase(ServiceTitanStream):
+    """Base for all journal entries stream"""
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,  # noqa: ANN401
+    ) -> dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        # This endpoint has an undocumented max page size of 500
+        params["pageSize"] = 500
+        return params
+
+
+class JournalEntriesStream(JournalEntriesStreamBase):
     """Define journal entries stream."""
 
     name = "journal_entries"
@@ -850,26 +873,173 @@ class JournalEntriesStream(ServiceTitanStream):
         th.Property("url", th.StringType),
     ).to_dict()
 
-    def get_url_params(
-        self,
-        context: dict | None,
-        next_page_token: Any | None,  # noqa: ANN401
-    ) -> dict[str, Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
-        params = super().get_url_params(context, next_page_token)
-        # This endpoint has an undocumented max page size of 500
-        params["pageSize"] = 500
-        return params
-
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries"
+
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            record: The record to be processed.
+            context: The stream context.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        return {"entry_id": record["id"]}
+
+
+class JournalEntrySummariesStream(JournalEntriesStreamBase):
+    """Define journal entry summary stream."""
+
+    name = "journal_entry_summaries"
+    primary_keys: t.ClassVar[list[str]] = []
+    parent_stream_type = JournalEntriesStream
+
+    schema = th.PropertiesList(
+        th.Property("postDate", th.DateTimeType),
+        th.Property(
+            "account",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("type", th.StringType),
+                th.Property("subtype", th.StringType),
+            ),
+        ),
+        th.Property("credit", th.NumberType),
+        th.Property("debit", th.NumberType),
+        th.Property("memo", th.StringType),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{{entry_id}}/summary"
+
+
+class JournalEntryDetailsStream(JournalEntriesStreamBase):
+    """Define journal entry details stream."""
+
+    name = "journal_entry_details"
+    primary_keys: t.ClassVar[list[str]] = []
+    parent_stream_type = JournalEntriesStream
+
+    schema = th.PropertiesList(
+        th.Property("postDate", th.DateTimeType),
+        th.Property(
+            "account",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("type", th.StringType),
+                th.Property("subtype", th.StringType),
+            ),
+        ),
+        th.Property("debit", th.NumberType),
+        th.Property("credit", th.NumberType),
+        th.Property("memo", th.StringType),
+        th.Property(
+            "transaction",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("refNumber", th.StringType),
+            ),
+        ),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "customer",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "vendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "inventoryLocation",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "job",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "customerLocation",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "paymentType",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "project",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "serviceAgreement",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "appliedTo",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("refNumber", th.StringType),
+            ),
+        ),
+        th.Property(
+            "sku",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("code", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{{entry_id}}/details"
