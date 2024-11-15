@@ -443,7 +443,25 @@ class ReturnTypesStream(ServiceTitanStream):
         th.Property("isDefaultForConsignment", th.BooleanType),
     ).to_dict()
 
-    # TODO: Add activeOnly to query params
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        # This endpoint has an undocumented max page size of 500
+        params["activeOnly"] = False
+        return params
+
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
