@@ -355,3 +355,316 @@ class ReturnsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/returns"
+
+
+class AdjustmentsStream(ServiceTitanStream):
+    """Define adjustments stream."""
+
+    name = "adjustments"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("number", th.StringType),
+        th.Property("referenceNumber", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("inventoryLocationId", th.IntegerType),
+        th.Property("businessUnitId", th.IntegerType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("memo", th.StringType),
+        th.Property("date", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("batchId", th.IntegerType),
+        th.Property(
+            "batch",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property("syncStatus", th.StringType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property(
+            "items",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("skuId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("code", th.StringType),
+                    th.Property("description", th.StringType),
+                    th.Property("quantity", th.NumberType),
+                )
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/adjustments"
+
+
+class ReturnTypesStream(ServiceTitanStream):
+    """Define return types stream."""
+
+    name = "return_types"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("automaticallyReceiveVendorCredit", th.BooleanType),
+        th.Property("includeInSalesTax", th.BooleanType),
+        th.Property("active", th.BooleanType),
+        th.Property("isDefault", th.BooleanType),
+        th.Property("isDefaultForConsignment", th.BooleanType),
+    ).to_dict()
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        # This endpoint has an undocumented max page size of 500
+        params["activeOnly"] = False
+        return params
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/return-types"
+
+
+class TransfersStream(ServiceTitanStream):
+    """Define transfers stream."""
+
+    name = "transfers"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("transferType", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("number", th.StringType),
+        th.Property("referenceNumber", th.StringType),
+        th.Property("fromLocationId", th.IntegerType),
+        th.Property("toLocationId", th.IntegerType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("memo", th.StringType),
+        th.Property("date", th.DateTimeType),
+        th.Property("pickedDate", th.DateTimeType),
+        th.Property("receivedDate", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("batchId", th.IntegerType),
+        th.Property(
+            "batch",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property("syncStatus", th.StringType),
+        th.Property(
+            "items",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("skuId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("code", th.StringType),
+                    th.Property("description", th.StringType),
+                    th.Property("quantity", th.NumberType),
+                )
+            ),
+        ),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/transfers"
+
+
+class TrucksStream(ServiceTitanStream):
+    """Define trucks stream."""
+
+    name = "trucks"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("active", th.BooleanType),
+        th.Property("memo", th.StringType),
+        th.Property("warehouseId", th.IntegerType),
+        th.Property("technicianIds", th.ArrayType(th.IntegerType)),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/trucks"
+
+
+class VendorsStream(ServiceTitanStream):
+    """Define vendors stream."""
+
+    name = "vendors"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("active", th.BooleanType),
+        th.Property("isTruckReplenishment", th.BooleanType),
+        th.Property("isMobileCreationRestricted", th.BooleanType),
+        th.Property("memo", th.StringType),
+        th.Property("deliveryOption", th.StringType),
+        th.Property("defaultTaxRate", th.NumberType),
+        th.Property(
+            "contactInfo",
+            th.ObjectType(
+                th.Property("firstName", th.StringType),
+                th.Property("lastName", th.StringType),
+                th.Property("phone", th.StringType),
+                th.Property("email", th.StringType),
+                th.Property("fax", th.StringType),
+            ),
+        ),
+        th.Property(
+            "address",
+            th.ObjectType(
+                th.Property("street", th.StringType),
+                th.Property("unit", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property("state", th.StringType),
+                th.Property("zip", th.StringType),
+                th.Property("country", th.StringType),
+            ),
+        ),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/vendors"
+
+
+class WarehousesStream(ServiceTitanStream):
+    """Define warehouses stream."""
+
+    name = "warehouses"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("active", th.BooleanType),
+        th.Property(
+            "address",
+            th.ObjectType(
+                th.Property("street", th.StringType),
+                th.Property("unit", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property("state", th.StringType),
+                th.Property("zip", th.StringType),
+                th.Property("country", th.StringType),
+            ),
+        ),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("key", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/warehouses"
