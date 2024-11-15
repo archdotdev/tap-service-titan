@@ -20,14 +20,13 @@ class InvoicesStream(ServiceTitanExportStream):
     name = "invoices"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("syncStatus", th.StringType),
         th.Property("summary", th.StringType),
         th.Property("referenceNumber", th.StringType),
-        th.Property("invoiceDate", th.StringType),
-        th.Property("dueDate", th.StringType),
+        th.Property("invoiceDate", th.DateTimeType),
+        th.Property("dueDate", th.DateTimeType),
         th.Property("subTotal", th.StringType),
         th.Property("salesTax", th.StringType),
         th.Property(
@@ -90,6 +89,8 @@ class InvoicesStream(ServiceTitanExportStream):
                 th.Property("name", th.StringType),
             ),
         ),
+        th.Property("termName", th.StringType),
+        th.Property("createdBy", th.StringType),
         th.Property(
             "batch",
             th.ObjectType(
@@ -98,8 +99,8 @@ class InvoicesStream(ServiceTitanExportStream):
                 th.Property("name", th.StringType),
             ),
         ),
-        th.Property("depositedOn", th.StringType),
-        th.Property("createdOn", th.StringType),
+        th.Property("depositedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("adjustmentToId", th.IntegerType),
         th.Property(
@@ -115,8 +116,8 @@ class InvoicesStream(ServiceTitanExportStream):
             "royalty",
             th.ObjectType(
                 th.Property("status", th.StringType),
-                th.Property("date", th.StringType),
-                th.Property("sentOn", th.StringType),
+                th.Property("date", th.DateTimeType),
+                th.Property("sentOn", th.DateTimeType),
                 th.Property("memo", th.StringType),
             ),
         ),
@@ -129,8 +130,8 @@ class InvoicesStream(ServiceTitanExportStream):
             ),
         ),
         th.Property("commissionEligibilityDate", th.StringType),
-        th.Property("sentStatus", th.StringType),  # Assuming this is a string type
-        th.Property("reviewStatus", th.StringType),  # Assuming this is a string type
+        th.Property("sentStatus", th.StringType),
+        th.Property("reviewStatus", th.StringType),
         th.Property(
             "assignedTo",
             th.ObjectType(
@@ -149,9 +150,7 @@ class InvoicesStream(ServiceTitanExportStream):
                     th.Property("totalCost", th.StringType),
                     th.Property("inventoryLocation", th.StringType),
                     th.Property("price", th.StringType),
-                    th.Property(
-                        "type", th.StringType
-                    ),  # Assuming this is a string type
+                    th.Property("type", th.StringType),
                     th.Property("skuName", th.StringType),
                     th.Property("skuId", th.IntegerType),
                     th.Property("total", th.StringType),
@@ -198,7 +197,7 @@ class InvoicesStream(ServiceTitanExportStream):
                     th.Property("displayName", th.StringType),
                     th.Property("soldHours", th.NumberType),
                     th.Property("modifiedOn", th.DateTimeType),
-                    th.Property("serviceDate", th.StringType),
+                    th.Property("serviceDate", th.DateTimeType),
                     th.Property("order", th.IntegerType),
                     th.Property(
                         "businessUnit",
