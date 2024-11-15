@@ -175,6 +175,7 @@ class TapServiceTitan(Tap):
             streams.marketing.CampaignsStream(self),
             streams.marketing_reputation.ReviewsStream(self),
             streams.sales_and_estimates.EstimatesStream(self),
+            streams.service_agreements.ServiceAgreementsStream(self),
             streams.settings.BusinessUnitsStream(self),
             streams.settings.EmployeesStream(self),
             streams.settings.TechniciansStream(self),
