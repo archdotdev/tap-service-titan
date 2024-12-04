@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import typing as t
+from datetime import datetime, timezone
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
@@ -90,6 +91,27 @@ class AttributedLeadsStream(ServiceTitanStream):
         return (
             f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/attributed-leads"
         )
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = super().get_url_params(context, next_page_token)
+
+        params["fromUtc"] = params.pop("modifiedOnOrAfter")
+        params["toUtc"] = datetime.now(timezone.utc).isoformat()
+        return params
 
 
 class CapacityWarningsStream(ServiceTitanStream):
