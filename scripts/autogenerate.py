@@ -97,14 +97,5 @@ def get_prompts(
             pass
 
 
-@app.command()
-def write_all(
-    spec_root: Annotated[
-        Path, typer.Option(exists=True, file_okay=False, dir_okay=True, readable=True)
-    ],
-):
-    """Write all the prompts to a file."""
-
-
 if __name__ == "__main__":
     app()
