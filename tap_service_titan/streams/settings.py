@@ -224,3 +224,24 @@ class TagTypesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/tag-types"
+
+
+class UserRolesStream(ServiceTitanStream):
+    """Define user roles stream."""
+
+    name = "user_roles"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "createdOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("name", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("employeeType", th.StringType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/user-roles"

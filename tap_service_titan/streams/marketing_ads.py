@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
+from singer_sdk.helpers.types import Context  # noqa: TCH002
 
 from tap_service_titan.client import (
     ServiceTitanStream,
@@ -141,8 +142,11 @@ class PerformanceStream(ServiceTitanStream):
 
     name = "performance"
     primary_keys: t.ClassVar[list[str]] = ["campaign.name", "adGroup.id", "keyword.id"]
+    replication_key: str = "to_utc"
 
     schema = th.PropertiesList(
+        th.Property("from_utc", th.DateTimeType),
+        th.Property("to_utc", th.DateTimeType),
         th.Property(
             "campaign",
             th.ObjectType(
@@ -202,7 +206,122 @@ class PerformanceStream(ServiceTitanStream):
         th.Property("returnOnInvestment", th.NumberType),
     ).to_dict()
 
+    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
+        """Add report end time for consistency."""
+        super().__init__(*args, **kwargs)
+        self.end_time = datetime.now(timezone.utc).isoformat()
+
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/performance"
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = super().get_url_params(context, next_page_token)
+
+        params["fromUtc"] = self.get_starting_timestamp(context)
+        params["toUtc"] = self.end_time
+        return params
+
+    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
+        """Return a generator of record-type dictionary objects with coerced values.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            One item per record with string coercion only in the units section.
+        """
+        for record in super().get_records(context):
+            record["from_utc"] = self.get_starting_timestamp(context)
+            record["to_utc"] = self.end_time
+            yield record
+
+
+class CampaignPerformanceStream(PerformanceStream):
+    """Define marketing performance stream for campaigns."""
+
+    name = "campaign_performance"
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = super().get_url_params(context, next_page_token)
+        params["performanceSegmentationType"] = "Campaign"
+        return params
+
+
+class KeywordPerformanceStream(PerformanceStream):
+    """Define marketing performance stream for campaigns."""
+
+    name = "keyword_performance"
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = super().get_url_params(context, next_page_token)
+        params["performanceSegmentationType"] = "Keyword"
+        return params
+
+
+class AdGroupPerformanceStream(PerformanceStream):
+    """Define marketing performance stream for campaigns."""
+
+    name = "adgroup_performance"
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = super().get_url_params(context, next_page_token)
+        params["performanceSegmentationType"] = "AdGroup"
+        return params

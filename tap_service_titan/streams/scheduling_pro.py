@@ -108,4 +108,4 @@ class SchedulerSessionsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/schedulingpro/v2/tenant/{self._tap.config['tenant_id']}/schedulers/{self.config.get('scheduler_id', '')}/sessions"
+        return f"/schedulingpro/v2/tenant/{self._tap.config['tenant_id']}/schedulers/{'{scheduler_id}'}/sessions"
