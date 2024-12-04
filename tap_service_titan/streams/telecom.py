@@ -7,9 +7,7 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 
 
 class CallsStream(ServiceTitanExportStream):
@@ -79,3 +77,20 @@ class CallsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/telecom/v2/tenant/{self._tap.config['tenant_id']}/export/calls"
+
+
+class OptOutsStream(ServiceTitanStream):
+    """Define opt-outs stream."""
+
+    name = "opt_outs"
+    primary_keys: t.ClassVar[list[str]] = ["contactNumber"]
+
+    schema = th.PropertiesList(
+        th.Property("contactNumber", th.StringType),
+        th.Property("optOutType", th.StringType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/telecom/v3/tenant/{self._tap.config['tenant_id']}/optinouts/optouts"

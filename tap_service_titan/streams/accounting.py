@@ -852,8 +852,8 @@ class JournalEntriesStream(ServiceTitanStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: Any | None,  # noqa: ANN401
-    ) -> dict[str, Any]:
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -872,3 +872,165 @@ class JournalEntriesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries"
+
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Return a context dictionary for a child stream."""
+        return {"journal_entry_id": record["id"]}
+
+
+class JournalEntrySummaryStream(ServiceTitanStream):
+    """Define journal entry summary stream."""
+
+    name = "journal_entry_summaries"
+    primary_keys: t.ClassVar[list[str]] = []
+    replication_key: str | None = None
+    parent_stream_type = JournalEntriesStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("postDate", th.DateTimeType),
+        th.Property(
+            "account",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("type", th.StringType),
+                th.Property("subtype", th.StringType),
+            ),
+        ),
+        th.Property("credit", th.NumberType),
+        th.Property("debit", th.NumberType),
+        th.Property("memo", th.StringType),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{'{journal_entry_id}'}/summary"
+
+
+class JournalEntryDetailsStream(ServiceTitanStream):
+    """Define journal entry details stream."""
+
+    name = "journal_entry_details"
+    primary_keys: t.ClassVar[list[str]] = []
+    replication_key: str | None = None
+    parent_stream_type = JournalEntriesStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("postDate", th.DateTimeType),
+        th.Property(
+            "account",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("type", th.StringType),
+                th.Property("subtype", th.StringType),
+            ),
+        ),
+        th.Property("debit", th.NumberType),
+        th.Property("credit", th.NumberType),
+        th.Property("memo", th.StringType),
+        th.Property(
+            "transaction",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("refNumber", th.StringType),
+            ),
+        ),
+        th.Property(
+            "businessUnit",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "customer",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "vendor",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "inventoryLocation",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "job",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "customerLocation",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "paymentType",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("name", th.StringType),
+            ),
+        ),
+        th.Property(
+            "project",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "serviceAgreement",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("number", th.StringType),
+            ),
+        ),
+        th.Property(
+            "appliedTo",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("refNumber", th.StringType),
+            ),
+        ),
+        th.Property(
+            "sku",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+                th.Property("type", th.StringType),
+                th.Property("code", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{'{journal_entry_id}'}/details"

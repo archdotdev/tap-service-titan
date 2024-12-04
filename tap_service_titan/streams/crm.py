@@ -7,10 +7,33 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import ServiceTitanExportStream
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 
 
 # CRM Streams
+class BookingProviderTagsStream(ServiceTitanStream):
+    """Define booking provider tags stream."""
+
+    name = "booking_provider_tags"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("tagName", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/booking-provider-tags"
+
+
 class BookingsStream(ServiceTitanExportStream):
     """Define bookings stream."""
 
@@ -124,6 +147,33 @@ class CustomersStream(ServiceTitanExportStream):
         """Return the API path for the stream."""
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/customers"
 
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Return a context dictionary for a child stream."""
+        return {"customer_id": record["id"]}
+
+
+class CustomerNotesStream(ServiceTitanStream):
+    """Define customer notes stream."""
+
+    name = "customer_notes"
+    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    replication_key: str = "modifiedOn"
+    parent_stream_type = CustomersStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("text", th.StringType),
+        th.Property("isPinned", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers/{'{customer_id}'}/notes"  # noqa: E501
+
 
 class CustomerContactsStream(ServiceTitanExportStream):
     """Define contacts stream."""
@@ -191,6 +241,35 @@ class LeadsStream(ServiceTitanExportStream):
         """Return the API path for the stream."""
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/leads"
 
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Return a context dictionary for a child stream."""
+        return {"lead_id": record["id"]}
+
+
+class LeadNotesStream(ServiceTitanStream):
+    """Define lead notes stream."""
+
+    name = "lead_notes"
+    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    replication_key: str = "modifiedOn"
+    parent_stream_type = LeadsStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("text", th.StringType),
+        th.Property("isPinned", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return (
+            f"/crm/v2/tenant/{self._tap.config['tenant_id']}/leads/{'{lead_id}'}/notes"
+        )
+
 
 class LocationsStream(ServiceTitanExportStream):
     """Define locations stream."""
@@ -249,6 +328,33 @@ class LocationsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations"
+
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Return a context dictionary for a child stream."""
+        return {"location_id": record["id"]}
+
+
+class LocationNotesStream(ServiceTitanStream):
+    """Define location notes stream."""
+
+    name = "location_notes"
+    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    replication_key: str = "modifiedOn"
+    parent_stream_type = LocationsStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("text", th.StringType),
+        th.Property("isPinned", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations/{'{location_id}'}/notes"  # noqa: E501
 
 
 class LocationContactsStream(ServiceTitanExportStream):
