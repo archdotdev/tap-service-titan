@@ -11,6 +11,7 @@ from singer_sdk.helpers.types import Context  # noqa: TCH002
 from tap_service_titan.client import (
     ServiceTitanStream,
 )
+from tap_service_titan.streams.jpm import JobsStream
 
 
 class FormsStream(ServiceTitanStream):
@@ -150,3 +151,24 @@ class SubmissionsStream(ServiceTitanStream):
                 # Only process the units section, leaving the rest of the record unchanged
                 record["units"] = [process_units(unit) for unit in record["units"]]
             yield record
+
+
+class JobAttachmentsStream(ServiceTitanStream):
+    """Define forms stream."""
+
+    name = "job_attachments"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "createdOn"
+    parent_stream_type = JobsStream
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("fileName", th.StringType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/forms/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/attachments"
