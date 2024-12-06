@@ -77,15 +77,17 @@ class CustomReports(ServiceTitanStream):
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:
-        mapping = {
-            # String , Number , Boolean , Date , Time
-            "String": th.StringType(),
-            "Number": th.NumberType(),
-            "Boolean": th.BooleanType(),
-            "Date": th.DateTimeType(),
-            "Time": th.StringType(),
-        }
-        return mapping.get(string_type, th.StringType())
+        # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
+        return th.StringType()
+        # mapping = {
+        #     # String , Number , Boolean , Date , Time
+        #     "String": th.StringType(),
+        #     "Number": th.NumberType(),
+        #     "Boolean": th.BooleanType(),
+        #     "Date": th.DateTimeType(),
+        #     "Time": th.StringType(),
+        # }
+        # return mapping.get(string_type, th.StringType())
 
     def _get_report_metadata(self) -> dict:
         report_category = self._report["report_category"]
@@ -196,7 +198,9 @@ class CustomReports(ServiceTitanStream):
         resp = response.json()
         field_names = [field["name"] for field in resp["fields"]]
         for record in resp["data"]:
-            data = dict(zip(field_names, record))
+            # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
+            string_record = [str(val) if val is not None else "" for val in record]
+            data = dict(zip(field_names, string_record))
             # Add the backfill date to the record if configured
             if "backfill_date_parameter" in self._report:
                 data[self._report["backfill_date_parameter"]] = (
