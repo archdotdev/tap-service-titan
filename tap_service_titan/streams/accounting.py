@@ -815,7 +815,28 @@ class TaxZonesStream(ServiceTitanStream):
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/tax-zones"
 
 
-class JournalEntriesStream(ServiceTitanStream):
+class PageSizeLimitMixin:
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
+
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        # This endpoint has an undocumented max page size of 500
+        params["pageSize"] = 500
+        return params
+
+
+class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entries stream."""
 
     name = "journal_entries"
@@ -864,7 +885,7 @@ class JournalEntriesStream(ServiceTitanStream):
             A dictionary of URL query parameters.
         """
         params = super().get_url_params(context, next_page_token)
-        # This endpoint has an undocumented max page size of 500
+        # Some endpoints have an undocumented max page size of 500
         params["pageSize"] = 500
         return params
 
@@ -878,7 +899,7 @@ class JournalEntriesStream(ServiceTitanStream):
         return {"journal_entry_id": record["id"]}
 
 
-class JournalEntrySummaryStream(ServiceTitanStream):
+class JournalEntrySummaryStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entry summary stream."""
 
     name = "journal_entry_summaries"
@@ -917,7 +938,7 @@ class JournalEntrySummaryStream(ServiceTitanStream):
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{'{journal_entry_id}'}/summary"
 
 
-class JournalEntryDetailsStream(ServiceTitanStream):
+class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entry details stream."""
 
     name = "journal_entry_details"
