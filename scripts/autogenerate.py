@@ -86,7 +86,7 @@ def get_prompts(
     for path in _get_paths_with_get(get_spec_from_path(spec_path)):
         try:
             response_spec = _get_response_spec_for_path(spec_path, path)
-            text = f"URL path segment: {path}\nJSON schema:\n{response_spec}"
+            text = f"This is for the {spec_path.stem.replace('-', ' ')} API.\nURL path segment: {path}\nJSON schema:\n{response_spec}"  # noqa: E501
             process = subprocess.Popen(
                 "pbcopy", env={"LANG": "en_US.UTF-8"}, stdin=subprocess.PIPE
             )

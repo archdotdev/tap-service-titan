@@ -258,3 +258,45 @@ class ZonesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self._tap.config['tenant_id']}/zones"
+
+
+class BusinessHoursStream(ServiceTitanStream):
+    """Define business hours stream."""
+
+    name = "business_hours"
+    primary_keys: t.ClassVar[list[str]] = []
+
+    schema = th.PropertiesList(
+        th.Property(
+            "weekdays",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("fromHour", th.IntegerType),
+                    th.Property("toHour", th.IntegerType),
+                )
+            ),
+        ),
+        th.Property(
+            "saturday",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("fromHour", th.IntegerType),
+                    th.Property("toHour", th.IntegerType),
+                )
+            ),
+        ),
+        th.Property(
+            "sunday",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("fromHour", th.IntegerType),
+                    th.Property("toHour", th.IntegerType),
+                )
+            ),
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/dispatch/v2/tenant/{self._tap.config['tenant_id']}/business-hours"

@@ -345,3 +345,70 @@ class ProjectSubStatusesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-substatuses"
+
+
+class JobNotesStream(ServiceTitanExportStream):
+    """Define job notes stream."""
+
+    name = "job_notes"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("text", th.StringType),
+        th.Property("isPinned", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("jobId", th.IntegerType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-notes"
+
+
+class ProjectNotesStream(ServiceTitanExportStream):
+    """Define project notes stream."""
+
+    name = "project_notes"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("text", th.StringType),
+        th.Property("isPinned", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("projectId", th.IntegerType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/project-notes"
+
+
+class ProjectTypesStream(ServiceTitanStream):
+    """Define project types stream."""
+
+    name = "project_types"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("createdById", th.IntegerType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-types"

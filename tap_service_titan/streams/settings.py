@@ -7,9 +7,7 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 
 
 class EmployeesStream(ServiceTitanExportStream):
@@ -201,3 +199,49 @@ class TechniciansStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/export/technicians"
+
+
+class TagTypesStream(ServiceTitanStream):
+    """Define tag types stream."""
+
+    name = "tag_types"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("color", th.StringType),
+        th.Property("code", th.StringType),
+        th.Property("importance", th.StringType),
+        th.Property("isConversionOpportunity", th.BooleanType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/tag-types"
+
+
+class UserRolesStream(ServiceTitanStream):
+    """Define user roles stream."""
+
+    name = "user_roles"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "createdOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property("name", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("employeeType", th.StringType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/settings/v2/tenant/{self._tap.config['tenant_id']}/user-roles"
