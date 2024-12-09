@@ -95,7 +95,7 @@ class ServiceTitanBaseStream(RESTStream):
             str: The error message
         """
         default = super().response_error_message(response)
-        if "title" in response.json():
+        if response.content and "title" in response.json():
             title = response.json()["title"]
             return f"{default}. {title}"
         return default
