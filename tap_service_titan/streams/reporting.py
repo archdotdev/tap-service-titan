@@ -238,6 +238,6 @@ class CustomReports(ServiceTitanStream):
 
         def _backoff_from_headers(retriable_api_error) -> int:  # noqa: ANN001
             response_headers = retriable_api_error.response.headers
-            return int(math.ceil(response_headers.get("Retry-After", 0)))
+            return int(math.ceil(float(response_headers.get("Retry-After", 0))))
 
         return self.backoff_runtime(value=_backoff_from_headers)
