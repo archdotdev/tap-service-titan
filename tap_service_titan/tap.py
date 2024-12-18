@@ -100,7 +100,8 @@ class TapServiceTitan(Tap):
                             "The amount of days to lookback when running incrementally."
                             "This is used to handled retroactively updated data in "
                             "previously synced reports.",
-                        )
+                        ),
+                        default=0,
                     ),
                     th.Property(
                         "parameters",

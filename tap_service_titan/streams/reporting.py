@@ -73,7 +73,7 @@ class CustomReports(ServiceTitanStream):
             # Parse to a date and subtract the lookback window days if configured
             bookmark_dt = datetime.strptime(
                 bookmark, "%Y-%m-%dT%H:%M:%S%z"
-            ).date() - timedelta(days=self._report.get("lookback_window_days", 0))
+            ).date() - timedelta(days=self._report["lookback_window_days"])
             return max(
                 configured_date_param,
                 bookmark_dt,
