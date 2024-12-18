@@ -95,7 +95,7 @@ class TapServiceTitan(Tap):
                     ),
                     th.Property(
                         "lookback_window_days",
-                        th.StringType,
+                        th.NumberType,
                         description=(
                             "The amount of days to lookback when running incrementally."
                             "This is used to handled retroactively updated data in "
