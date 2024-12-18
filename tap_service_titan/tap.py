@@ -94,6 +94,15 @@ class TapServiceTitan(Tap):
                         description="The date parameter to use for backfilling. The report will be retrieved for each date until the current date.",  # noqa: E501
                     ),
                     th.Property(
+                        "lookback_window_days",
+                        th.StringType,
+                        description=(
+                            "The amount of days to lookback when running incrementally."
+                            "This is used to handled retroactively updated data in "
+                            "previously synced reports.",
+                        )
+                    ),
+                    th.Property(
                         "parameters",
                         th.ArrayType(
                             th.ObjectType(
