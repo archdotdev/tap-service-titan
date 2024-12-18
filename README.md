@@ -93,6 +93,26 @@ The backfill_date_parameter value must be in the parameters list.
   ]
 ```
 
+Optionally add `lookback_window_days` to define the amount of days to lookback when running incrementally.
+This is used to handled retroactively updated data in previously synced reports.
+
+```json
+  "custom_reports": [
+      {
+          "report_category": "accounting",
+          "report_name": "my_custom_accounting_report",
+          "report_id": "123",
+          "backfill_date_parameter": "AsOfDate",
+          "lookback_window_days": 30,
+          "parameters": [
+              {
+                  "name": "AsOfDate",
+                  "value": "2024-09-01"
+              }
+          ]
+      }
+  ]
+```
 ### Configure using environment variables
 
 This Singer tap will automatically import any environment variables within the working directory's

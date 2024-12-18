@@ -70,9 +70,13 @@ class CustomReports(ServiceTitanStream):
         ).date()
         bookmark = self.stream_state.get("replication_key_value")
         if bookmark:
+            # Parse to a date and subtract the lookback window days if configured
+            bookmark_dt = datetime.strptime(
+                bookmark, "%Y-%m-%dT%H:%M:%S%z"
+            ).date() - timedelta(days=self._report["lookback_window_days"])
             return max(
                 configured_date_param,
-                datetime.strptime(bookmark, "%Y-%m-%dT%H:%M:%S%z").date(),
+                bookmark_dt,
             )
         return configured_date_param
 
