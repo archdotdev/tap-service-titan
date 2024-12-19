@@ -46,6 +46,21 @@ class CustomReports(ServiceTitanStream):
         )
         self._curr_backfill_date_param: date | None = None
 
+    # This data is sorted but we use a lookback window to get overlapping historical
+    # data. This causes the sort check to fail because the bookmark gets updated to
+    # and older value than previously saved.
+    @property
+    def check_sorted(self) -> bool:
+        """Check if stream is sorted.
+
+        This setting enables additional checks which may trigger
+        `InvalidStreamSortException` if records are found which are unsorted.
+
+        Returns:
+            `True` if sorting is checked. Defaults to `True`.
+        """
+        return False
+
     @property
     def curr_backfill_date_param(self) -> date | None:
         """Get current backfill date parameter."""
