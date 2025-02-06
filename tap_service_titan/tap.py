@@ -137,7 +137,6 @@ class TapServiceTitan(Tap):
             A list of discovered streams.
         """
         streams_list = [
-            streams.accounting.EstimateItemsStream(self),
             streams.accounting.InvoiceItemsStream(self),
             streams.accounting.InvoicesStream(self),
             streams.accounting.PaymentsStream(self),
@@ -230,6 +229,7 @@ class TapServiceTitan(Tap):
             streams.pricebook.MaterialsMarkupStream(self),
             streams.pricebook.ServicesStream(self),
             streams.sales_and_estimates.EstimatesStream(self),
+            streams.sales_and_estimates.EstimateItemsStream(self),
             streams.service_agreements.ServiceAgreementsStream(self),
             streams.scheduling_pro.SchedulersStream(self),
             streams.scheduling_pro.SchedulerSessionsStream(self),
