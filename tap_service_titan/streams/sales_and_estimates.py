@@ -7,7 +7,6 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.streams import Stream
-from singer_sdk.streams.core import REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import ServiceTitanExportStream
 
@@ -97,6 +96,7 @@ class EstimatesStream(ServiceTitanExportStream):
         """Return a context dictionary for child streams."""
         return {
             "estimate_id": record["id"],
+            "items": record.get("items", []),  # Pass items directly in context
         }
 
 
@@ -106,7 +106,7 @@ class EstimateItemsStream(Stream):
     name = "estimate_items"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    replication_method = REPLICATION_INCREMENTAL
+    parent_stream_type = EstimatesStream
     state_partitioning_keys = []  # We don't need to partition state since we rely on parent's state
     
     schema = th.PropertiesList(
@@ -140,38 +140,19 @@ class EstimateItemsStream(Stream):
         th.Property("chargeable", th.BooleanType),
     ).to_dict()
 
-    def __init__(self, tap: t.Any) -> None:
-        """Initialize the estimate items stream.
-        
-        Args:
-            tap: The parent tap instance.
-        """
-        super().__init__(tap)
-        self._parent = None
-
-    @property
-    def parent_stream(self) -> EstimatesStream:
-        """Return the parent stream.
-        
-        Returns:
-            The parent estimates stream.
-        """
-        if self._parent is None:
-            self._parent = EstimatesStream(self._tap)
-        return self._parent
-
     def get_records(self, context: dict | None) -> t.Iterable[dict]:
         """Return a generator of row-type dictionary objects.
         
         Args:
-            context: The stream partition or context dictionary.
+            context: The stream partition or context dictionary containing the parent's
+                    estimate_id and items array.
         """
-        estimate_id = context["estimate_id"] if context else None
+        if not context:
+            return
+            
+        estimate_id = context["estimate_id"]
+        items = context["items"]
         
-        for estimate in self.parent_stream.get_records(context):
-            if estimate_id and estimate["id"] != estimate_id:
-                continue
-                
-            for item in estimate.get("items", []):
-                transformed_item = {**item, "estimate_id": estimate["id"]}
-                yield transformed_item
+        for item in items:
+            transformed_item = {**item, "estimate_id": estimate_id}
+            yield transformed_item
