@@ -93,7 +93,7 @@ class MembershipTypesStream(ServiceTitanExportStream):
             th.ArrayType(
                 th.ObjectType(
                     th.Property("duration", th.IntegerType, required=False),
-                    th.Property("billingFrequency", th.StringType, required=True),
+                    th.Property("billingFrequency", th.StringType, required=False),
                     additional_properties=False,
                 ),
             ),
@@ -109,6 +109,21 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property("useMembershipPricingTable", th.BooleanType),
         th.Property("showMembershipSavings", th.BooleanType),
     ).to_dict()
+
+    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
+        """Return a generator of record-type dictionary objects with coerced values.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            One item per record with string coercion only in the units section.
+        """
+        for record in super().get_records(context):
+            record["durationBilling"] = [
+                {} if item is None else item for item in record["durationBilling"]
+            ]
+            yield record
 
     @cached_property
     def path(self) -> str:
