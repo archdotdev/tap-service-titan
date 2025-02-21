@@ -25,20 +25,22 @@ class AppointmentsStream(ServiceTitanExportStream):
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
-        th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
         th.Property("jobId", th.IntegerType),
-        th.Property("appointmentNumber", th.StringType),
+        th.Property("appointmentNumber", th.StringType, required=False),
         th.Property("start", th.DateTimeType),
         th.Property("end", th.DateTimeType),
-        th.Property("arrivalWindowStart", th.DateTimeType),
-        th.Property("arrivalWindowEnd", th.DateTimeType),
+        th.Property("arrivalWindowStart", th.DateTimeType, required=False),
+        th.Property("arrivalWindowEnd", th.DateTimeType, required=False),
         th.Property("status", th.StringType),
-        th.Property("specialInstructions", th.StringType),
+        th.Property("specialInstructions", th.StringType, required=False),
         th.Property("createdOn", th.DateTimeType),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("customerId", th.IntegerType),
         th.Property("unused", th.BooleanType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("isConfirmed", th.BooleanType),
+        th.Property("active", th.BooleanType),
     ).to_dict()
 
     @cached_property
@@ -55,19 +57,18 @@ class JobsStream(ServiceTitanExportStream):
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
-        th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
         th.Property("jobNumber", th.StringType),
-        th.Property("projectId", th.IntegerType),
+        th.Property("projectId", th.IntegerType, required=False),
         th.Property("customerId", th.IntegerType),
         th.Property("locationId", th.IntegerType),
         th.Property("jobStatus", th.StringType),
-        th.Property("completedOn", th.DateTimeType),
+        th.Property("completedOn", th.DateTimeType, required=False),
         th.Property("businessUnitId", th.IntegerType),
         th.Property("jobTypeId", th.IntegerType),
         th.Property("priority", th.StringType),
         th.Property("campaignId", th.IntegerType),
-        th.Property("summary", th.StringType),
+        th.Property("summary", th.StringType, required=False),
         th.Property(
             "customFields",
             th.ArrayType(
@@ -81,14 +82,15 @@ class JobsStream(ServiceTitanExportStream):
         th.Property("appointmentCount", th.IntegerType),
         th.Property("firstAppointmentId", th.IntegerType),
         th.Property("lastAppointmentId", th.IntegerType),
-        th.Property("recallForId", th.IntegerType),
-        th.Property("warrantyId", th.IntegerType),
+        th.Property("recallForId", th.IntegerType, required=False),
+        th.Property("warrantyId", th.IntegerType, required=False),
         th.Property(
             "jobGeneratedLeadSource",
             th.ObjectType(
                 th.Property("jobId", th.IntegerType),
                 th.Property("employeeId", th.IntegerType),
             ),
+            required=False,
         ),
         th.Property("noCharge", th.BooleanType),
         th.Property("notificationsEnabled", th.BooleanType),
@@ -96,11 +98,22 @@ class JobsStream(ServiceTitanExportStream):
         th.Property("createdById", th.IntegerType),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
-        th.Property("leadCallId", th.IntegerType),
-        th.Property("bookingId", th.IntegerType),
-        th.Property("soldById", th.IntegerType),
-        th.Property("externalData", th.StringType),
+        th.Property("leadCallId", th.IntegerType, required=False),
+        th.Property("bookingId", th.IntegerType, required=False),
+        th.Property("soldById", th.IntegerType, required=False),
+        th.Property(
+            "externalData", 
+            th.ArrayType(
+                th.ObjectType(
+                    additional_properties=True
+                )
+            )
+        ),
         th.Property("customerPo", th.StringType),
+        th.Property("invoiceId", th.IntegerType),
+        th.Property("membershipId", th.IntegerType, required=False),
+        th.Property("total", th.NumberType, required=False),
+        th.Property("active", th.BooleanType),
     ).to_dict()
 
     @cached_property
@@ -162,23 +175,23 @@ class ProjectsStream(ServiceTitanExportStream):
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
-        th.Property("active", th.BooleanType),
         th.Property("id", th.IntegerType),
         th.Property("number", th.StringType),
-        th.Property("name", th.StringType),
-        th.Property("summary", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("statusId", th.IntegerType),
-        th.Property("subStatus", th.StringType),
-        th.Property("subStatusId", th.IntegerType),
+        th.Property("name", th.StringType, required=False),
+        th.Property("summary", th.StringType, required=False),
+        th.Property("status", th.StringType, required=False),
+        th.Property("statusId", th.IntegerType, required=False),
+        th.Property("subStatus", th.StringType, required=False),
+        th.Property("subStatusId", th.IntegerType, required=False),
         th.Property("customerId", th.IntegerType),
         th.Property("locationId", th.IntegerType),
+        th.Property("projectTypeId", th.IntegerType, required=False),
         th.Property("projectManagerIds", th.ArrayType(th.IntegerType)),
         th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
-        th.Property("startDate", th.DateTimeType),
-        th.Property("targetCompletionDate", th.DateTimeType),
-        th.Property("actualCompletionDate", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("startDate", th.DateTimeType, required=False),
+        th.Property("targetCompletionDate", th.DateTimeType, required=False),
+        th.Property("actualCompletionDate", th.DateTimeType, required=False),
+        th.Property("modifiedOn", th.DateTimeType, required=False),
         th.Property("createdOn", th.DateTimeType),
         th.Property(
             "customFields",
@@ -190,8 +203,16 @@ class ProjectsStream(ServiceTitanExportStream):
                 )
             ),
         ),
-        th.Property("externalData", th.StringType),
+        th.Property(
+            "externalData",
+            th.ArrayType(
+                th.ObjectType(
+                    additional_properties=True
+                )
+            ),
+        ),
         th.Property("jobIds", th.ArrayType(th.IntegerType)),
+        th.Property("active", th.BooleanType),
     ).to_dict()
 
     @cached_property
