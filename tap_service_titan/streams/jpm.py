@@ -34,8 +34,10 @@ class AppointmentsStream(ServiceTitanExportStream):
         th.Property("arrivalWindowStart", th.DateTimeType),
         th.Property("arrivalWindowEnd", th.DateTimeType),
         th.Property("status", th.StringType),
+        th.Property("confirmationStatus", th.StringType, required=False),
         th.Property("specialInstructions", th.StringType),
         th.Property("createdOn", th.DateTimeType),
+        th.Property("createdById", th.IntegerType, required=False),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("customerId", th.IntegerType),
         th.Property("unused", th.BooleanType),
@@ -68,6 +70,9 @@ class JobsStream(ServiceTitanExportStream):
         th.Property("priority", th.StringType),
         th.Property("campaignId", th.IntegerType),
         th.Property("summary", th.StringType),
+        th.Property("invoiceId", th.IntegerType, required=False),
+        th.Property("membershipId", th.IntegerType, required=False),
+        th.Property("total", th.NumberType, required=False),
         th.Property(
             "customFields",
             th.ArrayType(
@@ -175,6 +180,7 @@ class ProjectsStream(ServiceTitanExportStream):
         th.Property("locationId", th.IntegerType),
         th.Property("projectManagerIds", th.ArrayType(th.IntegerType)),
         th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
+        th.Property("projectTypeId", th.IntegerType, required=False),
         th.Property("startDate", th.DateTimeType),
         th.Property("targetCompletionDate", th.DateTimeType),
         th.Property("actualCompletionDate", th.DateTimeType),

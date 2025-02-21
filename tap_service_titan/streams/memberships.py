@@ -54,6 +54,17 @@ class MembershipsStream(ServiceTitanExportStream):
         th.Property("customerPo", th.StringType),
         th.Property("importId", th.StringType),
         th.Property("memo", th.StringType),
+        th.Property(
+            "customFields",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("typeId", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.StringType),
+                )
+            ),
+            required=False,
+        ),
     ).to_dict()
 
     @cached_property
@@ -79,6 +90,7 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property("importId", th.StringType),
         th.Property("billingTemplateId", th.IntegerType),
         th.Property("name", th.StringType),
+        th.Property("displayName", th.StringType, required=False),
         th.Property("active", th.BooleanType),
         th.Property("discountMode", th.StringType),
         th.Property("locationTarget", th.StringType),
@@ -86,6 +98,19 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property("autoCalculateInvoiceTemplates", th.BooleanType),
         th.Property("useMembershipPricingTable", th.BooleanType),
         th.Property("showMembershipSavings", th.BooleanType),
+        th.Property(
+            "durationBilling",
+            th.ArrayType(
+                th.OneOf(
+                    th.ObjectType(
+                        th.Property("duration", th.IntegerType, required=False),
+                        th.Property("billingFrequency", th.StringType, required=True),
+                        additional_properties=False,
+                    )
+                )
+            ),
+            required=False,
+        ),
     ).to_dict()
 
     @cached_property
@@ -247,3 +272,28 @@ class RecurringServiceEventsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/recurring-service-events"
+
+
+class MembershipStatusChangesStream(ServiceTitanExportStream):
+    """Define membership status changes export stream."""
+
+    name = "membership_status_changes"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("membershipId", th.IntegerType),
+        th.Property("statusFrom", th.StringType, required=False),
+        th.Property("statusTo", th.StringType, required=False),
+        th.Property("changedOn", th.DateTimeType, required=False),
+        th.Property("changedById", th.IntegerType, required=False),
+        th.Property("reason", th.StringType, required=False),
+        th.Property("createdOn", th.DateTimeType, required=False),
+        th.Property("modifiedOn", th.DateTimeType, required=False),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/membership-status-changes"
