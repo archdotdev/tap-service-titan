@@ -91,14 +91,11 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property(
             "durationBilling",
             th.ArrayType(
-                th.OneOf(
-                    None,
-                    th.ObjectType(
-                        th.Property("duration", th.IntegerType, required=False),
-                        th.Property("billingFrequency", th.StringType, required=True),
-                        additional_properties=False,
-                    ),
-                )
+                th.ObjectType(
+                    th.Property("duration", th.IntegerType, required=False),
+                    th.Property("billingFrequency", th.StringType, required=True),
+                    additional_properties=False,
+                ),
             ),
             required=False,
         ),
