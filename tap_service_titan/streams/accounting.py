@@ -1027,12 +1027,13 @@ class GLAccountsStream(ServiceTitanStream):
         th.Property("description", th.StringType, required=False),
         th.Property("type", th.StringType, required=False),
         th.Property("subtype", th.StringType, required=False),
-        th.Property("isActive", th.BooleanType, required=False),
-        th.Property("isIntacctGroup", th.BooleanType, required=False),
-        th.Property("isIntacctBankAccount", th.BooleanType, required=False),
-        th.Property("source", th.StringType, required=False),
-        th.Property("createdOn", th.DateTimeType, required=False),
-        th.Property("modifiedOn", th.DateTimeType, required=False),
+        th.Property("active", th.BooleanType),
+        th.Property("isIntacctGroup", th.BooleanType),
+        th.Property("isIntacctBankAccount", th.BooleanType),
+        th.Property("source", th.StringType),
+        th.Property("defaultAccountType", th.StringType, required=False),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
     ).to_dict()
 
     @cached_property

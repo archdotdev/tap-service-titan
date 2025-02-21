@@ -20,40 +20,40 @@ class MembershipsStream(ServiceTitanExportStream):
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
+        th.Property("createdById", th.IntegerType, required=False),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("followUpOn", th.DateTimeType),
-        th.Property("cancellationDate", th.DateTimeType),
-        th.Property("from", th.DateTimeType),
-        th.Property("nextScheduledBillDate", th.DateTimeType),
-        th.Property("to", th.DateTimeType),
+        th.Property("cancellationDate", th.DateTimeType, required=False),
+        th.Property("from", th.DateTimeType, required=False),
+        th.Property("nextScheduledBillDate", th.DateTimeType, required=False),
+        th.Property("to", th.DateTimeType, required=False),
         th.Property("billingFrequency", th.StringType),
-        th.Property("renewalBillingFrequency", th.StringType),
+        th.Property("renewalBillingFrequency", th.StringType, required=False),
         th.Property("status", th.StringType),
         th.Property("followUpStatus", th.StringType),
         th.Property("active", th.BooleanType),
         th.Property("initialDeferredRevenue", th.NumberType),
-        th.Property("duration", th.IntegerType),
-        th.Property("renewalDuration", th.IntegerType),
+        th.Property("duration", th.IntegerType, required=False),
+        th.Property("renewalDuration", th.IntegerType, required=False),
         th.Property("businessUnitId", th.IntegerType),
         th.Property("customerId", th.IntegerType),
         th.Property("membershipTypeId", th.IntegerType),
-        th.Property("activatedById", th.IntegerType),
-        th.Property("activatedFromId", th.IntegerType),
-        th.Property("billingTemplateId", th.IntegerType),
-        th.Property("cancellationBalanceInvoiceId", th.IntegerType),
-        th.Property("cancellationInvoiceId", th.IntegerType),
-        th.Property("followUpCustomStatusId", th.IntegerType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("paymentMethodId", th.IntegerType),
-        th.Property("paymentTypeId", th.IntegerType),
-        th.Property("recurringLocationId", th.IntegerType),
-        th.Property("renewalMembershipTaskId", th.IntegerType),
-        th.Property("renewedById", th.IntegerType),
-        th.Property("soldById", th.IntegerType),
-        th.Property("customerPo", th.StringType),
-        th.Property("importId", th.StringType),
-        th.Property("memo", th.StringType),
+        th.Property("activatedById", th.IntegerType, required=False),
+        th.Property("activatedFromId", th.IntegerType, required=False),
+        th.Property("billingTemplateId", th.IntegerType, required=False),
+        th.Property("cancellationBalanceInvoiceId", th.IntegerType, required=False),
+        th.Property("cancellationInvoiceId", th.IntegerType, required=False),
+        th.Property("followUpCustomStatusId", th.IntegerType, required=False),
+        th.Property("locationId", th.IntegerType, required=False),
+        th.Property("paymentMethodId", th.IntegerType, required=False),
+        th.Property("paymentTypeId", th.IntegerType, required=False),
+        th.Property("recurringLocationId", th.IntegerType, required=False),
+        th.Property("renewalMembershipTaskId", th.IntegerType, required=False),
+        th.Property("renewedById", th.IntegerType, required=False),
+        th.Property("soldById", th.IntegerType, required=False),
+        th.Property("customerPo", th.StringType, required=False),
+        th.Property("importId", th.StringType, required=False),
+        th.Property("memo", th.StringType, required=False),
         th.Property(
             "customFields",
             th.ArrayType(
@@ -63,7 +63,6 @@ class MembershipsStream(ServiceTitanExportStream):
                     th.Property("value", th.StringType),
                 )
             ),
-            required=False,
         ),
     ).to_dict()
 
@@ -85,10 +84,24 @@ class MembershipTypesStream(ServiceTitanExportStream):
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
+        th.Property("createdById", th.IntegerType, required=False),
         th.Property("modifiedOn", th.DateTimeType),
-        th.Property("importId", th.StringType),
-        th.Property("billingTemplateId", th.IntegerType),
+        th.Property("importId", th.StringType, required=False),
+        th.Property("billingTemplateId", th.IntegerType, required=False),
+        th.Property(
+            "durationBilling",
+            th.ArrayType(
+                th.OneOf(
+                    None,
+                    th.ObjectType(
+                        th.Property("duration", th.IntegerType, required=False),
+                        th.Property("billingFrequency", th.StringType, required=True),
+                        additional_properties=False,
+                    ),
+                )
+            ),
+            required=False,
+        ),
         th.Property("name", th.StringType),
         th.Property("displayName", th.StringType, required=False),
         th.Property("active", th.BooleanType),
@@ -98,19 +111,6 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property("autoCalculateInvoiceTemplates", th.BooleanType),
         th.Property("useMembershipPricingTable", th.BooleanType),
         th.Property("showMembershipSavings", th.BooleanType),
-        th.Property(
-            "durationBilling",
-            th.ArrayType(
-                th.OneOf(
-                    th.ObjectType(
-                        th.Property("duration", th.IntegerType, required=False),
-                        th.Property("billingFrequency", th.StringType, required=True),
-                        additional_properties=False,
-                    )
-                )
-            ),
-            required=False,
-        ),
     ).to_dict()
 
     @cached_property
@@ -283,14 +283,12 @@ class MembershipStatusChangesStream(ServiceTitanExportStream):
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
+        th.Property("oldStatus", th.StringType),
+        th.Property("newStatus", th.StringType),
+        th.Property("note", th.StringType, required=False),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("createdById", th.IntegerType, required=False),
         th.Property("membershipId", th.IntegerType),
-        th.Property("statusFrom", th.StringType, required=False),
-        th.Property("statusTo", th.StringType, required=False),
-        th.Property("changedOn", th.DateTimeType, required=False),
-        th.Property("changedById", th.IntegerType, required=False),
-        th.Property("reason", th.StringType, required=False),
-        th.Property("createdOn", th.DateTimeType, required=False),
-        th.Property("modifiedOn", th.DateTimeType, required=False),
     ).to_dict()
 
     @cached_property
