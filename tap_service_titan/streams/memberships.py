@@ -276,7 +276,7 @@ class MembershipStatusChangesStream(ServiceTitanExportStream):
 
     name = "membership_status_changes"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    replication_key: str = "modifiedOn"
+    replication_key: str = "createdOn"
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
