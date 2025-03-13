@@ -49,6 +49,31 @@ class TapServiceTitan(Tap):
             description="Tenant ID to pull records for.",
         ),
         th.Property(
+            "internal_api_url",
+            th.StringType,
+            description="The url for the ServiceTitan API",
+        ),
+        th.Property(
+            "internal_login_url",
+            th.StringType,
+            description="The url for the ServiceTitan login API",
+        ),
+        th.Property(
+            "internal_username",
+            th.StringType,
+            description="The username for the Internal ServiceTitan login API",
+        ),
+        th.Property(
+            "internal_password",
+            th.StringType,
+            description="The password for the Internal ServiceTitan login API",
+        ),
+        th.Property(
+            "internal_cookie_set_url",
+            th.StringType,
+            description="The url for the ServiceTitan cookie set API, example https://enterprise-hub-eh-proxy-go.servicetitan.com/api/v1/account/set-cookie-for/3984754118/?tenant=handyman_vertex-99510&redirectUrl=https://handyman_vertex-99510.eh.go.servicetitan.com",
+        ),
+        th.Property(
             "api_url",
             th.StringType,
             default="https://api-integration.servicetitan.io",
@@ -243,6 +268,8 @@ class TapServiceTitan(Tap):
             streams.task_management.TasksStream(self),
             streams.telecom.CallsStream(self),
             streams.telecom.OptOutsStream(self),
+            streams.crm.CustomerAttachmentsStream(self),
+            streams.crm.CustomerImageAttachmentsStream(self),
         ]
         custom_reports_config = self.config.get("custom_reports", [])
         if custom_reports_config:
