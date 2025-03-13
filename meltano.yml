@@ -32,13 +32,30 @@ plugins:
       kind: string
     - name: auth_url
       kind: string
+    - name: internal_api_url
+      kind: string
+    - name: internal_login_url
+      kind: string
+    - name: internal_cookie_set_url
+      kind: string
+    - name: internal_username
+      kind: string
+    - name: internal_password
+      kind: string
+      sensitive: true
     config:
-      api_url: https://api-integration.servicetitan.io
-      auth_url: https://auth-integration.servicetitan.io/connect/token
+      api_url: https://api.servicetitan.io
+      auth_url: https://auth.servicetitan.io/connect/token
+      internal_api_url: https://handyman_vertex-99510.eh.go.servicetitan.com
+      internal_login_url: https://enterprise-hub.servicetitan.com/Home/login
+      internal_username: dvisch@autoidm.com
+      internal_cookie_set_url: https://enterprise-hub-eh-proxy-go.servicetitan.com/api/v1/account/set-cookie-for/3984754118/?tenant=handyman_vertex-99510&redirectUrl=https://handyman_vertex-99510.eh.go.servicetitan.com
     select:
-    - '*.*'
-    - '!job_history.*'
-    - '!capacities.*'
+#    - 'customers.*'
+#    - 'customer_attachment.*'
+    - 'customer_image_attachment.*'
+    #- '!job_history.*'
+    #- '!capacities.*'
   loaders:
   - name: target-jsonl
     variant: andyh1203
