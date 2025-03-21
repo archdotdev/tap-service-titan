@@ -57,7 +57,21 @@ class PricebookCategoriesStream(ServiceTitanStream):
         th.Property(
             "subcategories",
             th.ArrayType(
-                th.ObjectType()  # Recursive definition, but left empty as details not specified
+                th.ObjectType(
+                    th.Property("id", th.IntegerType),
+                    th.Property("name", th.StringType),
+                    th.Property("active", th.BooleanType),
+                    th.Property("description", th.StringType),
+                    th.Property("image", th.StringType),
+                    th.Property("parentId", th.IntegerType),
+                    th.Property("position", th.IntegerType),
+                    th.Property("categoryType", th.StringType),
+                    th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
+                    th.Property("skuImages", th.ArrayType(th.StringType)),
+                    th.Property("skuVideos", th.ArrayType(th.StringType)),
+                    th.Property("source", th.StringType),
+                    th.Property("externalId", th.StringType),
+                )
             ),
         ),
         th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
