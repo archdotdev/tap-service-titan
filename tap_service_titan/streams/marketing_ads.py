@@ -154,7 +154,7 @@ class PerformanceStream(ServiceTitanStream):
                 th.Property("name", th.StringType),
                 th.Property("category", th.StringType),
                 th.Property("launchDate", th.StringType),
-                th.Property("status", th.StringType),
+                th.Property("status", th.IntegerType),
             ),
         ),
         th.Property(
