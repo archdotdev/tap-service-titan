@@ -162,7 +162,7 @@ class PerformanceStream(ServiceTitanStream):
             th.ObjectType(
                 th.Property("id", th.StringType),
                 th.Property("name", th.StringType),
-                th.Property("status", th.StringType),
+                th.Property("status", th.IntegerType),
             ),
         ),
         th.Property(
@@ -170,7 +170,7 @@ class PerformanceStream(ServiceTitanStream):
             th.ObjectType(
                 th.Property("id", th.StringType),
                 th.Property("name", th.StringType),
-                th.Property("status", th.StringType),
+                th.Property("status", th.IntegerType),
             ),
         ),
         th.Property(
