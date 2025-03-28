@@ -13,6 +13,8 @@ from tap_service_titan.client import (
     ServiceTitanStream,
 )
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers import types
 
 class AttributedLeadsStream(ServiceTitanStream):
     """Define attributed leads stream."""
@@ -141,12 +143,15 @@ class PerformanceStream(ServiceTitanStream):
     """Define marketing performance stream."""
 
     name = "performance"
-    primary_keys: t.ClassVar[list[str]] = ["campaign.name", "adGroup.id", "keyword.id"]
+    primary_keys: t.ClassVar[list[str]] = ["campaign_name", "adGroup_id", "keyword_id"]
     replication_key: str = "to_utc"
 
     schema = th.PropertiesList(
         th.Property("from_utc", th.DateTimeType),
         th.Property("to_utc", th.DateTimeType),
+        th.Property("campaign_name", th.StringType),
+        th.Property("adGroup_id", th.StringType),
+        th.Property("keyword_id", th.StringType),
         th.Property(
             "campaign",
             th.ObjectType(
@@ -215,6 +220,25 @@ class PerformanceStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/performance"
+
+    def post_process(
+        self,
+        row: types.Record,
+        context: types.Context | None = None,  # noqa: ARG002
+    ) -> dict | None:
+        """Process the record to add top-level IDs.
+
+        Args:
+            row: Individual record in the stream.
+            context: Stream partition or context dictionary.
+
+        Returns:
+            The resulting record dict, or `None` if the record should be excluded.
+        """
+        row["campaign_name"] = row.get("campaign", {}).get("name")
+        row["adGroup_id"] = row.get("adGroup", {}).get("id")
+        row["keyword_id"] = row.get("keyword", {}).get("id")
+        return row
 
     def get_url_params(
         self,
