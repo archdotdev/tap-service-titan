@@ -93,7 +93,9 @@ class SubmissionsStream(ServiceTitanStream):
                                 ),
                                 th.Property("value", th.StringType),
                                 th.Property("options", th.StringType),
-                                th.Property("values", th.ArrayType(th.StringType)),
+                                th.Property("values", th.ArrayType(
+                                    th.CustomType({"type": ["string", "null"]})
+                                )),
                                 th.Property("isRefused", th.BooleanType),
                                 th.Property("refusalReason", th.StringType),
                             )
