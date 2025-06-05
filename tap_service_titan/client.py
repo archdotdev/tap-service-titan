@@ -95,9 +95,16 @@ class ServiceTitanBaseStream(RESTStream):
             str: The error message
         """
         default = super().response_error_message(response)
-        if response.content and "title" in response.json():
-            title = response.json()["title"]
-            return f"{default}. {title}"
+        if response.content:
+            try:
+                json_response = response.json()
+                if "title" in json_response:
+                    title = json_response["title"]
+                    return f"{default}. {title}"
+            except (requests.exceptions.JSONDecodeError, ValueError):
+                # Response content is not valid JSON - log the full content
+                # This helps debug unexpected responses (e.g., HTML error pages)
+                return f"{default}. Response body: {response.text}"
         return default
 
 
