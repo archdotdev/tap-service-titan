@@ -9,6 +9,7 @@ from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import (
     ServiceTitanStream,
+    ServiceTitanExportStream,
 )
 
 
@@ -538,3 +539,115 @@ class ServicesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/services"
+
+
+class ExportEquipmentStream(ServiceTitanExportStream):
+    """Define export equipment stream."""
+
+    name = "export_equipment"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("code", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("cost", th.NumberType),
+        th.Property("price", th.NumberType),
+        th.Property("memberPrice", th.NumberType),
+        th.Property("addOnPrice", th.NumberType),
+        th.Property("addOnMemberPrice", th.NumberType),
+        th.Property("active", th.BooleanType),
+        th.Property("manufacturer", th.StringType),
+        th.Property("manufacturerPartNumber", th.StringType),
+        th.Property("vendorPartNumber", th.StringType),
+        th.Property("vendor", th.StringType),
+        th.Property("unitOfMeasure", th.StringType),
+        th.Property("pricebookId", th.IntegerType),
+        th.Property("account", th.StringType),
+        th.Property("categories", th.ArrayType(th.StringType)),
+        th.Property("primaryVendor", th.StringType),
+        th.Property("sources", th.ArrayType(th.StringType)),
+        th.Property("model", th.StringType),
+        th.Property("serialNumber", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("equipmentType", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/equipment"
+
+
+class ExportMaterialsStream(ServiceTitanExportStream):
+    """Define export materials stream."""
+
+    name = "export_materials"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("code", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("cost", th.NumberType),
+        th.Property("price", th.NumberType),
+        th.Property("memberPrice", th.NumberType),
+        th.Property("addOnPrice", th.NumberType),
+        th.Property("addOnMemberPrice", th.NumberType),
+        th.Property("active", th.BooleanType),
+        th.Property("manufacturer", th.StringType),
+        th.Property("manufacturerPartNumber", th.StringType),
+        th.Property("vendorPartNumber", th.StringType),
+        th.Property("vendor", th.StringType),
+        th.Property("unitOfMeasure", th.StringType),
+        th.Property("pricebookId", th.IntegerType),
+        th.Property("account", th.StringType),
+        th.Property("categories", th.ArrayType(th.StringType)),
+        th.Property("primaryVendor", th.StringType),
+        th.Property("sources", th.ArrayType(th.StringType)),
+        th.Property("description", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/materials"
+
+
+class ExportServicesStream(ServiceTitanExportStream):
+    """Define export services stream."""
+
+    name = "export_services"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("code", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("price", th.NumberType),
+        th.Property("memberPrice", th.NumberType),
+        th.Property("addOnPrice", th.NumberType),
+        th.Property("addOnMemberPrice", th.NumberType),
+        th.Property("active", th.BooleanType),
+        th.Property("pricebookId", th.IntegerType),
+        th.Property("account", th.StringType),
+        th.Property("categories", th.ArrayType(th.StringType)),
+        th.Property("taxable", th.BooleanType),
+        th.Property("warranty", th.BooleanType),
+        th.Property("serviceGroup", th.StringType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/services"

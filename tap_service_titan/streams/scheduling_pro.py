@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import typing as t
 from functools import cached_property
+from typing import Optional
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
@@ -109,3 +110,49 @@ class SchedulerSessionsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/schedulingpro/v2/tenant/{self._tap.config['tenant_id']}/schedulers/{'{scheduler_id}'}/sessions"
+
+
+class SchedulerPerformanceStream(ServiceTitanStream):
+    """Define scheduler performance stream."""
+
+    name = "scheduler_performance"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    parent_stream_type = SchedulersStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("schedulerName", th.StringType),
+        th.Property("totalSessions", th.IntegerType),
+        th.Property("completedSessions", th.IntegerType),
+        th.Property("bookedSessions", th.IntegerType),
+        th.Property("abandonedSessions", th.IntegerType),
+        th.Property("completionRate", th.NumberType),
+        th.Property("bookingRate", th.NumberType),
+        th.Property("abandonmentRate", th.NumberType),
+        th.Property(
+            "funnelMetrics",
+            th.ObjectType(
+                th.Property("landingPageViews", th.IntegerType),
+                th.Property("customerInfoStarts", th.IntegerType),
+                th.Property("customerInfoCompletes", th.IntegerType),
+                th.Property("timeslotSelections", th.IntegerType),
+                th.Property("confirmationViews", th.IntegerType),
+                th.Property("bookingCompletes", th.IntegerType),
+            )
+        ),
+        th.Property(
+            "averageSessionDuration",
+            th.ObjectType(
+                th.Property("minutes", th.IntegerType),
+                th.Property("seconds", th.IntegerType),
+            )
+        ),
+        th.Property("dateRangeStart", th.DateTimeType),
+        th.Property("dateRangeEnd", th.DateTimeType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/schedulingpro/v2/tenant/{self._tap.config['tenant_id']}/schedulers/{'{scheduler_id}'}/performance"

@@ -387,3 +387,55 @@ class LocationContactsStream(ServiceTitanExportStream):
         return (
             f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations/contacts"
         )
+
+
+class LocationsCustomFieldsStream(ServiceTitanStream):
+    """Define locations custom fields stream."""
+
+    name = "locations_custom_fields"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("dataType", th.StringType),
+        th.Property("required", th.BooleanType),
+        th.Property("enabled", th.BooleanType),
+        th.Property("allowOnBulkUpdate", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations/custom-fields"
+
+
+class CustomersCustomFieldsStream(ServiceTitanStream):
+    """Define customers custom fields stream."""
+
+    name = "customers_custom_fields"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("dataType", th.StringType),
+        th.Property("required", th.BooleanType),
+        th.Property("enabled", th.BooleanType),
+        th.Property("allowOnBulkUpdate", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers/custom-fields"

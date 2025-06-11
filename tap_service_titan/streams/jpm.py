@@ -114,6 +114,11 @@ class JobsStream(ServiceTitanExportStream):
         th.Property("membershipId", th.IntegerType, required=False),
         th.Property("total", th.NumberType, required=False),
         th.Property("active", th.BooleanType),
+        th.Property("duration", th.NumberType),
+        th.Property("end", th.DateTimeType),
+        th.Property("planEnd", th.DateTimeType),
+        th.Property("planStart", th.DateTimeType),
+        th.Property("start", th.DateTimeType),
     ).to_dict()
 
     @cached_property
@@ -433,3 +438,78 @@ class ProjectTypesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-types"
+
+
+class JobBookedLogStream(ServiceTitanStream):
+    """Define job booked log stream."""
+
+    name = "job_booked_log"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    parent_stream_type = JobsStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property(
+            "job", 
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+            )
+        ),
+        th.Property("start", th.DateTimeType),
+        th.Property("arrivalWindowStart", th.DateTimeType),
+        th.Property("arrivalWindowEnd", th.DateTimeType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("createdBy", th.IntegerType),
+        th.Property("active", th.BooleanType),
+        th.Property(
+            "appointment",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+            )
+        ),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/booked-log"
+
+
+class JobCanceledLogStream(ServiceTitanStream):
+    """Define job canceled log stream."""
+
+    name = "job_canceled_log"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    parent_stream_type = JobsStream
+    ignore_parent_replication_key = True
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property(
+            "job",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+            )
+        ),
+        th.Property(
+            "reason",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+            )
+        ),
+        th.Property("memo", th.StringType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property(
+            "createdBy",
+            th.ObjectType(
+                th.Property("id", th.IntegerType),
+            )
+        ),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/canceled-log"
