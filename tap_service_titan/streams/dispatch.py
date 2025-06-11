@@ -87,10 +87,7 @@ class CapacitiesStream(ServiceTitanStream):
         ):
             # We're only looking to get technician availabilities here
             for unused_key in [
-                "totalAvailability",
-                "openAvailability",
                 "isAvailable",
-                "isExceedingIdealBookingPercentage",
             ]:
                 availability_dict.pop(unused_key)
             for technician in availability_dict.pop("technicians"):
