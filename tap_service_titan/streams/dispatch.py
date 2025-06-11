@@ -58,12 +58,12 @@ class CapacitiesStream(ServiceTitanStream):
         th.Property("technician_hasRequiredSkills", th.BooleanType),
         th.Property(
             "totalAvailability",
-            th.NumberType,  # TODO: Use SingerDecimalType for . Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
+            th.NumberType,  # TODO: Use SingerDecimalType. Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
             description="Number of hours that total capacity can allow to be booked during this time frame",  # noqa: E501
         ),
         th.Property(
             "openAvailability",
-            th.NumberType,  # TODO: Use SingerDecimalType for . Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
+            th.NumberType,  # TODO: Use SingerDecimalType. Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
             description="Number of remaining hours that can be booked during this time frame",  # noqa: E501
         ),
         th.Property(
