@@ -56,6 +56,21 @@ class CapacitiesStream(ServiceTitanStream):
         th.Property("technician_name", th.StringType),
         th.Property("technician_status", th.StringType),
         th.Property("technician_hasRequiredSkills", th.BooleanType),
+        th.Property(
+            "totalAvailability",
+            th.NumberType,  # TODO: Use SingerDecimalType. Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
+            description="Number of hours that total capacity can allow to be booked during this time frame",  # noqa: E501
+        ),
+        th.Property(
+            "openAvailability",
+            th.NumberType,  # TODO: Use SingerDecimalType. Requires SDK 0.45.0+.  # noqa: E501, FIX002, TD002, TD003
+            description="Number of remaining hours that can be booked during this time frame",  # noqa: E501
+        ),
+        th.Property(
+            "isExceedingIdealBookingPercentage",
+            th.BooleanType,
+            description="Indicate if Ideal Booking Percentage is exceeded",
+        ),
     ).to_dict()
 
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
@@ -72,10 +87,7 @@ class CapacitiesStream(ServiceTitanStream):
         ):
             # We're only looking to get technician availabilities here
             for unused_key in [
-                "totalAvailability",
-                "openAvailability",
                 "isAvailable",
-                "isExceedingIdealBookingPercentage",
             ]:
                 availability_dict.pop(unused_key)
             for technician in availability_dict.pop("technicians"):
