@@ -219,6 +219,12 @@ class InvoicesStream(ServiceTitanExportStream):
             ),
         ),
         th.Property("active", th.BooleanType),
+        th.Property("discountTotal", th.StringType),
+        th.Property("importId", th.StringType),
+        th.Property("exportId", th.StringType),
+        th.Property("materialSkuId", th.IntegerType),
+        th.Property("membershipId", th.IntegerType),
+        th.Property("paidOn", th.DateTimeType),
     ).to_dict()
 
     @cached_property
@@ -300,6 +306,15 @@ class InvoiceItemsStream(ServiceTitanExportStream):
         ),
         th.Property("active", th.BooleanType),
         th.Property("invoiceId", th.IntegerType),
+        th.Property("createdById", th.IntegerType),
+        th.Property("displayInAmount", th.NumberType),
+        th.Property("importId", th.StringType),
+        th.Property("exportId", th.StringType),
+        th.Property("inventoryStatus", th.StringType),
+        th.Property("isAddOn", th.BooleanType),
+        th.Property("memberPrice", th.StringType),
+        th.Property("technicianId", th.IntegerType),
+        th.Property("installedEquipmentId", th.IntegerType),
     ).to_dict()
 
     @cached_property
@@ -824,6 +839,10 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
             ),
         ),
         th.Property("url", th.StringType),
+        th.Property("syncStatus", th.StringType),
+        th.Property("versionId", th.StringType),
+        th.Property("lastSyncVersionId", th.StringType),
+        th.Property("message", th.StringType),
     ).to_dict()
 
     def get_url_params(
@@ -1011,6 +1030,32 @@ class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{'{journal_entry_id}'}/details"
+
+
+class InventoryBillsCustomFieldsStream(ServiceTitanStream):
+    """Define inventory bills custom fields stream."""
+
+    name = "inventory_bills_custom_fields"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key: str = "modifiedOn"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("displayName", th.StringType),
+        th.Property("dataType", th.StringType),
+        th.Property("required", th.BooleanType),
+        th.Property("enabled", th.BooleanType),
+        th.Property("allowOnBulkUpdate", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+        th.Property("active", th.BooleanType),
+    ).to_dict()
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/inventory-bills/custom-fields"
 
 
 class GLAccountsStream(ServiceTitanStream):
