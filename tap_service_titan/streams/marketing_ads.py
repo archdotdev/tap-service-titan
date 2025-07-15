@@ -236,8 +236,12 @@ class _PerformanceStream(ServiceTitanStream):
 
     def _get_effective_start_date(self, context: Context | None = None) -> datetime:
         """Get the effective start date for the current context."""
-        start_date = self.get_starting_timestamp(context)
-        return start_date if start_date is not None else self._get_default_start_date()
+        if start_date := self.get_starting_timestamp(context):
+            effective_start_date = start_date
+        else:
+            effective_start_date = self._get_default_start_date()
+
+        return effective_start_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
     @cached_property
     def path(self) -> str:
