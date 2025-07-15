@@ -7,7 +7,6 @@ from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.exceptions import FatalAPIError
 from singer_sdk.helpers.types import Context  # noqa: TC002
 
 from tap_service_titan.client import (
@@ -220,12 +219,21 @@ class PerformanceStream(ServiceTitanStream):
         super().__init__(*args, **kwargs)
         self.end_time = datetime.now(timezone.utc)
         self.interval = timedelta(days=1)
+        self._paginator: DateRangePaginator | None = None
+
+    @property
+    def paginator(self) -> DateRangePaginator:
+        """Get the paginator for the stream."""
+        if self._paginator is None:
+            msg = "Paginator not initialized"
+            raise RuntimeError(msg)
+        return self._paginator
 
     def _get_default_start_date(self) -> datetime:
         """Get default start date when none is provided."""
         return datetime.now(timezone.utc) - timedelta(days=30)
 
-    def _get_effective_start_date(self, context: dict | None = None) -> datetime:
+    def _get_effective_start_date(self, context: Context | None = None) -> datetime:
         """Get the effective start date for the current context."""
         start_date = self.get_starting_timestamp(context)
         return start_date if start_date is not None else self._get_default_start_date()
@@ -256,13 +264,14 @@ class PerformanceStream(ServiceTitanStream):
 
     def get_new_paginator(self) -> DateRangePaginator:
         """Create a new pagination helper instance for date ranges."""
-        start_date = self._get_effective_start_date()
-        return DateRangePaginator(start_date, self.interval, self.end_time)
+        start_date = self._get_effective_start_date(self.context)
+        self._paginator = DateRangePaginator(start_date, self.interval, self.end_time)
+        return self._paginator
 
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
+        context: Context | None,  # noqa: ARG002
+        next_page_token: DateRange | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -276,17 +285,12 @@ class PerformanceStream(ServiceTitanStream):
         """
         params: dict = {}
 
-        if next_page_token is not None:
-            # next_page_token is a DateRange object
-            params["fromUtc"] = next_page_token.start.isoformat()
-            params["toUtc"] = next_page_token.end.isoformat()
-        else:
-            # First request
-            start_date = self._get_effective_start_date(context)
-            end_date = min(start_date + self.interval, self.end_time)
-            params["fromUtc"] = start_date.isoformat()
-            params["toUtc"] = end_date.isoformat()
+        if next_page_token is None:
+            msg = "Paginator not initialized"
+            raise RuntimeError(msg)
 
+        params["fromUtc"] = next_page_token.start.isoformat()
+        params["toUtc"] = next_page_token.end.isoformat()
         return params
 
     def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
@@ -299,12 +303,8 @@ class PerformanceStream(ServiceTitanStream):
             One item per record with string coercion only in the units section.
         """
         for record in super().get_records(context):
-            # Create a fresh DateRange for the current request
-            start_date = self._get_effective_start_date(context)
-            current_range = DateRange(start_date, self.interval, self.end_time)
-
-            record["from_utc"] = current_range.start.isoformat()
-            record["to_utc"] = current_range.end.isoformat()
+            record["from_utc"] = self.paginator.current_value.start
+            record["to_utc"] = self.paginator.current_value.end
             yield record
 
 

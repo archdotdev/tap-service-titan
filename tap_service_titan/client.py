@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import cached_property
 from typing import Any, Callable, Iterable
@@ -25,27 +26,20 @@ else:
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 
 
+@dataclass
 class DateRange:
     """Represents a date range for pagination."""
 
-    def __init__(self, start: datetime, interval: timedelta, max_date: datetime):
-        """Initialize DateRange.
-
-        Args:
-            start: Start date of the range
-            interval: Time interval for each range
-            max_date: Maximum allowed date
-        """
-        self.start = start
-        self.interval = interval
-        self.max_date = max_date
+    start: datetime
+    interval: timedelta
+    max_date: datetime
 
     @property
     def end(self) -> datetime:
         """Calculate the end date of the current range."""
         return self.start + self.interval
 
-    def increase(self) -> "DateRange":
+    def increase(self) -> DateRange:
         """Create a new DateRange with the next interval."""
         return DateRange(self.end, self.interval, self.max_date)
 
@@ -54,7 +48,7 @@ class DateRange:
         return self.start < self.max_date
 
 
-class DateRangePaginator(BaseAPIPaginator):
+class DateRangePaginator(BaseAPIPaginator[DateRange]):
     """Paginator that uses date ranges for pagination."""
 
     def __init__(self, start_date: datetime, interval: timedelta, max_date: datetime):
