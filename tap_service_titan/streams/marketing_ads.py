@@ -3,24 +3,28 @@
 from __future__ import annotations
 
 import typing as t
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers.types import Context  # noqa: TCH002
+from singer_sdk.exceptions import FatalAPIError
+from singer_sdk.helpers.types import Context  # noqa: TC002
 
 from tap_service_titan.client import (
+    DateRange,
+    DateRangePaginator,
     ServiceTitanStream,
 )
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers import types
 
+
 class AttributedLeadsStream(ServiceTitanStream):
     """Define attributed leads stream."""
 
     name = "attributed_leads"
-    primary_keys: t.ClassVar[list[str]] = ["dateTime"]
+    primary_keys: tuple[str] = ("dateTime",)
     replication_key: str = "dateTime"
 
     schema = th.PropertiesList(
@@ -121,7 +125,7 @@ class CapacityWarningsStream(ServiceTitanStream):
     """Define capacity warnings stream."""
 
     name = "capacity_warnings"
-    primary_keys: t.ClassVar[list[str]] = ["campaignName", "warningType"]
+    primary_keys: tuple[str, str] = ("campaignName", "warningType")
 
     schema = th.PropertiesList(
         th.Property("campaignName", th.StringType),
@@ -143,8 +147,8 @@ class PerformanceStream(ServiceTitanStream):
     """Define marketing performance stream."""
 
     name = "performance"
-    primary_keys: t.ClassVar[list[str]] = ["campaign_name", "adGroup_id", "keyword_id"]
-    replication_key: str = "to_utc"
+    primary_keys: tuple[str, str, str] = ("campaign_name", "adGroup_id", "keyword_id")
+    replication_key: str = "from_utc"
 
     schema = th.PropertiesList(
         th.Property("from_utc", th.DateTimeType),
@@ -214,7 +218,7 @@ class PerformanceStream(ServiceTitanStream):
     def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
         """Add report end time for consistency."""
         super().__init__(*args, **kwargs)
-        self.end_time = datetime.now(timezone.utc).isoformat()
+        self.end_time = datetime.now(timezone.utc)
 
     @cached_property
     def path(self) -> str:
@@ -235,10 +239,24 @@ class PerformanceStream(ServiceTitanStream):
         Returns:
             The resulting record dict, or `None` if the record should be excluded.
         """
-        row["campaign_name"] = row.get("campaign", {}).get("name")
-        row["adGroup_id"] = row.get("adGroup", {}).get("id")
-        row["keyword_id"] = row.get("keyword", {}).get("id")
+        try:
+            row["campaign_name"] = row["campaign"]["name"]
+            row["adGroup_id"] = row["adGroup"]["id"]
+            row["keyword_id"] = row["keyword"]["id"]
+        except KeyError as e:
+            msg = f"Missing primary keys for record: {row}"
+            raise FatalAPIError(msg) from e
         return row
+
+    def get_new_paginator(self) -> DateRangePaginator:
+        """Create a new pagination helper instance for date ranges."""
+        start_date = self.get_starting_timestamp(None)
+        if start_date is None:
+            start_date = datetime.now(timezone.utc) - timedelta(days=30)
+
+        # Use 1-day intervals for performance data
+        interval = timedelta(days=1)
+        return DateRangePaginator(start_date, interval, self.end_time)
 
     def get_url_params(
         self,
@@ -249,16 +267,29 @@ class PerformanceStream(ServiceTitanStream):
 
         Args:
             context: The stream context.
-            next_page_token: The next page index or value.
+            next_page_token: The next page index or value (DateRange object).
 
 
         Returns:
             A dictionary of URL query parameters.
         """
-        params: dict = super().get_url_params(context, next_page_token)
+        params: dict = {}
 
-        params["fromUtc"] = self.get_starting_timestamp(context)
-        params["toUtc"] = self.end_time
+        if next_page_token is not None:
+            # next_page_token is a DateRange object
+            params["fromUtc"] = next_page_token.start.isoformat()
+            params["toUtc"] = next_page_token.end.isoformat()
+        else:
+            # First request
+            start_date = self.get_starting_timestamp(context)
+            if start_date is None:
+                start_date = datetime.now(timezone.utc) - timedelta(days=30)
+
+            # Calculate end date based on interval
+            end_date = min(start_date + timedelta(days=1), self.end_time)
+            params["fromUtc"] = start_date.isoformat()
+            params["toUtc"] = end_date.isoformat()
+
         return params
 
     def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
@@ -271,8 +302,16 @@ class PerformanceStream(ServiceTitanStream):
             One item per record with string coercion only in the units section.
         """
         for record in super().get_records(context):
-            record["from_utc"] = self.get_starting_timestamp(context)
-            record["to_utc"] = self.end_time
+            # Create a fresh DateRange for the current request
+            start_date = self.get_starting_timestamp(context)
+            if start_date is None:
+                start_date = datetime.now(timezone.utc) - timedelta(days=30)
+
+            interval = timedelta(days=1)
+            current_range = DateRange(start_date, interval, self.end_time)
+
+            record["from_utc"] = current_range.start.isoformat()
+            record["to_utc"] = current_range.end.isoformat()
             yield record
 
 
