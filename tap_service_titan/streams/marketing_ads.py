@@ -249,13 +249,9 @@ class PerformanceStream(ServiceTitanStream):
         Returns:
             The resulting record dict, or `None` if the record should be excluded.
         """
-        try:
-            row["campaign_name"] = row["campaign"]["name"]
-            row["adGroup_id"] = row["adGroup"]["id"]
-            row["keyword_id"] = row["keyword"]["id"]
-        except KeyError as e:
-            msg = f"Missing primary keys for record: {row}"
-            raise FatalAPIError(msg) from e
+        row["campaign_name"] = row.get("campaign", {}).get("name")
+        row["adGroup_id"] = row.get("adGroup", {}).get("id")
+        row["keyword_id"] = row.get("keyword", {}).get("id")
         return row
 
     def get_new_paginator(self) -> DateRangePaginator:
