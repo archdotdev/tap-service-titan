@@ -142,14 +142,15 @@ class CapacityWarningsStream(ServiceTitanStream):
         )
 
 
-class PerformanceStream(ServiceTitanStream):
+class _PerformanceStream(ServiceTitanStream):
     """Define marketing performance stream."""
 
     name = "performance"
-    primary_keys: tuple[str, str, str] = ("campaign_name", "adGroup_id", "keyword_id")
+    primary_keys: tuple[str, ...] = ()
     replication_key: str = "from_utc"
 
     schema = th.PropertiesList(
+        th.Property("date", th.DateType),
         th.Property("from_utc", th.DateTimeType),
         th.Property("to_utc", th.DateTimeType),
         th.Property("campaign_name", th.StringType),
@@ -260,6 +261,9 @@ class PerformanceStream(ServiceTitanStream):
         row["campaign_name"] = row.get("campaign", {}).get("name")
         row["adGroup_id"] = row.get("adGroup", {}).get("id")
         row["keyword_id"] = row.get("keyword", {}).get("id")
+        row["date"] = self.paginator.current_value.start.date()
+        row["from_utc"] = self.paginator.current_value.start
+        row["to_utc"] = self.paginator.current_value.end
         return row
 
     def get_new_paginator(self) -> DateRangePaginator:
@@ -293,25 +297,12 @@ class PerformanceStream(ServiceTitanStream):
         params["toUtc"] = next_page_token.end.isoformat()
         return params
 
-    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
-        """Return a generator of record-type dictionary objects with coerced values.
 
-        Args:
-            context: Stream partition or context dictionary.
-
-        Yields:
-            One item per record with string coercion only in the units section.
-        """
-        for record in super().get_records(context):
-            record["from_utc"] = self.paginator.current_value.start
-            record["to_utc"] = self.paginator.current_value.end
-            yield record
-
-
-class CampaignPerformanceStream(PerformanceStream):
+class CampaignPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "campaign_performance"
+    primary_keys: tuple[str, str] = ("campaign_id", "date")
 
     def get_url_params(
         self,
@@ -333,10 +324,11 @@ class CampaignPerformanceStream(PerformanceStream):
         return params
 
 
-class KeywordPerformanceStream(PerformanceStream):
+class KeywordPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "keyword_performance"
+    primary_keys: tuple[str, str] = ("keyword_id", "date")
 
     def get_url_params(
         self,
@@ -358,10 +350,11 @@ class KeywordPerformanceStream(PerformanceStream):
         return params
 
 
-class AdGroupPerformanceStream(PerformanceStream):
+class AdGroupPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "adgroup_performance"
+    primary_keys: tuple[str, str] = ("adGroup_id", "date")
 
     def get_url_params(
         self,
