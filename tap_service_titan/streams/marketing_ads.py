@@ -219,6 +219,16 @@ class PerformanceStream(ServiceTitanStream):
         """Add report end time for consistency."""
         super().__init__(*args, **kwargs)
         self.end_time = datetime.now(timezone.utc)
+        self.interval = timedelta(days=1)
+
+    def _get_default_start_date(self) -> datetime:
+        """Get default start date when none is provided."""
+        return datetime.now(timezone.utc) - timedelta(days=30)
+
+    def _get_effective_start_date(self, context: dict | None = None) -> datetime:
+        """Get the effective start date for the current context."""
+        start_date = self.get_starting_timestamp(context)
+        return start_date if start_date is not None else self._get_default_start_date()
 
     @cached_property
     def path(self) -> str:
@@ -250,13 +260,8 @@ class PerformanceStream(ServiceTitanStream):
 
     def get_new_paginator(self) -> DateRangePaginator:
         """Create a new pagination helper instance for date ranges."""
-        start_date = self.get_starting_timestamp(None)
-        if start_date is None:
-            start_date = datetime.now(timezone.utc) - timedelta(days=30)
-
-        # Use 1-day intervals for performance data
-        interval = timedelta(days=1)
-        return DateRangePaginator(start_date, interval, self.end_time)
+        start_date = self._get_effective_start_date()
+        return DateRangePaginator(start_date, self.interval, self.end_time)
 
     def get_url_params(
         self,
@@ -281,12 +286,8 @@ class PerformanceStream(ServiceTitanStream):
             params["toUtc"] = next_page_token.end.isoformat()
         else:
             # First request
-            start_date = self.get_starting_timestamp(context)
-            if start_date is None:
-                start_date = datetime.now(timezone.utc) - timedelta(days=30)
-
-            # Calculate end date based on interval
-            end_date = min(start_date + timedelta(days=1), self.end_time)
+            start_date = self._get_effective_start_date(context)
+            end_date = min(start_date + self.interval, self.end_time)
             params["fromUtc"] = start_date.isoformat()
             params["toUtc"] = end_date.isoformat()
 
@@ -303,12 +304,8 @@ class PerformanceStream(ServiceTitanStream):
         """
         for record in super().get_records(context):
             # Create a fresh DateRange for the current request
-            start_date = self.get_starting_timestamp(context)
-            if start_date is None:
-                start_date = datetime.now(timezone.utc) - timedelta(days=30)
-
-            interval = timedelta(days=1)
-            current_range = DateRange(start_date, interval, self.end_time)
+            start_date = self._get_effective_start_date(context)
+            current_range = DateRange(start_date, self.interval, self.end_time)
 
             record["from_utc"] = current_range.start.isoformat()
             record["to_utc"] = current_range.end.isoformat()
