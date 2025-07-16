@@ -102,12 +102,8 @@ class JobsStream(ServiceTitanExportStream):
         th.Property("bookingId", th.IntegerType, required=False),
         th.Property("soldById", th.IntegerType, required=False),
         th.Property(
-            "externalData", 
-            th.ArrayType(
-                th.ObjectType(
-                    additional_properties=True
-                )
-            )
+            "externalData",
+            th.ArrayType(th.ObjectType(additional_properties=True)),
         ),
         th.Property("customerPo", th.StringType),
         th.Property("invoiceId", th.IntegerType),
@@ -210,11 +206,7 @@ class ProjectsStream(ServiceTitanExportStream):
         ),
         th.Property(
             "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    additional_properties=True
-                )
-            ),
+            th.ArrayType(th.ObjectType(additional_properties=True)),
         ),
         th.Property("jobIds", th.ArrayType(th.IntegerType)),
         th.Property("active", th.BooleanType),
@@ -451,10 +443,10 @@ class JobBookedLogStream(ServiceTitanStream):
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property(
-            "job", 
+            "job",
             th.ObjectType(
                 th.Property("id", th.IntegerType),
-            )
+            ),
         ),
         th.Property("start", th.DateTimeType),
         th.Property("arrivalWindowStart", th.DateTimeType),
@@ -466,7 +458,7 @@ class JobBookedLogStream(ServiceTitanStream):
             "appointment",
             th.ObjectType(
                 th.Property("id", th.IntegerType),
-            )
+            ),
         ),
     ).to_dict()
 
@@ -490,13 +482,13 @@ class JobCanceledLogStream(ServiceTitanStream):
             "job",
             th.ObjectType(
                 th.Property("id", th.IntegerType),
-            )
+            ),
         ),
         th.Property(
             "reason",
             th.ObjectType(
                 th.Property("id", th.IntegerType),
-            )
+            ),
         ),
         th.Property("memo", th.StringType),
         th.Property("createdOn", th.DateTimeType),
@@ -504,7 +496,7 @@ class JobCanceledLogStream(ServiceTitanStream):
             "createdBy",
             th.ObjectType(
                 th.Property("id", th.IntegerType),
-            )
+            ),
         ),
         th.Property("active", th.BooleanType),
     ).to_dict()

@@ -9,8 +9,8 @@ from functools import cached_property
 
 import requests
 from singer_sdk import typing as th
-from singer_sdk.helpers import types  # noqa: TCH002
-from singer_sdk.helpers.types import Context  # noqa: TCH002
+from singer_sdk.helpers import types  # noqa: TC002
+from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import (

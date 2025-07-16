@@ -108,7 +108,7 @@ class EstimateItemsStream(Stream):
     replication_key: str = "modifiedOn"
     parent_stream_type = EstimatesStream
     state_partitioning_keys = []  # We don't need to partition state since we rely on parent's state
-    
+
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("estimate_id", th.IntegerType),  # Added to link back to parent
@@ -142,17 +142,17 @@ class EstimateItemsStream(Stream):
 
     def get_records(self, context: dict | None) -> t.Iterable[dict]:
         """Return a generator of row-type dictionary objects.
-        
+
         Args:
             context: The stream partition or context dictionary containing the parent's
                     estimate_id and items array.
         """
         if not context:
             return
-            
+
         estimate_id = context["estimate_id"]
         items = context["items"]
-        
+
         for item in items:
             transformed_item = {**item, "estimate_id": estimate_id}
             yield transformed_item
