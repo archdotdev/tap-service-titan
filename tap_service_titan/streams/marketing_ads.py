@@ -153,6 +153,7 @@ class _PerformanceStream(ServiceTitanStream):
         th.Property("date", th.DateType),
         th.Property("from_utc", th.DateTimeType),
         th.Property("to_utc", th.DateTimeType),
+        th.Property("campaign_id", th.IntegerType),
         th.Property("campaign_name", th.StringType),
         th.Property("adGroup_id", th.StringType),
         th.Property("keyword_id", th.StringType),
@@ -262,6 +263,7 @@ class _PerformanceStream(ServiceTitanStream):
         Returns:
             The resulting record dict, or `None` if the record should be excluded.
         """
+        row["campaign_id"] = row.get("campaign", {}).get("id")
         row["campaign_name"] = row.get("campaign", {}).get("name")
         row["adGroup_id"] = row.get("adGroup", {}).get("id")
         row["keyword_id"] = row.get("keyword", {}).get("id")
