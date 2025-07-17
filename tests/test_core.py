@@ -1,12 +1,12 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
 import datetime
+from os import environ
 
+import dotenv
 from singer_sdk.testing import SuiteConfig, get_tap_test_class
 
 from tap_service_titan.tap import TapServiceTitan
-from os import environ
-import dotenv
 
 dotenv.load_dotenv()
 

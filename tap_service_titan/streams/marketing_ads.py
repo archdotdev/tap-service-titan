@@ -3,24 +3,27 @@
 from __future__ import annotations
 
 import typing as t
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers.types import Context  # noqa: TCH002
+from singer_sdk.helpers.types import Context  # noqa: TC002
 
 from tap_service_titan.client import (
+    DateRange,
+    DateRangePaginator,
     ServiceTitanStream,
 )
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers import types
 
+
 class AttributedLeadsStream(ServiceTitanStream):
     """Define attributed leads stream."""
 
     name = "attributed_leads"
-    primary_keys: t.ClassVar[list[str]] = ["dateTime"]
+    primary_keys: tuple[str] = ("dateTime",)
     replication_key: str = "dateTime"
 
     schema = th.PropertiesList(
@@ -121,7 +124,7 @@ class CapacityWarningsStream(ServiceTitanStream):
     """Define capacity warnings stream."""
 
     name = "capacity_warnings"
-    primary_keys: t.ClassVar[list[str]] = ["campaignName", "warningType"]
+    primary_keys: tuple[str, str] = ("campaignName", "warningType")
 
     schema = th.PropertiesList(
         th.Property("campaignName", th.StringType),
@@ -139,16 +142,18 @@ class CapacityWarningsStream(ServiceTitanStream):
         )
 
 
-class PerformanceStream(ServiceTitanStream):
+class _PerformanceStream(ServiceTitanStream):
     """Define marketing performance stream."""
 
     name = "performance"
-    primary_keys: t.ClassVar[list[str]] = ["campaign_name", "adGroup_id", "keyword_id"]
-    replication_key: str = "to_utc"
+    primary_keys: tuple[str, ...] = ()
+    replication_key: str = "from_utc"
 
     schema = th.PropertiesList(
+        th.Property("date", th.DateType),
         th.Property("from_utc", th.DateTimeType),
         th.Property("to_utc", th.DateTimeType),
+        th.Property("campaign_id", th.IntegerType),
         th.Property("campaign_name", th.StringType),
         th.Property("adGroup_id", th.StringType),
         th.Property("keyword_id", th.StringType),
@@ -214,7 +219,30 @@ class PerformanceStream(ServiceTitanStream):
     def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
         """Add report end time for consistency."""
         super().__init__(*args, **kwargs)
-        self.end_time = datetime.now(timezone.utc).isoformat()
+        self.end_time = datetime.now(timezone.utc)
+        self.interval = timedelta(days=1)
+        self._paginator: DateRangePaginator | None = None
+
+    @property
+    def paginator(self) -> DateRangePaginator:
+        """Get the paginator for the stream."""
+        if self._paginator is None:
+            msg = "Paginator not initialized"
+            raise RuntimeError(msg)
+        return self._paginator
+
+    def _get_default_start_date(self) -> datetime:
+        """Get default start date when none is provided."""
+        return datetime.now(timezone.utc) - timedelta(days=30)
+
+    def _get_effective_start_date(self, context: Context | None = None) -> datetime:
+        """Get the effective start date for the current context."""
+        if start_date := self.get_starting_timestamp(context):
+            effective_start_date = start_date
+        else:
+            effective_start_date = self._get_default_start_date()
+
+        return effective_start_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
     @cached_property
     def path(self) -> str:
@@ -235,51 +263,52 @@ class PerformanceStream(ServiceTitanStream):
         Returns:
             The resulting record dict, or `None` if the record should be excluded.
         """
+        row["campaign_id"] = row.get("campaign", {}).get("id")
         row["campaign_name"] = row.get("campaign", {}).get("name")
         row["adGroup_id"] = row.get("adGroup", {}).get("id")
         row["keyword_id"] = row.get("keyword", {}).get("id")
+        row["date"] = self.paginator.current_value.start.date()
+        row["from_utc"] = self.paginator.current_value.start
+        row["to_utc"] = self.paginator.current_value.end
         return row
+
+    def get_new_paginator(self) -> DateRangePaginator:
+        """Create a new pagination helper instance for date ranges."""
+        start_date = self._get_effective_start_date(self.context)
+        self._paginator = DateRangePaginator(start_date, self.interval, self.end_time)
+        return self._paginator
 
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
+        context: Context | None,  # noqa: ARG002
+        next_page_token: DateRange | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
             context: The stream context.
-            next_page_token: The next page index or value.
+            next_page_token: The next page index or value (DateRange object).
 
 
         Returns:
             A dictionary of URL query parameters.
         """
-        params: dict = super().get_url_params(context, next_page_token)
+        params: dict = {}
 
-        params["fromUtc"] = self.get_starting_timestamp(context)
-        params["toUtc"] = self.end_time
+        if next_page_token is None:
+            msg = "Paginator not initialized"
+            raise RuntimeError(msg)
+
+        params["fromUtc"] = next_page_token.start.isoformat()
+        params["toUtc"] = next_page_token.end.isoformat()
         return params
 
-    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
-        """Return a generator of record-type dictionary objects with coerced values.
 
-        Args:
-            context: Stream partition or context dictionary.
-
-        Yields:
-            One item per record with string coercion only in the units section.
-        """
-        for record in super().get_records(context):
-            record["from_utc"] = self.get_starting_timestamp(context)
-            record["to_utc"] = self.end_time
-            yield record
-
-
-class CampaignPerformanceStream(PerformanceStream):
+class CampaignPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "campaign_performance"
+    primary_keys: tuple[str, str] = ("campaign_id", "date")
 
     def get_url_params(
         self,
@@ -301,10 +330,11 @@ class CampaignPerformanceStream(PerformanceStream):
         return params
 
 
-class KeywordPerformanceStream(PerformanceStream):
+class KeywordPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "keyword_performance"
+    primary_keys: tuple[str, str] = ("keyword_id", "date")
 
     def get_url_params(
         self,
@@ -326,10 +356,11 @@ class KeywordPerformanceStream(PerformanceStream):
         return params
 
 
-class AdGroupPerformanceStream(PerformanceStream):
+class AdGroupPerformanceStream(_PerformanceStream):
     """Define marketing performance stream for campaigns."""
 
     name = "adgroup_performance"
+    primary_keys: tuple[str, str] = ("adGroup_id", "date")
 
     def get_url_params(
         self,

@@ -6,7 +6,7 @@ import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers.types import Context  # noqa: TCH002
+from singer_sdk.helpers.types import Context  # noqa: TC002
 
 from tap_service_titan.client import (
     ServiceTitanStream,
@@ -93,9 +93,12 @@ class SubmissionsStream(ServiceTitanStream):
                                 ),
                                 th.Property("value", th.StringType),
                                 th.Property("options", th.StringType),
-                                th.Property("values", th.ArrayType(
-                                    th.CustomType({"type": ["string", "null"]})
-                                )),
+                                th.Property(
+                                    "values",
+                                    th.ArrayType(
+                                        th.CustomType({"type": ["string", "null"]})
+                                    ),
+                                ),
                                 th.Property("isRefused", th.BooleanType),
                                 th.Property("refusalReason", th.StringType),
                             )

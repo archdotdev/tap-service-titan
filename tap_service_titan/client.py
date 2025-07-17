@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import sys
-from datetime import timedelta
+from dataclasses import dataclass
+from datetime import datetime, timedelta
 from functools import cached_property
 from typing import Any, Callable, Iterable
 
@@ -23,6 +24,58 @@ else:
     pass
 
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
+
+
+@dataclass
+class DateRange:
+    """Represents a date range for pagination."""
+
+    start: datetime
+    interval: timedelta
+    max_date: datetime
+
+    @property
+    def end(self) -> datetime:
+        """Calculate the end date of the current range."""
+        return self.start + self.interval
+
+    def increase(self) -> DateRange:
+        """Create a new DateRange with the next interval."""
+        return DateRange(self.end, self.interval, self.max_date)
+
+    def is_valid(self) -> bool:
+        """Check if the current range is within the maximum date."""
+        return self.start < self.max_date
+
+
+class DateRangePaginator(BaseAPIPaginator[DateRange]):
+    """Paginator that uses date ranges for pagination."""
+
+    def __init__(self, start_date: datetime, interval: timedelta, max_date: datetime):
+        """Initialize DateRangePaginator.
+
+        Args:
+            start_date: Starting date for pagination
+            interval: Time interval for each page
+            max_date: Maximum date to paginate to
+        """
+        date_range = DateRange(start_date, interval, max_date)
+        super().__init__(start_value=date_range)
+
+    def get_next(self, response: requests.Response) -> DateRange | None:
+        """Get the next date range for pagination.
+
+        Args:
+            response: The HTTP response (unused in this implementation)
+
+        Returns:
+            Next DateRange or None if no more pages
+        """
+        if not isinstance(self.current_value, DateRange):
+            return None
+
+        new_range = self.current_value.increase()
+        return new_range if new_range.is_valid() else None
 
 
 class ServiceTitanBaseStream(RESTStream):

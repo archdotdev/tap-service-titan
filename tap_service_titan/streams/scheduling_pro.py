@@ -139,14 +139,14 @@ class SchedulerPerformanceStream(ServiceTitanStream):
                 th.Property("timeslotSelections", th.IntegerType),
                 th.Property("confirmationViews", th.IntegerType),
                 th.Property("bookingCompletes", th.IntegerType),
-            )
+            ),
         ),
         th.Property(
             "averageSessionDuration",
             th.ObjectType(
                 th.Property("minutes", th.IntegerType),
                 th.Property("seconds", th.IntegerType),
-            )
+            ),
         ),
         th.Property("dateRangeStart", th.DateTimeType),
         th.Property("dateRangeEnd", th.DateTimeType),
