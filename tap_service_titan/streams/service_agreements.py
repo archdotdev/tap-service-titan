@@ -6,6 +6,7 @@ import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
+from typing_extensions import override
 
 from tap_service_titan.client import (
     ServiceTitanExportStream,
@@ -81,3 +82,12 @@ class ServiceAgreementsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/service-agreements/v2/tenant/{self._tap.config['tenant_id']}/export/service-agreements"
+
+    @override
+    def post_process(self, row, context = None) -> dict | None:
+        # Fix date fields, e.g. 2025-08-01T00:00:00 -> 2025-08-01
+        if start_date := row.get("startDate"):
+            row["startDate"] = start_date.split("T")[0]
+        if end_date := row.get("endDate"):
+            row["endDate"] = end_date.split("T")[0]
+        return row
