@@ -306,7 +306,7 @@ class InvoiceItemsStream(ServiceTitanExportStream):
         th.Property("active", th.BooleanType),
         th.Property("invoiceId", th.IntegerType),
         th.Property("createdById", th.IntegerType),
-        th.Property("displayInAmount", th.NumberType),
+        th.Property("displayInAmount", th.BooleanType),
         th.Property("importId", th.StringType),
         th.Property("exportId", th.StringType),
         th.Property("inventoryStatus", th.StringType),
