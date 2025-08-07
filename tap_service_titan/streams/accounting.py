@@ -205,6 +205,7 @@ class InvoicesStream(ServiceTitanExportStream):
                             th.Property("name", th.StringType),
                         ),
                     ),
+                    th.Property("estimateItemId", th.IntegerType),
                 )
             ),
         ),
@@ -314,6 +315,7 @@ class InvoiceItemsStream(ServiceTitanExportStream):
         th.Property("memberPrice", th.StringType),
         th.Property("technicianId", th.IntegerType),
         th.Property("installedEquipmentId", th.IntegerType),
+        th.Property("estimateItemId", th.IntegerType),
     ).to_dict()
 
     @cached_property
