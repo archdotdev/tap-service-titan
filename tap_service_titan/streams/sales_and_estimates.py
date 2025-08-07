@@ -70,6 +70,7 @@ class EstimatesStream(ServiceTitanExportStream):
                     th.Property("createdOn", th.DateTimeType),
                     th.Property("modifiedOn", th.DateTimeType),
                     th.Property("chargeable", th.BooleanType),
+                    th.Property("invoiceItemId", th.IntegerType),
                 ),
             ),
         ),
@@ -138,6 +139,7 @@ class EstimateItemsStream(Stream):
         th.Property("createdOn", th.DateTimeType),
         th.Property("modifiedOn", th.DateTimeType),
         th.Property("chargeable", th.BooleanType),
+        th.Property("invoiceItemId", th.IntegerType),
     ).to_dict()
 
     def get_records(self, context: dict | None) -> t.Iterable[dict]:
