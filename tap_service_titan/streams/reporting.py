@@ -8,7 +8,9 @@ from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
 import requests
+import requests.exceptions
 from singer_sdk import typing as th
+from singer_sdk.exceptions import RetriableAPIError
 from singer_sdk.helpers import types  # noqa: TC002
 from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
@@ -252,11 +254,20 @@ class CustomReports(ServiceTitanStream):
                     self.curr_backfill_date_param + timedelta(days=1)
                 )
 
-    def backoff_wait_generator(self) -> t.Callable[..., t.Generator[int, t.Any, None]]:
+    def backoff_wait_generator(self) -> t.Generator[float, None, None]:
         """Return a generator for backoff wait times."""
 
-        def _backoff_from_headers(retriable_api_error) -> int:  # noqa: ANN001
-            response_headers = retriable_api_error.response.headers
-            return int(math.ceil(float(response_headers.get("Retry-After", 0))))
+        def _backoff_from_headers(retriable_api_error: Exception) -> int:
+            if (
+                isinstance(
+                    retriable_api_error,
+                    (RetriableAPIError, requests.exceptions.HTTPError),
+                )
+                and retriable_api_error.response is not None
+            ):
+                response_headers = retriable_api_error.response.headers
+                return math.ceil(float(response_headers.get("Retry-After", 0)))
+
+            return 1
 
         return self.backoff_runtime(value=_backoff_from_headers)
