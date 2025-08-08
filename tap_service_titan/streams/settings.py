@@ -187,9 +187,13 @@ class TechniciansStream(ServiceTitanExportStream):
         th.Property(
             "permissions",
             th.ArrayType(
-                th.ObjectType(
+                th.OneOf(
+                    th.ObjectType(
                     th.Property("id", th.IntegerType),
                     th.Property("value", th.StringType),
+                    ),
+                    # Array may contain Nones -- falling back to AnyType for now
+                    th.AnyType,
                 )
             ),
         ),
