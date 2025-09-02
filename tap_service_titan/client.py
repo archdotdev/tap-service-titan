@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-import sys
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import cached_property
-from typing import Any, Callable, Iterable
+from typing import Any
 
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
@@ -17,11 +17,6 @@ from singer_sdk.pagination import (
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
-
-if sys.version_info >= (3, 9):
-    pass
-else:
-    pass
 
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 
