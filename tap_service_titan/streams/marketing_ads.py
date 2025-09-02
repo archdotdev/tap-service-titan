@@ -263,10 +263,10 @@ class _PerformanceStream(ServiceTitanStream):
         Returns:
             The resulting record dict, or `None` if the record should be excluded.
         """
-        row["campaign_id"] = row.get("campaign", {}).get("id")
-        row["campaign_name"] = row.get("campaign", {}).get("name")
-        row["adGroup_id"] = row.get("adGroup", {}).get("id")
-        row["keyword_id"] = row.get("keyword", {}).get("id")
+        row["campaign_id"] = (row.get("campaign") or {}).get("id")
+        row["campaign_name"] = (row.get("campaign") or {}).get("name")
+        row["adGroup_id"] = (row.get("adGroup") or {}).get("id")
+        row["keyword_id"] = (row.get("keyword") or {}).get("id")
         row["date"] = self.paginator.current_value.start.date()
         row["from_utc"] = self.paginator.current_value.start
         row["to_utc"] = self.paginator.current_value.end
