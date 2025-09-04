@@ -301,6 +301,7 @@ class _PerformanceStream(ServiceTitanStream):
 
         params["fromUtc"] = next_page_token.start.isoformat()
         params["toUtc"] = next_page_token.end.isoformat()
+        params["pageSize"] = 5000
         return params
 
 
