@@ -143,7 +143,7 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream):
 
     name = "appointment_assignments"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    replication_key: str = "updatedOn"
+    replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -156,7 +156,7 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream):
         th.Property("jobId", th.IntegerType),
         th.Property("appointmentId", th.IntegerType),
         th.Property("createdOn", th.DateTimeType),
-        th.Property("updatedOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
         th.Property("active", th.BooleanType),
     ).to_dict()
 
