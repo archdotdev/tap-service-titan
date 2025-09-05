@@ -75,6 +75,8 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
 
 class ServiceTitanBaseStream(RESTStream):
     """ServiceTitan base stream class."""
+    
+    _LOG_REQUEST_METRIC_URLS: bool = True # Safe as params don't have sensitive info, but very helpful for debugging
 
     @property
     def url_base(self) -> str:
