@@ -101,9 +101,11 @@ class SubmissionsStream(ServiceTitanStream):
                                 ),
                                 th.Property("isRefused", th.BooleanType),
                                 th.Property("refusalReason", th.StringType),
+                                additional_properties=True,
                             )
                         ),
                     ),
+                    additional_properties=True,
                 )
             ),
         ),
