@@ -502,6 +502,8 @@ class InventoryBillsStream(ServiceTitanExportStream):
                             th.Property("detailType", th.StringType),
                         ),
                     ),
+                    th.Property("id", th.IntegerType),
+                    th.Property("receiptItemId", th.IntegerType),
                     th.Property("skuId", th.IntegerType),
                     th.Property("skuCode", th.StringType),
                 )
