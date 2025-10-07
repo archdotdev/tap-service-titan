@@ -49,8 +49,7 @@ class EmployeesStream(ServiceTitanExportStream):
                         th.Property("id", th.IntegerType),
                         th.Property("value", th.StringType),
                     ),
-                    # Array may contain Nones -- falling back to AnyType for now
-                    th.AnyType,
+                    th.NullType(),  # Array may contain Nones
                 )
             ),
         ),
@@ -189,11 +188,10 @@ class TechniciansStream(ServiceTitanExportStream):
             th.ArrayType(
                 th.OneOf(
                     th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("value", th.StringType),
+                        th.Property("id", th.IntegerType),
+                        th.Property("value", th.StringType),
                     ),
-                    # Array may contain Nones -- falling back to AnyType for now
-                    th.AnyType,
+                    th.NullType(),  # Array may contain Nones
                 )
             ),
         ),
