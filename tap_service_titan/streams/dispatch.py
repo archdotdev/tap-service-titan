@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
@@ -11,6 +12,11 @@ from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+
+if sys.version_info >= (3, 11):
+    from http import HTTPMethod
+else:
+    from backports.httpmethod import HTTPMethod
 
 if t.TYPE_CHECKING:
     import requests
@@ -43,7 +49,7 @@ class CapacitiesStream(ServiceTitanStream):
         "technician_id",
     ]
     replication_key = "startUtc"
-    rest_method = "POST"
+    http_method = HTTPMethod.POST
     records_jsonpath = "$.availabilities[*]"
 
     schema = th.PropertiesList(

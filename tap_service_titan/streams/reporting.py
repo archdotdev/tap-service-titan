@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import sys
 import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
@@ -19,6 +20,11 @@ from tap_service_titan.client import (
     ServiceTitanStream,
 )
 
+if sys.version_info >= (3, 11):
+    from http import HTTPMethod
+else:
+    from backports.httpmethod import HTTPMethod
+
 if t.TYPE_CHECKING:
     from datetime import date
 
@@ -29,7 +35,7 @@ class CustomReports(ServiceTitanStream):
     """Define reviews stream."""
 
     name = "custom_report"
-    rest_method = "POST"
+    http_method = HTTPMethod.POST
     replication_method = REPLICATION_FULL_TABLE
     is_sorted = True
 
