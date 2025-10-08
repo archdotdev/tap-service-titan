@@ -18,23 +18,7 @@ class ServiceTitanAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
             A dict with the request body
         """
         return {
-            "client_id": self.config["client_id"],
-            "client_secret": self.config["client_secret"],
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
             "grant_type": "client_credentials",
         }
-
-    @classmethod
-    def create_for_stream(cls, stream) -> ServiceTitanAuthenticator:  # noqa: ANN001
-        """Instantiate an authenticator for a specific Singer stream.
-
-        Args:
-            stream: The Singer stream instance.
-
-        Returns:
-            A new authenticator.
-        """
-        return cls(
-            stream=stream,
-            auth_endpoint=stream.config.get("auth_url"),
-            oauth_scopes="",
-        )

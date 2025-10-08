@@ -92,7 +92,12 @@ class ServiceTitanBaseStream(RESTStream):
         Returns:
             An authenticator instance.
         """
-        return ServiceTitanAuthenticator.create_for_stream(self)
+        return ServiceTitanAuthenticator(
+            client_id=self.config["client_id"],
+            client_secret=self.config["client_secret"],
+            auth_endpoint=self.config["auth_url"],
+            oauth_scopes="",
+        )
 
     @property
     def http_headers(self) -> dict:
