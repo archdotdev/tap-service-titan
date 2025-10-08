@@ -59,6 +59,7 @@ class TapServiceTitan(Tap):
             th.StringType,
             default="https://auth-integration.servicetitan.io/connect/token",
             description="The url for the ServiceTitan OAuth API",
+            nullable=False,
         ),
         th.Property(
             "start_date",
