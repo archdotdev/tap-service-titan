@@ -16,6 +16,7 @@ else:
 
 __all__ = [
     "ACCOUNTING",
+    "INVENTORY",
 ]
 
 
@@ -65,3 +66,4 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
 
 OPENAPI_SPECS = files("tap_service_titan") / "openapi_specs"
 ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
+INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")

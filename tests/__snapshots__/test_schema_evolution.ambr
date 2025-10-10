@@ -34426,6 +34426,24 @@
       }),
       dict({
         'breadcrumb': list([
+          'properties',
+          'createdOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'modifiedOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -34439,51 +34457,57 @@
     ]),
     'replication_method': 'FULL_TABLE',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'automaticallyReceiveVendorCredit': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Should the return type allow receiving Vendor Credits automatically.',
+          'type': 'boolean',
+        }),
+        'createdOn': dict({
+          'description': 'System created date',
+          'format': 'date-time',
+          'type': 'string',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Return Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'includeInSalesTax': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'isDefault': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'isDefaultForConsignment': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
+        }),
+        'modifiedOn': dict({
+          'description': 'Last time return type was modified date',
+          'format': 'date-time',
+          'type': 'string',
         }),
         'name': dict({
+          'description': 'Name of the Return Type',
           'type': list([
             'string',
             'null',
           ]),
         }),
       }),
+      'required': list([
+        'id',
+        'automaticallyReceiveVendorCredit',
+        'includeInSalesTax',
+        'active',
+        'isDefault',
+        'isDefaultForConsignment',
+        'createdOn',
+        'modifiedOn',
+      ]),
       'type': 'object',
     }),
     'stream': 'return_types',
