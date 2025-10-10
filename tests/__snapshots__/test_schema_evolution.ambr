@@ -25205,78 +25205,6 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'id',
-        ]),
-        'metadata': dict({
-          'inclusion': 'automatic',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'status',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'customerId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'locationId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'businessUnitId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'jobTypeId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'priority',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'campaignId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
           'summary',
         ]),
         'metadata': dict({
@@ -25322,6 +25250,168 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'leadUrl',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadCustomerName',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadPhone',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadEmail',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadStreet',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadUnit',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadCity',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadState',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadZip',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'leadCountry',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'id',
+        ]),
+        'metadata': dict({
+          'inclusion': 'automatic',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'status',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'priority',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'customerId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'locationId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'businessUnitId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'jobTypeId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'campaignId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'followUpDate',
         ]),
         'metadata': dict({
@@ -25331,7 +25421,7 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'createdOn',
+          'createdById',
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -25340,7 +25430,7 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'createdById',
+          'createdOn',
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -25359,6 +25449,15 @@
         'breadcrumb': list([
           'properties',
           'tagTypeIds',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'dismissingReasonId',
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -25392,64 +25491,76 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'bookingId': dict({
+          'description': 'Booking ID used to classify the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'businessUnitId': dict({
+          'description': 'Business unit associated to the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'callId': dict({
+          'description': 'Call ID used to classify the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'callReasonId': dict({
+          'description': 'Call reason ID used to classify the lead by the user',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'campaignId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Campaign associated to the lead',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'createdById': dict({
+          'description': 'User ID who created this lead',
+          'format': 'int64',
+          'type': 'integer',
+        }),
+        'createdOn': dict({
+          'description': 'When the lead was created',
+          'format': 'date-time',
+          'type': 'string',
+        }),
+        'customerId': dict({
+          'description': 'Customer associated to the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
-        'createdOn': dict({
-          'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
-        }),
-        'customerId': dict({
+        'dismissingReasonId': dict({
+          'description': 'ID of the reason booking was dismissed',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'followUpDate': dict({
+          'description': 'The next time someone is supposed to follow up on this lead',
           'format': 'date-time',
           'type': list([
             'string',
@@ -25457,59 +25568,140 @@
           ]),
         }),
         'id': dict({
+          'description': 'ID of the lead',
+          'format': 'int64',
+          'type': 'integer',
+        }),
+        'jobTypeId': dict({
+          'description': 'Job type associated to the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
-        'jobTypeId': dict({
+        'leadCity': dict({
+          'description': 'City provided for the lead',
           'type': list([
-            'integer',
+            'string',
+            'null',
+          ]),
+        }),
+        'leadCountry': dict({
+          'description': 'Country provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadCustomerName': dict({
+          'description': 'Customer name provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadEmail': dict({
+          'description': 'Email provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadPhone': dict({
+          'description': 'Phone number provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadState': dict({
+          'description': 'State provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadStreet': dict({
+          'description': 'Street provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadUnit': dict({
+          'description': 'Unit provided for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadUrl': dict({
+          'description': 'Permanent URL for the lead',
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
+        'leadZip': dict({
+          'description': 'Zip provided for the lead',
+          'type': list([
+            'string',
             'null',
           ]),
         }),
         'locationId': dict({
+          'description': 'Location associated to the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'manualCallId': dict({
+          'description': 'Manual Call ID used to classify the lead',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'modifiedOn': dict({
+          'description': 'When the lead was modified',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'priority': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': '',
+          'enum': list([
+            'Low',
+            'Normal',
+            'High',
+            'Urgent',
           ]),
+          'type': 'string',
         }),
         'status': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': '',
+          'enum': list([
+            'Open',
+            'Dismissed',
+            'Converted',
           ]),
+          'type': 'string',
         }),
         'summary': dict({
+          'description': 'Summary of the lead',
           'type': list([
             'string',
             'null',
           ]),
         }),
         'tagTypeIds': dict({
+          'description': 'List of IDs of tags on the lead',
           'items': dict({
-            'type': list([
-              'integer',
-            ]),
+            'format': 'int64',
+            'type': 'integer',
           }),
           'type': list([
             'array',
@@ -25517,6 +25709,16 @@
           ]),
         }),
       }),
+      'required': list([
+        'id',
+        'status',
+        'priority',
+        'campaignId',
+        'createdById',
+        'createdOn',
+        'modifiedOn',
+        'active',
+      ]),
       'type': 'object',
     }),
     'stream': 'leads',
