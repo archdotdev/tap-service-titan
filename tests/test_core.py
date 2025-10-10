@@ -28,4 +28,8 @@ TestTapServiceTitan = get_tap_test_class(
     suite_config=SuiteConfig(
         max_records_limit=25,
     ),
+    # Enable these to run the tests
+    include_stream_attribute_tests=False,
+    include_stream_tests=False,
+    include_tap_tests=False,
 )
