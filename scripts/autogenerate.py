@@ -1,12 +1,13 @@
 """Tools for autogenerating streams."""
 
-import subprocess
-import typer
-import click
-from pathlib import Path
 import json
+import subprocess
+from pathlib import Path
+from typing import Annotated
+
+import click
 import jsonref
-from typing_extensions import Annotated
+import typer
 
 app = typer.Typer()
 

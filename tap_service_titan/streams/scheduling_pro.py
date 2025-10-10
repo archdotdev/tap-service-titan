@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import typing as t
 from functools import cached_property
-from typing import Optional
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
@@ -34,7 +33,7 @@ class SchedulersStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/schedulingpro/v2/tenant/{self._tap.config['tenant_id']}/schedulers"
 
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for child streams."""
         return {"scheduler_id": record.get("id")}
 

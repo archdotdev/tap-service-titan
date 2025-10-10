@@ -230,7 +230,7 @@ class CustomReports(ServiceTitanStream):
         for record in resp["data"]:
             # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
             string_record = [str(val) if val is not None else "" for val in record]
-            data = dict(zip(field_names, string_record))
+            data = dict(zip(field_names, string_record, strict=False))
             # Add the backfill date to the record if configured
             if "backfill_date_parameter" in self._report:
                 data[self._report["backfill_date_parameter"]] = (
