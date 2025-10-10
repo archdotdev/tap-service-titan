@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 import typing as t
 from functools import cached_property
 
@@ -10,6 +11,14 @@ from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import ACCOUNTING
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 class InvoicesStream(ServiceTitanExportStream):
@@ -498,44 +507,15 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entries stream."""
 
     name = "journal_entries"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = th.PropertiesList(
-        th.Property("id", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("number", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("postDate", th.DateTimeType),
-        th.Property("exportedOn", th.DateTimeType),
-        th.Property(
-            "exportedBy",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("url", th.StringType),
-        th.Property("syncStatus", th.StringType),
-        th.Property("versionId", th.StringType),
-        th.Property("lastSyncVersionId", th.StringType),
-        th.Property("message", th.StringType),
-    ).to_dict()
+    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.JournalEntryResponse")
 
+    @override
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
+        next_page_token: t.Any | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -551,12 +531,14 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
         params["pageSize"] = 500
         return params
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries"
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    @override
+    def get_child_context(self, record: dict, context: Context | None) -> dict:
         """Return a context dictionary for a child stream."""
         return {"journal_entry_id": record["id"]}
 
@@ -716,7 +698,7 @@ class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/journal-entries/{'{journal_entry_id}'}/details"
+        return f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/details"  # noqa: E501
 
 
 class InventoryBillsCustomFieldsStream(ServiceTitanStream):
