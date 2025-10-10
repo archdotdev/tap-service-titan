@@ -27,82 +27,7 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
     name = "purchase_orders"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("number", th.StringType),
-        th.Property("invoiceId", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("projectId", th.IntegerType),
-        th.Property("status", th.StringType),
-        th.Property("typeId", th.IntegerType),
-        th.Property("vendorId", th.IntegerType),
-        th.Property("technicianId", th.IntegerType),
-        th.Property(
-            "shipTo",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("inventoryLocationId", th.IntegerType),
-        th.Property("batchId", th.IntegerType),
-        th.Property("vendorDocumentNumber", th.StringType),
-        th.Property("date", th.StringType),
-        th.Property("requiredOn", th.StringType),
-        th.Property("sentOn", th.StringType),
-        th.Property("receivedOn", th.StringType),
-        th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("total", th.NumberType),
-        th.Property("tax", th.NumberType),
-        th.Property("shipping", th.NumberType),
-        th.Property("summary", th.StringType),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("skuName", th.StringType),
-                    th.Property("skuCode", th.StringType),
-                    th.Property("skuType", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("vendorPartNumber", th.StringType),
-                    th.Property("quantity", th.NumberType),
-                    th.Property("quantityReceived", th.NumberType),
-                    th.Property("cost", th.NumberType),
-                    th.Property("total", th.NumberType),
-                    th.Property(
-                        "serialNumbers",
-                        th.ArrayType(
-                            th.ObjectType(
-                                th.Property("id", th.IntegerType),
-                                th.Property("number", th.StringType),
-                            )
-                        ),
-                    ),
-                    th.Property("status", th.StringType),
-                    th.Property("chargeable", th.BooleanType),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.ExportPurchaseOrdersResponse")
 
     @override
     @cached_property
@@ -116,13 +41,7 @@ class PurchaseOrderMarkupsStream(ServiceTitanStream):
 
     name = "purchase_order_markups"
     primary_keys = ("id",)
-
-    schema = th.PropertiesList(
-        th.Property("from", th.NumberType),
-        th.Property("to", th.NumberType),
-        th.Property("percent", th.NumberType),
-        th.Property("id", th.IntegerType),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.Markups.PurchaseOrderMarkupResponse")
 
     @override
     @cached_property
@@ -137,21 +56,7 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
     name = "purchase_order_types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("automaticallyReceive", th.BooleanType),
-        th.Property("displayToTechnician", th.BooleanType),
-        th.Property("impactToTechnicianPayroll", th.BooleanType),
-        th.Property("allowTechniciansToSendPo", th.BooleanType),
-        th.Property("defaultRequiredDateDaysOffset", th.IntegerType),
-        th.Property("skipWeekends", th.BooleanType),
-        th.Property("excludeTaxFromJobCosting", th.BooleanType),
-        th.Property("createdOn", th.StringType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.PurchaseOrderTypeResponse")
 
     @override
     @cached_property
@@ -166,93 +71,7 @@ class ReceiptsStream(ServiceTitanStream):
     name = "receipts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("number", th.StringType),
-        th.Property("vendorInvoiceNumber", th.StringType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("memo", th.StringType),
-        th.Property("purchaseOrderId", th.IntegerType),
-        th.Property("billId", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("vendorId", th.IntegerType),
-        th.Property("technicianId", th.IntegerType),
-        th.Property("inventoryLocationId", th.IntegerType),
-        th.Property(
-            "shipTo",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property("shipToDescription", th.StringType),
-        th.Property("receiptAmount", th.NumberType),
-        th.Property("taxAmount", th.NumberType),
-        th.Property("shippingAmount", th.NumberType),
-        th.Property("receivedOn", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("batchId", th.IntegerType),
-        th.Property("syncStatus", th.StringType),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("code", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("quantity", th.NumberType),
-                    th.Property("cost", th.NumberType),
-                    th.Property(
-                        "generalLedgerAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "costOfSaleAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "assetAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryReceiptResponse")
 
     @override
     def get_url_params(
@@ -278,99 +97,7 @@ class ReturnsStream(ServiceTitanStream):
     name = "returns"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("number", th.StringType),
-        th.Property("referenceNumber", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("vendorId", th.IntegerType),
-        th.Property("purchaseOrderId", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("inventoryLocationId", th.IntegerType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("memo", th.StringType),
-        th.Property("returnAmount", th.NumberType),
-        th.Property("taxAmount", th.NumberType),
-        th.Property("shippingAmount", th.NumberType),
-        th.Property("returnDate", th.DateTimeType),
-        th.Property("returnedOn", th.DateTimeType),
-        th.Property("creditReceivedOn", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("batchId", th.IntegerType),
-        th.Property(
-            "batch",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("number", th.StringType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property("syncStatus", th.StringType),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("code", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("quantity", th.NumberType),
-                    th.Property("cost", th.NumberType),
-                    th.Property(
-                        "generalLedgerAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "costOfSaleAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "assetAccount",
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryReturnResponse")
 
     @override
     def get_url_params(
@@ -396,63 +123,7 @@ class AdjustmentsStream(ServiceTitanStream):
     name = "adjustments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("number", th.StringType),
-        th.Property("referenceNumber", th.StringType),
-        th.Property("type", th.StringType),
-        th.Property("inventoryLocationId", th.IntegerType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("memo", th.StringType),
-        th.Property("date", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("batchId", th.IntegerType),
-        th.Property(
-            "batch",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("number", th.StringType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property("syncStatus", th.StringType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("code", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("quantity", th.NumberType),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryAdjustmentResponse")
 
     @override
     @cached_property
@@ -492,65 +163,7 @@ class TransfersStream(ServiceTitanStream):
     name = "transfers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("transferType", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("number", th.StringType),
-        th.Property("referenceNumber", th.StringType),
-        th.Property("fromLocationId", th.IntegerType),
-        th.Property("toLocationId", th.IntegerType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("memo", th.StringType),
-        th.Property("date", th.DateTimeType),
-        th.Property("pickedDate", th.DateTimeType),
-        th.Property("receivedDate", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("batchId", th.IntegerType),
-        th.Property(
-            "batch",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("number", th.StringType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property("syncStatus", th.StringType),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("code", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("quantity", th.NumberType),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryTransferResponse")
 
     @override
     @cached_property
@@ -565,26 +178,7 @@ class TrucksStream(ServiceTitanStream):
     name = "trucks"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("memo", th.StringType),
-        th.Property("warehouseId", th.IntegerType),
-        th.Property("technicianIds", th.ArrayType(th.IntegerType)),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.TruckResponse")
 
     @override
     @cached_property
@@ -599,49 +193,7 @@ class VendorsStream(ServiceTitanStream):
     name = "vendors"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("isTruckReplenishment", th.BooleanType),
-        th.Property("isMobileCreationRestricted", th.BooleanType),
-        th.Property("memo", th.StringType),
-        th.Property("deliveryOption", th.StringType),
-        th.Property("defaultTaxRate", th.NumberType),
-        th.Property(
-            "contactInfo",
-            th.ObjectType(
-                th.Property("firstName", th.StringType),
-                th.Property("lastName", th.StringType),
-                th.Property("phone", th.StringType),
-                th.Property("email", th.StringType),
-                th.Property("fax", th.StringType),
-            ),
-        ),
-        th.Property(
-            "address",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.VendorResponse")
 
     @override
     @cached_property
@@ -656,34 +208,7 @@ class WarehousesStream(ServiceTitanStream):
     name = "warehouses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property(
-            "address",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.WarehouseResponse")
 
     @override
     @cached_property
