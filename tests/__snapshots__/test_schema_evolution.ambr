@@ -29681,6 +29681,15 @@
       }),
       dict({
         'breadcrumb': list([
+          'properties',
+          'createdOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -29698,13 +29707,18 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
-        'id': dict({
+        'createdOn': dict({
+          'format': 'date-time',
           'type': list([
-            'integer',
+            'string',
             'null',
           ]),
+        }),
+        'id': dict({
+          'format': 'int64',
+          'type': 'integer',
         }),
         'modifiedOn': dict({
           'format': 'date-time',
@@ -29714,12 +29728,13 @@
           ]),
         }),
         'name': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'name',
+      ]),
       'type': 'object',
     }),
     'stream': 'payment_types',

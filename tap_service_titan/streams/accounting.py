@@ -431,19 +431,14 @@ class PaymentTypesStream(ServiceTitanStream):
     """Define payment types stream."""
 
     name = "payment_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
+    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.PaymentTypeResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/payment-types"
+        return f"/accounting/v2/tenant/{self.tenant_id}/payment-types"
 
 
 class TaxZonesStream(ServiceTitanStream):
