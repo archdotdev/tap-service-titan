@@ -21,7 +21,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -31,7 +30,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -91,7 +90,9 @@
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "chargeable": true
+                                            "chargeable": true,
+                                            "invoiceItemId": 0,
+                                            "budgetCodeId": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -103,7 +104,10 @@
                                     "subtotal": 0,
                                     "tax": 0,
                                     "businessUnitId": 0,
-                                    "businessUnitName": "string"
+                                    "businessUnitName": "string",
+                                    "isRecommended": true,
+                                    "budgetCodeId": 0,
+                                    "isChangeOrder": true
                                 }
                             }
                         }
@@ -138,7 +142,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -148,7 +151,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -169,6 +172,8 @@
                                 "status": {},
                                 "reviewStatus": {},
                                 "soldBy": 0,
+                                "isRecommended": true,
+                                "budgetCodeId": 0,
                                 "items": [
                                     {
                                         "id": 0,
@@ -183,7 +188,8 @@
                                         "itemGroupName": "string",
                                         "itemGroupRootId": 0,
                                         "chargeable": true,
-                                        "useDefaultProjectLabels": true
+                                        "useDefaultProjectLabels": true,
+                                        "budgetCodeId": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -249,7 +255,9 @@
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "chargeable": true
+                                            "chargeable": true,
+                                            "invoiceItemId": 0,
+                                            "budgetCodeId": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -261,7 +269,10 @@
                                     "subtotal": 0,
                                     "tax": 0,
                                     "businessUnitId": 0,
-                                    "businessUnitName": "string"
+                                    "businessUnitName": "string",
+                                    "isRecommended": true,
+                                    "budgetCodeId": 0,
+                                    "isChangeOrder": true
                                 }
                             }
                         }
@@ -298,7 +309,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -308,7 +319,6 @@
                     {
                         "name": "jobId",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -318,7 +328,6 @@
                     {
                         "name": "projectId",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -336,7 +345,6 @@
                     {
                         "name": "totalGreater",
                         "in": "query",
-                        "description": "Format - decimal.",
                         "schema": {
                             "type": "number",
                             "format": "decimal",
@@ -346,7 +354,6 @@
                     {
                         "name": "totalLess",
                         "in": "query",
-                        "description": "Format - decimal.",
                         "schema": {
                             "type": "number",
                             "format": "decimal",
@@ -356,7 +363,6 @@
                     {
                         "name": "soldById",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -366,7 +372,6 @@
                     {
                         "name": "soldByEmployeeId",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -385,7 +390,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -395,7 +400,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -414,7 +419,6 @@
                     {
                         "name": "soldAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -424,7 +428,6 @@
                     {
                         "name": "soldBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -472,7 +475,6 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -482,7 +484,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -492,7 +494,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -502,7 +504,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -512,7 +514,6 @@
                     {
                         "name": "locationId",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -578,7 +579,9 @@
                                                     "itemGroupRootId": 0,
                                                     "createdOn": "string",
                                                     "modifiedOn": "string",
-                                                    "chargeable": true
+                                                    "chargeable": true,
+                                                    "invoiceItemId": 0,
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "externalLinks": [
@@ -590,7 +593,10 @@
                                             "subtotal": 0,
                                             "tax": 0,
                                             "businessUnitId": 0,
-                                            "businessUnitName": "string"
+                                            "businessUnitName": "string",
+                                            "isRecommended": true,
+                                            "budgetCodeId": 0,
+                                            "isChangeOrder": true
                                         }
                                     ]
                                 }
@@ -627,7 +633,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -648,6 +654,8 @@
                                 "status": {},
                                 "reviewStatus": {},
                                 "soldBy": 0,
+                                "isRecommended": true,
+                                "budgetCodeId": 0,
                                 "items": [
                                     {
                                         "id": 0,
@@ -662,7 +670,8 @@
                                         "itemGroupName": "string",
                                         "itemGroupRootId": 0,
                                         "chargeable": true,
-                                        "useDefaultProjectLabels": true
+                                        "useDefaultProjectLabels": true,
+                                        "budgetCodeId": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -731,7 +740,9 @@
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "chargeable": true
+                                            "chargeable": true,
+                                            "invoiceItemId": 0,
+                                            "budgetCodeId": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -743,7 +754,10 @@
                                     "subtotal": 0,
                                     "tax": 0,
                                     "businessUnitId": 0,
-                                    "businessUnitName": "string"
+                                    "businessUnitName": "string",
+                                    "isRecommended": true,
+                                    "budgetCodeId": 0,
+                                    "isChangeOrder": true
                                 }
                             }
                         }
@@ -780,7 +794,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -790,7 +804,6 @@
                     {
                         "name": "estimateId",
                         "in": "query",
-                        "description": "Format - int64.",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -823,7 +836,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -833,7 +846,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -843,7 +856,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -853,7 +866,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -908,7 +921,9 @@
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "chargeable": true
+                                            "chargeable": true,
+                                            "invoiceItemId": 0,
+                                            "budgetCodeId": 0
                                         }
                                     ]
                                 }
@@ -947,7 +962,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -957,7 +971,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1029,7 +1043,9 @@
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "chargeable": true
+                                            "chargeable": true,
+                                            "invoiceItemId": 0,
+                                            "budgetCodeId": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -1041,7 +1057,10 @@
                                     "subtotal": 0,
                                     "tax": 0,
                                     "businessUnitId": 0,
-                                    "businessUnitName": "string"
+                                    "businessUnitName": "string",
+                                    "isRecommended": true,
+                                    "budgetCodeId": 0,
+                                    "isChangeOrder": true
                                 }
                             }
                         }
@@ -1078,7 +1097,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1088,7 +1106,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1132,7 +1150,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1142,7 +1159,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1186,7 +1203,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1196,7 +1212,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1223,7 +1239,8 @@
                                 "itemGroupName": "string",
                                 "itemGroupRootId": 0,
                                 "chargeable": true,
-                                "useDefaultProjectLabels": true
+                                "useDefaultProjectLabels": true,
+                                "budgetCodeId": 0
                             }
                         }
                     }
@@ -1261,6 +1278,8 @@
                                     "createdOn": "string",
                                     "modifiedOn": "string",
                                     "chargeable": true,
+                                    "invoiceItemId": 0,
+                                    "budgetCodeId": 0,
                                     "estimateId": 0
                                 }
                             }
@@ -1298,7 +1317,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1308,7 +1326,6 @@
                     {
                         "name": "itemId",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1318,7 +1335,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1363,7 +1380,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1445,7 +1462,9 @@
                                                     "itemGroupRootId": 0,
                                                     "createdOn": "string",
                                                     "modifiedOn": "string",
-                                                    "chargeable": true
+                                                    "chargeable": true,
+                                                    "invoiceItemId": 0,
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "externalLinks": [
@@ -1457,13 +1476,462 @@
                                             "subtotal": 0,
                                             "tax": 0,
                                             "businessUnitId": 0,
-                                            "businessUnitName": "string"
+                                            "businessUnitName": "string",
+                                            "isRecommended": true,
+                                            "budgetCodeId": 0,
+                                            "isChangeOrder": true
                                         }
                                     ]
                                 }
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/opportunities/{id}": {
+            "get": {
+                "tags": [
+                    "Opportunities",
+                    "CustomerOnly"
+                ],
+                "summary": "Opportunities_Get",
+                "operationId": "Opportunities_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/opportunities": {
+            "get": {
+                "tags": [
+                    "Opportunities",
+                    "CustomerOnly"
+                ],
+                "summary": "Opportunities_GetList",
+                "operationId": "Opportunities_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/opportunities": {
+            "get": {
+                "tags": [
+                    "OpportunitiesExport",
+                    "CustomerOnly"
+                ],
+                "summary": "OpportunitiesExport_Export",
+                "operationId": "OpportunitiesExport_Export",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/opportunities/{id}/followups": {
+            "get": {
+                "tags": [
+                    "OpportunitiesFollowUps",
+                    "CustomerOnly"
+                ],
+                "summary": "OpportunitiesFollowUps_GetFollowUps",
+                "operationId": "OpportunitiesFollowUps_GetFollowUps",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/opportunities/followups": {
+            "get": {
+                "tags": [
+                    "OpportunitiesFollowUps",
+                    "CustomerOnly"
+                ],
+                "summary": "OpportunitiesFollowUps_GetFollowUpsList",
+                "operationId": "OpportunitiesFollowUps_GetFollowUpsList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/opportunities/followups": {
+            "get": {
+                "tags": [
+                    "OpportunitiesFollowUpsExport",
+                    "CustomerOnly"
+                ],
+                "summary": "OpportunitiesFollowUpsExport_Export",
+                "operationId": "OpportunitiesFollowUpsExport_Export",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1496,7 +1964,9 @@
                     "modifiedOn",
                     "active",
                     "subtotal",
-                    "tax"
+                    "tax",
+                    "isRecommended",
+                    "isChangeOrder"
                 ],
                 "type": "object",
                 "properties": {
@@ -1598,6 +2068,17 @@
                     "businessUnitName": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "isRecommended": {
+                        "type": "boolean"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isChangeOrder": {
+                        "type": "boolean"
                     }
                 },
                 "additionalProperties": false
@@ -1709,6 +2190,17 @@
                     },
                     "chargeable": {
                         "type": "boolean",
+                        "nullable": true
+                    },
+                    "invoiceItemId": {
+                        "type": "integer",
+                        "description": "The invoice item which was created from this estimate item.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     }
                 },
@@ -1934,7 +2426,7 @@
                     "status": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/EstimateStatus"
+                                "$ref": "#/components/schemas/Estimates.Types.EstimateStatus"
                             }
                         ],
                         "nullable": true
@@ -1948,6 +2440,15 @@
                         "nullable": true
                     },
                     "soldBy": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isRecommended": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
@@ -1988,7 +2489,7 @@
                 },
                 "additionalProperties": false
             },
-            "EstimateStatus": {
+            "Estimates.Types.EstimateStatus": {
                 "enum": [
                     "Open",
                     "Sold",
@@ -2063,6 +2564,11 @@
                     "useDefaultProjectLabels": {
                         "type": "boolean",
                         "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -2100,7 +2606,7 @@
                     "status": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/EstimateStatus"
+                                "$ref": "#/components/schemas/Estimates.Types.EstimateStatus"
                             }
                         ],
                         "nullable": true
@@ -2114,6 +2620,15 @@
                         "nullable": true
                     },
                     "soldBy": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isRecommended": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
@@ -2229,6 +2744,17 @@
                         "type": "boolean",
                         "nullable": true
                     },
+                    "invoiceItemId": {
+                        "type": "integer",
+                        "description": "The invoice item which was created from this estimate item.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "estimateId": {
                         "type": "integer",
                         "format": "int64"
@@ -2271,7 +2797,9 @@
                     "modifiedOn",
                     "active",
                     "subtotal",
-                    "tax"
+                    "tax",
+                    "isRecommended",
+                    "isChangeOrder"
                 ],
                 "type": "object",
                 "properties": {
@@ -2373,6 +2901,17 @@
                     "businessUnitName": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "isRecommended": {
+                        "type": "boolean"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isChangeOrder": {
+                        "type": "boolean"
                     }
                 },
                 "additionalProperties": false

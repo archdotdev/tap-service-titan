@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -73,6 +73,7 @@
                                                 "generalLedgerAccountId": 0,
                                                 "invoiceCancellationMode": {},
                                                 "billingServiceId": 0,
+                                                "billingScheduleType": {},
                                                 "negativeLiabilityServiceId": 0,
                                                 "positiveIncomeServiceId": 0,
                                                 "defaultLaborCostPerHour": 0,
@@ -82,7 +83,9 @@
                                                 "defaultLaborSurcharge": 0,
                                                 "defaultMaterialSurcharge": 0,
                                                 "defaultRateSheetId": 0,
-                                                "defaultCampaignId": 0
+                                                "defaultCampaignId": 0,
+                                                "defaultDocumentTemplateId": 0,
+                                                "defaultAutoRenew": true
                                             },
                                             "customerId": 0,
                                             "businessUnitId": 0,
@@ -115,6 +118,7 @@
                                             "estimatedGrossMarginPercentage": 0,
                                             "rateSheetId": 0,
                                             "accountManagerId": 0,
+                                            "soldById": 0,
                                             "active": true
                                         }
                                     ]
@@ -155,7 +159,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -206,7 +210,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -216,7 +220,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -226,7 +230,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -236,7 +240,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -246,7 +250,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -256,7 +260,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -309,6 +313,7 @@
                                                 "generalLedgerAccountId": 0,
                                                 "invoiceCancellationMode": {},
                                                 "billingServiceId": 0,
+                                                "billingScheduleType": {},
                                                 "negativeLiabilityServiceId": 0,
                                                 "positiveIncomeServiceId": 0,
                                                 "defaultLaborCostPerHour": 0,
@@ -318,7 +323,9 @@
                                                 "defaultLaborSurcharge": 0,
                                                 "defaultMaterialSurcharge": 0,
                                                 "defaultRateSheetId": 0,
-                                                "defaultCampaignId": 0
+                                                "defaultCampaignId": 0,
+                                                "defaultDocumentTemplateId": 0,
+                                                "defaultAutoRenew": true
                                             },
                                             "customerId": 0,
                                             "businessUnitId": 0,
@@ -350,7 +357,8 @@
                                             "estimatedGrossMarginAmount": 0,
                                             "estimatedGrossMarginPercentage": 0,
                                             "rateSheetId": 0,
-                                            "accountManagerId": 0
+                                            "accountManagerId": 0,
+                                            "soldById": 0
                                         }
                                     ]
                                 }
@@ -390,7 +398,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Service agreement ID",
+                        "description": "Service agreement ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -400,7 +408,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -429,6 +437,7 @@
                                         "generalLedgerAccountId": 0,
                                         "invoiceCancellationMode": {},
                                         "billingServiceId": 0,
+                                        "billingScheduleType": {},
                                         "negativeLiabilityServiceId": 0,
                                         "positiveIncomeServiceId": 0,
                                         "defaultLaborCostPerHour": 0,
@@ -438,7 +447,9 @@
                                         "defaultLaborSurcharge": 0,
                                         "defaultMaterialSurcharge": 0,
                                         "defaultRateSheetId": 0,
-                                        "defaultCampaignId": 0
+                                        "defaultCampaignId": 0,
+                                        "defaultDocumentTemplateId": 0,
+                                        "defaultAutoRenew": true
                                     },
                                     "customerId": 0,
                                     "businessUnitId": 0,
@@ -470,7 +481,8 @@
                                     "estimatedGrossMarginAmount": 0,
                                     "estimatedGrossMarginPercentage": 0,
                                     "rateSheetId": 0,
-                                    "accountManagerId": 0
+                                    "accountManagerId": 0,
+                                    "soldById": 0
                                 }
                             }
                         }
@@ -777,6 +789,12 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "soldById": {
+                        "type": "integer",
+                        "description": "ID of the employee or technician that sold this agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Whether this agreement still exists, or was deleted already."
@@ -824,6 +842,15 @@
                         "type": "integer",
                         "description": "Used for both revenue recognition modes:\nwhen Immediate, the service will be displayed in customer-facing invoices;\nwhen Deferred, the service is tied to the general ledger account chosen for this agreement.",
                         "format": "int64"
+                    },
+                    "billingScheduleType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            }
+                        ],
+                        "description": "Defines when the customer is billed for the service agreement.",
+                        "nullable": true
                     },
                     "negativeLiabilityServiceId": {
                         "type": "integer",
@@ -884,6 +911,17 @@
                         "description": "The ID of the marketing campaign to be used by default when booking jobs for service agreement visits",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "defaultDocumentTemplateId": {
+                        "type": "integer",
+                        "description": "The ID of the document template to be used by default when creating service agreements",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "defaultAutoRenew": {
+                        "type": "boolean",
+                        "description": "The default auto-renew setting when creating a service agreement",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -914,6 +952,28 @@
                     "AskToCreateInvoice",
                     "AlwaysCreateInvoice",
                     "NeverCreateInvoice"
+                ]
+            },
+            "ServiceAgreements.V2.BillingScheduleType": {
+                "enum": [
+                    "Upfront",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "Biannual",
+                    "Annual",
+                    "TimeOfService"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Upfront",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "Biannual",
+                    "Annual",
+                    "TimeOfService"
                 ]
             },
             "ServiceAgreements.V2.AgreementStatus": {
@@ -952,28 +1012,6 @@
                     "Initial",
                     "AutoRenew",
                     "ManualRenew"
-                ]
-            },
-            "ServiceAgreements.V2.BillingScheduleType": {
-                "enum": [
-                    "Upfront",
-                    "Monthly",
-                    "EveryOtherMonth",
-                    "Quarterly",
-                    "Biannual",
-                    "Annual",
-                    "TimeOfService"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Upfront",
-                    "Monthly",
-                    "EveryOtherMonth",
-                    "Quarterly",
-                    "Biannual",
-                    "Annual",
-                    "TimeOfService"
                 ]
             },
             "ApiErrorResponse": {
@@ -1292,6 +1330,12 @@
                     "accountManagerId": {
                         "type": "integer",
                         "description": "ID of the employee assigned to the agreement",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "soldById": {
+                        "type": "integer",
+                        "description": "ID of the employee or technician that sold this agreement",
                         "format": "int64",
                         "nullable": true
                     }

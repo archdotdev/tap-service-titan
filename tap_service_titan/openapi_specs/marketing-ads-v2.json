@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -32,7 +32,7 @@
                     {
                         "name": "fromUtc",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the start date and time in UTC for the filtering period.",
+                        "description": "Gets or sets the start date and time in UTC for the filtering period.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -42,7 +42,7 @@
                     {
                         "name": "toUtc",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the end date and time in UTC for the filtering period.",
+                        "description": "Gets or sets the end date and time in UTC for the filtering period.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -52,7 +52,7 @@
                     {
                         "name": "leadType",
                         "in": "query",
-                        "description": "Gets or sets the type of lead for filtering purposes. Possible values are:\n\nLeadType.Call\nLeadType.WebBooking\nLeadType.WebLeadForm\nLeadType.ManualJob\n\nIf null, data for all lead types is returned.\\\nValues: [Call, WebBooking, WebLeadForm, ManualJob]",
+                        "description": "Gets or sets the type of lead for filtering purposes. Possible values are:\nLeadType.Call\nLeadType.WebBooking\nLeadType.WebLeadForm\nLeadType.ManualJob\nIf null, data for all lead types is returned.\\\nValues: [Call, WebBooking, WebLeadForm, ManualJob]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -66,7 +66,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -76,7 +76,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -117,6 +117,8 @@
                                                 "landingPageUrl": "string",
                                                 "referrerUrl": "string",
                                                 "clickId": "string",
+                                                "gbraid": "string",
+                                                "wbraid": "string",
                                                 "stCampaignId": 0,
                                                 "originalCampaign": "string",
                                                 "attributionOverwriteType": {},
@@ -191,7 +193,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -259,7 +261,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -278,6 +280,8 @@
                                     "landingPageUrl": "string",
                                     "referrerUrl": "string",
                                     "gclid": "string",
+                                    "gbraid": "string",
+                                    "wbraid": "string",
                                     "fbclid": "string",
                                     "msclkid": "string",
                                     "utmSource": "string",
@@ -335,7 +339,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -345,7 +349,7 @@
                     {
                         "name": "fromUtc",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the start date and time in UTC for the filtering period.",
+                        "description": "Gets or sets the start date and time in UTC for the filtering period.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -355,7 +359,7 @@
                     {
                         "name": "toUtc",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Gets or sets the end date and time in UTC for the filtering period.",
+                        "description": "Gets or sets the end date and time in UTC for the filtering period.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -365,7 +369,7 @@
                     {
                         "name": "performanceSegmentationType",
                         "in": "query",
-                        "description": "Gets or sets the type of performance segmentation for filtering purposes. Possible values are:\n\nPerformanceSegmentationType.Campaign\nPerformanceSegmentationType.AdGroup\nPerformanceSegmentationType.Keyword\\\nValues: [Campaign, AdGroup, Keyword]",
+                        "description": "Gets or sets the type of performance segmentation for filtering purposes. Possible values are:\nPerformanceSegmentationType.Campaign\nPerformanceSegmentationType.AdGroup\nPerformanceSegmentationType.Keyword\\\nValues: [Campaign, AdGroup, Keyword]",
                         "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.PerformanceSegmentationType"
@@ -374,7 +378,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -384,7 +388,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -418,6 +422,7 @@
                                         {
                                             "campaign": {
                                                 "id": 0,
+                                                "externalId": 0,
                                                 "name": "string",
                                                 "category": "string",
                                                 "launchDate": "string",
@@ -454,6 +459,7 @@
                                                 "ranJobs": 0,
                                                 "soldJobs": 0,
                                                 "revenue": 0,
+                                                "potentialRevenue": 0,
                                                 "bookingRate": 0,
                                                 "avgTicket": 0
                                             },
@@ -497,7 +503,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -516,6 +522,8 @@
                                     "landingPageUrl": "string",
                                     "referrerUrl": "string",
                                     "gclid": "string",
+                                    "gbraid": "string",
+                                    "wbraid": "string",
                                     "fbclid": "string",
                                     "msclkid": "string",
                                     "utmSource": "string",
@@ -568,7 +576,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -587,6 +595,8 @@
                                     "landingPageUrl": "string",
                                     "referrerUrl": "string",
                                     "gclid": "string",
+                                    "gbraid": "string",
+                                    "wbraid": "string",
                                     "fbclid": "string",
                                     "msclkid": "string",
                                     "utmSource": "string",
@@ -639,7 +649,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -658,6 +668,8 @@
                                     "landingPageUrl": "string",
                                     "referrerUrl": "string",
                                     "gclid": "string",
+                                    "gbraid": "string",
+                                    "wbraid": "string",
                                     "fbclid": "string",
                                     "msclkid": "string",
                                     "utmSource": "string",
@@ -806,6 +818,8 @@
                     "landingPageUrl",
                     "referrerUrl",
                     "clickId",
+                    "gbraid",
+                    "wbraid",
                     "originalCampaign",
                     "adGroupId",
                     "adGroupName",
@@ -830,6 +844,12 @@
                         "type": "string"
                     },
                     "clickId": {
+                        "type": "string"
+                    },
+                    "gbraid": {
+                        "type": "string"
+                    },
+                    "wbraid": {
                         "type": "string"
                     },
                     "stCampaignId": {
@@ -1145,6 +1165,16 @@
                         "description": "Google Click Identifier",
                         "nullable": true
                     },
+                    "gbraid": {
+                        "type": "string",
+                        "description": "Google web to app click Identifier",
+                        "nullable": true
+                    },
+                    "wbraid": {
+                        "type": "string",
+                        "description": "Google app to web click Identifier",
+                        "nullable": true
+                    },
                     "fbclid": {
                         "type": "string",
                         "description": "Facebook Click Identifier",
@@ -1310,6 +1340,11 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "externalId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1454,7 +1489,8 @@
                     "bookedJobs",
                     "ranJobs",
                     "soldJobs",
-                    "revenue"
+                    "revenue",
+                    "potentialRevenue"
                 ],
                 "type": "object",
                 "properties": {
@@ -1487,6 +1523,10 @@
                         "format": "int32"
                     },
                     "revenue": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "potentialRevenue": {
                         "type": "number",
                         "format": "decimal"
                     },

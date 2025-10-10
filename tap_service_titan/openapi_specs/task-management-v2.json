@@ -264,9 +264,18 @@
                     {
                         "name": "isClosed",
                         "in": "query",
-                        "description": "Is Closed",
+                        "description": "Is Closed\nThis property is deprecated. Use Statuses instead.",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "description": "Task Status",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     },
@@ -423,7 +432,7 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn, CompletedBy, Priority",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, DescriptionModifiedOn, CompletedBy, Priority",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -449,6 +458,7 @@
                                             "assignedToId": 0,
                                             "active": true,
                                             "isClosed": true,
+                                            "status": "ToDo",
                                             "closedOn": "string",
                                             "name": "string",
                                             "businessUnitId": 0,
@@ -573,6 +583,7 @@
                                 "reportedById": 0,
                                 "assignedToId": 0,
                                 "isClosed": true,
+                                "status": {},
                                 "name": "string",
                                 "businessUnitId": 0,
                                 "employeeTaskTypeId": 0,
@@ -580,6 +591,7 @@
                                 "employeeTaskResolutionId": 0,
                                 "reportedDate": "string",
                                 "completeBy": "string",
+                                "startedOn": "string",
                                 "involvedEmployeeIdList": [
                                     0
                                 ],
@@ -604,6 +616,7 @@
                                     "reportedById": 0,
                                     "assignedToId": 0,
                                     "isClosed": true,
+                                    "status": {},
                                     "name": "string",
                                     "businessUnitId": 0,
                                     "employeeTaskTypeId": 0,
@@ -611,6 +624,7 @@
                                     "employeeTaskResolutionId": 0,
                                     "reportedDate": "string",
                                     "completeBy": "string",
+                                    "startedOn": "string",
                                     "involvedEmployeeIdList": [
                                         0
                                     ],
@@ -704,6 +718,7 @@
                                     "assignedToId": 0,
                                     "active": true,
                                     "isClosed": true,
+                                    "status": "ToDo",
                                     "closedOn": "string",
                                     "name": "string",
                                     "businessUnitId": 0,
@@ -1233,6 +1248,7 @@
                     "assignedToId",
                     "active",
                     "isClosed",
+                    "status",
                     "businessUnitId",
                     "employeeTaskTypeId",
                     "employeeTaskSourceId",
@@ -1256,7 +1272,13 @@
                         "type": "boolean"
                     },
                     "isClosed": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "This property is deprecated. Use Status instead.",
+                        "deprecated": true,
+                        "x-deprecatedMessage": "Use Status instead"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
                     },
                     "closedOn": {
                         "type": "string",
@@ -1387,6 +1409,24 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "TaskManagement.V2.TaskStatus": {
+                "enum": [
+                    "ToDo",
+                    "InProgress",
+                    "OnHold",
+                    "Canceled",
+                    "Completed"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "ToDo",
+                    "InProgress",
+                    "OnHold",
+                    "Canceled",
+                    "Completed"
+                ]
             },
             "TaskManagement.Contracts.ApiModels.Tasks.TaskComment": {
                 "required": [
@@ -1585,6 +1625,14 @@
                     "isClosed": {
                         "type": "boolean"
                     },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
+                            }
+                        ],
+                        "nullable": true
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1610,6 +1658,11 @@
                         "format": "date-time"
                     },
                     "completeBy": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "startedOn": {
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
@@ -1726,6 +1779,14 @@
                     "isClosed": {
                         "type": "boolean"
                     },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
+                            }
+                        ],
+                        "nullable": true
+                    },
                     "name": {
                         "type": "string"
                     },
@@ -1751,6 +1812,11 @@
                         "format": "date-time"
                     },
                     "completeBy": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "startedOn": {
                         "type": "string",
                         "format": "date-time",
                         "nullable": true

@@ -112,6 +112,11 @@ class ServiceTitanBaseStream(RESTStream):
         headers["ST-App-Key"] = self.config["st_app_key"]
         return headers
 
+    @cached_property
+    def tenant_id(self) -> str:
+        """The ServiceTitan tenant ID."""
+        return self.config["tenant_id"]
+
     def get_new_paginator(self) -> BaseAPIPaginator:
         """Create a new pagination helper instance.
 

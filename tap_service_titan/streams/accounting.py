@@ -5,12 +5,11 @@ from __future__ import annotations
 import typing as t
 from functools import cached_property
 
+from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.openapi_specs import ACCOUNTING
 
 
 class InvoicesStream(ServiceTitanExportStream):
@@ -410,123 +409,14 @@ class InventoryBillsStream(ServiceTitanExportStream):
     """Define inventory bills stream."""
 
     name = "inventory_bills"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("purchaseOrderId", th.IntegerType),
-        th.Property("syncStatus", th.StringType),
-        th.Property("referenceNumber", th.StringType),
-        th.Property("vendorNumber", th.StringType),
-        th.Property("summary", th.StringType),
-        th.Property("billDate", th.DateTimeType),
-        th.Property("billAmount", th.StringType),
-        th.Property("taxAmount", th.StringType),
-        th.Property("shippingAmount", th.StringType),
-        th.Property("createdBy", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("termName", th.StringType),
-        th.Property("dueDate", th.DateTimeType),
-        th.Property("shipToDescription", th.StringType),
-        th.Property(
-            "batch",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("number", th.StringType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "businessUnit",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "vendor",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "shipTo",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property(
-            "items",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("order", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("description", th.StringType),
-                    th.Property("quantity", th.StringType),
-                    th.Property("cost", th.StringType),
-                    th.Property("inventoryLocation", th.StringType),
-                    th.Property("serialNumber", th.StringType),
-                    th.Property(
-                        "generalLedgerAccount",
-                        th.ObjectType(
-                            th.Property("id", th.IntegerType),
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "costOfSaleAccount",
-                        th.ObjectType(
-                            th.Property("id", th.IntegerType),
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "assetAccount",
-                        th.ObjectType(
-                            th.Property("id", th.IntegerType),
-                            th.Property("name", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("type", th.StringType),
-                            th.Property("detailType", th.StringType),
-                        ),
-                    ),
-                    th.Property("id", th.IntegerType),
-                    th.Property("receiptItemId", th.IntegerType),
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("skuCode", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("jobId", th.IntegerType),
-        th.Property("jobNumber", th.StringType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
+    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportInventoryBillResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/export/inventory-bills"
+        return f"/accounting/v2/tenant/{self.tenant_id}/export/inventory-bills"
 
 
 class ApCreditsStream(ServiceTitanStream):

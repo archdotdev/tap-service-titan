@@ -1,10 +1,14 @@
-from playwright.async_api import async_playwright, Playwright
-import rich
-from bs4 import BeautifulSoup
+"""Scrape the ServiceTitan OpenAPI specs."""  # noqa: INP001
+
 import asyncio
 from pathlib import Path
 
+import rich
+from bs4 import BeautifulSoup
+from playwright.async_api import Playwright, async_playwright
+
 DOCS_ROOT = "https://developer.servicetitan.io"
+OUTPUT_DIR = Path("tap_service_titan/openapi_specs")
 
 
 def get_api_name_from_url(url: str) -> str:
@@ -12,7 +16,10 @@ def get_api_name_from_url(url: str) -> str:
     return url.split("api=")[-1].replace("tenant-", "")
 
 
-async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
+async def get_soup_from_url(
+    playwright: Playwright,
+    url: str,
+) -> tuple[str, BeautifulSoup]:
     """Get a BeautifulSoup object from a URL."""
     rich.print(f"Getting soup from {url}")
     browser = await playwright.chromium.launch()
@@ -23,7 +30,7 @@ async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
     return (url, BeautifulSoup(html, "html.parser"))
 
 
-async def get_all_service_titan_soups():
+async def get_all_service_titan_soups() -> dict[str, BeautifulSoup]:
     """Get all ServiceTitan API docs as BeautifulSoup objects."""
     async with async_playwright() as playwright:
         _, soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
@@ -38,8 +45,10 @@ async def get_all_service_titan_soups():
 
 
 async def download_openapi_spec(
-    playwright: Playwright, url: str, download_path: Path
-) -> str:
+    playwright: Playwright,
+    url: str,
+    download_path: Path,
+) -> None:
     """Download an OpenAPI spec from a URL."""
     browser = await playwright.chromium.launch()
     page = await browser.new_page()
@@ -53,7 +62,7 @@ async def download_openapi_spec(
     await browser.close()
 
 
-async def download_all_openapi_specs():
+async def download_all_openapi_specs() -> None:
     """Download all ServiceTitan OpenAPI specs."""
     async with async_playwright() as playwright:
         _, soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
@@ -65,9 +74,7 @@ async def download_all_openapi_specs():
         Path("openapi_specs").mkdir(parents=True, exist_ok=True)
         tasks = []
         for api_url in api_urls:
-            download_path = Path("openapi_specs") / Path(
-                f"{get_api_name_from_url(api_url)}.json"
-            )
+            download_path = OUTPUT_DIR / f"{get_api_name_from_url(api_url)}.json"
             tasks.append(download_openapi_spec(playwright, api_url, download_path))
         await asyncio.gather(*tasks)
 

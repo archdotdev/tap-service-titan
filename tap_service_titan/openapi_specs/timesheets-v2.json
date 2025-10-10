@@ -1,0 +1,2595 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Timesheets",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/timesheets/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/activities": {
+            "get": {
+                "tags": [
+                    "ActivitiesControllers"
+                ],
+                "summary": "Gets a list of activities",
+                "description": "Gets a list of activities",
+                "operationId": "ActivitiesControllers_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Timesheets.V2.Activities.ActivitiesResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "employeeId": 0,
+                                            "employeeType": {},
+                                            "startTime": "string",
+                                            "endTime": "string",
+                                            "jobId": 0,
+                                            "appointmentId": 0,
+                                            "projectId": 0,
+                                            "projectLabel": "string",
+                                            "laborTypeId": 0,
+                                            "budgetCodeId": 0,
+                                            "memo": "string",
+                                            "tagTypes": [
+                                                0
+                                            ],
+                                            "active": true,
+                                            "modifiedById": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/activities/{id}": {
+            "get": {
+                "tags": [
+                    "ActivitiesControllers"
+                ],
+                "summary": "Gets activity specified by ID",
+                "description": "Gets activity specified by ID",
+                "operationId": "ActivitiesControllers_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The activity ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "employeeId": 0,
+                                    "employeeType": {},
+                                    "startTime": "string",
+                                    "endTime": "string",
+                                    "jobId": 0,
+                                    "appointmentId": 0,
+                                    "projectId": 0,
+                                    "projectLabel": "string",
+                                    "laborTypeId": 0,
+                                    "budgetCodeId": 0,
+                                    "memo": "string",
+                                    "tagTypes": [
+                                        0
+                                    ],
+                                    "active": true,
+                                    "modifiedById": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Activity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/activity-categories": {
+            "get": {
+                "tags": [
+                    "ActivityCategories"
+                ],
+                "summary": "Gets a list of activity categories",
+                "description": "Gets a list of activity categories",
+                "operationId": "ActivityCategories_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Timesheets.V2.ActivityCategories.ActivityCategoriesResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "type": {},
+                                            "allowEdit": true,
+                                            "isDefault": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/activity-categories/{id}": {
+            "get": {
+                "tags": [
+                    "ActivityCategories"
+                ],
+                "summary": "Gets activity category specified by ID",
+                "description": "Gets activity category specified by ID",
+                "operationId": "ActivityCategories_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The activity category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Timesheets.V2.ActivityCategories.ActivityCategoryResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "type": {},
+                                    "allowEdit": true,
+                                    "isDefault": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "active": true
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Activity category was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/activity-types": {
+            "get": {
+                "tags": [
+                    "ActivityTypes"
+                ],
+                "summary": "Gets a list of activity types",
+                "description": "Gets a list of activity types",
+                "operationId": "ActivityTypes_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Timesheets.V2.ActivityTypes.ActivityTypesResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "code": "string",
+                                            "categoryId": 0,
+                                            "description": "string",
+                                            "icon": "string",
+                                            "businessUnitId": 0,
+                                            "isUsersHomeBusinessUnit": true,
+                                            "laborTypeId": 0,
+                                            "isTechnicianProfileLaborType": true,
+                                            "visibleToRoles": [
+                                                0
+                                            ],
+                                            "defaultTagTypeIds": [
+                                                0
+                                            ],
+                                            "tagAssociation": {},
+                                            "jobAssociation": {},
+                                            "projectAssociation": {},
+                                            "projectLabelAssociation": {},
+                                            "budgetCodeAssociation": {},
+                                            "laborTypeAssociation": {},
+                                            "memoAssociation": {},
+                                            "defaultMemo": "string",
+                                            "dontAllowToChangeMemo": true,
+                                            "dontAllowToChangeTag": true,
+                                            "isArchived": true,
+                                            "isDraft": true,
+                                            "isDefault": true,
+                                            "isInUse": true,
+                                            "active": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/activity-types/{id}": {
+            "get": {
+                "tags": [
+                    "ActivityTypes"
+                ],
+                "summary": "Gets activity types specified by ID",
+                "description": "Gets activity types specified by ID",
+                "operationId": "ActivityTypes_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The activity types ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Timesheets.V2.ActivityTypes.ActivityTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "code": "string",
+                                    "categoryId": 0,
+                                    "description": "string",
+                                    "icon": "string",
+                                    "businessUnitId": 0,
+                                    "isUsersHomeBusinessUnit": true,
+                                    "laborTypeId": 0,
+                                    "isTechnicianProfileLaborType": true,
+                                    "visibleToRoles": [
+                                        0
+                                    ],
+                                    "defaultTagTypeIds": [
+                                        0
+                                    ],
+                                    "tagAssociation": {},
+                                    "jobAssociation": {},
+                                    "projectAssociation": {},
+                                    "projectLabelAssociation": {},
+                                    "budgetCodeAssociation": {},
+                                    "laborTypeAssociation": {},
+                                    "memoAssociation": {},
+                                    "defaultMemo": "string",
+                                    "dontAllowToChangeMemo": true,
+                                    "dontAllowToChangeTag": true,
+                                    "isArchived": true,
+                                    "isDraft": true,
+                                    "isDefault": true,
+                                    "isInUse": true,
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Activity types was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/activity-categories": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for activity categories.",
+                "description": "Provides export feed for activity categories.",
+                "operationId": "Export_ActivityCategories",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "type": {},
+                                            "allowEdit": true,
+                                            "isDefault": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/activity-types": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for activity types.",
+                "description": "Provides export feed for activity types.",
+                "operationId": "Export_ActivityTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Timesheets.V2.ActivityTypes.ActivityTypeExportResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "code": "string",
+                                            "categoryId": 0,
+                                            "description": "string",
+                                            "icon": "string",
+                                            "businessUnitId": 0,
+                                            "isUsersHomeBusinessUnit": true,
+                                            "laborTypeId": 0,
+                                            "isTechnicianProfileLaborType": true,
+                                            "visibleToRoles": [
+                                                0
+                                            ],
+                                            "defaultTagTypeIds": [
+                                                0
+                                            ],
+                                            "tagAssociation": {},
+                                            "jobAssociation": {},
+                                            "projectAssociation": {},
+                                            "projectLabelAssociation": {},
+                                            "budgetCodeAssociation": {},
+                                            "laborTypeAssociation": {},
+                                            "memoAssociation": {},
+                                            "defaultMemo": "string",
+                                            "dontAllowToChangeMemo": true,
+                                            "dontAllowToChangeTag": true,
+                                            "isArchived": true,
+                                            "isDraft": true,
+                                            "isDefault": true,
+                                            "isInUse": true,
+                                            "active": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/activities": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for activity.",
+                "description": "Provides export feed for activity.",
+                "operationId": "Export_Activities",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Timesheets.V2.Activities.ActivityExportResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "employeeId": 0,
+                                            "employeeType": {},
+                                            "startTime": "string",
+                                            "endTime": "string",
+                                            "jobId": 0,
+                                            "appointmentId": 0,
+                                            "projectId": 0,
+                                            "projectLabel": "string",
+                                            "laborTypeId": 0,
+                                            "budgetCodeId": 0,
+                                            "memo": "string",
+                                            "tagTypes": [
+                                                0
+                                            ],
+                                            "active": true,
+                                            "modifiedById": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaginatedResponse_Of_Timesheets.V2.Activities.ActivitiesResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivitiesResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Timesheets.V2.Activities.ActivitiesResponse": {
+                "required": [
+                    "id",
+                    "employeeId",
+                    "employeeType",
+                    "startTime",
+                    "tagTypes",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity.",
+                        "format": "int64"
+                    },
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "ID of the employee associated with the activity.",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "Type of the employee."
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "description": "Start time of the activity on UTC.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "End time of the activity on UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "ID of the job associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appointmentId": {
+                        "type": "integer",
+                        "description": "ID of the appointment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabel": {
+                        "type": "string",
+                        "description": "Label of the project associated with the activity.",
+                        "nullable": true
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "ID of the labor type associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "ID of the budget code associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo or notes related to the activity.",
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the activity."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity is active."
+                    },
+                    "modifiedById": {
+                        "type": "integer",
+                        "description": "ID of the user who last modified the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was created on UTC.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was last modified on UTC.",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Timesheets.V2.EmployeeType": {
+                "enum": [
+                    "Technician",
+                    "Employee"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Technician",
+                    "Employee"
+                ]
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "Timesheets.V2.Activities.ActivityResponse": {
+                "required": [
+                    "id",
+                    "employeeId",
+                    "employeeType",
+                    "startTime",
+                    "tagTypes",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity.",
+                        "format": "int64"
+                    },
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "ID of the employee associated with the activity.",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "Type of the employee."
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "description": "Start time of the activity  on UTC.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "End time of the activity  on UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "ID of the job associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appointmentId": {
+                        "type": "integer",
+                        "description": "ID of the appointment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabel": {
+                        "type": "string",
+                        "description": "Label of the project associated with the activity.",
+                        "nullable": true
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "ID of the labor type associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "ID of the budget code associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo or notes related to the activity.",
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the activity."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity is active."
+                    },
+                    "modifiedById": {
+                        "type": "integer",
+                        "description": "ID of the user who last modified the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was created  on UTC.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was last modified  on UTC.",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Timesheets.V2.ActivityCategories.ActivityCategoriesResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.ActivityCategories.ActivityCategoriesResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Timesheets.V2.ActivityCategories.ActivityCategoriesResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "allowEdit",
+                    "isDefault",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity category",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the activity category"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.ActivityCategoryType"
+                            }
+                        ],
+                        "description": "Type of the activity category"
+                    },
+                    "allowEdit": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is allowed to edit"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Timesheets.V2.ActivityCategoryType": {
+                "enum": [
+                    "Other",
+                    "Idle",
+                    "Meal",
+                    "PaidTimeOff",
+                    "OnJobActivities",
+                    "Training",
+                    "Travel"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Other",
+                    "Idle",
+                    "Meal",
+                    "PaidTimeOff",
+                    "OnJobActivities",
+                    "Training",
+                    "Travel"
+                ]
+            },
+            "Timesheets.V2.ActivityCategories.ActivityCategoryResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "allowEdit",
+                    "isDefault",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity category",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the activity category"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.ActivityCategoryType"
+                            }
+                        ],
+                        "description": "Type of the activity category"
+                    },
+                    "allowEdit": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is allowed to edit"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Timesheets.V2.ActivityTypes.ActivityTypesResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.ActivityTypes.ActivityTypesResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Timesheets.V2.ActivityTypes.ActivityTypesResponse": {
+                "required": [
+                    "id",
+                    "code",
+                    "categoryId",
+                    "icon",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
+                    "visibleToRoles",
+                    "defaultTagTypeIds",
+                    "tagAssociation",
+                    "jobAssociation",
+                    "projectAssociation",
+                    "projectLabelAssociation",
+                    "budgetCodeAssociation",
+                    "laborTypeAssociation",
+                    "memoAssociation",
+                    "dontAllowToChangeMemo",
+                    "dontAllowToChangeTag",
+                    "isArchived",
+                    "isDraft",
+                    "isDefault",
+                    "isInUse",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity type",
+                        "format": "int64"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Code of the activity type"
+                    },
+                    "categoryId": {
+                        "type": "integer",
+                        "description": "Category ID of the activity type",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the activity type",
+                        "nullable": true
+                    },
+                    "icon": {
+                        "type": "string",
+                        "description": "Icon of the activity type"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isUsersHomeBusinessUnit": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is the user's home business unit"
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "Labor type ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isTechnicianProfileLaborType": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a technician profile labor type"
+                    },
+                    "visibleToRoles": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Visible to roles of the activity type"
+                    },
+                    "defaultTagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Default tag type IDs of the activity type"
+                    },
+                    "tagAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Tag association of the activity type"
+                    },
+                    "jobAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Job association of the activity type"
+                    },
+                    "projectAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project association of the activity type"
+                    },
+                    "projectLabelAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project label association of the activity type"
+                    },
+                    "budgetCodeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Budget code association of the activity type"
+                    },
+                    "laborTypeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Labor type association of the activity type\n            "
+                    },
+                    "memoAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Memo association of the activity type"
+                    },
+                    "defaultMemo": {
+                        "type": "string",
+                        "description": "Default memo of the activity type",
+                        "nullable": true
+                    },
+                    "dontAllowToChangeMemo": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change memo"
+                    },
+                    "dontAllowToChangeTag": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change tag"
+                    },
+                    "isArchived": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is archived"
+                    },
+                    "isDraft": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a draft"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "isInUse": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is in use"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Timesheets.V2.Association": {
+                "enum": [
+                    "DoNotAllow",
+                    "Allow",
+                    "Require"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "DoNotAllow",
+                    "Allow",
+                    "Require"
+                ]
+            },
+            "Timesheets.V2.ActivityTypes.ActivityTypeResponse": {
+                "required": [
+                    "id",
+                    "code",
+                    "categoryId",
+                    "icon",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
+                    "visibleToRoles",
+                    "defaultTagTypeIds",
+                    "tagAssociation",
+                    "jobAssociation",
+                    "projectAssociation",
+                    "projectLabelAssociation",
+                    "budgetCodeAssociation",
+                    "laborTypeAssociation",
+                    "memoAssociation",
+                    "dontAllowToChangeMemo",
+                    "dontAllowToChangeTag",
+                    "isArchived",
+                    "isDraft",
+                    "isDefault",
+                    "isInUse",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity type",
+                        "format": "int64"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Code of the activity type"
+                    },
+                    "categoryId": {
+                        "type": "integer",
+                        "description": "Category ID of the activity type",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the activity type",
+                        "nullable": true
+                    },
+                    "icon": {
+                        "type": "string",
+                        "description": "Icon of the activity type"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isUsersHomeBusinessUnit": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is the user's home business unit"
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "Labor type ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isTechnicianProfileLaborType": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a technician profile labor type"
+                    },
+                    "visibleToRoles": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Visible to roles of the activity type"
+                    },
+                    "defaultTagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Default tag type IDs of the activity type"
+                    },
+                    "tagAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Tag association of the activity type"
+                    },
+                    "jobAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Job association of the activity type"
+                    },
+                    "projectAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project association of the activity type"
+                    },
+                    "projectLabelAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project label association of the activity type"
+                    },
+                    "budgetCodeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Budget code association of the activity type"
+                    },
+                    "laborTypeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Labor type association of the activity type\n            "
+                    },
+                    "memoAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Memo association of the activity type"
+                    },
+                    "defaultMemo": {
+                        "type": "string",
+                        "description": "Default memo of the activity type",
+                        "nullable": true
+                    },
+                    "dontAllowToChangeMemo": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change memo"
+                    },
+                    "dontAllowToChangeTag": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change tag"
+                    },
+                    "isArchived": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is archived"
+                    },
+                    "isDraft": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a draft"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "isInUse": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is in use"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ExportResponse_Of_Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "allowEdit",
+                    "isDefault",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity category",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the activity category"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.ActivityCategoryType"
+                            }
+                        ],
+                        "description": "Type of the activity category"
+                    },
+                    "allowEdit": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is allowed to edit"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ExportResponse_Of_Timesheets.V2.ActivityTypes.ActivityTypeExportResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.ActivityTypes.ActivityTypeExportResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Timesheets.V2.ActivityTypes.ActivityTypeExportResponse": {
+                "required": [
+                    "id",
+                    "code",
+                    "categoryId",
+                    "icon",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
+                    "visibleToRoles",
+                    "defaultTagTypeIds",
+                    "tagAssociation",
+                    "jobAssociation",
+                    "projectAssociation",
+                    "projectLabelAssociation",
+                    "budgetCodeAssociation",
+                    "laborTypeAssociation",
+                    "memoAssociation",
+                    "dontAllowToChangeMemo",
+                    "dontAllowToChangeTag",
+                    "isArchived",
+                    "isDraft",
+                    "isDefault",
+                    "isInUse",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity type",
+                        "format": "int64"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Code of the activity type"
+                    },
+                    "categoryId": {
+                        "type": "integer",
+                        "description": "Category ID of the activity type",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the activity type",
+                        "nullable": true
+                    },
+                    "icon": {
+                        "type": "string",
+                        "description": "Icon of the activity type"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isUsersHomeBusinessUnit": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is the user's home business unit"
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "Labor type ID of the activity type",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isTechnicianProfileLaborType": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a technician profile labor type"
+                    },
+                    "visibleToRoles": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Visible to roles of the activity type"
+                    },
+                    "defaultTagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Default tag type IDs of the activity type"
+                    },
+                    "tagAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Tag association of the activity type"
+                    },
+                    "jobAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Job association of the activity type"
+                    },
+                    "projectAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project association of the activity type"
+                    },
+                    "projectLabelAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Project label association of the activity type"
+                    },
+                    "budgetCodeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Budget code association of the activity type"
+                    },
+                    "laborTypeAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Labor type association of the activity type\n            "
+                    },
+                    "memoAssociation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Association"
+                            }
+                        ],
+                        "description": "Memo association of the activity type"
+                    },
+                    "defaultMemo": {
+                        "type": "string",
+                        "description": "Default memo of the activity type",
+                        "nullable": true
+                    },
+                    "dontAllowToChangeMemo": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change memo"
+                    },
+                    "dontAllowToChangeTag": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type allows to change tag"
+                    },
+                    "isArchived": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is archived"
+                    },
+                    "isDraft": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is a draft"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Identifies if the activity category is default"
+                    },
+                    "isInUse": {
+                        "type": "boolean",
+                        "description": "Indicates if the activity type is in use"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity category is active or not"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date when the activity category was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date when the activity category was last modified (in UTC)",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ExportResponse_Of_Timesheets.V2.Activities.ActivityExportResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityExportResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Timesheets.V2.Activities.ActivityExportResponse": {
+                "required": [
+                    "id",
+                    "employeeId",
+                    "employeeType",
+                    "startTime",
+                    "tagTypes",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the activity.",
+                        "format": "int64"
+                    },
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "ID of the employee associated with the activity.",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "Type of the employee."
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "description": "Start time of the activity  on UTC.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "End time of the activity  on UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "ID of the job associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appointmentId": {
+                        "type": "integer",
+                        "description": "ID of the appointment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabel": {
+                        "type": "string",
+                        "description": "Label of the project associated with the activity.",
+                        "nullable": true
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "ID of the labor type associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "ID of the budget code associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo or notes related to the activity.",
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the activity."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity is active."
+                    },
+                    "modifiedById": {
+                        "type": "integer",
+                        "description": "ID of the user who last modified the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was created  on UTC.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date and time when the activity was last modified  on UTC.",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
