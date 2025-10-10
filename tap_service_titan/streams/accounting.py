@@ -39,91 +39,14 @@ class InvoiceItemsStream(ServiceTitanExportStream):
     """Define invoice items stream."""
 
     name = "invoice_items"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("description", th.StringType),
-        th.Property("quantity", th.StringType),
-        th.Property("cost", th.StringType),
-        th.Property("totalCost", th.StringType),
-        th.Property("inventoryLocation", th.StringType),
-        th.Property("price", th.StringType),
-        th.Property("type", th.StringType),
-        th.Property("skuName", th.StringType),
-        th.Property("skuId", th.IntegerType),
-        th.Property("total", th.StringType),
-        th.Property("inventory", th.BooleanType),
-        th.Property("taxable", th.BooleanType),
-        th.Property(
-            "generalLedgerAccount",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-                th.Property("number", th.StringType),
-                th.Property("type", th.StringType),
-                th.Property("detailType", th.StringType),
-            ),
-        ),
-        th.Property(
-            "costOfSaleAccount",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-                th.Property("number", th.StringType),
-                th.Property("type", th.StringType),
-                th.Property("detailType", th.StringType),
-            ),
-        ),
-        th.Property(
-            "assetAccount",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-                th.Property("number", th.StringType),
-                th.Property("type", th.StringType),
-                th.Property("detailType", th.StringType),
-            ),
-        ),
-        th.Property("membershipTypeId", th.IntegerType),
-        th.Property(
-            "itemGroup",
-            th.ObjectType(
-                th.Property("rootId", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property("displayName", th.StringType),
-        th.Property("soldHours", th.NumberType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("serviceDate", th.DateTimeType),
-        th.Property("order", th.IntegerType),
-        th.Property(
-            "businessUnit",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property("active", th.BooleanType),
-        th.Property("invoiceId", th.IntegerType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("displayInAmount", th.BooleanType),
-        th.Property("importId", th.StringType),
-        th.Property("exportId", th.StringType),
-        th.Property("inventoryStatus", th.StringType),
-        th.Property("isAddOn", th.BooleanType),
-        th.Property("memberPrice", th.StringType),
-        th.Property("technicianId", th.IntegerType),
-        th.Property("installedEquipmentId", th.IntegerType),
-        th.Property("estimateItemId", th.IntegerType),
-    ).to_dict()
+    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportInvoiceItemResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/export/invoice-items"  # noqa: E501
+        return f"/accounting/v2/tenant/{self.tenant_id}/export/invoice-items"
 
 
 class PaymentsStream(ServiceTitanExportStream):

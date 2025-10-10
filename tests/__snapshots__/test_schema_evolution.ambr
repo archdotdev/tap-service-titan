@@ -17522,6 +17522,15 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'inventoryLocationId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'inventoryLocation',
         ]),
         'metadata': dict({
@@ -17844,6 +17853,15 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'createdOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'modifiedOn',
         ]),
         'metadata': dict({
@@ -17902,24 +17920,6 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'active',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'invoiceId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
           'createdById',
         ]),
         'metadata': dict({
@@ -17965,7 +17965,7 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'isAddOn',
+          'addOn',
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -18009,6 +18009,24 @@
       }),
       dict({
         'breadcrumb': list([
+          'properties',
+          'active',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'invoiceId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -18026,16 +18044,16 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
+        }),
+        'addOn': dict({
+          'type': 'boolean',
         }),
         'assetAccount': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'detailType': dict({
               'type': list([
@@ -18044,10 +18062,8 @@
               ]),
             }),
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
               'type': list([
@@ -18068,19 +18084,20 @@
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'businessUnit': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
               'type': list([
@@ -18089,6 +18106,9 @@
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
@@ -18101,7 +18121,7 @@
           ]),
         }),
         'costOfSaleAccount': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'detailType': dict({
               'type': list([
@@ -18110,10 +18130,8 @@
               ]),
             }),
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
               'type': list([
@@ -18134,18 +18152,27 @@
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'createdById': dict({
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
+        'createdOn': dict({
+          'format': 'date-time',
+          'type': 'string',
+        }),
         'description': dict({
+          'format': 'html',
           'type': list([
             'string',
             'null',
@@ -18164,6 +18191,8 @@
           ]),
         }),
         'estimateItemId': dict({
+          'description': 'The estimate item from which this invoice item was created.',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
@@ -18176,7 +18205,7 @@
           ]),
         }),
         'generalLedgerAccount': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'detailType': dict({
               'type': list([
@@ -18185,10 +18214,8 @@
               ]),
             }),
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
               'type': list([
@@ -18209,16 +18236,17 @@
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int64',
+          'type': 'integer',
         }),
         'importId': dict({
           'type': list([
@@ -18227,20 +18255,25 @@
           ]),
         }),
         'installedEquipmentId': dict({
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'inventory': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'inventoryLocation': dict({
           'type': list([
             'string',
+            'null',
+          ]),
+        }),
+        'inventoryLocationId': dict({
+          'format': 'int64',
+          'type': list([
+            'integer',
             'null',
           ]),
         }),
@@ -18251,19 +18284,11 @@
           ]),
         }),
         'invoiceId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
-        }),
-        'isAddOn': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'format': 'int64',
+          'type': 'integer',
         }),
         'itemGroup': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'name': dict({
               'type': list([
@@ -18272,12 +18297,13 @@
               ]),
             }),
             'rootId': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
           }),
+          'required': list([
+            'rootId',
+          ]),
           'type': list([
             'object',
             'null',
@@ -18290,23 +18316,16 @@
           ]),
         }),
         'membershipTypeId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int64',
+          'type': 'integer',
         }),
         'modifiedOn': dict({
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'order': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int32',
+          'type': 'integer',
         }),
         'price': dict({
           'type': list([
@@ -18328,10 +18347,8 @@
           ]),
         }),
         'skuId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int64',
+          'type': 'integer',
         }),
         'skuName': dict({
           'type': list([
@@ -18340,18 +18357,17 @@
           ]),
         }),
         'soldHours': dict({
+          'format': 'decimal',
           'type': list([
             'number',
             'null',
           ]),
         }),
         'taxable': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'type': 'boolean',
         }),
         'technicianId': dict({
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
@@ -18370,12 +18386,31 @@
           ]),
         }),
         'type': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': "Indicates a type's item",
+          'enum': list([
+            'Service',
+            'Material',
+            'Equipment',
+            'PriceModifier',
+            'Unspecified',
           ]),
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'type',
+        'skuId',
+        'inventory',
+        'taxable',
+        'membershipTypeId',
+        'createdOn',
+        'modifiedOn',
+        'order',
+        'addOn',
+        'active',
+        'invoiceId',
+      ]),
       'type': 'object',
     }),
     'stream': 'invoice_items',
