@@ -18490,19 +18490,452 @@
       ],
       "schema": {
         "properties": {
-          "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "syncStatus": {
+          "summary": {
+            "format": "html",
             "type": [
               "string",
               "null"
             ]
           },
-          "summary": {
+          "items": {
+            "items": {
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "description": {
+                  "format": "html",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "quantity": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "cost": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "totalCost": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "inventoryLocationId": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "inventoryLocation": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "price": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "Indicates a type's item",
+                  "type": "string",
+                  "enum": [
+                    "Service",
+                    "Material",
+                    "Equipment",
+                    "PriceModifier",
+                    "Unspecified"
+                  ]
+                },
+                "skuName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "skuId": {
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "total": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "inventory": {
+                  "type": "boolean"
+                },
+                "taxable": {
+                  "type": "boolean"
+                },
+                "generalLedgerAccount": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "number": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "detailType": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                },
+                "costOfSaleAccount": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "number": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "detailType": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                },
+                "assetAccount": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "number": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "detailType": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                },
+                "membershipTypeId": {
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "itemGroup": {
+                  "properties": {
+                    "rootId": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "required": [
+                    "rootId"
+                  ],
+                  "additionalProperties": false
+                },
+                "displayName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "soldHours": {
+                  "format": "decimal",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "createdOn": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "modifiedOn": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "serviceDate": {
+                  "format": "date-time",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "order": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "businessUnit": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                },
+                "createdById": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "displayInAmount": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "importId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "exportId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "inventoryStatus": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "addOn": {
+                  "type": "boolean"
+                },
+                "memberPrice": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "technicianId": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "installedEquipmentId": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "estimateItemId": {
+                  "description": "The estimate item from which this invoice item was created.",
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "skuId",
+                "inventory",
+                "taxable",
+                "membershipTypeId",
+                "createdOn",
+                "modifiedOn",
+                "order",
+                "addOn"
+              ],
+              "additionalProperties": false
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "customFields": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "active": {
+            "description": "Whether this invoice is active, or not anymore.",
+            "type": "boolean"
+          },
+          "discountTotal": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "importId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "exportId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "materialSkuId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "membershipId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "paidOn": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "syncStatus": {
             "type": [
               "string",
               "null"
@@ -18543,10 +18976,8 @@
           "salesTaxCode": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18555,17 +18986,19 @@
                 ]
               },
               "taxRate": {
-                "type": [
-                  "number",
-                  "null"
-                ]
+                "format": "decimal",
+                "type": "number"
               }
             },
             "type": [
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id",
+              "taxRate"
+            ],
+            "additionalProperties": false
           },
           "total": {
             "type": [
@@ -18582,10 +19015,8 @@
           "invoiceType": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18598,15 +19029,16 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "customer": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18619,7 +19051,10 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "customerAddress": {
             "properties": {
@@ -18664,15 +19099,13 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "additionalProperties": false
           },
           "location": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18685,7 +19118,10 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "locationAddress": {
             "properties": {
@@ -18730,15 +19166,13 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "additionalProperties": false
           },
           "businessUnit": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18751,7 +19185,10 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "termName": {
             "type": [
@@ -18768,10 +19205,8 @@
           "batch": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "number": {
                 "type": [
@@ -18790,7 +19225,10 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "depositedOn": {
             "format": "date-time",
@@ -18801,10 +19239,7 @@
           },
           "createdOn": {
             "format": "date-time",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "modifiedOn": {
             "format": "date-time",
@@ -18814,6 +19249,7 @@
             ]
           },
           "adjustmentToId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -18822,10 +19258,8 @@
           "job": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "number": {
                 "type": [
@@ -18844,9 +19278,13 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "projectId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -18885,15 +19323,13 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "additionalProperties": false
           },
           "employeeInfo": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18903,17 +19339,18 @@
               },
               "modifiedOn": {
                 "format": "date-time",
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": "string"
               }
             },
             "type": [
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id",
+              "modifiedOn"
+            ],
+            "additionalProperties": false
           },
           "commissionEligibilityDate": {
             "type": [
@@ -18922,24 +19359,28 @@
             ]
           },
           "sentStatus": {
-            "type": [
-              "string",
-              "null"
+            "description": "",
+            "type": "string",
+            "enum": [
+              "NotSent",
+              "Sent",
+              "Opened"
             ]
           },
           "reviewStatus": {
-            "type": [
-              "string",
-              "null"
+            "description": "",
+            "type": "string",
+            "enum": [
+              "NeedsReview",
+              "OnHold",
+              "Reviewed"
             ]
           },
           "assignedTo": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -18952,374 +19393,114 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
-          },
-          "items": {
-            "items": {
-              "properties": {
-                "id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "quantity": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "cost": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "totalCost": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "inventoryLocation": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "price": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "skuName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "skuId": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "total": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "inventory": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "taxable": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "generalLedgerAccount": {
-                  "properties": {
-                    "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "number": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "type": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "detailType": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "additionalProperties": true
-                },
-                "costOfSaleAccount": {
-                  "properties": {
-                    "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "number": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "type": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "detailType": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "additionalProperties": true
-                },
-                "assetAccount": {
-                  "properties": {
-                    "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "number": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "type": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "detailType": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "additionalProperties": true
-                },
-                "membershipTypeId": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "itemGroup": {
-                  "properties": {
-                    "rootId": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "additionalProperties": true
-                },
-                "displayName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "soldHours": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "modifiedOn": {
-                  "format": "date-time",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "serviceDate": {
-                  "format": "date-time",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "order": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "businessUnit": {
-                  "properties": {
-                    "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "additionalProperties": true
-                },
-                "estimateItemId": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              },
-              "type": "object",
-              "additionalProperties": true
-            },
-            "type": [
-              "array",
-              "null"
-            ]
-          },
-          "customFields": {
-            "items": {
-              "properties": {
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "value": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "type": "object",
-              "additionalProperties": true
-            },
-            "type": [
-              "array",
-              "null"
-            ]
-          },
-          "active": {
-            "type": [
-              "boolean",
-              "null"
-            ]
-          },
-          "discountTotal": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "importId": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "exportId": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "materialSkuId": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "membershipId": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "paidOn": {
-            "format": "date-time",
-            "type": [
-              "string",
-              "null"
-            ]
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           }
         },
         "type": "object",
-        "$schema": "https://json-schema.org/draft/2020-12/schema"
+        "required": [
+          "active",
+          "id",
+          "createdOn",
+          "sentStatus",
+          "reviewStatus"
+        ],
+        "additionalProperties": false
       },
       "stream": "invoices",
       "metadata": [
+        {
+          "breadcrumb": [
+            "properties",
+            "summary"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "items"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "customFields"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "active"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "discountTotal"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "importId"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "exportId"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "materialSkuId"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "membershipId"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "paidOn"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
         {
           "breadcrumb": [
             "properties",
@@ -19333,15 +19514,6 @@
           "breadcrumb": [
             "properties",
             "syncStatus"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "summary"
           ],
           "metadata": {
             "inclusion": "available"
@@ -20021,87 +20193,6 @@
             "assignedTo",
             "properties",
             "name"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "items"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "customFields"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "active"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "discountTotal"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "importId"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "exportId"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "materialSkuId"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "membershipId"
-          ],
-          "metadata": {
-            "inclusion": "available"
-          }
-        },
-        {
-          "breadcrumb": [
-            "properties",
-            "paidOn"
           ],
           "metadata": {
             "inclusion": "available"
