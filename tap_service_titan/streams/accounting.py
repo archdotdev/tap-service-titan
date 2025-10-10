@@ -749,26 +749,11 @@ class GLAccountsStream(ServiceTitanStream):
     """Define GL accounts stream."""
 
     name = "gl_accounts"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType, required=False),
-        th.Property("number", th.StringType, required=False),
-        th.Property("description", th.StringType, required=False),
-        th.Property("type", th.StringType, required=False),
-        th.Property("subtype", th.StringType, required=False),
-        th.Property("active", th.BooleanType),
-        th.Property("isIntacctGroup", th.BooleanType),
-        th.Property("isIntacctBankAccount", th.BooleanType),
-        th.Property("source", th.StringType),
-        th.Property("defaultAccountType", th.StringType, required=False),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
+    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.GlAccountExtendedResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self._tap.config['tenant_id']}/gl-accounts"
+        return f"/accounting/v2/tenant/{self.tenant_id}/gl-accounts"

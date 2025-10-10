@@ -8,10 +8,8 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
         "type": [
@@ -44,52 +42,86 @@
         ]
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "isIntacctGroup": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "isIntacctBankAccount": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "source": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Undefined",
+          "AccountingSystem",
+          "ManuallyCreated",
+          "PublicApi"
         ]
       },
       "defaultAccountType": {
+        "description": "",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "CheckingAccount",
+          "UndepositedFunds",
+          "AccountsReceivable",
+          "Inventory",
+          "AccountsPayable",
+          "CustomerRefundsPayable",
+          "SalesTaxPayable",
+          "CustomerDeposits",
+          "MembershipAgreements",
+          "RetainedEarnings",
+          "Revenue",
+          "MembershipRevenue",
+          "Refunds",
+          "CostOfGoodsSoldMaterials",
+          "CostOfGoodsSoldEquipment",
+          "CostOfGoodsSoldShipping",
+          "CostOfGoodsSoldTax",
+          "PayrollLabor",
+          "PayrollEmployeeTaxes",
+          "EmployeeBenefits",
+          "EmployerTaxes",
+          "EmployerBenefits",
+          "Deductions",
+          "InventoryAdjustments",
+          "CostOfGoodsSoldRestockingFee",
+          "CostOfGoodsSoldLabor",
+          "PayrollLiability",
+          "PayrollClearing",
+          "CommittedCosts",
+          "GoodsReceivedNotInvoiced",
+          "VendorDiscount",
+          "ProcessingFees",
+          "GoodsReturnedNotCredited"
         ]
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "isIntacctGroup",
+      "isIntacctBankAccount",
+      "source",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "gl_accounts",
   "metadata": [
