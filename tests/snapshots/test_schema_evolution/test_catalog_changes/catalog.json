@@ -16229,12 +16229,11 @@
       "schema": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "purchaseOrderId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -16302,6 +16301,13 @@
               "null"
             ]
           },
+          "modifiedOn": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "termName": {
             "type": [
               "string",
@@ -16324,10 +16330,8 @@
           "batch": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "number": {
                 "type": [
@@ -16346,15 +16350,16 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "businessUnit": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -16367,15 +16372,38 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
+          },
+          "taxZone": {
+            "properties": {
+              "id": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "vendor": {
             "properties": {
               "id": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
               "name": {
                 "type": [
@@ -16388,7 +16416,10 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
           },
           "shipTo": {
             "properties": {
@@ -16433,16 +16464,14 @@
               "object",
               "null"
             ],
-            "additionalProperties": true
+            "additionalProperties": false
           },
           "items": {
             "items": {
               "properties": {
                 "order": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "format": "int32",
+                  "type": "integer"
                 },
                 "name": {
                   "type": [
@@ -16451,6 +16480,7 @@
                   ]
                 },
                 "description": {
+                  "format": "html",
                   "type": [
                     "string",
                     "null"
@@ -16483,10 +16513,8 @@
                 "generalLedgerAccount": {
                   "properties": {
                     "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "name": {
                       "type": [
@@ -16517,15 +16545,16 @@
                     "object",
                     "null"
                   ],
-                  "additionalProperties": true
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
                 },
                 "costOfSaleAccount": {
                   "properties": {
                     "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "name": {
                       "type": [
@@ -16556,15 +16585,16 @@
                     "object",
                     "null"
                   ],
-                  "additionalProperties": true
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
                 },
                 "assetAccount": {
                   "properties": {
                     "id": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "name": {
                       "type": [
@@ -16595,35 +16625,42 @@
                     "object",
                     "null"
                   ],
-                  "additionalProperties": true
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
                 },
                 "id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "receiptItemId": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "format": "int64",
+                  "type": "integer"
                 },
                 "skuId": {
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "receiptItemId": {
+                  "format": "int64",
                   "type": [
                     "integer",
                     "null"
                   ]
                 },
+                "skuType": {
+                  "type": "string"
+                },
                 "skuCode": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 }
               },
               "type": "object",
-              "additionalProperties": true
+              "required": [
+                "order",
+                "id",
+                "skuId",
+                "skuType",
+                "skuCode"
+              ],
+              "additionalProperties": false
             },
             "type": [
               "array",
@@ -16647,7 +16684,7 @@
                 }
               },
               "type": "object",
-              "additionalProperties": true
+              "additionalProperties": false
             },
             "type": [
               "array",
@@ -16655,6 +16692,7 @@
             ]
           },
           "jobId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -16667,14 +16705,15 @@
             ]
           },
           "active": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           }
         },
         "type": "object",
-        "$schema": "https://json-schema.org/draft/2020-12/schema"
+        "required": [
+          "id",
+          "active"
+        ],
+        "additionalProperties": false
       },
       "stream": "inventory_bills",
       "metadata": [
@@ -16789,6 +16828,15 @@
         {
           "breadcrumb": [
             "properties",
+            "modifiedOn"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
             "termName"
           ],
           "metadata": {
@@ -16879,6 +16927,37 @@
           "breadcrumb": [
             "properties",
             "businessUnit",
+            "properties",
+            "name"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "taxZone"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "taxZone",
+            "properties",
+            "id"
+          ],
+          "metadata": {
+            "inclusion": "available"
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "taxZone",
             "properties",
             "name"
           ],
