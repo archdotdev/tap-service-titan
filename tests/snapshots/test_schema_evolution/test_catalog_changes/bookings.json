@@ -7,108 +7,109 @@
   ],
   "schema": {
     "properties": {
-      "id": {
+      "summary": {
+        "description": "Booking summary",
         "type": [
-          "integer",
+          "string",
           "null"
         ]
+      },
+      "id": {
+        "description": "ID of the booking",
+        "format": "int64",
+        "type": "integer"
       },
       "source": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Source of the booking",
+        "type": "string"
       },
       "createdOn": {
+        "description": "when the booking was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the booking's customer",
+        "type": "string"
       },
       "address": {
         "properties": {
           "street": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Booking address street",
+            "type": "string"
           },
           "unit": {
+            "description": "Booking address unit",
             "type": [
               "string",
               "null"
             ]
           },
           "city": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Booking address city",
+            "type": "string"
           },
           "state": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Booking address state",
+            "type": "string"
           },
           "zip": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Booking address zip code",
+            "type": "string"
           },
           "country": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Booking address country",
+            "type": "string"
           }
         },
+        "description": "Address of the booking",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "street",
+          "city",
+          "state",
+          "zip",
+          "country"
+        ],
+        "additionalProperties": false
       },
       "customerType": {
+        "description": "Indicates a customer's type.",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "Residential",
+          "Commercial"
         ]
       },
       "start": {
+        "description": "Booking's start date time, in UTC",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "summary": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "campaignId": {
+        "description": "ID of the booking's campaign",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "businessUnitId": {
+        "description": "ID of the booking's business unit",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "isFirstTimeClient": {
+        "description": "Returns true if first time client",
         "type": [
           "boolean",
           "null"
@@ -116,82 +117,112 @@
       },
       "uploadedImages": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "Uploaded images",
         "type": [
           "array",
           "null"
         ]
       },
       "isSendConfirmationEmail": {
+        "description": "Returns true if customer should receive email when booking is created",
         "type": [
           "boolean",
           "null"
         ]
       },
       "status": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "New",
+          "Converted",
+          "Dismissed",
+          "Accepted"
         ]
       },
       "dismissingReasonId": {
+        "description": "ID of the reason booking was dismissed",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "jobId": {
+        "description": "ID of the job booked from the booking",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "externalId": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "External ID of booking",
+        "type": "string"
       },
       "priority": {
+        "description": "",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "Low",
+          "Normal",
+          "High",
+          "Urgent"
         ]
       },
       "jobTypeId": {
+        "description": "ID of the booking's job type",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "bookingProviderId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Booking provider id",
+        "format": "int64",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "When the booking was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "source",
+      "createdOn",
+      "name",
+      "start",
+      "status",
+      "externalId",
+      "bookingProviderId",
+      "modifiedOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "bookings",
   "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
     {
       "breadcrumb": [
         "properties",
@@ -316,15 +347,6 @@
       "breadcrumb": [
         "properties",
         "start"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "summary"
       ],
       "metadata": {
         "inclusion": "available"

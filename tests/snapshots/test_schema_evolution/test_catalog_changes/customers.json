@@ -8,102 +8,100 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the customer",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "False indicates that someone has deactivated the customer record, typically upon merging with another record.",
+        "type": "boolean"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the customer",
+        "type": "string"
       },
       "type": {
-        "type": [
-          "string",
-          "null"
+        "description": "Indicates a customer's type.",
+        "type": "string",
+        "enum": [
+          "Residential",
+          "Commercial"
         ]
       },
       "address": {
         "properties": {
           "street": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Street",
+            "type": "string"
           },
           "unit": {
+            "description": "Unit",
             "type": [
               "string",
               "null"
             ]
           },
           "city": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "City",
+            "type": "string"
           },
           "state": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "State",
+            "type": "string"
           },
           "zip": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Zip",
+            "type": "string"
           },
           "country": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Country",
+            "type": "string"
           },
           "latitude": {
+            "description": "Latitude",
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "longitude": {
+            "description": "Longitude",
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           }
         },
-        "type": [
-          "object",
-          "null"
+        "description": "Bill-To address of the customer record",
+        "type": "object",
+        "required": [
+          "street",
+          "city",
+          "state",
+          "zip",
+          "country"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "description": "ID of the custom field",
+              "format": "int64",
+              "type": "integer"
             },
             "name": {
+              "description": "Name/label of the custom field",
               "type": [
                 "string",
                 "null"
               ]
             },
             "value": {
+              "description": "Value of the custom field",
               "type": [
                 "string",
                 "null"
@@ -111,63 +109,57 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "typeId"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Customer record\u2019s custom fields",
+        "type": "array"
       },
       "balance": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "description": "Customer\u2019s account balance",
+        "format": "decimal",
+        "type": "number"
+      },
+      "taxExempt": {
+        "description": "Tax Exempt status of the customer.",
+        "type": "boolean"
       },
       "tagTypeIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Tag Type IDs associated with the Customer",
+        "type": "array"
       },
       "doNotMail": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Customer has been flagged as \u201cdo not mail\u201d",
+        "type": "boolean"
       },
       "doNotService": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Customer has been flagged as \u201cdo not service\u201d",
+        "type": "boolean"
       },
       "createdOn": {
+        "description": "DateTime (UTC) that customer record was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "User ID who created the record.",
+        "format": "int64",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "Modified on (UTC) for the record.",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "mergedToId": {
+        "description": "The customer ID of the record that this record was previously merged to.",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -177,29 +169,44 @@
         "items": {
           "properties": {
             "key": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data key.",
+              "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data value.",
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "List of external data attached to this Customer,\nwhich corresponds to the application GUID provided in the request.",
+        "type": "array"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "name",
+      "type",
+      "address",
+      "customFields",
+      "balance",
+      "taxExempt",
+      "tagTypeIds",
+      "doNotMail",
+      "doNotService",
+      "createdOn",
+      "createdById",
+      "modifiedOn",
+      "externalData"
+    ],
+    "additionalProperties": false
   },
   "stream": "customers",
   "metadata": [
@@ -349,6 +356,15 @@
       "breadcrumb": [
         "properties",
         "balance"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxExempt"
       ],
       "metadata": {
         "inclusion": "available"

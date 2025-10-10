@@ -8,24 +8,27 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Id of contact",
+        "format": "int64",
+        "type": "integer"
       },
       "type": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Phone",
+          "Phone",
+          "Email",
+          "Fax",
+          "MobilePhone"
         ]
       },
       "value": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Value of contact",
+        "type": "string"
       },
       "memo": {
+        "description": "Memo of contact",
         "type": [
           "string",
           "null"
@@ -34,46 +37,79 @@
       "phoneSettings": {
         "properties": {
           "phoneNumber": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Phone Number",
+            "type": "string"
           },
           "doNotText": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "description": "If the phone number has opted-out from notifications.",
+            "type": "boolean"
           }
         },
+        "description": "Phone settings of the location contact",
+        "type": "object",
+        "required": [
+          "phoneNumber",
+          "doNotText"
+        ],
+        "additionalProperties": false
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) the contact was last modified",
+        "format": "date-time",
+        "type": "string"
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) the contact was created",
+        "format": "date-time",
+        "type": "string"
+      },
+      "preferences": {
+        "properties": {
+          "jobRemindersEnabled": {
+            "description": "Job Reminders Enabled",
+            "type": "boolean"
+          },
+          "marketingUpdatesEnabled": {
+            "description": "Marketing Updates Enabled",
+            "type": "boolean"
+          },
+          "invoiceStatementNotification": {
+            "description": "Invoice Statement Notification",
+            "type": "boolean"
+          }
+        },
+        "description": "Contact Preferences",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
-      },
-      "modifiedOn": {
-        "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "required": [
+          "jobRemindersEnabled",
+          "marketingUpdatesEnabled",
+          "invoiceStatementNotification"
+        ],
+        "additionalProperties": false
       },
       "locationId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "type",
+      "value",
+      "phoneSettings",
+      "modifiedOn",
+      "createdOn",
+      "locationId",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "location_contacts",
   "metadata": [
@@ -151,6 +187,57 @@
       ],
       "metadata": {
         "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "jobRemindersEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "marketingUpdatesEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "invoiceStatementNotification"
+      ],
+      "metadata": {
+        "inclusion": "available"
       }
     },
     {

@@ -8,24 +8,19 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the custom field type",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "displayName": {
+        "description": "Name of the custom field type",
         "type": [
           "string",
           "null"
         ]
       },
       "dataType": {
+        "description": "The type custom field type (e.g. Text, Dropdown, or Numeric)",
         "type": [
           "string",
           "null"
@@ -33,9 +28,7 @@
       },
       "dataTypeOptions": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
         "description": "The type custom field type (e.g. Text, Dropdown, or Numeric)",
         "type": [
@@ -43,47 +36,24 @@
           "null"
         ]
       },
-      "required": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "enabled": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "allowOnBulkUpdate": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "createdOn": {
+        "description": "DateTime (UTC) that customer record was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Modified on (UTC) for the record.",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "customers_custom_fields",
   "metadata": [
@@ -100,15 +70,6 @@
       "breadcrumb": [
         "properties",
         "name"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "displayName"
       ],
       "metadata": {
         "inclusion": "available"
@@ -135,33 +96,6 @@
     {
       "breadcrumb": [
         "properties",
-        "required"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "enabled"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "allowOnBulkUpdate"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -175,15 +109,6 @@
       ],
       "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "active"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {

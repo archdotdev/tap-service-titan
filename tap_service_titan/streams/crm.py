@@ -29,21 +29,13 @@ class BookingProviderTagsStream(ServiceTitanStream):
     name = "booking_provider_tags"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.BookingProviderTagResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("tagName", th.StringType),
-        th.Property("description", th.StringType),
-        th.Property("type", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/booking-provider-tags"
+        return f"/crm/v2/tenant/{self.tenant_id}/booking-provider-tags"
 
 
 class BookingsStream(ServiceTitanExportStream):
@@ -52,52 +44,13 @@ class BookingsStream(ServiceTitanExportStream):
     name = "bookings"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportBookingResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("source", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("name", th.StringType),
-        th.Property(
-            "address",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-            ),
-        ),
-        th.Property(
-            "customerType", th.StringType
-        ),  # Enum values are actually treated as strings
-        th.Property("start", th.DateTimeType),
-        th.Property("summary", th.StringType),
-        th.Property("campaignId", th.IntegerType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("isFirstTimeClient", th.BooleanType),
-        th.Property("uploadedImages", th.ArrayType(th.StringType)),
-        th.Property("isSendConfirmationEmail", th.BooleanType),
-        th.Property(
-            "status", th.StringType
-        ),  # Enum values are actually treated as strings
-        th.Property("dismissingReasonId", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("externalId", th.StringType),
-        th.Property(
-            "priority", th.StringType
-        ),  # Enum values are actually treated as strings
-        th.Property("jobTypeId", th.IntegerType),
-        th.Property("bookingProviderId", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/bookings"
+        return f"/crm/v2/tenant/{self.tenant_id}/export/bookings"
 
 
 class CustomersStream(ServiceTitanExportStream):
@@ -106,59 +59,15 @@ class CustomersStream(ServiceTitanExportStream):
     name = "customers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportCustomerResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("name", th.StringType),
-        th.Property("type", th.StringType),  # Enum values are treated as strings
-        th.Property(
-            "address",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-                th.Property("latitude", th.NumberType),
-                th.Property("longitude", th.NumberType),
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("balance", th.NumberType),
-        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
-        th.Property("doNotMail", th.BooleanType),
-        th.Property("doNotService", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("mergedToId", th.IntegerType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/customers"
+        return f"/crm/v2/tenant/{self.tenant_id}/export/customers"
 
+    @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for a child stream."""
         return {"customer_id": record["id"]}
@@ -172,19 +81,13 @@ class CustomerNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = CustomersStream
     ignore_parent_replication_key = True
+    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
 
-    schema = th.PropertiesList(
-        th.Property("text", th.StringType),
-        th.Property("isPinned", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers/{'{customer_id}'}/notes"  # noqa: E501
+        return f"/crm/v2/tenant/{self.tenant_id}/customers/{'{customer_id}'}/notes"
 
 
 class CustomerContactsStream(ServiceTitanExportStream):
@@ -193,30 +96,13 @@ class CustomerContactsStream(ServiceTitanExportStream):
     name = "customer_contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportCustomerContactResponse")
 
-    schema = th.PropertiesList(
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "phoneSettings",
-            th.ObjectType(
-                th.Property("phoneNumber", th.StringType),
-                th.Property("doNotText", th.BooleanType),
-            ),
-        ),
-        th.Property("id", th.IntegerType),
-        th.Property("type", th.StringType),  # Enum values are treated as strings
-        th.Property("value", th.StringType),
-        th.Property("memo", th.StringType),
-        th.Property("customerId", th.IntegerType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/customers/contacts"
-        )
+        return f"/crm/v2/tenant/{self.tenant_id}/export/customers/contacts"
 
 
 class LeadsStream(ServiceTitanExportStream):
@@ -247,21 +133,13 @@ class LeadNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = LeadsStream
     ignore_parent_replication_key = True
+    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
 
-    schema = th.PropertiesList(
-        th.Property("text", th.StringType),
-        th.Property("isPinned", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/crm/v2/tenant/{self._tap.config['tenant_id']}/leads/{'{lead_id}'}/notes"
-        )
+        return f"/crm/v2/tenant/{self.tenant_id}/leads/{'{lead_id}'}/notes"
 
 
 class LocationsStream(ServiceTitanExportStream):
@@ -270,58 +148,15 @@ class LocationsStream(ServiceTitanExportStream):
     name = "locations"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportLocationsResponse")
 
-    schema = th.PropertiesList(
-        th.Property("taxZoneId", th.IntegerType),
-        th.Property("id", th.IntegerType),
-        th.Property("customerId", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("name", th.StringType),
-        th.Property(
-            "address",
-            th.ObjectType(
-                th.Property("street", th.StringType),
-                th.Property("unit", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("state", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("country", th.StringType),
-                th.Property("latitude", th.NumberType),
-                th.Property("longitude", th.NumberType),
-            ),
-        ),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("mergedToId", th.IntegerType),
-        th.Property("zoneId", th.IntegerType),
-        th.Property("tagTypeIds", th.ArrayType(th.IntegerType())),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations"
+        return f"/crm/v2/tenant/{self.tenant_id}/export/locations"
 
+    @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for a child stream."""
         return {"location_id": record["id"]}
@@ -335,19 +170,13 @@ class LocationNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = LocationsStream
     ignore_parent_replication_key = True
+    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
 
-    schema = th.PropertiesList(
-        th.Property("text", th.StringType),
-        th.Property("isPinned", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations/{'{location_id}'}/notes"  # noqa: E501
+        return f"/crm/v2/tenant/{self.tenant_id}/locations/{'{location_id}'}/notes"
 
 
 class LocationContactsStream(ServiceTitanExportStream):
@@ -356,30 +185,13 @@ class LocationContactsStream(ServiceTitanExportStream):
     name = "location_contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportLocationContactResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("type", th.StringType),  # Enum values are treated as strings
-        th.Property("value", th.StringType),
-        th.Property("memo", th.StringType),
-        th.Property(
-            "phoneSettings",
-            th.ObjectType(
-                th.Property("phoneNumber", th.StringType),
-                th.Property("doNotText", th.BooleanType),
-            ),
-        ),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/locations/contacts"
-        )
+        return f"/crm/v2/tenant/{self.tenant_id}/export/locations/contacts"
 
 
 class LocationsCustomFieldsStream(ServiceTitanStream):
@@ -388,30 +200,13 @@ class LocationsCustomFieldsStream(ServiceTitanStream):
     name = "locations_custom_fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.Locations.CustomFieldTypeResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("displayName", th.StringType),
-        th.Property("dataType", th.StringType),
-        th.Property(
-            "dataTypeOptions",
-            th.ArrayType(th.StringType),
-            description="The type custom field type (e.g. Text, Dropdown, or Numeric)",
-            nullable=True,
-        ),
-        th.Property("required", th.BooleanType),
-        th.Property("enabled", th.BooleanType),
-        th.Property("allowOnBulkUpdate", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/locations/custom-fields"
+        return f"/crm/v2/tenant/{self.tenant_id}/locations/custom-fields"
 
 
 class CustomersCustomFieldsStream(ServiceTitanStream):
@@ -420,27 +215,10 @@ class CustomersCustomFieldsStream(ServiceTitanStream):
     name = "customers_custom_fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.Customers.CustomFieldTypeResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("displayName", th.StringType),
-        th.Property("dataType", th.StringType),
-        th.Property(
-            "dataTypeOptions",
-            th.ArrayType(th.StringType),
-            description="The type custom field type (e.g. Text, Dropdown, or Numeric)",
-            nullable=True,
-        ),
-        th.Property("required", th.BooleanType),
-        th.Property("enabled", th.BooleanType),
-        th.Property("allowOnBulkUpdate", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/customers/custom-fields"
+        return f"/crm/v2/tenant/{self.tenant_id}/customers/custom-fields"

@@ -8,52 +8,47 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "id of booking provider tag",
+        "format": "int64",
+        "type": "integer"
       },
       "tagName": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of tag",
+        "type": "string"
       },
       "description": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Description of tag",
+        "type": "string"
       },
       "type": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "V1Api",
+          "V2Api"
         ]
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the booking provider tag was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when the booking provider tag was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "tagName",
+      "description",
+      "type",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "booking_provider_tags",
   "metadata": [
@@ -109,15 +104,6 @@
       ],
       "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "active"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {

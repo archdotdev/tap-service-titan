@@ -8,44 +8,57 @@
   ],
   "schema": {
     "properties": {
+      "id": {
+        "description": "Id of the note",
+        "format": "int64",
+        "type": "integer"
+      },
       "text": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Text content of a note",
+        "type": "string"
       },
       "isPinned": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the note is pinned to the top",
+        "type": "boolean"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of user who created this note",
+        "format": "int64",
+        "type": "integer"
       },
       "createdOn": {
+        "description": "Date/time (in UTC) the note was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) the note was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "text",
+      "isPinned",
+      "createdById",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "location_notes",
   "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
     {
       "breadcrumb": [
         "properties",
