@@ -1714,6 +1714,22 @@ files = [
 pytest = ">=3.0.0"
 
 [[package]]
+name = "pytest-subtests"
+version = "0.14.2"
+description = "unittest subTest() support and subtests fixture"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "pytest_subtests-0.14.2-py3-none-any.whl", hash = "sha256:8da0787c994ab372a13a0ad7d390533ad2e4385cac167b3ac501258c885d0b66"},
+    {file = "pytest_subtests-0.14.2.tar.gz", hash = "sha256:7154a8665fd528ee70a76d00216a44d139dc3c9c83521a0f779f7b0ad4f800de"},
+]
+
+[package.dependencies]
+attrs = ">=19.2.0"
+pytest = ">=7.4"
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 description = "Extensions to the standard Python datetime module"
@@ -2820,4 +2836,4 @@ s3 = ["s3fs"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4"
-content-hash = "02c824f6de85514a02f8aa74b35b0ad9ff4d2fff9cf0e576ca5bbeb6700ed818"
+content-hash = "e2714d73d1f6cb80019872f787cecf3f53cab79c852058940c8c55b3f105375b"

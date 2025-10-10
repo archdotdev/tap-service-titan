@@ -1,0 +1,109 @@
+{
+  "tap_stream_id": "capacity_warnings",
+  "replication_method": "FULL_TABLE",
+  "key_properties": [
+    "campaignName",
+    "warningType"
+  ],
+  "schema": {
+    "properties": {
+      "campaignName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "warningType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "businessUnits": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "lookaheadWindow": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "thresholdValue": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "capacity_warnings",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignName"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warningType"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnits"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lookaheadWindow"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "thresholdValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "campaignName",
+          "warningType"
+        ]
+      }
+    }
+  ]
+}

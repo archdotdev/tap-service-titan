@@ -1,0 +1,772 @@
+{
+  "tap_stream_id": "export_services",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Unique id for the SKU",
+        "type": [
+          "integer"
+        ]
+      },
+      "code": {
+        "description": "Code for the SKU",
+        "type": [
+          "string"
+        ]
+      },
+      "displayName": {
+        "description": "Name that displays with the SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "description": "Description on the SKU that is displayed with the item",
+        "type": [
+          "string"
+        ]
+      },
+      "warranty": {
+        "properties": {
+          "duration": {
+            "description": "Warranty duration",
+            "type": [
+              "integer"
+            ]
+          },
+          "description": {
+            "description": "Description of the warranty included in this SKU",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "description": "Warranty included with this SKU",
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "duration"
+        ],
+        "additionalProperties": true
+      },
+      "categories": {
+        "items": {
+          "properties": {
+            "id": {
+              "description": "Unique Category Id",
+              "type": [
+                "integer"
+              ]
+            },
+            "name": {
+              "description": "Category name",
+              "type": [
+                "string"
+              ]
+            },
+            "active": {
+              "description": "Active shows if the Category is active or inactive",
+              "type": [
+                "boolean"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "active"
+          ],
+          "additionalProperties": true
+        },
+        "description": "Categories that this SKU belongs to",
+        "type": "array"
+      },
+      "price": {
+        "description": "Price of this SKU sold",
+        "type": [
+          "number"
+        ]
+      },
+      "memberPrice": {
+        "description": "The price if the item is sold to a member",
+        "type": [
+          "number"
+        ]
+      },
+      "addOnPrice": {
+        "description": "The price of the SKU is sold as an add-on item",
+        "type": [
+          "number"
+        ]
+      },
+      "addOnMemberPrice": {
+        "description": "The price if the SKU is sold to a member as an add-on item",
+        "type": [
+          "number"
+        ]
+      },
+      "taxable": {
+        "description": "Is this SKU taxable",
+        "type": [
+          "boolean"
+        ]
+      },
+      "account": {
+        "description": "The accounting account assigned to this SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "hours": {
+        "description": "Hours needed to complete this service",
+        "type": [
+          "number"
+        ]
+      },
+      "isLabor": {
+        "description": "Is a labor service",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "recommendations": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "description": "Recommended other service or materials to include with this SKU",
+        "type": "array"
+      },
+      "upgrades": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "description": "Upgrades that can be sold for this SKU",
+        "type": "array"
+      },
+      "assets": {
+        "items": {
+          "properties": {
+            "alias": {
+              "description": "Asset alias",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fileName": {
+              "description": "Asset file name when downloaded",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "isDefault": {
+              "description": "It is the default asset",
+              "type": [
+                "boolean"
+              ]
+            },
+            "type": {
+              "description": "Asset type - image, video or PDF",
+              "type": [
+                "string"
+              ]
+            },
+            "url": {
+              "description": "Asset URL",
+              "type": [
+                "string"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "isDefault",
+            "type",
+            "url"
+          ],
+          "additionalProperties": true
+        },
+        "description": "Images, videos or PDFs attached to SKU",
+        "type": "array"
+      },
+      "serviceMaterials": {
+        "items": {
+          "properties": {
+            "skuId": {
+              "description": "Linked SKU unique id",
+              "type": [
+                "integer"
+              ]
+            },
+            "quantity": {
+              "description": "Quantity of linked SKUs",
+              "type": [
+                "number"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "skuId",
+            "quantity"
+          ],
+          "additionalProperties": true
+        },
+        "description": "Array of materials that is used with this service",
+        "type": "array"
+      },
+      "serviceEquipment": {
+        "items": {
+          "properties": {
+            "skuId": {
+              "description": "Linked SKU unique id",
+              "type": [
+                "integer"
+              ]
+            },
+            "quantity": {
+              "description": "Quantity of linked SKUs",
+              "type": [
+                "number"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "skuId",
+            "quantity"
+          ],
+          "additionalProperties": true
+        },
+        "description": "Array of equipment used with this service",
+        "type": "array"
+      },
+      "active": {
+        "description": "Active shows if the SKU is active or inactive",
+        "type": [
+          "boolean"
+        ]
+      },
+      "crossSaleGroup": {
+        "description": "A grouping of similar items that you'll then be able to track as a separate columns on the Technical Performance Board.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "paysCommission": {
+        "description": "PaysCommissions shows if this task pays commission",
+        "type": [
+          "boolean"
+        ]
+      },
+      "bonus": {
+        "description": "Flat rate bonus paid for this task",
+        "type": [
+          "number"
+        ]
+      },
+      "commissionBonus": {
+        "description": "Percentage rate bonus paid for this task",
+        "type": [
+          "number"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Timestamp when the item was last modified",
+        "format": "date-time",
+        "type": [
+          "string"
+        ]
+      },
+      "source": {
+        "description": "The source catalog for this SKU.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalId": {
+        "description": "External id is the id of the original source of the item when it comes from a catalog",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "items": {
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": true
+        },
+        "description": "List of external data attached to this job, that corresponds to the application guid provided in the request.",
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Service's Bussiness Unit Id",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "cost": {
+        "description": "Service Cost",
+        "type": [
+          "number"
+        ]
+      },
+      "createdOn": {
+        "description": "Timestamp when the item was created",
+        "format": "date-time",
+        "type": [
+          "string"
+        ]
+      },
+      "soldByCommission": {
+        "description": "Sold by commission",
+        "type": [
+          "number"
+        ]
+      },
+      "defaultAssetUrl": {
+        "description": "Default Asset Url",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "budgetCostCode": {
+        "description": "The Budget CostCode segment for this entity. (Note: BudgetCostType should also be provided)",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "budgetCostType": {
+        "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "required": [
+      "id",
+      "code",
+      "description",
+      "categories",
+      "price",
+      "memberPrice",
+      "addOnPrice",
+      "addOnMemberPrice",
+      "taxable",
+      "hours",
+      "recommendations",
+      "upgrades",
+      "assets",
+      "serviceMaterials",
+      "serviceEquipment",
+      "active",
+      "paysCommission",
+      "bonus",
+      "commissionBonus",
+      "modifiedOn",
+      "cost",
+      "createdOn",
+      "soldByCommission"
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "export_services",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "code"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warranty"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warranty",
+        "properties",
+        "duration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warranty",
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "categories"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "price"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memberPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "addOnPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "addOnMemberPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "account"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hours"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isLabor"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recommendations"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "upgrades"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assets"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "serviceMaterials"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "serviceEquipment"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "crossSaleGroup"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paysCommission"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bonus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "commissionBonus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "source"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldByCommission"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "defaultAssetUrl"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCostCode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCostType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}
