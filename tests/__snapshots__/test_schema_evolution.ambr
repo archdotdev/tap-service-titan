@@ -1077,6 +1077,33 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'canceledReason',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'canceledById',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'dateCanceled',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'externalData',
         ]),
         'metadata': dict({
@@ -1120,97 +1147,136 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Inventory adjustment response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Is active',
+          'type': 'boolean',
         }),
         'batch': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents Batch response',
           'properties': dict({
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'description': 'Batch Id',
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
+              'description': 'Batch name',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'number': dict({
+              'description': 'Batch number',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'batchId': dict({
+          'deprecated': True,
+          'description': 'Batch Id (Deprecated - Use Batch instead)',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'businessUnitId': dict({
+          'description': 'Business Unit Id',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
+        'canceledById': dict({
+          'description': 'Employee who canceled this adjustment',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
+        'canceledReason': dict({
+          'description': '',
+          'enum': list([
+            'NotRequired',
+            'Duplicate',
+            'Accidental',
+            'VendorIssue',
+            'Other',
+            'JobCanceled',
+            'NotWarranty',
+            'WarrantyRejected',
+          ]),
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
         'createdById': dict({
+          'description': 'Employee who created this adjustment',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdOn': dict({
+          'description': 'system created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'customFields': dict({
+          'description': 'Collection of custom fields',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Represents custom field response',
             'properties': dict({
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field name',
+                'type': 'string',
               }),
               'typeId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Id of custom field type',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field value',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'typeId',
+              'name',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'date': dict({
+          'description': 'Adjustment date',
+          'format': 'date-time',
+          'type': 'string',
+        }),
+        'dateCanceled': dict({
+          'description': 'time the adjustment was canceled',
           'format': 'date-time',
           'type': list([
             'string',
@@ -1218,127 +1284,187 @@
           ]),
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this warehouse,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Inventory adjustment Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'inventoryLocationId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Id of Inventory Location for this adjustment',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'items': dict({
+          'description': 'Collection of adjustment items',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Inventory adjustment item response',
             'properties': dict({
+              'active': dict({
+                'description': 'Is active',
+                'type': 'boolean',
+              }),
               'code': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item code',
+                'type': 'string',
               }),
-              'description': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
-              }),
-              'id': dict({
+              'createdById': dict({
+                'description': 'Employee who canceled this transfer',
+                'format': 'int64',
                 'type': list([
                   'integer',
                   'null',
                 ]),
               }),
+              'createdOn': dict({
+                'description': 'system created date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
+              'description': dict({
+                'description': 'Item description',
+                'format': 'html',
+                'type': 'string',
+              }),
+              'id': dict({
+                'description': 'Item Id',
+                'format': 'int64',
+                'type': 'integer',
+              }),
+              'modifiedOn': dict({
+                'description': 'last time transfer item was modified date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item name',
+                'type': 'string',
               }),
               'quantity': dict({
+                'description': 'Adjustment quantity',
+                'format': 'decimal',
+                'type': 'number',
+              }),
+              'serialNumbers': dict({
+                'description': 'List of serial numbers',
+                'items': dict({
+                  'additionalProperties': False,
+                  'description': 'Represents serial number response',
+                  'properties': dict({
+                    'id': dict({
+                      'description': 'Id of this serial number',
+                      'format': 'int64',
+                      'type': 'integer',
+                    }),
+                    'number': dict({
+                      'description': 'Serial number value',
+                      'type': 'string',
+                    }),
+                  }),
+                  'required': list([
+                    'id',
+                    'number',
+                  ]),
+                  'type': 'object',
+                }),
                 'type': list([
-                  'number',
+                  'array',
                   'null',
                 ]),
               }),
               'skuId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Sku Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
             }),
+            'required': list([
+              'id',
+              'skuId',
+              'description',
+              'createdOn',
+              'modifiedOn',
+              'name',
+              'code',
+              'quantity',
+              'active',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'memo/summary field',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'last time adjustment was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'number': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Number',
+          'type': 'string',
         }),
         'referenceNumber': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Reference number',
+          'type': 'string',
         }),
         'syncStatus': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': 'Sync status enum',
+          'enum': list([
+            'Pending',
+            'Posted',
+            'Exported',
           ]),
+          'type': 'string',
         }),
         'type': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Inventory Adjustment Type',
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'active',
+        'number',
+        'referenceNumber',
+        'type',
+        'inventoryLocationId',
+        'memo',
+        'date',
+        'createdOn',
+        'modifiedOn',
+        'syncStatus',
+        'externalData',
+        'items',
+        'customFields',
+      ]),
       'type': 'object',
     }),
     'stream': 'adjustments',
@@ -31870,6 +31996,24 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'createdOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'modifiedOn',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'from',
         ]),
         'metadata': dict({
@@ -31918,33 +32062,42 @@
     ]),
     'replication_method': 'FULL_TABLE',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Represents purchase order markup response',
       'properties': dict({
+        'createdOn': dict({
+          'format': 'date-time',
+          'type': 'string',
+        }),
         'from': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'format': 'decimal',
+          'type': 'number',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int64',
+          'type': 'integer',
+        }),
+        'modifiedOn': dict({
+          'format': 'date-time',
+          'type': 'string',
         }),
         'percent': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'format': 'decimal',
+          'type': 'number',
         }),
         'to': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'format': 'decimal',
+          'type': 'number',
         }),
       }),
+      'required': list([
+        'createdOn',
+        'modifiedOn',
+        'from',
+        'to',
+        'percent',
+        'id',
+      ]),
       'type': 'object',
     }),
     'stream': 'purchase_order_markups',
@@ -32084,82 +32237,76 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Represents purchase order type response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Active',
+          'type': 'boolean',
         }),
         'allowTechniciansToSendPo': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Allow permitted technicians to send and receive POs of this type',
+          'type': 'boolean',
         }),
         'automaticallyReceive': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Automatically receive purchase order',
+          'type': 'boolean',
         }),
         'createdOn': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'System created date',
+          'format': 'date-time',
+          'type': 'string',
         }),
         'defaultRequiredDateDaysOffset': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Default number of days to offset required date',
+          'format': 'int32',
+          'type': 'integer',
         }),
         'displayToTechnician': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Display purchase order type to technicain on mobile',
+          'type': 'boolean',
         }),
         'excludeTaxFromJobCosting': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Exclude tax from job costing',
+          'type': 'boolean',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Purchase order type Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'impactToTechnicianPayroll': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Default Selection for Impact to Technician Payroll on Purchase Order',
+          'type': 'boolean',
         }),
         'modifiedOn': dict({
+          'description': 'Last time purchase order type was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'name': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Purchase order type Name',
+          'type': 'string',
         }),
         'skipWeekends': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Skip weekends',
+          'type': 'boolean',
         }),
       }),
+      'required': list([
+        'id',
+        'name',
+        'active',
+        'automaticallyReceive',
+        'displayToTechnician',
+        'impactToTechnicianPayroll',
+        'allowTechniciansToSendPo',
+        'defaultRequiredDateDaysOffset',
+        'skipWeekends',
+        'excludeTaxFromJobCosting',
+        'createdOn',
+        'modifiedOn',
+      ]),
       'type': 'object',
     }),
     'stream': 'purchase_order_types',
@@ -32358,6 +32505,15 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'budgetCodeId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'vendorDocumentNumber',
         ]),
         'metadata': dict({
@@ -32491,337 +32647,385 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
         'batchId': dict({
+          'description': 'Batch Id of PO',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
+        'budgetCodeId': dict({
+          'description': 'Id of the budget code for this PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'businessUnitId': dict({
+          'description': 'Id of business unit for this PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdOn': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'When PO was created, system date',
+          'format': 'date-time',
+          'type': 'string',
         }),
         'customFields': dict({
+          'description': 'List of custom fields for this PO',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Represents custom field response',
             'properties': dict({
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field name',
+                'type': 'string',
               }),
               'typeId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Id of custom field type',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field value',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'typeId',
+              'name',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'date': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'PO date',
+          'format': 'date-time',
+          'type': 'string',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Purchase order Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'inventoryLocationId': dict({
+          'description': 'Inventory location Id of PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'invoiceId': dict({
+          'description': 'Id of invoice associated with PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'items': dict({
+          'description': 'List of PO items',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Represents purchase order item response',
             'properties': dict({
-              'chargeable': dict({
+              'budgetCodeId': dict({
+                'description': 'Id of the budget code for this PO item',
+                'format': 'int64',
                 'type': list([
-                  'boolean',
+                  'integer',
                   'null',
                 ]),
+              }),
+              'chargeable': dict({
+                'description': 'Indicates whether item price is charged to customer',
+                'type': 'boolean',
               }),
               'cost': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Item cost',
+                'format': 'decimal',
+                'type': 'number',
+              }),
+              'createdOn': dict({
+                'description': 'system created date',
+                'format': 'date-time',
+                'type': 'string',
               }),
               'description': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item description',
+                'format': 'html',
+                'type': 'string',
               }),
               'id': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Item Id',
+                'format': 'int64',
+                'type': 'integer',
+              }),
+              'modifiedOn': dict({
+                'description': 'last time transfer item was modified date',
+                'format': 'date-time',
+                'type': 'string',
               }),
               'quantity': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Item quantity',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'quantityReceived': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Quantity received for this item, PO must have at least one receipt for this to be not 0',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'serialNumbers': dict({
+                'description': 'List of serial numbers',
                 'items': dict({
-                  'additionalProperties': True,
+                  'additionalProperties': False,
+                  'description': 'Represents serial number response',
                   'properties': dict({
                     'id': dict({
-                      'type': list([
-                        'integer',
-                        'null',
-                      ]),
+                      'description': 'Id of this serial number',
+                      'format': 'int64',
+                      'type': 'integer',
                     }),
                     'number': dict({
-                      'type': list([
-                        'string',
-                        'null',
-                      ]),
+                      'description': 'Serial number value',
+                      'type': 'string',
                     }),
                   }),
+                  'required': list([
+                    'id',
+                    'number',
+                  ]),
                   'type': 'object',
                 }),
-                'type': list([
-                  'array',
-                  'null',
-                ]),
+                'type': 'array',
               }),
               'skuCode': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item code',
+                'type': 'string',
               }),
               'skuId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Sku Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'skuName': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item name',
+                'type': 'string',
               }),
               'skuType': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item type(material or equipment)',
+                'type': 'string',
               }),
               'status': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item status',
+                'type': 'string',
               }),
               'total': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Item total cost',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'vendorPartNumber': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Vendor part number for this item',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'id',
+              'skuId',
+              'description',
+              'createdOn',
+              'modifiedOn',
+              'skuName',
+              'skuCode',
+              'skuType',
+              'vendorPartNumber',
+              'quantity',
+              'quantityReceived',
+              'cost',
+              'total',
+              'serialNumbers',
+              'status',
+              'chargeable',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'jobId': dict({
+          'description': 'Id of job associated with PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'modifiedOn': dict({
+          'description': 'When PO was last modified, system date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'number': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Purchase order number',
+          'type': 'string',
         }),
         'projectId': dict({
+          'description': 'Id of project associated with PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'receivedOn': dict({
+          'description': 'PO received on date',
+          'format': 'date-time',
           'type': list([
             'string',
             'null',
           ]),
         }),
         'requiredOn': dict({
+          'description': 'PO required on date',
+          'format': 'date-time',
           'type': list([
             'string',
             'null',
           ]),
         }),
         'sentOn': dict({
+          'description': 'PO sent on date',
+          'format': 'date-time',
           'type': list([
             'string',
             'null',
           ]),
         }),
         'shipTo': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents address response',
           'properties': dict({
             'city': dict({
+              'description': 'City',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'country': dict({
+              'description': 'Country code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'state': dict({
+              'description': 'State',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'street': dict({
+              'description': 'Street',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'unit': dict({
+              'description': 'Unit',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'zip': dict({
+              'description': 'Zip code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
-          'type': list([
-            'object',
-            'null',
-          ]),
+          'type': 'object',
         }),
         'shipping': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'PO shipping cost',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'status': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Status of this PO',
+          'type': 'string',
         }),
         'summary': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'PO summary/memo',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'tax': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'PO tax',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'technicianId': dict({
+          'description': 'Id of technician for this PO',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'total': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'PO total, including items cost, tax and shipping cost',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'typeId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'The purchase order type Id of this PO',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'vendorDocumentNumber': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Vendor document number of PO',
+          'type': 'string',
         }),
         'vendorId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Id of vendor for this PO',
+          'format': 'int64',
+          'type': 'integer',
         }),
       }),
+      'required': list([
+        'id',
+        'number',
+        'status',
+        'typeId',
+        'vendorId',
+        'shipTo',
+        'vendorDocumentNumber',
+        'date',
+        'createdOn',
+        'modifiedOn',
+        'total',
+        'tax',
+        'shipping',
+        'summary',
+        'items',
+        'customFields',
+      ]),
       'type': 'object',
     }),
     'stream': 'purchase_orders',
@@ -33110,6 +33314,15 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'budgetCodeId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'items',
         ]),
         'metadata': dict({
@@ -33144,113 +33357,130 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Inventory receipt response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Is active',
+          'type': 'boolean',
         }),
         'batchId': dict({
+          'description': 'Id of batch',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'billId': dict({
+          'description': 'Id of bill',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
+        'budgetCodeId': dict({
+          'description': 'Id of the budget code',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'businessUnitId': dict({
+          'description': 'Id of business unit',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdById': dict({
+          'description': 'User who created this receipt',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdOn': dict({
+          'description': 'System created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'customFields': dict({
+          'description': 'Collection of custom fields',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Represents custom field response',
             'properties': dict({
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field name',
+                'type': 'string',
               }),
               'typeId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Id of custom field type',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field value',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'typeId',
+              'name',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Receipt Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'inventoryLocationId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Id of inventory location',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'items': dict({
+          'description': 'Collection of receipt items',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Inventory receipt item response',
             'properties': dict({
               'assetAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -33262,40 +33492,50 @@
                   'null',
                 ]),
               }),
-              'code': dict({
+              'budgetCodeId': dict({
+                'description': 'Id of the budget code',
+                'format': 'int64',
                 'type': list([
-                  'string',
+                  'integer',
                   'null',
                 ]),
+              }),
+              'code': dict({
+                'description': 'Item Code',
+                'type': 'string',
               }),
               'cost': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Item cost',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'costOfSaleAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -33308,33 +33548,37 @@
                 ]),
               }),
               'description': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item Description',
+                'format': 'html',
+                'type': 'string',
               }),
               'generalLedgerAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -33347,75 +33591,77 @@
                 ]),
               }),
               'id': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Item Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item Name',
+                'type': 'string',
+              }),
+              'purchaseOrderItemId': dict({
+                'format': 'int64',
+                'type': 'integer',
               }),
               'quantity': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Receipt quantity',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'skuId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Sku Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
             }),
+            'required': list([
+              'id',
+              'skuId',
+              'name',
+              'code',
+              'description',
+              'quantity',
+              'cost',
+              'purchaseOrderItemId',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'jobId': dict({
+          'description': 'Id of job',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Memo/summary field',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'last time receipt was modified',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'number': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Number',
+          'type': 'string',
         }),
         'purchaseOrderId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Id of purchase order',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'receiptAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Receipt total, including tax and shipping',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'receivedOn': dict({
+          'description': 'Date received',
           'format': 'date-time',
           'type': list([
             'string',
@@ -33423,39 +33669,46 @@
           ]),
         }),
         'shipTo': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents address response',
           'properties': dict({
             'city': dict({
+              'description': 'City',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'country': dict({
+              'description': 'Country code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'state': dict({
+              'description': 'State',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'street': dict({
+              'description': 'Street',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'unit': dict({
+              'description': 'Unit',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'zip': dict({
+              'description': 'Zip code',
               'type': list([
                 'string',
                 'null',
@@ -33468,48 +33721,65 @@
           ]),
         }),
         'shipToDescription': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Ship to description',
+          'type': 'string',
         }),
         'shippingAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Receipt shipping cost',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'syncStatus': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': 'Sync status enum',
+          'enum': list([
+            'Pending',
+            'Posted',
+            'Exported',
           ]),
+          'type': 'string',
         }),
         'taxAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Receipt tax',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'technicianId': dict({
+          'description': 'Id of technician',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'vendorId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Id of vendor',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'vendorInvoiceNumber': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Vendor invoice number',
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'active',
+        'number',
+        'vendorInvoiceNumber',
+        'memo',
+        'purchaseOrderId',
+        'vendorId',
+        'inventoryLocationId',
+        'shipToDescription',
+        'receiptAmount',
+        'taxAmount',
+        'shippingAmount',
+        'createdOn',
+        'modifiedOn',
+        'syncStatus',
+        'items',
+        'customFields',
+      ]),
       'type': 'object',
     }),
     'stream': 'receipts',
@@ -34847,6 +35117,24 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'projectId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'budgetCodeId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'businessUnitId',
         ]),
         'metadata': dict({
@@ -35015,6 +35303,33 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'canceledById',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'canceledReason',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'dateCanceled',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'items',
         ]),
         'metadata': dict({
@@ -35058,67 +35373,107 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Inventory return response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Is active',
+          'type': 'boolean',
         }),
         'batch': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents Batch response',
           'properties': dict({
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'description': 'Batch Id',
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
+              'description': 'Batch name',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'number': dict({
+              'description': 'Batch number',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'batchId': dict({
+          'deprecated': True,
+          'description': 'Batch Id (Deprecated - Use Batch instead)',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
+        'budgetCodeId': dict({
+          'description': 'Budget code Id for the return',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'businessUnitId': dict({
+          'description': 'Business unit',
+          'format': 'int64',
+          'type': 'integer',
+        }),
+        'canceledById': dict({
+          'description': 'Employee who canceled this transfer',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
+        'canceledReason': dict({
+          'description': '',
+          'enum': list([
+            'NotRequired',
+            'Duplicate',
+            'Accidental',
+            'VendorIssue',
+            'Other',
+            'JobCanceled',
+            'NotWarranty',
+            'WarrantyRejected',
+          ]),
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
         'createdById': dict({
+          'description': 'Employee who created this return',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdOn': dict({
+          'description': 'System created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'creditReceivedOn': dict({
+          'description': 'Date when credit was received',
           'format': 'date-time',
           'type': list([
             'string',
@@ -35126,97 +35481,117 @@
           ]),
         }),
         'customFields': dict({
+          'description': 'Collection of custom fields',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Represents custom field response',
             'properties': dict({
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field name',
+                'type': 'string',
               }),
               'typeId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Id of custom field type',
+                'format': 'int64',
+                'type': 'integer',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Custom field value',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'typeId',
+              'name',
+              'value',
+            ]),
             'type': 'object',
           }),
+          'type': 'array',
+        }),
+        'dateCanceled': dict({
+          'description': 'Transfer canceled date',
+          'format': 'date-time',
           'type': list([
-            'array',
+            'string',
             'null',
           ]),
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this return,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Return Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'inventoryLocationId': dict({
+          'description': 'Inventory location',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'items': dict({
+          'description': 'Collection of return items',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Inventory return item response',
             'properties': dict({
+              'active': dict({
+                'description': 'Is active',
+                'type': 'boolean',
+              }),
               'assetAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -35225,43 +35600,53 @@
                 }),
                 'type': list([
                   'object',
+                  'null',
+                ]),
+              }),
+              'budgetCodeId': dict({
+                'description': 'Budget code Id for the item',
+                'format': 'int64',
+                'type': list([
+                  'integer',
                   'null',
                 ]),
               }),
               'code': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item code',
+                'type': 'string',
               }),
               'cost': dict({
-                'type': list([
-                  'number',
-                  'null',
-                ]),
+                'description': 'Item cost',
+                'format': 'decimal',
+                'type': 'number',
               }),
               'costOfSaleAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -35273,34 +35658,51 @@
                   'null',
                 ]),
               }),
-              'description': dict({
+              'createdById': dict({
+                'description': 'Employee who canceled this transfer',
+                'format': 'int64',
                 'type': list([
-                  'string',
+                  'integer',
                   'null',
                 ]),
               }),
+              'createdOn': dict({
+                'description': 'system created date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
+              'description': dict({
+                'description': 'Item description',
+                'format': 'html',
+                'type': 'string',
+              }),
               'generalLedgerAccount': dict({
-                'additionalProperties': True,
+                'additionalProperties': False,
+                'description': 'Represents GL account response',
                 'properties': dict({
                   'detailType': dict({
+                    'description': 'GL Account detail type',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'name': dict({
+                    'description': 'GL Account name',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'number': dict({
+                    'description': 'GL Account number',
                     'type': list([
                       'string',
                       'null',
                     ]),
                   }),
                   'type': dict({
+                    'description': 'GL Account type',
                     'type': list([
                       'string',
                       'null',
@@ -35313,88 +35715,135 @@
                 ]),
               }),
               'id': dict({
+                'description': 'Item Id',
+                'format': 'int64',
+                'type': 'integer',
+              }),
+              'modifiedOn': dict({
+                'description': 'last time transfer item was modified date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
+              'name': dict({
+                'description': 'Item name',
+                'type': 'string',
+              }),
+              'quantity': dict({
+                'description': 'Return quantity',
+                'format': 'decimal',
+                'type': 'number',
+              }),
+              'receiptItemId': dict({
+                'description': 'Receipt item Id',
+                'format': 'int64',
                 'type': list([
                   'integer',
                   'null',
                 ]),
               }),
-              'name': dict({
+              'serialNumbers': dict({
+                'description': 'List of serial numbers',
+                'items': dict({
+                  'additionalProperties': False,
+                  'description': 'Represents serial number response',
+                  'properties': dict({
+                    'id': dict({
+                      'description': 'Id of this serial number',
+                      'format': 'int64',
+                      'type': 'integer',
+                    }),
+                    'number': dict({
+                      'description': 'Serial number value',
+                      'type': 'string',
+                    }),
+                  }),
+                  'required': list([
+                    'id',
+                    'number',
+                  ]),
+                  'type': 'object',
+                }),
                 'type': list([
-                  'string',
-                  'null',
-                ]),
-              }),
-              'quantity': dict({
-                'type': list([
-                  'number',
+                  'array',
                   'null',
                 ]),
               }),
               'skuId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Sku Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
             }),
+            'required': list([
+              'id',
+              'skuId',
+              'description',
+              'createdOn',
+              'modifiedOn',
+              'name',
+              'code',
+              'quantity',
+              'cost',
+              'active',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'jobId': dict({
+          'description': 'Job',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Memo/summary field',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'Last time return was modified',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'number': dict({
+          'description': 'Number',
+          'type': 'string',
+        }),
+        'projectId': dict({
+          'description': 'Project',
+          'format': 'int64',
           'type': list([
-            'string',
+            'integer',
             'null',
           ]),
         }),
         'purchaseOrderId': dict({
+          'description': 'Purchase order',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'referenceNumber': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Reference number',
+          'type': 'string',
         }),
         'returnAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Return total, including tax and shipping',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'returnDate': dict({
+          'description': 'Return creation date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'returnedOn': dict({
+          'description': 'Date when return was actually processed',
           'format': 'date-time',
           'type': list([
             'string',
@@ -35402,36 +35851,60 @@
           ]),
         }),
         'shippingAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Return shipping cost',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'status': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': '',
+          'enum': list([
+            'Pending',
+            'Returned',
+            'CreditReceived',
+            'Canceled',
           ]),
+          'type': 'string',
         }),
         'syncStatus': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': 'Sync status enum',
+          'enum': list([
+            'Pending',
+            'Posted',
+            'Exported',
           ]),
+          'type': 'string',
         }),
         'taxAmount': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Return tax',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'vendorId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Vendor',
+          'format': 'int64',
+          'type': 'integer',
         }),
       }),
+      'required': list([
+        'id',
+        'active',
+        'number',
+        'referenceNumber',
+        'status',
+        'vendorId',
+        'businessUnitId',
+        'memo',
+        'returnAmount',
+        'taxAmount',
+        'shippingAmount',
+        'returnDate',
+        'createdOn',
+        'modifiedOn',
+        'syncStatus',
+        'items',
+        'customFields',
+        'externalData',
+      ]),
       'type': 'object',
     }),
     'stream': 'returns',
@@ -41354,6 +41827,87 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'dateRequired',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'jobId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'invoiceId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'canceledById',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'canceledReason',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'dateCanceled',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'active',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'pickedById',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'receivedById',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'items',
         ]),
         'metadata': dict({
@@ -41397,85 +41951,136 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Inventory transfer response',
       'properties': dict({
+        'active': dict({
+          'description': 'Is active',
+          'type': 'boolean',
+        }),
         'batch': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents Batch response',
           'properties': dict({
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'description': 'Batch Id',
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
+              'description': 'Batch name',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'number': dict({
+              'description': 'Batch number',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
           ]),
         }),
         'batchId': dict({
+          'deprecated': True,
+          'description': 'Batch Id (Deprecated - Use Batch instead)',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
+        'canceledById': dict({
+          'description': 'Employee who canceled this transfer',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
+        'canceledReason': dict({
+          'description': '',
+          'enum': list([
+            'NotRequired',
+            'Duplicate',
+            'Accidental',
+            'VendorIssue',
+            'Other',
+            'JobCanceled',
+            'NotWarranty',
+            'WarrantyRejected',
+          ]),
+          'type': list([
+            'string',
+            'null',
+          ]),
+        }),
         'createdById': dict({
+          'description': 'Employee who created this transfer',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'createdOn': dict({
+          'description': 'system created date',
+          'format': 'date-time',
+          'type': 'string',
+        }),
+        'customFields': dict({
+          'description': 'Collection of custom fields',
+          'items': dict({
+            'additionalProperties': False,
+            'description': 'Represents custom field response',
+            'properties': dict({
+              'name': dict({
+                'description': 'Custom field name',
+                'type': 'string',
+              }),
+              'typeId': dict({
+                'description': 'Id of custom field type',
+                'format': 'int64',
+                'type': 'integer',
+              }),
+              'value': dict({
+                'description': 'Custom field value',
+                'type': 'string',
+              }),
+            }),
+            'required': list([
+              'typeId',
+              'name',
+              'value',
+            ]),
+            'type': 'object',
+          }),
+          'type': 'array',
+        }),
+        'date': dict({
+          'description': 'Transfer date',
+          'format': 'date-time',
+          'type': 'string',
+        }),
+        'dateCanceled': dict({
+          'description': 'Transfer canceled date',
           'format': 'date-time',
           'type': list([
             'string',
             'null',
           ]),
         }),
-        'customFields': dict({
-          'items': dict({
-            'additionalProperties': True,
-            'properties': dict({
-              'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
-              }),
-              'typeId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
-              }),
-              'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
-              }),
-            }),
-            'type': 'object',
-          }),
-          'type': list([
-            'array',
-            'null',
-          ]),
-        }),
-        'date': dict({
+        'dateRequired': dict({
+          'description': 'Transfer required by date',
           'format': 'date-time',
           'type': list([
             'string',
@@ -41483,22 +42088,26 @@
           ]),
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this return,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
           'type': list([
@@ -41507,92 +42116,176 @@
           ]),
         }),
         'fromLocationId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Inventory location to transfer from',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'id': dict({
+          'description': 'Inventory transfer Id',
+          'format': 'int64',
+          'type': 'integer',
+        }),
+        'invoiceId': dict({
+          'description': 'Id of invoice associated with transfer',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
         'items': dict({
+          'description': 'Collection of transfer items',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
+            'description': 'Inventory transfer item response',
             'properties': dict({
+              'active': dict({
+                'description': 'Is active',
+                'type': 'boolean',
+              }),
               'code': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item code',
+                'type': 'string',
               }),
-              'description': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
-              }),
-              'id': dict({
+              'createdById': dict({
+                'description': 'Employee who canceled this transfer',
+                'format': 'int64',
                 'type': list([
                   'integer',
                   'null',
                 ]),
               }),
+              'createdOn': dict({
+                'description': 'system created date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
+              'description': dict({
+                'description': 'Item description',
+                'format': 'html',
+                'type': 'string',
+              }),
+              'id': dict({
+                'description': 'Item Id',
+                'format': 'int64',
+                'type': 'integer',
+              }),
+              'modifiedOn': dict({
+                'description': 'last time transfer item was modified date',
+                'format': 'date-time',
+                'type': 'string',
+              }),
               'name': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'Item name',
+                'type': 'string',
               }),
               'quantity': dict({
+                'description': 'Transfer quantity',
+                'format': 'decimal',
+                'type': 'number',
+              }),
+              'quantityPicked': dict({
+                'description': 'Transfer quantity already picked',
+                'format': 'decimal',
+                'type': 'number',
+              }),
+              'serialNumbers': dict({
+                'description': 'List of serial numbers',
+                'items': dict({
+                  'additionalProperties': False,
+                  'description': 'Represents serial number response',
+                  'properties': dict({
+                    'id': dict({
+                      'description': 'Id of this serial number',
+                      'format': 'int64',
+                      'type': 'integer',
+                    }),
+                    'number': dict({
+                      'description': 'Serial number value',
+                      'type': 'string',
+                    }),
+                  }),
+                  'required': list([
+                    'id',
+                    'number',
+                  ]),
+                  'type': 'object',
+                }),
                 'type': list([
-                  'number',
+                  'array',
                   'null',
                 ]),
               }),
               'skuId': dict({
-                'type': list([
-                  'integer',
-                  'null',
-                ]),
+                'description': 'Sku Id',
+                'format': 'int64',
+                'type': 'integer',
               }),
             }),
+            'required': list([
+              'id',
+              'skuId',
+              'description',
+              'createdOn',
+              'modifiedOn',
+              'name',
+              'code',
+              'quantity',
+              'quantityPicked',
+              'active',
+            ]),
             'type': 'object',
           }),
+          'type': 'array',
+        }),
+        'jobId': dict({
+          'description': 'Id of job associated with transfer',
+          'format': 'int64',
           'type': list([
-            'array',
+            'integer',
             'null',
           ]),
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Memo/summary field',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'last time transfer was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'number': dict({
+          'description': 'Number',
+          'type': 'string',
+        }),
+        'pickedById': dict({
+          'description': 'Employee who picked this transfer',
+          'format': 'int64',
           'type': list([
-            'string',
+            'integer',
             'null',
           ]),
         }),
         'pickedDate': dict({
+          'description': 'Transfer picked date',
           'format': 'date-time',
           'type': list([
             'string',
             'null',
           ]),
         }),
+        'receivedById': dict({
+          'description': 'Employee who received this transfer',
+          'format': 'int64',
+          'type': list([
+            'integer',
+            'null',
+          ]),
+        }),
         'receivedDate': dict({
+          'description': 'Transfer recevived date',
           'format': 'date-time',
           'type': list([
             'string',
@@ -41600,36 +42293,49 @@
           ]),
         }),
         'referenceNumber': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Reference number',
+          'type': 'string',
         }),
         'status': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Status',
+          'type': 'string',
         }),
         'syncStatus': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': 'Sync status enum',
+          'enum': list([
+            'Pending',
+            'Posted',
+            'Exported',
           ]),
+          'type': 'string',
         }),
         'toLocationId': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Inventory location where transfer is going',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'transferType': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Type',
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'transferType',
+        'status',
+        'number',
+        'referenceNumber',
+        'fromLocationId',
+        'toLocationId',
+        'memo',
+        'date',
+        'createdOn',
+        'modifiedOn',
+        'syncStatus',
+        'active',
+        'items',
+        'customFields',
+      ]),
       'type': 'object',
     }),
     'stream': 'transfers',
@@ -41742,88 +42448,89 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Represents truck response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Active',
+          'type': 'boolean',
         }),
         'createdOn': dict({
+          'description': 'System created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this warehouse,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Truck Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Memo',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'Last time truck was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'name': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Truck Name',
+          'type': 'string',
         }),
         'technicianIds': dict({
+          'description': 'Technician Ids associated with this truck',
           'items': dict({
-            'type': list([
-              'integer',
-            ]),
+            'format': 'int64',
+            'type': 'integer',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'warehouseId': dict({
+          'description': 'Warehouse Id for this truck',
+          'format': 'int64',
           'type': list([
             'integer',
             'null',
           ]),
         }),
       }),
+      'required': list([
+        'id',
+        'name',
+        'active',
+        'memo',
+        'technicianIds',
+        'createdOn',
+        'modifiedOn',
+        'externalData',
+      ]),
       'type': 'object',
     }),
     'stream': 'trucks',
@@ -42203,179 +42910,178 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Vendor response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Active/Inactive status',
+          'type': 'boolean',
         }),
         'address': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents address response',
           'properties': dict({
             'city': dict({
+              'description': 'City',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'country': dict({
+              'description': 'Country code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'state': dict({
+              'description': 'State',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'street': dict({
+              'description': 'Street',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'unit': dict({
+              'description': 'Unit',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'zip': dict({
+              'description': 'Zip code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
-          'type': list([
-            'object',
-            'null',
-          ]),
+          'type': 'object',
         }),
         'contactInfo': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Vendor contact info response',
           'properties': dict({
             'email': dict({
-              'type': list([
-                'string',
-                'null',
-              ]),
+              'description': 'Vendor email',
+              'type': 'string',
             }),
             'fax': dict({
-              'type': list([
-                'string',
-                'null',
-              ]),
+              'description': 'Vendor fax',
+              'type': 'string',
             }),
             'firstName': dict({
-              'type': list([
-                'string',
-                'null',
-              ]),
+              'description': 'Vendor first name',
+              'type': 'string',
             }),
             'lastName': dict({
-              'type': list([
-                'string',
-                'null',
-              ]),
+              'description': 'Vendor last name',
+              'type': 'string',
             }),
             'phone': dict({
-              'type': list([
-                'string',
-                'null',
-              ]),
+              'description': 'Vendor phone',
+              'type': 'string',
             }),
           }),
-          'type': list([
-            'object',
-            'null',
+          'required': list([
+            'firstName',
+            'lastName',
+            'phone',
+            'email',
+            'fax',
           ]),
+          'type': 'object',
         }),
         'createdOn': dict({
+          'description': 'system created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'defaultTaxRate': dict({
-          'type': list([
-            'number',
-            'null',
-          ]),
+          'description': 'Default tax rate for this vendor',
+          'format': 'decimal',
+          'type': 'number',
         }),
         'deliveryOption': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Default delivery option',
+          'type': 'string',
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this vendor,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Vendor Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'isMobileCreationRestricted': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Indicates if vendor can be used for purchasing on mobile',
+          'type': 'boolean',
         }),
         'isTruckReplenishment': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Indicates if vendor can be used for replenishment',
+          'type': 'boolean',
         }),
         'memo': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Vendor memo',
+          'format': 'multiline',
+          'type': 'string',
         }),
         'modifiedOn': dict({
+          'description': 'last time adjustment was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'name': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Vendor name',
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'name',
+        'active',
+        'isTruckReplenishment',
+        'isMobileCreationRestricted',
+        'memo',
+        'deliveryOption',
+        'defaultTaxRate',
+        'contactInfo',
+        'address',
+        'createdOn',
+        'modifiedOn',
+        'externalData',
+      ]),
       'type': 'object',
     }),
     'stream': 'vendors',
@@ -42536,110 +43242,116 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
+      'description': 'Represents warehouse response',
       'properties': dict({
         'active': dict({
-          'type': list([
-            'boolean',
-            'null',
-          ]),
+          'description': 'Active',
+          'type': 'boolean',
         }),
         'address': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
+          'description': 'Represents address response',
           'properties': dict({
             'city': dict({
+              'description': 'City',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'country': dict({
+              'description': 'Country code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'state': dict({
+              'description': 'State',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'street': dict({
+              'description': 'Street',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'unit': dict({
+              'description': 'Unit',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
             'zip': dict({
+              'description': 'Zip code',
               'type': list([
                 'string',
                 'null',
               ]),
             }),
           }),
-          'type': list([
-            'object',
-            'null',
-          ]),
+          'type': 'object',
         }),
         'createdOn': dict({
+          'description': 'System created date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'externalData': dict({
+          'description': '''
+            List of external data attached to this warehouse,
+            that corresponds to the application guid provided in the request.
+          ''',
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'key': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data key.',
+                'type': 'string',
               }),
               'value': dict({
-                'type': list([
-                  'string',
-                  'null',
-                ]),
+                'description': 'External data value.',
+                'type': 'string',
               }),
             }),
+            'required': list([
+              'key',
+              'value',
+            ]),
             'type': 'object',
           }),
-          'type': list([
-            'array',
-            'null',
-          ]),
+          'type': 'array',
         }),
         'id': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'description': 'Warehouse Id',
+          'format': 'int64',
+          'type': 'integer',
         }),
         'modifiedOn': dict({
+          'description': 'Last time warehouse was modified date',
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'name': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'description': 'Warehouse Name',
+          'type': 'string',
         }),
       }),
+      'required': list([
+        'id',
+        'name',
+        'active',
+        'address',
+        'createdOn',
+        'modifiedOn',
+        'externalData',
+      ]),
       'type': 'object',
     }),
     'stream': 'warehouses',
