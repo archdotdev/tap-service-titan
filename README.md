@@ -16,11 +16,11 @@ Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
 ## Supported Python Versions
 
-* 3.8
-* 3.9
 * 3.10
 * 3.11
 * 3.12
+* 3.13
+* 3.14
 
 ## Settings
 
@@ -137,9 +137,10 @@ Follow these instructions to contribute to this project.
 
 ### Initialize your Development Environment
 
+Install `uv` following the [installation guide](https://docs.astral.sh/uv/getting-started/installation/), then:
+
 ```bash
-pipx install poetry
-poetry install
+uv sync
 ```
 
 ### Create and Run Tests
@@ -148,13 +149,23 @@ Create tests within the `tests` subfolder and
   then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
-You can also test the `tap-service-titan` CLI interface directly using `poetry run`:
+You can also test the `tap-service-titan` CLI interface directly using `uv run`:
 
 ```bash
-poetry run tap-service-titan --help
+uv run tap-service-titan --help
+```
+
+#### Snapshot Testing
+
+This project uses [Syrupy](https://github.com/tophat/syrupy) for snapshot testing to detect schema evolution. Snapshots are stored in `tests/__snapshots__/` as `.ambr` (Amber) files.
+
+**To update snapshots** after intentional schema changes:
+
+```bash
+uv run pytest tests/test_schema_evolution.py --snapshot-update
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)

@@ -62,7 +62,7 @@ build-backend = "hatchling.build"
 warn_unused_configs = true
 
 [tool.pytest.ini_options]
-addopts = ["-v"]
+addopts = ["-vv"]
 
 [tool.ruff]
 src = ["tap_service_titan"]

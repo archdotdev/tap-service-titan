@@ -22919,6 +22919,42 @@
       dict({
         'breadcrumb': list([
           'properties',
+          'syncStatus',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'versionId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'lastSyncVersionId',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
+          'message',
+        ]),
+        'metadata': dict({
+          'inclusion': 'available',
+        }),
+      }),
+      dict({
+        'breadcrumb': list([
+          'properties',
           'postDate',
         ]),
         'metadata': dict({
@@ -22986,34 +23022,7 @@
       dict({
         'breadcrumb': list([
           'properties',
-          'syncStatus',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'versionId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'lastSyncVersionId',
-        ]),
-        'metadata': dict({
-          'inclusion': 'available',
-        }),
-      }),
-      dict({
-        'breadcrumb': list([
-          'properties',
-          'message',
+          'isEmpty',
         ]),
         'metadata': dict({
           'inclusion': 'available',
@@ -23038,18 +23047,15 @@
     'replication_key': 'modifiedOn',
     'replication_method': 'INCREMENTAL',
     'schema': dict({
-      '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      'additionalProperties': False,
       'properties': dict({
         'createdOn': dict({
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'customFields': dict({
           'items': dict({
-            'additionalProperties': True,
+            'additionalProperties': False,
             'properties': dict({
               'name': dict({
                 'type': list([
@@ -23072,13 +23078,11 @@
           ]),
         }),
         'exportedBy': dict({
-          'additionalProperties': True,
+          'additionalProperties': False,
           'properties': dict({
             'id': dict({
-              'type': list([
-                'integer',
-                'null',
-              ]),
+              'format': 'int64',
+              'type': 'integer',
             }),
             'name': dict({
               'type': list([
@@ -23087,6 +23091,9 @@
               ]),
             }),
           }),
+          'required': list([
+            'id',
+          ]),
           'type': list([
             'object',
             'null',
@@ -23100,14 +23107,19 @@
           ]),
         }),
         'id': dict({
+          'format': 'guid',
           'type': list([
             'string',
             'null',
           ]),
         }),
+        'isEmpty': dict({
+          'type': 'boolean',
+        }),
         'lastSyncVersionId': dict({
+          'format': 'int32',
           'type': list([
-            'string',
+            'integer',
             'null',
           ]),
         }),
@@ -23119,10 +23131,7 @@
         }),
         'modifiedOn': dict({
           'format': 'date-time',
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'type': 'string',
         }),
         'name': dict({
           'type': list([
@@ -23131,29 +23140,35 @@
           ]),
         }),
         'number': dict({
-          'type': list([
-            'integer',
-            'null',
-          ]),
+          'format': 'int32',
+          'type': 'integer',
         }),
         'postDate': dict({
-          'format': 'date-time',
+          'format': 'date',
           'type': list([
             'string',
             'null',
           ]),
         }),
         'status': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': '',
+          'enum': list([
+            'Open',
+            'Closed',
           ]),
+          'type': 'string',
         }),
         'syncStatus': dict({
-          'type': list([
-            'string',
-            'null',
+          'description': "Indicates a journal entry's sync status.",
+          'enum': list([
+            'NotSynced',
+            'InProgress',
+            'Synced',
+            'OutOfSync',
+            'Error',
+            'Excluded',
           ]),
+          'type': 'string',
         }),
         'url': dict({
           'type': list([
@@ -23162,12 +23177,19 @@
           ]),
         }),
         'versionId': dict({
-          'type': list([
-            'string',
-            'null',
-          ]),
+          'format': 'int32',
+          'type': 'integer',
         }),
       }),
+      'required': list([
+        'createdOn',
+        'modifiedOn',
+        'number',
+        'status',
+        'syncStatus',
+        'versionId',
+        'isEmpty',
+      ]),
       'type': 'object',
     }),
     'stream': 'journal_entries',
