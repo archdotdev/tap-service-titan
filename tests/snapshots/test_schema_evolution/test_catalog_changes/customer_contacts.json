@@ -8,72 +8,108 @@
   "schema": {
     "properties": {
       "modifiedOn": {
+        "description": "Modified On (UTC) for the record",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "phoneSettings": {
         "properties": {
           "phoneNumber": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Phone Number",
+            "type": "string"
           },
           "doNotText": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "description": "If the phone number has opted-out from notifications.",
+            "type": "boolean"
           }
         },
+        "description": "Phone settings of the customer contact",
+        "type": "object",
+        "required": [
+          "phoneNumber",
+          "doNotText"
+        ],
+        "additionalProperties": false
+      },
+      "createdOn": {
+        "description": "Created On (UTC) for the record",
+        "format": "date-time",
+        "type": "string"
+      },
+      "preferences": {
+        "properties": {
+          "jobRemindersEnabled": {
+            "description": "Job Reminders Enabled",
+            "type": "boolean"
+          },
+          "marketingUpdatesEnabled": {
+            "description": "Marketing Updates Enabled",
+            "type": "boolean"
+          },
+          "invoiceStatementNotification": {
+            "description": "Invoice Statement Notification",
+            "type": "boolean"
+          }
+        },
+        "description": "Contact Preferences",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "jobRemindersEnabled",
+          "marketingUpdatesEnabled",
+          "invoiceStatementNotification"
+        ],
+        "additionalProperties": false
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the contact",
+        "format": "int64",
+        "type": "integer"
       },
       "type": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Phone",
+          "Phone",
+          "Email",
+          "Fax",
+          "MobilePhone"
         ]
       },
       "value": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "The email, phone number, or fax number for the contact.",
+        "type": "string"
       },
       "memo": {
+        "description": "Short description about this contact, for example, \u201cwork #\u201d or \u201cOwner\u2019s daughter - Kelly.\u201d",
         "type": [
           "string",
           "null"
         ]
       },
       "customerId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "modifiedOn",
+      "phoneSettings",
+      "createdOn",
+      "id",
+      "type",
+      "value",
+      "customerId",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "customer_contacts",
   "metadata": [
@@ -112,6 +148,57 @@
         "phoneSettings",
         "properties",
         "doNotText"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "jobRemindersEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "marketingUpdatesEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "invoiceStatementNotification"
       ],
       "metadata": {
         "inclusion": "available"

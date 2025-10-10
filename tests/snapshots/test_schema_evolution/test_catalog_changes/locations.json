@@ -8,108 +8,105 @@
   "schema": {
     "properties": {
       "taxZoneId": {
+        "description": "ID of the location tax zone",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the location",
+        "format": "int64",
+        "type": "integer"
       },
       "customerId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the location\u2019s customer.",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "If false, the record has been deactivated.",
+        "type": "boolean"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the location",
+        "type": "string"
       },
       "address": {
         "properties": {
           "street": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Street",
+            "type": "string"
           },
           "unit": {
+            "description": "Unit",
             "type": [
               "string",
               "null"
             ]
           },
           "city": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "City",
+            "type": "string"
           },
           "state": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "State",
+            "type": "string"
           },
           "zip": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Zip",
+            "type": "string"
           },
           "country": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Country",
+            "type": "string"
           },
           "latitude": {
+            "description": "Latitude",
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "longitude": {
+            "description": "Longitude",
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           }
         },
-        "type": [
-          "object",
-          "null"
+        "description": "Location\u2019s address",
+        "type": "object",
+        "required": [
+          "street",
+          "city",
+          "state",
+          "zip",
+          "country"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "description": "ID of the custom field",
+              "format": "int64",
+              "type": "integer"
             },
             "name": {
+              "description": "Name/label of the custom field",
               "type": [
                 "string",
                 "null"
               ]
             },
             "value": {
+              "description": "Value of the custom field",
               "type": [
                 "string",
                 "null"
@@ -117,83 +114,96 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "typeId"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Location record\u2019s custom fields",
+        "type": "array"
       },
       "createdOn": {
+        "description": "DateTime (UTC) that location record was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "User ID who created the record.",
+        "format": "int64",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "Modified On (UTC) for the record.",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "mergedToId": {
+        "description": "Tells you which location record this record was merged into.",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "zoneId": {
+        "description": "ID of the location's Zone",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
+      "taxExempt": {
+        "description": "Tax Exempt status of the location.",
+        "type": "boolean"
+      },
       "tagTypeIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Tag Type IDs of the location",
+        "type": "array"
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data key.",
+              "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data value.",
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "List of external data attached to this Location,\nwhich corresponds to the application GUID provided in the request.",
+        "type": "array"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "customerId",
+      "active",
+      "name",
+      "address",
+      "customFields",
+      "createdOn",
+      "createdById",
+      "modifiedOn",
+      "taxExempt",
+      "tagTypeIds",
+      "externalData"
+    ],
+    "additionalProperties": false
   },
   "stream": "locations",
   "metadata": [
@@ -388,6 +398,15 @@
       "breadcrumb": [
         "properties",
         "zoneId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxExempt"
       ],
       "metadata": {
         "inclusion": "available"
