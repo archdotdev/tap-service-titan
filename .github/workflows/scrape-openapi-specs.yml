@@ -1,0 +1,46 @@
+### A workflow to scrape ServiceTitan OpenAPI specs daily
+
+name: Scrape OpenAPI Specs
+
+on:
+  schedule:
+    # Run daily at 12 PM UTC
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Allow manual triggers
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+    - name: Set up Python
+      uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+      with:
+        python-version: "3.13"
+
+    - name: Set up uv
+      uses: astral-sh/setup-uv@eb1897b8dc4b5d5bfe39a428a8f2304605e0983c # v7.0.0
+
+    - name: Install Playwright browsers
+      run: uv run playwright install chromium --with-deps
+
+    - name: Run OpenAPI specs scraper
+      run: uv run python scripts/scrape_openapi_specs.py
+
+    - name: Check for changes
+      id: git-check
+      run: |
+        git diff --exit-code tap_service_titan/openapi_specs/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+    - name: Commit and push if changed
+      if: steps.git-check.outputs.changed == 'true'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add tap_service_titan/openapi_specs/
+        git commit -m "chore: Update OpenAPI specs"
+        git push
