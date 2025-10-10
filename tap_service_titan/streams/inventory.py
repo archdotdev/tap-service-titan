@@ -2,22 +2,30 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
 from functools import cached_property
+from typing import TYPE_CHECKING, Any
 
+from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.openapi_specs import INVENTORY
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 class PurchaseOrdersStream(ServiceTitanExportStream):
     """Define purchase orders stream."""
 
     name = "purchase_orders"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -96,17 +104,18 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/export/purchase-orders"  # noqa: E501
+        return f"/inventory/v2/tenant/{self.tenant_id}/export/purchase-orders"
 
 
 class PurchaseOrderMarkupsStream(ServiceTitanStream):
     """Define purchase order markups stream."""
 
     name = "purchase_order_markups"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("from", th.NumberType),
@@ -115,17 +124,18 @@ class PurchaseOrderMarkupsStream(ServiceTitanStream):
         th.Property("id", th.IntegerType),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/purchase-order-markups"  # noqa: E501
+        return f"/inventory/v2/tenant/{self.tenant_id}/purchase-order-markups"
 
 
 class PurchaseOrderTypesStream(ServiceTitanStream):
     """Define purchase order types stream."""
 
     name = "purchase_order_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -143,19 +153,18 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
         th.Property("modifiedOn", th.DateTimeType),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/purchase-order-types"
-        )
+        return f"/inventory/v2/tenant/{self.tenant_id}/purchase-order-types"
 
 
 class ReceiptsStream(ServiceTitanStream):
     """Define receipts stream."""
 
     name = "receipts"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -245,36 +254,29 @@ class ReceiptsStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: Context | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         # This endpoint has an undocumented max page size of 500
         params["active"] = "Any"
         return params
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/receipts"
+        return f"/inventory/v2/tenant/{self.tenant_id}/receipts"
 
 
 class ReturnsStream(ServiceTitanStream):
     """Define returns stream."""
 
     name = "returns"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -370,36 +372,29 @@ class ReturnsStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: Context | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         # This endpoint has an undocumented max page size of 500
         params["active"] = "Any"
         return params
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/returns"
+        return f"/inventory/v2/tenant/{self.tenant_id}/returns"
 
 
 class AdjustmentsStream(ServiceTitanStream):
     """Define adjustments stream."""
 
     name = "adjustments"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -459,58 +454,43 @@ class AdjustmentsStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/adjustments"
+        return f"/inventory/v2/tenant/{self.tenant_id}/adjustments"
 
 
 class ReturnTypesStream(ServiceTitanStream):
     """Define return types stream."""
 
     name = "return_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
+    schema = StreamSchema(INVENTORY, key="Inventory.V2.ListReturnTypesResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("automaticallyReceiveVendorCredit", th.BooleanType),
-        th.Property("includeInSalesTax", th.BooleanType),
-        th.Property("active", th.BooleanType),
-        th.Property("isDefault", th.BooleanType),
-        th.Property("isDefaultForConsignment", th.BooleanType),
-    ).to_dict()
-
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: Context | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         # This endpoint has an undocumented max page size of 500
         params["activeOnly"] = False
         return params
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/return-types"
+        return f"/inventory/v2/tenant/{self.tenant_id}/return-types"
 
 
 class TransfersStream(ServiceTitanStream):
     """Define transfers stream."""
 
     name = "transfers"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -572,17 +552,18 @@ class TransfersStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/transfers"
+        return f"/inventory/v2/tenant/{self.tenant_id}/transfers"
 
 
 class TrucksStream(ServiceTitanStream):
     """Define trucks stream."""
 
     name = "trucks"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -605,17 +586,18 @@ class TrucksStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/trucks"
+        return f"/inventory/v2/tenant/{self.tenant_id}/trucks"
 
 
 class VendorsStream(ServiceTitanStream):
     """Define vendors stream."""
 
     name = "vendors"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -661,17 +643,18 @@ class VendorsStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/vendors"
+        return f"/inventory/v2/tenant/{self.tenant_id}/vendors"
 
 
 class WarehousesStream(ServiceTitanStream):
     """Define warehouses stream."""
 
     name = "warehouses"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -702,7 +685,8 @@ class WarehousesStream(ServiceTitanStream):
         ),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/inventory/v2/tenant/{self._tap.config['tenant_id']}/warehouses"
+        return f"/inventory/v2/tenant/{self.tenant_id}/warehouses"
