@@ -10,12 +10,14 @@ if TYPE_CHECKING:
 
     import pytest
     from pytest_snapshot.plugin import Snapshot
+    from pytest_subtests.plugin import SubTests
 
 
 def test_catalog_changes(
     pytester: pytest.Pytester,
-    snapshot: Snapshot,
     tmp_path: Path,
+    snapshot: Snapshot,
+    subtests: SubTests,
 ) -> None:
     """Fail if the catalog has changed."""
     config = {
@@ -35,8 +37,11 @@ def test_catalog_changes(
         "--config",
         config_path.as_posix(),
     )
-    catalog = json.loads("".join(result.outlines))
-    pretty_catalog = json.dumps(catalog, indent=2)
-
     assert result.ret == 0, "Tap discovery failed"
-    snapshot.assert_match(pretty_catalog, "catalog.json")
+
+    catalog = json.loads("".join(result.outlines))
+    for stream in catalog["streams"]:
+        stream_id = stream["tap_stream_id"]
+        with subtests.test(stream_id):
+            pretty_stream = json.dumps(stream, indent=2)
+            snapshot.assert_match(pretty_stream, f"{stream_id}.json")

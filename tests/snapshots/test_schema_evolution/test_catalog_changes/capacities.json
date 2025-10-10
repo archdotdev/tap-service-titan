@@ -1,0 +1,227 @@
+{
+  "tap_stream_id": "capacities",
+  "replication_key": "startUtc",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "startUtc",
+    "businessUnitIds",
+    "technician_id"
+  ],
+  "schema": {
+    "properties": {
+      "start": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "end": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "startUtc": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "endUtc": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "businessUnitIds": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "technician_id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "technician_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technician_status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technician_hasRequiredSkills": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "totalAvailability": {
+        "description": "Number of hours that total capacity can allow to be booked during this time frame",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "openAvailability": {
+        "description": "Number of remaining hours that can be booked during this time frame",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "isExceedingIdealBookingPercentage": {
+        "description": "Indicate if Ideal Booking Percentage is exceeded",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "capacities",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "startUtc"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "endUtc"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitIds"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_hasRequiredSkills"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalAvailability"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "openAvailability"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isExceedingIdealBookingPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "startUtc",
+          "businessUnitIds",
+          "technician_id"
+        ],
+        "valid-replication-keys": [
+          "startUtc"
+        ]
+      }
+    }
+  ]
+}

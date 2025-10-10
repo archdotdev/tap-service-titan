@@ -40,12 +40,18 @@ types-requests = ">=2"
 openapi-core = "^0.19.4"
 jsonref = "^1.1.0"
 pytest-snapshot = "^0.9.0"
+pytest-subtests = "^0.14.2"
 
 [tool.poetry.extras]
 s3 = ["s3fs"]
 
 [tool.mypy]
 warn_unused_configs = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "-v",
+]
 
 [tool.ruff]
 src = ["tap_service_titan"]
