@@ -2,12 +2,24 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
 from functools import cached_property
+from typing import TYPE_CHECKING
 
+from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.openapi_specs import CRM
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 
 
 # CRM Streams
@@ -15,7 +27,7 @@ class BookingProviderTagsStream(ServiceTitanStream):
     """Define booking provider tags stream."""
 
     name = "booking_provider_tags"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -38,7 +50,7 @@ class BookingsStream(ServiceTitanExportStream):
     """Define bookings stream."""
 
     name = "bookings"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -92,7 +104,7 @@ class CustomersStream(ServiceTitanExportStream):
     """Define customers stream."""
 
     name = "customers"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -156,7 +168,7 @@ class CustomerNotesStream(ServiceTitanStream):
     """Define customer notes stream."""
 
     name = "customer_notes"
-    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = CustomersStream
     ignore_parent_replication_key = True
@@ -179,7 +191,7 @@ class CustomerContactsStream(ServiceTitanExportStream):
     """Define contacts stream."""
 
     name = "customer_contacts"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -211,37 +223,18 @@ class LeadsStream(ServiceTitanExportStream):
     """Define leads stream."""
 
     name = "leads"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(CRM, key="Crm.V2.ExportLeadsResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("status", th.StringType),  # Enum values are treated as strings
-        th.Property("customerId", th.IntegerType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("jobTypeId", th.IntegerType),
-        th.Property("priority", th.StringType),  # Enum values are treated as strings
-        th.Property("campaignId", th.IntegerType),
-        th.Property("summary", th.StringType),
-        th.Property("callReasonId", th.IntegerType),
-        th.Property("callId", th.IntegerType),
-        th.Property("bookingId", th.IntegerType),
-        th.Property("manualCallId", th.IntegerType),
-        th.Property("followUpDate", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self._tap.config['tenant_id']}/export/leads"
+        return f"/crm/v2/tenant/{self.tenant_id}/export/leads"
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    @override
+    def get_child_context(self, record: dict, context: Context | None) -> dict:
         """Return a context dictionary for a child stream."""
         return {"lead_id": record["id"]}
 
@@ -250,7 +243,7 @@ class LeadNotesStream(ServiceTitanStream):
     """Define lead notes stream."""
 
     name = "lead_notes"
-    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = LeadsStream
     ignore_parent_replication_key = True
@@ -275,7 +268,7 @@ class LocationsStream(ServiceTitanExportStream):
     """Define locations stream."""
 
     name = "locations"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -338,7 +331,7 @@ class LocationNotesStream(ServiceTitanStream):
     """Define location notes stream."""
 
     name = "location_notes"
-    primary_keys: t.ClassVar[list[str]] = ["createdById", "createdOn"]
+    primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = LocationsStream
     ignore_parent_replication_key = True
@@ -361,7 +354,7 @@ class LocationContactsStream(ServiceTitanExportStream):
     """Define location contacts stream."""
 
     name = "location_contacts"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -393,7 +386,7 @@ class LocationsCustomFieldsStream(ServiceTitanStream):
     """Define locations custom fields stream."""
 
     name = "locations_custom_fields"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -425,7 +418,7 @@ class CustomersCustomFieldsStream(ServiceTitanStream):
     """Define customers custom fields stream."""
 
     name = "customers_custom_fields"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
