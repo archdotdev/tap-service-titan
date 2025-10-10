@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -107,7 +107,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -156,6 +156,7 @@
                                             "invoiceId": 0,
                                             "hours": 0,
                                             "rate": 0,
+                                            "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true
                                         }
@@ -197,7 +198,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -286,7 +287,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -329,6 +330,7 @@
                                             "name": "string",
                                             "code": "string",
                                             "earningCategory": {},
+                                            "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true
                                         }
@@ -370,7 +372,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -461,7 +463,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -518,6 +520,7 @@
                                             "endedOn": "string",
                                             "paidDurationHours": 0,
                                             "paidTimeType": {},
+                                            "sourceEntityId": 0,
                                             "jobId": 0,
                                             "jobNumber": "string",
                                             "jobTypeName": "string",
@@ -536,7 +539,96 @@
                                             "taxZoneName": "string",
                                             "laborTypeId": 0,
                                             "laborTypeCode": "string",
+                                            "budgetCodeId": 0,
                                             "isPrevailingWageJob": true,
+                                            "memo": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/payroll-settings": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for payroll settings",
+                "description": "Provides export feed for payroll settings",
+                "operationId": "Export_PayrollSettings",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Payroll.V2.PayrollSettings.PayrollSettingsExportResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "employeeId": 0,
+                                            "employeeType": {},
+                                            "externalPayrollId": "string",
+                                            "hourlyRate": 0,
+                                            "managerId": 0,
+                                            "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true
@@ -579,7 +671,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -599,7 +691,9 @@
                                 "amount": 0,
                                 "activityCodeId": 0,
                                 "date": "string",
-                                "invoiceId": 0
+                                "invoiceId": 0,
+                                "budgetCodeId": 0,
+                                "memo": "string"
                             }
                         }
                     }
@@ -667,7 +761,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -677,7 +771,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -687,7 +781,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -720,7 +814,7 @@
                     {
                         "name": "employeeId",
                         "in": "query",
-                        "description": "Format - int64. The Employee ID",
+                        "description": "The Employee ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -739,7 +833,7 @@
                     {
                         "name": "dateOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)",
+                        "description": "Return items having date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -749,10 +843,69 @@
                     {
                         "name": "dateOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)",
+                        "description": "Return items having date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrBefore",
+                        "in": "query",
+                        "description": "Return items modified on or before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -790,6 +943,7 @@
                                             "endedOn": "string",
                                             "paidDurationHours": 0,
                                             "paidTimeType": {},
+                                            "sourceEntityId": 0,
                                             "jobId": 0,
                                             "jobNumber": "string",
                                             "jobTypeName": "string",
@@ -808,7 +962,11 @@
                                             "taxZoneName": "string",
                                             "laborTypeId": 0,
                                             "laborTypeCode": "string",
-                                            "isPrevailingWageJob": true
+                                            "budgetCodeId": 0,
+                                            "isPrevailingWageJob": true,
+                                            "memo": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -848,7 +1006,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The gross pay item ID",
+                        "description": "The gross pay item ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -858,7 +1016,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -878,7 +1036,9 @@
                                 "amount": 0,
                                 "activityCodeId": 0,
                                 "date": "string",
-                                "invoiceId": 0
+                                "invoiceId": 0,
+                                "budgetCodeId": 0,
+                                "memo": "string"
                             }
                         }
                     }
@@ -946,7 +1106,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The gross pay item ID",
+                        "description": "The gross pay item ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -956,7 +1116,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1001,7 +1161,6 @@
                     {
                         "name": "job",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1011,7 +1170,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1021,7 +1180,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1031,7 +1190,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1050,7 +1209,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split created on or after a certain date/time (in UTC)",
+                        "description": "Returns job split created on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1060,7 +1219,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return job splits created before a certain date/time (in UTC)",
+                        "description": "Return job splits created before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1070,7 +1229,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split modified on or after a certain date/time (in UTC)",
+                        "description": "Returns job split modified on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1080,7 +1239,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split modified before a certain date/time (in UTC)",
+                        "description": "Returns job split modified before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1189,7 +1348,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1207,7 +1366,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1217,7 +1376,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1236,7 +1395,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split created on or after a certain date/time (in UTC)",
+                        "description": "Returns job split created on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1246,7 +1405,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return job splits created before a certain date/time (in UTC)",
+                        "description": "Return job splits created before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1256,7 +1415,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split modified on or after a certain date/time (in UTC)",
+                        "description": "Returns job split modified on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1266,7 +1425,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Returns job split modified before a certain date/time (in UTC)",
+                        "description": "Returns job split modified before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1375,7 +1534,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1394,7 +1553,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1404,7 +1563,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1414,7 +1573,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1424,7 +1583,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1542,7 +1701,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1552,7 +1711,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1562,7 +1721,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1575,6 +1734,69 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -1597,7 +1819,10 @@
                                             "id": 0,
                                             "name": "string",
                                             "code": "string",
-                                            "earningCategory": {}
+                                            "earningCategory": {},
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -1637,7 +1862,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. ID of the payroll activity code",
+                        "description": "ID of the payroll activity code",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1647,7 +1872,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1667,7 +1892,10 @@
                                     "id": 0,
                                     "name": "string",
                                     "code": "string",
-                                    "earningCategory": {}
+                                    "earningCategory": {},
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "active": true
                                 }
                             }
                         }
@@ -1723,7 +1951,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1747,7 +1975,8 @@
                                 "activityCodeId": 0,
                                 "invoiceId": 0,
                                 "hours": 0,
-                                "rate": 0
+                                "rate": 0,
+                                "quantity": 0
                             }
                         }
                     }
@@ -1815,7 +2044,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1825,7 +2054,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1835,7 +2064,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1863,7 +2092,7 @@
                     {
                         "name": "postedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or after certain date/time (in UTC)",
+                        "description": "Return payroll adjustments posted on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1873,10 +2102,73 @@
                     {
                         "name": "postedOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or before certain date/time (in UTC)",
+                        "description": "Return payroll adjustments posted on or before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -1905,7 +2197,10 @@
                                             "activityCodeId": 0,
                                             "invoiceId": 0,
                                             "hours": 0,
-                                            "rate": 0
+                                            "rate": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -1945,7 +2240,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The ID of payroll adjustment",
+                        "description": "The ID of payroll adjustment",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1955,7 +2250,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1989,7 +2284,10 @@
                                     "activityCodeId": 0,
                                     "invoiceId": 0,
                                     "hours": 0,
-                                    "rate": 0
+                                    "rate": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "active": true
                                 }
                             }
                         }
@@ -2045,7 +2343,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2069,7 +2367,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2079,7 +2377,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2098,7 +2396,7 @@
                     {
                         "name": "startedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)",
+                        "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2108,7 +2406,7 @@
                     {
                         "name": "endedOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)",
+                        "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2118,7 +2416,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2128,7 +2426,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2138,7 +2436,7 @@
                     {
                         "name": "approvedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items approved on or after certain date/time (in UTC)",
+                        "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2148,7 +2446,7 @@
                     {
                         "name": "status",
                         "in": "query",
-                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid]",
+                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid, Locked]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -2170,6 +2468,35 @@
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
                             ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -2196,8 +2523,10 @@
                                             "employeeType": {},
                                             "status": {},
                                             "burdenRate": 0,
+                                            "managerApprovedOn": "string",
+                                            "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "managerApprovedOn": "string"
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -2255,7 +2584,7 @@
                     {
                         "name": "technician",
                         "in": "path",
-                        "description": "Format - int64. The technician ID",
+                        "description": "The technician ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2265,7 +2594,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2275,7 +2604,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2285,7 +2614,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2304,7 +2633,7 @@
                     {
                         "name": "startedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)",
+                        "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2314,7 +2643,7 @@
                     {
                         "name": "endedOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)",
+                        "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2324,7 +2653,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2334,7 +2663,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2344,7 +2673,7 @@
                     {
                         "name": "approvedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items approved on or after certain date/time (in UTC)",
+                        "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2354,7 +2683,7 @@
                     {
                         "name": "status",
                         "in": "query",
-                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid]",
+                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid, Locked]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -2376,6 +2705,35 @@
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
                             ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -2402,8 +2760,10 @@
                                             "employeeType": {},
                                             "status": {},
                                             "burdenRate": 0,
+                                            "managerApprovedOn": "string",
+                                            "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "managerApprovedOn": "string"
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -2461,7 +2821,7 @@
                     {
                         "name": "employee",
                         "in": "path",
-                        "description": "Format - int64. The employee ID",
+                        "description": "The employee ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2471,7 +2831,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2481,7 +2841,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2491,7 +2851,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2510,7 +2870,7 @@
                     {
                         "name": "startedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)",
+                        "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2520,7 +2880,7 @@
                     {
                         "name": "endedOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)",
+                        "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2530,7 +2890,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2540,7 +2900,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2550,7 +2910,7 @@
                     {
                         "name": "approvedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items approved on or after certain date/time (in UTC)",
+                        "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2560,7 +2920,7 @@
                     {
                         "name": "status",
                         "in": "query",
-                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid]",
+                        "description": "Return items of the specified payroll status\\\nValues: [Pending, Expired, Approved, Paid, Locked]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -2582,6 +2942,35 @@
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
                             ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -2608,10 +2997,574 @@
                                             "employeeType": {},
                                             "status": {},
                                             "burdenRate": 0,
+                                            "managerApprovedOn": "string",
+                                            "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "managerApprovedOn": "string"
+                                            "active": true
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/payroll-settings": {
+            "get": {
+                "tags": [
+                    "PayrollSettings"
+                ],
+                "summary": "Gets the payroll settings list",
+                "description": "Gets the payroll settings list",
+                "operationId": "PayrollSettings_GetPayrollSettingsList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "employeeType",
+                        "in": "query",
+                        "description": "The type of employee\\\nValues: [Technician, Employee]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Payroll.V2.PayrollSettings.PayrollSettingsListResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "employeeId": 0,
+                                            "employeeType": {},
+                                            "externalPayrollId": "string",
+                                            "hourlyRate": 0,
+                                            "managerId": 0,
+                                            "hireDate": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/employees/{employee}/payroll-settings": {
+            "get": {
+                "tags": [
+                    "PayrollSettings"
+                ],
+                "summary": "Gets the employee payroll settings",
+                "description": "Gets the employee payroll settings",
+                "operationId": "PayrollSettings_GetEmployeePayrollSettings",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "description": "The employee ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsResponse"
+                                },
+                                "example": {
+                                    "employeeId": 0,
+                                    "employeeType": {},
+                                    "externalPayrollId": "string",
+                                    "hourlyRate": 0,
+                                    "managerId": 0,
+                                    "hireDate": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "active": true
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "PayrollSettings"
+                ],
+                "summary": "Updates the employee payroll settings",
+                "description": "Updates the employee payroll settings",
+                "operationId": "PayrollSettings_UpdateEmployeePayrollSettings",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "description": "The employee ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsUpdateRequest"
+                            },
+                            "example": {
+                                "externalPayrollId": "string",
+                                "hourlyRate": 0,
+                                "managerId": 0,
+                                "hireDate": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsUpdateResponse"
+                                },
+                                "example": {
+                                    "employeeId": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/technicians/{technician}/payroll-settings": {
+            "get": {
+                "tags": [
+                    "PayrollSettings"
+                ],
+                "summary": "Gets the technician payroll settings",
+                "description": "Gets the technician payroll settings",
+                "operationId": "PayrollSettings_GetTechnicianPayrollSettings",
+                "parameters": [
+                    {
+                        "name": "technician",
+                        "in": "path",
+                        "description": "The technician ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsResponse"
+                                },
+                                "example": {
+                                    "employeeId": 0,
+                                    "employeeType": {},
+                                    "externalPayrollId": "string",
+                                    "hourlyRate": 0,
+                                    "managerId": 0,
+                                    "hireDate": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "active": true
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "PayrollSettings"
+                ],
+                "summary": "Updates the technician payroll settings",
+                "description": "Updates the technician payroll settings",
+                "operationId": "PayrollSettings_UpdateTechnicianPayrollSettings",
+                "parameters": [
+                    {
+                        "name": "technician",
+                        "in": "path",
+                        "description": "The technician ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsUpdateRequest"
+                            },
+                            "example": {
+                                "externalPayrollId": "string",
+                                "hourlyRate": 0,
+                                "managerId": 0,
+                                "hireDate": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsUpdateResponse"
+                                },
+                                "example": {
+                                    "employeeId": 0
                                 }
                             }
                         }
@@ -2667,7 +3620,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2677,7 +3630,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2687,7 +3640,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2697,7 +3650,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2707,7 +3660,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2717,7 +3670,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2727,7 +3680,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2834,7 +3787,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The timesheet code ID",
+                        "description": "The timesheet code ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2844,7 +3797,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2929,7 +3882,6 @@
                     {
                         "name": "job",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2939,7 +3891,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2949,7 +3901,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2959,7 +3911,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2978,7 +3930,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2988,7 +3940,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2998,7 +3950,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3008,7 +3960,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3016,9 +3968,23 @@
                         }
                     },
                     {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "technicianId",
                         "in": "query",
-                        "description": "Format - int64. The technician ID",
+                        "description": "The technician ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -3028,7 +3994,7 @@
                     {
                         "name": "startedOn",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
+                        "description": "Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3038,7 +4004,7 @@
                     {
                         "name": "endedOn",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
+                        "description": "Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3079,7 +4045,8 @@
                                             "canceledOn": "string",
                                             "doneOn": "string",
                                             "createdOn": "string",
-                                            "modifiedOn": "string"
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -3117,7 +4084,7 @@
                     {
                         "name": "job",
                         "in": "path",
-                        "description": "Format - int64. The job ID",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3127,7 +4094,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3200,7 +4167,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3210,7 +4177,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3220,7 +4187,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3239,7 +4206,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3249,7 +4216,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3259,7 +4226,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3269,7 +4236,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3279,7 +4246,7 @@
                     {
                         "name": "employeeId",
                         "in": "query",
-                        "description": "Format - int64. The employee ID",
+                        "description": "The employee ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -3387,7 +4354,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3405,7 +4372,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3415,7 +4382,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3434,7 +4401,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3444,7 +4411,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3454,7 +4421,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3464,7 +4431,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3472,9 +4439,23 @@
                         }
                     },
                     {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "technicianId",
                         "in": "query",
-                        "description": "Format - int64. The technician ID",
+                        "description": "The technician ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -3484,7 +4465,7 @@
                     {
                         "name": "startedOn",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
+                        "description": "Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3494,7 +4475,7 @@
                     {
                         "name": "endedOn",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
+                        "description": "Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3535,7 +4516,8 @@
                                             "canceledOn": "string",
                                             "doneOn": "string",
                                             "createdOn": "string",
-                                            "modifiedOn": "string"
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -3575,7 +4557,7 @@
                     {
                         "name": "job",
                         "in": "path",
-                        "description": "Format - int64. The job ID",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3585,7 +4567,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The job timesheet ID",
+                        "description": "The job timesheet ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3595,7 +4577,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3816,6 +4798,7 @@
                     "employeeId",
                     "postedOn",
                     "amount",
+                    "createdOn",
                     "modifiedOn",
                     "active"
                 ],
@@ -3877,6 +4860,11 @@
                         "description": "Rate of the payroll adjustment",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll adjustment was created",
+                        "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -4035,6 +5023,7 @@
                     "name",
                     "code",
                     "earningCategory",
+                    "createdOn",
                     "modifiedOn",
                     "active"
                 ],
@@ -4061,14 +5050,19 @@
                         ],
                         "description": "Earning category of the payroll activity code"
                     },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll activity code was created",
+                        "format": "date-time"
+                    },
                     "modifiedOn": {
                         "type": "string",
-                        "description": "Date/time (on UTC) when the activity code was modified",
+                        "description": "Date/time (on UTC) when the payroll activity code was modified",
                         "format": "date-time"
                     },
                     "active": {
                         "type": "boolean",
-                        "description": "Whether payroll activity code is active"
+                        "description": "Indicates whether the payroll activity code is active"
                     }
                 },
                 "additionalProperties": false
@@ -4401,6 +5395,12 @@
                         "description": "Type of the paid time",
                         "nullable": true
                     },
+                    "sourceEntityId": {
+                        "type": "integer",
+                        "description": "The source entity ID.\nWhen the GrossPayItemType is TimesheetTime, this is the Timesheet Activity ID.",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "jobId": {
                         "type": "integer",
                         "description": "The job ID",
@@ -4497,9 +5497,20 @@
                         "description": "Code of the labor type",
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "The budget code ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "isPrevailingWageJob": {
                         "type": "boolean",
                         "description": "Defines whether it's a prevailing wage job",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "The short message",
                         "nullable": true
                     },
                     "createdOn": {
@@ -4553,6 +5564,96 @@
                     "PaidTimeOff"
                 ]
             },
+            "ExportResponse_Of_Payroll.V2.PayrollSettings.PayrollSettingsExportResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsExportResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Payroll.V2.PayrollSettings.PayrollSettingsExportResponse": {
+                "required": [
+                    "employeeId",
+                    "employeeType",
+                    "hourlyRate",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "The employee ID",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "The type of employee"
+                    },
+                    "externalPayrollId": {
+                        "type": "string",
+                        "description": "The external payroll ID",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "The hourly rate",
+                        "format": "decimal"
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "The ID of the manager",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "hireDate": {
+                        "type": "string",
+                        "description": "The hire date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date the record was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The date the record was last modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "The active status of the record"
+                    }
+                },
+                "additionalProperties": false
+            },
             "ModificationResponse": {
                 "required": [
                     "id"
@@ -4602,6 +5703,17 @@
                         "description": "The invoice ID",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "The budget code ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "The memo if gross pay item",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -4639,6 +5751,17 @@
                         "type": "integer",
                         "description": "The invoice ID",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "The budget code ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "The memo if gross pay item",
                         "nullable": true
                     }
                 },
@@ -4690,7 +5813,9 @@
                     "date",
                     "amount",
                     "grossPayItemType",
-                    "jobId"
+                    "jobId",
+                    "createdOn",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -4802,6 +5927,12 @@
                         "description": "Type of the paid time",
                         "nullable": true
                     },
+                    "sourceEntityId": {
+                        "type": "integer",
+                        "description": "The source entity ID.\nWhen the GrossPayItemType is TimesheetTime, this is the Timesheet Activity ID.",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "jobId": {
                         "type": "integer",
                         "description": "The job ID",
@@ -4898,10 +6029,31 @@
                         "description": "Code of the labor type",
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "The budget code ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "isPrevailingWageJob": {
                         "type": "boolean",
                         "description": "Defines whether it's a prevailing wage job",
                         "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "The short message",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the gross pay item was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the gross pay item was modified",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -5130,7 +6282,10 @@
                     "id",
                     "name",
                     "code",
-                    "earningCategory"
+                    "earningCategory",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -5154,6 +6309,20 @@
                             }
                         ],
                         "description": "Earning category of the payroll activity code"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll activity code was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll activity code was modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payroll activity code is active"
                     }
                 },
                 "additionalProperties": false
@@ -5218,6 +6387,12 @@
                         "description": "Rate of the payroll adjustment",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity of the payroll adjustment",
+                        "format": "decimal",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -5268,7 +6443,10 @@
                     "employeeType",
                     "employeeId",
                     "postedOn",
-                    "amount"
+                    "amount",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -5328,6 +6506,20 @@
                         "description": "Rate of the payroll adjustment",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll adjustment was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll adjustment was modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether payroll adjustment is active"
                     }
                 },
                 "additionalProperties": false
@@ -5380,7 +6572,9 @@
                     "employeeId",
                     "employeeType",
                     "status",
-                    "modifiedOn"
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -5426,16 +6620,25 @@
                         "format": "decimal",
                         "nullable": true
                     },
-                    "modifiedOn": {
-                        "type": "string",
-                        "description": "Date/time (on UTC) when the payroll was modified",
-                        "format": "date-time"
-                    },
                     "managerApprovedOn": {
                         "type": "string",
                         "description": "Date/time (on UTC) when the payroll was approved",
                         "format": "date-time",
                         "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll adjustment was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll adjustment was modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether payroll adjustment is active"
                     }
                 },
                 "additionalProperties": false
@@ -5445,7 +6648,8 @@
                     "Pending",
                     "Expired",
                     "Approved",
-                    "Paid"
+                    "Paid",
+                    "Locked"
                 ],
                 "type": "string",
                 "description": "",
@@ -5453,8 +6657,220 @@
                     "Pending",
                     "Expired",
                     "Approved",
-                    "Paid"
+                    "Paid",
+                    "Locked"
                 ]
+            },
+            "PaginatedResponse_Of_Payroll.V2.PayrollSettings.PayrollSettingsListResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollSettingsListResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Payroll.V2.PayrollSettings.PayrollSettingsListResponse": {
+                "required": [
+                    "employeeId",
+                    "employeeType",
+                    "hourlyRate",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "The employee ID",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "The type of employee"
+                    },
+                    "externalPayrollId": {
+                        "type": "string",
+                        "description": "The external payroll ID",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "The hourly rate",
+                        "format": "decimal"
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "The ID of the manager",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "hireDate": {
+                        "type": "string",
+                        "description": "The hire date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date the record was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The date the record was last modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "The active status of the record"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollSettings.PayrollSettingsResponse": {
+                "required": [
+                    "employeeId",
+                    "employeeType",
+                    "hourlyRate",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "The employee ID",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "The type of employee"
+                    },
+                    "externalPayrollId": {
+                        "type": "string",
+                        "description": "The external payroll ID",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "The hourly rate",
+                        "format": "decimal"
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "The ID of the manager",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "hireDate": {
+                        "type": "string",
+                        "description": "The hire date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date the record was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The date the record was last modified",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "The active status of the record"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollSettings.PayrollSettingsUpdateResponse": {
+                "required": [
+                    "employeeId"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "The employee ID",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollSettings.PayrollSettingsUpdateRequest": {
+                "required": [
+                    "hourlyRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "externalPayrollId": {
+                        "type": "string",
+                        "description": "The external payroll ID",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "The hourly rate",
+                        "format": "decimal"
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "The ID of the manager",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "hireDate": {
+                        "type": "string",
+                        "description": "The hire date",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
             },
             "PaginatedResponse_Of_Payroll.V2.TimesheetCodes.TimesheetCodeResponse": {
                 "required": [
@@ -5611,7 +7027,8 @@
                     "appointmentId",
                     "technicianId",
                     "createdOn",
-                    "modifiedOn"
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -5668,6 +7085,10 @@
                         "type": "string",
                         "description": "The modified date/time (in UTC)",
                         "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether job timesheet is active"
                     }
                 },
                 "additionalProperties": false
@@ -5860,6 +7281,158 @@
                         "description": "The done date/time (in UTC)",
                         "format": "date-time",
                         "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Payroll.V2.Webhooks.PayPeriodLockedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.prl.pay-period-locked\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.Webhooks.PayPeriodLockedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.Webhooks.PayPeriodLockedWebhookEvent": {
+                "required": [
+                    "payroll",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "payroll": {
+                        "$ref": "#/components/schemas/Payroll.V2.Payrolls.PayrollResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Payroll.V2.Webhooks.PayrollAdjustmentCreatedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.prl.payroll-adjustment-created\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.Webhooks.PayrollAdjustmentCreatedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.Webhooks.PayrollAdjustmentCreatedWebhookEvent": {
+                "required": [
+                    "payrollAdjustment",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "payrollAdjustment": {
+                        "$ref": "#/components/schemas/Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
                     }
                 },
                 "additionalProperties": false

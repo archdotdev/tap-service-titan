@@ -1,0 +1,1950 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Scheduling Pro",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/schedulingpro/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/routers/{id}/sessions": {
+            "get": {
+                "tags": [
+                    "Router"
+                ],
+                "summary": "Gets a paginated list of sessions for router",
+                "description": "Gets a paginated list of sessions for router",
+                "operationId": "Router_RouterSessions",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_SchedulingPro.V2.RouterSessionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "lastCheckinDate": "string",
+                                            "sessionOutcome": "string",
+                                            "schedulerId": "string",
+                                            "jobId": 0,
+                                            "bookingId": 0,
+                                            "leadId": 0,
+                                            "timeslotStart": "string",
+                                            "timeslotEnd": "string",
+                                            "category": "string",
+                                            "jobTypeId": 0,
+                                            "businessUnitId": 0,
+                                            "customer": {
+                                                "isNewCustomer": true,
+                                                "id": 0,
+                                                "firstName": "string",
+                                                "lastName": "string",
+                                                "email": "string",
+                                                "phone": "string",
+                                                "locationId": 0,
+                                                "isNewLocation": true,
+                                                "address": {
+                                                    "street": "string",
+                                                    "unit": "string",
+                                                    "city": "string",
+                                                    "state": "string",
+                                                    "zip": "string",
+                                                    "country": "string"
+                                                },
+                                                "browserName": "string",
+                                                "browserVersion": "string",
+                                                "cpuArchitecture": "string",
+                                                "deviceModel": "string",
+                                                "deviceType": "string",
+                                                "deviceVendor": "string",
+                                                "engineName": "string",
+                                                "engineVersion": "string",
+                                                "ipAddress": "string",
+                                                "isBot": true,
+                                                "osName": "string",
+                                                "osVersion": "string",
+                                                "userAgent": "string"
+                                            },
+                                            "zoneId": 0,
+                                            "customerResponses": [
+                                                "string"
+                                            ],
+                                            "notes": "string",
+                                            "sourceTracking": {
+                                                "isRWGSession": true,
+                                                "campaignId": "string",
+                                                "landingPageUrl": "string",
+                                                "gclid": "string",
+                                                "fbclid": "string",
+                                                "msclkid": "string",
+                                                "utmSource": "string",
+                                                "utmMedium": "string",
+                                                "utmCampaign": "string",
+                                                "utmAdgroup": "string",
+                                                "utmTerm": "string",
+                                                "utmContent": "string",
+                                                "googleAnalyticsClientId": "string",
+                                                "bookedFrom": "string",
+                                                "sourcedFromMarketingPro": "string",
+                                                "gbraid": "string",
+                                                "wbraid": "string",
+                                                "marketingSource": "string"
+                                            },
+                                            "mobileNotificationOptIn": true,
+                                            "blockerType": "string",
+                                            "blockerToBookAdditionalData": "string",
+                                            "lastStep": "string",
+                                            "dispatchFeeQuoted": "string",
+                                            "isLocationTakeover": true,
+                                            "customOptIn": true,
+                                            "marketingOptIn": true,
+                                            "membershipInterest": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/routers/{id}/performance": {
+            "get": {
+                "tags": [
+                    "Router"
+                ],
+                "summary": "Provides performance data for router",
+                "description": "Provides performance data for router",
+                "operationId": "Router_RouterPerformance",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sessionCreatedOnOrAfter",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "sessionCreatedBefore",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchedulingPro.V2.RouterPerformanceResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "openedCount": 0,
+                                    "interactedCount": 0,
+                                    "sessionCountBySchedulerId": [
+                                        {
+                                            "schedulerId": "string",
+                                            "openedCount": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/schedulers": {
+            "get": {
+                "tags": [
+                    "Scheduler"
+                ],
+                "summary": "Gets a list of schedulers",
+                "description": "Gets a list of schedulers",
+                "operationId": "Scheduler_Schedulers",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_SchedulingPro.V2.SchedulerResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "name": "string",
+                                            "companyName": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "schedulerStatus": "string",
+                                            "dataApiKey": "string",
+                                            "isDefault": true,
+                                            "mode": {},
+                                            "quickLaunchLink": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/schedulers/{id}/sessions": {
+            "get": {
+                "tags": [
+                    "Scheduler"
+                ],
+                "summary": "Gets a paginated list of sessions for scheduler",
+                "description": "Gets a paginated list of sessions for scheduler",
+                "operationId": "Scheduler_SchedulerSessions",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_SchedulingPro.V2.SchedulerSessionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "lastCheckinDate": "string",
+                                            "sessionOutcome": "string",
+                                            "schedulerId": "string",
+                                            "jobId": 0,
+                                            "bookingId": 0,
+                                            "leadId": 0,
+                                            "timeslotStart": "string",
+                                            "timeslotEnd": "string",
+                                            "category": "string",
+                                            "jobTypeId": 0,
+                                            "businessUnitId": 0,
+                                            "customer": {
+                                                "isNewCustomer": true,
+                                                "id": 0,
+                                                "firstName": "string",
+                                                "lastName": "string",
+                                                "email": "string",
+                                                "phone": "string",
+                                                "locationId": 0,
+                                                "isNewLocation": true,
+                                                "address": {
+                                                    "street": "string",
+                                                    "unit": "string",
+                                                    "city": "string",
+                                                    "state": "string",
+                                                    "zip": "string",
+                                                    "country": "string"
+                                                },
+                                                "browserName": "string",
+                                                "browserVersion": "string",
+                                                "cpuArchitecture": "string",
+                                                "deviceModel": "string",
+                                                "deviceType": "string",
+                                                "deviceVendor": "string",
+                                                "engineName": "string",
+                                                "engineVersion": "string",
+                                                "ipAddress": "string",
+                                                "isBot": true,
+                                                "osName": "string",
+                                                "osVersion": "string",
+                                                "userAgent": "string"
+                                            },
+                                            "zoneId": 0,
+                                            "customerResponses": [
+                                                "string"
+                                            ],
+                                            "notes": "string",
+                                            "sourceTracking": {
+                                                "isRWGSession": true,
+                                                "campaignId": "string",
+                                                "landingPageUrl": "string",
+                                                "gclid": "string",
+                                                "fbclid": "string",
+                                                "msclkid": "string",
+                                                "utmSource": "string",
+                                                "utmMedium": "string",
+                                                "utmCampaign": "string",
+                                                "utmAdgroup": "string",
+                                                "utmTerm": "string",
+                                                "utmContent": "string",
+                                                "googleAnalyticsClientId": "string",
+                                                "bookedFrom": "string",
+                                                "sourcedFromMarketingPro": "string",
+                                                "gbraid": "string",
+                                                "wbraid": "string",
+                                                "marketingSource": "string"
+                                            },
+                                            "mobileNotificationOptIn": true,
+                                            "blockerType": "string",
+                                            "blockerToBookAdditionalData": "string",
+                                            "lastStep": "string",
+                                            "dispatchFeeQuoted": "string",
+                                            "isLocationTakeover": true,
+                                            "customOptIn": true,
+                                            "marketingOptIn": true,
+                                            "membershipInterest": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/schedulers/{id}/performance": {
+            "get": {
+                "tags": [
+                    "Scheduler"
+                ],
+                "summary": "Provides performance data for scheduler",
+                "description": "Provides performance data for scheduler",
+                "operationId": "Scheduler_SchedulerPerformance",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sessionCreatedOnOrAfter",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "sessionCreatedBefore",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerPerformanceResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "schedulerName": "string",
+                                    "brandName": "string",
+                                    "schedulerCompletionRate": 0,
+                                    "openedCompletionRate": 0,
+                                    "totalCustomerContactsCaptured": 0,
+                                    "totalJobsCreated": 0,
+                                    "totalBookingsCreated": 0,
+                                    "totalAbandonedSessionsSentToBookings": 0,
+                                    "totalAbandonedSessionsSentToLeads": 0,
+                                    "totalBookingsRecoveredFromAbandonedSessions": 0,
+                                    "totalJobsRecoveredFromAbandonedSessions": 0,
+                                    "totalMembershipInterest": 0,
+                                    "totalSessions": 0,
+                                    "milestoneFrequencyCount": {
+                                        "opened": 0,
+                                        "zipcode": 0,
+                                        "interacted": 0,
+                                        "issue": 0,
+                                        "schedule": 0,
+                                        "customer": 0,
+                                        "details": 0,
+                                        "booked": 0,
+                                        "abandoned": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_SchedulingPro.V2.RouterSessionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.RouterSessionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "SchedulingPro.V2.RouterSessionResponse": {
+                "required": [
+                    "id",
+                    "createdOn",
+                    "modifiedOn",
+                    "lastCheckinDate",
+                    "customer",
+                    "sourceTracking"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Session ID"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When this session was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When this session was last modified",
+                        "format": "date-time"
+                    },
+                    "lastCheckinDate": {
+                        "type": "string",
+                        "description": "When the customer last interacted with the session",
+                        "format": "date-time"
+                    },
+                    "sessionOutcome": {
+                        "type": "string",
+                        "description": "The outcome of the session",
+                        "nullable": true
+                    },
+                    "schedulerId": {
+                        "type": "string",
+                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Job ID if a job was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "description": "Booking ID if a booking was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "leadId": {
+                        "type": "integer",
+                        "description": "Lead ID if a lead was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "timeslotStart": {
+                        "type": "string",
+                        "description": "Timeslot start",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "timeslotEnd": {
+                        "type": "string",
+                        "description": "Timeslot end",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Category of the job",
+                        "nullable": true
+                    },
+                    "jobTypeId": {
+                        "type": "integer",
+                        "description": "Job type ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customer": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.Customer"
+                            }
+                        ],
+                        "description": "Customer information"
+                    },
+                    "zoneId": {
+                        "type": "integer",
+                        "description": "Zone ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customerResponses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Customer Responses",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "description": "Customer customer",
+                        "nullable": true
+                    },
+                    "sourceTracking": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.SourceTracking"
+                            }
+                        ],
+                        "description": "Source tracking information"
+                    },
+                    "mobileNotificationOptIn": {
+                        "type": "boolean",
+                        "description": "Check if user opt in for mobile notifications",
+                        "nullable": true
+                    },
+                    "blockerType": {
+                        "type": "string",
+                        "description": "Blocker Type",
+                        "nullable": true
+                    },
+                    "blockerToBookAdditionalData": {
+                        "type": "string",
+                        "description": "Additional data for the blocker to book",
+                        "nullable": true
+                    },
+                    "lastStep": {
+                        "type": "string",
+                        "description": "Last Step",
+                        "nullable": true
+                    },
+                    "dispatchFeeQuoted": {
+                        "type": "string",
+                        "description": "Dispatch Fee Quoted",
+                        "nullable": true
+                    },
+                    "isLocationTakeover": {
+                        "type": "boolean",
+                        "description": "Is Location Takeover",
+                        "nullable": true
+                    },
+                    "customOptIn": {
+                        "type": "boolean",
+                        "description": "Custom Opt In",
+                        "nullable": true
+                    },
+                    "marketingOptIn": {
+                        "type": "boolean",
+                        "description": "Marketing Opt In",
+                        "nullable": true
+                    },
+                    "membershipInterest": {
+                        "type": "string",
+                        "description": "Membership Interest",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.Customer": {
+                "required": [
+                    "isNewCustomer",
+                    "isNewLocation",
+                    "address"
+                ],
+                "type": "object",
+                "properties": {
+                    "isNewCustomer": {
+                        "type": "boolean",
+                        "description": "Whether this is a new customer"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "Customer ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "Customer first name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Customer last name",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Customer email",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Customer phone",
+                        "nullable": true
+                    },
+                    "locationId": {
+                        "type": "integer",
+                        "description": "Location ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "isNewLocation": {
+                        "type": "boolean",
+                        "description": "Whether this is a new Location"
+                    },
+                    "address": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.Address"
+                            }
+                        ],
+                        "description": "Customer Address Information"
+                    },
+                    "browserName": {
+                        "type": "string",
+                        "description": "Browser Name",
+                        "nullable": true
+                    },
+                    "browserVersion": {
+                        "type": "string",
+                        "description": "Browser Version",
+                        "nullable": true
+                    },
+                    "cpuArchitecture": {
+                        "type": "string",
+                        "description": "CPU Architecture",
+                        "nullable": true
+                    },
+                    "deviceModel": {
+                        "type": "string",
+                        "description": "Device Model",
+                        "nullable": true
+                    },
+                    "deviceType": {
+                        "type": "string",
+                        "description": "Device Type",
+                        "nullable": true
+                    },
+                    "deviceVendor": {
+                        "type": "string",
+                        "description": "Device Vendor",
+                        "nullable": true
+                    },
+                    "engineName": {
+                        "type": "string",
+                        "description": "Engine Name",
+                        "nullable": true
+                    },
+                    "engineVersion": {
+                        "type": "string",
+                        "description": "Engine Version",
+                        "nullable": true
+                    },
+                    "ipAddress": {
+                        "type": "string",
+                        "description": "IP Address",
+                        "nullable": true
+                    },
+                    "isBot": {
+                        "type": "boolean",
+                        "description": "Flag whether this session was bot or not",
+                        "nullable": true
+                    },
+                    "osName": {
+                        "type": "string",
+                        "description": "OS Name",
+                        "nullable": true
+                    },
+                    "osVersion": {
+                        "type": "string",
+                        "description": "OS Version",
+                        "nullable": true
+                    },
+                    "userAgent": {
+                        "type": "string",
+                        "description": "User Agent",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.Address": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "description": "Street",
+                        "nullable": true
+                    },
+                    "unit": {
+                        "type": "string",
+                        "description": "Unit",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City",
+                        "nullable": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State",
+                        "nullable": true
+                    },
+                    "zip": {
+                        "type": "string",
+                        "description": "Zip",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.SourceTracking": {
+                "type": "object",
+                "properties": {
+                    "isRWGSession": {
+                        "type": "boolean",
+                        "description": "Whether the session came from Reserve with Google",
+                        "nullable": true
+                    },
+                    "campaignId": {
+                        "type": "string",
+                        "description": "Campaign ID",
+                        "nullable": true
+                    },
+                    "landingPageUrl": {
+                        "type": "string",
+                        "description": "Campaign Name",
+                        "nullable": true
+                    },
+                    "gclid": {
+                        "type": "string",
+                        "description": "Google Click ID",
+                        "nullable": true
+                    },
+                    "fbclid": {
+                        "type": "string",
+                        "description": "Facebook Click ID",
+                        "nullable": true
+                    },
+                    "msclkid": {
+                        "type": "string",
+                        "description": "Microsoft Click ID",
+                        "nullable": true
+                    },
+                    "utmSource": {
+                        "type": "string",
+                        "description": "UTM Source",
+                        "nullable": true
+                    },
+                    "utmMedium": {
+                        "type": "string",
+                        "description": "UTM Medium",
+                        "nullable": true
+                    },
+                    "utmCampaign": {
+                        "type": "string",
+                        "description": "UTM Campaign",
+                        "nullable": true
+                    },
+                    "utmAdgroup": {
+                        "type": "string",
+                        "description": "UTM Content",
+                        "nullable": true
+                    },
+                    "utmTerm": {
+                        "type": "string",
+                        "description": "UTM Term",
+                        "nullable": true
+                    },
+                    "utmContent": {
+                        "type": "string",
+                        "description": "UTM Content",
+                        "nullable": true
+                    },
+                    "googleAnalyticsClientId": {
+                        "type": "string",
+                        "description": "Google Analytics Client ID",
+                        "nullable": true
+                    },
+                    "bookedFrom": {
+                        "type": "string",
+                        "description": "Booked From",
+                        "nullable": true
+                    },
+                    "sourcedFromMarketingPro": {
+                        "type": "string",
+                        "description": "Sourced From Marketing Pro",
+                        "nullable": true
+                    },
+                    "gbraid": {
+                        "type": "string",
+                        "description": "gbraid",
+                        "nullable": true
+                    },
+                    "wbraid": {
+                        "type": "string",
+                        "description": "wbraid",
+                        "nullable": true
+                    },
+                    "marketingSource": {
+                        "type": "string",
+                        "description": "Marketing Source",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.RouterPerformanceResponse": {
+                "required": [
+                    "id",
+                    "openedCount",
+                    "interactedCount",
+                    "sessionCountBySchedulerId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Router ID"
+                    },
+                    "openedCount": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Opened milestone",
+                        "format": "int32"
+                    },
+                    "interactedCount": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Interacted milestone",
+                        "format": "int32"
+                    },
+                    "sessionCountBySchedulerId": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.RouterSchedulerSessionPerformance"
+                        },
+                        "description": "Session counts by SchedulerID"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.RouterSchedulerSessionPerformance": {
+                "required": [
+                    "openedCount"
+                ],
+                "type": "object",
+                "properties": {
+                    "schedulerId": {
+                        "type": "string",
+                        "description": "Scheduler ID. Null value represents sessions that have not been routed to a scheduler.",
+                        "nullable": true
+                    },
+                    "openedCount": {
+                        "type": "integer",
+                        "description": "The total number of scheduler sessions that have reached the Opened milestone",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_SchedulingPro.V2.SchedulerResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "SchedulingPro.V2.SchedulerResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "companyName",
+                    "createdOn",
+                    "modifiedOn",
+                    "schedulerStatus",
+                    "dataApiKey",
+                    "isDefault",
+                    "mode",
+                    "quickLaunchLink"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Scheduler ID"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Scheduler name"
+                    },
+                    "companyName": {
+                        "type": "string",
+                        "description": "Company Name"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When this scheduler was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When this scheduler was last modified",
+                        "format": "date-time"
+                    },
+                    "schedulerStatus": {
+                        "type": "string",
+                        "description": "Scheduler Status"
+                    },
+                    "dataApiKey": {
+                        "type": "string",
+                        "description": "Scheduler Data API Key used for embedding the Scheduler"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Denotes if this is the default scheduler"
+                    },
+                    "mode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerMode"
+                            }
+                        ],
+                        "description": "whether this scheduler is in Standard Online Booking mode or Call Center mode"
+                    },
+                    "quickLaunchLink": {
+                        "type": "string",
+                        "description": "Link that can be used to directly open this scheduler"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.SchedulerMode": {
+                "enum": [
+                    "Call_Center",
+                    "Standard"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Call_Center",
+                    "Standard"
+                ]
+            },
+            "PaginatedResponse_Of_SchedulingPro.V2.SchedulerSessionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerSessionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "SchedulingPro.V2.SchedulerSessionResponse": {
+                "required": [
+                    "id",
+                    "createdOn",
+                    "modifiedOn",
+                    "lastCheckinDate",
+                    "customer",
+                    "sourceTracking"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Session ID"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When this session was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When this session was last modified",
+                        "format": "date-time"
+                    },
+                    "lastCheckinDate": {
+                        "type": "string",
+                        "description": "When the customer last interacted with the session",
+                        "format": "date-time"
+                    },
+                    "sessionOutcome": {
+                        "type": "string",
+                        "description": "The outcome of the session",
+                        "nullable": true
+                    },
+                    "schedulerId": {
+                        "type": "string",
+                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Job ID if a job was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "description": "Booking ID if a booking was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "leadId": {
+                        "type": "integer",
+                        "description": "Lead ID if a lead was created from this session",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "timeslotStart": {
+                        "type": "string",
+                        "description": "Timeslot start",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "timeslotEnd": {
+                        "type": "string",
+                        "description": "Timeslot end",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Category of the job",
+                        "nullable": true
+                    },
+                    "jobTypeId": {
+                        "type": "integer",
+                        "description": "Job type ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customer": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.Customer"
+                            }
+                        ],
+                        "description": "Customer information"
+                    },
+                    "zoneId": {
+                        "type": "integer",
+                        "description": "Zone ID",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customerResponses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Customer Responses",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "description": "Customer customer",
+                        "nullable": true
+                    },
+                    "sourceTracking": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.SourceTracking"
+                            }
+                        ],
+                        "description": "Source tracking information"
+                    },
+                    "mobileNotificationOptIn": {
+                        "type": "boolean",
+                        "description": "Check if user opt in for mobile notifications",
+                        "nullable": true
+                    },
+                    "blockerType": {
+                        "type": "string",
+                        "description": "Blocker Type",
+                        "nullable": true
+                    },
+                    "blockerToBookAdditionalData": {
+                        "type": "string",
+                        "description": "Additional data for the blocker to book",
+                        "nullable": true
+                    },
+                    "lastStep": {
+                        "type": "string",
+                        "description": "Last Step",
+                        "nullable": true
+                    },
+                    "dispatchFeeQuoted": {
+                        "type": "string",
+                        "description": "Dispatch Fee Quoted",
+                        "nullable": true
+                    },
+                    "isLocationTakeover": {
+                        "type": "boolean",
+                        "description": "Is Location Takeover",
+                        "nullable": true
+                    },
+                    "customOptIn": {
+                        "type": "boolean",
+                        "description": "Custom Opt In",
+                        "nullable": true
+                    },
+                    "marketingOptIn": {
+                        "type": "boolean",
+                        "description": "Marketing Opt In",
+                        "nullable": true
+                    },
+                    "membershipInterest": {
+                        "type": "string",
+                        "description": "Membership Interest",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.SchedulerPerformanceResponse": {
+                "required": [
+                    "id",
+                    "schedulerName",
+                    "brandName",
+                    "schedulerCompletionRate",
+                    "openedCompletionRate",
+                    "totalCustomerContactsCaptured",
+                    "totalJobsCreated",
+                    "totalBookingsCreated",
+                    "totalAbandonedSessionsSentToBookings",
+                    "totalAbandonedSessionsSentToLeads",
+                    "totalBookingsRecoveredFromAbandonedSessions",
+                    "totalJobsRecoveredFromAbandonedSessions",
+                    "totalMembershipInterest",
+                    "totalSessions",
+                    "milestoneFrequencyCount"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Scheduler ID"
+                    },
+                    "schedulerName": {
+                        "type": "string",
+                        "description": "Scheduler Name"
+                    },
+                    "brandName": {
+                        "type": "string",
+                        "description": "Brand Name"
+                    },
+                    "schedulerCompletionRate": {
+                        "type": "number",
+                        "description": "Scheduler Completion Rate",
+                        "format": "double"
+                    },
+                    "openedCompletionRate": {
+                        "type": "number",
+                        "description": "Opened Completion Rate",
+                        "format": "double"
+                    },
+                    "totalCustomerContactsCaptured": {
+                        "type": "integer",
+                        "description": "The total number of customer contacts captured",
+                        "format": "int32"
+                    },
+                    "totalJobsCreated": {
+                        "type": "integer",
+                        "description": "The total number of jobs created",
+                        "format": "int32"
+                    },
+                    "totalBookingsCreated": {
+                        "type": "integer",
+                        "description": "The total number of bookings created",
+                        "format": "int32"
+                    },
+                    "totalAbandonedSessionsSentToBookings": {
+                        "type": "integer",
+                        "description": "The total number of bookings created from abandoned sessions",
+                        "format": "int32"
+                    },
+                    "totalAbandonedSessionsSentToLeads": {
+                        "type": "integer",
+                        "description": "The total number of leads created from abandoned sessions",
+                        "format": "int32"
+                    },
+                    "totalBookingsRecoveredFromAbandonedSessions": {
+                        "type": "integer",
+                        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session recovery SMS",
+                        "format": "int32"
+                    },
+                    "totalJobsRecoveredFromAbandonedSessions": {
+                        "type": "integer",
+                        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session recovery SMS",
+                        "format": "int32"
+                    },
+                    "totalMembershipInterest": {
+                        "type": "integer",
+                        "description": "The total number of membership interest",
+                        "format": "int32"
+                    },
+                    "totalSessions": {
+                        "type": "integer",
+                        "description": "The total number of sessions",
+                        "format": "int32"
+                    },
+                    "milestoneFrequencyCount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.MilestoneFrequencyCount"
+                            }
+                        ],
+                        "description": "Milestone Frequency Count"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.MilestoneFrequencyCount": {
+                "required": [
+                    "opened",
+                    "zipcode",
+                    "interacted",
+                    "issue",
+                    "schedule",
+                    "customer",
+                    "details",
+                    "booked",
+                    "abandoned"
+                ],
+                "type": "object",
+                "properties": {
+                    "opened": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Opened milestone",
+                        "format": "int32"
+                    },
+                    "zipcode": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Zipcode milestone",
+                        "format": "int32"
+                    },
+                    "interacted": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Interacted milestone",
+                        "format": "int32"
+                    },
+                    "issue": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Issue milestone",
+                        "format": "int32"
+                    },
+                    "schedule": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Schedule milestone",
+                        "format": "int32"
+                    },
+                    "customer": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Customer milestone",
+                        "format": "int32"
+                    },
+                    "details": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Details milestone",
+                        "format": "int32"
+                    },
+                    "booked": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have reached the Booked milestone",
+                        "format": "int32"
+                    },
+                    "abandoned": {
+                        "type": "integer",
+                        "description": "The total number of sessions that have been abandoned",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

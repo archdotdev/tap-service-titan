@@ -219,7 +219,162 @@
                                             "soldById": 0,
                                             "customerPo": "string",
                                             "importId": "string",
-                                            "memo": "string"
+                                            "memo": "string",
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/memberships/custom-fields": {
+            "get": {
+                "tags": [
+                    "CustomerMemberships"
+                ],
+                "summary": "Gets a list of custom field types that apply to customer memberships",
+                "description": "Gets a list of custom field types that apply to customer memberships",
+                "operationId": "CustomerMemberships_GetCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Format - int32. How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Memberships.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": {},
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -321,7 +476,14 @@
                                     "soldById": 0,
                                     "customerPo": "string",
                                     "importId": "string",
-                                    "memo": "string"
+                                    "memo": "string",
+                                    "customFields": [
+                                        {
+                                            "typeId": 0,
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -699,7 +861,14 @@
                                             "modifiedOn": "string",
                                             "importId": "string",
                                             "billingTemplateId": 0,
+                                            "durationBilling": [
+                                                {
+                                                    "duration": 0,
+                                                    "billingFrequency": {}
+                                                }
+                                            ],
                                             "name": "string",
+                                            "displayName": "string",
                                             "active": true,
                                             "discountMode": {},
                                             "locationTarget": {},
@@ -918,7 +1087,14 @@
                                             "soldById": 0,
                                             "customerPo": "string",
                                             "importId": "string",
-                                            "memo": "string"
+                                            "memo": "string",
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -1229,6 +1405,91 @@
                                             "createdById": 0,
                                             "modifiedOn": "string",
                                             "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/export/membership-status-changes": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Provides export feed for customer membership status changes",
+                "description": "Provides export feed for customer membership status changes",
+                "operationId": "Export_MembershipStatusChanges",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Format - int64. Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Memberships.V2.ExportCustomerMembershipStatusChangesResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "oldStatus": {},
+                                            "newStatus": {},
+                                            "note": "string",
+                                            "createdOn": "string",
+                                            "createdById": 0,
+                                            "membershipId": 0
                                         }
                                     ]
                                 }
@@ -2520,6 +2781,15 @@
                         }
                     },
                     {
+                        "name": "includeDurationBilling",
+                        "in": "query",
+                        "description": "Whether duration/billing should be included in the result",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
@@ -2605,6 +2875,7 @@
                                     "data": [
                                         {
                                             "name": "string",
+                                            "displayName": "string",
                                             "active": true,
                                             "discountMode": {},
                                             "locationTarget": {},
@@ -2617,7 +2888,13 @@
                                             "createdById": 0,
                                             "modifiedOn": "string",
                                             "importId": "string",
-                                            "billingTemplateId": 0
+                                            "billingTemplateId": 0,
+                                            "durationBilling": [
+                                                {
+                                                    "duration": 0,
+                                                    "billingFrequency": {}
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -2685,6 +2962,7 @@
                                 },
                                 "example": {
                                     "name": "string",
+                                    "displayName": "string",
                                     "active": true,
                                     "discountMode": {},
                                     "locationTarget": {},
@@ -2697,7 +2975,13 @@
                                     "createdById": 0,
                                     "modifiedOn": "string",
                                     "importId": "string",
-                                    "billingTemplateId": 0
+                                    "billingTemplateId": 0,
+                                    "durationBilling": [
+                                        {
+                                            "duration": 0,
+                                            "billingFrequency": {}
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -3419,7 +3703,8 @@
                     "initialDeferredRevenue",
                     "businessUnitId",
                     "customerId",
-                    "membershipTypeId"
+                    "membershipTypeId",
+                    "customFields"
                 ],
                 "type": "object",
                 "properties": {
@@ -3634,6 +3919,13 @@
                         "type": "string",
                         "description": "Memo for customer membership",
                         "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.CustomFieldResponse"
+                        },
+                        "description": "List of custom fields"
                     }
                 },
                 "additionalProperties": false
@@ -3694,6 +3986,30 @@
                     "Dismissed"
                 ]
             },
+            "Memberships.V2.CustomFieldResponse": {
+                "required": [
+                    "typeId",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "typeId": {
+                        "type": "integer",
+                        "description": "Custom field type id",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Custom field name"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Custom field value",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
             "ApiErrorResponse": {
                 "required": [
                     "type",
@@ -3753,6 +4069,108 @@
                     "True",
                     "Any",
                     "False"
+                ]
+            },
+            "PaginatedResponse_Of_Memberships.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.CustomFieldTypeResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Memberships.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "dataType",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the custom field.",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the custom field."
+                    },
+                    "dataType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Memberships.V2.CustomFieldDataType"
+                            }
+                        ],
+                        "description": "Indicates the data type of the custom field."
+                    },
+                    "dataTypeOptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Indicates the dropdown options if the custom field is a dropdown data type.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date the custom field was created in UTC date / time.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date the custom field was modified in UTC date / time.",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.V2.CustomFieldDataType": {
+                "enum": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
                 ]
             },
             "Memberships.V2.CustomerMembershipStatusChangeItemResponse": {
@@ -4088,9 +4506,22 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "durationBilling": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
+                        },
+                        "description": "Membership type duration billing options",
+                        "nullable": true
+                    },
                     "name": {
                         "type": "string",
                         "description": "Membership type name"
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard.",
+                        "nullable": true
                     },
                     "active": {
                         "type": "boolean",
@@ -4131,6 +4562,29 @@
                     "showMembershipSavings": {
                         "type": "boolean",
                         "description": "Whether membership savings should be displayed"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.V2.MembershipTypeDurationBillingEntry": {
+                "required": [
+                    "billingFrequency"
+                ],
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "integer",
+                        "description": "Duration of the entry ",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "billingFrequency": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Memberships.V2.MembershipRecurrenceType"
+                            }
+                        ],
+                        "description": "Billing frequency of the entry"
                     }
                 },
                 "additionalProperties": false
@@ -4441,7 +4895,8 @@
                     "initialDeferredRevenue",
                     "businessUnitId",
                     "customerId",
-                    "membershipTypeId"
+                    "membershipTypeId",
+                    "customFields"
                 ],
                 "type": "object",
                 "properties": {
@@ -4656,6 +5111,13 @@
                         "type": "string",
                         "description": "Memo for customer membership",
                         "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.CustomFieldResponse"
+                        },
+                        "description": "List of custom fields"
                     }
                 },
                 "additionalProperties": false
@@ -5244,6 +5706,88 @@
                     "active": {
                         "type": "boolean",
                         "description": "Whether this event still exists, or was deleted already."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ExportResponse_Of_Memberships.V2.ExportCustomerMembershipStatusChangesResponse": {
+                "required": [
+                    "hasMore",
+                    "continueFrom",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether the export feed has reached its logical \"end\", or if there is more to export.\nTrue means the consumer can invoke another request right away using new continuation token value.\nFalse means there is now new data for the export, and the consumer should wait for some time (5-10 minutes)\nbefore making another request."
+                    },
+                    "continueFrom": {
+                        "type": "string",
+                        "description": "Continuation token used to resume the export operation. The value should be used in \"from\" query parameter of the following request."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.ExportCustomerMembershipStatusChangesResponse"
+                        },
+                        "description": "The collection of exported items, usually sorted chronologically based on modification date"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents export API response."
+            },
+            "Memberships.V2.ExportCustomerMembershipStatusChangesResponse": {
+                "required": [
+                    "id",
+                    "oldStatus",
+                    "newStatus",
+                    "createdOn",
+                    "membershipId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the status change record",
+                        "format": "int64"
+                    },
+                    "oldStatus": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Memberships.V2.MembershipStatus"
+                            }
+                        ],
+                        "description": "Previous status value"
+                    },
+                    "newStatus": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Memberships.V2.MembershipStatus"
+                            }
+                        ],
+                        "description": "New status value"
+                    },
+                    "note": {
+                        "type": "string",
+                        "description": "Optional note attached to this status change",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When this status change record was created",
+                        "format": "date-time"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "ID of the user that created this status change record",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "membershipId": {
+                        "type": "integer",
+                        "description": "ID of the membership that this status change record is associated with",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -6107,6 +6651,11 @@
                         "type": "string",
                         "description": "Membership type name"
                     },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard.",
+                        "nullable": true
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Whether membership type is active"
@@ -6177,6 +6726,14 @@
                         "type": "integer",
                         "description": "Billing template ID",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "durationBilling": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
+                        },
+                        "description": "Membership type duration billing options",
                         "nullable": true
                     }
                 },

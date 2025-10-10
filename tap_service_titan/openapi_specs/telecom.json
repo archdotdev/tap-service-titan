@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -32,7 +32,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -42,7 +42,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -70,7 +70,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -80,7 +80,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -90,7 +90,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -100,7 +100,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -124,7 +124,7 @@
                     {
                         "name": "createdAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created after certain date/time (in UTC)",
+                        "description": "Return items created after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -134,7 +134,7 @@
                     {
                         "name": "modifiedAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified after certain date/time (in UTC)",
+                        "description": "Return items modified after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -144,7 +144,7 @@
                     {
                         "name": "campaignId",
                         "in": "query",
-                        "description": "Format - int64. Campaign ID",
+                        "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -154,7 +154,7 @@
                     {
                         "name": "agentId",
                         "in": "query",
-                        "description": "Format - int64. Agent ID (number)",
+                        "description": "Agent ID (number)",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -164,7 +164,7 @@
                     {
                         "name": "minDuration",
                         "in": "query",
-                        "description": "Format - int32. Minimum call duration (number of seconds)",
+                        "description": "Minimum call duration (number of seconds)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -210,7 +210,7 @@
                     {
                         "name": "agentExternalId",
                         "in": "query",
-                        "description": "Format - int64. Agent external ID (number)",
+                        "description": "Agent external ID (number)",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -221,6 +221,24 @@
                         "name": "sort",
                         "in": "query",
                         "description": "The Sorting field, possible values: Id, CreatedOn, ModifiedOn.\nThe Sorting is ascending by default, add the '-' character to use descending (for example -Id)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sid",
+                        "in": "query",
+                        "description": "Sid of the call (string)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Tag of the call (string)",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -289,7 +307,14 @@
                                                     "id": 0,
                                                     "name": "string",
                                                     "externalId": 0
-                                                }
+                                                },
+                                                "sid": "string",
+                                                "tags": [
+                                                    {
+                                                        "id": 0,
+                                                        "typeName": "string"
+                                                    }
+                                                ]
                                             }
                                         }
                                     ]
@@ -330,7 +355,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -388,7 +413,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -463,7 +488,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -537,7 +562,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Id of the call.",
+                        "description": "Id of the call.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -547,7 +572,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -701,6 +726,7 @@
                                             "modifiedOn": "string",
                                             "createdOn": "string",
                                             "active": true,
+                                            "isDefaultCampaign": true,
                                             "category": {
                                                 "id": 0,
                                                 "name": "string",
@@ -718,7 +744,14 @@
                                             "id": 0,
                                             "name": "string",
                                             "externalId": 0
-                                        }
+                                        },
+                                        "sid": "string",
+                                        "tags": [
+                                            {
+                                                "id": 0,
+                                                "typeName": "string"
+                                            }
+                                        ]
                                     }
                                 }
                             }
@@ -737,7 +770,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Id of updating call.",
+                        "description": "Id of updating call.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -747,7 +780,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -816,7 +849,8 @@
                                             "memo": "string"
                                         }
                                     ]
-                                }
+                                },
+                                "tag": "string"
                             }
                         }
                     }
@@ -920,6 +954,7 @@
                                         "modifiedOn": "string",
                                         "createdOn": "string",
                                         "active": true,
+                                        "isDefaultCampaign": true,
                                         "category": {
                                             "id": 0,
                                             "name": "string",
@@ -937,7 +972,14 @@
                                         "id": 0,
                                         "name": "string",
                                         "externalId": 0
-                                    }
+                                    },
+                                    "sid": "string",
+                                    "tags": [
+                                        {
+                                            "id": 0,
+                                            "typeName": "string"
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -957,7 +999,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -967,7 +1009,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Modified before a certain date/time (as date-time in RFC3339), not inclusive",
+                        "description": "Modified before a certain date/time (as date-time in RFC3339), not inclusive",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -977,7 +1019,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Modified on or after a certain date/time (as date-time in RFC3339), inclusive",
+                        "description": "Modified on or after a certain date/time (as date-time in RFC3339), inclusive",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -987,7 +1029,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Created on or after a certain date/time (as date-time in RFC3339), inclusive",
+                        "description": "Created on or after a certain date/time (as date-time in RFC3339), inclusive",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -997,7 +1039,7 @@
                     {
                         "name": "modifiedAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Modified after a certain date/time (as date-time in RFC3339), not inclusive",
+                        "description": "Modified after a certain date/time (as date-time in RFC3339), not inclusive",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1007,7 +1049,7 @@
                     {
                         "name": "minDuration",
                         "in": "query",
-                        "description": "Format - int32. Minimum call duration (number)",
+                        "description": "Minimum call duration (number)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1025,7 +1067,7 @@
                     {
                         "name": "campaignId",
                         "in": "query",
-                        "description": "Format - int64. Campaign ID",
+                        "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1035,7 +1077,7 @@
                     {
                         "name": "agentId",
                         "in": "query",
-                        "description": "Format - int64. Agent ID (number)",
+                        "description": "Agent ID (number)",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1062,7 +1104,7 @@
                     {
                         "name": "agentExternalId",
                         "in": "query",
-                        "description": "Format - int64. Agent external ID (number)",
+                        "description": "Agent external ID (number)",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1095,7 +1137,6 @@
                     {
                         "name": "createdAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1105,7 +1146,6 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1126,7 +1166,6 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1136,7 +1175,6 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1292,6 +1330,7 @@
                                                     "modifiedOn": "string",
                                                     "createdOn": "string",
                                                     "active": true,
+                                                    "isDefaultCampaign": true,
                                                     "category": {
                                                         "id": 0,
                                                         "name": "string",
@@ -1310,6 +1349,13 @@
                                                     "name": "string",
                                                     "externalId": 0
                                                 },
+                                                "sid": "string",
+                                                "tags": [
+                                                    {
+                                                        "id": 0,
+                                                        "typeName": "string"
+                                                    }
+                                                ],
                                                 "createdOn": "string",
                                                 "active": true
                                             }
@@ -1338,7 +1384,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Id of the call.",
+                        "description": "Id of the call.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1348,7 +1394,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1388,7 +1434,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Id of the call.",
+                        "description": "Id of the call.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1398,7 +1444,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1438,7 +1484,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1516,7 +1562,12 @@
                                                 "id": 0,
                                                 "name": "string"
                                             },
-                                            "active": true
+                                            "excuseMemo": "string",
+                                            "tag": "string",
+                                            "active": true,
+                                            "lead": {
+                                                "id": 0
+                                            }
                                         }
                                     ]
                                 }
@@ -1745,6 +1796,17 @@
                     },
                     "agent": {
                         "$ref": "#/components/schemas/Telecom.V3.CallAgentModel"
+                    },
+                    "sid": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Module.Telecom.Shared.TagResponseModel"
+                        },
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -1826,6 +1888,23 @@
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Module.Telecom.Shared.TagResponseModel": {
+                "required": [
+                    "id",
+                    "typeName"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "typeName": {
+                        "type": "string"
                     }
                 },
                 "additionalProperties": false
@@ -2282,7 +2361,9 @@
                     "customer",
                     "campaign",
                     "modifiedOn",
-                    "agent"
+                    "agent",
+                    "sid",
+                    "tags"
                 ],
                 "type": "object",
                 "properties": {
@@ -2339,6 +2420,15 @@
                     },
                     "agent": {
                         "$ref": "#/components/schemas/Module.Telecom.Shared.CallAgentModel"
+                    },
+                    "sid": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Module.Telecom.Shared.TagResponseModel"
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -2737,6 +2827,10 @@
                     "active": {
                         "type": "boolean"
                     },
+                    "isDefaultCampaign": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
                     "category": {
                         "oneOf": [
                             {
@@ -2900,6 +2994,8 @@
                     "campaign",
                     "modifiedOn",
                     "agent",
+                    "sid",
+                    "tags",
                     "createdOn",
                     "active"
                 ],
@@ -2959,6 +3055,15 @@
                     "agent": {
                         "$ref": "#/components/schemas/Module.Telecom.Shared.CallAgentModel"
                     },
+                    "sid": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Module.Telecom.Shared.TagResponseModel"
+                        }
+                    },
                     "createdOn": {
                         "type": "string",
                         "format": "date-time"
@@ -2974,7 +3079,8 @@
                     "excuseMemo",
                     "reason",
                     "customer",
-                    "location"
+                    "location",
+                    "tag"
                 ],
                 "type": "object",
                 "properties": {
@@ -3017,6 +3123,9 @@
                     },
                     "location": {
                         "$ref": "#/components/schemas/LocationInModel"
+                    },
+                    "tag": {
+                        "type": "string"
                     }
                 },
                 "additionalProperties": false
@@ -3197,6 +3306,8 @@
                     "status",
                     "createdOn",
                     "modifiedOn",
+                    "excuseMemo",
+                    "tag",
                     "active"
                 ],
                 "type": "object",
@@ -3327,9 +3438,26 @@
                         "description": "The info about the user who created the outbound call",
                         "nullable": true
                     },
+                    "excuseMemo": {
+                        "type": "string",
+                        "description": "Excuse memo of the call"
+                    },
+                    "tag": {
+                        "type": "string",
+                        "description": "Call Tag"
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Gets or sets whether the entity is active."
+                    },
+                    "lead": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.LeadModel"
+                            }
+                        ],
+                        "description": "CRM Leads created from unbooked calls",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -3395,6 +3523,172 @@
                     "number": {
                         "type": "string",
                         "description": "Human readable number of the job"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V2.LeadModel": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Telecom.V3.Webhooks.CallCompletedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.tlc.call-completed\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.Webhooks.CallCompletedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.Webhooks.CallCompletedWebhookEvent": {
+                "required": [
+                    "call",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "call": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Telecom.V3.Webhooks.CallUpdatedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.tlc.call-updated\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.Webhooks.CallUpdatedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Telecom.V3.Webhooks.CallUpdatedWebhookEvent": {
+                "required": [
+                    "call",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "call": {
+                        "$ref": "#/components/schemas/Telecom.V3.CallResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
                     }
                 },
                 "additionalProperties": false

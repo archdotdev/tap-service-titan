@@ -10,6 +10,123 @@
         }
     ],
     "paths": {
+        "/tenant/{tenant}/export/installed-equipment": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Export_ExportInstalledEquipment",
+                "operationId": "Export_ExportInstalledEquipment",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentListExportResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "active": true,
+                                            "equipmentId": 0,
+                                            "locationId": 0,
+                                            "customerId": 0,
+                                            "invoiceItemId": 0,
+                                            "name": "string",
+                                            "type": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "installedOn": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "serialNumber": "string",
+                                            "barcodeId": "string",
+                                            "memo": "string",
+                                            "manufacturer": "string",
+                                            "model": "string",
+                                            "cost": 0,
+                                            "status": "Installed",
+                                            "manufacturerWarrantyStart": "string",
+                                            "manufacturerWarrantyEnd": "string",
+                                            "serviceProviderWarrantyStart": "string",
+                                            "serviceProviderWarrantyEnd": "string",
+                                            "tags": [
+                                                {
+                                                    "id": 0,
+                                                    "ownerId": 0,
+                                                    "typeId": 0,
+                                                    "typeName": "string",
+                                                    "memo": "string",
+                                                    "color": "string",
+                                                    "textColor": "string",
+                                                    "code": "string"
+                                                }
+                                            ],
+                                            "actualReplacementDate": "string",
+                                            "predictedReplacementMonths": 0,
+                                            "predictedReplacementDate": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/installed-equipment": {
             "get": {
                 "tags": [
@@ -21,7 +138,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -48,7 +165,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -58,7 +175,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -68,7 +185,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -78,7 +195,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -88,7 +205,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -98,7 +215,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -122,6 +239,20 @@
                             "type": "string",
                             "nullable": true
                         }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
                     }
                 ],
                 "responses": {
@@ -140,11 +271,16 @@
                                     "data": [
                                         {
                                             "id": 0,
+                                            "active": true,
                                             "equipmentId": 0,
                                             "locationId": 0,
                                             "customerId": 0,
                                             "invoiceItemId": 0,
                                             "name": "string",
+                                            "type": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
                                             "installedOn": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -154,6 +290,7 @@
                                             "manufacturer": "string",
                                             "model": "string",
                                             "cost": 0,
+                                            "status": "Installed",
                                             "manufacturerWarrantyStart": "string",
                                             "manufacturerWarrantyEnd": "string",
                                             "serviceProviderWarrantyStart": "string",
@@ -209,7 +346,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -270,11 +407,16 @@
                                 },
                                 "example": {
                                     "id": 0,
+                                    "active": true,
                                     "equipmentId": 0,
                                     "locationId": 0,
                                     "customerId": 0,
                                     "invoiceItemId": 0,
                                     "name": "string",
+                                    "type": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
                                     "installedOn": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -284,6 +426,7 @@
                                     "manufacturer": "string",
                                     "model": "string",
                                     "cost": 0,
+                                    "status": "Installed",
                                     "manufacturerWarrantyStart": "string",
                                     "manufacturerWarrantyEnd": "string",
                                     "serviceProviderWarrantyStart": "string",
@@ -355,7 +498,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -365,7 +507,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -383,11 +525,16 @@
                                 },
                                 "example": {
                                     "id": 0,
+                                    "active": true,
                                     "equipmentId": 0,
                                     "locationId": 0,
                                     "customerId": 0,
                                     "invoiceItemId": 0,
                                     "name": "string",
+                                    "type": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
                                     "installedOn": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -397,6 +544,7 @@
                                     "manufacturer": "string",
                                     "model": "string",
                                     "cost": 0,
+                                    "status": "Installed",
                                     "manufacturerWarrantyStart": "string",
                                     "manufacturerWarrantyEnd": "string",
                                     "serviceProviderWarrantyStart": "string",
@@ -484,7 +632,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -494,7 +641,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -554,11 +701,16 @@
                                 },
                                 "example": {
                                     "id": 0,
+                                    "active": true,
                                     "equipmentId": 0,
                                     "locationId": 0,
                                     "customerId": 0,
                                     "invoiceItemId": 0,
                                     "name": "string",
+                                    "type": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
                                     "installedOn": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -568,6 +720,7 @@
                                     "manufacturer": "string",
                                     "model": "string",
                                     "cost": 0,
+                                    "status": "Installed",
                                     "manufacturerWarrantyStart": "string",
                                     "manufacturerWarrantyEnd": "string",
                                     "serviceProviderWarrantyStart": "string",
@@ -657,7 +810,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -740,7 +893,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -800,53 +953,174 @@
                     }
                 }
             }
+        },
+        "/tenant/{tenant}/installed-equipment/custom-field-types": {
+            "get": {
+                "tags": [
+                    "InstalledEquipment"
+                ],
+                "summary": "InstalledEquipment_GetCustomFieldTypes",
+                "operationId": "InstalledEquipment_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "descending",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationEquipment.Repositories.Types.RepositoryPageResult_Of_LocationEquipment.CustomFieldTypeModel"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ]
+                                        }
+                                    ],
+                                    "totalCount": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
-            "PaginatedResponse_Of_EquipmentSystems.V2.InstalledEquipmentResponse": {
+            "EquipmentSystems.V2.InstalledEquipmentListExportResponse": {
                 "required": [
-                    "page",
-                    "pageSize",
                     "hasMore",
+                    "continueFrom",
                     "data"
                 ],
                 "type": "object",
                 "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "From which page this output has started",
-                        "format": "int32"
-                    },
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "Page size for this query (i.e. how many records were requested to return)",
-                        "format": "int32"
-                    },
                     "hasMore": {
-                        "type": "boolean",
-                        "description": "True if there are more records in the query than returned in this result"
+                        "type": "boolean"
                     },
-                    "totalCount": {
-                        "type": "integer",
-                        "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                    "continueFrom": {
+                        "type": "string"
                     },
                     "data": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentResponse"
-                        },
-                        "description": "The collection of result items, will never have more than PageSize items"
+                        }
                     }
                 },
-                "additionalProperties": false,
-                "description": "Represents paginated API response."
+                "additionalProperties": false
             },
             "EquipmentSystems.V2.InstalledEquipmentResponse": {
                 "required": [
                     "id",
+                    "active",
                     "locationId",
                     "customerId",
                     "name",
@@ -856,13 +1130,17 @@
                     "memo",
                     "manufacturer",
                     "model",
-                    "cost"
+                    "cost",
+                    "status"
                 ],
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
                     },
                     "equipmentId": {
                         "type": "integer",
@@ -884,6 +1162,14 @@
                     },
                     "name": {
                         "type": "string"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentTypeModel"
+                            }
+                        ],
+                        "nullable": true
                     },
                     "installedOn": {
                         "type": "string",
@@ -917,6 +1203,9 @@
                     "cost": {
                         "type": "number",
                         "format": "decimal"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
                     },
                     "manufacturerWarrantyStart": {
                         "type": "string",
@@ -962,6 +1251,35 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "EquipmentSystems.V2.InstalledEquipmentTypeModel": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LocationEquipment.InstalledEquipmentStatus": {
+                "enum": [
+                    "Installed",
+                    "Replaced"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Installed",
+                    "Replaced"
+                ]
             },
             "EquipmentSystems.V2.TagResponseModel": {
                 "required": [
@@ -1053,9 +1371,64 @@
                 "additionalProperties": false,
                 "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
             },
+            "PaginatedResponse_Of_EquipmentSystems.V2.InstalledEquipmentResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
             "EquipmentSystems.V2.InstalledEquipmentDetailedResponse": {
                 "required": [
                     "id",
+                    "active",
                     "locationId",
                     "customerId",
                     "name",
@@ -1065,13 +1438,17 @@
                     "memo",
                     "manufacturer",
                     "model",
-                    "cost"
+                    "cost",
+                    "status"
                 ],
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
                     },
                     "equipmentId": {
                         "type": "integer",
@@ -1093,6 +1470,14 @@
                     },
                     "name": {
                         "type": "string"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentTypeModel"
+                            }
+                        ],
+                        "nullable": true
                     },
                     "installedOn": {
                         "type": "string",
@@ -1126,6 +1511,9 @@
                     "cost": {
                         "type": "number",
                         "format": "decimal"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
                     },
                     "manufacturerWarrantyStart": {
                         "type": "string",
@@ -1474,6 +1862,88 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "LocationEquipment.Repositories.Types.RepositoryPageResult_Of_LocationEquipment.CustomFieldTypeModel": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number, starting from 1.",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "The number of items per page.",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether there are more items available beyond the current page."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LocationEquipment.CustomFieldTypeModel"
+                        },
+                        "description": "The list of items on the current page."
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Optional total count of items across all pages.",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Implementation of a paginated result for repository queries."
+            },
+            "LocationEquipment.CustomFieldTypeModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "dataType",
+                    "dataTypeOptions"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "dataType": {
+                        "$ref": "#/components/schemas/CustomFieldDataType"
+                    },
+                    "dataTypeOptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomFieldDataType": {
+                "enum": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ]
             }
         },
         "securitySchemes": {

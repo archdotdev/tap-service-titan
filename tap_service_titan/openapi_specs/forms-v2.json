@@ -1031,7 +1031,8 @@
                     "Membership",
                     "Truck",
                     "Project",
-                    "ServiceAgreement"
+                    "ServiceAgreement",
+                    "InvoiceItem"
                 ],
                 "type": "string",
                 "description": "",
@@ -1046,7 +1047,8 @@
                     "Membership",
                     "Truck",
                     "Project",
-                    "ServiceAgreement"
+                    "ServiceAgreement",
+                    "InvoiceItem"
                 ]
             },
             "Forms.Contracts.FormSubmissions.FormUnitApiDto": {

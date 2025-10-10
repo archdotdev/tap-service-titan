@@ -13,7 +13,8 @@
         "/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings": {
             "post": {
                 "tags": [
-                    "Gps"
+                    "Gps",
+                    "CustomerOnly"
                 ],
                 "summary": "Creates new gps ping.",
                 "description": "Creates new gps ping.",
@@ -30,7 +31,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -122,7 +123,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -150,7 +151,7 @@
                     {
                         "name": "jobId",
                         "in": "query",
-                        "description": "Format - int64. Return appointment assignments for a single job",
+                        "description": "Return appointment assignments for a single job",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -160,7 +161,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -170,7 +171,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -180,7 +181,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -190,7 +191,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -200,7 +201,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -210,7 +211,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -232,6 +233,20 @@
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
                             "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
                             "nullable": true
                         }
                     }
@@ -259,7 +274,10 @@
                                             "status": {},
                                             "isPaused": true,
                                             "jobId": 0,
-                                            "appointmentId": 0
+                                            "appointmentId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -299,7 +317,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -397,7 +415,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -476,7 +494,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -486,7 +504,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -496,7 +514,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -515,7 +533,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -525,7 +543,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -605,7 +623,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -681,7 +699,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -691,7 +708,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -767,7 +784,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -777,7 +793,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -853,7 +869,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -863,7 +878,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -937,7 +952,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -989,7 +1004,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1056,7 +1071,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1125,7 +1140,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1225,7 +1240,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1321,11 +1336,25 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
                         }
                     },
                     {
@@ -1368,7 +1397,10 @@
                                             "status": {},
                                             "isPaused": true,
                                             "jobId": 0,
-                                            "appointmentId": 0
+                                            "appointmentId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -1407,7 +1439,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1417,7 +1448,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1484,7 +1515,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1494,7 +1524,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1608,7 +1638,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1618,7 +1647,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1692,7 +1721,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1702,7 +1731,7 @@
                     {
                         "name": "technicianId",
                         "in": "query",
-                        "description": "Format - int64. Unique id of the technician this non-job appointment applies to",
+                        "description": "Unique id of the technician this non-job appointment applies to",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1712,7 +1741,7 @@
                     {
                         "name": "startsOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or after",
+                        "description": "When the Start of non-job appointment should be at or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1722,7 +1751,7 @@
                     {
                         "name": "startsOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or before",
+                        "description": "When the Start of non-job appointment should be at or before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1732,7 +1761,7 @@
                     {
                         "name": "timesheetCodeId",
                         "in": "query",
-                        "description": "Format - int64. Unique Id of timesheet code must apply to",
+                        "description": "Unique Id of timesheet code must apply to",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1760,7 +1789,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1770,7 +1799,27 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1789,7 +1838,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1799,7 +1848,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1812,6 +1861,15 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -1845,6 +1903,7 @@
                                             "showOnTechnicianSchedule": true,
                                             "active": true,
                                             "createdOn": "string",
+                                            "modifiedOn": "string",
                                             "createdById": 0
                                         }
                                     ]
@@ -1883,7 +1942,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1988,7 +2047,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1998,7 +2057,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2008,7 +2067,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2030,6 +2089,55 @@
                         "description": "Whether to include inactive teams",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -2092,7 +2200,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2166,7 +2274,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2176,7 +2283,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2252,7 +2359,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2262,7 +2368,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2325,7 +2431,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2335,7 +2441,7 @@
                     {
                         "name": "startsOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). When the Start of shift should be at or after",
+                        "description": "When the Start of shift should be at or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2345,7 +2451,7 @@
                     {
                         "name": "endsOnOrBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). When the End of shift should be at or before",
+                        "description": "When the End of shift should be at or before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2369,7 +2475,7 @@
                     {
                         "name": "technicianId",
                         "in": "query",
-                        "description": "Format - int64. Unique Id of technician shift must apply to",
+                        "description": "Unique Id of technician shift must apply to",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -2397,7 +2503,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2407,7 +2513,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2440,7 +2546,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2450,7 +2556,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2460,7 +2566,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2470,10 +2576,19 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -2501,7 +2616,9 @@
                                             "technicianId": 0,
                                             "start": "string",
                                             "end": "string",
-                                            "timesheetCodeId": 0
+                                            "timesheetCodeId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -2539,7 +2656,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2591,7 +2708,9 @@
                                             "technicianId": 0,
                                             "start": "string",
                                             "end": "string",
-                                            "timesheetCodeId": 0
+                                            "timesheetCodeId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -2631,7 +2750,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2641,7 +2759,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2666,7 +2784,9 @@
                                     "technicianId": 0,
                                     "start": "string",
                                     "end": "string",
-                                    "timesheetCodeId": 0
+                                    "timesheetCodeId": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -2720,7 +2840,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2730,7 +2849,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2774,7 +2893,9 @@
                                             "technicianId": 0,
                                             "start": "string",
                                             "end": "string",
-                                            "timesheetCodeId": 0
+                                            "timesheetCodeId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -2830,7 +2951,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The technician shift Id to delete",
+                        "description": "The technician shift Id to delete",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2840,7 +2961,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2914,7 +3035,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2974,6 +3095,73 @@
                 }
             }
         },
+        "/tenant/{tenant}/technician-tracking": {
+            "get": {
+                "tags": [
+                    "TechnicianTracking"
+                ],
+                "summary": "TechnicianTracking_Get",
+                "operationId": "TechnicianTracking_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "technicianId",
+                        "in": "query",
+                        "description": "Unique Id of technician that tracking url must apply to",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "appointmentId",
+                        "in": "query",
+                        "description": "Unique Id of appointment that tracking url must apply to",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.TechnicianTrackingResponse"
+                                },
+                                "example": {
+                                    "technicianTrackingUrl": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/zones": {
             "get": {
                 "tags": [
@@ -2986,7 +3174,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2996,7 +3184,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3006,7 +3194,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3019,6 +3207,69 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -3091,6 +3342,104 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Zone"
+                ],
+                "summary": "Creates a new zone",
+                "description": "Creates a new zone",
+                "operationId": "Zone_CreateZone",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dispatch.V2.CreateOrUpdateZoneRequestArgs"
+                            },
+                            "example": {
+                                "name": "string",
+                                "zips": [
+                                    "string"
+                                ],
+                                "cities": [
+                                    "string"
+                                ],
+                                "territoryNumbers": [
+                                    "string"
+                                ],
+                                "locnNumbers": [
+                                    "string"
+                                ],
+                                "serviceDaysEnabled": true,
+                                "serviceDaysIds": [
+                                    0
+                                ],
+                                "businessUnits": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.CreateOrUpdateZoneResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "active": true,
+                                    "name": "string",
+                                    "zips": [
+                                        "string"
+                                    ],
+                                    "cities": [
+                                        "string"
+                                    ],
+                                    "territoryNumbers": [
+                                        "string"
+                                    ],
+                                    "locnNumbers": [
+                                        "string"
+                                    ],
+                                    "serviceDaysEnabled": true,
+                                    "serviceDaysIds": [
+                                        0
+                                    ],
+                                    "businessUnits": [
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "string"
+                            }
+                        }
+                    }
+                }
             }
         },
         "/tenant/{tenant}/zones/{id}": {
@@ -3105,7 +3454,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3115,7 +3463,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3184,6 +3532,167 @@
                     },
                     "404": {
                         "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/zones/{zoneId}": {
+            "patch": {
+                "tags": [
+                    "Zone"
+                ],
+                "summary": "Updates an existing zone",
+                "description": "Updates an existing zone",
+                "operationId": "Zone_UpdateZone",
+                "parameters": [
+                    {
+                        "name": "zoneId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dispatch.V2.CreateOrUpdateZoneRequestArgs"
+                            },
+                            "example": {
+                                "name": "string",
+                                "zips": [
+                                    "string"
+                                ],
+                                "cities": [
+                                    "string"
+                                ],
+                                "territoryNumbers": [
+                                    "string"
+                                ],
+                                "locnNumbers": [
+                                    "string"
+                                ],
+                                "serviceDaysEnabled": true,
+                                "serviceDaysIds": [
+                                    0
+                                ],
+                                "businessUnits": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.CreateOrUpdateZoneResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "active": true,
+                                    "name": "string",
+                                    "zips": [
+                                        "string"
+                                    ],
+                                    "cities": [
+                                        "string"
+                                    ],
+                                    "territoryNumbers": [
+                                        "string"
+                                    ],
+                                    "locnNumbers": [
+                                        "string"
+                                    ],
+                                    "serviceDaysEnabled": true,
+                                    "serviceDaysIds": [
+                                        0
+                                    ],
+                                    "businessUnits": [
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Zone"
+                ],
+                "summary": "Deletes a zone",
+                "description": "Deletes a zone",
+                "operationId": "Zone_DeleteZone",
+                "parameters": [
+                    {
+                        "name": "zoneId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3426,7 +3935,10 @@
                     "status",
                     "isPaused",
                     "jobId",
-                    "appointmentId"
+                    "appointmentId",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -3475,6 +3987,20 @@
                         "type": "integer",
                         "description": "ID of the appointment",
                         "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the assignment was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the assignment was modified (in UTC)",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicate if assignment is active"
                     }
                 },
                 "additionalProperties": false
@@ -3493,6 +4019,20 @@
                     "Dispatched",
                     "Working",
                     "Done"
+                ]
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
                 ]
             },
             "Dispatch.V2.AppointmentResponse": {
@@ -3711,20 +4251,6 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "ActiveRequestArg": {
-                "enum": [
-                    "True",
-                    "Any",
-                    "False"
-                ],
-                "type": "string",
-                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
-                "x-enumNames": [
-                    "True",
-                    "Any",
-                    "False"
-                ]
             },
             "Dispatch.V2.CreateArrivalWindowRequest": {
                 "required": [
@@ -4152,7 +4678,10 @@
                     "status",
                     "isPaused",
                     "jobId",
-                    "appointmentId"
+                    "appointmentId",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -4201,6 +4730,20 @@
                         "type": "integer",
                         "description": "ID of the appointment",
                         "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the assignment was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the assignment was modified (in UTC)",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicate if assignment is active"
                     }
                 },
                 "additionalProperties": false
@@ -4336,6 +4879,7 @@
                     "showOnTechnicianSchedule",
                     "active",
                     "createdOn",
+                    "modifiedOn",
                     "createdById"
                 ],
                 "type": "object",
@@ -4400,6 +4944,11 @@
                     "createdOn": {
                         "type": "string",
                         "description": "When the appointment was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the appointment was last modified (in UTC)",
                         "format": "date-time"
                     },
                     "createdById": {
@@ -4980,7 +5529,9 @@
                     "active",
                     "technicianId",
                     "start",
-                    "end"
+                    "end",
+                    "createdOn",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -5030,6 +5581,16 @@
                         "description": "Timesheet code ID of shift",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the shift was created (in UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the shift was modified (in UTC)",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -5262,6 +5823,19 @@
                 },
                 "additionalProperties": false
             },
+            "Dispatch.V2.TechnicianTrackingResponse": {
+                "required": [
+                    "technicianTrackingUrl"
+                ],
+                "type": "object",
+                "properties": {
+                    "technicianTrackingUrl": {
+                        "type": "string",
+                        "description": "Url to allow tracking the technician's location"
+                    }
+                },
+                "additionalProperties": false
+            },
             "PaginatedResponse_Of_Dispatch.V2.ZoneResponse": {
                 "required": [
                     "page",
@@ -5403,6 +5977,770 @@
                         },
                         "description": "A list of assigned technicians",
                         "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.CreateOrUpdateZoneResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "name",
+                    "zips",
+                    "cities",
+                    "territoryNumbers",
+                    "locnNumbers",
+                    "serviceDaysEnabled",
+                    "serviceDaysIds",
+                    "businessUnits"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique id of the zone record",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the zone is enabled"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Descriptive identifier"
+                    },
+                    "zips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned zip codes to the zone"
+                    },
+                    "cities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned cities to the zone"
+                    },
+                    "territoryNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned territory numbers to the zone"
+                    },
+                    "locnNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned LOCN numbers to the zone"
+                    },
+                    "serviceDaysEnabled": {
+                        "type": "boolean",
+                        "description": "Whether the service days option is enabled"
+                    },
+                    "serviceDaysIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "A list of assigned service days"
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of assigned business units"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.CreateOrUpdateZoneRequestArgs": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Descriptive identifier",
+                        "nullable": true
+                    },
+                    "zips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned zip codes to the zone",
+                        "nullable": true
+                    },
+                    "cities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned cities to the zone",
+                        "nullable": true
+                    },
+                    "territoryNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned territory numbers to the zone",
+                        "nullable": true
+                    },
+                    "locnNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of assigned LOCN numbers to the zone",
+                        "nullable": true
+                    },
+                    "serviceDaysEnabled": {
+                        "type": "boolean",
+                        "description": "Whether the service days option is enabled",
+                        "nullable": true
+                    },
+                    "serviceDaysIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "A list of assigned service days",
+                        "nullable": true
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of assigned business units",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Dispatch.V2.Webhook.TechnicianArrivedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.dis.technician-arrived\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.TechnicianArrivedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.TechnicianArrivedWebhookEvent": {
+                "required": [
+                    "job",
+                    "appointment",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "job": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Job"
+                    },
+                    "appointment": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.JobAppointment"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.Job": {
+                "required": [
+                    "id",
+                    "jobNumber",
+                    "projectId",
+                    "customerId",
+                    "locationId",
+                    "jobStatus",
+                    "businessUnitId",
+                    "jobTypeId",
+                    "priority",
+                    "campaignId",
+                    "firstAppointmentId",
+                    "lastAppointmentId",
+                    "jobGeneratedLeadSource",
+                    "noCharge",
+                    "notificationsEnabled",
+                    "createdById",
+                    "modifiedOn",
+                    "total"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobNumber": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "locationId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobStatus": {
+                        "type": "string"
+                    },
+                    "completedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "jobTypeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "priority": {
+                        "type": "string"
+                    },
+                    "campaignId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appointmentCount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "firstAppointmentId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "lastAppointmentId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "recallForId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "warrantyId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobGeneratedLeadSource": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.JobGeneratedLeadSource"
+                    },
+                    "noCharge": {
+                        "type": "boolean"
+                    },
+                    "notificationsEnabled": {
+                        "type": "boolean"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "leadCallId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "soldById": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customerPo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "invoiceId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "membershipId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "number",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.JobGeneratedLeadSource": {
+                "type": "object",
+                "properties": {
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "employeeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.JobAppointment": {
+                "required": [
+                    "id",
+                    "appointmentNumber",
+                    "start",
+                    "end",
+                    "duration"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appointmentNumber": {
+                        "type": "string"
+                    },
+                    "scheduledOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "start": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "end": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "arrivalWindowStart": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "arrivalWindowEnd": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "manageEmployeeEmail": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "manageFollowUpEmail": {
+                        "type": "boolean",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.dis.technician-dispatched\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent": {
+                "required": [
+                    "job",
+                    "appointment",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "job": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Job"
+                    },
+                    "appointment": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.JobAppointment"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Dispatch.V2.Webhook.ZoneDeletedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.dis.zone-deleted\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.ZoneDeletedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.ZoneDeletedWebhookEvent": {
+                "required": [
+                    "zone",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "zone": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Zone"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.Zone": {
+                "required": [
+                    "id",
+                    "serviceDaysEnabled",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "color": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "zips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "cities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "territoryNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "locnNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "serviceDaysEnabled": {
+                        "type": "boolean"
+                    },
+                    "serviceDaysIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "maxDriveTimeAdjustment": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.dis.zone-updated\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent": {
+                "required": [
+                    "zone",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "zone": {
+                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Zone"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
                     }
                 },
                 "additionalProperties": false

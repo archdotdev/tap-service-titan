@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -32,7 +32,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -42,7 +42,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -61,7 +61,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -71,7 +71,27 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -107,7 +127,8 @@
                                             "name": "string",
                                             "active": true,
                                             "type": "Regular",
-                                            "createdOn": "string"
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -145,7 +166,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -212,7 +233,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -222,7 +242,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -243,7 +263,8 @@
                                     "name": "string",
                                     "active": true,
                                     "type": "Regular",
-                                    "createdOn": "string"
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -279,7 +300,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -289,7 +309,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -357,7 +377,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -367,7 +387,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -377,7 +397,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -396,7 +416,7 @@
                     {
                         "name": "year",
                         "in": "query",
-                        "description": "Format - int32. Year",
+                        "description": "Year",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -406,7 +426,7 @@
                     {
                         "name": "month",
                         "in": "query",
-                        "description": "Format - int32. Month",
+                        "description": "Month",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -416,7 +436,7 @@
                     {
                         "name": "campaignId",
                         "in": "query",
-                        "description": "Format - int64. Campaign ID",
+                        "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -490,7 +510,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -564,7 +584,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -574,7 +593,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -631,7 +650,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -641,7 +659,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -708,7 +726,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -718,7 +736,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -728,7 +746,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -747,7 +765,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -757,7 +775,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -799,7 +817,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -809,7 +827,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -855,6 +873,7 @@
                                             "modifiedOn": "string",
                                             "createdOn": "string",
                                             "active": true,
+                                            "isDefaultCampaign": true,
                                             "category": {
                                                 "id": 0,
                                                 "name": "string",
@@ -905,7 +924,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -925,6 +944,7 @@
                                 "dnis": "string",
                                 "categoryId": 0,
                                 "active": true,
+                                "isDefaultCampaign": true,
                                 "source": "string",
                                 "medium": "string",
                                 "otherSource": "string",
@@ -947,6 +967,7 @@
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "active": true,
+                                    "isDefaultCampaign": true,
                                     "category": {
                                         "id": 0,
                                         "name": "string",
@@ -997,7 +1018,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1007,7 +1027,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1029,6 +1049,7 @@
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "active": true,
+                                    "isDefaultCampaign": true,
                                     "category": {
                                         "id": 0,
                                         "name": "string",
@@ -1077,7 +1098,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1087,7 +1107,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1107,6 +1127,7 @@
                                 "dnis": "string",
                                 "categoryId": 0,
                                 "active": true,
+                                "isDefaultCampaign": true,
                                 "source": "string",
                                 "medium": "string",
                                 "otherSource": "string",
@@ -1129,6 +1150,7 @@
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "active": true,
+                                    "isDefaultCampaign": true,
                                     "category": {
                                         "id": 0,
                                         "name": "string",
@@ -1179,7 +1201,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1189,7 +1210,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1199,7 +1220,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1209,7 +1230,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1228,7 +1249,6 @@
                     {
                         "name": "year",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1238,7 +1258,6 @@
                     {
                         "name": "month",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1314,7 +1333,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1324,7 +1343,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1334,7 +1353,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1347,6 +1366,87 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Filters suppressions by email.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Email, CreatedOn, ModifiedOn",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     }
@@ -1366,8 +1466,12 @@
                                     "totalCount": 0,
                                     "data": [
                                         {
+                                            "id": 0,
                                             "email": "string",
-                                            "reason": {}
+                                            "reason": {},
+                                            "modifiedOn": "string",
+                                            "createdOn": "string",
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -1407,7 +1511,6 @@
                     {
                         "name": "email",
                         "in": "path",
-                        "description": "Format - email.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -1417,7 +1520,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1434,8 +1537,12 @@
                                     "$ref": "#/components/schemas/Marketing.V2.SuppressionResponse"
                                 },
                                 "example": {
+                                    "id": 0,
                                     "email": "string",
-                                    "reason": {}
+                                    "reason": {},
+                                    "modifiedOn": "string",
+                                    "createdOn": "string",
+                                    "active": true
                                 }
                             }
                         }
@@ -1473,7 +1580,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1532,7 +1639,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1629,7 +1736,8 @@
                     "name",
                     "active",
                     "type",
-                    "createdOn"
+                    "createdOn",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -1647,6 +1755,10 @@
                         "$ref": "#/components/schemas/Marketing.V2.CampaignCategoryType"
                     },
                     "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
                         "type": "string",
                         "format": "date-time"
                     }
@@ -1937,6 +2049,10 @@
                     "active": {
                         "type": "boolean"
                     },
+                    "isDefaultCampaign": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
                     "category": {
                         "oneOf": [
                             {
@@ -2037,6 +2153,10 @@
                     "active": {
                         "type": "boolean"
                     },
+                    "isDefaultCampaign": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
                     "source": {
                         "type": "string",
                         "nullable": true
@@ -2098,10 +2218,18 @@
             },
             "Marketing.V2.SuppressionResponse": {
                 "required": [
-                    "email"
+                    "id",
+                    "email",
+                    "modifiedOn",
+                    "createdOn",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
                     "email": {
                         "type": "string"
                     },
@@ -2112,6 +2240,17 @@
                             }
                         ],
                         "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
                     }
                 },
                 "additionalProperties": false
