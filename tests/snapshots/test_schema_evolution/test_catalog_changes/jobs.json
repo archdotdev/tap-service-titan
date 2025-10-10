@@ -1,0 +1,694 @@
+{
+  "tap_stream_id": "jobs",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobNumber": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "customerId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "locationId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobStatus": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "completedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobTypeId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "priority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "campaignId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "items": {
+          "properties": {
+            "typeId": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object",
+          "additionalProperties": true
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "appointmentCount": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "firstAppointmentId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "lastAppointmentId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "recallForId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "warrantyId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobGeneratedLeadSource": {
+        "properties": {
+          "jobId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "employeeId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true
+      },
+      "noCharge": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "notificationsEnabled": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "leadCallId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bookingId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "soldById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "externalData": {
+        "items": {
+          "properties": {},
+          "type": "object",
+          "additionalProperties": true
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "customerPo": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "invoiceId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "membershipId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "total": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "duration": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "end": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "planEnd": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "planStart": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "start": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "jobs",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "completedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "appointmentCount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "firstAppointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lastAppointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recallForId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warrantyId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource",
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource",
+        "properties",
+        "employeeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "noCharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "notificationsEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadCallId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookingId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerPo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "membershipId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "total"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "duration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "planEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "planStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

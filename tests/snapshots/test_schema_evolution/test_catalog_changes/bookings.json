@@ -1,0 +1,474 @@
+{
+  "tap_stream_id": "bookings",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "address": {
+        "properties": {
+          "street": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true
+      },
+      "customerType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "start": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "campaignId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "isFirstTimeClient": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "uploadedImages": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "isSendConfirmationEmail": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "dismissingReasonId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "externalId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "priority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobTypeId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bookingProviderId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "bookings",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "source"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isFirstTimeClient"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "uploadedImages"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isSendConfirmationEmail"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dismissingReasonId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookingProviderId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

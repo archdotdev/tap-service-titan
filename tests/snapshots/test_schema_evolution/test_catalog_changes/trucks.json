@@ -1,0 +1,189 @@
+{
+  "tap_stream_id": "trucks",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Truck Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Truck Name",
+        "type": "string"
+      },
+      "active": {
+        "description": "Active",
+        "type": "boolean"
+      },
+      "memo": {
+        "description": "Memo",
+        "format": "multiline",
+        "type": "string"
+      },
+      "warehouseId": {
+        "description": "Warehouse Id for this truck",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "technicianIds": {
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "description": "Technician Ids associated with this truck",
+        "type": "array"
+      },
+      "createdOn": {
+        "description": "System created date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "Last time truck was modified date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "externalData": {
+        "items": {
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": "string"
+            },
+            "value": {
+              "description": "External data value.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "description": "List of external data attached to this warehouse,\nthat corresponds to the application guid provided in the request.",
+        "type": "array"
+      }
+    },
+    "description": "Represents truck response",
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "active",
+      "memo",
+      "technicianIds",
+      "createdOn",
+      "modifiedOn",
+      "externalData"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "trucks",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warehouseId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "tap_stream_id": "scheduler_performance",
+  "replication_method": "FULL_TABLE",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "schedulerName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "totalSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "completedSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bookedSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "abandonedSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "completionRate": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "bookingRate": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "abandonmentRate": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "funnelMetrics": {
+        "properties": {
+          "landingPageViews": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "customerInfoStarts": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "customerInfoCompletes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "timeslotSelections": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "confirmationViews": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "bookingCompletes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true
+      },
+      "averageSessionDuration": {
+        "properties": {
+          "minutes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "seconds": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true
+      },
+      "dateRangeStart": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "dateRangeEnd": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "scheduler_performance",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "schedulerName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalSessions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "completedSessions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookedSessions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "abandonedSessions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "completionRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookingRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "abandonmentRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "landingPageViews"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "customerInfoStarts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "customerInfoCompletes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "timeslotSelections"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "confirmationViews"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "bookingCompletes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration",
+        "properties",
+        "minutes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration",
+        "properties",
+        "seconds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateRangeStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateRangeEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

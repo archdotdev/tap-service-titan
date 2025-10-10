@@ -1,0 +1,290 @@
+{
+  "tap_stream_id": "job_types",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "businessUnitIds": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "skills": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "priority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "duration": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "soldThreshold": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "class": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "noCharge": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "enforceRecurringServiceEventSelection": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "invoiceSignaturesRequired": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "items": {
+          "properties": {
+            "key": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object",
+          "additionalProperties": true
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "job_types",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skills"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "duration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldThreshold"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "class"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "noCharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "enforceRecurringServiceEventSelection"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceSignaturesRequired"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

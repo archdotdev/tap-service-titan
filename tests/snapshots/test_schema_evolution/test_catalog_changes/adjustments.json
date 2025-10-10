@@ -1,0 +1,565 @@
+{
+  "tap_stream_id": "adjustments",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Inventory adjustment Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "active": {
+        "description": "Is active",
+        "type": "boolean"
+      },
+      "number": {
+        "description": "Number",
+        "type": "string"
+      },
+      "referenceNumber": {
+        "description": "Reference number",
+        "type": "string"
+      },
+      "type": {
+        "description": "Inventory Adjustment Type",
+        "type": "string"
+      },
+      "inventoryLocationId": {
+        "description": "Id of Inventory Location for this adjustment",
+        "format": "int64",
+        "type": "integer"
+      },
+      "businessUnitId": {
+        "description": "Business Unit Id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "Employee who created this adjustment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "memo/summary field",
+        "format": "multiline",
+        "type": "string"
+      },
+      "date": {
+        "description": "Adjustment date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "createdOn": {
+        "description": "system created date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "last time adjustment was modified date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "batchId": {
+        "description": "Batch Id (Deprecated - Use Batch instead)",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ],
+        "deprecated": true
+      },
+      "batch": {
+        "properties": {
+          "id": {
+            "description": "Batch Id",
+            "format": "int64",
+            "type": "integer"
+          },
+          "number": {
+            "description": "Batch number",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "description": "Batch name",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "description": "Represents Batch response",
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "syncStatus": {
+        "description": "Sync status enum",
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Posted",
+          "Exported"
+        ]
+      },
+      "canceledReason": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "NotRequired",
+          "Duplicate",
+          "Accidental",
+          "VendorIssue",
+          "Other",
+          "JobCanceled",
+          "NotWarranty",
+          "WarrantyRejected"
+        ]
+      },
+      "canceledById": {
+        "description": "Employee who canceled this adjustment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "dateCanceled": {
+        "description": "time the adjustment was canceled",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "items": {
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": "string"
+            },
+            "value": {
+              "description": "External data value.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "description": "List of external data attached to this warehouse,\nthat corresponds to the application guid provided in the request.",
+        "type": "array"
+      },
+      "items": {
+        "items": {
+          "properties": {
+            "id": {
+              "description": "Item Id",
+              "format": "int64",
+              "type": "integer"
+            },
+            "skuId": {
+              "description": "Sku Id",
+              "format": "int64",
+              "type": "integer"
+            },
+            "description": {
+              "description": "Item description",
+              "format": "html",
+              "type": "string"
+            },
+            "createdOn": {
+              "description": "system created date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "modifiedOn": {
+              "description": "last time transfer item was modified date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "name": {
+              "description": "Item name",
+              "type": "string"
+            },
+            "code": {
+              "description": "Item code",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Adjustment quantity",
+              "format": "decimal",
+              "type": "number"
+            },
+            "createdById": {
+              "description": "Employee who canceled this transfer",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "active": {
+              "description": "Is active",
+              "type": "boolean"
+            },
+            "serialNumbers": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "description": "Id of this serial number",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "number": {
+                    "description": "Serial number value",
+                    "type": "string"
+                  }
+                },
+                "description": "Represents serial number response",
+                "type": "object",
+                "required": [
+                  "id",
+                  "number"
+                ],
+                "additionalProperties": false
+              },
+              "description": "List of serial numbers",
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "description": "Inventory adjustment item response",
+          "type": "object",
+          "required": [
+            "id",
+            "skuId",
+            "description",
+            "createdOn",
+            "modifiedOn",
+            "name",
+            "code",
+            "quantity",
+            "active"
+          ],
+          "additionalProperties": false
+        },
+        "description": "Collection of adjustment items",
+        "type": "array"
+      },
+      "customFields": {
+        "items": {
+          "properties": {
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Custom field name",
+              "type": "string"
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": "string"
+            }
+          },
+          "description": "Represents custom field response",
+          "type": "object",
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "description": "Collection of custom fields",
+        "type": "array"
+      }
+    },
+    "description": "Inventory adjustment response",
+    "type": "object",
+    "required": [
+      "id",
+      "active",
+      "number",
+      "referenceNumber",
+      "type",
+      "inventoryLocationId",
+      "memo",
+      "date",
+      "createdOn",
+      "modifiedOn",
+      "syncStatus",
+      "externalData",
+      "items",
+      "customFields"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "adjustments",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "referenceNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batchId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledReason"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateCanceled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

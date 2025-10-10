@@ -1,0 +1,206 @@
+{
+  "tap_stream_id": "purchase_order_types",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Purchase order type Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Purchase order type Name",
+        "type": "string"
+      },
+      "active": {
+        "description": "Active",
+        "type": "boolean"
+      },
+      "automaticallyReceive": {
+        "description": "Automatically receive purchase order",
+        "type": "boolean"
+      },
+      "displayToTechnician": {
+        "description": "Display purchase order type to technicain on mobile",
+        "type": "boolean"
+      },
+      "impactToTechnicianPayroll": {
+        "description": "Default Selection for Impact to Technician Payroll on Purchase Order",
+        "type": "boolean"
+      },
+      "allowTechniciansToSendPo": {
+        "description": "Allow permitted technicians to send and receive POs of this type",
+        "type": "boolean"
+      },
+      "defaultRequiredDateDaysOffset": {
+        "description": "Default number of days to offset required date",
+        "format": "int32",
+        "type": "integer"
+      },
+      "skipWeekends": {
+        "description": "Skip weekends",
+        "type": "boolean"
+      },
+      "excludeTaxFromJobCosting": {
+        "description": "Exclude tax from job costing",
+        "type": "boolean"
+      },
+      "createdOn": {
+        "description": "System created date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "Last time purchase order type was modified date",
+        "format": "date-time",
+        "type": "string"
+      }
+    },
+    "description": "Represents purchase order type response",
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "active",
+      "automaticallyReceive",
+      "displayToTechnician",
+      "impactToTechnicianPayroll",
+      "allowTechniciansToSendPo",
+      "defaultRequiredDateDaysOffset",
+      "skipWeekends",
+      "excludeTaxFromJobCosting",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "purchase_order_types",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "automaticallyReceive"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayToTechnician"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "impactToTechnicianPayroll"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allowTechniciansToSendPo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "defaultRequiredDateDaysOffset"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skipWeekends"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "excludeTaxFromJobCosting"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

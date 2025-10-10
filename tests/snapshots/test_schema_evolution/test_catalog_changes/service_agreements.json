@@ -1,0 +1,853 @@
+{
+  "tap_stream_id": "service_agreements",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "templateFields": {
+        "properties": {
+          "originalTemplateId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "revenueRecognitionMode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generalLedgerAccountId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "invoiceCancellationMode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "billingServiceId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "negativeLiabilityServiceId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "positiveIncomeServiceId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "defaultLaborCostPerHour": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultExtraTravelCostPerHour": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultLaborMarkupPercentage": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultMaterialMarkupPercentage": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultLaborSurcharge": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultMaterialSurcharge": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultRateSheetId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "defaultCampaignId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": true
+      },
+      "customerId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "locationIds": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "origin": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "importId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "importedDeferredAmount": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "importedRecognizedAmount": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "durationMonths": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "autoRenew": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "renewalAgreementId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "startDate": {
+        "format": "date",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "endDate": {
+        "format": "date",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "billingSchedule": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "paymentTermId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "paymentMethodId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "estimatedTravelCost": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "estimatedLaborCost": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "estimatedMaterialCost": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "laborMarkupPercentage": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "materialMarkupPercentage": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "laborSurcharge": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "materialSurcharge": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "totalAgreementPrice": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "estimatedGrossMarginAmount": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "estimatedGrossMarginPercentage": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "rateSheetId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "accountManagerId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "stream": "service_agreements",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "originalTemplateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "revenueRecognitionMode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "generalLedgerAccountId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "invoiceCancellationMode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "billingServiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "negativeLiabilityServiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "positiveIncomeServiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultLaborCostPerHour"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultExtraTravelCostPerHour"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultLaborMarkupPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultMaterialMarkupPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultLaborSurcharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultMaterialSurcharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultRateSheetId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultCampaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "origin"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "importId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "importedDeferredAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "importedRecognizedAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "durationMonths"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "autoRenew"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "renewalAgreementId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "startDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "endDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "billingSchedule"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentMethodId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedTravelCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedLaborCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedMaterialCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "laborMarkupPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "materialMarkupPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "laborSurcharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "materialSurcharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalAgreementPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedGrossMarginAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedGrossMarginPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "rateSheetId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "accountManagerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,704 @@
+{
+  "tap_stream_id": "transfers",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Inventory transfer Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "transferType": {
+        "description": "Type",
+        "type": "string"
+      },
+      "status": {
+        "description": "Status",
+        "type": "string"
+      },
+      "number": {
+        "description": "Number",
+        "type": "string"
+      },
+      "referenceNumber": {
+        "description": "Reference number",
+        "type": "string"
+      },
+      "fromLocationId": {
+        "description": "Inventory location to transfer from",
+        "format": "int64",
+        "type": "integer"
+      },
+      "toLocationId": {
+        "description": "Inventory location where transfer is going",
+        "format": "int64",
+        "type": "integer"
+      },
+      "createdById": {
+        "description": "Employee who created this transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "Memo/summary field",
+        "format": "multiline",
+        "type": "string"
+      },
+      "date": {
+        "description": "Transfer date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "pickedDate": {
+        "description": "Transfer picked date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "receivedDate": {
+        "description": "Transfer recevived date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "system created date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "last time transfer was modified date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "batchId": {
+        "description": "Batch Id (Deprecated - Use Batch instead)",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ],
+        "deprecated": true
+      },
+      "batch": {
+        "properties": {
+          "id": {
+            "description": "Batch Id",
+            "format": "int64",
+            "type": "integer"
+          },
+          "number": {
+            "description": "Batch number",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "description": "Batch name",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "description": "Represents Batch response",
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "syncStatus": {
+        "description": "Sync status enum",
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Posted",
+          "Exported"
+        ]
+      },
+      "dateRequired": {
+        "description": "Transfer required by date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "Id of job associated with transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "invoiceId": {
+        "description": "Id of invoice associated with transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "canceledById": {
+        "description": "Employee who canceled this transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "canceledReason": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "NotRequired",
+          "Duplicate",
+          "Accidental",
+          "VendorIssue",
+          "Other",
+          "JobCanceled",
+          "NotWarranty",
+          "WarrantyRejected"
+        ]
+      },
+      "dateCanceled": {
+        "description": "Transfer canceled date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "active": {
+        "description": "Is active",
+        "type": "boolean"
+      },
+      "pickedById": {
+        "description": "Employee who picked this transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "receivedById": {
+        "description": "Employee who received this transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "items": {
+        "items": {
+          "properties": {
+            "id": {
+              "description": "Item Id",
+              "format": "int64",
+              "type": "integer"
+            },
+            "skuId": {
+              "description": "Sku Id",
+              "format": "int64",
+              "type": "integer"
+            },
+            "description": {
+              "description": "Item description",
+              "format": "html",
+              "type": "string"
+            },
+            "createdOn": {
+              "description": "system created date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "modifiedOn": {
+              "description": "last time transfer item was modified date",
+              "format": "date-time",
+              "type": "string"
+            },
+            "name": {
+              "description": "Item name",
+              "type": "string"
+            },
+            "code": {
+              "description": "Item code",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Transfer quantity",
+              "format": "decimal",
+              "type": "number"
+            },
+            "quantityPicked": {
+              "description": "Transfer quantity already picked",
+              "format": "decimal",
+              "type": "number"
+            },
+            "serialNumbers": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "description": "Id of this serial number",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "number": {
+                    "description": "Serial number value",
+                    "type": "string"
+                  }
+                },
+                "description": "Represents serial number response",
+                "type": "object",
+                "required": [
+                  "id",
+                  "number"
+                ],
+                "additionalProperties": false
+              },
+              "description": "List of serial numbers",
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "createdById": {
+              "description": "Employee who canceled this transfer",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "active": {
+              "description": "Is active",
+              "type": "boolean"
+            }
+          },
+          "description": "Inventory transfer item response",
+          "type": "object",
+          "required": [
+            "id",
+            "skuId",
+            "description",
+            "createdOn",
+            "modifiedOn",
+            "name",
+            "code",
+            "quantity",
+            "quantityPicked",
+            "active"
+          ],
+          "additionalProperties": false
+        },
+        "description": "Collection of transfer items",
+        "type": "array"
+      },
+      "customFields": {
+        "items": {
+          "properties": {
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Custom field name",
+              "type": "string"
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": "string"
+            }
+          },
+          "description": "Represents custom field response",
+          "type": "object",
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "description": "Collection of custom fields",
+        "type": "array"
+      },
+      "externalData": {
+        "items": {
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": "string"
+            },
+            "value": {
+              "description": "External data value.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "description": "List of external data attached to this return,\nthat corresponds to the application guid provided in the request.",
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "description": "Inventory transfer response",
+    "type": "object",
+    "required": [
+      "id",
+      "transferType",
+      "status",
+      "number",
+      "referenceNumber",
+      "fromLocationId",
+      "toLocationId",
+      "memo",
+      "date",
+      "createdOn",
+      "modifiedOn",
+      "syncStatus",
+      "active",
+      "items",
+      "customFields"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "transfers",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "transferType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "referenceNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "fromLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "toLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "pickedDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receivedDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batchId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateRequired"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledReason"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateCanceled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "pickedById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receivedById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

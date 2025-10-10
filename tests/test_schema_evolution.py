@@ -9,14 +9,14 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import pytest
+    from pytest_snapshot.plugin import Snapshot
     from pytest_subtests.plugin import SubTests
-    from syrupy.assertion import SnapshotAssertion
 
 
 def test_catalog_changes(
     pytester: pytest.Pytester,
     tmp_path: Path,
-    snapshot: SnapshotAssertion,
+    snapshot: Snapshot,
     subtests: SubTests,
 ) -> None:
     """Fail if the catalog has changed."""
@@ -43,5 +43,5 @@ def test_catalog_changes(
     for stream in catalog["streams"]:
         stream_id = stream["tap_stream_id"]
         with subtests.test(stream_id):
-            # Syrupy snapshots the object directly - it handles serialization
-            assert stream == snapshot(name=stream_id)
+            pretty_stream = json.dumps(stream, indent=2)
+            snapshot.assert_match(pretty_stream, f"{stream_id}.json")

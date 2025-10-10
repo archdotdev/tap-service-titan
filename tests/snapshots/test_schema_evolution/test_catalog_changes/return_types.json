@@ -1,0 +1,156 @@
+{
+  "tap_stream_id": "return_types",
+  "replication_method": "FULL_TABLE",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "description": "Return Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Name of the Return Type",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "automaticallyReceiveVendorCredit": {
+        "description": "Should the return type allow receiving Vendor Credits automatically.",
+        "type": "boolean"
+      },
+      "includeInSalesTax": {
+        "type": "boolean"
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "isDefault": {
+        "type": "boolean"
+      },
+      "isDefaultForConsignment": {
+        "type": "boolean"
+      },
+      "createdOn": {
+        "description": "System created date",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "Last time return type was modified date",
+        "format": "date-time",
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": [
+      "id",
+      "automaticallyReceiveVendorCredit",
+      "includeInSalesTax",
+      "active",
+      "isDefault",
+      "isDefaultForConsignment",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "return_types",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "automaticallyReceiveVendorCredit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "includeInSalesTax"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isDefault"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isDefaultForConsignment"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

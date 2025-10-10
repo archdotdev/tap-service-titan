@@ -1,0 +1,946 @@
+{
+  "tap_stream_id": "invoice_items",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "description": {
+        "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "quantity": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "cost": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "totalCost": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "inventoryLocationId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "inventoryLocation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "description": "Indicates a type's item",
+        "type": "string",
+        "enum": [
+          "Service",
+          "Material",
+          "Equipment",
+          "PriceModifier",
+          "Unspecified"
+        ]
+      },
+      "skuName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "skuId": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "total": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "inventory": {
+        "type": "boolean"
+      },
+      "taxable": {
+        "type": "boolean"
+      },
+      "generalLedgerAccount": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "detailType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "costOfSaleAccount": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "detailType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "assetAccount": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "detailType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "membershipTypeId": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "itemGroup": {
+        "properties": {
+          "rootId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "rootId"
+        ],
+        "additionalProperties": false
+      },
+      "displayName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "soldHours": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "serviceDate": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "order": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "businessUnit": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "createdById": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "displayInAmount": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "importId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "exportId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "inventoryStatus": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "addOn": {
+        "type": "boolean"
+      },
+      "memberPrice": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "installedEquipmentId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "estimateItemId": {
+        "description": "The estimate item from which this invoice item was created.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "invoiceId": {
+        "format": "int64",
+        "type": "integer"
+      }
+    },
+    "type": "object",
+    "required": [
+      "id",
+      "type",
+      "skuId",
+      "inventory",
+      "taxable",
+      "membershipTypeId",
+      "createdOn",
+      "modifiedOn",
+      "order",
+      "addOn",
+      "active",
+      "invoiceId"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "invoice_items",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "quantity"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "price"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skuName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skuId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "total"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventory"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccount",
+        "properties",
+        "detailType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount",
+        "properties",
+        "detailType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount",
+        "properties",
+        "detailType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "membershipTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "itemGroup"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "itemGroup",
+        "properties",
+        "rootId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "itemGroup",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldHours"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "serviceDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "order"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayInAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "importId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "addOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memberPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "installedEquipmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimateItemId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}

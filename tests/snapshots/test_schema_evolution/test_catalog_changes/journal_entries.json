@@ -1,0 +1,337 @@
+{
+  "tap_stream_id": "journal_entries",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "key_properties": [
+    "id"
+  ],
+  "schema": {
+    "properties": {
+      "id": {
+        "format": "guid",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "number": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Open",
+          "Closed"
+        ]
+      },
+      "syncStatus": {
+        "description": "Indicates a journal entry's sync status.",
+        "type": "string",
+        "enum": [
+          "NotSynced",
+          "InProgress",
+          "Synced",
+          "OutOfSync",
+          "Error",
+          "Excluded"
+        ]
+      },
+      "versionId": {
+        "format": "int32",
+        "type": "integer"
+      },
+      "lastSyncVersionId": {
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "message": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "postDate": {
+        "format": "date",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "exportedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "exportedBy": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "customFields": {
+        "items": {
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "isEmpty": {
+        "type": "boolean"
+      }
+    },
+    "type": "object",
+    "required": [
+      "createdOn",
+      "modifiedOn",
+      "number",
+      "status",
+      "syncStatus",
+      "versionId",
+      "isEmpty"
+    ],
+    "additionalProperties": false
+  },
+  "stream": "journal_entries",
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "versionId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lastSyncVersionId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "message"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "postDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportedBy"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportedBy",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportedBy",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "url"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isEmpty"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ]
+}
