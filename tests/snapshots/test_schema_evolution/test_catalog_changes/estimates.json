@@ -8,30 +8,32 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "jobId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "projectId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "customerId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -52,28 +54,31 @@
       "status": {
         "properties": {
           "value": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int32",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "value",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "reviewStatus": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "None",
+          "NeedsApproval",
+          "Approved",
+          "NotApproved"
         ]
       },
       "summary": {
@@ -84,17 +89,11 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "soldOn": {
         "format": "date-time",
@@ -104,139 +103,105 @@
         ]
       },
       "soldBy": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "items": {
         "items": {
           "properties": {
             "id": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "sku": {
               "properties": {
                 "id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "format": "int64",
+                  "type": "integer"
                 },
                 "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "displayName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "soldHours": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "format": "decimal",
+                  "type": "number"
                 },
                 "generalLedgerAccountId": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "format": "int64",
+                  "type": "integer"
                 },
                 "generalLedgerAccountName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "modifiedOn": {
                   "format": "date-time",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 }
               },
-              "type": [
-                "object",
-                "null"
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "displayName",
+                "type",
+                "soldHours",
+                "generalLedgerAccountId",
+                "generalLedgerAccountName",
+                "modifiedOn"
               ],
-              "additionalProperties": true
+              "additionalProperties": false
             },
             "skuAccount": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "format": "html",
+              "type": "string"
             },
             "membershipTypeId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "qty": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             },
             "unitRate": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             },
             "total": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             },
             "unitCost": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             },
             "totalCost": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             },
             "itemGroupName": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "itemGroupRootId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -244,17 +209,11 @@
             },
             "createdOn": {
               "format": "date-time",
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "modifiedOn": {
               "format": "date-time",
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "chargeable": {
               "type": [
@@ -263,6 +222,15 @@
               ]
             },
             "invoiceItemId": {
+              "description": "The invoice item which was created from this estimate item.",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "budgetCodeId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -270,7 +238,21 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "id",
+            "sku",
+            "skuAccount",
+            "description",
+            "qty",
+            "unitRate",
+            "total",
+            "unitCost",
+            "totalCost",
+            "itemGroupName",
+            "createdOn",
+            "modifiedOn"
+          ],
+          "additionalProperties": false
         },
         "type": [
           "array",
@@ -281,20 +263,18 @@
         "items": {
           "properties": {
             "name": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "url": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "name",
+            "url"
+          ],
+          "additionalProperties": false
         },
         "type": [
           "array",
@@ -302,12 +282,15 @@
         ]
       },
       "subtotal": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
+      },
+      "tax": {
+        "format": "decimal",
+        "type": "number"
       },
       "businessUnitId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -318,10 +301,34 @@
           "string",
           "null"
         ]
+      },
+      "isRecommended": {
+        "type": "boolean"
+      },
+      "budgetCodeId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "isChangeOrder": {
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "reviewStatus",
+      "createdOn",
+      "modifiedOn",
+      "active",
+      "subtotal",
+      "tax",
+      "isRecommended",
+      "isChangeOrder"
+    ],
+    "additionalProperties": false
   },
   "stream": "estimates",
   "metadata": [
@@ -512,6 +519,15 @@
     {
       "breadcrumb": [
         "properties",
+        "tax"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "businessUnitId"
       ],
       "metadata": {
@@ -522,6 +538,33 @@
       "breadcrumb": [
         "properties",
         "businessUnitName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isRecommended"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isChangeOrder"
       ],
       "metadata": {
         "inclusion": "available"

@@ -8,130 +8,92 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "estimate_id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "sku": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "displayName": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "type": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "soldHours": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "format": "decimal",
+            "type": "number"
           },
           "generalLedgerAccountId": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "generalLedgerAccountName": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "modifiedOn": {
             "format": "date-time",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
-        "type": [
-          "object",
-          "null"
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "displayName",
+          "type",
+          "soldHours",
+          "generalLedgerAccountId",
+          "generalLedgerAccountName",
+          "modifiedOn"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "skuAccount": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "description": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "format": "html",
+        "type": "string"
       },
       "membershipTypeId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "qty": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "unitRate": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "total": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "unitCost": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "totalCost": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "itemGroupName": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "itemGroupRootId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -139,17 +101,11 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "chargeable": {
         "type": [
@@ -158,6 +114,15 @@
         ]
       },
       "invoiceItemId": {
+        "description": "The invoice item which was created from this estimate item.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -165,7 +130,21 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "sku",
+      "skuAccount",
+      "description",
+      "qty",
+      "unitRate",
+      "total",
+      "unitCost",
+      "totalCost",
+      "itemGroupName",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "estimate_items",
   "metadata": [
@@ -176,15 +155,6 @@
       ],
       "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "estimate_id"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {
@@ -405,6 +375,15 @@
       "breadcrumb": [
         "properties",
         "invoiceItemId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
       ],
       "metadata": {
         "inclusion": "available"
