@@ -8,229 +8,286 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "The ID of the call",
+        "format": "int64",
+        "type": "integer"
       },
       "duration": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "The duration of the call",
+        "format": "duration",
+        "type": "string"
       },
       "from": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "The caller's phone",
+        "type": "string"
       },
       "to": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "The called party's phone",
+        "type": "string"
       },
       "direction": {
-        "type": [
-          "string",
-          "null"
+        "description": "Indicates the direction of a call",
+        "type": "string",
+        "enum": [
+          "Inbound",
+          "Outbound"
         ]
       },
       "status": {
-        "type": [
-          "string",
-          "null"
+        "description": "Indicates the status of a call",
+        "type": "string",
+        "enum": [
+          "Ringing",
+          "Answered",
+          "Completed",
+          "Initiated"
         ]
       },
       "type": {
+        "description": "Specifies the type (classification) of the call. If null, the call was not classified yet. Also,\n            outbound calls don't have classification and CallType is always null for outbound calls",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "Abandoned",
+          "Unbooked",
+          "Excused",
+          "Booked",
+          "NotLead"
         ]
       },
       "recordingUrl": {
+        "description": "The URL for call recording. Can be null if the call hasn't a recording",
         "type": [
           "string",
           "null"
         ]
       },
       "voiceMailPath": {
+        "description": "The URL for call voicemail. Can be null if the call hasn't a voicemail. This field may have value only for\nPhones Pro tenants",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "The time the call was created (i.e. inbound call was received or outbound call was initiated)\n            ",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "The last time the call properties were updated",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "reason": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the call reason linked to the call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "customer": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the customer linked to the call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "location": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the location linked to the call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "campaign": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the phone advertising campaign linked to the call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "job": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the job",
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "Human readable number of the job",
+            "type": "string"
           }
         },
+        "description": "The info about the job linked to the call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "number"
+        ],
+        "additionalProperties": false
       },
       "agent": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the user agent who was assigned to the call. For inbound calls this is the user who\n            clicked the call bubble last time, or outbound calls this is a user who initiated the call. For Phones Pro,\n            this may differ to CreatedBy for outbound calls if the outbound call was transferred between users\n            ",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
       },
       "createdBy": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "The name of the entity",
+            "type": "string"
           }
         },
+        "description": "The info about the user who created the outbound call",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "excuseMemo": {
+        "description": "Excuse memo of the call",
+        "type": "string"
+      },
+      "tag": {
+        "description": "Call Tag",
+        "type": "string"
       },
       "active": {
+        "description": "Gets or sets whether the entity is active.",
+        "type": "boolean"
+      },
+      "lead": {
+        "properties": {
+          "id": {
+            "description": "The ID of the entity",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "description": "CRM Leads created from unbooked calls",
         "type": [
-          "boolean",
+          "object",
           "null"
-        ]
+        ],
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "duration",
+      "from",
+      "to",
+      "direction",
+      "status",
+      "createdOn",
+      "modifiedOn",
+      "excuseMemo",
+      "tag",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "calls",
   "metadata": [
@@ -553,7 +610,45 @@
     {
       "breadcrumb": [
         "properties",
+        "excuseMemo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tag"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lead"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lead",
+        "properties",
+        "id"
       ],
       "metadata": {
         "inclusion": "available"

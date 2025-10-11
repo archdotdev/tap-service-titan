@@ -7,20 +7,27 @@
   "schema": {
     "properties": {
       "contactNumber": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Contact number in E.164 format",
+        "type": "string"
       },
       "optOutType": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Unknown",
+          "Global",
+          "Marketing",
+          "Other"
         ]
       }
     },
+    "description": "Single contact number opt-out status",
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "contactNumber",
+      "optOutType"
+    ],
+    "additionalProperties": false
   },
   "stream": "opt_outs",
   "metadata": [
