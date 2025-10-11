@@ -8,41 +8,41 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the technician",
+        "format": "int64",
+        "type": "integer"
       },
       "userId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the user that belongs to the technician",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Technician's name",
+        "type": "string"
       },
       "roleIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "IDs of the user roles assigned to the technician.",
         "type": [
           "array",
           "null"
         ]
       },
       "businessUnitId": {
+        "description": "ID of business unit technician belongs to",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "mainZoneId": {
+        "description": "ID of the main technician's zone",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -50,42 +50,43 @@
       },
       "zoneIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "IDs of all technician's zones",
         "type": [
           "array",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When the technician was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "When the technician was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "email": {
+        "description": "Email address of the technician",
+        "format": "email",
         "type": [
           "string",
           "null"
         ]
       },
       "phoneNumber": {
+        "description": "Phone number of the technician",
+        "format": "phone",
         "type": [
           "string",
           "null"
         ]
       },
       "loginName": {
+        "description": "Login name of the technician",
         "type": [
           "string",
           "null"
@@ -136,44 +137,42 @@
             ]
           },
           "latitude": {
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "longitude": {
+            "format": "double",
             "type": [
               "number",
               "null"
             ]
           }
         },
+        "description": "Technician's home address",
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "dailyGoal": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "description": "Technician's daily goal",
+        "format": "decimal",
+        "type": "number"
       },
       "isManagedTech": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the technician is managed",
+        "type": "boolean"
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "name": {
               "type": [
@@ -189,77 +188,105 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "typeId"
+          ],
+          "additionalProperties": false
         },
+        "description": "Custom fields",
         "type": [
           "array",
           "null"
         ]
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the technician is active",
+        "type": "boolean"
       },
       "aadUserId": {
+        "description": "Azure Active Directory User Id",
         "type": [
           "string",
           "null"
         ]
       },
       "burdenRate": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "description": "Technician's burden rate",
+        "format": "decimal",
+        "type": "number"
       },
       "team": {
+        "description": "Team of the technician",
         "type": [
           "string",
           "null"
         ]
       },
       "jobFilter": {
+        "description": "",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "AllScheduledDispatchedWorking",
+          "NextScheduledDispatchedWorking",
+          "DispatchedWorking",
+          "NextScheduledDispatchedWorkingToday",
+          "AllScheduledDispatchedWorkingToday",
+          "AllScheduledDispatchedWorkingFiveDays",
+          "NextScheduledDispatchedWorkingTodayTomorrow",
+          "AllScheduledDispatchedWorkingTodayTomorrow",
+          "Next2ScheduledDispatchedWorkingToday"
         ]
       },
       "permissions": {
         "items": {
-          "oneOf": [
-            {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "value": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "additionalProperties": true
+          "properties": {
+            "id": {
+              "format": "int32",
+              "type": "integer"
             },
-            {
-              "type": "null"
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ]
+          },
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
         },
+        "description": "List of the all availible permissions for this user.",
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "accountLocked": {
+        "description": "Account Locked Status",
+        "type": [
+          "boolean",
           "null"
         ]
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "userId",
+      "name",
+      "createdOn",
+      "modifiedOn",
+      "dailyGoal",
+      "isManagedTech",
+      "active",
+      "burdenRate"
+    ],
+    "additionalProperties": false
   },
   "stream": "technicians",
   "metadata": [
@@ -555,6 +582,15 @@
       "breadcrumb": [
         "properties",
         "permissions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "accountLocked"
       ],
       "metadata": {
         "inclusion": "available"

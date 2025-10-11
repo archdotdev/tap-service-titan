@@ -8,39 +8,37 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "employeeType": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Employee",
+          "Technician"
         ]
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "name",
+      "createdOn",
+      "employeeType"
+    ],
+    "additionalProperties": false
   },
   "stream": "user_roles",
   "metadata": [

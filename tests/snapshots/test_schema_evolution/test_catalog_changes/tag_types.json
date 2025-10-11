@@ -8,64 +8,69 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the tag type",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the tag type",
+        "type": "string"
       },
       "color": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Color hex string of the tag type",
+        "type": "string"
       },
       "code": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Code associated with the tag type",
+        "type": "string"
       },
       "importance": {
+        "description": "",
         "type": [
           "string",
           "null"
+        ],
+        "enum": [
+          "Medium",
+          "High"
         ]
       },
       "isConversionOpportunity": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicates whether tags of this type should be considered as an opportunity",
+        "type": "boolean"
+      },
+      "allowToUseOnTimesheetActivity": {
+        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity",
+        "type": "boolean"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the tag type is active",
+        "type": "boolean"
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the tag type was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when the tag type was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "color",
+      "code",
+      "isConversionOpportunity",
+      "allowToUseOnTimesheetActivity",
+      "active",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "tag_types",
   "metadata": [
@@ -118,6 +123,15 @@
       "breadcrumb": [
         "properties",
         "isConversionOpportunity"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allowToUseOnTimesheetActivity"
       ],
       "metadata": {
         "inclusion": "available"
