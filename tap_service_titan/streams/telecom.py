@@ -2,95 +2,46 @@
 
 from __future__ import annotations
 
+import sys
 import typing as t
 from functools import cached_property
 
+from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.openapi_specs import TELECOM
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 
 class CallsStream(ServiceTitanExportStream):
     """Define calls stream."""
 
     name = "calls"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("duration", th.StringType),
-        th.Property("from", th.StringType),
-        th.Property("to", th.StringType),
-        th.Property("direction", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("type", th.StringType),
-        th.Property("recordingUrl", th.StringType),
-        th.Property("voiceMailPath", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "reason",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property(
-            "customer",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property(
-            "location",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property(
-            "campaign",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property(
-            "job",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("number", th.StringType)
-            ),
-        ),
-        th.Property(
-            "agent",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property(
-            "createdBy",
-            th.ObjectType(
-                th.Property("id", th.IntegerType), th.Property("name", th.StringType)
-            ),
-        ),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
+    schema = StreamSchema(TELECOM, key="Telecom.V2.ExportCallResponse")
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/telecom/v2/tenant/{self._tap.config['tenant_id']}/export/calls"
+        return f"/telecom/v2/tenant/{self.tenant_id}/export/calls"
 
 
 class OptOutsStream(ServiceTitanStream):
     """Define opt-outs stream."""
 
     name = "opt_outs"
-    primary_keys: t.ClassVar[list[str]] = ["contactNumber"]
+    primary_keys = ("contactNumber",)
+    schema = StreamSchema(TELECOM, key="Telecom.V3.OptOutResponse")
 
-    schema = th.PropertiesList(
-        th.Property("contactNumber", th.StringType),
-        th.Property("optOutType", th.StringType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/telecom/v3/tenant/{self._tap.config['tenant_id']}/optinouts/optouts"
+        return f"/telecom/v3/tenant/{self.tenant_id}/optinouts/optouts"

@@ -20,6 +20,7 @@ __all__ = [
     "DISPATCH",
     "INVENTORY",
     "SETTINGS",
+    "TELECOM",
 ]
 
 
@@ -73,3 +74,4 @@ CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
+TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
