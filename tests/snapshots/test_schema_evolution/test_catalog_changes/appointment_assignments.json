@@ -8,83 +8,84 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the appointment assignment",
+        "format": "int64",
+        "type": "integer"
       },
       "technicianId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the technician",
+        "format": "int64",
+        "type": "integer"
       },
       "technicianName": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the technician",
+        "type": "string"
       },
       "assignedById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the user who assigned the appointment assignment",
+        "format": "int64",
+        "type": "integer"
       },
       "assignedOn": {
+        "description": "Date/time (in UTC) when the appointment assignment was assigned",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "status": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Scheduled",
+          "Dispatched",
+          "Working",
+          "Done"
         ]
       },
       "isPaused": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether appointment assignment is paused",
+        "type": "boolean"
       },
       "jobId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job",
+        "format": "int64",
+        "type": "integer"
       },
       "appointmentId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the appointment",
+        "format": "int64",
+        "type": "integer"
       },
       "createdOn": {
+        "description": "When the assignment was created (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "When the assignment was modified (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if assignment is active",
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "technicianId",
+      "technicianName",
+      "assignedById",
+      "assignedOn",
+      "status",
+      "isPaused",
+      "jobId",
+      "appointmentId",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "appointment_assignments",
   "metadata": [

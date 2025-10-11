@@ -8,100 +8,98 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Non-job appointment id",
+        "format": "int64",
+        "type": "integer"
       },
       "technicianId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Non-job appointment's technician id",
+        "format": "int64",
+        "type": "integer"
       },
       "start": {
+        "description": "Non-job appointment's start date/time (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Non-job appointment name",
+        "type": "string"
       },
       "duration": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Non-job appointment duration",
+        "format": "duration",
+        "type": "string"
       },
       "timesheetCodeId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Unique Id of timesheet code",
+        "format": "int64",
+        "type": "integer"
       },
       "summary": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Non-job appointment summary",
+        "type": "string"
       },
       "clearDispatchBoard": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if non-job appointment should be cleared from dispatch board once event is over",
+        "type": "boolean"
       },
       "clearTechnicianView": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if non-job appointment should be cleared from technician's calendar once event is over",
+        "type": "boolean"
       },
       "removeTechnicianFromCapacityPlanning": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if technician availability should be remove from legacy capacity planning",
+        "type": "boolean"
       },
       "allDay": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if non-job appointment is scheduled for whole day",
+        "type": "boolean"
       },
       "showOnTechnicianSchedule": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the non-job appointment shows on the technicians schedule even if there is no timesheet",
+        "type": "boolean"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Indicate if non-job appointment is active",
+        "type": "boolean"
       },
       "createdOn": {
+        "description": "When the appointment was created (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "When the appointment was last modified (in UTC)",
+        "format": "date-time",
+        "type": "string"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the user who created the non-job appointment",
+        "format": "int64",
+        "type": "integer"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "technicianId",
+      "start",
+      "name",
+      "duration",
+      "timesheetCodeId",
+      "summary",
+      "clearDispatchBoard",
+      "clearTechnicianView",
+      "removeTechnicianFromCapacityPlanning",
+      "allDay",
+      "showOnTechnicianSchedule",
+      "active",
+      "createdOn",
+      "modifiedOn",
+      "createdById"
+    ],
+    "additionalProperties": false
   },
   "stream": "non_job_appointments",
   "metadata": [
@@ -229,6 +227,15 @@
       ],
       "metadata": {
         "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
       }
     },
     {

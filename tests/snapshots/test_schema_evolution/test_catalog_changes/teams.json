@@ -8,46 +8,48 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Unique id of the team record",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the team is enabled",
+        "type": "boolean"
       },
       "name": {
+        "description": "Descriptive identifier",
         "type": [
           "string",
           "null"
         ]
       },
       "createdBy": {
+        "description": "Created by User ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
+        "description": "Created on date",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Modified on date",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "teams",
   "metadata": [

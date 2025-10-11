@@ -7,43 +7,37 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "start": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "format": "duration",
+        "type": "string"
       },
       "duration": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "format": "duration",
+        "type": "string"
       },
       "businessUnitIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "start",
+      "duration",
+      "businessUnitIds",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "arrival_windows",
   "metadata": [

@@ -7,64 +7,81 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Unique id of the shift record",
+        "format": "int64",
+        "type": "integer"
       },
       "shiftType": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Normal",
+          "OnCall",
+          "TimeOff"
         ]
       },
       "title": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Descriptive identifier",
+        "type": "string"
       },
       "note": {
+        "description": "Optional detailed explanation of the shift",
         "type": [
           "string",
           "null"
         ]
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the shift is enabled",
+        "type": "boolean"
       },
       "technicianId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": ">Unique id of the technician this shift applies to",
+        "format": "int64",
+        "type": "integer"
       },
       "start": {
+        "description": "When the shift begins",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "end": {
+        "description": "When the shift ends",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "timesheetCodeId": {
+        "description": "Timesheet code ID of shift",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
+      },
+      "createdOn": {
+        "description": "When the shift was created (in UTC)",
+        "format": "date-time",
+        "type": "string"
+      },
+      "modifiedOn": {
+        "description": "When the shift was modified (in UTC)",
+        "format": "date-time",
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "shiftType",
+      "title",
+      "active",
+      "technicianId",
+      "start",
+      "end",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "technician_shifts",
   "metadata": [
@@ -144,6 +161,24 @@
       "breadcrumb": [
         "properties",
         "timesheetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
       ],
       "metadata": {
         "inclusion": "available"
