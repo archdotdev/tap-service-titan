@@ -8,73 +8,91 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the employee",
+        "format": "int64",
+        "type": "integer"
       },
       "userId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the user that belongs to the employee",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Employee's name",
+        "type": "string"
       },
       "role": {
-        "type": [
-          "string",
-          "null"
+        "description": "",
+        "type": "string",
+        "enum": [
+          "Unspecified",
+          "Technician",
+          "Dispatch",
+          "Accounting",
+          "FieldManager",
+          "DisplayUser",
+          "DisplayUserWithBillingAccess",
+          "SalesManager",
+          "CSR",
+          "GeneralOffice",
+          "TechnicianHelper",
+          "TechnicianMaintenance",
+          "TechnicianInstaller",
+          "Admin",
+          "TechnicianService",
+          "TechnicianSales",
+          "Owner",
+          "EmptyEmployee",
+          "EmptyTechnician"
         ]
       },
       "roleIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "IDs of the user roles assigned to the technician.",
         "type": [
           "array",
           "null"
         ]
       },
       "businessUnitId": {
+        "description": "ID of business unit employee belongs to",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When the employee was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "When the employee was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "email": {
+        "description": "Email address of the employee",
+        "format": "email",
         "type": [
           "string",
           "null"
         ]
       },
       "phoneNumber": {
+        "description": "Phone number of the employee",
+        "format": "phone",
         "type": [
           "string",
           "null"
         ]
       },
       "loginName": {
+        "description": "Login name of the employee",
         "type": [
           "string",
           "null"
@@ -84,10 +102,8 @@
         "items": {
           "properties": {
             "typeId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "name": {
               "type": [
@@ -103,20 +119,23 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "typeId"
+          ],
+          "additionalProperties": false
         },
+        "description": "Custom fields",
         "type": [
           "array",
           "null"
         ]
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the employee is active",
+        "type": "boolean"
       },
       "aadUserId": {
+        "description": "Azure Active Directory User Id",
         "type": [
           "string",
           "null"
@@ -124,38 +143,49 @@
       },
       "permissions": {
         "items": {
-          "oneOf": [
-            {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "value": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "additionalProperties": true
+          "properties": {
+            "id": {
+              "format": "int32",
+              "type": "integer"
             },
-            {
-              "type": "null"
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          ]
+          },
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
         },
+        "description": "List of the all availible permissions for this user.",
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "accountLocked": {
+        "description": "Account Locked Status",
+        "type": [
+          "boolean",
           "null"
         ]
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "userId",
+      "name",
+      "role",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "employees",
   "metadata": [
@@ -289,6 +319,15 @@
       "breadcrumb": [
         "properties",
         "permissions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "accountLocked"
       ],
       "metadata": {
         "inclusion": "available"

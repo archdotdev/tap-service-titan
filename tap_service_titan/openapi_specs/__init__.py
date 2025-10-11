@@ -19,6 +19,7 @@ __all__ = [
     "CRM",
     "DISPATCH",
     "INVENTORY",
+    "SETTINGS",
 ]
 
 
@@ -71,3 +72,4 @@ ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
+SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")

@@ -8,22 +8,14 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "officialName": {
         "type": [
@@ -32,42 +24,55 @@
         ]
       },
       "email": {
+        "format": "email",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "currency": {
         "type": [
           "string",
           "null"
         ]
       },
       "phoneNumber": {
+        "format": "phone",
         "type": [
           "string",
           "null"
         ]
       },
       "invoiceHeader": {
+        "format": "html",
         "type": [
           "string",
           "null"
         ]
       },
       "invoiceMessage": {
+        "format": "html",
         "type": [
           "string",
           "null"
         ]
       },
       "defaultTaxRate": {
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "authorizationParagraph": {
+        "format": "html",
         "type": [
           "string",
           "null"
         ]
       },
       "acknowledgementParagraph": {
+        "format": "html",
         "type": [
           "string",
           "null"
@@ -116,7 +121,7 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "materialSku": {
         "type": [
@@ -157,16 +162,11 @@
       "tenant": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "accountCode": {
             "type": [
@@ -188,51 +188,48 @@
           },
           "modifiedOn": {
             "format": "date-time",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "type": [
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name",
+          "modifiedOn"
+        ],
+        "additionalProperties": false
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data key.",
+              "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data value.",
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
         },
+        "description": "Optional model that contains a list of external data items\nthat should be attached to this business unit.",
         "type": [
           "array",
           "null"
@@ -240,7 +237,14 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "name",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "business_units",
   "metadata": [
@@ -284,6 +288,15 @@
       "breadcrumb": [
         "properties",
         "email"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "currency"
       ],
       "metadata": {
         "inclusion": "available"
