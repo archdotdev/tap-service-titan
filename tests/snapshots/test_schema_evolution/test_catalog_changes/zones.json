@@ -8,18 +8,16 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Unique id of the zone record",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the zone is enabled",
+        "type": "boolean"
       },
       "name": {
+        "description": "Descriptive identifier",
         "type": [
           "string",
           "null"
@@ -27,10 +25,9 @@
       },
       "zips": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "A list of assigned zip codes to the zone",
         "type": [
           "array",
           "null"
@@ -38,10 +35,9 @@
       },
       "cities": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "A list of assigned cities to the zone",
         "type": [
           "array",
           "null"
@@ -49,10 +45,9 @@
       },
       "territoryNumbers": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "A list of assigned territory numbers to the zone",
         "type": [
           "array",
           "null"
@@ -60,47 +55,38 @@
       },
       "locnNumbers": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "A list of assigned LOCN numbers to the zone",
         "type": [
           "array",
           "null"
         ]
       },
       "createdBy": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "User ID who created the zone",
+        "format": "int64",
+        "type": "integer"
       },
       "createdOn": {
+        "description": "Date/time (in UTC) the zone was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) the zone was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "serviceDaysEnabled": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the service days option is enabled",
+        "type": "boolean"
       },
       "serviceDays": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "A list of assigned service days",
         "type": [
           "array",
           "null"
@@ -108,10 +94,10 @@
       },
       "businessUnits": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "A list of assigned business units",
         "type": [
           "array",
           "null"
@@ -119,10 +105,10 @@
       },
       "technicians": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "A list of assigned technicians",
         "type": [
           "array",
           "null"
@@ -130,7 +116,15 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "createdBy",
+      "createdOn",
+      "modifiedOn",
+      "serviceDaysEnabled"
+    ],
+    "additionalProperties": false
   },
   "stream": "zones",
   "metadata": [

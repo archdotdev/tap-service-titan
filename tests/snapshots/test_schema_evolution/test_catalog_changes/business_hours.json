@@ -8,77 +8,73 @@
         "items": {
           "properties": {
             "fromHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             },
             "toHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "fromHour",
+            "toHour"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "saturday": {
         "items": {
           "properties": {
             "fromHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             },
             "toHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "fromHour",
+            "toHour"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "sunday": {
         "items": {
           "properties": {
             "fromHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             },
             "toHour": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int32",
+              "type": "integer"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "fromHour",
+            "toHour"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "weekdays",
+      "saturday",
+      "sunday"
+    ],
+    "additionalProperties": false
   },
   "stream": "business_hours",
   "metadata": [
