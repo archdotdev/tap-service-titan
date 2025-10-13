@@ -70,13 +70,23 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
         spec = super().spec
         schemas = spec["components"]["schemas"]
         if "Crm.V2.AddressModel" in schemas:
-            schemas["Crm.V2.AddressModel"]["properties"]["street"]["nullable"] = True
-            schemas["Crm.V2.AddressModel"]["properties"]["city"]["nullable"] = True
-            schemas["Crm.V2.AddressModel"]["properties"]["state"]["nullable"] = True
-            schemas["Crm.V2.AddressModel"]["properties"]["zip"]["nullable"] = True
-            schemas["Crm.V2.AddressModel"]["properties"]["country"]["nullable"] = True
+            props = schemas["Crm.V2.AddressModel"]["properties"]
+            props["street"]["nullable"] = True
+            props["city"]["nullable"] = True
+            props["state"]["nullable"] = True
+            props["zip"]["nullable"] = True
+            props["country"]["nullable"] = True
+        if "Crm.V2.Customers.CustomerAddress" in schemas:
+            props = schemas["Crm.V2.Customers.CustomerAddress"]["properties"]
+            props["country"]["nullable"] = True
         if "Crm.V2.CustomerType" in schemas:
             schemas["Crm.V2.CustomerType"]["enum"].append(None)
+        if "Crm.V2.ExportCustomerResponse" in schemas:
+            props = schemas["Crm.V2.ExportCustomerResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+        if "Crm.V2.ExportLocationsResponse" in schemas:
+            props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
+            props["externalData"]["nullable"] = True
         return spec
 
     @override
