@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 from copy import deepcopy
+from functools import cached_property
 from importlib.resources import files
 from typing import Any
 
@@ -61,6 +62,22 @@ def _normalize_schema(schema: dict[str, Any]) -> dict[str, Any]:
 
 class ServiceTitanOpenAPISchema(OpenAPISchema):
     """ServiceTitan OpenAPI schema."""
+
+    @override
+    @cached_property
+    def spec(self) -> dict[str, Any]:
+        """Get the spec."""
+        spec = super().spec
+        schemas = spec["components"]["schemas"]
+        if "Crm.V2.AddressModel" in schemas:
+            schemas["Crm.V2.AddressModel"]["properties"]["street"]["nullable"] = True
+            schemas["Crm.V2.AddressModel"]["properties"]["city"]["nullable"] = True
+            schemas["Crm.V2.AddressModel"]["properties"]["state"]["nullable"] = True
+            schemas["Crm.V2.AddressModel"]["properties"]["zip"]["nullable"] = True
+            schemas["Crm.V2.AddressModel"]["properties"]["country"]["nullable"] = True
+        if "Crm.V2.CustomerType" in schemas:
+            schemas["Crm.V2.CustomerType"]["enum"].append(None)
+        return spec
 
     @override
     def fetch_schema(self, key: str) -> dict[str, Any]:

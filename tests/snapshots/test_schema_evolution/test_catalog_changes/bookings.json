@@ -36,7 +36,10 @@
         "properties": {
           "street": {
             "description": "Booking address street",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "unit": {
             "description": "Booking address unit",
@@ -47,19 +50,31 @@
           },
           "city": {
             "description": "Booking address city",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "state": {
             "description": "Booking address state",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "zip": {
             "description": "Booking address zip code",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "country": {
             "description": "Booking address country",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "Address of the booking",
@@ -84,7 +99,8 @@
         ],
         "enum": [
           "Residential",
-          "Commercial"
+          "Commercial",
+          null
         ]
       },
       "start": {
