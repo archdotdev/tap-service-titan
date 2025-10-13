@@ -5,7 +5,7 @@
   "schema": {
     "properties": {
       "postDate": {
-        "format": "date-time",
+        "format": "date",
         "type": [
           "string",
           "null"
@@ -14,10 +14,8 @@
       "account": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -44,23 +42,19 @@
             ]
           }
         },
-        "type": [
-          "object",
-          "null"
+        "type": "object",
+        "required": [
+          "id"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       },
       "debit": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "credit": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "memo": {
         "type": [
@@ -71,15 +65,32 @@
       "transaction": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "type": {
-            "type": [
-              "string",
-              "null"
+            "description": "",
+            "type": "string",
+            "enum": [
+              "Unspecified",
+              "Invoice",
+              "Payment",
+              "Bill",
+              "VendorCredit",
+              "VendorPayment",
+              "InventoryAdjustment",
+              "PaymentApplication",
+              "BankDeposit",
+              "InventoryReturn",
+              "InventoryTransfer",
+              "RevenueRecognition",
+              "Estimate",
+              "PurchaseOrder",
+              "Receipt",
+              "GrossPayItem",
+              "PayrollPeriod",
+              "Manual",
+              "External"
             ]
           },
           "refNumber": {
@@ -93,15 +104,17 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "type"
+        ],
+        "additionalProperties": false
       },
       "businessUnit": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -114,15 +127,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "customer": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -135,15 +149,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "vendor": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -156,15 +171,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "inventoryLocation": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -177,15 +193,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "job": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -198,15 +215,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "customerLocation": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -219,15 +237,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "paymentType": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -240,15 +259,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "project": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -261,15 +281,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "serviceAgreement": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -282,20 +303,40 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "appliedTo": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "type": {
-            "type": [
-              "string",
-              "null"
+            "description": "",
+            "type": "string",
+            "enum": [
+              "Unspecified",
+              "Invoice",
+              "Payment",
+              "Bill",
+              "VendorCredit",
+              "VendorPayment",
+              "InventoryAdjustment",
+              "PaymentApplication",
+              "BankDeposit",
+              "InventoryReturn",
+              "InventoryTransfer",
+              "RevenueRecognition",
+              "Estimate",
+              "PurchaseOrder",
+              "Receipt",
+              "GrossPayItem",
+              "PayrollPeriod",
+              "Manual",
+              "External"
             ]
           },
           "refNumber": {
@@ -309,20 +350,30 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "type"
+        ],
+        "additionalProperties": false
       },
       "sku": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "type": {
+            "description": "",
             "type": [
               "string",
               "null"
+            ],
+            "enum": [
+              "Service",
+              "Material",
+              "Equipment",
+              "PriceModifier",
+              "Unspecified"
             ]
           },
           "code": {
@@ -336,11 +387,26 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "transactionDate": {
+        "format": "date",
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "account",
+      "debit",
+      "credit"
+    ],
+    "additionalProperties": false
   },
   "stream": "journal_entry_details",
   "metadata": [
@@ -844,6 +910,15 @@
         "sku",
         "properties",
         "code"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "transactionDate"
       ],
       "metadata": {
         "inclusion": "available"
