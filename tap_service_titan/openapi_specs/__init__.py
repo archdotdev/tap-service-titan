@@ -75,6 +75,30 @@ def _normalize_schema(
     return result
 
 
+class ServiceTitanOpenAPISchema(OpenAPISchema):
+    """ServiceTitan OpenAPI schema."""
+
+    @override
+    @cached_property
+    def spec(self) -> dict[str, Any]:
+        """Get the spec."""
+        spec = super().spec
+        schemas = spec["components"]["schemas"]
+
+        # Accounting
+        for comp in (
+            "Accounting.V2.JournalEntryResponse",
+            "Accounting.V2.JournalEntrySummaryResponse",
+            "Accounting.V2.JournalEntryDetailsResponse",
+        ):
+            if comp in schemas:
+                props = schemas[comp]["properties"]
+                # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+                props["postDate"]["format"] = "date-time"
+
+        return spec
+
+
 class ServiceTitanSchema(StreamSchema):
     """ServiceTitan schema."""
 
@@ -90,11 +114,11 @@ class ServiceTitanSchema(StreamSchema):
 
 
 OPENAPI_SPECS = files("tap_service_titan") / "openapi_specs"
-ACCOUNTING = OpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
-CRM = OpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
-DISPATCH = OpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
-INVENTORY = OpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
-JPM = OpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
-SALESTECH = OpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
-SETTINGS = OpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
-TELECOM = OpenAPISchema(OPENAPI_SPECS / "telecom.json")
+ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
+CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
+DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
+INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
+JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
+SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
+SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
+TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
