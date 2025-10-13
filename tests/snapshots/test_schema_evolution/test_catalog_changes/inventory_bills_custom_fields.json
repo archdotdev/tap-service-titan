@@ -8,70 +8,43 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "displayName": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "dataType": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       },
-      "required": {
+      "dataTypeOptions": {
+        "items": {
+          "type": "string"
+        },
         "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "enabled": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "allowOnBulkUpdate": {
-        "type": [
-          "boolean",
+          "array",
           "null"
         ]
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "dataType",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "inventory_bills_custom_fields",
   "metadata": [
@@ -96,15 +69,6 @@
     {
       "breadcrumb": [
         "properties",
-        "displayName"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "dataType"
       ],
       "metadata": {
@@ -114,25 +78,7 @@
     {
       "breadcrumb": [
         "properties",
-        "required"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "enabled"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "allowOnBulkUpdate"
+        "dataTypeOptions"
       ],
       "metadata": {
         "inclusion": "available"
@@ -154,15 +100,6 @@
       ],
       "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "active"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {
