@@ -88,6 +88,18 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
         if "Crm.V2.ExportLocationsResponse" in schemas:
             props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
             props["externalData"]["nullable"] = True
+        if "Accounting.V2.JournalEntryResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntryResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
+        if "Accounting.V2.JournalEntrySummaryResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntrySummaryResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
+        if "Accounting.V2.JournalEntryDetailsResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntryDetailsResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
         return spec
 
     @override

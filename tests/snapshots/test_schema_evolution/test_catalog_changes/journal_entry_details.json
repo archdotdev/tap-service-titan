@@ -5,7 +5,7 @@
   "schema": {
     "properties": {
       "postDate": {
-        "format": "date",
+        "format": "date-time",
         "type": [
           "string",
           "null"
