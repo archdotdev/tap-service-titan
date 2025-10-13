@@ -57,6 +57,9 @@ def _normalize_schema(schema: dict[str, Any]) -> dict[str, Any]:
     if result.get("nullable", False):
         result["type"] = [*types, "null"]
 
+    if "string" in types and "enum" in result:
+        result.pop("enum")
+
     return result
 
 
@@ -79,8 +82,6 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
         if "Crm.V2.Customers.CustomerAddress" in schemas:
             props = schemas["Crm.V2.Customers.CustomerAddress"]["properties"]
             props["country"]["nullable"] = True
-        if "Crm.V2.CustomerType" in schemas:
-            schemas["Crm.V2.CustomerType"]["enum"].append(None)
         if "Crm.V2.ExportCustomerResponse" in schemas:
             props = schemas["Crm.V2.ExportCustomerResponse"]["properties"]
             props["externalData"]["nullable"] = True

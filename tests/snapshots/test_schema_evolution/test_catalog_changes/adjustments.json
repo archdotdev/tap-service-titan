@@ -112,28 +112,13 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Posted",
-          "Exported"
-        ]
+        "type": "string"
       },
       "canceledReason": {
         "description": "",
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "NotRequired",
-          "Duplicate",
-          "Accidental",
-          "VendorIssue",
-          "Other",
-          "JobCanceled",
-          "NotWarranty",
-          "WarrantyRejected"
         ]
       },
       "canceledById": {

@@ -123,22 +123,11 @@
       },
       "status": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Open",
-          "Dismissed",
-          "Converted"
-        ]
+        "type": "string"
       },
       "priority": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Low",
-          "Normal",
-          "High",
-          "Urgent"
-        ]
+        "type": "string"
       },
       "customerId": {
         "description": "Customer associated to the lead",

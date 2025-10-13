@@ -67,14 +67,7 @@
             },
             "type": {
               "description": "Indicates a type's item",
-              "type": "string",
-              "enum": [
-                "Service",
-                "Material",
-                "Equipment",
-                "PriceModifier",
-                "Unspecified"
-              ]
+              "type": "string"
             },
             "skuName": {
               "type": [
@@ -877,21 +870,11 @@
       },
       "sentStatus": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "NotSent",
-          "Sent",
-          "Opened"
-        ]
+        "type": "string"
       },
       "reviewStatus": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "NeedsReview",
-          "OnHold",
-          "Reviewed"
-        ]
+        "type": "string"
       },
       "assignedTo": {
         "properties": {

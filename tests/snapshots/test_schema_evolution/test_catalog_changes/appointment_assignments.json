@@ -33,13 +33,7 @@
       },
       "status": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Scheduled",
-          "Dispatched",
-          "Working",
-          "Done"
-        ]
+        "type": "string"
       },
       "isPaused": {
         "description": "Whether appointment assignment is paused",

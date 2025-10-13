@@ -13,12 +13,7 @@
       },
       "shiftType": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Normal",
-          "OnCall",
-          "TimeOff"
-        ]
+        "type": "string"
       },
       "title": {
         "description": "Descriptive identifier",

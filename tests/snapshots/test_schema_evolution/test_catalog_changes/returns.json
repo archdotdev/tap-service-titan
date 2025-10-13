@@ -26,13 +26,7 @@
       },
       "status": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Returned",
-          "CreditReceived",
-          "Canceled"
-        ]
+        "type": "string"
       },
       "vendorId": {
         "description": "Vendor",
@@ -186,12 +180,7 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Posted",
-          "Exported"
-        ]
+        "type": "string"
       },
       "canceledById": {
         "description": "Employee who canceled this transfer",
@@ -206,16 +195,6 @@
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "NotRequired",
-          "Duplicate",
-          "Accidental",
-          "VendorIssue",
-          "Other",
-          "JobCanceled",
-          "NotWarranty",
-          "WarrantyRejected"
         ]
       },
       "dateCanceled": {

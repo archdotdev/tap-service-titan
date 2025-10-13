@@ -22,12 +22,7 @@
       },
       "type": {
         "description": "Indicates a customer's type.",
-        "type": "string",
-        "enum": [
-          "Residential",
-          "Commercial",
-          null
-        ]
+        "type": "string"
       },
       "address": {
         "properties": {

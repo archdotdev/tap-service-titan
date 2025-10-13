@@ -12,13 +12,7 @@
       },
       "optOutType": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Unknown",
-          "Global",
-          "Marketing",
-          "Other"
-        ]
+        "type": "string"
       }
     },
     "description": "Single contact number opt-out status",

@@ -57,14 +57,7 @@
       },
       "type": {
         "description": "Indicates a type's item",
-        "type": "string",
-        "enum": [
-          "Service",
-          "Material",
-          "Equipment",
-          "PriceModifier",
-          "Unspecified"
-        ]
+        "type": "string"
       },
       "skuName": {
         "type": [

@@ -14,14 +14,7 @@
       },
       "type": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Phone",
-          "Phone",
-          "Email",
-          "Fax",
-          "MobilePhone"
-        ]
+        "type": "string"
       },
       "value": {
         "description": "Value of contact",
