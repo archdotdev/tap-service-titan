@@ -184,6 +184,10 @@
           "integer",
           "null"
         ]
+      },
+      "estimate_id": {
+        "format": "int64",
+        "type": "integer"
       }
     },
     "type": "object",
@@ -441,6 +445,15 @@
       "breadcrumb": [
         "properties",
         "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimate_id"
       ],
       "metadata": {
         "inclusion": "available"
