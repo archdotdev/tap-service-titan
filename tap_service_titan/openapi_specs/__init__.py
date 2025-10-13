@@ -112,6 +112,13 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
         if "Jpm.V2.JobTypeResponse" in schemas:
             props = schemas["Jpm.V2.JobTypeResponse"]["properties"]
             props["externalData"]["nullable"] = True
+
+        # Telecom
+        if "Telecom.V2.ExportCallResponse" in schemas:
+            props = schemas["Telecom.V2.ExportCallResponse"]["properties"]
+            props["excuseMemo"]["nullable"] = True
+            props["tag"]["nullable"] = True
+
         return spec
 
     @override
