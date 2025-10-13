@@ -8,10 +8,8 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "syncStatus": {
         "type": [
@@ -65,10 +63,8 @@
       "customer": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -81,15 +77,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "businessUnit": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -102,15 +99,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "batch": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -129,7 +127,10 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "createdBy": {
         "type": [
@@ -140,10 +141,8 @@
       "generalLedgerAccount": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -174,22 +173,21 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "appliedTo": {
         "items": {
           "properties": {
             "appliedId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "appliedTo": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "appliedAmount": {
               "type": [
@@ -218,7 +216,11 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "appliedId",
+            "appliedTo"
+          ],
+          "additionalProperties": false
         },
         "type": [
           "array",
@@ -229,20 +231,18 @@
         "items": {
           "properties": {
             "name": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "name",
+            "value"
+          ],
+          "additionalProperties": false
         },
         "type": [
           "array",
@@ -263,27 +263,24 @@
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "modifiedOn",
+      "createdOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "payments",
   "metadata": [

@@ -8,66 +8,72 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the project",
+        "format": "int64",
+        "type": "integer"
       },
       "number": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Project number",
+        "type": "string"
       },
       "name": {
+        "description": "Project name",
         "type": [
           "string",
           "null"
         ]
       },
       "summary": {
+        "description": "Project summary",
+        "format": "html",
         "type": [
           "string",
           "null"
         ]
       },
       "status": {
+        "description": "Project status",
         "type": [
           "string",
           "null"
         ]
       },
       "statusId": {
+        "description": "Project status id",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "subStatus": {
+        "description": "Project substatus",
         "type": [
           "string",
           "null"
         ]
       },
       "subStatusId": {
+        "description": "Project substatus id",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "customerId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the project's customer",
+        "format": "int64",
+        "type": "integer"
       },
       "locationId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the project's location",
+        "format": "int64",
+        "type": "integer"
       },
       "projectTypeId": {
+        "description": "ID of the project's type",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -75,27 +81,22 @@
       },
       "projectManagerIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "IDs of project managers for the project.",
+        "type": "array"
       },
       "businessUnitIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "IDs of business units for the project.",
+        "type": "array"
       },
       "startDate": {
+        "description": "Start date of the project",
         "format": "date-time",
         "type": [
           "string",
@@ -103,6 +104,7 @@
         ]
       },
       "targetCompletionDate": {
+        "description": "Target completion date of the project",
         "format": "date-time",
         "type": [
           "string",
@@ -110,6 +112,7 @@
         ]
       },
       "actualCompletionDate": {
+        "description": "Actual completion date of the project",
         "format": "date-time",
         "type": [
           "string",
@@ -117,6 +120,7 @@
         ]
       },
       "modifiedOn": {
+        "description": "Projects last modification date",
         "format": "date-time",
         "type": [
           "string",
@@ -124,26 +128,19 @@
         ]
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the project was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "value": {
               "type": [
@@ -153,19 +150,36 @@
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Custom fields on the project",
+        "type": "array"
       },
       "externalData": {
         "items": {
-          "properties": {},
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": "string"
+            },
+            "value": {
+              "description": "External data value.",
+              "type": "string"
+            }
+          },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
         },
+        "description": "List of external data attached to this project,\nthat corresponds to the application guid provided in the request.",
         "type": [
           "array",
           "null"
@@ -173,24 +187,31 @@
       },
       "jobIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "List of jobs associated with this project.",
+        "type": "array"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "number",
+      "customerId",
+      "locationId",
+      "projectManagerIds",
+      "businessUnitIds",
+      "createdOn",
+      "customFields",
+      "externalData",
+      "jobIds",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "projects",
   "metadata": [

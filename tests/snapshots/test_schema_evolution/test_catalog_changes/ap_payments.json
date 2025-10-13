@@ -8,10 +8,8 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
         "type": [
@@ -21,24 +19,15 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "date": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "approvedDate": {
         "format": "date-time",
@@ -48,10 +37,8 @@
         ]
       },
       "method": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       },
       "name": {
         "type": [
@@ -66,10 +53,8 @@
         ]
       },
       "amount": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "format": "decimal",
+        "type": "number"
       },
       "errorMessage": {
         "type": [
@@ -78,24 +63,18 @@
         ]
       },
       "status": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       },
       "syncStatus": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       },
       "batch": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "number": {
             "type": [
@@ -114,15 +93,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "glAccount": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -153,15 +133,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "businessUnit": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -174,15 +155,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "vendor": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -195,15 +177,16 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "remittanceVendor": {
         "properties": {
           "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "name": {
             "type": [
@@ -216,16 +199,17 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
       },
       "splits": {
         "items": {
           "properties": {
             "id": {
-              "type": [
-                "integer",
-                "null"
-              ]
+              "format": "int64",
+              "type": "integer"
             },
             "active": {
               "type": [
@@ -235,41 +219,51 @@
             },
             "createdOn": {
               "format": "date-time",
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "documentId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "inventoryBillId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "amount": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "format": "decimal",
+              "type": "number"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "id",
+            "createdOn",
+            "amount"
+          ],
+          "additionalProperties": false
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "createdOn",
+      "modifiedOn",
+      "date",
+      "method",
+      "amount",
+      "status",
+      "syncStatus",
+      "splits"
+    ],
+    "additionalProperties": false
   },
   "stream": "ap_payments",
   "metadata": [

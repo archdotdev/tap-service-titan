@@ -8,38 +8,34 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Appointment ID",
+        "format": "int64",
+        "type": "integer"
       },
       "jobId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job that the appointment was created for",
+        "format": "int64",
+        "type": "integer"
       },
       "appointmentNumber": {
+        "description": "Appointment number",
         "type": [
           "string",
           "null"
         ]
       },
       "start": {
+        "description": "Appointment's start date/time (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "end": {
+        "description": "Appointment's end date/time (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "arrivalWindowStart": {
+        "description": "Arrival window start date/time (in UTC), if configured",
         "format": "date-time",
         "type": [
           "string",
@@ -47,6 +43,7 @@
         ]
       },
       "arrivalWindowEnd": {
+        "description": "Arrival window end date/time (in UTC), if configured",
         "format": "date-time",
         "type": [
           "string",
@@ -54,64 +51,66 @@
         ]
       },
       "status": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Indicates the status of a Job Appointment.",
+        "type": "string"
       },
       "specialInstructions": {
+        "description": "Special instructions associated to the appointment",
+        "format": "multiline",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When the appointment was created (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "When the appointment was modified (in UTC)",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "customerId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Id of a customer that the appointment was created for",
+        "format": "int64",
+        "type": "integer"
       },
       "unused": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Returns true if the appointment is unused",
+        "type": "boolean"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the user that created the appointment",
+        "format": "int64",
+        "type": "integer"
       },
       "isConfirmed": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Returns true if the appointment is confirmed",
+        "type": "boolean"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether this appointment is active, or not anymore.",
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "jobId",
+      "start",
+      "end",
+      "status",
+      "createdOn",
+      "modifiedOn",
+      "customerId",
+      "unused",
+      "createdById",
+      "isConfirmed",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "appointments",
   "metadata": [

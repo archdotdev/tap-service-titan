@@ -8,6 +8,7 @@
   "schema": {
     "properties": {
       "id": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -20,34 +21,24 @@
         ]
       },
       "dueDayType": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       },
       "dueDay": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "isCustomerDefault": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "isVendorDefault": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "type": "boolean"
       },
       "inUse": {
         "type": [
@@ -57,32 +48,37 @@
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": "string"
       },
       "paymentTermDiscountModel": {
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "discountApplyTo": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "discount": {
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "discountType": {
+            "description": "",
             "type": [
               "string",
               "null"
@@ -95,63 +91,63 @@
             ]
           },
           "applyBy": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "applyByValue": {
+            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           }
         },
-        "type": [
-          "object",
-          "null"
-        ],
-        "additionalProperties": true
+        "type": "object",
+        "additionalProperties": false
       },
       "interestSettings": {
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "rateType": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "",
+            "type": "string"
           },
           "flatRateValue": {
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "percentageRateValue": {
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "chargeMethod": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "frequency": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "description": "",
+            "type": "string"
           },
           "gracePeriod": {
+            "format": "int32",
             "type": [
               "integer",
               "null"
@@ -159,37 +155,42 @@
           },
           "targetInvoices": {
             "items": {
-              "type": [
-                "string"
-              ]
+              "description": "",
+              "type": "string"
             },
-            "type": [
-              "array",
-              "null"
-            ]
+            "type": "array"
           },
           "taskId": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "format": "int64",
+            "type": "integer"
           },
           "taskDisplayName": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
-        "type": [
-          "object",
-          "null"
+        "type": "object",
+        "required": [
+          "rateType",
+          "frequency",
+          "targetInvoices",
+          "taskId",
+          "taskDisplayName"
         ],
-        "additionalProperties": true
+        "additionalProperties": false
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "dueDayType",
+      "isCustomerDefault",
+      "isVendorDefault",
+      "active",
+      "modifiedOn",
+      "createdOn",
+      "paymentTermDiscountModel",
+      "interestSettings"
+    ],
+    "additionalProperties": false
   },
   "stream": "payment_terms",
   "metadata": [
@@ -272,6 +273,15 @@
       ],
       "metadata": {
         "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
       }
     },
     {

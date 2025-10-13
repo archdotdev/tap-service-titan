@@ -7,24 +7,17 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "description": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdById": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -32,7 +25,12 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "description"
+    ],
+    "additionalProperties": false
   },
   "stream": "project_types",
   "metadata": [

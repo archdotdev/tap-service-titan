@@ -8,132 +8,137 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job type",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the job type",
+        "type": "string"
       },
       "businessUnitIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Business Unit Ids associated with job type",
+        "type": "array"
       },
       "skills": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "List of skills required to complete this job",
+        "type": "array"
       },
       "tagTypeIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "description": "Tags here will automatically be applied to jobs booked",
+        "type": "array"
       },
       "priority": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Level of urgency for this type of job",
+        "type": "string"
       },
       "duration": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Avg length of time for this job type",
+        "format": "int64",
+        "type": "integer"
       },
       "soldThreshold": {
+        "description": "A job is considered as converted if subtotal meets or exceeds this threshold",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "class": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Let\u2019s you group other job types by class",
+        "type": "string"
       },
       "summary": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Text that is automatically added to job summary when booked",
+        "format": "multiline",
+        "type": "string"
       },
       "noCharge": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "When true, all jobs are considered no charge",
+        "type": "boolean"
       },
       "enforceRecurringServiceEventSelection": {
+        "description": "When true enforce recurring service event",
         "type": [
           "boolean",
           "null"
         ]
       },
       "invoiceSignaturesRequired": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "When true signature is required",
+        "type": "boolean"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when job type was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) when job type was created",
+        "format": "date-time",
+        "type": "string"
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data key.",
+              "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "description": "External data value.",
+              "type": "string"
             }
           },
           "type": "object",
-          "additionalProperties": true
+          "required": [
+            "key",
+            "value"
+          ],
+          "additionalProperties": false
         },
+        "description": "List of external data attached to this job type,\nthat corresponds to the application guid provided in the request.",
         "type": [
           "array",
           "null"
         ]
+      },
+      "active": {
+        "description": "When true, job type is active",
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "businessUnitIds",
+      "skills",
+      "tagTypeIds",
+      "priority",
+      "duration",
+      "class",
+      "summary",
+      "noCharge",
+      "invoiceSignaturesRequired",
+      "modifiedOn",
+      "createdOn",
+      "externalData",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_types",
   "metadata": [
@@ -266,7 +271,25 @@
     {
       "breadcrumb": [
         "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
       ],
       "metadata": {
         "inclusion": "available"

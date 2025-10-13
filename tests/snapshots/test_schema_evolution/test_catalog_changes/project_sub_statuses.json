@@ -8,39 +8,44 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the project sub status",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the project sub status",
+        "type": "string"
       },
       "statusId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Id of the parent status",
+        "format": "int64",
+        "type": "integer"
       },
       "order": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Order of the project status",
+        "format": "int32",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when project sub status was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
+      },
+      "active": {
+        "description": "When true, project sub status is active",
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "statusId",
+      "order",
+      "modifiedOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "project_sub_statuses",
   "metadata": [
@@ -87,6 +92,15 @@
       ],
       "metadata": {
         "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
       }
     },
     {

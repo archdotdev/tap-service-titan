@@ -20,6 +20,7 @@ __all__ = [
     "CRM",
     "DISPATCH",
     "INVENTORY",
+    "JPM",
     "SALESTECH",
     "SETTINGS",
     "TELECOM",
@@ -68,26 +69,12 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
 
     @override
     @cached_property
-    def spec(self) -> dict[str, Any]:
+    def spec(self) -> dict[str, Any]:  # noqa: C901
         """Get the spec."""
         spec = super().spec
         schemas = spec["components"]["schemas"]
-        if "Crm.V2.AddressModel" in schemas:
-            props = schemas["Crm.V2.AddressModel"]["properties"]
-            props["street"]["nullable"] = True
-            props["city"]["nullable"] = True
-            props["state"]["nullable"] = True
-            props["zip"]["nullable"] = True
-            props["country"]["nullable"] = True
-        if "Crm.V2.Customers.CustomerAddress" in schemas:
-            props = schemas["Crm.V2.Customers.CustomerAddress"]["properties"]
-            props["country"]["nullable"] = True
-        if "Crm.V2.ExportCustomerResponse" in schemas:
-            props = schemas["Crm.V2.ExportCustomerResponse"]["properties"]
-            props["externalData"]["nullable"] = True
-        if "Crm.V2.ExportLocationsResponse" in schemas:
-            props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
-            props["externalData"]["nullable"] = True
+
+        # Accounting
         if "Accounting.V2.JournalEntryResponse" in schemas:
             props = schemas["Accounting.V2.JournalEntryResponse"]["properties"]
             # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
@@ -100,6 +87,52 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
             props = schemas["Accounting.V2.JournalEntryDetailsResponse"]["properties"]
             # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
             props["postDate"]["format"] = "date-time"
+
+        # CRM
+        if "Crm.V2.AddressModel" in schemas:
+            props = schemas["Crm.V2.AddressModel"]["properties"]
+            props["street"]["nullable"] = True
+            props["city"]["nullable"] = True
+            props["state"]["nullable"] = True
+            props["zip"]["nullable"] = True
+            props["country"]["nullable"] = True
+
+        if "Crm.V2.Customers.CustomerAddress" in schemas:
+            props = schemas["Crm.V2.Customers.CustomerAddress"]["properties"]
+            props["country"]["nullable"] = True
+
+        if "Crm.V2.ExportCustomerResponse" in schemas:
+            props = schemas["Crm.V2.ExportCustomerResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        if "Crm.V2.ExportLocationsResponse" in schemas:
+            props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        # JPM
+        if "CustomFieldApiModel" in schemas:
+            props = schemas["CustomFieldApiModel"]["properties"]
+            props["value"]["nullable"] = True
+
+        if "Jpm.V2.ExportJobsResponse" in schemas:
+            props = schemas["Jpm.V2.ExportJobsResponse"]["properties"]
+            props["customerPo"]["nullable"] = True
+            props["externalData"]["nullable"] = True
+
+        if "Jpm.V2.ExportProjectsResponse" in schemas:
+            props = schemas["Jpm.V2.ExportProjectsResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        if "Jpm.V2.JobTypeResponse" in schemas:
+            props = schemas["Jpm.V2.JobTypeResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        # Telecom
+        if "Telecom.V2.ExportCallResponse" in schemas:
+            props = schemas["Telecom.V2.ExportCallResponse"]["properties"]
+            props["excuseMemo"]["nullable"] = True
+            props["tag"]["nullable"] = True
+
         return spec
 
     @override
@@ -114,6 +147,7 @@ ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
+JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
