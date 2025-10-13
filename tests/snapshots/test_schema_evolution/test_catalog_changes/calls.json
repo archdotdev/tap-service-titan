@@ -227,11 +227,17 @@
       },
       "excuseMemo": {
         "description": "Excuse memo of the call",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "tag": {
         "description": "Call Tag",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Gets or sets whether the entity is active.",
