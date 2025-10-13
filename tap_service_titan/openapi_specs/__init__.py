@@ -129,6 +129,12 @@ class ServiceTitanSchema(StreamSchema):
                 "type": "integer",
             }
 
+        if stream.name == "estimate_items":
+            normalized["properties"]["estimate_id"] = {
+                "format": "int64",
+                "type": "integer",
+            }
+
         return normalized
 
 
