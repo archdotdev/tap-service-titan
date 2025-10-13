@@ -17,7 +17,7 @@ else:
     from typing_extensions import override
 
 if t.TYPE_CHECKING:
-    from singer_sdk.helpers.types import Context, Record
+    from singer_sdk.helpers.types import Context
 
 
 class InvoicesStream(ServiceTitanExportStream):
@@ -211,14 +211,6 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
         """Return a context dictionary for a child stream."""
         return {"journal_entry_id": record["id"]}
 
-    @override
-    def post_process(self, row: Record, context: Context | None = None) -> Record:
-        """Post-process the record."""
-        row = super().post_process(row, context)
-        if (post_date := row.get("postDate")) and isinstance(post_date, str):
-            row["postDate"] = post_date.split("T")[0]
-        return row
-
 
 class JournalEntrySummaryStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entry summary stream."""
@@ -236,14 +228,6 @@ class JournalEntrySummaryStream(PageSizeLimitMixin, ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/summary"  # noqa: E501
 
-    @override
-    def post_process(self, row: Record, context: Context | None = None) -> Record:
-        """Post-process the record."""
-        row = super().post_process(row, context)
-        if (post_date := row.get("postDate")) and isinstance(post_date, str):
-            row["postDate"] = post_date.split("T")[0]
-        return row
-
 
 class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     """Define journal entry details stream."""
@@ -259,14 +243,6 @@ class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/details"  # noqa: E501
-
-    @override
-    def post_process(self, row: Record, context: Context | None = None) -> Record:
-        """Post-process the record."""
-        row = super().post_process(row, context)
-        if (post_date := row.get("postDate")) and isinstance(post_date, str):
-            row["postDate"] = post_date.split("T")[0]
-        return row
 
 
 class InventoryBillsCustomFieldsStream(ServiceTitanStream):

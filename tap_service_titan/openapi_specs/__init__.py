@@ -69,10 +69,24 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
 
     @override
     @cached_property
-    def spec(self) -> dict[str, Any]:
+    def spec(self) -> dict[str, Any]:  # noqa: C901
         """Get the spec."""
         spec = super().spec
         schemas = spec["components"]["schemas"]
+
+        # Accounting
+        if "Accounting.V2.JournalEntryResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntryResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
+        if "Accounting.V2.JournalEntrySummaryResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntrySummaryResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
+        if "Accounting.V2.JournalEntryDetailsResponse" in schemas:
+            props = schemas["Accounting.V2.JournalEntryDetailsResponse"]["properties"]
+            # Values are coming in as '2025-10-13T00:00:00', so not valid ISO dates
+            props["postDate"]["format"] = "date-time"
 
         # CRM
         if "Crm.V2.AddressModel" in schemas:
