@@ -8,33 +8,33 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the project status",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Name of the project status",
+        "type": "string"
       },
       "order": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Order of the project status",
+        "format": "int32",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when project status was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "order",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "project_statuses",
   "metadata": [

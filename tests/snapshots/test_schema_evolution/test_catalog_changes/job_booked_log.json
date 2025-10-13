@@ -7,34 +7,27 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job booked log",
+        "format": "int64",
+        "type": "integer"
       },
-      "job": {
-        "properties": {
-          "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          }
-        },
-        "type": [
-          "object",
-          "null"
-        ],
-        "additionalProperties": true
+      "jobId": {
+        "description": "ID of the job that has been booked",
+        "format": "int64",
+        "type": "integer"
+      },
+      "jobAppointmentId": {
+        "description": "ID of the job that has been booked",
+        "format": "int64",
+        "type": "integer"
       },
       "start": {
+        "description": "Start date/time (in UTC) of the job",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "arrivalWindowStart": {
+        "description": "Arrival window start date/time (in UTC) of the job",
         "format": "date-time",
         "type": [
           "string",
@@ -42,6 +35,7 @@
         ]
       },
       "arrivalWindowEnd": {
+        "description": "Arrival window end date/time (in UTC) of the job",
         "format": "date-time",
         "type": [
           "string",
@@ -49,42 +43,32 @@
         ]
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the job booked log was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
-      "createdBy": {
-        "type": [
-          "integer",
-          "null"
-        ]
+      "createdById": {
+        "description": "ID of user who booked the job",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "appointment": {
-        "properties": {
-          "id": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          }
-        },
-        "type": [
-          "object",
-          "null"
-        ],
-        "additionalProperties": true
+        "description": "Whether the job booked log is active",
+        "type": "boolean"
       }
     },
+    "description": "JobBookedLog response model",
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "jobId",
+      "jobAppointmentId",
+      "start",
+      "createdOn",
+      "createdById",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_booked_log",
   "metadata": [
@@ -100,7 +84,7 @@
     {
       "breadcrumb": [
         "properties",
-        "job"
+        "jobId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -109,9 +93,7 @@
     {
       "breadcrumb": [
         "properties",
-        "job",
-        "properties",
-        "id"
+        "jobAppointmentId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -156,7 +138,7 @@
     {
       "breadcrumb": [
         "properties",
-        "createdBy"
+        "createdById"
       ],
       "metadata": {
         "inclusion": "available"
@@ -166,26 +148,6 @@
       "breadcrumb": [
         "properties",
         "active"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "appointment"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "appointment",
-        "properties",
-        "id"
       ],
       "metadata": {
         "inclusion": "available"

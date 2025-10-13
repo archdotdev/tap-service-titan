@@ -8,58 +8,55 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Note Id.",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether this note is active, or not anymore.",
+        "type": "boolean"
       },
       "text": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Text content of a note",
+        "type": "string"
       },
       "isPinned": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the note is pinned to the top",
+        "type": "boolean"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of user who created this note",
+        "format": "int64",
+        "type": "integer"
       },
       "createdOn": {
+        "description": "Date/time (in UTC) the note was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) the note was modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "jobId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Notes Job Id.",
+        "format": "int64",
+        "type": "integer"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "text",
+      "isPinned",
+      "createdById",
+      "createdOn",
+      "modifiedOn",
+      "jobId"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_notes",
   "metadata": [
