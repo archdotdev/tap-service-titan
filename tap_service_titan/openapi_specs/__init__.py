@@ -20,6 +20,7 @@ __all__ = [
     "CRM",
     "DISPATCH",
     "INVENTORY",
+    "JPM",
     "SALESTECH",
     "SETTINGS",
     "TELECOM",
@@ -72,6 +73,8 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
         """Get the spec."""
         spec = super().spec
         schemas = spec["components"]["schemas"]
+
+        # CRM
         if "Crm.V2.AddressModel" in schemas:
             props = schemas["Crm.V2.AddressModel"]["properties"]
             props["street"]["nullable"] = True
@@ -79,14 +82,35 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
             props["state"]["nullable"] = True
             props["zip"]["nullable"] = True
             props["country"]["nullable"] = True
+
         if "Crm.V2.Customers.CustomerAddress" in schemas:
             props = schemas["Crm.V2.Customers.CustomerAddress"]["properties"]
             props["country"]["nullable"] = True
+
         if "Crm.V2.ExportCustomerResponse" in schemas:
             props = schemas["Crm.V2.ExportCustomerResponse"]["properties"]
             props["externalData"]["nullable"] = True
+
         if "Crm.V2.ExportLocationsResponse" in schemas:
             props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        # JPM
+        if "CustomFieldApiModel" in schemas:
+            props = schemas["CustomFieldApiModel"]["properties"]
+            props["value"]["nullable"] = True
+
+        if "Jpm.V2.ExportJobsResponse" in schemas:
+            props = schemas["Jpm.V2.ExportJobsResponse"]["properties"]
+            props["customerPo"]["nullable"] = True
+            props["externalData"]["nullable"] = True
+
+        if "Jpm.V2.ExportProjectsResponse" in schemas:
+            props = schemas["Jpm.V2.ExportProjectsResponse"]["properties"]
+            props["externalData"]["nullable"] = True
+
+        if "Jpm.V2.JobTypeResponse" in schemas:
+            props = schemas["Jpm.V2.JobTypeResponse"]["properties"]
             props["externalData"]["nullable"] = True
         return spec
 
@@ -102,6 +126,7 @@ ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
+JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")

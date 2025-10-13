@@ -8,51 +8,52 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job canceled log",
+        "format": "int64",
+        "type": "integer"
       },
       "jobId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job that has been canceled",
+        "format": "int64",
+        "type": "integer"
       },
       "reasonId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the job cancel reason",
+        "format": "int64",
+        "type": "integer"
       },
       "memo": {
+        "description": "Job canceled log additional comments",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the job canceled log was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "createdById": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of user who canceled the job",
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Whether the job canceled log is active",
+        "type": "boolean"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "jobId",
+      "reasonId",
+      "createdOn",
+      "createdById",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_canceled_logs",
   "metadata": [
