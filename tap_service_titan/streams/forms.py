@@ -8,9 +8,8 @@ from functools import cached_property
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers.types import Context  # noqa: TC002
 
-from tap_service_titan.client import (
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanStream
+from tap_service_titan.openapi_specs import FORMS, ServiceTitanSchema
 from tap_service_titan.streams.jpm import JobsStream
 
 
@@ -18,25 +17,14 @@ class FormsStream(ServiceTitanStream):
     """Define forms stream."""
 
     name = "forms"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("name", th.StringType),
-        th.Property("published", th.BooleanType),
-        th.Property("hasConditionalLogic", th.BooleanType),
-        th.Property("hasTriggers", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
+    schema = ServiceTitanSchema(FORMS, key="Forms.V2.FormResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/forms/v2/tenant/{self._tap.config['tenant_id']}/forms"
+        return f"/forms/v2/tenant/{self.tenant_id}/forms"
 
 
 class SubmissionsStream(ServiceTitanStream):

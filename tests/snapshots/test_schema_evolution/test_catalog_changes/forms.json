@@ -8,10 +8,8 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "active": {
         "type": [
@@ -44,6 +42,7 @@
         ]
       },
       "createdById": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -65,7 +64,17 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "active",
+      "published",
+      "hasConditionalLogic",
+      "hasTriggers",
+      "createdById",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "forms",
   "metadata": [

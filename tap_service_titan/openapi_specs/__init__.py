@@ -24,6 +24,7 @@ __all__ = [
     "ACCOUNTING",
     "CRM",
     "DISPATCH",
+    "FORMS",
     "INVENTORY",
     "JPM",
     "SALESTECH",
@@ -135,6 +136,7 @@ OPENAPI_SPECS = files("tap_service_titan") / "openapi_specs"
 ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
+FORMS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "forms-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
 JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
