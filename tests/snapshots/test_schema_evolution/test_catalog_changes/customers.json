@@ -25,7 +25,8 @@
         "type": "string",
         "enum": [
           "Residential",
-          "Commercial"
+          "Commercial",
+          null
         ]
       },
       "address": {
