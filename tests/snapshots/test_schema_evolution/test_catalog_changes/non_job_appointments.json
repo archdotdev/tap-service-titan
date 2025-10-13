@@ -15,26 +15,41 @@
       "technicianId": {
         "description": "Non-job appointment's technician id",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "start": {
         "description": "Non-job appointment's start date/time (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "name": {
         "description": "Non-job appointment name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "duration": {
         "description": "Non-job appointment duration",
         "format": "duration",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "timesheetCodeId": {
         "description": "Unique Id of timesheet code",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "summary": {
         "description": "Non-job appointment summary",
@@ -45,42 +60,69 @@
       },
       "clearDispatchBoard": {
         "description": "Indicate if non-job appointment should be cleared from dispatch board once event is over",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "clearTechnicianView": {
         "description": "Indicate if non-job appointment should be cleared from technician's calendar once event is over",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "removeTechnicianFromCapacityPlanning": {
         "description": "Indicate if technician availability should be remove from legacy capacity planning",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "allDay": {
         "description": "Indicate if non-job appointment is scheduled for whole day",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "showOnTechnicianSchedule": {
         "description": "Whether the non-job appointment shows on the technicians schedule even if there is no timesheet",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "active": {
         "description": "Indicate if non-job appointment is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "When the appointment was created (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the appointment was last modified (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of the user who created the non-job appointment",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -14,26 +14,41 @@
       },
       "name": {
         "description": "Name of the project sub status",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "statusId": {
         "description": "Id of the parent status",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "order": {
         "description": "Order of the project status",
         "format": "int32",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when project sub status was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "When true, project sub status is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -5,7 +5,7 @@
   "schema": {
     "properties": {
       "postDate": {
-        "format": "date-time",
+        "format": "date",
         "type": [
           "string",
           "null"
@@ -15,7 +15,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -42,7 +45,10 @@
             ]
           }
         },
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "id"
         ],
@@ -50,11 +56,17 @@
       },
       "debit": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "credit": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "memo": {
         "type": [
@@ -66,11 +78,17 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "type": {
             "description": "",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "refNumber": {
             "type": [
@@ -93,7 +111,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -115,7 +136,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -137,7 +161,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -159,7 +186,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -181,7 +211,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -203,7 +236,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -225,7 +261,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -247,7 +286,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -269,7 +311,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -291,11 +336,17 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "type": {
             "description": "",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "refNumber": {
             "type": [
@@ -318,7 +369,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "type": {
             "description": "",

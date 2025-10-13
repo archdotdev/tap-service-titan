@@ -14,7 +14,10 @@
       },
       "number": {
         "description": "Project number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "name": {
         "description": "Project name",
@@ -64,12 +67,18 @@
       "customerId": {
         "description": "ID of the project's customer",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "locationId": {
         "description": "ID of the project's location",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "projectTypeId": {
         "description": "ID of the project's type",
@@ -85,7 +94,10 @@
           "type": "integer"
         },
         "description": "IDs of project managers for the project.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "businessUnitIds": {
         "items": {
@@ -93,7 +105,10 @@
           "type": "integer"
         },
         "description": "IDs of business units for the project.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "startDate": {
         "description": "Start date of the project",
@@ -130,17 +145,26 @@
       "createdOn": {
         "description": "Date/time (in UTC) when the project was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "type": [
@@ -158,18 +182,27 @@
           "additionalProperties": false
         },
         "description": "Custom fields on the project",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -191,10 +224,16 @@
           "type": "integer"
         },
         "description": "List of jobs associated with this project.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

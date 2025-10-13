@@ -6,11 +6,10 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import SETTINGS
+from tap_service_titan.openapi_specs import SETTINGS, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -24,7 +23,7 @@ class EmployeesStream(ServiceTitanExportStream):
     name = "employees"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(SETTINGS, key="TenantSettings.V2.ExportEmployeeResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportEmployeeResponse")
 
     @override
     @cached_property
@@ -39,7 +38,7 @@ class BusinessUnitsStream(ServiceTitanExportStream):
     name = "business_units"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(SETTINGS, key="TenantSettings.V2.ExportBusinessUnitResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportBusinessUnitResponse")
 
     @override
     @cached_property
@@ -54,7 +53,7 @@ class TechniciansStream(ServiceTitanExportStream):
     name = "technicians"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(SETTINGS, key="TenantSettings.V2.ExportTechnicianResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportTechnicianResponse")
 
     @override
     @cached_property
@@ -69,7 +68,7 @@ class TagTypesStream(ServiceTitanStream):
     name = "tag_types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(SETTINGS, key="TenantSettings.V2.TagTypeResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.TagTypeResponse")
 
     @override
     @cached_property
@@ -84,7 +83,7 @@ class UserRolesStream(ServiceTitanStream):
     name = "user_roles"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = StreamSchema(SETTINGS, key="TenantSettings.V2.UserRoleResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.UserRoleResponse")
 
     @override
     @cached_property

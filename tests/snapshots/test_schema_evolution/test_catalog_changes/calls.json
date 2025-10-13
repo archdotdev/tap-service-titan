@@ -15,23 +15,38 @@
       "duration": {
         "description": "The duration of the call",
         "format": "duration",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "from": {
         "description": "The caller's phone",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "to": {
         "description": "The called party's phone",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "direction": {
         "description": "Indicates the direction of a call",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "status": {
         "description": "Indicates the status of a call",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "type": {
         "description": "Specifies the type (classification) of the call. If null, the call was not classified yet. Also,\n            outbound calls don't have classification and CallType is always null for outbound calls",
@@ -57,23 +72,35 @@
       "createdOn": {
         "description": "The time the call was created (i.e. inbound call was received or outbound call was initiated)\n            ",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "The last time the call properties were updated",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "reason": {
         "properties": {
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the call reason linked to the call",
@@ -92,11 +119,17 @@
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the customer linked to the call",
@@ -115,11 +148,17 @@
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the location linked to the call",
@@ -138,11 +177,17 @@
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the phone advertising campaign linked to the call",
@@ -161,11 +206,17 @@
           "id": {
             "description": "The ID of the job",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "description": "Human readable number of the job",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the job linked to the call",
@@ -184,11 +235,17 @@
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the user agent who was assigned to the call. For inbound calls this is the user who\n            clicked the call bubble last time, or outbound calls this is a user who initiated the call. For Phones Pro,\n            this may differ to CreatedBy for outbound calls if the outbound call was transferred between users\n            ",
@@ -207,11 +264,17 @@
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "description": "The name of the entity",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "The info about the user who created the outbound call",
@@ -241,14 +304,20 @@
       },
       "active": {
         "description": "Gets or sets whether the entity is active.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "lead": {
         "properties": {
           "id": {
             "description": "The ID of the entity",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           }
         },
         "description": "CRM Leads created from unbooked calls",

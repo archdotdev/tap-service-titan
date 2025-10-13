@@ -14,50 +14,83 @@
       },
       "name": {
         "description": "Purchase order type Name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "automaticallyReceive": {
         "description": "Automatically receive purchase order",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "displayToTechnician": {
         "description": "Display purchase order type to technicain on mobile",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "impactToTechnicianPayroll": {
         "description": "Default Selection for Impact to Technician Payroll on Purchase Order",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "allowTechniciansToSendPo": {
         "description": "Allow permitted technicians to send and receive POs of this type",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "defaultRequiredDateDaysOffset": {
         "description": "Default number of days to offset required date",
         "format": "int32",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "skipWeekends": {
         "description": "Skip weekends",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "excludeTaxFromJobCosting": {
         "description": "Exclude tax from job costing",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "System created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Last time purchase order type was modified date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "description": "Represents purchase order type response",

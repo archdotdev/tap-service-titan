@@ -23,21 +23,33 @@
       "customerId": {
         "description": "ID of the location\u2019s customer.",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "active": {
         "description": "If false, the record has been deactivated.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "name": {
         "description": "Name of the location",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "address": {
         "properties": {
           "street": {
             "description": "Street",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "unit": {
             "description": "Unit",
@@ -48,15 +60,24 @@
           },
           "city": {
             "description": "City",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "state": {
             "description": "State",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "zip": {
             "description": "Zip",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "country": {
             "description": "Country",
@@ -83,7 +104,10 @@
           }
         },
         "description": "Location\u2019s address",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "street",
           "city",
@@ -99,7 +123,10 @@
             "typeId": {
               "description": "ID of the custom field",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Name/label of the custom field",
@@ -123,22 +150,34 @@
           "additionalProperties": false
         },
         "description": "Location record\u2019s custom fields",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "DateTime (UTC) that location record was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "User ID who created the record.",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Modified On (UTC) for the record.",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "mergedToId": {
         "description": "Tells you which location record this record was merged into.",
@@ -158,7 +197,10 @@
       },
       "taxExempt": {
         "description": "Tax Exempt status of the location.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "tagTypeIds": {
         "items": {
@@ -166,18 +208,27 @@
           "type": "integer"
         },
         "description": "Tag Type IDs of the location",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",

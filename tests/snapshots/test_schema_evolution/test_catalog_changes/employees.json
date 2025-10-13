@@ -15,15 +15,24 @@
       "userId": {
         "description": "ID of the user that belongs to the employee",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "name": {
         "description": "Employee's name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "role": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "roleIds": {
         "items": {
@@ -47,12 +56,18 @@
       "createdOn": {
         "description": "When the employee was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the employee was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "email": {
         "description": "Email address of the employee",
@@ -82,7 +97,10 @@
           "properties": {
             "typeId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "type": [
@@ -111,7 +129,10 @@
       },
       "active": {
         "description": "Whether the employee is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "aadUserId": {
         "description": "Azure Active Directory User Id",
@@ -125,7 +146,10 @@
           "properties": {
             "id": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "value": {
               "type": [

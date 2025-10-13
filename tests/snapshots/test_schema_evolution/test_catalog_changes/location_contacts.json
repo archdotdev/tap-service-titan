@@ -14,11 +14,17 @@
       },
       "type": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "value": {
         "description": "Value of contact",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "memo": {
         "description": "Memo of contact",
@@ -31,15 +37,24 @@
         "properties": {
           "phoneNumber": {
             "description": "Phone Number",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "doNotText": {
             "description": "If the phone number has opted-out from notifications.",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "description": "Phone settings of the location contact",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "phoneNumber",
           "doNotText"
@@ -49,26 +64,41 @@
       "modifiedOn": {
         "description": "Date/time (in UTC) the contact was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) the contact was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "preferences": {
         "properties": {
           "jobRemindersEnabled": {
             "description": "Job Reminders Enabled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "marketingUpdatesEnabled": {
             "description": "Marketing Updates Enabled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "invoiceStatementNotification": {
             "description": "Invoice Statement Notification",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "description": "Contact Preferences",
@@ -85,10 +115,16 @@
       },
       "locationId": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

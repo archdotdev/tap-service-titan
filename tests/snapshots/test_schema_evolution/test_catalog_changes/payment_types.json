@@ -12,7 +12,10 @@
         "type": "integer"
       },
       "name": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",

@@ -19,15 +19,24 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "date": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "approvedDate": {
         "format": "date-time",
@@ -38,7 +47,10 @@
       },
       "method": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "name": {
         "type": [
@@ -54,7 +66,10 @@
       },
       "amount": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "errorMessage": {
         "type": [
@@ -64,17 +79,26 @@
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "syncStatus": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "batch": {
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -102,7 +126,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -142,7 +169,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -164,7 +194,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -186,7 +219,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -209,7 +245,10 @@
           "properties": {
             "id": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "active": {
               "type": [
@@ -219,7 +258,10 @@
             },
             "createdOn": {
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "documentId": {
               "format": "int64",
@@ -237,7 +279,10 @@
             },
             "amount": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -248,7 +293,10 @@
           ],
           "additionalProperties": false
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "type": "object",

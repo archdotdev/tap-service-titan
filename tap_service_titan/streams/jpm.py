@@ -6,14 +6,13 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th
 
 from tap_service_titan.client import (
     ServiceTitanExportStream,
     ServiceTitanStream,
 )
-from tap_service_titan.openapi_specs import JPM
+from tap_service_titan.openapi_specs import JPM, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -31,7 +30,7 @@ class AppointmentsStream(ServiceTitanExportStream):
     name = "appointments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportAppointmentsResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportAppointmentsResponse")
 
     @override
     @cached_property
@@ -46,7 +45,7 @@ class JobsStream(ServiceTitanExportStream):
     name = "jobs"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobsResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobsResponse")
 
     @override
     @cached_property
@@ -66,7 +65,7 @@ class JobHistoryStream(ServiceTitanExportStream):
     name = "job_history"
     primary_keys = ("id",)
     replication_key: th.DateTimeType = "date"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobHistoryEntry")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobHistoryEntry")
 
     @override
     @cached_property
@@ -98,7 +97,7 @@ class ProjectsStream(ServiceTitanExportStream):
     name = "projects"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportProjectsResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportProjectsResponse")
 
     @override
     @cached_property
@@ -113,7 +112,7 @@ class JobCancelledLogsStream(ServiceTitanExportStream):
     name = "job_canceled_logs"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobCanceledLogResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobCanceledLogResponse")
 
     @override
     @cached_property
@@ -128,7 +127,7 @@ class JobCancelReasonsStream(ServiceTitanStream):
     name = "job_cancel_reasons"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.JobCancelReasonResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCancelReasonResponse")
 
     @override
     @cached_property
@@ -143,7 +142,7 @@ class JobHoldReasonsStream(ServiceTitanStream):
     name = "job_hold_reasons"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.JobHoldReasonResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobHoldReasonResponse")
 
     @override
     @cached_property
@@ -158,7 +157,7 @@ class JobTypesStream(ServiceTitanStream):
     name = "job_types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.JobTypeResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobTypeResponse")
 
     @override
     @cached_property
@@ -173,7 +172,7 @@ class ProjectStatusesStream(ServiceTitanStream):
     name = "project_statuses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ProjectStatusResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectStatusResponse")
 
     @override
     @cached_property
@@ -188,7 +187,7 @@ class ProjectSubStatusesStream(ServiceTitanStream):
     name = "project_sub_statuses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ProjectSubStatusResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectSubStatusResponse")
 
     @override
     @cached_property
@@ -203,7 +202,7 @@ class JobNotesStream(ServiceTitanExportStream):
     name = "job_notes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobNotesResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobNotesResponse")
 
     @override
     @cached_property
@@ -218,7 +217,7 @@ class ProjectNotesStream(ServiceTitanExportStream):
     name = "project_notes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(JPM, key="Jpm.V2.ExportProjectNotesResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportProjectNotesResponse")
 
     @override
     @cached_property
@@ -232,7 +231,7 @@ class ProjectTypesStream(ServiceTitanStream):
 
     name = "project_types"
     primary_keys = ("id",)
-    schema = StreamSchema(JPM, key="Jpm.V2.ProjectTypeResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectTypeResponse")
 
     @override
     @cached_property
@@ -248,7 +247,7 @@ class JobBookedLogStream(ServiceTitanStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(JPM, key="Jpm.V2.JobBookedLogResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobBookedLogResponse")
 
     @override
     @cached_property
@@ -264,7 +263,7 @@ class JobCanceledLogStream(ServiceTitanStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(JPM, key="Jpm.V2.JobCanceledLogResponse")
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCanceledLogResponse")
 
     @override
     @cached_property

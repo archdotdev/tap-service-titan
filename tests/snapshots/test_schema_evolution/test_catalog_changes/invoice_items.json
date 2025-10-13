@@ -57,7 +57,10 @@
       },
       "type": {
         "description": "Indicates a type's item",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "skuName": {
         "type": [
@@ -67,7 +70,10 @@
       },
       "skuId": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "total": {
         "type": [
@@ -76,16 +82,25 @@
         ]
       },
       "inventory": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "taxable": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "generalLedgerAccount": {
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -125,7 +140,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -165,7 +183,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -203,13 +224,19 @@
       },
       "membershipTypeId": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "itemGroup": {
         "properties": {
           "rootId": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -242,11 +269,17 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "serviceDate": {
         "format": "date-time",
@@ -257,13 +290,19 @@
       },
       "order": {
         "format": "int32",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "businessUnit": {
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -313,7 +352,10 @@
         ]
       },
       "addOn": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "memberPrice": {
         "type": [
@@ -344,11 +386,17 @@
         ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "invoiceId": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       }
     },
     "type": "object",

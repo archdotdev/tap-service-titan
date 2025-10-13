@@ -14,16 +14,25 @@
       },
       "name": {
         "description": "Truck Name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "memo": {
         "description": "Memo",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "warehouseId": {
         "description": "Warehouse Id for this truck",
@@ -39,28 +48,43 @@
           "type": "integer"
         },
         "description": "Technician Ids associated with this truck",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "System created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Last time truck was modified date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -71,7 +95,10 @@
           "additionalProperties": false
         },
         "description": "List of external data attached to this warehouse,\nthat corresponds to the application guid provided in the request.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "description": "Represents truck response",

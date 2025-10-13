@@ -7,13 +7,12 @@ import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import DISPATCH
+from tap_service_titan.openapi_specs import DISPATCH, ServiceTitanSchema
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod
@@ -145,7 +144,7 @@ class ArrivalWindowsStream(ServiceTitanStream):
 
     name = "arrival_windows"
     primary_keys = ("id",)
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.ArrivalWindowResponse")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.ArrivalWindowResponse")
 
     @override
     @cached_property
@@ -160,7 +159,7 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream):
     name = "appointment_assignments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(
+    schema = ServiceTitanSchema(
         DISPATCH,
         key="Dispatch.V2.ExportAppointmentAssignmentsResponse",
     )
@@ -178,7 +177,7 @@ class NonJobAppointmentsStream(ServiceTitanStream):
     name = "non_job_appointments"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.NonJobAppointmentResponse")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.NonJobAppointmentResponse")
 
     @override
     @cached_property
@@ -193,7 +192,7 @@ class TeamsStream(ServiceTitanStream):
     name = "teams"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.TeamResponse")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TeamResponse")
 
     @override
     @cached_property
@@ -207,7 +206,7 @@ class TechnicianShiftsStream(ServiceTitanStream):
 
     name = "technician_shifts"
     primary_keys = ("id",)
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.TechnicianShiftResponse")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianShiftResponse")
 
     @override
     @cached_property
@@ -222,7 +221,7 @@ class ZonesStream(ServiceTitanStream):
     name = "zones"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.ZoneResponse")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.ZoneResponse")
 
     @override
     @cached_property
@@ -236,7 +235,7 @@ class BusinessHoursStream(ServiceTitanStream):
 
     name = "business_hours"
     primary_keys: t.ClassVar[list[str]] = []
-    schema = StreamSchema(DISPATCH, key="Dispatch.V2.BusinessHourModel")
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.BusinessHourModel")
 
     @override
     @cached_property

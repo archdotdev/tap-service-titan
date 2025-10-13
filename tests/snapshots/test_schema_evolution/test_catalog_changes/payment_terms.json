@@ -9,10 +9,7 @@
     "properties": {
       "id": {
         "format": "int64",
-        "type": [
-          "integer",
-          "null"
-        ]
+        "type": "integer"
       },
       "name": {
         "type": [
@@ -22,7 +19,10 @@
       },
       "dueDayType": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "dueDay": {
         "format": "int32",
@@ -32,13 +32,22 @@
         ]
       },
       "isCustomerDefault": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isVendorDefault": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "inUse": {
         "type": [
@@ -48,11 +57,17 @@
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "paymentTermDiscountModel": {
         "properties": {
@@ -105,7 +120,10 @@
             ]
           }
         },
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "additionalProperties": false
       },
       "interestSettings": {
@@ -119,7 +137,10 @@
           },
           "rateType": {
             "description": "",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "flatRateValue": {
             "format": "decimal",
@@ -144,7 +165,10 @@
           },
           "frequency": {
             "description": "",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "gracePeriod": {
             "format": "int32",
@@ -158,17 +182,29 @@
               "description": "",
               "type": "string"
             },
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "taskId": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "taskDisplayName": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "rateType",
           "frequency",

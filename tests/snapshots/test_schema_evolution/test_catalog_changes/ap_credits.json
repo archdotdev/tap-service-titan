@@ -26,19 +26,31 @@
         ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "date": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "canceledOn": {
         "format": "date-time",
@@ -67,25 +79,40 @@
       },
       "amount": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "appliedAmount": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "syncStatus": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "batch": {
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -113,7 +140,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -135,7 +165,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -157,7 +190,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -177,33 +213,54 @@
       },
       "paymentStatus": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "splits": {
         "items": {
           "properties": {
             "id": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "active": {
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "createdOn": {
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "inventoryBillId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "vendorCreditId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "amount": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -217,7 +274,10 @@
           ],
           "additionalProperties": false
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "type": "object",

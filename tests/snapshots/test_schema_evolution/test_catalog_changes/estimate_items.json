@@ -15,34 +15,61 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "displayName": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "type": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "soldHours": {
             "format": "decimal",
-            "type": "number"
+            "type": [
+              "number",
+              "null"
+            ]
           },
           "generalLedgerAccountId": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "generalLedgerAccountName": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "modifiedOn": {
             "format": "date-time",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "id",
           "name",
@@ -56,11 +83,17 @@
         "additionalProperties": false
       },
       "skuAccount": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "description": {
         "format": "html",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "membershipTypeId": {
         "format": "int64",
@@ -71,26 +104,44 @@
       },
       "qty": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "unitRate": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "total": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "unitCost": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "totalCost": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "itemGroupName": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "itemGroupRootId": {
         "format": "int64",
@@ -101,11 +152,17 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "chargeable": {
         "type": [

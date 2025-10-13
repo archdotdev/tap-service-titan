@@ -20,10 +20,16 @@
           "properties": {
             "typeId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "type": [
@@ -41,18 +47,27 @@
           "additionalProperties": false
         },
         "description": "Custom fields on the job",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -75,7 +90,10 @@
       },
       "jobNumber": {
         "description": "Job number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "projectId": {
         "description": "ID of the job's project",
@@ -88,16 +106,25 @@
       "customerId": {
         "description": "ID of the job's customer",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "locationId": {
         "description": "ID of the job's location",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobStatus": {
         "description": "Status of the job",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "completedOn": {
         "description": "Date/time (in UTC) when the job was completed",
@@ -110,36 +137,57 @@
       "businessUnitId": {
         "description": "ID of the job's business unit",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobTypeId": {
         "description": "ID of job type",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "priority": {
         "description": "Priority of the job",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "campaignId": {
         "description": "ID of the job's campaign",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "appointmentCount": {
         "description": "Number of appointments on the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "firstAppointmentId": {
         "description": "ID of the first appointment on the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "lastAppointmentId": {
         "description": "ID of the last appointment on the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "recallForId": {
         "description": "ID of the job for which this job is a recall",
@@ -183,26 +231,41 @@
       },
       "noCharge": {
         "description": "Whether the job is a no-charge job",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "notificationsEnabled": {
         "description": "Whether notifications will be sent to customers",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) when the job was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of the user who created the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when job was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "tagTypeIds": {
         "items": {
@@ -210,7 +273,10 @@
           "type": "integer"
         },
         "description": "Tags on the job",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "leadCallId": {
         "description": "ID of the Call that resulted in this job",
@@ -254,7 +320,10 @@
       "invoiceId": {
         "description": "ID of the invoice associated with this job.",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "membershipId": {
         "description": "ID of the Membership associated with this job.",
@@ -274,7 +343,10 @@
       },
       "active": {
         "description": "Whether this job is active, or not anymore.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -10,21 +10,33 @@
       "modifiedOn": {
         "description": "Modified On (UTC) for the record",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "phoneSettings": {
         "properties": {
           "phoneNumber": {
             "description": "Phone Number",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "doNotText": {
             "description": "If the phone number has opted-out from notifications.",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "description": "Phone settings of the customer contact",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "phoneNumber",
           "doNotText"
@@ -34,21 +46,33 @@
       "createdOn": {
         "description": "Created On (UTC) for the record",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "preferences": {
         "properties": {
           "jobRemindersEnabled": {
             "description": "Job Reminders Enabled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "marketingUpdatesEnabled": {
             "description": "Marketing Updates Enabled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "invoiceStatementNotification": {
             "description": "Invoice Statement Notification",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "description": "Contact Preferences",
@@ -70,11 +94,17 @@
       },
       "type": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "value": {
         "description": "The email, phone number, or fax number for the contact.",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "memo": {
         "description": "Short description about this contact, for example, \u201cwork #\u201d or \u201cOwner\u2019s daughter - Kelly.\u201d",
@@ -85,10 +115,16 @@
       },
       "customerId": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

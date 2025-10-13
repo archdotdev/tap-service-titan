@@ -12,18 +12,30 @@
         "type": "integer"
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "name": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "employeeType": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

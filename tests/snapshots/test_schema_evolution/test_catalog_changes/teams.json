@@ -14,7 +14,10 @@
       },
       "active": {
         "description": "Whether the team is enabled",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "name": {
         "description": "Descriptive identifier",
@@ -34,12 +37,18 @@
       "createdOn": {
         "description": "Created on date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Modified on date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

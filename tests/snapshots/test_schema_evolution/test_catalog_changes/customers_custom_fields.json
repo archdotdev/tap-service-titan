@@ -39,12 +39,18 @@
       "createdOn": {
         "description": "DateTime (UTC) that customer record was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Modified on (UTC) for the record.",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

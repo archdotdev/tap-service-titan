@@ -14,7 +14,10 @@
       },
       "name": {
         "description": "Name of the job type",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "businessUnitIds": {
         "items": {
@@ -22,14 +25,20 @@
           "type": "integer"
         },
         "description": "Business Unit Ids associated with job type",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "skills": {
         "items": {
           "type": "string"
         },
         "description": "List of skills required to complete this job",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "tagTypeIds": {
         "items": {
@@ -37,16 +46,25 @@
           "type": "integer"
         },
         "description": "Tags here will automatically be applied to jobs booked",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "priority": {
         "description": "Level of urgency for this type of job",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "duration": {
         "description": "Avg length of time for this job type",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "soldThreshold": {
         "description": "A job is considered as converted if subtotal meets or exceeds this threshold",
@@ -58,16 +76,25 @@
       },
       "class": {
         "description": "Let\u2019s you group other job types by class",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "summary": {
         "description": "Text that is automatically added to job summary when booked",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "noCharge": {
         "description": "When true, all jobs are considered no charge",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "enforceRecurringServiceEventSelection": {
         "description": "When true enforce recurring service event",
@@ -78,28 +105,43 @@
       },
       "invoiceSignaturesRequired": {
         "description": "When true signature is required",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when job type was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) when job type was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -117,7 +159,10 @@
       },
       "active": {
         "description": "When true, job type is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

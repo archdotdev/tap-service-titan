@@ -11,10 +11,16 @@
         "type": "integer"
       },
       "name": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "description": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "format": "int64",

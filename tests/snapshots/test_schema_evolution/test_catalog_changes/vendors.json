@@ -14,59 +14,98 @@
       },
       "name": {
         "description": "Vendor name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Active/Inactive status",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isTruckReplenishment": {
         "description": "Indicates if vendor can be used for replenishment",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isMobileCreationRestricted": {
         "description": "Indicates if vendor can be used for purchasing on mobile",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "memo": {
         "description": "Vendor memo",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "deliveryOption": {
         "description": "Default delivery option",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "defaultTaxRate": {
         "description": "Default tax rate for this vendor",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "contactInfo": {
         "properties": {
           "firstName": {
             "description": "Vendor first name",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "lastName": {
             "description": "Vendor last name",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "phone": {
             "description": "Vendor phone",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "email": {
             "description": "Vendor email",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "fax": {
             "description": "Vendor fax",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "description": "Vendor contact info response",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "firstName",
           "lastName",
@@ -122,29 +161,44 @@
           }
         },
         "description": "Represents address response",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "additionalProperties": false
       },
       "createdOn": {
         "description": "system created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "last time adjustment was modified date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -155,7 +209,10 @@
           "additionalProperties": false
         },
         "description": "List of external data attached to this vendor,\nthat corresponds to the application guid provided in the request.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "description": "Vendor response",

@@ -14,21 +14,33 @@
       },
       "name": {
         "description": "Name of the job cancel reason",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Whether the job cancel reason is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) when the job was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when job was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

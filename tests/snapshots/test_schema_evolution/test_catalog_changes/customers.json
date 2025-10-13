@@ -14,21 +14,33 @@
       },
       "active": {
         "description": "False indicates that someone has deactivated the customer record, typically upon merging with another record.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "name": {
         "description": "Name of the customer",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "type": {
         "description": "Indicates a customer's type.",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "address": {
         "properties": {
           "street": {
             "description": "Street",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "unit": {
             "description": "Unit",
@@ -39,15 +51,24 @@
           },
           "city": {
             "description": "City",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "state": {
             "description": "State",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "zip": {
             "description": "Zip",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "country": {
             "description": "Country",
@@ -74,7 +95,10 @@
           }
         },
         "description": "Bill-To address of the customer record",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "required": [
           "street",
           "city",
@@ -90,7 +114,10 @@
             "typeId": {
               "description": "ID of the custom field",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Name/label of the custom field",
@@ -114,16 +141,25 @@
           "additionalProperties": false
         },
         "description": "Customer record\u2019s custom fields",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "balance": {
         "description": "Customer\u2019s account balance",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "taxExempt": {
         "description": "Tax Exempt status of the customer.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "tagTypeIds": {
         "items": {
@@ -131,30 +167,48 @@
           "type": "integer"
         },
         "description": "Tag Type IDs associated with the Customer",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "doNotMail": {
         "description": "Customer has been flagged as \u201cdo not mail\u201d",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "doNotService": {
         "description": "Customer has been flagged as \u201cdo not service\u201d",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "DateTime (UTC) that customer record was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "User ID who created the record.",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Modified on (UTC) for the record.",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "mergedToId": {
         "description": "The customer ID of the record that this record was previously merged to.",
@@ -169,11 +223,17 @@
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",

@@ -14,7 +14,10 @@
       },
       "active": {
         "description": "Whether the zone is enabled",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "name": {
         "description": "Descriptive identifier",
@@ -66,21 +69,33 @@
       "createdBy": {
         "description": "User ID who created the zone",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) the zone was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) the zone was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "serviceDaysEnabled": {
         "description": "Whether the service days option is enabled",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "serviceDays": {
         "items": {

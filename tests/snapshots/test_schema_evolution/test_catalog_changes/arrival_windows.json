@@ -12,21 +12,33 @@
       },
       "start": {
         "format": "duration",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "duration": {
         "format": "duration",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "businessUnitIds": {
         "items": {
           "format": "int64",
           "type": "integer"
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

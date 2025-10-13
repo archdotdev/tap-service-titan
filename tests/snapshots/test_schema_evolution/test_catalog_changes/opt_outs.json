@@ -12,7 +12,10 @@
       },
       "optOutType": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "description": "Single contact number opt-out status",

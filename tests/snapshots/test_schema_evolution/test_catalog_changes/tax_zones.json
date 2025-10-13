@@ -29,11 +29,17 @@
       },
       "isTaxRateSeparated": {
         "description": "Tax Zone has separate material and labor taxes",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isMultipleTaxZone": {
         "description": "Tax Zone has multiple rates",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "rates": {
         "items": {
@@ -59,12 +65,18 @@
                 "type": "string"
               },
               "description": "Indicates how the tax rate is applied (Subtotal, Labor, Material)",
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "taxRate": {
               "description": "Tax rate as a fractional/decimal value",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "salesTaxItem": {
               "description": "The Quickbooks item that relates to this tax rate",
@@ -82,21 +94,33 @@
           "additionalProperties": false
         },
         "description": "Tax Zone rates",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date which the Tax Zone was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date which the Tax Zone was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
         "description": "Tax zone is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -13,11 +13,17 @@
       },
       "shiftType": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "title": {
         "description": "Descriptive identifier",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "note": {
         "description": "Optional detailed explanation of the shift",
@@ -28,22 +34,34 @@
       },
       "active": {
         "description": "Whether the shift is enabled",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "technicianId": {
         "description": ">Unique id of the technician this shift applies to",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "start": {
         "description": "When the shift begins",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "end": {
         "description": "When the shift ends",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "timesheetCodeId": {
         "description": "Timesheet code ID of shift",
@@ -56,12 +74,18 @@
       "createdOn": {
         "description": "When the shift was created (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the shift was modified (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

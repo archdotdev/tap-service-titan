@@ -6,11 +6,10 @@ import sys
 from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import INVENTORY
+from tap_service_titan.openapi_specs import INVENTORY, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -27,7 +26,7 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
     name = "purchase_orders"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.ExportPurchaseOrdersResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.ExportPurchaseOrdersResponse")
 
     @override
     @cached_property
@@ -41,7 +40,7 @@ class PurchaseOrderMarkupsStream(ServiceTitanStream):
 
     name = "purchase_order_markups"
     primary_keys = ("id",)
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.Markups.PurchaseOrderMarkupResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.Markups.PurchaseOrderMarkupResponse")
 
     @override
     @cached_property
@@ -56,7 +55,7 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
     name = "purchase_order_types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.PurchaseOrderTypeResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.PurchaseOrderTypeResponse")
 
     @override
     @cached_property
@@ -71,7 +70,7 @@ class ReceiptsStream(ServiceTitanStream):
     name = "receipts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryReceiptResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryReceiptResponse")
 
     @override
     def get_url_params(
@@ -97,7 +96,7 @@ class ReturnsStream(ServiceTitanStream):
     name = "returns"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryReturnResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryReturnResponse")
 
     @override
     def get_url_params(
@@ -123,7 +122,7 @@ class AdjustmentsStream(ServiceTitanStream):
     name = "adjustments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryAdjustmentResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryAdjustmentResponse")
 
     @override
     @cached_property
@@ -137,7 +136,7 @@ class ReturnTypesStream(ServiceTitanStream):
 
     name = "return_types"
     primary_keys = ("id",)
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.ListReturnTypesResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.ListReturnTypesResponse")
 
     @override
     def get_url_params(
@@ -163,7 +162,7 @@ class TransfersStream(ServiceTitanStream):
     name = "transfers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.InventoryTransferResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryTransferResponse")
 
     @override
     @cached_property
@@ -178,7 +177,7 @@ class TrucksStream(ServiceTitanStream):
     name = "trucks"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.TruckResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.TruckResponse")
 
     @override
     @cached_property
@@ -193,7 +192,7 @@ class VendorsStream(ServiceTitanStream):
     name = "vendors"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.VendorResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.VendorResponse")
 
     @override
     @cached_property
@@ -208,7 +207,7 @@ class WarehousesStream(ServiceTitanStream):
     name = "warehouses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(INVENTORY, key="Inventory.V2.WarehouseResponse")
+    schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.WarehouseResponse")
 
     @override
     @cached_property

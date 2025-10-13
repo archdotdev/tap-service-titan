@@ -9,11 +9,17 @@
           "properties": {
             "fromHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "toHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -23,18 +29,27 @@
           ],
           "additionalProperties": false
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "saturday": {
         "items": {
           "properties": {
             "fromHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "toHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -44,18 +59,27 @@
           ],
           "additionalProperties": false
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "sunday": {
         "items": {
           "properties": {
             "fromHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "toHour": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -65,7 +89,10 @@
           ],
           "additionalProperties": false
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -22,16 +22,25 @@
       },
       "eventType": {
         "description": "Type of the job status ",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "date": {
         "description": "Date of the log ",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "usedSchedulingTool": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

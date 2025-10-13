@@ -6,10 +6,8 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import StreamSchema
-
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import ACCOUNTING
+from tap_service_titan.openapi_specs import ACCOUNTING, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -26,7 +24,7 @@ class InvoicesStream(ServiceTitanExportStream):
     name = "invoices"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportInvoiceResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExportInvoiceResponse")
 
     @cached_property
     def path(self) -> str:
@@ -40,7 +38,7 @@ class InvoiceItemsStream(ServiceTitanExportStream):
     name = "invoice_items"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportInvoiceItemResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExportInvoiceItemResponse")
 
     @cached_property
     def path(self) -> str:
@@ -54,7 +52,7 @@ class PaymentsStream(ServiceTitanExportStream):
     name = "payments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportPaymentResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExportPaymentResponse")
 
     @override
     @cached_property
@@ -69,7 +67,7 @@ class InventoryBillsStream(ServiceTitanExportStream):
     name = "inventory_bills"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ExportInventoryBillResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExportInventoryBillResponse")
 
     @cached_property
     def path(self) -> str:
@@ -83,7 +81,7 @@ class ApCreditsStream(ServiceTitanStream):
     name = "ap_credits"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ApCreditResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ApCreditResponse")
 
     @override
     @cached_property
@@ -98,7 +96,7 @@ class ApPaymentsStream(ServiceTitanStream):
     name = "ap_payments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.ApPaymentResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ApPaymentResponse")
 
     @override
     @cached_property
@@ -113,7 +111,7 @@ class PaymentTermsStream(ServiceTitanStream):
     name = "payment_terms"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.PaymentTermAPIModel")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.PaymentTermAPIModel")
 
     @override
     @cached_property
@@ -128,7 +126,7 @@ class PaymentTypesStream(ServiceTitanStream):
     name = "payment_types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.PaymentTypeResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.PaymentTypeResponse")
 
     @cached_property
     def path(self) -> str:
@@ -142,7 +140,7 @@ class TaxZonesStream(ServiceTitanStream):
     name = "tax_zones"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.TaxZoneResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.TaxZoneResponse")
 
     @override
     @cached_property
@@ -178,7 +176,7 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
     name = "journal_entries"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.JournalEntryResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.JournalEntryResponse")
 
     @override
     def get_url_params(
@@ -220,7 +218,7 @@ class JournalEntrySummaryStream(PageSizeLimitMixin, ServiceTitanStream):
     replication_key: str | None = None
     parent_stream_type = JournalEntriesStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.JournalEntrySummaryResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.JournalEntrySummaryResponse")
 
     @override
     @cached_property
@@ -237,7 +235,7 @@ class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     replication_key: str | None = None
     parent_stream_type = JournalEntriesStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.JournalEntryDetailsResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.JournalEntryDetailsResponse")
 
     @cached_property
     def path(self) -> str:
@@ -251,7 +249,7 @@ class InventoryBillsCustomFieldsStream(ServiceTitanStream):
     name = "inventory_bills_custom_fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.CustomFieldTypeResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.CustomFieldTypeResponse")
 
     @override
     @cached_property
@@ -266,7 +264,7 @@ class GLAccountsStream(ServiceTitanStream):
     name = "gl_accounts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(ACCOUNTING, key="Accounting.V2.GlAccountExtendedResponse")
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.GlAccountExtendedResponse")
 
     @cached_property
     def path(self) -> str:

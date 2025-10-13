@@ -14,12 +14,18 @@
       "jobId": {
         "description": "ID of the job that has been canceled",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "reasonId": {
         "description": "ID of the job cancel reason",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "memo": {
         "description": "Job canceled log additional comments",
@@ -31,16 +37,25 @@
       "createdOn": {
         "description": "Date/time (in UTC) when the job canceled log was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of user who canceled the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "active": {
         "description": "Whether the job canceled log is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "description": "JobCanceledLog response model",

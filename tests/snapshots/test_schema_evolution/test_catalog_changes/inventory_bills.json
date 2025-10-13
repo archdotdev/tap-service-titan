@@ -110,7 +110,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "type": [
@@ -138,7 +141,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -160,7 +166,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -182,7 +191,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -250,7 +262,10 @@
           "properties": {
             "order": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "type": [
@@ -293,7 +308,10 @@
               "properties": {
                 "id": {
                   "format": "int64",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "name": {
                   "type": [
@@ -333,7 +351,10 @@
               "properties": {
                 "id": {
                   "format": "int64",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "name": {
                   "type": [
@@ -373,7 +394,10 @@
               "properties": {
                 "id": {
                   "format": "int64",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "name": {
                   "type": [
@@ -411,11 +435,17 @@
             },
             "id": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "skuId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "receiptItemId": {
               "format": "int64",
@@ -425,10 +455,16 @@
               ]
             },
             "skuType": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "skuCode": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -484,7 +520,10 @@
         ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

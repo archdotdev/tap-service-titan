@@ -123,11 +123,17 @@
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "priority": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "customerId": {
         "description": "Customer associated to the lead",
@@ -164,7 +170,10 @@
       "campaignId": {
         "description": "Campaign associated to the lead",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "followUpDate": {
         "description": "The next time someone is supposed to follow up on this lead",
@@ -177,17 +186,26 @@
       "createdById": {
         "description": "User ID who created this lead",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "When the lead was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the lead was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "tagTypeIds": {
         "items": {
@@ -209,7 +227,10 @@
         ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

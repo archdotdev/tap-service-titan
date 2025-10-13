@@ -15,7 +15,10 @@
       "jobId": {
         "description": "ID of the job that the appointment was created for",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "appointmentNumber": {
         "description": "Appointment number",
@@ -27,12 +30,18 @@
       "start": {
         "description": "Appointment's start date/time (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "end": {
         "description": "Appointment's end date/time (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "arrivalWindowStart": {
         "description": "Arrival window start date/time (in UTC), if configured",
@@ -52,7 +61,10 @@
       },
       "status": {
         "description": "Indicates the status of a Job Appointment.",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "specialInstructions": {
         "description": "Special instructions associated to the appointment",
@@ -65,34 +77,55 @@
       "createdOn": {
         "description": "When the appointment was created (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the appointment was modified (in UTC)",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "customerId": {
         "description": "Id of a customer that the appointment was created for",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "unused": {
         "description": "Returns true if the appointment is unused",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of the user that created the appointment",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "isConfirmed": {
         "description": "Returns true if the appointment is confirmed",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "active": {
         "description": "Whether this appointment is active, or not anymore.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

@@ -55,10 +55,16 @@
         "properties": {
           "value": {
             "format": "int32",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "type": [
@@ -73,7 +79,10 @@
       },
       "reviewStatus": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "summary": {
         "type": [
@@ -83,11 +92,17 @@
       },
       "createdOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "soldOn": {
         "format": "date-time",
@@ -104,47 +119,80 @@
         ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "items": {
         "items": {
           "properties": {
             "id": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "sku": {
               "properties": {
                 "id": {
                   "format": "int64",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "name": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "displayName": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "type": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "soldHours": {
                   "format": "decimal",
-                  "type": "number"
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 },
                 "generalLedgerAccountId": {
                   "format": "int64",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "generalLedgerAccountName": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "modifiedOn": {
                   "format": "date-time",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "required": [
                 "id",
                 "name",
@@ -158,11 +206,17 @@
               "additionalProperties": false
             },
             "skuAccount": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "description": {
               "format": "html",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "membershipTypeId": {
               "format": "int64",
@@ -173,26 +227,44 @@
             },
             "qty": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "unitRate": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "total": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "unitCost": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "totalCost": {
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "itemGroupName": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "itemGroupRootId": {
               "format": "int64",
@@ -203,11 +275,17 @@
             },
             "createdOn": {
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modifiedOn": {
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "chargeable": {
               "type": [
@@ -257,10 +335,16 @@
         "items": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "url": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -277,11 +361,17 @@
       },
       "subtotal": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "tax": {
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "businessUnitId": {
         "format": "int64",
@@ -297,7 +387,10 @@
         ]
       },
       "isRecommended": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "budgetCodeId": {
         "format": "int64",
@@ -307,7 +400,10 @@
         ]
       },
       "isChangeOrder": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

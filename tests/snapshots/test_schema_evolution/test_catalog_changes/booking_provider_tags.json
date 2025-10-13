@@ -14,25 +14,40 @@
       },
       "tagName": {
         "description": "Name of tag",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "description": {
         "description": "Description of tag",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "type": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) when the booking provider tag was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when the booking provider tag was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

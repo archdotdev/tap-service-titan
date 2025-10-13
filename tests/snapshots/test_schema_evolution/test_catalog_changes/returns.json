@@ -14,24 +14,39 @@
       },
       "active": {
         "description": "Is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "number": {
         "description": "Number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "referenceNumber": {
         "description": "Reference number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "vendorId": {
         "description": "Vendor",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "purchaseOrderId": {
         "description": "Purchase order",
@@ -68,7 +83,10 @@
       "businessUnitId": {
         "description": "Business unit",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "inventoryLocationId": {
         "description": "Inventory location",
@@ -89,27 +107,42 @@
       "memo": {
         "description": "Memo/summary field",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "returnAmount": {
         "description": "Return total, including tax and shipping",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "taxAmount": {
         "description": "Return tax",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "shippingAmount": {
         "description": "Return shipping cost",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "returnDate": {
         "description": "Return creation date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "returnedOn": {
         "description": "Date when return was actually processed",
@@ -130,12 +163,18 @@
       "createdOn": {
         "description": "System created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Last time return was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "batchId": {
         "description": "Batch Id (Deprecated - Use Batch instead)",
@@ -151,7 +190,10 @@
           "id": {
             "description": "Batch Id",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "description": "Batch number",
@@ -180,7 +222,10 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "canceledById": {
         "description": "Employee who canceled this transfer",
@@ -211,45 +256,72 @@
             "id": {
               "description": "Item Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "skuId": {
               "description": "Sku Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "description": {
               "description": "Item description",
               "format": "html",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "createdOn": {
               "description": "system created date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modifiedOn": {
               "description": "last time transfer item was modified date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "name": {
               "description": "Item name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "code": {
               "description": "Item code",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "quantity": {
               "description": "Return quantity",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "cost": {
               "description": "Item cost",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "generalLedgerAccount": {
               "properties": {
@@ -371,11 +443,17 @@
                   "id": {
                     "description": "Id of this serial number",
                     "format": "int64",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "number": {
                     "description": "Serial number value",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "description": "Represents serial number response",
@@ -402,7 +480,10 @@
             },
             "active": {
               "description": "Is active",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "receiptItemId": {
               "description": "Receipt item Id",
@@ -438,7 +519,10 @@
           "additionalProperties": false
         },
         "description": "Collection of return items",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
@@ -446,15 +530,24 @@
             "typeId": {
               "description": "Id of custom field type",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Custom field name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "Custom field value",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "description": "Represents custom field response",
@@ -467,18 +560,27 @@
           "additionalProperties": false
         },
         "description": "Collection of custom fields",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",
@@ -489,7 +591,10 @@
           "additionalProperties": false
         },
         "description": "List of external data attached to this return,\nthat corresponds to the application guid provided in the request.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "description": "Inventory return response",

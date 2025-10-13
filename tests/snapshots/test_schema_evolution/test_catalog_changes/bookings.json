@@ -21,16 +21,25 @@
       },
       "source": {
         "description": "Source of the booking",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "when the booking was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "name": {
         "description": "Name of the booking's customer",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "address": {
         "properties": {
@@ -101,7 +110,10 @@
       "start": {
         "description": "Booking's start date time, in UTC",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "campaignId": {
         "description": "ID of the booking's campaign",
@@ -145,7 +157,10 @@
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "dismissingReasonId": {
         "description": "ID of the reason booking was dismissed",
@@ -165,7 +180,10 @@
       },
       "externalId": {
         "description": "External ID of booking",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "priority": {
         "description": "",
@@ -185,15 +203,24 @@
       "bookingProviderId": {
         "description": "Booking provider id",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the booking was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

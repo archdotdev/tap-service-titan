@@ -6,11 +6,10 @@ import sys
 from functools import cached_property
 from typing import TYPE_CHECKING
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import CRM
+from tap_service_titan.openapi_specs import CRM, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -29,7 +28,7 @@ class BookingProviderTagsStream(ServiceTitanStream):
     name = "booking_provider_tags"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.BookingProviderTagResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.BookingProviderTagResponse")
 
     @override
     @cached_property
@@ -44,7 +43,7 @@ class BookingsStream(ServiceTitanExportStream):
     name = "bookings"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportBookingResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportBookingResponse")
 
     @override
     @cached_property
@@ -59,7 +58,7 @@ class CustomersStream(ServiceTitanExportStream):
     name = "customers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportCustomerResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportCustomerResponse")
 
     @override
     @cached_property
@@ -81,7 +80,7 @@ class CustomerNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = CustomersStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
     @override
     @cached_property
@@ -96,7 +95,7 @@ class CustomerContactsStream(ServiceTitanExportStream):
     name = "customer_contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportCustomerContactResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportCustomerContactResponse")
 
     @override
     @cached_property
@@ -111,7 +110,7 @@ class LeadsStream(ServiceTitanExportStream):
     name = "leads"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportLeadsResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLeadsResponse")
 
     @override
     @cached_property
@@ -133,7 +132,7 @@ class LeadNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = LeadsStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
     @override
     @cached_property
@@ -148,7 +147,7 @@ class LocationsStream(ServiceTitanExportStream):
     name = "locations"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportLocationsResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLocationsResponse")
 
     @override
     @cached_property
@@ -170,7 +169,7 @@ class LocationNotesStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     parent_stream_type = LocationsStream
     ignore_parent_replication_key = True
-    schema = StreamSchema(CRM, key="Crm.V2.NoteResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
     @override
     @cached_property
@@ -185,7 +184,7 @@ class LocationContactsStream(ServiceTitanExportStream):
     name = "location_contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.ExportLocationContactResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLocationContactResponse")
 
     @override
     @cached_property
@@ -200,7 +199,7 @@ class LocationsCustomFieldsStream(ServiceTitanStream):
     name = "locations_custom_fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.Locations.CustomFieldTypeResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.Locations.CustomFieldTypeResponse")
 
     @override
     @cached_property
@@ -215,7 +214,7 @@ class CustomersCustomFieldsStream(ServiceTitanStream):
     name = "customers_custom_fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(CRM, key="Crm.V2.Customers.CustomFieldTypeResponse")
+    schema = ServiceTitanSchema(CRM, key="Crm.V2.Customers.CustomFieldTypeResponse")
 
     @override
     @cached_property

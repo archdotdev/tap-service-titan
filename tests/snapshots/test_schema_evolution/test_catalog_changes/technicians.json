@@ -15,11 +15,17 @@
       "userId": {
         "description": "ID of the user that belongs to the technician",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "name": {
         "description": "Technician's name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "roleIds": {
         "items": {
@@ -62,12 +68,18 @@
       "createdOn": {
         "description": "When the technician was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When the technician was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "email": {
         "description": "Email address of the technician",
@@ -161,18 +173,27 @@
       "dailyGoal": {
         "description": "Technician's daily goal",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "isManagedTech": {
         "description": "Whether the technician is managed",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
           "properties": {
             "typeId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "type": [
@@ -201,7 +222,10 @@
       },
       "active": {
         "description": "Whether the technician is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "aadUserId": {
         "description": "Azure Active Directory User Id",
@@ -213,7 +237,10 @@
       "burdenRate": {
         "description": "Technician's burden rate",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "team": {
         "description": "Team of the technician",
@@ -234,7 +261,10 @@
           "properties": {
             "id": {
               "format": "int32",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "value": {
               "type": [

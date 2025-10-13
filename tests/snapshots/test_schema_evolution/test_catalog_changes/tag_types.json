@@ -14,15 +14,24 @@
       },
       "name": {
         "description": "Name of the tag type",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "color": {
         "description": "Color hex string of the tag type",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "code": {
         "description": "Code associated with the tag type",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "importance": {
         "description": "",
@@ -33,25 +42,40 @@
       },
       "isConversionOpportunity": {
         "description": "Indicates whether tags of this type should be considered as an opportunity",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "allowToUseOnTimesheetActivity": {
         "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "active": {
         "description": "Whether the tag type is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "Date/time (in UTC) when the tag type was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Date/time (in UTC) when the tag type was last modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

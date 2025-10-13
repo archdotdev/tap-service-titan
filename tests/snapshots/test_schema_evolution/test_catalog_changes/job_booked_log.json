@@ -14,17 +14,26 @@
       "jobId": {
         "description": "ID of the job that has been booked",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobAppointmentId": {
         "description": "ID of the job that has been booked",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "start": {
         "description": "Start date/time (in UTC) of the job",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "arrivalWindowStart": {
         "description": "Arrival window start date/time (in UTC) of the job",
@@ -45,16 +54,25 @@
       "createdOn": {
         "description": "Date/time (in UTC) when the job booked log was created",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of user who booked the job",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "active": {
         "description": "Whether the job booked log is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "description": "JobBookedLog response model",

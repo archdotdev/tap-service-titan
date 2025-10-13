@@ -14,29 +14,47 @@
       },
       "transferType": {
         "description": "Type",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "status": {
         "description": "Status",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "number": {
         "description": "Number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "referenceNumber": {
         "description": "Reference number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "fromLocationId": {
         "description": "Inventory location to transfer from",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "toLocationId": {
         "description": "Inventory location where transfer is going",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "createdById": {
         "description": "Employee who created this transfer",
@@ -49,12 +67,18 @@
       "memo": {
         "description": "Memo/summary field",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "date": {
         "description": "Transfer date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "pickedDate": {
         "description": "Transfer picked date",
@@ -75,12 +99,18 @@
       "createdOn": {
         "description": "system created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "last time transfer was modified date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "batchId": {
         "description": "Batch Id (Deprecated - Use Batch instead)",
@@ -96,7 +126,10 @@
           "id": {
             "description": "Batch Id",
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "number": {
             "description": "Batch number",
@@ -125,7 +158,10 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "dateRequired": {
         "description": "Transfer required by date",
@@ -176,7 +212,10 @@
       },
       "active": {
         "description": "Is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "pickedById": {
         "description": "Employee who picked this transfer",
@@ -200,45 +239,72 @@
             "id": {
               "description": "Item Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "skuId": {
               "description": "Sku Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "description": {
               "description": "Item description",
               "format": "html",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "createdOn": {
               "description": "system created date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modifiedOn": {
               "description": "last time transfer item was modified date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "name": {
               "description": "Item name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "code": {
               "description": "Item code",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "quantity": {
               "description": "Transfer quantity",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "quantityPicked": {
               "description": "Transfer quantity already picked",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "serialNumbers": {
               "items": {
@@ -246,11 +312,17 @@
                   "id": {
                     "description": "Id of this serial number",
                     "format": "int64",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "number": {
                     "description": "Serial number value",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "description": "Represents serial number response",
@@ -277,7 +349,10 @@
             },
             "active": {
               "description": "Is active",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           },
           "description": "Inventory transfer item response",
@@ -297,7 +372,10 @@
           "additionalProperties": false
         },
         "description": "Collection of transfer items",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
@@ -305,15 +383,24 @@
             "typeId": {
               "description": "Id of custom field type",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Custom field name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "Custom field value",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "description": "Represents custom field response",
@@ -326,18 +413,27 @@
           "additionalProperties": false
         },
         "description": "Collection of custom fields",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "externalData": {
         "items": {
           "properties": {
             "key": {
               "description": "External data key.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "External data value.",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object",

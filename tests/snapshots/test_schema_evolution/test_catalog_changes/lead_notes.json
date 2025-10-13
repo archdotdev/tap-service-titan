@@ -11,15 +11,24 @@
       "id": {
         "description": "Id of the note",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "text": {
         "description": "Text content of a note",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "isPinned": {
         "description": "Whether the note is pinned to the top",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdById": {
         "description": "ID of user who created this note",
@@ -34,7 +43,10 @@
       "modifiedOn": {
         "description": "Date/time (in UTC) the note was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

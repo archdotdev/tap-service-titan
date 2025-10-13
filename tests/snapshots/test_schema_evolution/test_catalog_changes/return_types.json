@@ -20,29 +20,50 @@
       },
       "automaticallyReceiveVendorCredit": {
         "description": "Should the return type allow receiving Vendor Credits automatically.",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "includeInSalesTax": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "active": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isDefault": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "isDefaultForConsignment": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "createdOn": {
         "description": "System created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Last time return type was modified date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "type": "object",

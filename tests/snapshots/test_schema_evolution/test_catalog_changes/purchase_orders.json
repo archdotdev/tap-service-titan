@@ -14,7 +14,10 @@
       },
       "number": {
         "description": "Purchase order number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "invoiceId": {
         "description": "Id of invoice associated with PO",
@@ -42,17 +45,26 @@
       },
       "status": {
         "description": "Status of this PO",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "typeId": {
         "description": "The purchase order type Id of this PO",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "vendorId": {
         "description": "Id of vendor for this PO",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "technicianId": {
         "description": "Id of technician for this PO",
@@ -108,7 +120,10 @@
           }
         },
         "description": "Represents address response",
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "additionalProperties": false
       },
       "businessUnitId": {
@@ -145,12 +160,18 @@
       },
       "vendorDocumentNumber": {
         "description": "Vendor document number of PO",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "date": {
         "description": "PO date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "requiredOn": {
         "description": "PO required on date",
@@ -179,32 +200,50 @@
       "createdOn": {
         "description": "When PO was created, system date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "When PO was last modified, system date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "total": {
         "description": "PO total, including items cost, tax and shipping cost",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "tax": {
         "description": "PO tax",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "shipping": {
         "description": "PO shipping cost",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "summary": {
         "description": "PO summary/memo",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "items": {
         "items": {
@@ -212,63 +251,102 @@
             "id": {
               "description": "Item Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "skuId": {
               "description": "Sku Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "description": {
               "description": "Item description",
               "format": "html",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "createdOn": {
               "description": "system created date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modifiedOn": {
               "description": "last time transfer item was modified date",
               "format": "date-time",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "skuName": {
               "description": "Item name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "skuCode": {
               "description": "Item code",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "skuType": {
               "description": "Item type(material or equipment)",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "vendorPartNumber": {
               "description": "Vendor part number for this item",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "quantity": {
               "description": "Item quantity",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "quantityReceived": {
               "description": "Quantity received for this item, PO must have at least one receipt for this to be not 0",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "cost": {
               "description": "Item cost",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "total": {
               "description": "Item total cost",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "serialNumbers": {
               "items": {
@@ -276,11 +354,17 @@
                   "id": {
                     "description": "Id of this serial number",
                     "format": "int64",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "number": {
                     "description": "Serial number value",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "description": "Represents serial number response",
@@ -292,15 +376,24 @@
                 "additionalProperties": false
               },
               "description": "List of serial numbers",
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "status": {
               "description": "Item status",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "chargeable": {
               "description": "Indicates whether item price is charged to customer",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "budgetCodeId": {
               "description": "Id of the budget code for this PO item",
@@ -334,7 +427,10 @@
           "additionalProperties": false
         },
         "description": "List of PO items",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
@@ -342,15 +438,24 @@
             "typeId": {
               "description": "Id of custom field type",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Custom field name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "Custom field value",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "description": "Represents custom field response",
@@ -363,7 +468,10 @@
           "additionalProperties": false
         },
         "description": "List of custom fields for this PO",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "type": "object",

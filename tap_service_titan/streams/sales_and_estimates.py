@@ -6,11 +6,10 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import StreamSchema
 from singer_sdk.streams import Stream
 
 from tap_service_titan.client import ServiceTitanExportStream
-from tap_service_titan.openapi_specs import SALESTECH
+from tap_service_titan.openapi_specs import SALESTECH, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -24,7 +23,7 @@ class EstimatesStream(ServiceTitanExportStream):
     name = "estimates"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(SALESTECH, key="Estimates.V2.ExportEstimatesResponse")
+    schema = ServiceTitanSchema(SALESTECH, key="Estimates.V2.ExportEstimatesResponse")
 
     @override
     @cached_property
@@ -49,7 +48,7 @@ class EstimateItemsStream(Stream):
     replication_key: str = "modifiedOn"
     parent_stream_type = EstimatesStream
     state_partitioning_keys = []  # We don't need to partition state since we rely on parent's state
-    schema = StreamSchema(SALESTECH, key="Estimates.V2.EstimateItemResponse")
+    schema = ServiceTitanSchema(SALESTECH, key="Estimates.V2.EstimateItemResponse")
 
     @override
     def get_records(self, context: dict | None) -> t.Iterable[dict]:

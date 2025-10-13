@@ -6,11 +6,10 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import StreamSchema
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
-from tap_service_titan.openapi_specs import TELECOM
+from tap_service_titan.openapi_specs import TELECOM, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -24,7 +23,7 @@ class CallsStream(ServiceTitanExportStream):
     name = "calls"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = StreamSchema(TELECOM, key="Telecom.V2.ExportCallResponse")
+    schema = ServiceTitanSchema(TELECOM, key="Telecom.V2.ExportCallResponse")
 
     @override
     @cached_property
@@ -38,7 +37,7 @@ class OptOutsStream(ServiceTitanStream):
 
     name = "opt_outs"
     primary_keys = ("contactNumber",)
-    schema = StreamSchema(TELECOM, key="Telecom.V3.OptOutResponse")
+    schema = ServiceTitanSchema(TELECOM, key="Telecom.V3.OptOutResponse")
 
     @override
     @cached_property

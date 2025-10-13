@@ -9,22 +9,28 @@
     "properties": {
       "id": {
         "format": "guid",
+        "type": "string"
+      },
+      "createdOn": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
-      "createdOn": {
-        "format": "date-time",
-        "type": "string"
-      },
       "modifiedOn": {
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "number": {
         "format": "int32",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "name": {
         "type": [
@@ -34,15 +40,24 @@
       },
       "status": {
         "description": "",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "syncStatus": {
         "description": "Indicates a journal entry's sync status.",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "versionId": {
         "format": "int32",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "lastSyncVersionId": {
         "format": "int32",
@@ -58,7 +73,7 @@
         ]
       },
       "postDate": {
-        "format": "date-time",
+        "format": "date",
         "type": [
           "string",
           "null"
@@ -75,7 +90,10 @@
         "properties": {
           "id": {
             "format": "int64",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "name": {
             "type": [
@@ -124,7 +142,10 @@
         ]
       },
       "isEmpty": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "type": "object",

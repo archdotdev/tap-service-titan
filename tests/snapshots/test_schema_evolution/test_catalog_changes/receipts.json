@@ -14,15 +14,24 @@
       },
       "active": {
         "description": "Is active",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "number": {
         "description": "Number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "vendorInvoiceNumber": {
         "description": "Vendor invoice number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "createdById": {
         "description": "User who created this receipt",
@@ -35,12 +44,18 @@
       "memo": {
         "description": "Memo/summary field",
         "format": "multiline",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "purchaseOrderId": {
         "description": "Id of purchase order",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "billId": {
         "description": "Id of bill",
@@ -69,7 +84,10 @@
       "vendorId": {
         "description": "Id of vendor",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "technicianId": {
         "description": "Id of technician",
@@ -82,7 +100,10 @@
       "inventoryLocationId": {
         "description": "Id of inventory location",
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "shipTo": {
         "properties": {
@@ -138,22 +159,34 @@
       },
       "shipToDescription": {
         "description": "Ship to description",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "receiptAmount": {
         "description": "Receipt total, including tax and shipping",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "taxAmount": {
         "description": "Receipt tax",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "shippingAmount": {
         "description": "Receipt shipping cost",
         "format": "decimal",
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "receivedOn": {
         "description": "Date received",
@@ -166,12 +199,18 @@
       "createdOn": {
         "description": "System created date",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "last time receipt was modified",
         "format": "date-time",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "batchId": {
         "description": "Id of batch",
@@ -183,7 +222,10 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "budgetCodeId": {
         "description": "Id of the budget code",
@@ -199,35 +241,56 @@
             "id": {
               "description": "Item Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "skuId": {
               "description": "Sku Id",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Item Name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "code": {
               "description": "Item Code",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "description": {
               "description": "Item Description",
               "format": "html",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "quantity": {
               "description": "Receipt quantity",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "cost": {
               "description": "Item cost",
               "format": "decimal",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "generalLedgerAccount": {
               "properties": {
@@ -345,7 +408,10 @@
             },
             "purchaseOrderItemId": {
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "budgetCodeId": {
               "description": "Id of the budget code",
@@ -371,7 +437,10 @@
           "additionalProperties": false
         },
         "description": "Collection of receipt items",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "customFields": {
         "items": {
@@ -379,15 +448,24 @@
             "typeId": {
               "description": "Id of custom field type",
               "format": "int64",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
               "description": "Custom field name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "value": {
               "description": "Custom field value",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "description": "Represents custom field response",
@@ -400,7 +478,10 @@
           "additionalProperties": false
         },
         "description": "Collection of custom fields",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "description": "Inventory receipt response",
