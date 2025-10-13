@@ -109,6 +109,11 @@ class ServiceTitanOpenAPISchema(OpenAPISchema):
             props = schemas["Crm.V2.ExportLocationsResponse"]["properties"]
             props["externalData"]["nullable"] = True
 
+        # Dispatch
+        if "Dispatch.V2.NonJobAppointmentResponse" in schemas:
+            props = schemas["Dispatch.V2.NonJobAppointmentResponse"]["properties"]
+            props["summary"]["nullable"] = True
+
         # JPM
         if "CustomFieldApiModel" in schemas:
             props = schemas["CustomFieldApiModel"]["properties"]

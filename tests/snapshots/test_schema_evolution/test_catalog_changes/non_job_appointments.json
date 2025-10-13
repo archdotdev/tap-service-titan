@@ -38,7 +38,10 @@
       },
       "summary": {
         "description": "Non-job appointment summary",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "clearDispatchBoard": {
         "description": "Indicate if non-job appointment should be cleared from dispatch board once event is over",
