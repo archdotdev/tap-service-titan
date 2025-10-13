@@ -60,7 +60,10 @@
           },
           "country": {
             "description": "Country",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "latitude": {
             "description": "Latitude",
@@ -185,7 +188,10 @@
           "additionalProperties": false
         },
         "description": "List of external data attached to this Location,\nwhich corresponds to the application GUID provided in the request.",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       }
     },
     "type": "object",
