@@ -42,7 +42,10 @@ def _normalize_schema(schema: dict[str, Any]) -> dict[str, Any]:
     schema_type: str | list[str] = result.get("type", [])
 
     if "object" in schema_type:
+        required = result.get("required", [])
         for prop, prop_schema in result.get("properties", {}).items():
+            if prop not in required:
+                prop_schema["nullable"] = True
             result["properties"][prop] = _normalize_schema(prop_schema)
 
     elif "array" in schema_type:
