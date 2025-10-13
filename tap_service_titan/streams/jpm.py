@@ -2,15 +2,23 @@
 
 from __future__ import annotations
 
+import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
+from singer_sdk import StreamSchema
+from singer_sdk import typing as th
 
 from tap_service_titan.client import (
     ServiceTitanExportStream,
     ServiceTitanStream,
 )
+from tap_service_titan.openapi_specs import JPM
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if t.TYPE_CHECKING:
     import requests
@@ -21,108 +29,33 @@ class AppointmentsStream(ServiceTitanExportStream):
     """Define appointments stream."""
 
     name = "appointments"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportAppointmentsResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("appointmentNumber", th.StringType, required=False),
-        th.Property("start", th.DateTimeType),
-        th.Property("end", th.DateTimeType),
-        th.Property("arrivalWindowStart", th.DateTimeType, required=False),
-        th.Property("arrivalWindowEnd", th.DateTimeType, required=False),
-        th.Property("status", th.StringType),
-        th.Property("specialInstructions", th.StringType, required=False),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("customerId", th.IntegerType),
-        th.Property("unused", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("isConfirmed", th.BooleanType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/appointments"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/appointments"
 
 
 class JobsStream(ServiceTitanExportStream):
     """Define jobs stream."""
 
     name = "jobs"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobsResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobNumber", th.StringType),
-        th.Property("projectId", th.IntegerType, required=False),
-        th.Property("customerId", th.IntegerType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("jobStatus", th.StringType),
-        th.Property("completedOn", th.DateTimeType, required=False),
-        th.Property("businessUnitId", th.IntegerType),
-        th.Property("jobTypeId", th.IntegerType),
-        th.Property("priority", th.StringType),
-        th.Property("campaignId", th.IntegerType),
-        th.Property("summary", th.StringType, required=False),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("appointmentCount", th.IntegerType),
-        th.Property("firstAppointmentId", th.IntegerType),
-        th.Property("lastAppointmentId", th.IntegerType),
-        th.Property("recallForId", th.IntegerType, required=False),
-        th.Property("warrantyId", th.IntegerType, required=False),
-        th.Property(
-            "jobGeneratedLeadSource",
-            th.ObjectType(
-                th.Property("jobId", th.IntegerType),
-                th.Property("employeeId", th.IntegerType),
-            ),
-            required=False,
-        ),
-        th.Property("noCharge", th.BooleanType),
-        th.Property("notificationsEnabled", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
-        th.Property("leadCallId", th.IntegerType, required=False),
-        th.Property("bookingId", th.IntegerType, required=False),
-        th.Property("soldById", th.IntegerType, required=False),
-        th.Property(
-            "externalData",
-            th.ArrayType(th.ObjectType(additional_properties=True)),
-        ),
-        th.Property("customerPo", th.StringType),
-        th.Property("invoiceId", th.IntegerType),
-        th.Property("membershipId", th.IntegerType, required=False),
-        th.Property("total", th.NumberType, required=False),
-        th.Property("active", th.BooleanType),
-        th.Property("duration", th.NumberType),
-        th.Property("end", th.DateTimeType),
-        th.Property("planEnd", th.DateTimeType),
-        th.Property("planStart", th.DateTimeType),
-        th.Property("start", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/jobs"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/jobs"
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:  # noqa: ARG002
+    @override
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for a child stream."""
         return {"job_id": record["id"]}
 
@@ -131,29 +64,20 @@ class JobHistoryStream(ServiceTitanExportStream):
     """Define job history stream."""
 
     name = "job_history"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: th.DateTimeType = "date"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobHistoryEntry")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("employeeId", th.IntegerType, required=False),
-        th.Property("eventType", th.StringType),
-        th.Property("date", th.DateTimeType),
-        th.Property(
-            "usedSchedulingTool",
-            th.StringType,
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-history"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-history"
 
     # Parse the default 'data' path for response records but the real contents are in
     # the nested history array. Keep the jobID from the top level then yield
     # each history item as its own record.
+    @override
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result records.
 
@@ -172,264 +96,149 @@ class ProjectsStream(ServiceTitanExportStream):
     """Define projects stream."""
 
     name = "projects"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportProjectsResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("number", th.StringType),
-        th.Property("name", th.StringType, required=False),
-        th.Property("summary", th.StringType, required=False),
-        th.Property("status", th.StringType, required=False),
-        th.Property("statusId", th.IntegerType, required=False),
-        th.Property("subStatus", th.StringType, required=False),
-        th.Property("subStatusId", th.IntegerType, required=False),
-        th.Property("customerId", th.IntegerType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("projectTypeId", th.IntegerType, required=False),
-        th.Property("projectManagerIds", th.ArrayType(th.IntegerType)),
-        th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
-        th.Property("startDate", th.DateTimeType, required=False),
-        th.Property("targetCompletionDate", th.DateTimeType, required=False),
-        th.Property("actualCompletionDate", th.DateTimeType, required=False),
-        th.Property("modifiedOn", th.DateTimeType, required=False),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property(
-            "customFields",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("typeId", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "externalData",
-            th.ArrayType(th.ObjectType(additional_properties=True)),
-        ),
-        th.Property("jobIds", th.ArrayType(th.IntegerType)),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/projects"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/projects"
 
 
 class JobCancelledLogsStream(ServiceTitanExportStream):
     """Define cancelled job stream."""
 
     name = "job_canceled_logs"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "createdOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobCanceledLogResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("reasonId", th.IntegerType),
-        th.Property("memo", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-canceled-logs"
-        )
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-canceled-logs"
 
 
 class JobCancelReasonsStream(ServiceTitanStream):
     """Define job cancel reasons stream."""
 
     name = "job_cancel_reasons"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.JobCancelReasonResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-cancel-reasons"
+        return f"/jpm/v2/tenant/{self.tenant_id}/job-cancel-reasons"
 
 
 class JobHoldReasonsStream(ServiceTitanStream):
     """Define job hold reasons stream."""
 
     name = "job_hold_reasons"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.JobHoldReasonResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-hold-reasons"
+        return f"/jpm/v2/tenant/{self.tenant_id}/job-hold-reasons"
 
 
 class JobTypesStream(ServiceTitanStream):
     """Define job types stream."""
 
     name = "job_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.JobTypeResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
-        th.Property("skills", th.ArrayType(th.StringType)),
-        th.Property("tagTypeIds", th.ArrayType(th.IntegerType)),
-        th.Property("priority", th.StringType),
-        th.Property("duration", th.IntegerType),
-        th.Property("soldThreshold", th.NumberType),
-        th.Property("class", th.StringType),
-        th.Property("summary", th.StringType),
-        th.Property("noCharge", th.BooleanType),
-        th.Property("enforceRecurringServiceEventSelection", th.BooleanType),
-        th.Property("invoiceSignaturesRequired", th.BooleanType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/job-types"
+        return f"/jpm/v2/tenant/{self.tenant_id}/job-types"
 
 
 class ProjectStatusesStream(ServiceTitanStream):
     """Define project statuses stream."""
 
     name = "project_statuses"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ProjectStatusResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("order", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-statuses"
+        return f"/jpm/v2/tenant/{self.tenant_id}/project-statuses"
 
 
 class ProjectSubStatusesStream(ServiceTitanStream):
     """Define project substatuses stream."""
 
     name = "project_sub_statuses"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ProjectSubStatusResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("statusId", th.IntegerType),
-        th.Property("order", th.IntegerType),
-        th.Property("modifiedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-substatuses"
+        return f"/jpm/v2/tenant/{self.tenant_id}/project-substatuses"
 
 
 class JobNotesStream(ServiceTitanExportStream):
     """Define job notes stream."""
 
     name = "job_notes"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportJobNotesResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("text", th.StringType),
-        th.Property("isPinned", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("jobId", th.IntegerType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/job-notes"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-notes"
 
 
 class ProjectNotesStream(ServiceTitanExportStream):
     """Define project notes stream."""
 
     name = "project_notes"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = StreamSchema(JPM, key="Jpm.V2.ExportProjectNotesResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property("text", th.StringType),
-        th.Property("isPinned", th.BooleanType),
-        th.Property("createdById", th.IntegerType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("projectId", th.IntegerType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/export/project-notes"
+        return f"/jpm/v2/tenant/{self.tenant_id}/export/project-notes"
 
 
 class ProjectTypesStream(ServiceTitanStream):
     """Define project types stream."""
 
     name = "project_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
+    schema = StreamSchema(JPM, key="Jpm.V2.ProjectTypeResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("description", th.StringType),
-        th.Property("createdById", th.IntegerType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/project-types"
+        return f"/jpm/v2/tenant/{self.tenant_id}/project-types"
 
 
 class JobBookedLogStream(ServiceTitanStream):
@@ -439,33 +248,13 @@ class JobBookedLogStream(ServiceTitanStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
+    schema = StreamSchema(JPM, key="Jpm.V2.JobBookedLogResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property(
-            "job",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-        th.Property("start", th.DateTimeType),
-        th.Property("arrivalWindowStart", th.DateTimeType),
-        th.Property("arrivalWindowEnd", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("createdBy", th.IntegerType),
-        th.Property("active", th.BooleanType),
-        th.Property(
-            "appointment",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/booked-log"
+        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/booked-log"
 
 
 class JobCanceledLogStream(ServiceTitanStream):
@@ -475,33 +264,10 @@ class JobCanceledLogStream(ServiceTitanStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
+    schema = StreamSchema(JPM, key="Jpm.V2.JobCanceledLogResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property(
-            "job",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-        th.Property(
-            "reason",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-        th.Property("memo", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property(
-            "createdBy",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/canceled-log"
+        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/canceled-log"

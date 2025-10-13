@@ -8,40 +8,38 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Job Hold Reason Id",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Job Hold Reason Name",
+        "type": "string"
       },
       "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
+        "description": "Job Hold Reason Active Status",
+        "type": "boolean"
       },
       "createdOn": {
+        "description": "Date/time (in UTC) when the job was created",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "modifiedOn": {
+        "description": "Date/time (in UTC) when job was last modified",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "active",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_hold_reasons",
   "metadata": [

@@ -8,45 +8,40 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "jobId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the log ",
+        "format": "int64",
+        "type": "integer"
       },
       "employeeId": {
+        "description": "ID of the employee ",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "eventType": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Type of the job status ",
+        "type": "string"
       },
       "date": {
+        "description": "Date of the log ",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "usedSchedulingTool": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "",
+        "type": "string"
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "eventType",
+      "date",
+      "usedSchedulingTool"
+    ],
+    "additionalProperties": false
   },
   "stream": "job_history",
   "metadata": [
@@ -57,15 +52,6 @@
       ],
       "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "jobId"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {
