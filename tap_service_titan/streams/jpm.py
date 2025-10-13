@@ -6,8 +6,6 @@ import sys
 import typing as t
 from functools import cached_property
 
-from singer_sdk import typing as th
-
 from tap_service_titan.client import (
     ServiceTitanExportStream,
     ServiceTitanStream,

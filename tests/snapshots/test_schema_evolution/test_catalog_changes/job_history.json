@@ -41,6 +41,11 @@
           "string",
           "null"
         ]
+      },
+      "jobId": {
+        "description": "ID of the job",
+        "format": "int64",
+        "type": "integer"
       }
     },
     "type": "object",
@@ -48,7 +53,8 @@
       "id",
       "eventType",
       "date",
-      "usedSchedulingTool"
+      "usedSchedulingTool",
+      "jobId"
     ],
     "additionalProperties": false
   },
@@ -94,6 +100,15 @@
       "breadcrumb": [
         "properties",
         "usedSchedulingTool"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
       ],
       "metadata": {
         "inclusion": "available"

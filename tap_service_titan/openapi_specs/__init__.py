@@ -120,6 +120,14 @@ class ServiceTitanSchema(StreamSchema):
             for prop, prop_schema in technician_schema["properties"].items():
                 normalized["properties"][f"technician_{prop}"] = prop_schema
 
+        if stream.name == "job_history":
+            normalized["required"].append("jobId")
+            normalized["properties"]["jobId"] = {
+                "description": "ID of the job",
+                "format": "int64",
+                "type": "integer",
+            }
+
         return normalized
 
 

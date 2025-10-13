@@ -7,7 +7,6 @@ import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
 
