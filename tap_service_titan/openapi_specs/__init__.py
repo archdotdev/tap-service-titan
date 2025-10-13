@@ -110,7 +110,17 @@ class ServiceTitanSchema(StreamSchema):
     ) -> dict[str, Any]:
         """Get the schema for the given stream."""
         schema = super().get_stream_schema(stream, stream_class)
-        return _normalize_schema(schema, key_properties=stream.primary_keys)
+        normalized = _normalize_schema(schema, key_properties=stream.primary_keys)
+
+        if stream.name == "capacities":
+            normalized["required"].remove("isAvailable")
+            normalized["required"].remove("technicians")
+            normalized["properties"].pop("isAvailable")
+            technician_schema = normalized["properties"].pop("technicians")["items"]
+            for prop, prop_schema in technician_schema["properties"].items():
+                normalized["properties"][f"technician_{prop}"] = prop_schema
+
+        return normalized
 
 
 OPENAPI_SPECS = files("tap_service_titan") / "openapi_specs"
