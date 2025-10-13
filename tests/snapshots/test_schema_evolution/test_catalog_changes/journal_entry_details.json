@@ -70,28 +70,7 @@
           },
           "type": {
             "description": "",
-            "type": "string",
-            "enum": [
-              "Unspecified",
-              "Invoice",
-              "Payment",
-              "Bill",
-              "VendorCredit",
-              "VendorPayment",
-              "InventoryAdjustment",
-              "PaymentApplication",
-              "BankDeposit",
-              "InventoryReturn",
-              "InventoryTransfer",
-              "RevenueRecognition",
-              "Estimate",
-              "PurchaseOrder",
-              "Receipt",
-              "GrossPayItem",
-              "PayrollPeriod",
-              "Manual",
-              "External"
-            ]
+            "type": "string"
           },
           "refNumber": {
             "type": [
@@ -316,28 +295,7 @@
           },
           "type": {
             "description": "",
-            "type": "string",
-            "enum": [
-              "Unspecified",
-              "Invoice",
-              "Payment",
-              "Bill",
-              "VendorCredit",
-              "VendorPayment",
-              "InventoryAdjustment",
-              "PaymentApplication",
-              "BankDeposit",
-              "InventoryReturn",
-              "InventoryTransfer",
-              "RevenueRecognition",
-              "Estimate",
-              "PurchaseOrder",
-              "Receipt",
-              "GrossPayItem",
-              "PayrollPeriod",
-              "Manual",
-              "External"
-            ]
+            "type": "string"
           },
           "refNumber": {
             "type": [
@@ -367,13 +325,6 @@
             "type": [
               "string",
               "null"
-            ],
-            "enum": [
-              "Service",
-              "Material",
-              "Equipment",
-              "PriceModifier",
-              "Unspecified"
             ]
           },
           "code": {

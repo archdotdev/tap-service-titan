@@ -96,11 +96,6 @@
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "Residential",
-          "Commercial",
-          null
         ]
       },
       "start": {
@@ -150,13 +145,7 @@
       },
       "status": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "New",
-          "Converted",
-          "Dismissed",
-          "Accepted"
-        ]
+        "type": "string"
       },
       "dismissingReasonId": {
         "description": "ID of the reason booking was dismissed",
@@ -183,12 +172,6 @@
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "Low",
-          "Normal",
-          "High",
-          "Urgent"
         ]
       },
       "jobTypeId": {

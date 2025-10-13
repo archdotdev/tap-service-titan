@@ -34,23 +34,11 @@
       },
       "status": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Open",
-          "Closed"
-        ]
+        "type": "string"
       },
       "syncStatus": {
         "description": "Indicates a journal entry's sync status.",
-        "type": "string",
-        "enum": [
-          "NotSynced",
-          "InProgress",
-          "Synced",
-          "OutOfSync",
-          "Error",
-          "Excluded"
-        ]
+        "type": "string"
       },
       "versionId": {
         "format": "int32",

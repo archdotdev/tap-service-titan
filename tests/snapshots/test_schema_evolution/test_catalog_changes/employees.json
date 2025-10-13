@@ -23,28 +23,7 @@
       },
       "role": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Unspecified",
-          "Technician",
-          "Dispatch",
-          "Accounting",
-          "FieldManager",
-          "DisplayUser",
-          "DisplayUserWithBillingAccess",
-          "SalesManager",
-          "CSR",
-          "GeneralOffice",
-          "TechnicianHelper",
-          "TechnicianMaintenance",
-          "TechnicianInstaller",
-          "Admin",
-          "TechnicianService",
-          "TechnicianSales",
-          "Owner",
-          "EmptyEmployee",
-          "EmptyTechnician"
-        ]
+        "type": "string"
       },
       "roleIds": {
         "items": {

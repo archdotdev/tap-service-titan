@@ -227,17 +227,6 @@
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "AllScheduledDispatchedWorking",
-          "NextScheduledDispatchedWorking",
-          "DispatchedWorking",
-          "NextScheduledDispatchedWorkingToday",
-          "AllScheduledDispatchedWorkingToday",
-          "AllScheduledDispatchedWorkingFiveDays",
-          "NextScheduledDispatchedWorkingTodayTomorrow",
-          "AllScheduledDispatchedWorkingTodayTomorrow",
-          "Next2ScheduledDispatchedWorkingToday"
         ]
       },
       "permissions": {

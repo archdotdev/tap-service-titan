@@ -27,34 +27,17 @@
       },
       "direction": {
         "description": "Indicates the direction of a call",
-        "type": "string",
-        "enum": [
-          "Inbound",
-          "Outbound"
-        ]
+        "type": "string"
       },
       "status": {
         "description": "Indicates the status of a call",
-        "type": "string",
-        "enum": [
-          "Ringing",
-          "Answered",
-          "Completed",
-          "Initiated"
-        ]
+        "type": "string"
       },
       "type": {
         "description": "Specifies the type (classification) of the call. If null, the call was not classified yet. Also,\n            outbound calls don't have classification and CallType is always null for outbound calls",
         "type": [
           "string",
           "null"
-        ],
-        "enum": [
-          "Abandoned",
-          "Unbooked",
-          "Excused",
-          "Booked",
-          "NotLead"
         ]
       },
       "recordingUrl": {

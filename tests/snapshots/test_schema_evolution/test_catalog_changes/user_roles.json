@@ -23,11 +23,7 @@
       },
       "employeeType": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Employee",
-          "Technician"
-        ]
+        "type": "string"
       }
     },
     "type": "object",

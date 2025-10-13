@@ -70,14 +70,7 @@
       },
       "type": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "Phone",
-          "Phone",
-          "Email",
-          "Fax",
-          "MobilePhone"
-        ]
+        "type": "string"
       },
       "value": {
         "description": "The email, phone number, or fax number for the contact.",

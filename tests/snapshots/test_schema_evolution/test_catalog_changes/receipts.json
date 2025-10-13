@@ -183,12 +183,7 @@
       },
       "syncStatus": {
         "description": "Sync status enum",
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Posted",
-          "Exported"
-        ]
+        "type": "string"
       },
       "budgetCodeId": {
         "description": "Id of the budget code",

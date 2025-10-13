@@ -73,13 +73,7 @@
       },
       "reviewStatus": {
         "description": "",
-        "type": "string",
-        "enum": [
-          "None",
-          "NeedsApproval",
-          "Approved",
-          "NotApproved"
-        ]
+        "type": "string"
       },
       "summary": {
         "type": [
