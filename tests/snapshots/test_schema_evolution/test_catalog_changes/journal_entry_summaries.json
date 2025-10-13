@@ -100,7 +100,10 @@
         "additionalProperties": false
       }
     },
-    "type": "object",
+    "type": [
+      "object",
+      "null"
+    ],
     "required": [
       "account",
       "credit",

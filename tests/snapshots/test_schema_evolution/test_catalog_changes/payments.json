@@ -233,7 +233,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "appliedId",
             "appliedTo"
@@ -261,7 +264,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "name",
             "value"

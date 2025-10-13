@@ -467,7 +467,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "order",
             "id",
@@ -498,7 +501,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": false
         },
         "type": [

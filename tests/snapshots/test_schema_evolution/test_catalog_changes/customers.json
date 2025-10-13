@@ -134,7 +134,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "typeId"
           ],
@@ -236,7 +239,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "key",
             "value"

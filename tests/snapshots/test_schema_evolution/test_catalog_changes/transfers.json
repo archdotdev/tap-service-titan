@@ -326,7 +326,10 @@
                   }
                 },
                 "description": "Represents serial number response",
-                "type": "object",
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "required": [
                   "id",
                   "number"
@@ -356,7 +359,10 @@
             }
           },
           "description": "Inventory transfer item response",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "id",
             "skuId",
@@ -404,7 +410,10 @@
             }
           },
           "description": "Represents custom field response",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "typeId",
             "name",
@@ -436,7 +445,10 @@
               ]
             }
           },
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "key",
             "value"

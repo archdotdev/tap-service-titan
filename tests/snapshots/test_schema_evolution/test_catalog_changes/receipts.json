@@ -423,7 +423,10 @@
             }
           },
           "description": "Inventory receipt item response",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "id",
             "skuId",
@@ -469,7 +472,10 @@
             }
           },
           "description": "Represents custom field response",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "required": [
             "typeId",
             "name",
