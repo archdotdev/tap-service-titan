@@ -3,10 +3,7 @@
 from __future__ import annotations
 
 import sys
-import typing as t
 from functools import cached_property
-
-from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import SETTINGS, ServiceTitanSchema
