@@ -7,48 +7,56 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "The id for the category",
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
+        "description": "The name of the category",
         "type": [
           "string",
           "null"
         ]
       },
       "active": {
+        "description": "Active shows if this category is currently active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "description": {
+        "description": "A description that described the category",
         "type": [
           "string",
           "null"
         ]
       },
       "image": {
+        "description": "The image to display as the category",
         "type": [
           "string",
           "null"
         ]
       },
       "parentId": {
+        "description": "The id of the category that is the parent of this item",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "position": {
+        "description": "The position location of this item",
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "categoryType": {
+        "description": "",
         "type": [
           "string",
           "null"
@@ -58,59 +66,78 @@
         "items": {
           "properties": {
             "id": {
+              "description": "The id for the category",
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "name": {
+              "description": "The name of the category",
               "type": [
                 "string",
                 "null"
               ]
             },
             "active": {
+              "description": "Active shows if this category is currently active",
               "type": [
                 "boolean",
                 "null"
               ]
             },
             "description": {
+              "description": "A description that described the category",
               "type": [
                 "string",
                 "null"
               ]
             },
             "image": {
+              "description": "The image to display as the category",
               "type": [
                 "string",
                 "null"
               ]
             },
             "parentId": {
+              "description": "The id of the category that is the parent of this item",
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "position": {
+              "description": "The position location of this item",
+              "format": "int32",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "categoryType": {
+              "description": "",
               "type": [
                 "string",
                 "null"
               ]
             },
+            "subcategories": {
+              "items": {},
+              "description": "The array of the subcategories",
+              "type": [
+                "array",
+                "null"
+              ]
+            },
             "businessUnitIds": {
               "items": {
-                "type": [
-                  "integer"
-                ]
+                "format": "int64",
+                "type": "integer"
               },
+              "description": "The business units that are associated with this category",
               "type": [
                 "array",
                 "null"
@@ -118,10 +145,9 @@
             },
             "skuImages": {
               "items": {
-                "type": [
-                  "string"
-                ]
+                "type": "string"
               },
+              "description": "The images that will be used for the SKUs under this category",
               "type": [
                 "array",
                 "null"
@@ -129,31 +155,51 @@
             },
             "skuVideos": {
               "items": {
-                "type": [
-                  "string"
-                ]
+                "type": "string"
               },
+              "description": "The videos that will be used for the videos under this category",
               "type": [
                 "array",
                 "null"
               ]
             },
             "source": {
+              "description": "The source of the category if it was imported from a catalog",
               "type": [
                 "string",
                 "null"
               ]
             },
             "externalId": {
+              "description": "External id is the id of the original source of the item when it comes from a catalog",
               "type": [
                 "string",
                 "null"
               ]
+            },
+            "hideInMobile": {
+              "description": "If a category is available in mobile or not",
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           },
-          "type": "object",
-          "additionalProperties": true
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "id",
+            "name",
+            "active",
+            "position",
+            "categoryType",
+            "hideInMobile"
+          ],
+          "additionalProperties": false
         },
+        "description": "The array of the subcategories",
         "type": [
           "array",
           "null"
@@ -161,10 +207,10 @@
       },
       "businessUnitIds": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
+        "description": "The business units that are associated with this category",
         "type": [
           "array",
           "null"
@@ -172,10 +218,9 @@
       },
       "skuImages": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "The images that will be used for the SKUs under this category",
         "type": [
           "array",
           "null"
@@ -183,22 +228,37 @@
       },
       "skuVideos": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
+        "description": "The videos that will be used for the videos under this category",
         "type": [
           "array",
           "null"
         ]
       },
       "source": {
+        "description": "The source of the category if it was imported from a catalog",
         "type": [
           "string",
           "null"
         ]
       },
       "externalId": {
+        "description": "External id is the id of the original source of the item when it comes from a catalog",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "hideInMobile": {
+        "description": "If a category is available in mobile or not",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
@@ -206,7 +266,15 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "active",
+      "position",
+      "categoryType",
+      "hideInMobile"
+    ],
+    "additionalProperties": false
   },
   "stream": "categories",
   "metadata": [
@@ -331,6 +399,24 @@
       "breadcrumb": [
         "properties",
         "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hideInMobile"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
       ],
       "metadata": {
         "inclusion": "available"
