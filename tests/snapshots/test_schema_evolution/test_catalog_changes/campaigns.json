@@ -8,10 +8,8 @@
   "schema": {
     "properties": {
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "name": {
         "type": [
@@ -39,9 +37,16 @@
           "null"
         ]
       },
+      "isDefaultCampaign": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "category": {
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -64,7 +69,12 @@
           "object",
           "null"
         ],
-        "additionalProperties": true
+        "required": [
+          "id",
+          "name",
+          "active"
+        ],
+        "additionalProperties": false
       },
       "source": {
         "type": [
@@ -98,9 +108,7 @@
       },
       "campaignPhoneNumbers": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
         "type": [
           "array",
@@ -109,7 +117,14 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "required": [
+      "id",
+      "name",
+      "modifiedOn",
+      "createdOn",
+      "active"
+    ],
+    "additionalProperties": false
   },
   "stream": "campaigns",
   "metadata": [
@@ -153,6 +168,15 @@
       "breadcrumb": [
         "properties",
         "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isDefaultCampaign"
       ],
       "metadata": {
         "inclusion": "available"
