@@ -6,6 +6,7 @@ import sys
 import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
+from warnings import warn
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
@@ -28,14 +29,31 @@ if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
-class CapacitiesPaginator(BaseAPIPaginator):
+class CapacitiesPaginator(BaseAPIPaginator[datetime]):
     """Define paginator for the capacities stream."""
 
     @override
-    def __init__(self, start_value: datetime, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
+    def __init__(
+        self,
+        start_value: datetime | None,
+        *args: t.Any,
+        **kwargs: t.Any,
+    ) -> None:
         """Initialize the paginator."""
+        now = datetime.now(timezone.utc)
+        fourteen_days_ago = now - timedelta(days=14)
+        if start_value is not None and start_value < fourteen_days_ago:
+            msg = (
+                f"Provided start value at '{start_value}' is outside of the 14 day "
+                f"range limit, setting it to '{fourteen_days_ago}'"
+            )
+            warn(msg, category=UserWarning, stacklevel=2)
+            start_value = fourteen_days_ago
+        elif start_value is None:
+            start_value = fourteen_days_ago
+
         super().__init__(start_value=start_value, *args, **kwargs)  # noqa: B026
-        self.end_value = datetime.now(timezone.utc) + timedelta(days=7)
+        self.end_value = now + timedelta(days=7)
 
     @override
     def has_more(self, response: requests.Response) -> bool:
