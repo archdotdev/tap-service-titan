@@ -51,7 +51,7 @@ class PricebookCategoriesStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/categories"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/categories"
 
 
 class DiscountsAndFeesStream(ServiceTitanStream):
@@ -273,126 +273,14 @@ class MaterialsStream(ServiceTitanStream):
     """Define materials stream."""
 
     name = "materials"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("code", th.StringType),
-        th.Property("displayName", th.StringType),
-        th.Property("description", th.StringType),
-        th.Property("cost", th.NumberType),
-        th.Property("active", th.BooleanType),
-        th.Property("price", th.NumberType),
-        th.Property("memberPrice", th.NumberType),
-        th.Property("addOnPrice", th.NumberType),
-        th.Property("addOnMemberPrice", th.NumberType),
-        th.Property("hours", th.NumberType),
-        th.Property("bonus", th.NumberType),
-        th.Property("commissionBonus", th.NumberType),
-        th.Property("paysCommission", th.BooleanType),
-        th.Property("deductAsJobCost", th.BooleanType),
-        th.Property("unitOfMeasure", th.StringType),
-        th.Property("isInventory", th.BooleanType),
-        th.Property("account", th.StringType),
-        th.Property("costOfSaleAccount", th.StringType),
-        th.Property("assetAccount", th.StringType),
-        th.Property("taxable", th.BooleanType),
-        th.Property(
-            "primaryVendor",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("vendorName", th.StringType),
-                th.Property("vendorId", th.IntegerType),
-                th.Property("memo", th.StringType),
-                th.Property("vendorPart", th.StringType),
-                th.Property("cost", th.NumberType),
-                th.Property("active", th.BooleanType),
-                th.Property(
-                    "primarySubAccount",
-                    th.ObjectType(
-                        th.Property("id", th.IntegerType),
-                        th.Property("cost", th.NumberType),
-                        th.Property("accountName", th.StringType),
-                    ),
-                ),
-                th.Property(
-                    "otherSubAccounts",
-                    th.ArrayType(
-                        th.ObjectType(
-                            th.Property("id", th.IntegerType),
-                            th.Property("cost", th.NumberType),
-                            th.Property("accountName", th.StringType),
-                        )
-                    ),
-                ),
-            ),
-        ),
-        th.Property(
-            "otherVendors",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("vendorName", th.StringType),
-                    th.Property("vendorId", th.IntegerType),
-                    th.Property("memo", th.StringType),
-                    th.Property("vendorPart", th.StringType),
-                    th.Property("cost", th.NumberType),
-                    th.Property("active", th.BooleanType),
-                    th.Property(
-                        "primarySubAccount",
-                        th.ObjectType(
-                            th.Property("id", th.IntegerType),
-                            th.Property("cost", th.NumberType),
-                            th.Property("accountName", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "otherSubAccounts",
-                        th.ArrayType(
-                            th.ObjectType(
-                                th.Property("id", th.IntegerType),
-                                th.Property("cost", th.NumberType),
-                                th.Property("accountName", th.StringType),
-                            )
-                        ),
-                    ),
-                )
-            ),
-        ),
-        th.Property("categories", th.ArrayType(th.IntegerType)),
-        th.Property(
-            "assets",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("alias", th.StringType),
-                    th.Property("fileName", th.StringType),
-                    th.Property("type", th.StringType),
-                    th.Property("url", th.StringType),
-                )
-            ),
-        ),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("source", th.StringType),
-        th.Property("externalId", th.StringType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-        th.Property("isConfigurableMaterial", th.BooleanType),
-        th.Property("chargeableByDefault", th.BooleanType),
-        th.Property("variationsOrConfigurableMaterials", th.ArrayType(th.IntegerType)),
-    ).to_dict()
+    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.MaterialResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/materials"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/materials"
 
 
 class MaterialsMarkupStream(ServiceTitanStream):
