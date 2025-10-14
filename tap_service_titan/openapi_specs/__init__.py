@@ -143,15 +143,16 @@ class ServiceTitanSchema(StreamSchema):
         return normalized
 
 
-OPENAPI_SPECS = files("tap_service_titan") / "openapi_specs"
-ACCOUNTING = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "accounting-v2.json")
-CRM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "crm-v2.json")
-DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
-FORMS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "forms-v2.json")
-INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
-JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
-MARKETING_REPUTATION = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "marketing-reputation-v2.json")
-PRICEBOOK = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "pricebook-v2.json")
-SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
-SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
-TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
+SPECS = files("tap_service_titan") / "openapi_specs"
+ACCOUNTING = ServiceTitanOpenAPISchema(SPECS / "accounting-v2.json")
+CRM = ServiceTitanOpenAPISchema(SPECS / "crm-v2.json")
+DISPATCH = ServiceTitanOpenAPISchema(SPECS / "dispatch-v2.json")
+FORMS = ServiceTitanOpenAPISchema(SPECS / "forms-v2.json")
+INVENTORY = ServiceTitanOpenAPISchema(SPECS / "inventory-v2.json")
+JPM = ServiceTitanOpenAPISchema(SPECS / "jpm-v2.json")
+MARKETING = ServiceTitanOpenAPISchema(SPECS / "marketing-v2.json")
+MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v2.json")
+PRICEBOOK = ServiceTitanOpenAPISchema(SPECS / "pricebook-v2.json")
+SALESTECH = ServiceTitanOpenAPISchema(SPECS / "salestech-v2.json")
+SETTINGS = ServiceTitanOpenAPISchema(SPECS / "settings-v2.json")
+TELECOM = ServiceTitanOpenAPISchema(SPECS / "telecom.json")
