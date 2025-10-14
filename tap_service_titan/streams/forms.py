@@ -152,7 +152,7 @@ class JobAttachmentsStream(ServiceTitanStream):
     """Define forms stream."""
 
     name = "job_attachments"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "createdOn"
     parent_stream_type = JobsStream
 
@@ -166,4 +166,4 @@ class JobAttachmentsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/forms/v2/tenant/{self._tap.config['tenant_id']}/jobs/{'{job_id}'}/attachments"
+        return f"/forms/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/attachments"

@@ -10,16 +10,10 @@
   "schema": {
     "properties": {
       "address": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "platform": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "authorEmail": {
         "type": [
@@ -34,8 +28,12 @@
         ]
       },
       "review": {
+        "type": "string"
+      },
+      "reviewType": {
+        "format": "int32",
         "type": [
-          "string",
+          "integer",
           "null"
         ]
       },
@@ -53,12 +51,14 @@
         ]
       },
       "rating": {
+        "format": "double",
         "type": [
           "number",
           "null"
         ]
       },
       "recommendationStatus": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
@@ -71,12 +71,14 @@
         ]
       },
       "jobId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "verifiedByUserId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -96,12 +98,14 @@
         ]
       },
       "businessUnitId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "completedDate": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
@@ -114,18 +118,21 @@
         ]
       },
       "customerId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "dispatchedDate": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
       "jobStatus": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
@@ -144,6 +151,20 @@
         ]
       },
       "technicianId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "externalId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "internalId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -151,7 +172,7 @@
       }
     },
     "type": "object",
-    "$schema": "https://json-schema.org/draft/2020-12/schema"
+    "additionalProperties": false
   },
   "stream": "reviews",
   "metadata": [
@@ -198,6 +219,15 @@
       ],
       "metadata": {
         "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "reviewType"
+      ],
+      "metadata": {
+        "inclusion": "available"
       }
     },
     {
@@ -357,6 +387,24 @@
       "breadcrumb": [
         "properties",
         "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "internalId"
       ],
       "metadata": {
         "inclusion": "available"
