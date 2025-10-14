@@ -27,6 +27,7 @@ __all__ = [
     "FORMS",
     "INVENTORY",
     "JPM",
+    "MARKETING_REPUTATION",
     "SALESTECH",
     "SETTINGS",
     "TELECOM",
@@ -70,8 +71,8 @@ def _normalize_schema(
     if result.get("nullable", False) and "null" not in types:
         result["type"] = [*types, "null"]
 
-    if "string" in types and "enum" in result:
-        result.pop("enum")
+    # Remove 'enum' keyword
+    result.pop("enum", None)
 
     return result
 
@@ -145,6 +146,7 @@ DISPATCH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "dispatch-v2.json")
 FORMS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "forms-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
 JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
+MARKETING_REPUTATION = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "marketing-reputation-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
