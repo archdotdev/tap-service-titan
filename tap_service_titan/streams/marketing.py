@@ -25,24 +25,18 @@ class CampaignsStream(ServiceTitanStream):
         return f"/marketing/v2/tenant/{self.tenant_id}/campaigns"
 
 
-class CategoriesStream(ServiceTitanStream):
+class MarketingCategoriesStream(ServiceTitanStream):
     """Define categories stream."""
 
-    name = "categories"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    name = "marketing_categories"
+    primary_keys = ("id",)
     replication_key: str = "createdOn"
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("type", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-    ).to_dict()
+    schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignCategoryResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/marketing/v2/tenant/{self._tap.config['tenant_id']}/categories"
+        return f"/marketing/v2/tenant/{self.tenant_id}/categories"
 
 
 class CostsStream(ServiceTitanStream):

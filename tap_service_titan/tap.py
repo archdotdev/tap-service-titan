@@ -209,7 +209,7 @@ class TapServiceTitan(Tap):
             streams.marketing_ads.CampaignPerformanceStream(self),
             streams.marketing_ads.KeywordPerformanceStream(self),
             streams.marketing.CampaignsStream(self),
-            streams.marketing.CategoriesStream(self),
+            streams.marketing.MarketingCategoriesStream(self),
             streams.marketing.CostsStream(self),
             streams.marketing.SuppressionsStream(self),
             streams.marketing_reputation.ReviewsStream(self),
