@@ -11,6 +11,7 @@ from tap_service_titan.client import (
     ServiceTitanExportStream,
     ServiceTitanStream,
 )
+from tap_service_titan.openapi_specs import PRICEBOOK, ServiceTitanSchema
 
 
 class ClientSpecificPricingStream(ServiceTitanStream):
@@ -44,43 +45,8 @@ class PricebookCategoriesStream(ServiceTitanStream):
     """Define pricebook categories stream."""
 
     name = "categories"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("active", th.BooleanType),
-        th.Property("description", th.StringType),
-        th.Property("image", th.StringType),
-        th.Property("parentId", th.IntegerType),
-        th.Property("position", th.IntegerType),
-        th.Property("categoryType", th.StringType),
-        th.Property(
-            "subcategories",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("active", th.BooleanType),
-                    th.Property("description", th.StringType),
-                    th.Property("image", th.StringType),
-                    th.Property("parentId", th.IntegerType),
-                    th.Property("position", th.IntegerType),
-                    th.Property("categoryType", th.StringType),
-                    th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
-                    th.Property("skuImages", th.ArrayType(th.StringType)),
-                    th.Property("skuVideos", th.ArrayType(th.StringType)),
-                    th.Property("source", th.StringType),
-                    th.Property("externalId", th.StringType),
-                )
-            ),
-        ),
-        th.Property("businessUnitIds", th.ArrayType(th.IntegerType)),
-        th.Property("skuImages", th.ArrayType(th.StringType)),
-        th.Property("skuVideos", th.ArrayType(th.StringType)),
-        th.Property("source", th.StringType),
-        th.Property("externalId", th.StringType),
-    ).to_dict()
+    primary_keys = ("id",)
+    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ExportCategoryResponse")
 
     @cached_property
     def path(self) -> str:

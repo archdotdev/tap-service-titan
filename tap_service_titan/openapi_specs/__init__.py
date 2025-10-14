@@ -28,6 +28,7 @@ __all__ = [
     "INVENTORY",
     "JPM",
     "MARKETING_REPUTATION",
+    "PRICEBOOK",
     "SALESTECH",
     "SETTINGS",
     "TELECOM",
@@ -136,6 +137,9 @@ class ServiceTitanSchema(StreamSchema):
                 "type": "integer",
             }
 
+        if stream.name == "categories":
+            normalized["required"].remove("modifiedOn")
+
         return normalized
 
 
@@ -147,6 +151,7 @@ FORMS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "forms-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "inventory-v2.json")
 JPM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "jpm-v2.json")
 MARKETING_REPUTATION = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "marketing-reputation-v2.json")
+PRICEBOOK = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "pricebook-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "salestech-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "settings-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(OPENAPI_SPECS / "telecom.json")
