@@ -157,6 +157,14 @@ class ServiceTitanBaseStream(RESTStream):
     def tenant_id(self) -> str:
         """The ServiceTitan tenant ID."""
         return self.config["tenant_id"]
+    
+    def backoff_max_tries(self) -> int:  # noqa: PLR6301
+        """The number of attempts before giving up when retrying requests.
+
+        Returns:
+            Number of max retries.
+        """
+        return 10
 
     def get_new_paginator(self) -> BaseAPIPaginator:
         """Create a new pagination helper instance.
