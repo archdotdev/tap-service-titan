@@ -9,7 +9,6 @@ from functools import cached_property
 from typing import Any
 
 import requests
-from singer_sdk import metrics
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import (
     BaseAPIPaginator,
@@ -73,45 +72,6 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
         new_range = self.current_value.increase()
         return new_range if new_range.is_valid() else None
 
-
-class _ContextSuppressingCounter(metrics.Counter):
-    """Counter that ignores context assignment to avoid huge metric logs."""
-
-    @property
-    def context(self) -> dict | None:
-        """Get the context (always None to prevent logging)."""
-        return self.tags.get(metrics.Tag.CONTEXT)
-
-    @context.setter
-    def context(self, value: dict | None) -> None:
-        """Suppress context assignment to keep metrics logs clean."""
-        # Intentionally do nothing to prevent context from being added to tags
-
-
-# Monkey-patch the SDK's record_counter to return our context-suppressing version
-_original_record_counter = metrics.record_counter
-
-
-def _patched_record_counter(
-    stream: str,
-    endpoint: str | None = None,
-    log_interval: float = metrics.DEFAULT_LOG_INTERVAL,
-    **tags: Any,
-) -> metrics.Counter:
-    """Patched version of metrics.record_counter that suppresses context in logs."""
-    tags[metrics.Tag.STREAM] = stream
-    if endpoint:
-        tags[metrics.Tag.ENDPOINT] = endpoint
-    return _ContextSuppressingCounter(
-        metrics.Metric.RECORD_COUNT,
-        tags,
-        log_interval=log_interval,
-    )
-
-
-metrics.record_counter = _patched_record_counter
-
-
 class ServiceTitanBaseStream(RESTStream):
     """ServiceTitan base stream class."""
 
@@ -159,7 +119,7 @@ class ServiceTitanBaseStream(RESTStream):
         return self.config["tenant_id"]
     
     def backoff_max_tries(self) -> int:  # noqa: PLR6301
-        """The number of attempts before giving up when retrying requests.
+        """The number of attempts before giving up when retrying requests. Had issues with 500's and 429's so we're going to try for a bit longer before bailing
 
         Returns:
             Number of max retries.
