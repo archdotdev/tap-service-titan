@@ -308,86 +308,7 @@ class ServicesStream(ServiceTitanStream):
     name = "services"
     primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("code", th.StringType),
-        th.Property("displayName", th.StringType),
-        th.Property("description", th.StringType),
-        th.Property(
-            "warranty",
-            th.ObjectType(
-                th.Property("duration", th.IntegerType),
-                th.Property("description", th.StringType),
-            ),
-        ),
-        th.Property(
-            "categories",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.IntegerType),
-                    th.Property("name", th.StringType),
-                    th.Property("active", th.BooleanType),
-                )
-            ),
-        ),
-        th.Property("price", th.NumberType),
-        th.Property("memberPrice", th.NumberType),
-        th.Property("addOnPrice", th.NumberType),
-        th.Property("addOnMemberPrice", th.NumberType),
-        th.Property("taxable", th.BooleanType),
-        th.Property("account", th.StringType),
-        th.Property("hours", th.NumberType),
-        th.Property("isLabor", th.BooleanType),
-        th.Property("recommendations", th.ArrayType(th.IntegerType)),
-        th.Property("upgrades", th.ArrayType(th.IntegerType)),
-        th.Property(
-            "assets",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("alias", th.StringType),
-                    th.Property("fileName", th.StringType),
-                    th.Property("type", th.StringType),
-                    th.Property("url", th.StringType),
-                )
-            ),
-        ),
-        th.Property(
-            "serviceMaterials",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("quantity", th.NumberType),
-                )
-            ),
-        ),
-        th.Property(
-            "serviceEquipment",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("skuId", th.IntegerType),
-                    th.Property("quantity", th.NumberType),
-                )
-            ),
-        ),
-        th.Property("active", th.BooleanType),
-        th.Property("crossSaleGroup", th.StringType),
-        th.Property("paysCommission", th.BooleanType),
-        th.Property("bonus", th.NumberType),
-        th.Property("commissionBonus", th.NumberType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("source", th.StringType),
-        th.Property("externalId", th.StringType),
-        th.Property(
-            "externalData",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("key", th.StringType),
-                    th.Property("value", th.StringType),
-                )
-            ),
-        ),
-    ).to_dict()
+    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ServiceResponse")
 
     @cached_property
     def path(self) -> str:
@@ -1506,4 +1427,4 @@ class ExportServicesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/services"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/export/services"
