@@ -33,15 +33,17 @@ class EstimatesStream(ServiceTitanExportStream):
 
     @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
-        """Return a context dictionary for child streams."""
+        if not hasattr(self._tap, '_estimate_items_cache'):
+            self._tap._estimate_items_cache = {}
+        self._tap._estimate_items_cache[record["id"]] = record.get("items", []) # Was polluting our context with too many items causing logs to be >500 MB per run for some tenants
+        
         return {
             "estimate_id": record["id"],
-            "items": record.get("items", []),  # Pass items directly in context
         }
 
 
 class EstimateItemsStream(Stream):
-    """Define estimate items stream as a child of estimates."""
+    """Define estimate items stream as a child of estimates. It would be better if this class didn't exist and we used transformations instead as we're not actually doing a request here"""
 
     name = "estimate_items"
     primary_keys = ("id",)
@@ -60,10 +62,13 @@ class EstimateItemsStream(Stream):
         """
         if not context:
             return
-
         estimate_id = context["estimate_id"]
-        items = context["items"]
+        items = getattr(self._tap, '_estimate_items_cache', {}).get(estimate_id, [])
 
-        for item in items:
-            transformed_item = {**item, "estimate_id": estimate_id}
-            yield transformed_item
+        try:
+            for item in items:
+                transformed_item = {**item, "estimate_id": estimate_id}
+                yield transformed_item
+        finally:
+            if hasattr(self._tap, '_estimate_items_cache'):
+                self._tap._estimate_items_cache.pop(estimate_id, None)
