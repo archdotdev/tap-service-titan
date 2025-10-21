@@ -1,0 +1,833 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendorInvoiceNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "purchaseOrderId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "billId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendorId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipToDescription"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receiptAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shippingAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receivedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batchId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "description": "Inventory receipt response",
+    "properties": {
+      "active": {
+        "description": "Is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "batchId": {
+        "description": "Id of batch",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "billId": {
+        "description": "Id of bill",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "description": "Id of the budget code",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Id of business unit",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "User who created this receipt",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "System created date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Collection of custom fields",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents custom field response",
+          "properties": {
+            "name": {
+              "description": "Custom field name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Receipt Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "inventoryLocationId": {
+        "description": "Id of inventory location",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "items": {
+        "description": "Collection of receipt items",
+        "items": {
+          "additionalProperties": false,
+          "description": "Inventory receipt item response",
+          "properties": {
+            "assetAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "budgetCodeId": {
+              "description": "Id of the budget code",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "code": {
+              "description": "Item Code",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cost": {
+              "description": "Item cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "costOfSaleAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Item Description",
+              "format": "html",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generalLedgerAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Item Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Item Name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "purchaseOrderItemId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Receipt quantity",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "skuId": {
+              "description": "Sku Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "skuId",
+            "name",
+            "code",
+            "description",
+            "quantity",
+            "cost",
+            "purchaseOrderItemId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "Id of job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "Memo/summary field",
+        "format": "multiline",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "last time receipt was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "number": {
+        "description": "Number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "purchaseOrderId": {
+        "description": "Id of purchase order",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "receiptAmount": {
+        "description": "Receipt total, including tax and shipping",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "receivedOn": {
+        "description": "Date received",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shipTo": {
+        "additionalProperties": false,
+        "description": "Represents address response",
+        "properties": {
+          "city": {
+            "description": "City",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "description": "Country code",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "State",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "description": "Street",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "description": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "description": "Zip code",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "shipToDescription": {
+        "description": "Ship to description",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shippingAmount": {
+        "description": "Receipt shipping cost",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "syncStatus": {
+        "description": "Sync status enum",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "taxAmount": {
+        "description": "Receipt tax",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "description": "Id of technician",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "vendorId": {
+        "description": "Id of vendor",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "vendorInvoiceNumber": {
+        "description": "Vendor invoice number",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "active",
+      "number",
+      "vendorInvoiceNumber",
+      "memo",
+      "purchaseOrderId",
+      "vendorId",
+      "inventoryLocationId",
+      "shipToDescription",
+      "receiptAmount",
+      "taxAmount",
+      "shippingAmount",
+      "createdOn",
+      "modifiedOn",
+      "syncStatus",
+      "items",
+      "customFields"
+    ],
+    "type": "object"
+  },
+  "stream": "receipts",
+  "tap_stream_id": "receipts"
+}

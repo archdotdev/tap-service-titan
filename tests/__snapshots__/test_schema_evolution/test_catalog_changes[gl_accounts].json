@@ -1,0 +1,237 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subtype"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isIntacctGroup"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isIntacctBankAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "source"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "defaultAccountType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "defaultAccountType": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "isIntacctBankAccount": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isIntacctGroup": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "number": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "subtype": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "active",
+      "isIntacctGroup",
+      "isIntacctBankAccount",
+      "source",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "type": "object"
+  },
+  "stream": "gl_accounts",
+  "tap_stream_id": "gl_accounts"
+}

@@ -1,0 +1,965 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "referenceNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendorId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "purchaseOrderId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "returnAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shippingAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "returnDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "returnedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditReceivedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batchId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "canceledReason"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateCanceled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "description": "Inventory return response",
+    "properties": {
+      "active": {
+        "description": "Is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "batch": {
+        "additionalProperties": false,
+        "description": "Represents Batch response",
+        "properties": {
+          "id": {
+            "description": "Batch Id",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "description": "Batch name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "description": "Batch number",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "batchId": {
+        "deprecated": true,
+        "description": "Batch Id (Deprecated - Use Batch instead)",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "description": "Budget code Id for the return",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Business unit",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "canceledById": {
+        "description": "Employee who canceled this transfer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "canceledReason": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "Employee who created this return",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "System created date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "creditReceivedOn": {
+        "description": "Date when credit was received",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Collection of custom fields",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents custom field response",
+          "properties": {
+            "name": {
+              "description": "Custom field name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "dateCanceled": {
+        "description": "Transfer canceled date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "description": "List of external data attached to this return,\nthat corresponds to the application guid provided in the request.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Return Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "inventoryLocationId": {
+        "description": "Inventory location",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "items": {
+        "description": "Collection of return items",
+        "items": {
+          "additionalProperties": false,
+          "description": "Inventory return item response",
+          "properties": {
+            "active": {
+              "description": "Is active",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "assetAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "budgetCodeId": {
+              "description": "Budget code Id for the item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "code": {
+              "description": "Item code",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cost": {
+              "description": "Item cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "costOfSaleAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "createdById": {
+              "description": "Employee who canceled this transfer",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "createdOn": {
+              "description": "system created date",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Item description",
+              "format": "html",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generalLedgerAccount": {
+              "additionalProperties": false,
+              "description": "Represents GL account response",
+              "properties": {
+                "detailType": {
+                  "description": "GL Account detail type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "description": "GL Account name",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "description": "GL Account number",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "description": "GL Account type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Item Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "modifiedOn": {
+              "description": "last time transfer item was modified date",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Item name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Return quantity",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "receiptItemId": {
+              "description": "Receipt item Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "serialNumbers": {
+              "description": "List of serial numbers",
+              "items": {
+                "additionalProperties": false,
+                "description": "Represents serial number response",
+                "properties": {
+                  "id": {
+                    "description": "Id of this serial number",
+                    "format": "int64",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "number": {
+                    "description": "Serial number value",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "number"
+                ],
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "skuId": {
+              "description": "Sku Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "skuId",
+            "description",
+            "createdOn",
+            "modifiedOn",
+            "name",
+            "code",
+            "quantity",
+            "cost",
+            "active"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "Job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "Memo/summary field",
+        "format": "multiline",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Last time return was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "number": {
+        "description": "Number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "description": "Project",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "purchaseOrderId": {
+        "description": "Purchase order",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "referenceNumber": {
+        "description": "Reference number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "returnAmount": {
+        "description": "Return total, including tax and shipping",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "returnDate": {
+        "description": "Return creation date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "returnedOn": {
+        "description": "Date when return was actually processed",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shippingAmount": {
+        "description": "Return shipping cost",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "syncStatus": {
+        "description": "Sync status enum",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "taxAmount": {
+        "description": "Return tax",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "vendorId": {
+        "description": "Vendor",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "active",
+      "number",
+      "referenceNumber",
+      "status",
+      "vendorId",
+      "businessUnitId",
+      "memo",
+      "returnAmount",
+      "taxAmount",
+      "shippingAmount",
+      "returnDate",
+      "createdOn",
+      "modifiedOn",
+      "syncStatus",
+      "items",
+      "customFields",
+      "externalData"
+    ],
+    "type": "object"
+  },
+  "stream": "returns",
+  "tap_stream_id": "returns"
+}

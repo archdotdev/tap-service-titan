@@ -1,0 +1,101 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "order"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "description": "ID of the project status",
+        "format": "int64",
+        "type": "integer"
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) when project status was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Name of the project status",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "order": {
+        "description": "Order of the project status",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "order",
+      "modifiedOn"
+    ],
+    "type": "object"
+  },
+  "stream": "project_statuses",
+  "tap_stream_id": "project_statuses"
+}

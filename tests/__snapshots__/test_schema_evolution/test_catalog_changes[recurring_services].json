@@ -1,0 +1,560 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "importId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "membershipId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurringServiceTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "durationType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "durationLength"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "from"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "to"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceTemplateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceTemplateForFollowingYearsId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "firstVisitComplete"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "activatedFromId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allocation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobSummary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceInterval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceMonths"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceDaysOfWeek"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceWeek"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceDayOfNthWeek"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurrenceDaysOfMonth"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobStartTime"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimatedPayrollCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "activatedFromId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allocation": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "campaignId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "durationLength": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "durationType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "estimatedPayrollCost": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "firstVisitComplete": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "from": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "importId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "invoiceTemplateForFollowingYearsId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "invoiceTemplateId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobStartTime": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobSummary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobTypeId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "locationId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "membershipId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "priority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "recurrenceDayOfNthWeek": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "recurrenceDaysOfMonth": {
+        "items": {
+          "type": [
+            "integer"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "recurrenceDaysOfWeek": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "recurrenceInterval": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "recurrenceMonths": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "recurrenceType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "recurrenceWeek": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "recurringServiceTypeId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "to": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "stream": "recurring_services",
+  "tap_stream_id": "recurring_services"
+}

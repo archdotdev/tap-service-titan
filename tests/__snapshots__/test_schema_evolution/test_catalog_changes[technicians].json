@@ -1,0 +1,639 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "userId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "roleIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "mainZoneId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "zoneIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "email"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "phoneNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "loginName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "streetAddress"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "latitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "longitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dailyGoal"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isManagedTech"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "aadUserId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "burdenRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "team"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobFilter"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "permissions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "accountLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "aadUserId": {
+        "description": "Azure Active Directory User Id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "accountLocked": {
+        "description": "Account Locked Status",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "active": {
+        "description": "Whether the technician is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "burdenRate": {
+        "description": "Technician's burden rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "ID of business unit technician belongs to",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the technician was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Custom fields",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "dailyGoal": {
+        "description": "Technician's daily goal",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "email": {
+        "description": "Email address of the technician",
+        "format": "email",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "home": {
+        "additionalProperties": false,
+        "description": "Technician's home address",
+        "properties": {
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "latitude": {
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "longitude": {
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "streetAddress": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the technician",
+        "format": "int64",
+        "type": "integer"
+      },
+      "isManagedTech": {
+        "description": "Whether the technician is managed",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "jobFilter": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "loginName": {
+        "description": "Login name of the technician",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "mainZoneId": {
+        "description": "ID of the main technician's zone",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "When the technician was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Technician's name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "permissions": {
+        "description": "List of the all availible permissions for this user.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "phoneNumber": {
+        "description": "Phone number of the technician",
+        "format": "phone",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "roleIds": {
+        "description": "IDs of the user roles assigned to the technician.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "team": {
+        "description": "Team of the technician",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "userId": {
+        "description": "ID of the user that belongs to the technician",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "zoneIds": {
+        "description": "IDs of all technician's zones",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "userId",
+      "name",
+      "createdOn",
+      "modifiedOn",
+      "dailyGoal",
+      "isManagedTech",
+      "active",
+      "burdenRate"
+    ],
+    "type": "object"
+  },
+  "stream": "technicians",
+  "tap_stream_id": "technicians"
+}

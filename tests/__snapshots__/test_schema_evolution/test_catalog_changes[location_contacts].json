@@ -1,0 +1,305 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "value"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "phoneSettings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "phoneSettings",
+        "properties",
+        "phoneNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "phoneSettings",
+        "properties",
+        "doNotText"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "jobRemindersEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "marketingUpdatesEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "invoiceStatementNotification"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) the contact was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Id of contact",
+        "format": "int64",
+        "type": "integer"
+      },
+      "locationId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "Memo of contact",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) the contact was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "phoneSettings": {
+        "additionalProperties": false,
+        "description": "Phone settings of the location contact",
+        "properties": {
+          "doNotText": {
+            "description": "If the phone number has opted-out from notifications.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "phoneNumber": {
+            "description": "Phone Number",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "phoneNumber",
+          "doNotText"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "preferences": {
+        "additionalProperties": false,
+        "description": "Contact Preferences",
+        "properties": {
+          "invoiceStatementNotification": {
+            "description": "Invoice Statement Notification",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "jobRemindersEnabled": {
+            "description": "Job Reminders Enabled",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "marketingUpdatesEnabled": {
+            "description": "Marketing Updates Enabled",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "jobRemindersEnabled",
+          "marketingUpdatesEnabled",
+          "invoiceStatementNotification"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "type": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "value": {
+        "description": "Value of contact",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "value",
+      "phoneSettings",
+      "modifiedOn",
+      "createdOn",
+      "locationId",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "location_contacts",
+  "tap_stream_id": "location_contacts"
+}

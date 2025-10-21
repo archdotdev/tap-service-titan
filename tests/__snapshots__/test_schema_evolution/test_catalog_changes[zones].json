@@ -1,0 +1,287 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "zips"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "cities"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "territoryNumbers"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locnNumbers"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdBy"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "serviceDaysEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "serviceDays"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnits"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicians"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Whether the zone is enabled",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "businessUnits": {
+        "description": "A list of assigned business units",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "cities": {
+        "description": "A list of assigned cities to the zone",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "createdBy": {
+        "description": "User ID who created the zone",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) the zone was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Unique id of the zone record",
+        "format": "int64",
+        "type": "integer"
+      },
+      "locnNumbers": {
+        "description": "A list of assigned LOCN numbers to the zone",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) the zone was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Descriptive identifier",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "serviceDays": {
+        "description": "A list of assigned service days",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "serviceDaysEnabled": {
+        "description": "Whether the service days option is enabled",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "technicians": {
+        "description": "A list of assigned technicians",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "territoryNumbers": {
+        "description": "A list of assigned territory numbers to the zone",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "zips": {
+        "description": "A list of assigned zip codes to the zone",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "active",
+      "createdBy",
+      "createdOn",
+      "modifiedOn",
+      "serviceDaysEnabled"
+    ],
+    "type": "object"
+  },
+  "stream": "zones",
+  "tap_stream_id": "zones"
+}

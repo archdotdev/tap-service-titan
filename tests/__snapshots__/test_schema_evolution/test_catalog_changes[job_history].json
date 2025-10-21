@@ -1,0 +1,132 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "employeeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "eventType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "usedSchedulingTool"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "date"
+        ]
+      }
+    }
+  ],
+  "replication_key": "date",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "date": {
+        "description": "Date of the log ",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "employeeId": {
+        "description": "ID of the employee ",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "eventType": {
+        "description": "Type of the job status ",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the log ",
+        "format": "int64",
+        "type": "integer"
+      },
+      "jobId": {
+        "description": "ID of the job",
+        "format": "int64",
+        "type": "integer"
+      },
+      "usedSchedulingTool": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "eventType",
+      "date",
+      "usedSchedulingTool",
+      "jobId"
+    ],
+    "type": "object"
+  },
+  "stream": "job_history",
+  "tap_stream_id": "job_history"
+}

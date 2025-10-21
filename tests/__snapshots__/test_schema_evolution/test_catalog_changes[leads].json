@@ -1,0 +1,536 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "callReasonId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "callId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookingId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "manualCallId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadUrl"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadCustomerName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadPhone"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadEmail"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStreet"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadUnit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadCity"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadState"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadZip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadCountry"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "followUpDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dismissingReasonId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "bookingId": {
+        "description": "Booking ID used to classify the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Business unit associated to the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "callId": {
+        "description": "Call ID used to classify the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "callReasonId": {
+        "description": "Call reason ID used to classify the lead by the user",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "campaignId": {
+        "description": "Campaign associated to the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "User ID who created this lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the lead was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customerId": {
+        "description": "Customer associated to the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "dismissingReasonId": {
+        "description": "ID of the reason booking was dismissed",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "followUpDate": {
+        "description": "The next time someone is supposed to follow up on this lead",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the lead",
+        "format": "int64",
+        "type": "integer"
+      },
+      "jobTypeId": {
+        "description": "Job type associated to the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "leadCity": {
+        "description": "City provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadCountry": {
+        "description": "Country provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadCustomerName": {
+        "description": "Customer name provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadEmail": {
+        "description": "Email provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadPhone": {
+        "description": "Phone number provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadState": {
+        "description": "State provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadStreet": {
+        "description": "Street provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadUnit": {
+        "description": "Unit provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadUrl": {
+        "description": "Permanent URL for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadZip": {
+        "description": "Zip provided for the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "locationId": {
+        "description": "Location associated to the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "manualCallId": {
+        "description": "Manual Call ID used to classify the lead",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "When the lead was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "priority": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "Summary of the lead",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "List of IDs of tags on the lead",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "status",
+      "priority",
+      "campaignId",
+      "createdById",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "leads",
+  "tap_stream_id": "leads"
+}

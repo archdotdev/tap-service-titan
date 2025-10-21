@@ -1,0 +1,109 @@
+{
+  "key_properties": [
+    "campaignName",
+    "warningType"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignName"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warningType"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnits"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lookaheadWindow"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "thresholdValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "campaignName",
+          "warningType"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "businessUnits": {
+        "items": {
+          "type": [
+            "string"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "campaignName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "lookaheadWindow": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "thresholdValue": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "warningType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "stream": "capacity_warnings",
+  "tap_stream_id": "capacity_warnings"
+}

@@ -1,0 +1,773 @@
+{
+  "key_properties": [
+    "keyword_id",
+    "date"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "from_utc"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "to_utc"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword_id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign",
+        "properties",
+        "category"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign",
+        "properties",
+        "launchDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign",
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup",
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword",
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "impressionShare"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "impressions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "clicks"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "averageCPC"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "conversions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "allConversions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "clickRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "costPerConversion"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "digitalStats",
+        "properties",
+        "conversionRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "leads"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "leadCalls"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "onlineBooking"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "manualBooking"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "bookedJobs"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "ranJobs"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "soldJobs"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "revenue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "bookingRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadStats",
+        "properties",
+        "avgTicket"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "returnOnInvestment"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "keyword_id",
+          "date"
+        ],
+        "valid-replication-keys": [
+          "from_utc"
+        ]
+      }
+    }
+  ],
+  "replication_key": "from_utc",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "adGroup": {
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "adGroup_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "campaign": {
+        "additionalProperties": true,
+        "properties": {
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "launchDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "campaign_id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "campaign_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "date": {
+        "format": "date",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "digitalStats": {
+        "additionalProperties": true,
+        "properties": {
+          "allConversions": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "averageCPC": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "clickRate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "clicks": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "conversionRate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "conversions": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "cost": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "costPerConversion": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "impressionShare": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "impressions": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "from_utc": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword": {
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "keyword_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "leadStats": {
+        "additionalProperties": true,
+        "properties": {
+          "avgTicket": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "bookedJobs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "bookingRate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "leadCalls": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "leads": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "manualBooking": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "onlineBooking": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ranJobs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "revenue": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "soldJobs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "returnOnInvestment": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "to_utc": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "stream": "keyword_performance",
+  "tap_stream_id": "keyword_performance"
+}

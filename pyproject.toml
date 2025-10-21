@@ -41,12 +41,16 @@ dev = [
 scrapping = ["beautifulsoup4>=4.12.3", "playwright>=1.48.0,<2", "rich>=14.2.0"]
 test = [
     "pytest>=8",
-    "pytest-snapshot>=0.9.0",
     "pytest-subtests>=0.14.2",
     "singer-sdk[testing]",
+    "syrupy>=5.0.0",
     "time-machine>=2.19.0",
 ]
-typing = ["types-requests>=2", "backports-httpmethod"]
+typing = [
+    { include-group = "test" },
+    "types-requests>=2",
+    "backports-httpmethod",
+]
 
 [tool.hatch.build.targets.sdist]
 include = ["tap_service_titan"]

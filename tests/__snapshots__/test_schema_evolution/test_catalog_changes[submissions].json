@@ -1,0 +1,308 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "formId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "formName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "submittedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "owners"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "units"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "submittedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "submittedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "createdById": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "formId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "formName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "owners": {
+        "items": {
+          "additionalProperties": true,
+          "properties": {
+            "id": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "submittedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "units": {
+        "items": {
+          "additionalProperties": true,
+          "properties": {
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "units": {
+              "items": {
+                "additionalProperties": true,
+                "properties": {
+                  "attachments": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "createdFrom": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "fileName": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "originalFileName": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "thumbnail": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "comment": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "isRefused": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "options": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "refusalReason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "values": {
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "stream": "submissions",
+  "tap_stream_id": "submissions"
+}

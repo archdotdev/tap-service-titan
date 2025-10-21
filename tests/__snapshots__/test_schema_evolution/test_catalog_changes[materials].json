@@ -1,0 +1,1226 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "code"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "price"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memberPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "addOnPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "addOnMemberPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hours"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bonus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "commissionBonus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paysCommission"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "deductAsJobCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "unitOfMeasure"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isInventory"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "account"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costOfSaleAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assetAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "vendorName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "vendorId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "vendorPart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "primarySubAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "primarySubAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "primarySubAccount",
+        "properties",
+        "cost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "primarySubAccount",
+        "properties",
+        "accountName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "primaryVendor",
+        "properties",
+        "otherSubAccounts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "otherVendors"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "categories"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assets"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "source"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isConfigurableMaterial"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "chargeableByDefault"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "variationsOrConfigurableMaterials"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "displayInAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "generalLedgerAccountId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isOtherDirectCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "costTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "defaultAssetUrl"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCostCode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCostType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "account": {
+        "description": "The accounting account assigned to the SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "active": {
+        "description": "Active shows if the SKU is active or inactive",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "addOnMemberPrice": {
+        "description": "The price if the SKU is sold to a member as an add-on item",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "addOnPrice": {
+        "description": "The price of the SKU is sold as an add-on item",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "assetAccount": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "assets": {
+        "description": "Images, videos or PDFs attached to SKU",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "alias": {
+              "description": "Asset alias",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fileName": {
+              "description": "Asset file name when downloaded",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "isDefault": {
+              "description": "It is the default asset",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "type": {
+              "description": "",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "description": "Asset URL",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "isDefault",
+            "type",
+            "url"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "bonus": {
+        "description": "Flat rate bonus paid for this task",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "budgetCostCode": {
+        "description": "The Budget CostCode segment for this entity. (Note: BudgetCostType should also be provided)",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "budgetCostType": {
+        "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Material's business unit id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "categories": {
+        "description": "Categories that this SKU belongs to",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "chargeableByDefault": {
+        "description": "Shows if material is going to be chargeable by default on Estimate or Invoice",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "code": {
+        "description": "Code for the SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "commissionBonus": {
+        "description": "Percentage rate bonus paid for this task",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "cost": {
+        "description": "The cost paid to acquire the material",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "costOfSaleAccount": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "costTypeId": {
+        "description": "The Cost Type of this Other Direct Cost",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "Material's created by user id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date Material was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "deductAsJobCost": {
+        "description": "Is this deducted as job cost",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "defaultAssetUrl": {
+        "description": "Default Asset Url",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "description": "Description on the SKU that is displayed with the item",
+        "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "displayInAmount": {
+        "description": "Shows if material is going to be displayed in amount",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "displayName": {
+        "description": "Name that displays with the SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "externalId": {
+        "description": "External id is the id of the original source of the item when it comes from a catalog",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "generalLedgerAccountId": {
+        "description": "Material's General Ledger Account Id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "hours": {
+        "description": "The number of hours associated with the installing the material",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Unique id for the SKU",
+        "format": "int64",
+        "type": "integer"
+      },
+      "isConfigurableMaterial": {
+        "description": "Shows if is a Configurable Material",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isInventory": {
+        "description": "Is this material a part of your inventory",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isOtherDirectCost": {
+        "description": "Shows if is Other Direct Cost",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "memberPrice": {
+        "description": "The price if the item is sold to a member",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Timestamp where the item was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "otherVendors": {
+        "description": "Other vendors that you might go to acquire this SKU",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "active": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "cost": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "id": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "memo": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "otherSubAccounts": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "accountName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "cost": {
+                    "format": "decimal",
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "format": "int64",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "cost",
+                  "accountName"
+                ],
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "primarySubAccount": {
+              "additionalProperties": false,
+              "properties": {
+                "accountName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "cost": {
+                  "format": "decimal",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "cost",
+                "accountName"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "vendorId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "vendorName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "vendorPart": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "vendorName",
+            "vendorId",
+            "cost",
+            "active"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "paysCommission": {
+        "description": "PaysCommissions shows if this task pays commission",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "price": {
+        "description": "Price of this SKU sold",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "primaryVendor": {
+        "additionalProperties": false,
+        "description": "The primary vendor you use to acquire this SKU",
+        "properties": {
+          "active": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "cost": {
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "memo": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "otherSubAccounts": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "accountName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "cost": {
+                  "format": "decimal",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "cost",
+                "accountName"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "primarySubAccount": {
+            "additionalProperties": false,
+            "properties": {
+              "accountName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cost": {
+                "format": "decimal",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "id": {
+                "format": "int64",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "cost",
+              "accountName"
+            ],
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "vendorId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "vendorName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "vendorPart": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "vendorName",
+          "vendorId",
+          "cost",
+          "active"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "source": {
+        "description": "The source catalog for this SKU.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "taxable": {
+        "description": "Is this SKU taxable",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "unitOfMeasure": {
+        "description": "The unit of measure used for this SKU",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "variationsOrConfigurableMaterials": {
+        "description": "List of added Variations if is a Configurable Material, or else the List of Configurable Materials assigned to",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "code",
+      "description",
+      "cost",
+      "active",
+      "price",
+      "memberPrice",
+      "addOnPrice",
+      "addOnMemberPrice",
+      "hours",
+      "bonus",
+      "commissionBonus",
+      "paysCommission",
+      "deductAsJobCost",
+      "isInventory",
+      "categories",
+      "assets",
+      "modifiedOn",
+      "isConfigurableMaterial",
+      "chargeableByDefault",
+      "createdById",
+      "createdOn",
+      "displayInAmount",
+      "isOtherDirectCost"
+    ],
+    "type": "object"
+  },
+  "stream": "materials",
+  "tap_stream_id": "materials"
+}

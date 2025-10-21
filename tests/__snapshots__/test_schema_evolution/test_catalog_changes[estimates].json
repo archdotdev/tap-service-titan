@@ -1,0 +1,684 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status",
+        "properties",
+        "value"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "reviewStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldBy"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalLinks"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subtotal"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tax"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isRecommended"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isChangeOrder"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customerId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "externalLinks": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "url"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "id": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "isChangeOrder": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isRecommended": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "items": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "budgetCodeId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "chargeable": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "createdOn": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "format": "html",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "invoiceItemId": {
+              "description": "The invoice item which was created from this estimate item.",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "itemGroupName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "itemGroupRootId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "membershipTypeId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "modifiedOn": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "qty": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sku": {
+              "additionalProperties": false,
+              "properties": {
+                "displayName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "generalLedgerAccountId": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "generalLedgerAccountName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "modifiedOn": {
+                  "format": "date-time",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "soldHours": {
+                  "format": "decimal",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "displayName",
+                "type",
+                "soldHours",
+                "generalLedgerAccountId",
+                "generalLedgerAccountName",
+                "modifiedOn"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "skuAccount": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "total": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "totalCost": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "unitCost": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "unitRate": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "sku",
+            "skuAccount",
+            "description",
+            "qty",
+            "unitRate",
+            "total",
+            "unitCost",
+            "totalCost",
+            "itemGroupName",
+            "createdOn",
+            "modifiedOn"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "jobId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobNumber": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "locationId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "reviewStatus": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "soldBy": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "soldOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "value",
+          "name"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "subtotal": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tax": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "reviewStatus",
+      "createdOn",
+      "modifiedOn",
+      "active",
+      "subtotal",
+      "tax",
+      "isRecommended",
+      "isChangeOrder"
+    ],
+    "type": "object"
+  },
+  "stream": "estimates",
+  "tap_stream_id": "estimates"
+}

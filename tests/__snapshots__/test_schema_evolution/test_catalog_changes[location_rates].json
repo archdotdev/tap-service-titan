@@ -1,0 +1,120 @@
+{
+  "key_properties": [
+    "locationId",
+    "laborTypeCode"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hourlyRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "laborTypeName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "laborTypeCode"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "locationId",
+          "laborTypeCode"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "hourlyRate": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "laborTypeCode": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "laborTypeName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "locationId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "stream": "location_rates",
+  "tap_stream_id": "location_rates"
+}

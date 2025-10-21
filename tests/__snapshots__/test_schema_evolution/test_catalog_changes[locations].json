@@ -1,0 +1,511 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "taxZoneId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "latitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "longitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "mergedToId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "zoneId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "taxExempt"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "If false, the record has been deactivated.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "address": {
+        "additionalProperties": false,
+        "description": "Location’s address",
+        "properties": {
+          "city": {
+            "description": "City",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "description": "Country",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "latitude": {
+            "description": "Latitude",
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "longitude": {
+            "description": "Longitude",
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "State",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "description": "Street",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "description": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "description": "Zip",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "street",
+          "city",
+          "state",
+          "zip",
+          "country"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "User ID who created the record.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "DateTime (UTC) that location record was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Location record’s custom fields",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "description": "Name/label of the custom field",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "ID of the custom field",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Value of the custom field",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "customerId": {
+        "description": "ID of the location’s customer.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "externalData": {
+        "description": "List of external data attached to this Location,\nwhich corresponds to the application GUID provided in the request.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the location",
+        "format": "int64",
+        "type": "integer"
+      },
+      "mergedToId": {
+        "description": "Tells you which location record this record was merged into.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Modified On (UTC) for the record.",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Name of the location",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "Tag Type IDs of the location",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "taxExempt": {
+        "description": "Tax Exempt status of the location.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "taxZoneId": {
+        "description": "ID of the location tax zone",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "zoneId": {
+        "description": "ID of the location's Zone",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "customerId",
+      "active",
+      "name",
+      "address",
+      "customFields",
+      "createdOn",
+      "createdById",
+      "modifiedOn",
+      "taxExempt",
+      "tagTypeIds",
+      "externalData"
+    ],
+    "type": "object"
+  },
+  "stream": "locations",
+  "tap_stream_id": "locations"
+}
