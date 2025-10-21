@@ -1,0 +1,218 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shiftType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "title"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "note"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "timesheetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Whether the shift is enabled",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the shift was created (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "end": {
+        "description": "When the shift ends",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Unique id of the shift record",
+        "format": "int64",
+        "type": "integer"
+      },
+      "modifiedOn": {
+        "description": "When the shift was modified (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "note": {
+        "description": "Optional detailed explanation of the shift",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shiftType": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "start": {
+        "description": "When the shift begins",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "description": ">Unique id of the technician this shift applies to",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "timesheetCodeId": {
+        "description": "Timesheet code ID of shift",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "title": {
+        "description": "Descriptive identifier",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "shiftType",
+      "title",
+      "active",
+      "technicianId",
+      "start",
+      "end",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "type": "object"
+  },
+  "stream": "technician_shifts",
+  "tap_stream_id": "technician_shifts"
+}

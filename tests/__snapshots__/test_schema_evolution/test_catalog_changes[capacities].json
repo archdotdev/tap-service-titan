@@ -1,0 +1,242 @@
+{
+  "key_properties": [
+    "startUtc",
+    "businessUnitIds",
+    "technician_id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "startUtc"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "endUtc"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitIds"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalAvailability"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "openAvailability"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isExceedingIdealBookingPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technician_hasRequiredSkills"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "startUtc",
+          "businessUnitIds",
+          "technician_id"
+        ],
+        "valid-replication-keys": [
+          "startUtc"
+        ]
+      }
+    }
+  ],
+  "replication_key": "startUtc",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "businessUnitIds": {
+        "description": "Business units that the availability applies to",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "end": {
+        "description": "When the availability time frame ends",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "endUtc": {
+        "description": "When the availability time frame ends",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "isExceedingIdealBookingPercentage": {
+        "description": "Indicate if Ideal Booking Percentage is exceeded",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "openAvailability": {
+        "description": "Number of remaining hours that can be booked during this time frame",
+        "format": "double",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "start": {
+        "description": "When the availability time frame starts",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "startUtc": {
+        "description": "When the availability time frame starts",
+        "format": "date-time",
+        "type": "string"
+      },
+      "technician_hasRequiredSkills": {
+        "description": "Whether the technician has all the skills required for the job type",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "technician_id": {
+        "description": "Unique Id of technician",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "technician_name": {
+        "description": "Name of technician",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technician_status": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "totalAvailability": {
+        "description": "Number of hours that total capacity can allow to be booked during this time frame",
+        "format": "double",
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "start",
+      "end",
+      "startUtc",
+      "endUtc",
+      "businessUnitIds",
+      "totalAvailability",
+      "openAvailability",
+      "isExceedingIdealBookingPercentage"
+    ],
+    "type": "object"
+  },
+  "stream": "capacities",
+  "tap_stream_id": "capacities"
+}

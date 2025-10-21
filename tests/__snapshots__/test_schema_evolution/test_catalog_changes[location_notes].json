@@ -1,0 +1,135 @@
+{
+  "key_properties": [
+    "createdById",
+    "createdOn"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "text"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isPinned"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "createdById",
+          "createdOn"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "createdById": {
+        "description": "ID of user who created this note",
+        "format": "int64",
+        "type": "integer"
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) the note was created",
+        "format": "date-time",
+        "type": "string"
+      },
+      "id": {
+        "description": "Id of the note",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "isPinned": {
+        "description": "Whether the note is pinned to the top",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) the note was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text": {
+        "description": "Text content of a note",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "text",
+      "isPinned",
+      "createdById",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "type": "object"
+  },
+  "stream": "location_notes",
+  "tap_stream_id": "location_notes"
+}

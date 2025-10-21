@@ -1,0 +1,309 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "appointmentNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "arrivalWindowStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "arrivalWindowEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "specialInstructions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "unused"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isConfirmed"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Whether this appointment is active, or not anymore.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "appointmentNumber": {
+        "description": "Appointment number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "arrivalWindowEnd": {
+        "description": "Arrival window end date/time (in UTC), if configured",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "arrivalWindowStart": {
+        "description": "Arrival window start date/time (in UTC), if configured",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "ID of the user that created the appointment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the appointment was created (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customerId": {
+        "description": "Id of a customer that the appointment was created for",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "end": {
+        "description": "Appointment's end date/time (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Appointment ID",
+        "format": "int64",
+        "type": "integer"
+      },
+      "isConfirmed": {
+        "description": "Returns true if the appointment is confirmed",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "ID of the job that the appointment was created for",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "When the appointment was modified (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "specialInstructions": {
+        "description": "Special instructions associated to the appointment",
+        "format": "multiline",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "start": {
+        "description": "Appointment's start date/time (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "Indicates the status of a Job Appointment.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "unused": {
+        "description": "Returns true if the appointment is unused",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "jobId",
+      "start",
+      "end",
+      "status",
+      "createdOn",
+      "modifiedOn",
+      "customerId",
+      "unused",
+      "createdById",
+      "isConfirmed",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "appointments",
+  "tap_stream_id": "appointments"
+}

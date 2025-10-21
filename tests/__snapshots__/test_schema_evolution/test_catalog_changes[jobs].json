@@ -1,0 +1,740 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "locationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "completedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "appointmentCount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "firstAppointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lastAppointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recallForId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "warrantyId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource",
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobGeneratedLeadSource",
+        "properties",
+        "employeeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "noCharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "notificationsEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "leadCallId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "partnerLeadCallId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bookingId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customerPo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "membershipId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "total"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Whether this job is active, or not anymore.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "appointmentCount": {
+        "description": "Number of appointments on the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bookingId": {
+        "description": "ID of the Booking that resulted in this job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "ID of the job's business unit",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "campaignId": {
+        "description": "ID of the job's campaign",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "completedOn": {
+        "description": "Date/time (in UTC) when the job was completed",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "ID of the user who created the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) when the job was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Custom fields on the job",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "customerId": {
+        "description": "ID of the job's customer",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "customerPo": {
+        "description": "Customer PO",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalData": {
+        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "firstAppointmentId": {
+        "description": "ID of the first appointment on the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the job",
+        "format": "int64",
+        "type": "integer"
+      },
+      "invoiceId": {
+        "description": "ID of the invoice associated with this job.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobGeneratedLeadSource": {
+        "additionalProperties": false,
+        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+        "properties": {
+          "employeeId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "jobId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "jobNumber": {
+        "description": "Job number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobStatus": {
+        "description": "Status of the job",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jobTypeId": {
+        "description": "ID of job type",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "lastAppointmentId": {
+        "description": "ID of the last appointment on the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "leadCallId": {
+        "description": "ID of the Call that resulted in this job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "locationId": {
+        "description": "ID of the job's location",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "membershipId": {
+        "description": "ID of the Membership associated with this job.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) when job was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "noCharge": {
+        "description": "Whether the job is a no-charge job",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "notificationsEnabled": {
+        "description": "Whether notifications will be sent to customers",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "partnerLeadCallId": {
+        "description": "ID of the Call that 3rd-party agents are enabled to set.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "priority": {
+        "description": "Priority of the job",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "description": "ID of the job's project",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "recallForId": {
+        "description": "ID of the job for which this job is a recall",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "soldById": {
+        "description": "ID of the Technician that sold this job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "Job summary",
+        "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "Tags on the job",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "total": {
+        "description": "Total amount of the job",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "warrantyId": {
+        "description": "ID of the job for which this job is a warranty",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "customFields",
+      "externalData",
+      "id",
+      "jobNumber",
+      "customerId",
+      "locationId",
+      "jobStatus",
+      "businessUnitId",
+      "jobTypeId",
+      "priority",
+      "campaignId",
+      "appointmentCount",
+      "firstAppointmentId",
+      "lastAppointmentId",
+      "noCharge",
+      "notificationsEnabled",
+      "createdOn",
+      "createdById",
+      "modifiedOn",
+      "tagTypeIds",
+      "customerPo",
+      "invoiceId",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "jobs",
+  "tap_stream_id": "jobs"
+}

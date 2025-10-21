@@ -1,0 +1,543 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dueDayType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dueDay"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isCustomerDefault"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isVendorDefault"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inUse"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "discountApplyTo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "discount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "discountType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "account"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "applyBy"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermDiscountModel",
+        "properties",
+        "applyByValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "rateType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "flatRateValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "percentageRateValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "chargeMethod"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "frequency"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "gracePeriod"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "targetInvoices"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "taskId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "interestSettings",
+        "properties",
+        "taskDisplayName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "dueDay": {
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "dueDayType": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "inUse": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "interestSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "chargeMethod": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "flatRateValue": {
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "frequency": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gracePeriod": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "percentageRateValue": {
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "rateType": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "targetInvoices": {
+            "items": {
+              "description": "",
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "taskDisplayName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "taskId": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "rateType",
+          "frequency",
+          "targetInvoices",
+          "taskId",
+          "taskDisplayName"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "isCustomerDefault": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isVendorDefault": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "paymentTermDiscountModel": {
+        "additionalProperties": false,
+        "properties": {
+          "account": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "applyBy": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "applyByValue": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "discount": {
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "discountApplyTo": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "discountType": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "dueDayType",
+      "isCustomerDefault",
+      "isVendorDefault",
+      "active",
+      "modifiedOn",
+      "createdOn",
+      "paymentTermDiscountModel",
+      "interestSettings"
+    ],
+    "type": "object"
+  },
+  "stream": "payment_terms",
+  "tap_stream_id": "payment_terms"
+}

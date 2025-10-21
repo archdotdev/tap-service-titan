@@ -1,0 +1,186 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobAppointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "arrivalWindowStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "arrivalWindowEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "additionalProperties": false,
+    "description": "JobBookedLog response model",
+    "properties": {
+      "active": {
+        "description": "Whether the job booked log is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "arrivalWindowEnd": {
+        "description": "Arrival window end date/time (in UTC) of the job",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "arrivalWindowStart": {
+        "description": "Arrival window start date/time (in UTC) of the job",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "ID of user who booked the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) when the job booked log was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the job booked log",
+        "format": "int64",
+        "type": "integer"
+      },
+      "jobAppointmentId": {
+        "description": "ID of the job that has been booked",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "ID of the job that has been booked",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "start": {
+        "description": "Start date/time (in UTC) of the job",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "jobId",
+      "jobAppointmentId",
+      "start",
+      "createdOn",
+      "createdById",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "job_booked_log",
+  "tap_stream_id": "job_booked_log"
+}

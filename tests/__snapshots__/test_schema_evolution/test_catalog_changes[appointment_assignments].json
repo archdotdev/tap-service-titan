@@ -1,0 +1,242 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assignedById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "assignedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isPaused"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "appointmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Indicate if assignment is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "appointmentId": {
+        "description": "ID of the appointment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "assignedById": {
+        "description": "ID of the user who assigned the appointment assignment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "assignedOn": {
+        "description": "Date/time (in UTC) when the appointment assignment was assigned",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the assignment was created (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the appointment assignment",
+        "format": "int64",
+        "type": "integer"
+      },
+      "isPaused": {
+        "description": "Whether appointment assignment is paused",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "ID of the job",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "When the assignment was modified (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "description": "ID of the technician",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "technicianName": {
+        "description": "Name of the technician",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "technicianId",
+      "technicianName",
+      "assignedById",
+      "assignedOn",
+      "status",
+      "isPaused",
+      "jobId",
+      "appointmentId",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "appointment_assignments",
+  "tap_stream_id": "appointment_assignments"
+}

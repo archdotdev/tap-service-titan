@@ -1,0 +1,833 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "typeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendorId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipTo",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "inventoryLocationId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batchId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendorDocumentNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "requiredOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "sentOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receivedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "total"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tax"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipping"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "batchId": {
+        "description": "Batch Id of PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "description": "Id of the budget code for this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "Id of business unit for this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When PO was created, system date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "List of custom fields for this PO",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents custom field response",
+          "properties": {
+            "name": {
+              "description": "Custom field name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "date": {
+        "description": "PO date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Purchase order Id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "inventoryLocationId": {
+        "description": "Inventory location Id of PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "invoiceId": {
+        "description": "Id of invoice associated with PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "items": {
+        "description": "List of PO items",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents purchase order item response",
+          "properties": {
+            "budgetCodeId": {
+              "description": "Id of the budget code for this PO item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "chargeable": {
+              "description": "Indicates whether item price is charged to customer",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "cost": {
+              "description": "Item cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "createdOn": {
+              "description": "system created date",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Item description",
+              "format": "html",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Item Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "modifiedOn": {
+              "description": "last time transfer item was modified date",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Item quantity",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "quantityReceived": {
+              "description": "Quantity received for this item, PO must have at least one receipt for this to be not 0",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "serialNumbers": {
+              "description": "List of serial numbers",
+              "items": {
+                "additionalProperties": false,
+                "description": "Represents serial number response",
+                "properties": {
+                  "id": {
+                    "description": "Id of this serial number",
+                    "format": "int64",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "number": {
+                    "description": "Serial number value",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "number"
+                ],
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "skuCode": {
+              "description": "Item code",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "skuId": {
+              "description": "Sku Id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "skuName": {
+              "description": "Item name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "skuType": {
+              "description": "Item type(material or equipment)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "description": "Item status",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "total": {
+              "description": "Item total cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "vendorPartNumber": {
+              "description": "Vendor part number for this item",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "skuId",
+            "description",
+            "createdOn",
+            "modifiedOn",
+            "skuName",
+            "skuCode",
+            "skuType",
+            "vendorPartNumber",
+            "quantity",
+            "quantityReceived",
+            "cost",
+            "total",
+            "serialNumbers",
+            "status",
+            "chargeable"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "jobId": {
+        "description": "Id of job associated with PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "When PO was last modified, system date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "number": {
+        "description": "Purchase order number",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "description": "Id of project associated with PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "receivedOn": {
+        "description": "PO received on date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "requiredOn": {
+        "description": "PO required on date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sentOn": {
+        "description": "PO sent on date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shipTo": {
+        "additionalProperties": false,
+        "description": "Represents address response",
+        "properties": {
+          "city": {
+            "description": "City",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "description": "Country code",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "State",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "description": "Street",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "description": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "description": "Zip code",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "shipping": {
+        "description": "PO shipping cost",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "Status of this PO",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "PO summary/memo",
+        "format": "multiline",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tax": {
+        "description": "PO tax",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "description": "Id of technician for this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "total": {
+        "description": "PO total, including items cost, tax and shipping cost",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "typeId": {
+        "description": "The purchase order type Id of this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "vendorDocumentNumber": {
+        "description": "Vendor document number of PO",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "vendorId": {
+        "description": "Id of vendor for this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "number",
+      "status",
+      "typeId",
+      "vendorId",
+      "shipTo",
+      "vendorDocumentNumber",
+      "date",
+      "createdOn",
+      "modifiedOn",
+      "total",
+      "tax",
+      "shipping",
+      "summary",
+      "items",
+      "customFields"
+    ],
+    "type": "object"
+  },
+  "stream": "purchase_orders",
+  "tap_stream_id": "purchase_orders"
+}

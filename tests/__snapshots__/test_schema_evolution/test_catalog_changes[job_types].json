@@ -1,0 +1,361 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnitIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skills"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "priority"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "duration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldThreshold"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "class"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "noCharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "enforceRecurringServiceEventSelection"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceSignaturesRequired"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalData"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "When true, job type is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "businessUnitIds": {
+        "description": "Business Unit Ids associated with job type",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "class": {
+        "description": "Let’s you group other job types by class",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (in UTC) when job type was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "duration": {
+        "description": "Avg length of time for this job type",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "enforceRecurringServiceEventSelection": {
+        "description": "When true enforce recurring service event",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "externalData": {
+        "description": "List of external data attached to this job type,\nthat corresponds to the application guid provided in the request.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "description": "External data key.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "External data value.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "ID of the job type",
+        "format": "int64",
+        "type": "integer"
+      },
+      "invoiceSignaturesRequired": {
+        "description": "When true signature is required",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date/time (in UTC) when job type was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Name of the job type",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "noCharge": {
+        "description": "When true, all jobs are considered no charge",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "priority": {
+        "description": "Level of urgency for this type of job",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "skills": {
+        "description": "List of skills required to complete this job",
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "soldThreshold": {
+        "description": "A job is considered as converted if subtotal meets or exceeds this threshold",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "Text that is automatically added to job summary when booked",
+        "format": "multiline",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "Tags here will automatically be applied to jobs booked",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "businessUnitIds",
+      "skills",
+      "tagTypeIds",
+      "priority",
+      "duration",
+      "class",
+      "summary",
+      "noCharge",
+      "invoiceSignaturesRequired",
+      "modifiedOn",
+      "createdOn",
+      "externalData",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "job_types",
+  "tap_stream_id": "job_types"
+}

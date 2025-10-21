@@ -1,0 +1,310 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "technicianId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "duration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "timesheetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "clearDispatchBoard"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "clearTechnicianView"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "removeTechnicianFromCapacityPlanning"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allDay"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "showOnTechnicianSchedule"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "createdOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "createdOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "Indicate if non-job appointment is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allDay": {
+        "description": "Indicate if non-job appointment is scheduled for whole day",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "clearDispatchBoard": {
+        "description": "Indicate if non-job appointment should be cleared from dispatch board once event is over",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "clearTechnicianView": {
+        "description": "Indicate if non-job appointment should be cleared from technician's calendar once event is over",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "ID of the user who created the non-job appointment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "When the appointment was created (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "duration": {
+        "description": "Non-job appointment duration",
+        "format": "duration",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Non-job appointment id",
+        "format": "int64",
+        "type": "integer"
+      },
+      "modifiedOn": {
+        "description": "When the appointment was last modified (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Non-job appointment name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "removeTechnicianFromCapacityPlanning": {
+        "description": "Indicate if technician availability should be remove from legacy capacity planning",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "showOnTechnicianSchedule": {
+        "description": "Whether the non-job appointment shows on the technicians schedule even if there is no timesheet",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "start": {
+        "description": "Non-job appointment's start date/time (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "Non-job appointment summary",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "technicianId": {
+        "description": "Non-job appointment's technician id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "timesheetCodeId": {
+        "description": "Unique Id of timesheet code",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "technicianId",
+      "start",
+      "name",
+      "duration",
+      "timesheetCodeId",
+      "summary",
+      "clearDispatchBoard",
+      "clearTechnicianView",
+      "removeTechnicianFromCapacityPlanning",
+      "allDay",
+      "showOnTechnicianSchedule",
+      "active",
+      "createdOn",
+      "modifiedOn",
+      "createdById"
+    ],
+    "type": "object"
+  },
+  "stream": "non_job_appointments",
+  "tap_stream_id": "non_job_appointments"
+}

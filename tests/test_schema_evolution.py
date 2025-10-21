@@ -5,21 +5,25 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
+from syrupy.extensions.json import JSONSnapshotExtension
+
 if TYPE_CHECKING:
     from pathlib import Path
 
     import pytest
-    from pytest_snapshot.plugin import Snapshot
     from pytest_subtests.plugin import SubTests
+    from syrupy.assertion import SnapshotAssertion
 
 
 def test_catalog_changes(
     pytester: pytest.Pytester,
     tmp_path: Path,
-    snapshot: Snapshot,
+    snapshot: SnapshotAssertion,
     subtests: SubTests,
 ) -> None:
     """Fail if the catalog has changed."""
+    snapshot_json = snapshot.with_defaults(extension_class=JSONSnapshotExtension)
+
     config = {
         "tenant_id": "1234567890",
         "client_id": "1234567890",
@@ -43,5 +47,4 @@ def test_catalog_changes(
     for stream in catalog["streams"]:
         stream_id = stream["tap_stream_id"]
         with subtests.test(stream_id):
-            pretty_stream = json.dumps(stream, indent=2)
-            snapshot.assert_match(pretty_stream, f"{stream_id}.json")
+            assert snapshot_json(name=stream_id) == stream
