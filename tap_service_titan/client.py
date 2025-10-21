@@ -176,6 +176,17 @@ class ServiceTitanBaseStream(RESTStream):
                 return f"{default}. Response body: {response.text}"
         return default
 
+    def request_decorator(self, func):  # noqa: D401
+        """
+        `Authorization` header is refreshed for every retry attempt. 
+        Default doesn't refresh the auth header on retries.
+        """
+        base_decorator = super().request_decorator
+
+        def reauth_then_call(prepared_request: requests.PreparedRequest, context):
+                self.authenticator(prepared_request)
+                return func(prepared_request, context)
+        return base_decorator(reauth_then_call)
 
 class ServiceTitanExportStream(ServiceTitanBaseStream):
     """ServiceTitan stream class for export endpoints."""
