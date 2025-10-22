@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
     "backports-httpmethod~=0.2.1 ; python_version < '3.11'",
-    "singer-sdk[faker]~=0.51.0",
+    "singer-sdk[faker]~=0.52.0",
     "requests~=2.32.3",
     "typing-extensions==4.15.0",
 ]
@@ -69,6 +69,7 @@ warn_unused_configs = true
 addopts = ["-vv"]
 
 [tool.ruff]
+line-length = 100
 src = ["tap_service_titan"]
 
 [tool.ruff.lint]

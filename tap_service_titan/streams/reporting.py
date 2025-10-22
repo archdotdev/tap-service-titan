@@ -16,9 +16,7 @@ from singer_sdk.helpers import types  # noqa: TC002
 from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
-from tap_service_titan.client import (
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanStream
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod

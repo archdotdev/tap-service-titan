@@ -33,7 +33,7 @@ class EstimatesStream(ServiceTitanExportStream):
 
     @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
-        if not hasattr(self._tap, '_estimate_items_cache'):
+        if not hasattr(self._tap, "_estimate_items_cache"):
             self._tap._estimate_items_cache = {}
         self._tap._estimate_items_cache[record["id"]] = record.get("items", []) # Was polluting our context with too many items causing logs to be >500 MB per run for some tenants
         
@@ -63,12 +63,12 @@ class EstimateItemsStream(Stream):
         if not context:
             return
         estimate_id = context["estimate_id"]
-        items = getattr(self._tap, '_estimate_items_cache', {}).get(estimate_id, [])
+        items = getattr(self._tap, "_estimate_items_cache", {}).get(estimate_id, [])
 
         try:
             for item in items:
                 transformed_item = {**item, "estimate_id": estimate_id}
                 yield transformed_item
         finally:
-            if hasattr(self._tap, '_estimate_items_cache'):
+            if hasattr(self._tap, "_estimate_items_cache"):
                 self._tap._estimate_items_cache.pop(estimate_id, None)

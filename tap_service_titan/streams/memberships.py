@@ -2,19 +2,28 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
 from functools import cached_property
+from typing import TYPE_CHECKING
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
+from singer_sdk import typing as th
 
 from tap_service_titan.client import ServiceTitanExportStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context, Record
 
 
 class MembershipsStream(ServiceTitanExportStream):
     """Define memberships export stream."""
 
     name = "memberships_export"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -69,16 +78,14 @@ class MembershipsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/memberships"
-        )
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/memberships"
 
 
 class MembershipTypesStream(ServiceTitanExportStream):
     """Define membership types stream."""
 
     name = "membership_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -110,32 +117,29 @@ class MembershipTypesStream(ServiceTitanExportStream):
         th.Property("showMembershipSavings", th.BooleanType),
     ).to_dict()
 
-    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
-        """Return a generator of record-type dictionary objects with coerced values.
-
-        Args:
-            context: Stream partition or context dictionary.
-
-        Yields:
-            One item per record with string coercion only in the units section.
-        """
-        for record in super().get_records(context):
-            record["durationBilling"] = [
-                {} if item is None else item for item in record["durationBilling"]
-            ]
-            yield record
-
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/membership-types"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/membership-types"
+
+    @override
+    def post_process(
+        self,
+        row: Record,
+        context: Context | None = None,
+    ) -> Record | None:
+        row["durationBilling"] = [
+            {} if item is None else item  # Replace null item with empty dict
+            for item in row["durationBilling"]
+        ]
+        return row
 
 
 class RecurringServiceTypesStream(ServiceTitanExportStream):
     """Define recurring service types stream."""
 
     name = "recurring_service_types"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -162,14 +166,14 @@ class RecurringServiceTypesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/recurring-service-types"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-service-types"
 
 
 class InvoiceTemplatesStream(ServiceTitanExportStream):
     """Define invoice templates stream."""
 
     name = "invoice_templates"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -205,14 +209,14 @@ class InvoiceTemplatesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/invoice-templates"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/invoice-templates"
 
 
 class RecurringServicesStream(ServiceTitanExportStream):
     """Define recurring services stream."""
 
     name = "recurring_services"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -255,14 +259,14 @@ class RecurringServicesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/recurring-services"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-services"
 
 
 class RecurringServiceEventsStream(ServiceTitanExportStream):
     """Define recurring service events stream."""
 
     name = "recurring_service_events"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -283,14 +287,14 @@ class RecurringServiceEventsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/recurring-service-events"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-service-events"
 
 
 class MembershipStatusChangesStream(ServiceTitanExportStream):
     """Define membership status changes export stream."""
 
     name = "membership_status_changes"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "createdOn"
 
     schema = th.PropertiesList(
@@ -306,4 +310,4 @@ class MembershipStatusChangesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self._tap.config['tenant_id']}/export/membership-status-changes"
+        return f"/memberships/v2/tenant/{self.tenant_id}/export/membership-status-changes"
