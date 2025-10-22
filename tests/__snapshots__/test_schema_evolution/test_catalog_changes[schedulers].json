@@ -76,6 +76,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "mode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "quickLaunchLink"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -93,15 +111,17 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "companyName": {
+        "description": "Company Name",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When this scheduler was created",
         "format": "date-time",
         "type": [
           "string",
@@ -109,24 +129,32 @@
         ]
       },
       "dataApiKey": {
+        "description": "Scheduler Data API Key used for embedding the Scheduler",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "Scheduler ID",
+        "type": "string"
       },
       "isDefault": {
+        "description": "Denotes if this is the default scheduler",
         "type": [
           "boolean",
           "null"
         ]
       },
+      "mode": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "modifiedOn": {
+        "description": "When this scheduler was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -134,18 +162,39 @@
         ]
       },
       "name": {
+        "description": "Scheduler name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "quickLaunchLink": {
+        "description": "Link that can be used to directly open this scheduler",
         "type": [
           "string",
           "null"
         ]
       },
       "schedulerStatus": {
+        "description": "Scheduler Status",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "name",
+      "companyName",
+      "createdOn",
+      "modifiedOn",
+      "schedulerStatus",
+      "dataApiKey",
+      "isDefault",
+      "mode",
+      "quickLaunchLink"
+    ],
     "type": "object"
   },
   "stream": "schedulers",
