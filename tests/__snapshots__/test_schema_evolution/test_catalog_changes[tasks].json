@@ -42,6 +42,15 @@
     {
       "breadcrumb": [
         "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "closedOn"
       ],
       "metadata": {
@@ -313,7 +322,7 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
         "type": [
@@ -322,6 +331,7 @@
         ]
       },
       "assignedToId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -329,15 +339,17 @@
       },
       "attachments": {
         "items": {
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "count": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "createdBy": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -352,7 +364,7 @@
             },
             "files": {
               "items": {
-                "additionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                   "filename": {
                     "type": [
@@ -367,7 +379,14 @@
                     ]
                   }
                 },
-                "type": "object"
+                "required": [
+                  "url",
+                  "filename"
+                ],
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "type": [
                 "array",
@@ -375,7 +394,16 @@
               ]
             }
           },
-          "type": "object"
+          "required": [
+            "createdOn",
+            "createdBy",
+            "count",
+            "files"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "type": [
           "array",
@@ -383,6 +411,7 @@
         ]
       },
       "businessUnitId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -397,7 +426,7 @@
       },
       "comments": {
         "items": {
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "comment": {
               "type": [
@@ -413,13 +442,22 @@
               ]
             },
             "employeeId": {
+              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             }
           },
-          "type": "object"
+          "required": [
+            "employeeId",
+            "comment",
+            "createdOn"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "type": [
           "array",
@@ -441,6 +479,7 @@
         ]
       },
       "customerId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -459,6 +498,7 @@
         ]
       },
       "descriptionModifiedById": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -472,34 +512,34 @@
         ]
       },
       "employeeTaskResolutionId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeeTaskSourceId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeeTaskTypeId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "involvedEmployeeIdList": {
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
         "type": [
           "array",
@@ -507,12 +547,15 @@
         ]
       },
       "isClosed": {
+        "deprecated": true,
+        "description": "This property is deprecated. Use Status instead.",
         "type": [
           "boolean",
           "null"
         ]
       },
       "jobId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -544,18 +587,21 @@
         ]
       },
       "projectId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "refundIssued": {
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "reportedById": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -568,10 +614,18 @@
           "null"
         ]
       },
+      "status": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "subTasksData": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "count": {
+            "format": "int32",
             "type": [
               "integer",
               "null"
@@ -579,7 +633,7 @@
           },
           "subTasks": {
             "items": {
-              "additionalProperties": true,
+              "additionalProperties": false,
               "properties": {
                 "active": {
                   "type": [
@@ -595,6 +649,7 @@
                   ]
                 },
                 "assignedToId": {
+                  "format": "int64",
                   "type": [
                     "integer",
                     "null"
@@ -609,7 +664,7 @@
                 },
                 "comments": {
                   "items": {
-                    "additionalProperties": true,
+                    "additionalProperties": false,
                     "properties": {
                       "comment": {
                         "type": [
@@ -625,13 +680,22 @@
                         ]
                       },
                       "employeeId": {
+                        "format": "int64",
                         "type": [
                           "integer",
                           "null"
                         ]
                       }
                     },
-                    "type": "object"
+                    "required": [
+                      "employeeId",
+                      "comment",
+                      "createdOn"
+                    ],
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "type": [
                     "array",
@@ -671,19 +735,34 @@
                   ]
                 },
                 "reportedById": {
+                  "format": "int64",
                   "type": [
                     "integer",
                     "null"
                   ]
                 },
                 "subtaskNumber": {
+                  "format": "int64",
                   "type": [
                     "integer",
                     "null"
                   ]
                 }
               },
-              "type": "object"
+              "required": [
+                "active",
+                "isClosed",
+                "name",
+                "createdOn",
+                "subtaskNumber",
+                "isViewed",
+                "assignedDateTime",
+                "comments"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "type": [
               "array",
@@ -691,18 +770,38 @@
             ]
           }
         },
+        "required": [
+          "count",
+          "subTasks"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "taskNumber": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       }
     },
+    "required": [
+      "reportedById",
+      "assignedToId",
+      "active",
+      "isClosed",
+      "status",
+      "businessUnitId",
+      "employeeTaskTypeId",
+      "employeeTaskSourceId",
+      "employeeTaskResolutionId",
+      "reportedOn",
+      "id",
+      "taskNumber",
+      "createdOn"
+    ],
     "type": "object"
   },
   "stream": "tasks",
