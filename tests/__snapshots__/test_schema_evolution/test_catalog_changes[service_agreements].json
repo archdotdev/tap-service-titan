@@ -126,6 +126,17 @@
         "properties",
         "templateFields",
         "properties",
+        "billingScheduleType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
         "negativeLiabilityServiceId"
       ],
       "metadata": {
@@ -226,6 +237,28 @@
         "templateFields",
         "properties",
         "defaultCampaignId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultDocumentTemplateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultAutoRenew"
       ],
       "metadata": {
         "inclusion": "available"
@@ -495,6 +528,15 @@
     {
       "breadcrumb": [
         "properties",
+        "soldById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -519,45 +561,55 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "accountManagerId": {
+        "description": "ID of the employee assigned to the agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "active": {
+        "description": "Whether this agreement still exists, or was deleted already.",
         "type": [
           "boolean",
           "null"
         ]
       },
       "autoRenew": {
+        "description": "Determines if the agreement automatically renews or expires on its end date",
         "type": [
           "boolean",
           "null"
         ]
       },
       "billingSchedule": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "businessUnitId": {
+        "description": "Business unit ID to which this agreement is assigned",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdById": {
+        "description": "ID of the user that created this agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When the service agreement was created",
         "format": "date-time",
         "type": [
           "string",
@@ -565,18 +617,23 @@
         ]
       },
       "customerId": {
+        "description": "Customer ID of the agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "durationMonths": {
+        "description": "Duration of the agreement in months (can be absent when the agreement is still being built)",
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "endDate": {
+        "description": "The end date of the agreement (can be absent when the agreement is still being built)",
         "format": "date",
         "type": [
           "string",
@@ -584,76 +641,94 @@
         ]
       },
       "estimatedGrossMarginAmount": {
+        "description": "The estimated gross margin in dollars for the agreement (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "estimatedGrossMarginPercentage": {
+        "description": "The estimated gross margin as a percentage of the Total Agreement Price (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "estimatedLaborCost": {
+        "description": "The dollar amount of estimated labor cost for all visits (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "estimatedMaterialCost": {
+        "description": "The dollar amount of estimated material cost for all visits (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "estimatedTravelCost": {
+        "description": "The dollar amount of estimated travel cost for all visits (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Service agreement ID",
+        "format": "int64",
+        "type": "integer"
       },
       "importId": {
+        "description": "Internal import ID label",
         "type": [
           "string",
           "null"
         ]
       },
       "importedDeferredAmount": {
+        "description": "Imported amount already billed for this agreement",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "importedRecognizedAmount": {
+        "description": "Imported amount of recognized revenue for this agreement",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "laborMarkupPercentage": {
+        "description": "The markup percentage applied to labor cost of the agreement (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "laborSurcharge": {
+        "description": "The dollar amount added to labor cost of the agreement",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "locationIds": {
+        "description": "Location IDs covered by the agreement",
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
         "type": [
           "array",
@@ -661,24 +736,31 @@
         ]
       },
       "materialMarkupPercentage": {
+        "description": "The markup percentage applied to material cost of the agreement (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "materialSurcharge": {
+        "description": "The dollar amount added to material cost of the agreement",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "modifiedById": {
+        "description": "ID of the user that modified this agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "modifiedOn": {
+        "description": "When the service agreement was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -686,42 +768,61 @@
         ]
       },
       "name": {
+        "description": "Service agreement name",
         "type": [
           "string",
           "null"
         ]
       },
       "origin": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "paymentMethodId": {
+        "description": "ID of the payment method of the agreement (can be absent when the agreement is still being built).\nNote there is a special hardcoded value of -1 that means \"Cash or Check\".",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "paymentTermId": {
+        "description": "ID of the payment terms of the agreement (can be absent when the agreement is still being built)",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "rateSheetId": {
+        "description": "ID of a rate sheet (Client-Specific Pricing Rule) assigned to the service agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "renewalAgreementId": {
+        "description": "Indicates the next agreement ID that renews the current agreement (null means the agreement was not renewed)",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "soldById": {
+        "description": "ID of the employee or technician that sold this agreement",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "startDate": {
+        "description": "The start date of the agreement (can be absent when the agreement is still being built)",
         "format": "date",
         "type": [
           "string",
@@ -729,123 +830,201 @@
         ]
       },
       "status": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "summary": {
+        "description": "Optional text summary of the agreement",
         "type": [
           "string",
           "null"
         ]
       },
       "templateFields": {
-        "additionalProperties": true,
+        "additionalProperties": false,
+        "description": "Data fields that were populated from the template",
         "properties": {
+          "billingScheduleType": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "billingServiceId": {
+            "description": "Used for both revenue recognition modes:\nwhen Immediate, the service will be displayed in customer-facing invoices;\nwhen Deferred, the service is tied to the general ledger account chosen for this agreement.",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
+          "defaultAutoRenew": {
+            "description": "The default auto-renew setting when creating a service agreement",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "defaultCampaignId": {
+            "description": "The ID of the marketing campaign to be used by default when booking jobs for service agreement visits",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "defaultDocumentTemplateId": {
+            "description": "The ID of the document template to be used by default when creating service agreements",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "defaultExtraTravelCostPerHour": {
+            "description": "The default extra travel cost / hour to be used in the UI when adding service agreement locations",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultLaborCostPerHour": {
+            "description": "The default labor cost / hour to be used in the UI when adding service agreement visits",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultLaborMarkupPercentage": {
+            "description": "The default percentage value of the labor markup to be used in the UI when creating a service agreement",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultLaborSurcharge": {
+            "description": "The default labor surcharge amount to be used in the UI when creating a service agreement",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultMaterialMarkupPercentage": {
+            "description": "The default percentage value of the material markup to be used in the UI when creating a service agreement",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultMaterialSurcharge": {
+            "description": "The default material surcharge amount to be used in the UI when creating a service agreement",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "defaultRateSheetId": {
+            "description": "The default rate sheet ID (Client-Specific Pricing Rule) to be used in the UI when creating a service agreement",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "generalLedgerAccountId": {
+            "description": "General ledger account that will hold funds until recognition\n(this is only used for the Deferred revenue recognition)",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "invoiceCancellationMode": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "negativeLiabilityServiceId": {
+            "description": "Negative liability services draw money from liability account when services are delivered\n(this is only used for the Deferred revenue recognition)",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "originalTemplateId": {
+            "description": "ID of the template originally used to create this service agreement.\nNote that the content of the original template may have changed since the agreement's creation.\nThe template fields in this object represent the current state of the service agreement, as they were captured at the time of creation.",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "positiveIncomeServiceId": {
+            "description": "Positive income services transfer money into the income account when services are delivered\n(this is only used for the Deferred revenue recognition)",
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "revenueRecognitionMode": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           }
         },
+        "required": [
+          "originalTemplateId",
+          "revenueRecognitionMode",
+          "billingServiceId"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "totalAgreementPrice": {
+        "description": "The total price of the agreement (can be absent when the agreement is still being built)",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "name",
+      "createdOn",
+      "modifiedOn",
+      "templateFields",
+      "customerId",
+      "businessUnitId",
+      "status",
+      "locationIds",
+      "origin",
+      "importedDeferredAmount",
+      "importedRecognizedAmount",
+      "autoRenew",
+      "laborSurcharge",
+      "materialSurcharge",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "service_agreements",
