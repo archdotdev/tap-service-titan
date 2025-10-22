@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import sys
 from functools import cached_property
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
-
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.openapi_specs import PAYROLL, ServiceTitanSchema
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 
 class JobSplitsStream(ServiceTitanExportStream):
@@ -15,17 +20,9 @@ class JobSplitsStream(ServiceTitanExportStream):
     name = "job_splits"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(PAYROLL, key="Payroll.V2.JobSplits.JobSplitExportResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("technicianId", th.IntegerType),
-        th.Property("split", th.NumberType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -38,22 +35,12 @@ class PayrollAdjustmentsStream(ServiceTitanExportStream):
     name = "payroll_adjustments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.PayrollAdjustments.PayrollAdjustmentExportResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("employeeType", th.StringType),
-        th.Property("employeeId", th.IntegerType),
-        th.Property("postedOn", th.DateTimeType),
-        th.Property("amount", th.NumberType),
-        th.Property("memo", th.StringType),
-        th.Property("activityCodeId", th.IntegerType),
-        th.Property("invoiceId", th.IntegerType),
-        th.Property("hours", th.NumberType),
-        th.Property("rate", th.NumberType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -66,21 +53,12 @@ class JobTimesheetsStream(ServiceTitanExportStream):
     name = "job_timesheets"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.Timesheets.JobTimesheetExportResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("appointmentId", th.IntegerType),
-        th.Property("technicianId", th.IntegerType),
-        th.Property("dispatchedOn", th.DateTimeType),
-        th.Property("arrivedOn", th.DateTimeType),
-        th.Property("canceledOn", th.DateTimeType),
-        th.Property("doneOn", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -93,16 +71,12 @@ class ActivityCodesStream(ServiceTitanExportStream):
     name = "activity_codes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.PayrollActivityCodes.PayrollActivityCodeExportResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("name", th.StringType),
-        th.Property("code", th.StringType),
-        th.Property("earningCategory", th.StringType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -115,26 +89,12 @@ class TimesheetCodesStream(ServiceTitanExportStream):
     name = "timesheet_codes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.TimesheetCodes.TimesheetCodeExportResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("code", th.StringType),
-        th.Property("description", th.StringType),
-        th.Property("type", th.StringType),
-        th.Property("applicableEmployeeType", th.StringType),
-        th.Property(
-            "rateInfo",
-            th.ObjectType(
-                th.Property("hourlyRate", th.StringType),
-                th.Property("customHourlyRate", th.NumberType),
-                th.Property("rateMultiplier", th.NumberType),
-            ),
-        ),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -147,50 +107,12 @@ class GrossPayItemsStream(ServiceTitanExportStream):
     name = "gross_pay_items"
     primary_keys = ("payrollId", "date")
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.GrossPayItems.GrossPayItemExportResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("employeeId", th.IntegerType),
-        th.Property("employeeType", th.StringType),
-        th.Property("businessUnitName", th.StringType),
-        th.Property("payrollId", th.IntegerType),
-        th.Property("employeePayrollId", th.StringType),
-        th.Property("date", th.DateTimeType),
-        th.Property("activity", th.StringType),
-        th.Property("activityCodeId", th.IntegerType),
-        th.Property("activityCode", th.StringType),
-        th.Property("amount", th.NumberType),
-        th.Property("amountAdjustment", th.NumberType),
-        th.Property("payoutBusinessUnitName", th.StringType),
-        th.Property("grossPayItemType", th.StringType),
-        th.Property("startedOn", th.DateTimeType),
-        th.Property("endedOn", th.DateTimeType),
-        th.Property("paidDurationHours", th.NumberType),
-        th.Property("paidTimeType", th.StringType),
-        th.Property("jobId", th.IntegerType),
-        th.Property("jobNumber", th.StringType),
-        th.Property("jobTypeName", th.StringType),
-        th.Property("projectNumber", th.StringType),
-        th.Property("projectId", th.IntegerType),
-        th.Property("invoiceId", th.IntegerType),
-        th.Property("invoiceNumber", th.StringType),
-        th.Property("invoiceItemId", th.IntegerType),
-        th.Property("customerId", th.IntegerType),
-        th.Property("customerName", th.StringType),
-        th.Property("locationId", th.IntegerType),
-        th.Property("locationName", th.StringType),
-        th.Property("locationAddress", th.StringType),
-        th.Property("locationZip", th.StringType),
-        th.Property("zoneName", th.StringType),
-        th.Property("taxZoneName", th.StringType),
-        th.Property("laborTypeId", th.IntegerType),
-        th.Property("laborTypeCode", th.StringType),
-        th.Property("isPrevailingWageJob", th.BooleanType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -202,16 +124,12 @@ class LocationRatesStream(ServiceTitanStream):
 
     name = "location_rates"
     primary_keys = ("locationId", "laborTypeCode")
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.LocationLaborTypes.LocationLaborTypeResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("locationId", th.IntegerType),
-        th.Property("hourlyRate", th.NumberType),
-        th.Property("laborTypeName", th.StringType),
-        th.Property("laborTypeCode", th.StringType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -224,19 +142,9 @@ class PayrollsStream(ServiceTitanStream):
     name = "payrolls"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(PAYROLL, key="Payroll.V2.Payrolls.PayrollResponse")
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("startedOn", th.DateTimeType),
-        th.Property("endedOn", th.DateTimeType),
-        th.Property("employeeId", th.IntegerType),
-        th.Property("employeeType", th.StringType),
-        th.Property("status", th.StringType),
-        th.Property("burdenRate", th.NumberType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("managerApprovedOn", th.DateTimeType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -249,19 +157,12 @@ class NonJobTimesheetsStream(ServiceTitanStream):
     name = "non_job_timesheets"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.Timesheets.NonJobTimesheetResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("id", th.IntegerType),
-        th.Property("employeeId", th.IntegerType),
-        th.Property("employeeType", th.StringType),
-        th.Property("timesheetCodeId", th.IntegerType),
-        th.Property("startedOn", th.DateTimeType),
-        th.Property("endedOn", th.DateTimeType),
-        th.Property("createdOn", th.DateTimeType),
-        th.Property("modifiedOn", th.DateTimeType),
-        th.Property("active", th.BooleanType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""

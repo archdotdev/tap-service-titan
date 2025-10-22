@@ -96,6 +96,15 @@
     {
       "breadcrumb": [
         "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -129,63 +138,84 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Whether payroll adjustment is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "activityCodeId": {
+        "description": "Activity code ID of the payroll adjustment",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "amount": {
+        "description": "Amount of the payroll adjustment",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
+      "createdOn": {
+        "description": "Date/time (on UTC) when the payroll adjustment was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "employeeId": {
+        "description": "Employee ID of the payroll adjustment",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "hours": {
+        "description": "Hours of the payroll adjustment",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the payroll adjustment",
+        "format": "int64",
+        "type": "integer"
       },
       "invoiceId": {
+        "description": "ID of the payroll adjustment invoice",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "memo": {
+        "description": "Memo of the payroll adjustment",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
+        "description": "Date/time (on UTC) when the payroll adjustment was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -193,6 +223,7 @@
         ]
       },
       "postedOn": {
+        "description": "Posted date/time (UTC) of the payroll adjustment",
         "format": "date-time",
         "type": [
           "string",
@@ -200,12 +231,24 @@
         ]
       },
       "rate": {
+        "description": "Rate of the payroll adjustment",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "employeeType",
+      "employeeId",
+      "postedOn",
+      "amount",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "payroll_adjustments",
