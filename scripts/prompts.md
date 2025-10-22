@@ -16,7 +16,7 @@ class InvoicesStream(ServiceTitanExportStream):
     """Define invoices stream."""
 
     name = "invoices"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -239,7 +239,7 @@ class InvoiceItemsStream(ServiceTitanExportStream):
     """Define invoice items stream."""
 
     name = "invoice_items"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -328,7 +328,7 @@ class PaymentsStream(ServiceTitanExportStream):
     """Define payments stream."""
 
     name = "payments"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -423,7 +423,7 @@ class EstimateItemsStream(ServiceTitanStream):
     """Define estimate items stream."""
 
     name = "estimate_items"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),

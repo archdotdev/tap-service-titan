@@ -94,9 +94,7 @@ class AttributedLeadsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/attributed-leads"
-        )
+        return f"/marketingads/v2/tenant/{self.tenant_id}/attributed-leads"
 
     def get_url_params(
         self,
@@ -137,9 +135,7 @@ class CapacityWarningsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/capacity-warnings"
-        )
+        return f"/marketingads/v2/tenant/{self.tenant_id}/capacity-warnings"
 
 
 class _PerformanceStream(ServiceTitanStream):
@@ -247,7 +243,7 @@ class _PerformanceStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/marketingads/v2/tenant/{self._tap.config['tenant_id']}/performance"
+        return f"/marketingads/v2/tenant/{self.tenant_id}/performance"
 
     def post_process(
         self,

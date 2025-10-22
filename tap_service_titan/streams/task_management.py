@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
@@ -14,7 +13,7 @@ class TasksStream(ServiceTitanStream):
     """Define tasks stream."""
 
     name = "tasks"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -113,4 +112,4 @@ class TasksStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/task-management/v2/tenant/{self._tap.config['tenant_id']}/tasks"
+        return f"/task-management/v2/tenant/{self.tenant_id}/tasks"

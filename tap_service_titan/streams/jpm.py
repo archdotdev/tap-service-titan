@@ -242,7 +242,7 @@ class JobBookedLogStream(ServiceTitanStream):
     """Define job booked log stream."""
 
     name = "job_booked_log"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobBookedLogResponse")
@@ -258,7 +258,7 @@ class JobCanceledLogStream(ServiceTitanStream):
     """Define job canceled log stream."""
 
     name = "job_canceled_log"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCanceledLogResponse")

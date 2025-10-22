@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
@@ -18,7 +17,7 @@ class ClientSpecificPricingStream(ServiceTitanStream):
     """Define client-specific pricing stream."""
 
     name = "client_specific_pricing"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -38,7 +37,7 @@ class ClientSpecificPricingStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/clientspecificpricing"  # noqa: E501
+        return f"/pricebook/v2/tenant/{self.tenant_id}/clientspecificpricing"
 
 
 class PricebookCategoriesStream(ServiceTitanStream):
@@ -58,7 +57,7 @@ class DiscountsAndFeesStream(ServiceTitanStream):
     """Define discounts and fees stream."""
 
     name = "discounts_and_fees"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -104,16 +103,14 @@ class DiscountsAndFeesStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/discounts-and-fees"
-        )
+        return f"/pricebook/v2/tenant/{self.tenant_id}/discounts-and-fees"
 
 
 class EquipmentStream(ServiceTitanStream):
     """Define equipment stream."""
 
     name = "equipment"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -266,7 +263,7 @@ class EquipmentStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/equipment"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/equipment"
 
 
 class MaterialsStream(ServiceTitanStream):
@@ -287,7 +284,7 @@ class MaterialsMarkupStream(ServiceTitanStream):
     """Define materials markup stream."""
 
     name = "materials_markup"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -299,37 +296,33 @@ class MaterialsMarkupStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/materialsmarkup"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/materialsmarkup"
 
 
 class ServicesStream(ServiceTitanStream):
     """Define services stream."""
 
     name = "services"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ServiceResponse")
 
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/services"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/services"
 
 
 class ExportEquipmentStream(ServiceTitanExportStream):
     """Define export equipment stream."""
 
     name = "export_equipment"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
-        th.Property(
-            "id", th.IntegerType, description="Unique id for the SKU", required=True
-        ),
-        th.Property(
-            "code", th.StringType, description="Code for the SKU", required=True
-        ),
+        th.Property("id", th.IntegerType, description="Unique id for the SKU", required=True),
+        th.Property("code", th.StringType, description="Code for the SKU", required=True),
         th.Property(
             "displayName",
             th.StringType,
@@ -348,9 +341,7 @@ class ExportEquipmentStream(ServiceTitanExportStream):
             description="Active shows if the SKU is active or inactive",
             required=True,
         ),
-        th.Property(
-            "price", th.NumberType, description="Price of this SKU sold", required=True
-        ),
+        th.Property("price", th.NumberType, description="Price of this SKU sold", required=True),
         th.Property(
             "memberPrice",
             th.NumberType,
@@ -453,9 +444,7 @@ class ExportEquipmentStream(ServiceTitanExportStream):
                         description="Asset type - image, video or PDF",
                         required=True,
                     ),
-                    th.Property(
-                        "url", th.StringType, description="Asset URL", required=True
-                    ),
+                    th.Property("url", th.StringType, description="Asset URL", required=True),
                 )
             ),
             description="Images, videos or PDFs attached to SKU",
@@ -569,9 +558,7 @@ class ExportEquipmentStream(ServiceTitanExportStream):
                             th.ObjectType(
                                 th.Property("id", th.IntegerType, required=True),
                                 th.Property("cost", th.NumberType, required=True),
-                                th.Property(
-                                    "accountName", th.StringType, required=True
-                                ),
+                                th.Property("accountName", th.StringType, required=True),
                             )
                         ),
                         nullable=True,
@@ -616,12 +603,10 @@ class ExportEquipmentStream(ServiceTitanExportStream):
         th.Property(
             "hours",
             th.NumberType,
-            description="The number of hours associated with the installing the equipment",  # noqa: E501
+            description="The number of hours associated with the installing the equipment",
             required=True,
         ),
-        th.Property(
-            "taxable", th.BooleanType, description="Is this SKU taxable", required=True
-        ),
+        th.Property("taxable", th.BooleanType, description="Is this SKU taxable", required=True),
         th.Property(
             "cost",
             th.NumberType,
@@ -763,14 +748,14 @@ class ExportEquipmentStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/equipment"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/export/equipment"
 
 
 class ExportMaterialsStream(ServiceTitanExportStream):
     """Define export materials stream."""
 
     name = "export_materials"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -810,9 +795,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
             description="Active shows if the SKU is active or inactive",
             required=True,
         ),
-        th.Property(
-            "price", th.NumberType, description="Price of this SKU sold", required=True
-        ),
+        th.Property("price", th.NumberType, description="Price of this SKU sold", required=True),
         th.Property(
             "memberPrice",
             th.NumberType,
@@ -834,7 +817,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
         th.Property(
             "hours",
             th.NumberType,
-            description="The number of hours associated with the installing the material",  # noqa: E501
+            description="The number of hours associated with the installing the material",
             required=True,
         ),
         th.Property(
@@ -881,9 +864,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
         ),
         th.Property("costOfSaleAccount", th.StringType, nullable=True),
         th.Property("assetAccount", th.StringType, nullable=True),
-        th.Property(
-            "taxable", th.BooleanType, description="Is this SKU taxable", nullable=True
-        ),
+        th.Property("taxable", th.BooleanType, description="Is this SKU taxable", nullable=True),
         th.Property(
             "primaryVendor",
             th.ObjectType(
@@ -943,9 +924,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
                             th.ObjectType(
                                 th.Property("id", th.IntegerType, required=True),
                                 th.Property("cost", th.NumberType, required=True),
-                                th.Property(
-                                    "accountName", th.StringType, required=True
-                                ),
+                                th.Property("accountName", th.StringType, required=True),
                             )
                         ),
                         nullable=True,
@@ -964,9 +943,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
             "assets",
             th.ArrayType(
                 th.ObjectType(
-                    th.Property(
-                        "alias", th.StringType, description="Asset alias", nullable=True
-                    ),
+                    th.Property("alias", th.StringType, description="Asset alias", nullable=True),
                     th.Property(
                         "fileName",
                         th.StringType,
@@ -985,9 +962,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
                         description="Asset type - image, video or PDF",
                         required=True,
                     ),
-                    th.Property(
-                        "url", th.StringType, description="Asset URL", required=True
-                    ),
+                    th.Property("url", th.StringType, description="Asset URL", required=True),
                 )
             ),
             description="Images, videos or PDFs attached to SKU",
@@ -1115,23 +1090,19 @@ class ExportMaterialsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/pricebook/v2/tenant/{self._tap.config['tenant_id']}/export/materials"
+        return f"/pricebook/v2/tenant/{self.tenant_id}/export/materials"
 
 
 class ExportServicesStream(ServiceTitanExportStream):
     """Define export services stream."""
 
     name = "export_services"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
-        th.Property(
-            "id", th.IntegerType, description="Unique id for the SKU", required=True
-        ),
-        th.Property(
-            "code", th.StringType, description="Code for the SKU", required=True
-        ),
+        th.Property("id", th.IntegerType, description="Unique id for the SKU", required=True),
+        th.Property("code", th.StringType, description="Code for the SKU", required=True),
         th.Property(
             "displayName",
             th.StringType,
@@ -1182,7 +1153,7 @@ class ExportServicesStream(ServiceTitanExportStream):
                     th.Property(
                         "active",
                         th.BooleanType,
-                        description="Active shows if the Category is active or inactive",  # noqa: E501
+                        description="Active shows if the Category is active or inactive",
                         required=True,
                     ),
                 )
@@ -1190,9 +1161,7 @@ class ExportServicesStream(ServiceTitanExportStream):
             description="Categories that this SKU belongs to",
             required=True,
         ),
-        th.Property(
-            "price", th.NumberType, description="Price of this SKU sold", required=True
-        ),
+        th.Property("price", th.NumberType, description="Price of this SKU sold", required=True),
         th.Property(
             "memberPrice",
             th.NumberType,
@@ -1211,9 +1180,7 @@ class ExportServicesStream(ServiceTitanExportStream):
             description="The price if the SKU is sold to a member as an add-on item",
             required=True,
         ),
-        th.Property(
-            "taxable", th.BooleanType, description="Is this SKU taxable", required=True
-        ),
+        th.Property("taxable", th.BooleanType, description="Is this SKU taxable", required=True),
         th.Property(
             "account",
             th.StringType,
@@ -1226,13 +1193,11 @@ class ExportServicesStream(ServiceTitanExportStream):
             description="Hours needed to complete this service",
             required=True,
         ),
-        th.Property(
-            "isLabor", th.BooleanType, description="Is a labor service", nullable=True
-        ),
+        th.Property("isLabor", th.BooleanType, description="Is a labor service", nullable=True),
         th.Property(
             "recommendations",
             th.ArrayType(th.IntegerType),
-            description="Recommended other service or materials to include with this SKU",  # noqa: E501
+            description="Recommended other service or materials to include with this SKU",
             required=True,
         ),
         th.Property(
@@ -1245,9 +1210,7 @@ class ExportServicesStream(ServiceTitanExportStream):
             "assets",
             th.ArrayType(
                 th.ObjectType(
-                    th.Property(
-                        "alias", th.StringType, description="Asset alias", nullable=True
-                    ),
+                    th.Property("alias", th.StringType, description="Asset alias", nullable=True),
                     th.Property(
                         "fileName",
                         th.StringType,
@@ -1266,9 +1229,7 @@ class ExportServicesStream(ServiceTitanExportStream):
                         description="Asset type - image, video or PDF",
                         required=True,
                     ),
-                    th.Property(
-                        "url", th.StringType, description="Asset URL", required=True
-                    ),
+                    th.Property("url", th.StringType, description="Asset URL", required=True),
                 )
             ),
             description="Images, videos or PDFs attached to SKU",
