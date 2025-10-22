@@ -32,6 +32,7 @@ __all__ = [
     "PRICEBOOK",
     "SALESTECH",
     "SETTINGS",
+    "TASK_MANAGEMENT",
     "TELECOM",
 ]
 
@@ -157,4 +158,5 @@ MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v
 PRICEBOOK = ServiceTitanOpenAPISchema(SPECS / "pricebook-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(SPECS / "salestech-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(SPECS / "settings-v2.json")
+TASK_MANAGEMENT = ServiceTitanOpenAPISchema(SPECS / "task-management-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(SPECS / "telecom.json")
