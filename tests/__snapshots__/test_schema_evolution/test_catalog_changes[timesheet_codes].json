@@ -135,27 +135,31 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Indicates whether the timesheet code is active or not",
         "type": [
           "boolean",
           "null"
         ]
       },
       "applicableEmployeeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "code": {
+        "description": "Code of the timesheet code",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "The date when the timesheet code was created (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -163,18 +167,19 @@
         ]
       },
       "description": {
+        "description": "Description of the timesheet code",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the timesheet code",
+        "format": "int64",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "The last date when the timesheet code was modified (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -182,39 +187,60 @@
         ]
       },
       "rateInfo": {
-        "additionalProperties": true,
+        "additionalProperties": false,
+        "description": "Rate info of the timesheet code",
         "properties": {
           "customHourlyRate": {
+            "description": "The custom hourly rate",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "hourlyRate": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "rateMultiplier": {
+            "description": "The rate multiplier",
+            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           }
         },
+        "required": [
+          "hourlyRate",
+          "rateMultiplier"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "type": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "code",
+      "type",
+      "applicableEmployeeType",
+      "rateInfo",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "timesheet_codes",

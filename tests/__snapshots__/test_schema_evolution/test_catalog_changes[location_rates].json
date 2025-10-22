@@ -73,15 +73,17 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Whether the location rate is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdOn": {
+        "description": "The location rate creation date/time (on UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -89,30 +91,38 @@
         ]
       },
       "hourlyRate": {
+        "description": "The hourly rate of the location",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "laborTypeCode": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "description": "The labor type code of the location",
+        "type": "string"
       },
       "laborTypeName": {
+        "description": "The labor type name of the location",
         "type": [
           "string",
           "null"
         ]
       },
       "locationId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Location ID",
+        "format": "int64",
+        "type": "integer"
       }
     },
+    "required": [
+      "locationId",
+      "hourlyRate",
+      "laborTypeName",
+      "laborTypeCode",
+      "createdOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "location_rates",

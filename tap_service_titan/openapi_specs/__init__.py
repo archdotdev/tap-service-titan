@@ -30,6 +30,7 @@ __all__ = [
     "JBCE",
     "JPM",
     "MARKETING_REPUTATION",
+    "PAYROLL",
     "PRICEBOOK",
     "SALESTECH",
     "SCHEDULING_PRO",
@@ -159,6 +160,7 @@ JBCE = ServiceTitanOpenAPISchema(SPECS / "jbce-v2.json")
 JPM = ServiceTitanOpenAPISchema(SPECS / "jpm-v2.json")
 MARKETING = ServiceTitanOpenAPISchema(SPECS / "marketing-v2.json")
 MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v2.json")
+PAYROLL = ServiceTitanOpenAPISchema(SPECS / "payroll-v2.json")
 PRICEBOOK = ServiceTitanOpenAPISchema(SPECS / "pricebook-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(SPECS / "salestech-v2.json")
 SCHEDULING_PRO = ServiceTitanOpenAPISchema(SPECS / "scheduling-pro-v2.json")

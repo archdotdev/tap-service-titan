@@ -169,6 +169,15 @@
     {
       "breadcrumb": [
         "properties",
+        "sourceEntityId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "jobId"
       ],
       "metadata": {
@@ -331,7 +340,25 @@
     {
       "breadcrumb": [
         "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "isPrevailingWageJob"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
       ],
       "metadata": {
         "inclusion": "available"
@@ -383,51 +410,70 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Whether gross pay item is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "activity": {
+        "description": "The activity",
         "type": [
           "string",
           "null"
         ]
       },
       "activityCode": {
+        "description": "The payroll activity code name",
         "type": [
           "string",
           "null"
         ]
       },
       "activityCodeId": {
+        "description": "The payroll activity code ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "amount": {
+        "description": "The amount",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "amountAdjustment": {
+        "description": "The amount adjustment",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
+      "budgetCodeId": {
+        "description": "The budget code ID",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "businessUnitName": {
+        "description": "The business unit name",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "Date/time (on UTC) when the gross pay item was created",
         "format": "date-time",
         "type": [
           "string",
@@ -435,43 +481,49 @@
         ]
       },
       "customerId": {
+        "description": "The customer ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "customerName": {
+        "description": "The customer name",
         "type": [
           "string",
           "null"
         ]
       },
       "date": {
+        "description": "The date (UTC) of the gross pay item",
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "employeeId": {
+        "description": "The employee/technician ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeePayrollId": {
+        "description": "Employee/Technician payroll ID",
         "type": [
           "string",
           "null"
         ]
       },
       "employeeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "endedOn": {
+        "description": "The end time (UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -479,96 +531,125 @@
         ]
       },
       "grossPayItemType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
+        "description": "The gross pay item ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "invoiceId": {
+        "description": "The invoice ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "invoiceItemId": {
+        "description": "The invoice item ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "invoiceNumber": {
+        "description": "The invoice number",
         "type": [
           "string",
           "null"
         ]
       },
       "isPrevailingWageJob": {
+        "description": "Defines whether it's a prevailing wage job",
         "type": [
           "boolean",
           "null"
         ]
       },
       "jobId": {
+        "description": "The job ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "jobNumber": {
+        "description": "The job number",
         "type": [
           "string",
           "null"
         ]
       },
       "jobTypeName": {
+        "description": "Name of the job type",
         "type": [
           "string",
           "null"
         ]
       },
       "laborTypeCode": {
+        "description": "Code of the labor type",
         "type": [
           "string",
           "null"
         ]
       },
       "laborTypeId": {
+        "description": "ID of the labor type",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationAddress": {
+        "description": "The location address",
         "type": [
           "string",
           "null"
         ]
       },
       "locationId": {
+        "description": "The location ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationName": {
+        "description": "The location name",
         "type": [
           "string",
           "null"
         ]
       },
       "locationZip": {
+        "description": "The location zip",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "memo": {
+        "description": "The short message",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
+        "description": "Date/time (on UTC) when the gross pay item was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -576,42 +657,57 @@
         ]
       },
       "paidDurationHours": {
+        "description": "The paid duration in hours",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "paidTimeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "payoutBusinessUnitName": {
+        "description": "The payout business unit name",
         "type": [
           "string",
           "null"
         ]
       },
       "payrollId": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "The payroll ID",
+        "format": "int64",
+        "type": "integer"
       },
       "projectId": {
+        "description": "The project ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "projectNumber": {
+        "description": "The project number",
         "type": [
           "string",
           "null"
         ]
       },
+      "sourceEntityId": {
+        "description": "The source entity ID.\nWhen the GrossPayItemType is TimesheetTime, this is the Timesheet Activity ID.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "startedOn": {
+        "description": "The start time (UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -619,18 +715,30 @@
         ]
       },
       "taxZoneName": {
+        "description": "The tax zone name",
         "type": [
           "string",
           "null"
         ]
       },
       "zoneName": {
+        "description": "The zone name",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "payrollId",
+      "date",
+      "amount",
+      "grossPayItemType",
+      "jobId",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "gross_pay_items",

@@ -102,15 +102,17 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Indicates whether the timesheet is active or not",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdOn": {
+        "description": "The created date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -118,18 +120,22 @@
         ]
       },
       "employeeId": {
+        "description": "The employee/technician ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "endedOn": {
+        "description": "The end time of the timesheet (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -137,12 +143,12 @@
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "The timesheet ID",
+        "format": "int64",
+        "type": "integer"
       },
       "modifiedOn": {
+        "description": "The modified date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -150,6 +156,7 @@
         ]
       },
       "startedOn": {
+        "description": "The start time of the timesheet (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -157,12 +164,24 @@
         ]
       },
       "timesheetCodeId": {
+        "description": "The timesheet code ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "employeeId",
+      "employeeType",
+      "timesheetCodeId",
+      "startedOn",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "non_job_timesheets",

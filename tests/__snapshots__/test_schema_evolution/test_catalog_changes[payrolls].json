@@ -69,6 +69,24 @@
     {
       "breadcrumb": [
         "properties",
+        "managerApprovedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -78,7 +96,7 @@
     {
       "breadcrumb": [
         "properties",
-        "managerApprovedOn"
+        "active"
       ],
       "metadata": {
         "inclusion": "available"
@@ -102,27 +120,48 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
+      "active": {
+        "description": "Whether payroll adjustment is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "burdenRate": {
+        "description": "Burden rate of employee",
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
+      "createdOn": {
+        "description": "Date/time (on UTC) when the payroll adjustment was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "employeeId": {
+        "description": "Employee ID of the payroll",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "employeeType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "endedOn": {
+        "description": "Ended on date (UTC) of the payroll",
         "format": "date-time",
         "type": [
           "string",
@@ -130,12 +169,12 @@
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "ID of the payroll",
+        "format": "int64",
+        "type": "integer"
       },
       "managerApprovedOn": {
+        "description": "Date/time (on UTC) when the payroll was approved",
         "format": "date-time",
         "type": [
           "string",
@@ -143,6 +182,7 @@
         ]
       },
       "modifiedOn": {
+        "description": "Date/time (on UTC) when the payroll adjustment was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -150,6 +190,7 @@
         ]
       },
       "startedOn": {
+        "description": "Started on date (UTC) of the payroll",
         "format": "date-time",
         "type": [
           "string",
@@ -157,12 +198,24 @@
         ]
       },
       "status": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "startedOn",
+      "endedOn",
+      "employeeId",
+      "employeeType",
+      "status",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
     "type": "object"
   },
   "stream": "payrolls",
