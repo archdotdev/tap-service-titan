@@ -2,22 +2,23 @@
 
 from __future__ import annotations
 
-import typing as t
 from functools import cached_property
+from typing import TYPE_CHECKING
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 from typing_extensions import override
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context, Record
 
 
 class ServiceAgreementsStream(ServiceTitanExportStream):
     """Define service agreements stream."""
 
     name = "service_agreements"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -81,10 +82,10 @@ class ServiceAgreementsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/service-agreements/v2/tenant/{self._tap.config['tenant_id']}/export/service-agreements"
+        return f"/service-agreements/v2/tenant/{self.tenant_id}/export/service-agreements"
 
     @override
-    def post_process(self, row, context=None) -> dict | None:
+    def post_process(self, row: Record, context: Context | None = None) -> Record | None:
         # Fix date fields, e.g. 2025-08-01T00:00:00 -> 2025-08-01
         if start_date := row.get("startDate"):
             row["startDate"] = start_date.split("T")[0]

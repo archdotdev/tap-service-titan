@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
@@ -16,7 +15,7 @@ class InstalledEquipmentStream(ServiceTitanStream):
     """Define installed equipment stream."""
 
     name = "installed_equipment"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -62,4 +61,4 @@ class InstalledEquipmentStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/equipmentsystems/v2/tenant/{self._tap.config['tenant_id']}/installed-equipment"
+        return f"/equipmentsystems/v2/tenant/{self.tenant_id}/installed-equipment"

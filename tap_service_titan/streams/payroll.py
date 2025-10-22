@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing as t
 from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
@@ -14,7 +13,7 @@ class JobSplitsStream(ServiceTitanExportStream):
     """Define job splits stream."""
 
     name = "job_splits"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -30,14 +29,14 @@ class JobSplitsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/jobs/splits"
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/jobs/splits"
 
 
 class PayrollAdjustmentsStream(ServiceTitanExportStream):
     """Define payroll adjustments stream."""
 
     name = "payroll_adjustments"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -58,14 +57,14 @@ class PayrollAdjustmentsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/payroll-adjustments"
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/payroll-adjustments"
 
 
 class JobTimesheetsStream(ServiceTitanExportStream):
     """Define job timesheets stream."""
 
     name = "job_timesheets"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -85,16 +84,14 @@ class JobTimesheetsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/jobs/timesheets"
-        )
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/jobs/timesheets"
 
 
 class ActivityCodesStream(ServiceTitanExportStream):
     """Define activity codes stream."""
 
     name = "activity_codes"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -109,16 +106,14 @@ class ActivityCodesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/activity-codes"
-        )
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/activity-codes"
 
 
 class TimesheetCodesStream(ServiceTitanExportStream):
     """Define timesheet codes stream."""
 
     name = "timesheet_codes"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -143,16 +138,14 @@ class TimesheetCodesStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/timesheet-codes"
-        )
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/timesheet-codes"
 
 
 class GrossPayItemsStream(ServiceTitanExportStream):
     """Define gross pay items stream."""
 
     name = "gross_pay_items"
-    primary_keys: t.ClassVar[list[str]] = ["payrollId", "date"]
+    primary_keys = ("payrollId", "date")
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -201,16 +194,14 @@ class GrossPayItemsStream(ServiceTitanExportStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return (
-            f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/export/gross-pay-items"
-        )
+        return f"/payroll/v2/tenant/{self.tenant_id}/export/gross-pay-items"
 
 
 class LocationRatesStream(ServiceTitanStream):
     """Define location rates stream."""
 
     name = "location_rates"
-    primary_keys: t.ClassVar[list[str]] = ["locationId", "laborTypeCode"]
+    primary_keys = ("locationId", "laborTypeCode")
 
     schema = th.PropertiesList(
         th.Property("locationId", th.IntegerType),
@@ -224,14 +215,14 @@ class LocationRatesStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/locations/rates"
+        return f"/payroll/v2/tenant/{self.tenant_id}/locations/rates"
 
 
 class PayrollsStream(ServiceTitanStream):
     """Define payrolls stream."""
 
     name = "payrolls"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -249,14 +240,14 @@ class PayrollsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/payrolls"
+        return f"/payroll/v2/tenant/{self.tenant_id}/payrolls"
 
 
 class NonJobTimesheetsStream(ServiceTitanStream):
     """Define non-job timesheets stream."""
 
     name = "non_job_timesheets"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key: str = "modifiedOn"
 
     schema = th.PropertiesList(
@@ -274,4 +265,4 @@ class NonJobTimesheetsStream(ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/payroll/v2/tenant/{self._tap.config['tenant_id']}/non-job-timesheets"
+        return f"/payroll/v2/tenant/{self.tenant_id}/non-job-timesheets"

@@ -33,23 +33,32 @@ class EstimatesStream(ServiceTitanExportStream):
 
     @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
+        # Was polluting our context with too many items causing logs to be >500 MB per run
+        # for some tenants
         if not hasattr(self._tap, "_estimate_items_cache"):
-            self._tap._estimate_items_cache = {}
-        self._tap._estimate_items_cache[record["id"]] = record.get("items", []) # Was polluting our context with too many items causing logs to be >500 MB per run for some tenants
-        
+            self._tap._estimate_items_cache = {}  # noqa: SLF001
+        self._tap._estimate_items_cache[record["id"]] = record.get("items", [])  # noqa: SLF001
+
         return {
             "estimate_id": record["id"],
         }
 
 
 class EstimateItemsStream(Stream):
-    """Define estimate items stream as a child of estimates. It would be better if this class didn't exist and we used transformations instead as we're not actually doing a request here"""
+    """Define estimate items stream as a child of estimates.
+
+    It would be better if this class didn't exist and we used transformations instead as we're not
+    actually doing a request here.
+    """
 
     name = "estimate_items"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     parent_stream_type = EstimatesStream
-    state_partitioning_keys = []  # We don't need to partition state since we rely on parent's state
+
+    # We don't need to partition state since we rely on parent's state
+    state_partitioning_keys: t.ClassVar[list[str]] = []
+
     schema = ServiceTitanSchema(SALESTECH, key="Estimates.V2.EstimateItemResponse")
 
     @override
@@ -71,4 +80,4 @@ class EstimateItemsStream(Stream):
                 yield transformed_item
         finally:
             if hasattr(self._tap, "_estimate_items_cache"):
-                self._tap._estimate_items_cache.pop(estimate_id, None)
+                self._tap._estimate_items_cache.pop(estimate_id, None)  # noqa: SLF001

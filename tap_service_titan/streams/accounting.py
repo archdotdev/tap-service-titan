@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import sys
-import typing as t
 from functools import cached_property
+from typing import TYPE_CHECKING, Any
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import ACCOUNTING, ServiceTitanSchema
@@ -14,7 +14,7 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
@@ -150,11 +150,13 @@ class TaxZonesStream(ServiceTitanStream):
 
 
 class PageSizeLimitMixin:
+    """Mixin for streams that have a page size limit."""
+
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
+        next_page_token: Any | None,  # noqa: ANN401
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -182,8 +184,8 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: t.Any | None,
-    ) -> dict[str, t.Any]:
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -224,7 +226,9 @@ class JournalEntrySummaryStream(PageSizeLimitMixin, ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/summary"  # noqa: E501
+        return (
+            f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/summary"
+        )
 
 
 class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
@@ -240,7 +244,9 @@ class JournalEntryDetailsStream(PageSizeLimitMixin, ServiceTitanStream):
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/details"  # noqa: E501
+        return (
+            f"/accounting/v2/tenant/{self.tenant_id}/journal-entries/{{journal_entry_id}}/details"
+        )
 
 
 class InventoryBillsCustomFieldsStream(ServiceTitanStream):
