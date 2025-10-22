@@ -183,33 +183,41 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "active": {
+        "description": "Whether recurring service type is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "businessUnitId": {
+        "description": "Business unit ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "campaignId": {
+        "description": "Campaign ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdById": {
+        "description": "ID of the user that created this recurring service type",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When recurring service type was created",
         "format": "date-time",
         "type": [
           "string",
@@ -217,48 +225,57 @@
         ]
       },
       "durationLength": {
+        "description": "The recurrence duration length (number of events)",
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "durationType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "description": "Recurring service type ID",
+        "format": "int64",
+        "type": "integer"
       },
       "importId": {
+        "description": "Import ID",
         "type": [
           "string",
           "null"
         ]
       },
       "invoiceTemplateId": {
+        "description": "Invoice template ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "jobSummary": {
+        "description": "Job summary",
         "type": [
           "string",
           "null"
         ]
       },
       "jobTypeId": {
+        "description": "Job type ID",
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "modifiedOn": {
+        "description": "When recurring service type was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -266,28 +283,32 @@
         ]
       },
       "name": {
+        "description": "Recurring service type name",
         "type": [
           "string",
           "null"
         ]
       },
       "priority": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "recurrenceInterval": {
+        "description": "The recurrence interval for the given recurrence type",
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "recurrenceMonths": {
+        "description": "A list of months when the recurring service occurs, if it is a seasonal recurrence type",
         "items": {
-          "type": [
-            "string"
-          ]
+          "description": "Month name as a string, e.g. \"January\" or \"May\"",
+          "type": "string"
         },
         "type": [
           "array",
@@ -295,12 +316,25 @@
         ]
       },
       "recurrenceType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "createdOn",
+      "modifiedOn",
+      "active",
+      "recurrenceType",
+      "recurrenceInterval",
+      "recurrenceMonths",
+      "durationType",
+      "durationLength",
+      "priority"
+    ],
     "type": "object"
   },
   "stream": "recurring_service_types",
