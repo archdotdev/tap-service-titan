@@ -62,7 +62,7 @@ class JobHistoryStream(ServiceTitanExportStream):
 
     name = "job_history"
     primary_keys = ("id",)
-    replication_key: th.DateTimeType = "date"
+    replication_key = "date"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobHistoryEntry")
 
     @override

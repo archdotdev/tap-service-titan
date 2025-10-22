@@ -69,6 +69,7 @@ warn_unused_configs = true
 addopts = ["-vv"]
 
 [tool.ruff]
+line-length = 100
 src = ["tap_service_titan"]
 
 [tool.ruff.lint]
