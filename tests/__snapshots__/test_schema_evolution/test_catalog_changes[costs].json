@@ -62,39 +62,48 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "campaignId": {
+        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "dailyCost": {
+        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "id": {
-        "type": [
-          "integer",
-          "null"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "month": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "year": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       }
     },
+    "required": [
+      "id",
+      "year",
+      "month",
+      "dailyCost",
+      "campaignId"
+    ],
     "type": "object"
   },
   "stream": "costs",
