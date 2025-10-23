@@ -151,16 +151,16 @@ class ServiceTitanSchema(StreamSchema):
         if stream.name in ("campaign_performance", "keyword_performance", "adgroup_performance"):
             normalized["properties"] |= {
                 "date": {
-                    "type": "string",
-                    "format": ["date", "null"],
+                    "type": ["string", "null"],
+                    "format": "date",
                 },
                 "from_utc": {
-                    "type": "string",
-                    "format": ["date-time", "null"],
+                    "type": ["string", "null"],
+                    "format": "date-time",
                 },
                 "to_utc": {
-                    "type": "string",
-                    "format": ["date-time", "null"],
+                    "type": ["string", "null"],
+                    "format": "date-time",
                 },
                 "campaign_id": normalized["properties"]["campaign"]["properties"]["id"],
                 "campaign_name": normalized["properties"]["campaign"]["properties"]["name"],
