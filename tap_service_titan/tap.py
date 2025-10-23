@@ -155,6 +155,7 @@ class TapServiceTitan(Tap):
             streams.accounting.JournalEntrySummaryStream(self),
             streams.accounting.JournalEntryDetailsStream(self),
             streams.accounting.GLAccountsStream(self),
+            streams.accounting.GLAccountTypesStream(self),
             streams.accounting.InventoryBillsCustomFieldsStream(self),
             streams.crm.BookingProviderTagsStream(self),
             streams.crm.BookingsStream(self),
