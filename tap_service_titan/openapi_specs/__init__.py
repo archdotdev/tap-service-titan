@@ -29,6 +29,7 @@ __all__ = [
     "INVENTORY",
     "JBCE",
     "JPM",
+    "MARKETING_ADS",
     "MARKETING_REPUTATION",
     "MEMBERSHIPS",
     "PAYROLL",
@@ -147,6 +148,26 @@ class ServiceTitanSchema(StreamSchema):
         if stream.name == "categories":
             normalized["required"].remove("modifiedOn")
 
+        if stream.name in ("campaign_performance", "keyword_performance", "adgroup_performance"):
+            normalized["properties"] |= {
+                "date": {
+                    "type": "string",
+                    "format": ["date", "null"],
+                },
+                "from_utc": {
+                    "type": "string",
+                    "format": ["date-time", "null"],
+                },
+                "to_utc": {
+                    "type": "string",
+                    "format": ["date-time", "null"],
+                },
+                "campaign_id": normalized["properties"]["campaign"]["properties"]["id"],
+                "campaign_name": normalized["properties"]["campaign"]["properties"]["name"],
+                "adGroup_id": normalized["properties"]["adGroup"]["properties"]["id"],
+                "keyword_id": normalized["properties"]["keyword"]["properties"]["id"],
+            }
+
         return normalized
 
 
@@ -160,6 +181,7 @@ INVENTORY = ServiceTitanOpenAPISchema(SPECS / "inventory-v2.json")
 JBCE = ServiceTitanOpenAPISchema(SPECS / "jbce-v2.json")
 JPM = ServiceTitanOpenAPISchema(SPECS / "jpm-v2.json")
 MARKETING = ServiceTitanOpenAPISchema(SPECS / "marketing-v2.json")
+MARKETING_ADS = ServiceTitanOpenAPISchema(SPECS / "marketing-ads-v2.json")
 MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v2.json")
 MEMBERSHIPS = ServiceTitanOpenAPISchema(SPECS / "memberships-v2.json")
 PAYROLL = ServiceTitanOpenAPISchema(SPECS / "payroll-v2.json")

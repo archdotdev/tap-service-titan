@@ -64,13 +64,11 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "businessUnits": {
         "items": {
-          "type": [
-            "string"
-          ]
+          "type": "string"
         },
         "type": [
           "array",
@@ -78,30 +76,33 @@
         ]
       },
       "campaignName": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "lookaheadWindow": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "thresholdValue": {
+        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "warningType": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       }
     },
+    "required": [
+      "campaignName",
+      "warningType",
+      "businessUnits",
+      "lookaheadWindow",
+      "thresholdValue"
+    ],
     "type": "object"
   },
   "stream": "capacity_warnings",
