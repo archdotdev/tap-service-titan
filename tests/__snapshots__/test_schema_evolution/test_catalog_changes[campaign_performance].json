@@ -523,7 +523,7 @@
           "status": {
             "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
@@ -581,7 +581,7 @@
           "status": {
             "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
@@ -728,7 +728,7 @@
           "status": {
             "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
