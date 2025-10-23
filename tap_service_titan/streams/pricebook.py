@@ -6,10 +6,7 @@ from functools import cached_property
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import PRICEBOOK, ServiceTitanSchema
 
 
@@ -305,7 +302,7 @@ class ServicesStream(ServiceTitanStream):
     name = "services"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ServiceResponse")
+    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ServiceGetResponse")
 
     @cached_property
     def path(self) -> str:
