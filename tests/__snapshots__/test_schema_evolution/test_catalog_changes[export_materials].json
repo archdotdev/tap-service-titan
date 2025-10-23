@@ -537,7 +537,7 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "account": {
         "description": "The accounting account assigned to the SKU",
@@ -549,19 +549,24 @@
       "active": {
         "description": "Active shows if the SKU is active or inactive",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "addOnMemberPrice": {
         "description": "The price if the SKU is sold to a member as an add-on item",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "addOnPrice": {
         "description": "The price of the SKU is sold as an add-on item",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "assetAccount": {
@@ -573,7 +578,7 @@
       "assets": {
         "description": "Images, videos or PDFs attached to SKU",
         "items": {
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "alias": {
               "description": "Asset alias",
@@ -592,19 +597,22 @@
             "isDefault": {
               "description": "It is the default asset",
               "type": [
-                "boolean"
+                "boolean",
+                "null"
               ]
             },
             "type": {
-              "description": "Asset type - image, video or PDF",
+              "description": "",
               "type": [
-                "string"
+                "string",
+                "null"
               ]
             },
             "url": {
               "description": "Asset URL",
               "type": [
-                "string"
+                "string",
+                "null"
               ]
             }
           },
@@ -613,14 +621,22 @@
             "type",
             "url"
           ],
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "bonus": {
         "description": "Flat rate bonus paid for this task",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "budgetCostCode": {
@@ -639,6 +655,7 @@
       },
       "businessUnitId": {
         "description": "Material's business unit id",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -647,34 +664,42 @@
       "categories": {
         "description": "Categories that this SKU belongs to",
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "chargeableByDefault": {
         "description": "Shows if material is going to be chargeable by default on Estimate or Invoice",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "code": {
         "description": "Code for the SKU",
         "type": [
-          "string"
+          "string",
+          "null"
         ]
       },
       "commissionBonus": {
         "description": "Percentage rate bonus paid for this task",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "cost": {
         "description": "The cost paid to acquire the material",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "costOfSaleAccount": {
@@ -685,6 +710,7 @@
       },
       "costTypeId": {
         "description": "The Cost Type of this Other Direct Cost",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -692,21 +718,25 @@
       },
       "createdById": {
         "description": "Material's created by user id",
+        "format": "int64",
         "type": [
-          "integer"
+          "integer",
+          "null"
         ]
       },
       "createdOn": {
         "description": "Date Material was created",
         "format": "date-time",
         "type": [
-          "string"
+          "string",
+          "null"
         ]
       },
       "deductAsJobCost": {
         "description": "Is this deducted as job cost",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "defaultAssetUrl": {
@@ -718,14 +748,17 @@
       },
       "description": {
         "description": "Description on the SKU that is displayed with the item",
+        "format": "html",
         "type": [
-          "string"
+          "string",
+          "null"
         ]
       },
       "displayInAmount": {
         "description": "Shows if material is going to be displayed in amount",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "displayName": {
@@ -736,20 +769,22 @@
         ]
       },
       "externalData": {
-        "description": "List of external data attached to this job, that corresponds to the application guid provided in the request.",
+        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
         "items": {
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "key": {
               "description": "External data key.",
               "type": [
-                "string"
+                "string",
+                "null"
               ]
             },
             "value": {
               "description": "External data value.",
               "type": [
-                "string"
+                "string",
+                "null"
               ]
             }
           },
@@ -757,7 +792,10 @@
             "key",
             "value"
           ],
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "type": [
           "array",
@@ -773,6 +811,7 @@
       },
       "generalLedgerAccountId": {
         "description": "Material's General Ledger Account Id",
+        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -780,64 +819,77 @@
       },
       "hours": {
         "description": "The number of hours associated with the installing the material",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "id": {
         "description": "Unique id for the SKU",
-        "type": [
-          "integer"
-        ]
+        "format": "int64",
+        "type": "integer"
       },
       "isConfigurableMaterial": {
         "description": "Shows if is a Configurable Material",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "isInventory": {
         "description": "Is this material a part of your inventory",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "isOtherDirectCost": {
         "description": "Shows if is Other Direct Cost",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "memberPrice": {
         "description": "The price if the item is sold to a member",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "modifiedOn": {
         "description": "Timestamp where the item was last modified",
         "format": "date-time",
         "type": [
-          "string"
+          "string",
+          "null"
         ]
       },
       "otherVendors": {
+        "description": "Other vendors that you might go to acquire this SKU",
         "items": {
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "active": {
               "type": [
-                "boolean"
+                "boolean",
+                "null"
               ]
             },
             "cost": {
+              "format": "decimal",
               "type": [
-                "number"
+                "number",
+                "null"
               ]
             },
             "id": {
+              "format": "int64",
               "type": [
-                "integer"
+                "integer",
+                "null"
               ]
             },
             "memo": {
@@ -848,21 +900,26 @@
             },
             "otherSubAccounts": {
               "items": {
-                "additionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                   "accountName": {
                     "type": [
-                      "string"
+                      "string",
+                      "null"
                     ]
                   },
                   "cost": {
+                    "format": "decimal",
                     "type": [
-                      "number"
+                      "number",
+                      "null"
                     ]
                   },
                   "id": {
+                    "format": "int64",
                     "type": [
-                      "integer"
+                      "integer",
+                      "null"
                     ]
                   }
                 },
@@ -871,7 +928,10 @@
                   "cost",
                   "accountName"
                 ],
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "type": [
                 "array",
@@ -879,21 +939,26 @@
               ]
             },
             "primarySubAccount": {
-              "additionalProperties": true,
+              "additionalProperties": false,
               "properties": {
                 "accountName": {
                   "type": [
-                    "string"
+                    "string",
+                    "null"
                   ]
                 },
                 "cost": {
+                  "format": "decimal",
                   "type": [
-                    "number"
+                    "number",
+                    "null"
                   ]
                 },
                 "id": {
+                  "format": "int64",
                   "type": [
-                    "integer"
+                    "integer",
+                    "null"
                   ]
                 }
               },
@@ -908,13 +973,16 @@
               ]
             },
             "vendorId": {
+              "format": "int64",
               "type": [
-                "integer"
+                "integer",
+                "null"
               ]
             },
             "vendorName": {
               "type": [
-                "string"
+                "string",
+                "null"
               ]
             },
             "vendorPart": {
@@ -931,7 +999,10 @@
             "cost",
             "active"
           ],
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "type": [
           "array",
@@ -941,31 +1012,40 @@
       "paysCommission": {
         "description": "PaysCommissions shows if this task pays commission",
         "type": [
-          "boolean"
+          "boolean",
+          "null"
         ]
       },
       "price": {
         "description": "Price of this SKU sold",
+        "format": "decimal",
         "type": [
-          "number"
+          "number",
+          "null"
         ]
       },
       "primaryVendor": {
-        "additionalProperties": true,
+        "additionalProperties": false,
+        "description": "The primary vendor you use to acquire this SKU",
         "properties": {
           "active": {
             "type": [
-              "boolean"
+              "boolean",
+              "null"
             ]
           },
           "cost": {
+            "format": "decimal",
             "type": [
-              "number"
+              "number",
+              "null"
             ]
           },
           "id": {
+            "format": "int64",
             "type": [
-              "integer"
+              "integer",
+              "null"
             ]
           },
           "memo": {
@@ -976,21 +1056,26 @@
           },
           "otherSubAccounts": {
             "items": {
-              "additionalProperties": true,
+              "additionalProperties": false,
               "properties": {
                 "accountName": {
                   "type": [
-                    "string"
+                    "string",
+                    "null"
                   ]
                 },
                 "cost": {
+                  "format": "decimal",
                   "type": [
-                    "number"
+                    "number",
+                    "null"
                   ]
                 },
                 "id": {
+                  "format": "int64",
                   "type": [
-                    "integer"
+                    "integer",
+                    "null"
                   ]
                 }
               },
@@ -999,7 +1084,10 @@
                 "cost",
                 "accountName"
               ],
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "type": [
               "array",
@@ -1007,21 +1095,26 @@
             ]
           },
           "primarySubAccount": {
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "accountName": {
                 "type": [
-                  "string"
+                  "string",
+                  "null"
                 ]
               },
               "cost": {
+                "format": "decimal",
                 "type": [
-                  "number"
+                  "number",
+                  "null"
                 ]
               },
               "id": {
+                "format": "int64",
                 "type": [
-                  "integer"
+                  "integer",
+                  "null"
                 ]
               }
             },
@@ -1036,13 +1129,16 @@
             ]
           },
           "vendorId": {
+            "format": "int64",
             "type": [
-              "integer"
+              "integer",
+              "null"
             ]
           },
           "vendorName": {
             "type": [
-              "string"
+              "string",
+              "null"
             ]
           },
           "vendorPart": {
@@ -1088,9 +1184,8 @@
       "variationsOrConfigurableMaterials": {
         "description": "List of added Variations if is a Configurable Material, or else the List of Configurable Materials assigned to",
         "items": {
-          "type": [
-            "integer"
-          ]
+          "format": "int64",
+          "type": "integer"
         },
         "type": [
           "array",
