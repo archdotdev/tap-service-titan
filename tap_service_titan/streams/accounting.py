@@ -66,7 +66,7 @@ class InventoryBillsStream(ServiceTitanExportStream):
 
     name = "inventory_bills"
     primary_keys = ("id",)
-    replication_key: str = "createdOn"
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExportInventoryBillResponse")
 
     @cached_property

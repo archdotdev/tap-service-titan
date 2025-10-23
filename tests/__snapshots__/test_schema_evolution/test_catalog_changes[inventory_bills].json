@@ -108,7 +108,7 @@
         "createdOn"
       ],
       "metadata": {
-        "inclusion": "automatic"
+        "inclusion": "available"
       }
     },
     {
@@ -117,7 +117,7 @@
         "modifiedOn"
       ],
       "metadata": {
-        "inclusion": "available"
+        "inclusion": "automatic"
       }
     },
     {
@@ -412,12 +412,12 @@
           "id"
         ],
         "valid-replication-keys": [
-          "createdOn"
+          "modifiedOn"
         ]
       }
     }
   ],
-  "replication_key": "createdOn",
+  "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
     "additionalProperties": false,
