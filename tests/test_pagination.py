@@ -2,27 +2,19 @@
 
 from __future__ import annotations
 
-import warnings
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
-import pytest
 import requests
 import time_machine
 
 from tap_service_titan.streams.dispatch import CapacitiesPaginator
 
-if TYPE_CHECKING:
-    from pytest_subtests import SubTests
 
-
-def test_capacities_paginator(subtests: SubTests) -> None:
+def test_capacities_paginator() -> None:
     """Test capacities paginator."""
     fake_now = datetime(2025, 1, 25, tzinfo=timezone.utc)
-    fourteen_days_ago = fake_now - timedelta(days=14)
     three_days_ago = fake_now - timedelta(days=3)
-    twenty_days_ago = fake_now - timedelta(days=20)
     seven_days_from_now = fake_now + timedelta(days=7)
     response = Mock(spec=requests.Response)
 
