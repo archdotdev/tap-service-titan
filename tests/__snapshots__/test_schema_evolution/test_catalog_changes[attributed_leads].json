@@ -101,6 +101,28 @@
         "properties",
         "attribution",
         "properties",
+        "gbraid"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "attribution",
+        "properties",
+        "wbraid"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "attribution",
+        "properties",
         "stCampaignId"
       ],
       "metadata": {
@@ -423,10 +445,10 @@
   "replication_key": "dateTime",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
     "properties": {
       "attribution": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "adGroupId": {
             "type": [
@@ -441,18 +463,26 @@
             ]
           },
           "attributionOverwriteId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "attributionOverwriteType": {
+            "description": "",
             "type": [
               "string",
               "null"
             ]
           },
           "clickId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gbraid": {
             "type": [
               "string",
               "null"
@@ -483,6 +513,7 @@
             ]
           },
           "overwrittenBookingJobId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -495,6 +526,7 @@
             ]
           },
           "stCampaignId": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -517,17 +549,39 @@
               "string",
               "null"
             ]
+          },
+          "wbraid": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
+        "required": [
+          "utmSource",
+          "utmMedium",
+          "utmCampaign",
+          "landingPageUrl",
+          "referrerUrl",
+          "clickId",
+          "gbraid",
+          "wbraid",
+          "originalCampaign",
+          "adGroupId",
+          "adGroupName",
+          "keywordId",
+          "keywordName"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "booking": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -540,7 +594,7 @@
         ]
       },
       "call": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "callerNumber": {
             "type": [
@@ -561,6 +615,7 @@
             ]
           },
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -585,15 +640,24 @@
             ]
           }
         },
+        "required": [
+          "duration",
+          "type",
+          "source",
+          "callerNumber",
+          "trackingNumber",
+          "excusedReason"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "customer": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -606,6 +670,9 @@
             ]
           }
         },
+        "required": [
+          "name"
+        ],
         "type": [
           "object",
           "null"
@@ -613,15 +680,13 @@
       },
       "dateTime": {
         "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": "string"
       },
       "job": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "id": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -634,15 +699,19 @@
             ]
           }
         },
+        "required": [
+          "name"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "leadForm": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "leadNumber": {
+            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -661,18 +730,33 @@
             ]
           }
         },
+        "required": [
+          "leadStatus",
+          "notes"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "leadType": {
+        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
+    "required": [
+      "dateTime",
+      "leadType",
+      "attribution",
+      "job",
+      "customer",
+      "call",
+      "leadForm",
+      "booking"
+    ],
     "type": "object"
   },
   "stream": "attributed_leads",

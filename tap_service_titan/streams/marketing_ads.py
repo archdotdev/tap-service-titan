@@ -2,20 +2,20 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
+from typing import TYPE_CHECKING, Any
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers.types import Context  # noqa: TC002
+from tap_service_titan.client import DateRange, DateRangePaginator, ServiceTitanStream
+from tap_service_titan.openapi_specs import MARKETING_ADS, ServiceTitanSchema
 
-from tap_service_titan.client import (
-    DateRange,
-    DateRangePaginator,
-    ServiceTitanStream,
-)
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from singer_sdk.helpers import types
 
 
@@ -25,94 +25,25 @@ class AttributedLeadsStream(ServiceTitanStream):
     name = "attributed_leads"
     primary_keys: tuple[str] = ("dateTime",)
     replication_key: str = "dateTime"
+    schema = ServiceTitanSchema(
+        MARKETING_ADS,
+        # https://developer.servicetitan.io/api-details/#api=tenant-marketing-ads-v2&operation=AttributedLeads_Get&definition=Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse
+        key="Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("dateTime", th.DateTimeType),
-        th.Property("leadType", th.StringType),
-        th.Property(
-            "attribution",
-            th.ObjectType(
-                th.Property("utmSource", th.StringType),
-                th.Property("utmMedium", th.StringType),
-                th.Property("utmCampaign", th.StringType),
-                th.Property("landingPageUrl", th.StringType),
-                th.Property("referrerUrl", th.StringType),
-                th.Property("clickId", th.StringType),
-                th.Property("stCampaignId", th.IntegerType),
-                th.Property("originalCampaign", th.StringType),
-                th.Property("attributionOverwriteType", th.StringType),
-                th.Property("attributionOverwriteId", th.IntegerType),
-                th.Property("overwrittenBookingJobId", th.IntegerType),
-                th.Property("adGroupId", th.StringType),
-                th.Property("adGroupName", th.StringType),
-                th.Property("keywordId", th.StringType),
-                th.Property("keywordName", th.StringType),
-            ),
-        ),
-        th.Property(
-            "job",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "customer",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-            ),
-        ),
-        th.Property(
-            "call",
-            th.ObjectType(
-                th.Property("duration", th.StringType),
-                th.Property("id", th.IntegerType),
-                th.Property("type", th.StringType),
-                th.Property("source", th.StringType),
-                th.Property("callerNumber", th.StringType),
-                th.Property("trackingNumber", th.StringType),
-                th.Property("excusedReason", th.StringType),
-            ),
-        ),
-        th.Property(
-            "leadForm",
-            th.ObjectType(
-                th.Property("leadNumber", th.IntegerType),
-                th.Property("leadStatus", th.StringType),
-                th.Property("notes", th.StringType),
-            ),
-        ),
-        th.Property(
-            "booking",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-            ),
-        ),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/marketingads/v2/tenant/{self.tenant_id}/attributed-leads"
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: types.Context | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         params: dict = super().get_url_params(context, next_page_token)
-
         params["fromUtc"] = params.pop("modifiedOnOrAfter")
         params["toUtc"] = datetime.now(timezone.utc).isoformat()
         return params
@@ -123,15 +54,13 @@ class CapacityWarningsStream(ServiceTitanStream):
 
     name = "capacity_warnings"
     primary_keys: tuple[str, str] = ("campaignName", "warningType")
+    schema = ServiceTitanSchema(
+        MARKETING_ADS,
+        # https://developer.servicetitan.io/api-details/#api=tenant-marketing-ads-v2&operation=CapacityAwarenessWarning_Get&definition=Marketing.Ads.Client.CapacityAwarenessWarning
+        key="Marketing.Ads.Client.CapacityAwarenessWarning",
+    )
 
-    schema = th.PropertiesList(
-        th.Property("campaignName", th.StringType),
-        th.Property("warningType", th.StringType),
-        th.Property("businessUnits", th.ArrayType(th.StringType)),
-        th.Property("lookaheadWindow", th.IntegerType),
-        th.Property("thresholdValue", th.IntegerType),
-    ).to_dict()
-
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -145,74 +74,14 @@ class _PerformanceStream(ServiceTitanStream):
     primary_keys: tuple[str, ...] = ()
     replication_key: str = "from_utc"
 
-    schema = th.PropertiesList(
-        th.Property("date", th.DateType),
-        th.Property("from_utc", th.DateTimeType),
-        th.Property("to_utc", th.DateTimeType),
-        th.Property("campaign_id", th.IntegerType),
-        th.Property("campaign_name", th.StringType),
-        th.Property("adGroup_id", th.StringType),
-        th.Property("keyword_id", th.StringType),
-        th.Property(
-            "campaign",
-            th.ObjectType(
-                th.Property("id", th.IntegerType),
-                th.Property("name", th.StringType),
-                th.Property("category", th.StringType),
-                th.Property("launchDate", th.StringType),
-                th.Property("status", th.IntegerType),
-            ),
-        ),
-        th.Property(
-            "adGroup",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("name", th.StringType),
-                th.Property("status", th.IntegerType),
-            ),
-        ),
-        th.Property(
-            "keyword",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("name", th.StringType),
-                th.Property("status", th.IntegerType),
-            ),
-        ),
-        th.Property(
-            "digitalStats",
-            th.ObjectType(
-                th.Property("impressionShare", th.NumberType),
-                th.Property("impressions", th.IntegerType),
-                th.Property("clicks", th.IntegerType),
-                th.Property("averageCPC", th.NumberType),
-                th.Property("conversions", th.IntegerType),
-                th.Property("allConversions", th.NumberType),
-                th.Property("cost", th.NumberType),
-                th.Property("clickRate", th.NumberType),
-                th.Property("costPerConversion", th.NumberType),
-                th.Property("conversionRate", th.NumberType),
-            ),
-        ),
-        th.Property(
-            "leadStats",
-            th.ObjectType(
-                th.Property("leads", th.IntegerType),
-                th.Property("leadCalls", th.IntegerType),
-                th.Property("onlineBooking", th.IntegerType),
-                th.Property("manualBooking", th.IntegerType),
-                th.Property("bookedJobs", th.IntegerType),
-                th.Property("ranJobs", th.IntegerType),
-                th.Property("soldJobs", th.IntegerType),
-                th.Property("revenue", th.NumberType),
-                th.Property("bookingRate", th.NumberType),
-                th.Property("avgTicket", th.NumberType),
-            ),
-        ),
-        th.Property("returnOnInvestment", th.NumberType),
-    ).to_dict()
+    schema = ServiceTitanSchema(
+        MARKETING_ADS,
+        # https://developer.servicetitan.io/api-details/#api=tenant-marketing-ads-v2&operation=Performance_Get&definition=Marketing.Ads.Contracts.Performance.GetPerformanceResponse
+        key="Marketing.Ads.Contracts.Performance.GetPerformanceResponse",
+    )
 
-    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
+    @override
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Add report end time for consistency."""
         super().__init__(*args, **kwargs)
         self.end_time = datetime.now(timezone.utc)
@@ -231,7 +100,7 @@ class _PerformanceStream(ServiceTitanStream):
         """Get default start date when none is provided."""
         return datetime.now(timezone.utc) - timedelta(days=30)
 
-    def _get_effective_start_date(self, context: Context | None = None) -> datetime:
+    def _get_effective_start_date(self, context: types.Context | None = None) -> datetime:
         """Get the effective start date for the current context."""
         if start_date := self.get_starting_timestamp(context):
             effective_start_date = start_date
@@ -240,15 +109,17 @@ class _PerformanceStream(ServiceTitanStream):
 
         return effective_start_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/marketingads/v2/tenant/{self.tenant_id}/performance"
 
+    @override
     def post_process(
         self,
         row: types.Record,
-        context: types.Context | None = None,  # noqa: ARG002
+        context: types.Context | None = None,
     ) -> dict | None:
         """Process the record to add top-level IDs.
 
@@ -268,27 +139,19 @@ class _PerformanceStream(ServiceTitanStream):
         row["to_utc"] = self.paginator.current_value.end
         return row
 
+    @override
     def get_new_paginator(self) -> DateRangePaginator:
         """Create a new pagination helper instance for date ranges."""
         start_date = self._get_effective_start_date(self.context)
         self._paginator = DateRangePaginator(start_date, self.interval, self.end_time)
         return self._paginator
 
+    @override
     def get_url_params(
         self,
-        context: Context | None,  # noqa: ARG002
+        context: types.Context | None,
         next_page_token: DateRange | None,
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value (DateRange object).
-
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+    ) -> dict[str, Any]:
         params: dict = {}
 
         if next_page_token is None:
@@ -307,21 +170,12 @@ class CampaignPerformanceStream(_PerformanceStream):
     name = "campaign_performance"
     primary_keys: tuple[str, str] = ("campaign_id", "date")
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: types.Context | None,
+        next_page_token: DateRange | None,
+    ) -> dict[str, Any]:
         params: dict = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "Campaign"
         return params
@@ -333,21 +187,12 @@ class KeywordPerformanceStream(_PerformanceStream):
     name = "keyword_performance"
     primary_keys: tuple[str, str] = ("keyword_id", "date")
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: types.Context | None,
+        next_page_token: DateRange | None,
+    ) -> dict[str, Any]:
         params: dict = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "Keyword"
         return params
@@ -359,21 +204,12 @@ class AdGroupPerformanceStream(_PerformanceStream):
     name = "adgroup_performance"
     primary_keys: tuple[str, str] = ("adGroup_id", "date")
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
+        context: types.Context | None,
+        next_page_token: DateRange | None,
+    ) -> dict[str, Any]:
         params: dict = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "AdGroup"
         return params
