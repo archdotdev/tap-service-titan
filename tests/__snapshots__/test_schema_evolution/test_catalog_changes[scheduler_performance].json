@@ -24,105 +24,6 @@
     {
       "breadcrumb": [
         "properties",
-        "brandName"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "schedulerCompletionRate"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "openedCompletionRate"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalCustomerContactsCaptured"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalJobsCreated"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalBookingsCreated"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalAbandonedSessionsSentToBookings"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalAbandonedSessionsSentToLeads"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalBookingsRecoveredFromAbandonedSessions"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalJobsRecoveredFromAbandonedSessions"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "totalMembershipInterest"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "totalSessions"
       ],
       "metadata": {
@@ -132,7 +33,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount"
+        "completedSessions"
       ],
       "metadata": {
         "inclusion": "available"
@@ -141,9 +42,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "opened"
+        "bookedSessions"
       ],
       "metadata": {
         "inclusion": "available"
@@ -152,9 +51,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "zipcode"
+        "abandonedSessions"
       ],
       "metadata": {
         "inclusion": "available"
@@ -163,9 +60,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "interacted"
+        "completionRate"
       ],
       "metadata": {
         "inclusion": "available"
@@ -174,9 +69,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "issue"
+        "bookingRate"
       ],
       "metadata": {
         "inclusion": "available"
@@ -185,9 +78,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "schedule"
+        "abandonmentRate"
       ],
       "metadata": {
         "inclusion": "available"
@@ -196,9 +87,7 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
-        "properties",
-        "customer"
+        "funnelMetrics"
       ],
       "metadata": {
         "inclusion": "available"
@@ -207,9 +96,9 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
+        "funnelMetrics",
         "properties",
-        "details"
+        "landingPageViews"
       ],
       "metadata": {
         "inclusion": "available"
@@ -218,9 +107,9 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
+        "funnelMetrics",
         "properties",
-        "booked"
+        "customerInfoStarts"
       ],
       "metadata": {
         "inclusion": "available"
@@ -229,9 +118,91 @@
     {
       "breadcrumb": [
         "properties",
-        "milestoneFrequencyCount",
+        "funnelMetrics",
         "properties",
-        "abandoned"
+        "customerInfoCompletes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "timeslotSelections"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "confirmationViews"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "funnelMetrics",
+        "properties",
+        "bookingCompletes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration",
+        "properties",
+        "minutes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "averageSessionDuration",
+        "properties",
+        "seconds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateRangeStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dateRangeEnd"
       ],
       "metadata": {
         "inclusion": "available"
@@ -251,225 +222,143 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-      "brandName": {
-        "description": "Brand Name",
+      "abandonedSessions": {
         "type": [
-          "string",
+          "integer",
           "null"
         ]
       },
-      "id": {
-        "description": "Scheduler ID",
-        "type": "string"
+      "abandonmentRate": {
+        "type": [
+          "number",
+          "null"
+        ]
       },
-      "milestoneFrequencyCount": {
-        "additionalProperties": false,
-        "description": "Milestone Frequency Count",
+      "averageSessionDuration": {
+        "additionalProperties": true,
         "properties": {
-          "abandoned": {
-            "description": "The total number of sessions that have been abandoned",
-            "format": "int32",
+          "minutes": {
             "type": [
               "integer",
               "null"
             ]
           },
-          "booked": {
-            "description": "The total number of sessions that have reached the Booked milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "customer": {
-            "description": "The total number of sessions that have reached the Customer milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "details": {
-            "description": "The total number of sessions that have reached the Details milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "interacted": {
-            "description": "The total number of sessions that have reached the Interacted milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "issue": {
-            "description": "The total number of sessions that have reached the Issue milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "opened": {
-            "description": "The total number of sessions that have reached the Opened milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "schedule": {
-            "description": "The total number of sessions that have reached the Schedule milestone",
-            "format": "int32",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "zipcode": {
-            "description": "The total number of sessions that have reached the Zipcode milestone",
-            "format": "int32",
+          "seconds": {
             "type": [
               "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "opened",
-          "zipcode",
-          "interacted",
-          "issue",
-          "schedule",
-          "customer",
-          "details",
-          "booked",
-          "abandoned"
-        ],
         "type": [
           "object",
           "null"
         ]
       },
-      "openedCompletionRate": {
-        "description": "Opened Completion Rate",
-        "format": "double",
+      "bookedSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bookingRate": {
         "type": [
           "number",
           "null"
         ]
       },
-      "schedulerCompletionRate": {
-        "description": "Scheduler Completion Rate",
-        "format": "double",
+      "completedSessions": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "completionRate": {
         "type": [
           "number",
           "null"
         ]
       },
-      "schedulerName": {
-        "description": "Scheduler Name",
+      "dateRangeEnd": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
-      "totalAbandonedSessionsSentToBookings": {
-        "description": "The total number of bookings created from abandoned sessions",
-        "format": "int32",
+      "dateRangeStart": {
+        "format": "date-time",
         "type": [
-          "integer",
+          "string",
           "null"
         ]
       },
-      "totalAbandonedSessionsSentToLeads": {
-        "description": "The total number of leads created from abandoned sessions",
-        "format": "int32",
+      "funnelMetrics": {
+        "additionalProperties": true,
+        "properties": {
+          "bookingCompletes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "confirmationViews": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "customerInfoCompletes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "customerInfoStarts": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "landingPageViews": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "timeslotSelections": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
         "type": [
-          "integer",
+          "object",
           "null"
         ]
       },
-      "totalBookingsCreated": {
-        "description": "The total number of bookings created",
-        "format": "int32",
+      "id": {
         "type": [
-          "integer",
+          "string",
           "null"
         ]
       },
-      "totalBookingsRecoveredFromAbandonedSessions": {
-        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session recovery SMS",
-        "format": "int32",
+      "schedulerName": {
         "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "totalCustomerContactsCaptured": {
-        "description": "The total number of customer contacts captured",
-        "format": "int32",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "totalJobsCreated": {
-        "description": "The total number of jobs created",
-        "format": "int32",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "totalJobsRecoveredFromAbandonedSessions": {
-        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session recovery SMS",
-        "format": "int32",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "totalMembershipInterest": {
-        "description": "The total number of membership interest",
-        "format": "int32",
-        "type": [
-          "integer",
+          "string",
           "null"
         ]
       },
       "totalSessions": {
-        "description": "The total number of sessions",
-        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "schedulerName",
-      "brandName",
-      "schedulerCompletionRate",
-      "openedCompletionRate",
-      "totalCustomerContactsCaptured",
-      "totalJobsCreated",
-      "totalBookingsCreated",
-      "totalAbandonedSessionsSentToBookings",
-      "totalAbandonedSessionsSentToLeads",
-      "totalBookingsRecoveredFromAbandonedSessions",
-      "totalJobsRecoveredFromAbandonedSessions",
-      "totalMembershipInterest",
-      "totalSessions",
-      "milestoneFrequencyCount"
-    ],
     "type": "object"
   },
   "stream": "scheduler_performance",

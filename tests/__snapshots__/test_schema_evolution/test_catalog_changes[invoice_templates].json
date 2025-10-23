@@ -111,25 +111,21 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether invoice template is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdById": {
-        "description": "ID of the user that created invoice template",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "Invoice template creation date",
         "format": "date-time",
         "type": [
           "string",
@@ -137,127 +133,95 @@
         ]
       },
       "id": {
-        "description": "Invoice template ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "importId": {
-        "description": "Import ID",
         "type": [
           "string",
           "null"
         ]
       },
       "isSettingsTemplate": {
-        "description": "Whether invoice template is shared (i.e. visible on the Settings page)",
         "type": [
           "boolean",
           "null"
         ]
       },
       "items": {
-        "description": "A list of invoice template items",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "cost": {
-              "description": "Materials cost",
-              "format": "decimal",
               "type": [
                 "number",
                 "null"
               ]
             },
             "description": {
-              "description": "Item description",
-              "format": "html",
               "type": [
                 "string",
                 "null"
               ]
             },
             "hours": {
-              "description": "Sold/billable hours",
-              "format": "decimal",
               "type": [
                 "number",
                 "null"
               ]
             },
             "id": {
-              "description": "Invoice template item ID",
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "importId": {
-              "description": "Import ID",
               "type": [
                 "string",
                 "null"
               ]
             },
             "isAddOn": {
-              "description": "Whether invoice item is add-on",
               "type": [
                 "boolean",
                 "null"
               ]
             },
             "quantity": {
-              "description": "Quantity",
-              "format": "decimal",
               "type": [
                 "number",
                 "null"
               ]
             },
             "skuId": {
-              "description": "Linked SKU ID",
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "skuType": {
-              "description": "",
               "type": [
                 "string",
                 "null"
               ]
             },
             "unitPrice": {
-              "description": "Unit price",
-              "format": "decimal",
               "type": [
                 "number",
                 "null"
               ]
             },
             "workflowActionItemId": {
-              "description": "The invoice item ID that created this invoice template item via ModifyMembershipWorkflowAction",
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             }
           },
-          "required": [
-            "id",
-            "skuId",
-            "skuType",
-            "quantity",
-            "unitPrice",
-            "isAddOn"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -265,7 +229,6 @@
         ]
       },
       "modifiedOn": {
-        "description": "Invoice template modification date",
         "format": "date-time",
         "type": [
           "string",
@@ -273,30 +236,18 @@
         ]
       },
       "name": {
-        "description": "Invoice template name (used only for shared invoice templates)",
         "type": [
           "string",
           "null"
         ]
       },
       "total": {
-        "description": "Invoice template total",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "createdOn",
-      "modifiedOn",
-      "active",
-      "total",
-      "isSettingsTemplate",
-      "items"
-    ],
     "type": "object"
   },
   "stream": "invoice_templates",

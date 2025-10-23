@@ -327,57 +327,45 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "activatedFromId": {
-        "description": "ID of the invoice item that is the sale task of this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "active": {
-        "description": "Whether recurring service is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "allocation": {
-        "description": "Recurring service allocation",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "businessUnitId": {
-        "description": "Business unit ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "campaignId": {
-        "description": "Campaign ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdById": {
-        "description": "ID of the user that created this recurring service",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "When recurring service was created",
         "format": "date-time",
         "type": [
           "string",
@@ -385,37 +373,30 @@
         ]
       },
       "durationLength": {
-        "description": "The duration length for the given duration type",
-        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "durationType": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "estimatedPayrollCost": {
-        "description": "Estimated payroll cost",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "firstVisitComplete": {
-        "description": "Whether first visit is complete",
         "type": [
           "boolean",
           "null"
         ]
       },
       "from": {
-        "description": "Beginning date of recurring service",
         "format": "date-time",
         "type": [
           "string",
@@ -423,81 +404,66 @@
         ]
       },
       "id": {
-        "description": "Recurring service ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "importId": {
-        "description": "Internal import ID label",
         "type": [
           "string",
           "null"
         ]
       },
       "invoiceTemplateForFollowingYearsId": {
-        "description": "Invoice template ID for the 2nd year and following (for ongoing memberships)",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "invoiceTemplateId": {
-        "description": "Invoice template ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "jobStartTime": {
-        "description": "Job start time",
-        "format": "duration",
         "type": [
           "string",
           "null"
         ]
       },
       "jobSummary": {
-        "description": "Job summary",
         "type": [
           "string",
           "null"
         ]
       },
       "jobTypeId": {
-        "description": "Job type ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationId": {
-        "description": "Location ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "membershipId": {
-        "description": "Customer membership ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "memo": {
-        "description": "Memo",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "When recurring service was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -505,31 +471,28 @@
         ]
       },
       "name": {
-        "description": "Recurring service name",
         "type": [
           "string",
           "null"
         ]
       },
       "priority": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "recurrenceDayOfNthWeek": {
-        "description": "Day of week as a string, e.g. \"Monday\" or \"Thursday\"",
         "type": [
           "string",
           "null"
         ]
       },
       "recurrenceDaysOfMonth": {
-        "description": "A list of days of the month on which this recurring service recurs when\nRecurrenceType is Monthly.",
         "items": {
-          "format": "int32",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
         "type": [
           "array",
@@ -537,10 +500,10 @@
         ]
       },
       "recurrenceDaysOfWeek": {
-        "description": "A list specifying which days of the week this recurring service recurs when\nRecurrenceType is Weekly",
         "items": {
-          "description": "Day of week as a string, e.g. \"Monday\" or \"Thursday\"",
-          "type": "string"
+          "type": [
+            "string"
+          ]
         },
         "type": [
           "array",
@@ -548,18 +511,16 @@
         ]
       },
       "recurrenceInterval": {
-        "description": "The recurrence interval for the given recurrence type.\nCan be 0 when RecurrenceType is Seasonal.",
-        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "recurrenceMonths": {
-        "description": "A list of months when the recurring service occurs, if it is a seasonal recurrence type",
         "items": {
-          "description": "Month name as a string, e.g. \"January\" or \"May\"",
-          "type": "string"
+          "type": [
+            "string"
+          ]
         },
         "type": [
           "array",
@@ -567,29 +528,24 @@
         ]
       },
       "recurrenceType": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "recurrenceWeek": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "recurringServiceTypeId": {
-        "description": "Recurring Service Type ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "to": {
-        "description": "End date of recurring service",
         "format": "date-time",
         "type": [
           "string",
@@ -597,26 +553,6 @@
         ]
       }
     },
-    "required": [
-      "id",
-      "name",
-      "active",
-      "createdOn",
-      "modifiedOn",
-      "locationId",
-      "recurringServiceTypeId",
-      "durationType",
-      "durationLength",
-      "firstVisitComplete",
-      "allocation",
-      "priority",
-      "recurrenceType",
-      "recurrenceInterval",
-      "recurrenceMonths",
-      "recurrenceDaysOfWeek",
-      "recurrenceWeek",
-      "recurrenceDaysOfMonth"
-    ],
     "type": "object"
   },
   "stream": "recurring_services",

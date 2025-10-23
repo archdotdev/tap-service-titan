@@ -354,64 +354,51 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "activatedById": {
-        "description": "ID of the user that activated this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "activatedFromId": {
-        "description": "ID of the invoice item that is the sale task of this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "active": {
-        "description": "Whether customer membership is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "billingFrequency": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "billingTemplateId": {
-        "description": "ID of the invoice template used for membership billing",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "businessUnitId": {
-        "description": "Business unit ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "cancellationBalanceInvoiceId": {
-        "description": "Cancellation balance invoice ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "cancellationDate": {
-        "description": "When customer membership was or will be cancelled",
         "format": "date-time",
         "type": [
           "string",
@@ -419,23 +406,18 @@
         ]
       },
       "cancellationInvoiceId": {
-        "description": "ID of the invoice that either charged or refunded the deferred revenue balance of the customer membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdById": {
-        "description": "ID of the user that created this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "When customer membership was created",
         "format": "date-time",
         "type": [
           "string",
@@ -443,41 +425,29 @@
         ]
       },
       "customFields": {
-        "description": "List of custom fields",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "name": {
-              "description": "Custom field name",
               "type": [
                 "string",
                 "null"
               ]
             },
             "typeId": {
-              "description": "Custom field type id",
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "value": {
-              "description": "Custom field value",
               "type": [
                 "string",
                 "null"
               ]
             }
           },
-          "required": [
-            "typeId",
-            "name"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -485,38 +455,30 @@
         ]
       },
       "customerId": {
-        "description": "Customer ID of membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "customerPo": {
-        "description": "Customer Purchase Order",
         "type": [
           "string",
           "null"
         ]
       },
       "duration": {
-        "description": "Duration of customer membership in months",
-        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "followUpCustomStatusId": {
-        "description": "ID of custom followup status",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "followUpOn": {
-        "description": "Follow up on date",
         "format": "date-time",
         "type": [
           "string",
@@ -524,14 +486,12 @@
         ]
       },
       "followUpStatus": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "from": {
-        "description": "Beginning date of customer membership",
         "format": "date-time",
         "type": [
           "string",
@@ -539,50 +499,42 @@
         ]
       },
       "id": {
-        "description": "Customer membership ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "importId": {
-        "description": "Internal import ID label",
         "type": [
           "string",
           "null"
         ]
       },
       "initialDeferredRevenue": {
-        "description": "Initial deferred revenue",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "locationId": {
-        "description": "ID of location for this customer membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "membershipTypeId": {
-        "description": "The membership type ID of the customer membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "memo": {
-        "description": "Memo for customer membership",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "When customer membership was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -590,7 +542,6 @@
         ]
       },
       "nextScheduledBillDate": {
-        "description": "Next scheduled billing date",
         "format": "date-time",
         "type": [
           "string",
@@ -598,77 +549,60 @@
         ]
       },
       "paymentMethodId": {
-        "description": "Preferred payment method ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "paymentTypeId": {
-        "description": "ID of payment type",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "recurringLocationId": {
-        "description": "Recurring Location ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "renewalBillingFrequency": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "renewalDuration": {
-        "description": "Renewal duration",
-        "format": "int32",
         "type": [
           "integer",
           "null"
         ]
       },
       "renewalMembershipTaskId": {
-        "description": "Task ID that renews this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "renewedById": {
-        "description": "ID of the user that renewed this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "soldById": {
-        "description": "ID of the user that was credited for the sale of this membership",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "status": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "to": {
-        "description": "End date of customer membership",
         "format": "date-time",
         "type": [
           "string",
@@ -676,21 +610,6 @@
         ]
       }
     },
-    "required": [
-      "id",
-      "createdOn",
-      "modifiedOn",
-      "followUpOn",
-      "billingFrequency",
-      "status",
-      "followUpStatus",
-      "active",
-      "initialDeferredRevenue",
-      "businessUnitId",
-      "customerId",
-      "membershipTypeId",
-      "customFields"
-    ],
     "type": "object"
   },
   "stream": "memberships_export",

@@ -15,15 +15,6 @@
     {
       "breadcrumb": [
         "properties",
-        "active"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "equipmentId"
       ],
       "metadata": {
@@ -59,37 +50,6 @@
     },
     {
       "breadcrumb": [
-        "properties",
-        "name"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "type"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "type",
-        "properties",
-        "id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "type",
         "properties",
         "name"
       ],
@@ -173,15 +133,6 @@
       "breadcrumb": [
         "properties",
         "cost"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "status"
       ],
       "metadata": {
         "inclusion": "available"
@@ -277,14 +228,8 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "actualReplacementDate": {
         "format": "date",
         "type": [
@@ -299,7 +244,6 @@
         ]
       },
       "cost": {
-        "format": "decimal",
         "type": [
           "number",
           "null"
@@ -313,22 +257,22 @@
         ]
       },
       "customerId": {
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "equipmentId": {
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "id": {
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "installedOn": {
         "format": "date-time",
@@ -338,14 +282,12 @@
         ]
       },
       "invoiceItemId": {
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationId": {
-        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -404,7 +346,6 @@
         ]
       },
       "predictedReplacementMonths": {
-        "format": "int32",
         "type": [
           "integer",
           "null"
@@ -430,16 +371,9 @@
           "null"
         ]
       },
-      "status": {
-        "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
       "tags": {
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "code": {
               "type": [
@@ -454,7 +388,6 @@
               ]
             },
             "id": {
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -467,7 +400,6 @@
               ]
             },
             "ownerId": {
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -480,7 +412,6 @@
               ]
             },
             "typeId": {
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
@@ -493,62 +424,14 @@
               ]
             }
           },
-          "required": [
-            "id",
-            "ownerId",
-            "typeId"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
           "null"
         ]
-      },
-      "type": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "name": {
-            "type": [
-              "string",
-              "null"
-            ]
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "type": [
-          "object",
-          "null"
-        ]
       }
     },
-    "required": [
-      "id",
-      "active",
-      "locationId",
-      "customerId",
-      "name",
-      "createdOn",
-      "modifiedOn",
-      "serialNumber",
-      "memo",
-      "manufacturer",
-      "model",
-      "cost",
-      "status"
-    ],
     "type": "object"
   },
   "stream": "installed_equipment",

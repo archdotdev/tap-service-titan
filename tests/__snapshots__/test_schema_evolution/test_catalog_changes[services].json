@@ -341,24 +341,6 @@
       }
     },
     {
-      "breadcrumb": [
-        "properties",
-        "calculatedPrice"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "useStaticPrices"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -491,14 +473,6 @@
         "format": "int64",
         "type": [
           "integer",
-          "null"
-        ]
-      },
-      "calculatedPrice": {
-        "description": "If a service has Dynamic Pricing rule and query parameter CalculatePrices is true, this field will contain the calculated price based on the rule.",
-        "format": "decimal",
-        "type": [
-          "number",
           "null"
         ]
       },
@@ -810,13 +784,6 @@
         },
         "type": [
           "array",
-          "null"
-        ]
-      },
-      "useStaticPrices": {
-        "description": "If a service has Dynamic Pricing rule and query parameter CalculatePrices is true, this field will contain the value.",
-        "type": [
-          "boolean",
           "null"
         ]
       },

@@ -120,25 +120,21 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether job timesheet is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "appointmentId": {
-        "description": "The appointment ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "arrivedOn": {
-        "description": "The arrive date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -146,7 +142,6 @@
         ]
       },
       "canceledOn": {
-        "description": "The cancel date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -154,7 +149,6 @@
         ]
       },
       "createdOn": {
-        "description": "The created date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -162,7 +156,6 @@
         ]
       },
       "dispatchedOn": {
-        "description": "the dispatch date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -170,7 +163,6 @@
         ]
       },
       "doneOn": {
-        "description": "The done date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -178,20 +170,18 @@
         ]
       },
       "id": {
-        "description": "The timesheet ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobId": {
-        "description": "The job ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "The modified date/time (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -199,23 +189,12 @@
         ]
       },
       "technicianId": {
-        "description": "The technician ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "jobId",
-      "appointmentId",
-      "technicianId",
-      "createdOn",
-      "modifiedOn",
-      "active"
-    ],
     "type": "object"
   },
   "stream": "job_timesheets",

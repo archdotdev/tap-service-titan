@@ -53,40 +53,33 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "from": {
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "id": {
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "percent": {
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "to": {
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "from",
-      "to",
-      "percent"
-    ],
     "type": "object"
   },
   "stream": "materials_markup",

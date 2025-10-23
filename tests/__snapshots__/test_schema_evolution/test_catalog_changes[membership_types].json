@@ -165,40 +165,33 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether membership type is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "autoCalculateInvoiceTemplates": {
-        "description": "Whether invoice templates should be auto-calculated",
         "type": [
           "boolean",
           "null"
         ]
       },
       "billingTemplateId": {
-        "description": "Billing template ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdById": {
-        "description": "ID of the user that created this membership type",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "When membership type was created",
         "format": "date-time",
         "type": [
           "string",
@@ -206,47 +199,35 @@
         ]
       },
       "discountMode": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "displayName": {
-        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard.",
         "type": [
           "string",
           "null"
         ]
       },
       "durationBilling": {
-        "description": "Membership type duration billing options",
         "items": {
           "additionalProperties": false,
           "properties": {
             "billingFrequency": {
-              "description": "",
               "type": [
                 "string",
                 "null"
               ]
             },
             "duration": {
-              "description": "Duration of the entry ",
-              "format": "int32",
               "type": [
                 "integer",
                 "null"
               ]
             }
           },
-          "required": [
-            "billingFrequency"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -254,26 +235,24 @@
         ]
       },
       "id": {
-        "description": "Membership type ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "importId": {
-        "description": "Internal import ID label",
         "type": [
           "string",
           "null"
         ]
       },
       "locationTarget": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "When membership type was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -281,47 +260,30 @@
         ]
       },
       "name": {
-        "description": "Membership type name",
         "type": [
           "string",
           "null"
         ]
       },
       "revenueRecognitionMode": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "showMembershipSavings": {
-        "description": "Whether membership savings should be displayed",
         "type": [
           "boolean",
           "null"
         ]
       },
       "useMembershipPricingTable": {
-        "description": "Whether membership pricing table should be used",
         "type": [
           "boolean",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "createdOn",
-      "modifiedOn",
-      "name",
-      "active",
-      "discountMode",
-      "locationTarget",
-      "revenueRecognitionMode",
-      "autoCalculateInvoiceTemplates",
-      "useMembershipPricingTable",
-      "showMembershipSavings"
-    ],
     "type": "object"
   },
   "stream": "membership_types",

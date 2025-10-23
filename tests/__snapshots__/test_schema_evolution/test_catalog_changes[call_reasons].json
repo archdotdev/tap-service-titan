@@ -75,17 +75,15 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether the call reason is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdOn": {
-        "description": "Date/time (in UTC) when the job was created",
         "format": "date-time",
         "type": [
           "string",
@@ -93,19 +91,18 @@
         ]
       },
       "id": {
-        "description": "Call reason ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "isLead": {
-        "description": "Indicates that the call is a lead",
         "type": [
           "boolean",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "Date/time (in UTC) when job was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -113,21 +110,12 @@
         ]
       },
       "name": {
-        "description": "Call reason name",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "name",
-      "isLead",
-      "active",
-      "createdOn",
-      "modifiedOn"
-    ],
     "type": "object"
   },
   "stream": "call_reasons",

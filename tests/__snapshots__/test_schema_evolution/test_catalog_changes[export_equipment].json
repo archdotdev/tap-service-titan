@@ -650,7 +650,7 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "account": {
         "description": "The accounting account assigned to the SKU",
@@ -662,24 +662,19 @@
       "active": {
         "description": "Active shows if the SKU is active or inactive",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "addOnMemberPrice": {
         "description": "The price if the SKU is sold to a member as an add-on item",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "addOnPrice": {
         "description": "The price of the SKU is sold as an add-on item",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "assetAccount": {
@@ -691,7 +686,7 @@
       "assets": {
         "description": "Images, videos or PDFs attached to SKU",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "alias": {
               "description": "Asset alias",
@@ -710,22 +705,19 @@
             "isDefault": {
               "description": "It is the default asset",
               "type": [
-                "boolean",
-                "null"
+                "boolean"
               ]
             },
             "type": {
-              "description": "",
+              "description": "Asset type - image, video or PDF",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             },
             "url": {
               "description": "Asset URL",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -734,22 +726,14 @@
             "type",
             "url"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "bonus": {
         "description": "Flat rate bonus paid for this task",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "budgetCostCode": {
@@ -769,35 +753,28 @@
       "categories": {
         "description": "Categories that this SKU belongs to",
         "items": {
-          "format": "int64",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "code": {
         "description": "Code for the SKU",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "commissionBonus": {
         "description": "Percentage rate bonus paid for this task",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "cost": {
         "description": "The cost paid to acquire the material",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "costOfSaleAccount": {
@@ -810,8 +787,7 @@
         "description": "Shows Equipment's Created On Date",
         "format": "date-time",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "crossSaleGroup": {
@@ -830,19 +806,16 @@
       },
       "description": {
         "description": "Description on the SKU that is displayed with the item",
-        "format": "html",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "dimensions": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "description": "The equipment dimensions",
         "properties": {
           "depth": {
             "description": "Depth",
-            "format": "decimal",
             "type": [
               "number",
               "null"
@@ -850,7 +823,6 @@
           },
           "height": {
             "description": "Height",
-            "format": "decimal",
             "type": [
               "number",
               "null"
@@ -858,7 +830,6 @@
           },
           "width": {
             "description": "Width",
-            "format": "decimal",
             "type": [
               "number",
               "null"
@@ -873,8 +844,7 @@
       "displayInAmount": {
         "description": "Shows if it should be displayed in the amount",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "displayName": {
@@ -887,22 +857,18 @@
       "equipmentMaterials": {
         "description": "Array of materials used with this equipment",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "quantity": {
               "description": "Quantity of linked SKUs",
-              "format": "decimal",
               "type": [
-                "number",
-                "null"
+                "number"
               ]
             },
             "skuId": {
               "description": "Linked SKU unique id",
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             }
           },
@@ -910,33 +876,25 @@
             "skuId",
             "quantity"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "externalData": {
-        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
+        "description": "List of external data attached to this job, that corresponds to the application guid provided in the request.",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "key": {
               "description": "External data key.",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             },
             "value": {
               "description": "External data value.",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -944,10 +902,7 @@
             "key",
             "value"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -963,7 +918,6 @@
       },
       "generalLedgerAccountId": {
         "description": "The General Ledger Account assigned to the SKU",
-        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -971,29 +925,26 @@
       },
       "hours": {
         "description": "The number of hours associated with the installing the equipment",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "id": {
         "description": "Unique id for the SKU",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer"
+        ]
       },
       "isConfigurableEquipment": {
         "description": "Shows if is a Configurable Equipment",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "isInventory": {
         "description": "Is this equipment a part of your inventory",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "manufacturer": {
@@ -1004,7 +955,7 @@
         ]
       },
       "manufacturerWarranty": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "description": "Description of the manufacturer warranty included in this SKU",
         "properties": {
           "description": {
@@ -1016,27 +967,20 @@
           },
           "duration": {
             "description": "Warranty duration",
-            "format": "int32",
             "type": [
-              "integer",
-              "null"
+              "integer"
             ]
           }
         },
         "required": [
           "duration"
         ],
-        "type": [
-          "object",
-          "null"
-        ]
+        "type": "object"
       },
       "memberPrice": {
         "description": "The price if the item is sold to a member",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "model": {
@@ -1050,33 +994,27 @@
         "description": "Timestamp where the item was last modified",
         "format": "date-time",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "otherVendors": {
         "description": "Other vendors that you might go to acquire this SKU",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "active": {
               "type": [
-                "boolean",
-                "null"
+                "boolean"
               ]
             },
             "cost": {
-              "format": "decimal",
               "type": [
-                "number",
-                "null"
+                "number"
               ]
             },
             "id": {
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             },
             "memo": {
@@ -1087,26 +1025,21 @@
             },
             "otherSubAccounts": {
               "items": {
-                "additionalProperties": false,
+                "additionalProperties": true,
                 "properties": {
                   "accountName": {
                     "type": [
-                      "string",
-                      "null"
+                      "string"
                     ]
                   },
                   "cost": {
-                    "format": "decimal",
                     "type": [
-                      "number",
-                      "null"
+                      "number"
                     ]
                   },
                   "id": {
-                    "format": "int64",
                     "type": [
-                      "integer",
-                      "null"
+                      "integer"
                     ]
                   }
                 },
@@ -1115,10 +1048,7 @@
                   "cost",
                   "accountName"
                 ],
-                "type": [
-                  "object",
-                  "null"
-                ]
+                "type": "object"
               },
               "type": [
                 "array",
@@ -1126,26 +1056,21 @@
               ]
             },
             "primarySubAccount": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
                 "accountName": {
                   "type": [
-                    "string",
-                    "null"
+                    "string"
                   ]
                 },
                 "cost": {
-                  "format": "decimal",
                   "type": [
-                    "number",
-                    "null"
+                    "number"
                   ]
                 },
                 "id": {
-                  "format": "int64",
                   "type": [
-                    "integer",
-                    "null"
+                    "integer"
                   ]
                 }
               },
@@ -1160,16 +1085,13 @@
               ]
             },
             "vendorId": {
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             },
             "vendorName": {
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             },
             "vendorPart": {
@@ -1186,10 +1108,7 @@
             "cost",
             "active"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -1199,40 +1118,32 @@
       "paysCommission": {
         "description": "PaysCommissions shows if this task pays commission",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "price": {
         "description": "Price of this SKU sold",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "primaryVendor": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "description": "The primary vendor you use to acquire this SKU",
         "properties": {
           "active": {
             "type": [
-              "boolean",
-              "null"
+              "boolean"
             ]
           },
           "cost": {
-            "format": "decimal",
             "type": [
-              "number",
-              "null"
+              "number"
             ]
           },
           "id": {
-            "format": "int64",
             "type": [
-              "integer",
-              "null"
+              "integer"
             ]
           },
           "memo": {
@@ -1243,26 +1154,21 @@
           },
           "otherSubAccounts": {
             "items": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
                 "accountName": {
                   "type": [
-                    "string",
-                    "null"
+                    "string"
                   ]
                 },
                 "cost": {
-                  "format": "decimal",
                   "type": [
-                    "number",
-                    "null"
+                    "number"
                   ]
                 },
                 "id": {
-                  "format": "int64",
                   "type": [
-                    "integer",
-                    "null"
+                    "integer"
                   ]
                 }
               },
@@ -1271,10 +1177,7 @@
                 "cost",
                 "accountName"
               ],
-              "type": [
-                "object",
-                "null"
-              ]
+              "type": "object"
             },
             "type": [
               "array",
@@ -1282,26 +1185,21 @@
             ]
           },
           "primarySubAccount": {
-            "additionalProperties": false,
+            "additionalProperties": true,
             "properties": {
               "accountName": {
                 "type": [
-                  "string",
-                  "null"
+                  "string"
                 ]
               },
               "cost": {
-                "format": "decimal",
                 "type": [
-                  "number",
-                  "null"
+                  "number"
                 ]
               },
               "id": {
-                "format": "int64",
                 "type": [
-                  "integer",
-                  "null"
+                  "integer"
                 ]
               }
             },
@@ -1316,16 +1214,13 @@
             ]
           },
           "vendorId": {
-            "format": "int64",
             "type": [
-              "integer",
-              "null"
+              "integer"
             ]
           },
           "vendorName": {
             "type": [
-              "string",
-              "null"
+              "string"
             ]
           },
           "vendorPart": {
@@ -1350,21 +1245,18 @@
       "recommendations": {
         "description": "Recommended services and materials to include with this SKU",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "skuId": {
               "description": "SKU unique identifier",
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             },
             "type": {
-              "description": "",
+              "description": "Recommended SKU type (Service or Material)",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -1372,18 +1264,12 @@
             "skuId",
             "type"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "serviceProviderWarranty": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "description": "Description of the manufacturer warranty included in this SKU",
         "properties": {
           "description": {
@@ -1395,20 +1281,15 @@
           },
           "duration": {
             "description": "Warranty duration",
-            "format": "int32",
             "type": [
-              "integer",
-              "null"
+              "integer"
             ]
           }
         },
         "required": [
           "duration"
         ],
-        "type": [
-          "object",
-          "null"
-        ]
+        "type": "object"
       },
       "source": {
         "description": "The source catalog for this SKU.",
@@ -1420,13 +1301,11 @@
       "taxable": {
         "description": "Is this SKU taxable",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "typeId": {
         "description": "Shows Equipment's Type Id",
-        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -1442,19 +1321,18 @@
       "upgrades": {
         "description": "Upgrades that can be sold for this SKU",
         "items": {
-          "format": "int64",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "variationsOrConfigurableEquipment": {
         "description": "List of added Variations if is a Configurable Equipment, or else the List of Configurable Equipment assigned to",
         "items": {
-          "format": "int64",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
         "type": [
           "array",

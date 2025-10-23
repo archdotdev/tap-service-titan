@@ -84,18 +84,15 @@
   "replication_key": "createdOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "createdById": {
-        "description": "ID of the user that created this status change record",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "When this status change record was created",
         "format": "date-time",
         "type": [
           "string",
@@ -103,47 +100,36 @@
         ]
       },
       "id": {
-        "description": "ID of the status change record",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "membershipId": {
-        "description": "ID of the membership that this status change record is associated with",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "newStatus": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "note": {
-        "description": "Optional note attached to this status change",
         "type": [
           "string",
           "null"
         ]
       },
       "oldStatus": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "oldStatus",
-      "newStatus",
-      "createdOn",
-      "membershipId"
-    ],
     "type": "object"
   },
   "stream": "membership_status_changes",
