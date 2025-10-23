@@ -71,7 +71,7 @@ async def download_all_openapi_specs() -> None:
             for href in [a.get("href") for a in soup.find_all("a")]
             if "api-details" in href
         ]
-        Path("openapi_specs").mkdir(parents=True, exist_ok=True)
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         tasks = []
         for api_url in api_urls:
             download_path = OUTPUT_DIR / f"{get_api_name_from_url(api_url)}.json"
