@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import sys
-import typing as t
 from functools import cached_property
+from typing import TYPE_CHECKING, ClassVar
 
 from singer_sdk.streams import Stream
 
@@ -15,6 +15,11 @@ if sys.version_info >= (3, 12):
     from typing import override
 else:
     from typing_extensions import override
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from singer_sdk.helpers.types import Context, Record
 
 
 class EstimatesStream(ServiceTitanExportStream):
@@ -32,7 +37,7 @@ class EstimatesStream(ServiceTitanExportStream):
         return f"/sales/v2/tenant/{self.tenant_id}/estimates/export"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         # Was polluting our context with too many items causing logs to be >500 MB per run
         # for some tenants
         if not hasattr(self._tap, "_estimate_items_cache"):
@@ -57,12 +62,12 @@ class EstimateItemsStream(Stream):
     parent_stream_type = EstimatesStream
 
     # We don't need to partition state since we rely on parent's state
-    state_partitioning_keys: t.ClassVar[list[str]] = []
+    state_partitioning_keys: ClassVar[list[str]] = []
 
     schema = ServiceTitanSchema(SALESTECH, key="Estimates.V2.EstimateItemResponse")
 
     @override
-    def get_records(self, context: dict | None) -> t.Iterable[dict]:
+    def get_records(self, context: Context | None) -> Iterable[Record]:
         """Return a generator of row-type dictionary objects.
 
         Args:
