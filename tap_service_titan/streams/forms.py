@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
@@ -11,6 +12,11 @@ from singer_sdk.helpers.types import Context  # noqa: TC002
 from tap_service_titan.client import ServiceTitanStream
 from tap_service_titan.openapi_specs import FORMS, ServiceTitanSchema
 from tap_service_titan.streams.jpm import JobsStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -24,6 +30,7 @@ class FormsStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(FORMS, key="Forms.V2.FormResponse")
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -103,6 +110,7 @@ class SubmissionsStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/forms/v2/tenant/{self.tenant_id}/submissions"
 
+    @override
     def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
         """Return a generator of record-type dictionary objects with coerced values.
 
@@ -160,6 +168,7 @@ class JobAttachmentsStream(ServiceTitanStream):
         th.Property("createdOn", th.DateTimeType),
     ).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
