@@ -149,6 +149,11 @@ class ServiceTitanSchema(StreamSchema):
             normalized["required"].remove("modifiedOn")
 
         if stream.name in ("campaign_performance", "keyword_performance", "adgroup_performance"):
+            # TODO(maintainers): Remove these `status` patches once ServiceTitan fixes this.
+            # https://github.com/archdotdev/tap-service-titan/issues/163
+            normalized["properties"]["campaign"]["properties"]["status"]["type"] = ["integer", "null"]
+            normalized["properties"]["adGroup"]["properties"]["status"]["type"] = ["integer", "null"]
+            normalized["properties"]["keyword"]["properties"]["status"]["type"] = ["integer", "null"]
             normalized["properties"] |= {
                 "date": {
                     "type": ["string", "null"],
