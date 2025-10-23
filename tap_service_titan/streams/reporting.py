@@ -16,7 +16,9 @@ from singer_sdk.helpers import types  # noqa: TC002
 from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
-from tap_service_titan.client import ServiceTitanStream
+from tap_service_titan.client import (
+    ServiceTitanStream,
+)
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod
@@ -92,9 +94,9 @@ class CustomReports(ServiceTitanStream):
         bookmark = self.stream_state.get("replication_key_value")
         if bookmark:
             # Parse to a date and subtract the lookback window days if configured
-            bookmark_dt = datetime.strptime(bookmark, "%Y-%m-%dT%H:%M:%S%z").date() - timedelta(
-                days=self._report["lookback_window_days"]
-            )
+            bookmark_dt = datetime.strptime(
+                bookmark, "%Y-%m-%dT%H:%M:%S%z"
+            ).date() - timedelta(days=self._report["lookback_window_days"])
             return max(
                 configured_date_param,
                 bookmark_dt,
@@ -102,7 +104,7 @@ class CustomReports(ServiceTitanStream):
         return configured_date_param
 
     @staticmethod
-    def _get_datatype(string_type: str) -> th.JSONTypeHelper:  # noqa: ARG004
+    def _get_datatype(string_type: str) -> th.JSONTypeHelper:
         # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
         return th.StringType()
         # mapping = {
@@ -156,7 +158,7 @@ class CustomReports(ServiceTitanStream):
         report_category = self._report["report_category"]
         report_id = self._report["report_id"]
         return (
-            f"/reporting/v2/tenant/{self.tenant_id}/report-category"
+            f"/reporting/v2/tenant/{self._tap.config['tenant_id']}/report-category"
             f"/{report_category}/reports/{report_id}/data"
         )
 
@@ -255,7 +257,9 @@ class CustomReports(ServiceTitanStream):
             while datetime.now(timezone.utc).date() >= self.curr_backfill_date_param:
                 yield from super().get_records(context)
                 # Increment date for next iteration
-                self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)
+                self.curr_backfill_date_param = (
+                    self.curr_backfill_date_param + timedelta(days=1)
+                )
 
     def backoff_wait_generator(self) -> t.Generator[float, None, None]:
         """Return a generator for backoff wait times."""

@@ -42,15 +42,6 @@
     {
       "breadcrumb": [
         "properties",
-        "createdOn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -84,44 +75,33 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Indicates whether the payroll activity code is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "code": {
-        "description": "Code of the payroll activity code",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "createdOn": {
-        "description": "Date/time (on UTC) when the payroll activity code was created",
-        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
       "earningCategory": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
-        "description": "ID of the payroll activity code",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
-        "description": "Date/time (on UTC) when the payroll activity code was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -129,22 +109,12 @@
         ]
       },
       "name": {
-        "description": "Name of the payroll activity code",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "name",
-      "code",
-      "earningCategory",
-      "createdOn",
-      "modifiedOn",
-      "active"
-    ],
     "type": "object"
   },
   "stream": "activity_codes",

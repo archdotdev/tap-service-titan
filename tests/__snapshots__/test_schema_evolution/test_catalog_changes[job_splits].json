@@ -84,17 +84,15 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether job split is active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdOn": {
-        "description": "The job split creation date/time (on UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -102,20 +100,18 @@
         ]
       },
       "id": {
-        "description": "The job split ID",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobId": {
-        "description": "Job ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "Date/time (on UTC) when the job split was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -123,31 +119,18 @@
         ]
       },
       "split": {
-        "description": "The split",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "technicianId": {
-        "description": "Technician ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "jobId",
-      "technicianId",
-      "split",
-      "createdOn",
-      "modifiedOn",
-      "active"
-    ],
     "type": "object"
   },
   "stream": "job_splits",

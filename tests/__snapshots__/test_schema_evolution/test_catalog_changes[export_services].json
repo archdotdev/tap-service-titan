@@ -358,7 +358,7 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "account": {
         "description": "The accounting account assigned to this SKU",
@@ -370,30 +370,25 @@
       "active": {
         "description": "Active shows if the SKU is active or inactive",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "addOnMemberPrice": {
         "description": "The price if the SKU is sold to a member as an add-on item",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "addOnPrice": {
         "description": "The price of the SKU is sold as an add-on item",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "assets": {
         "description": "Images, videos or PDFs attached to SKU",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "alias": {
               "description": "Asset alias",
@@ -412,22 +407,19 @@
             "isDefault": {
               "description": "It is the default asset",
               "type": [
-                "boolean",
-                "null"
+                "boolean"
               ]
             },
             "type": {
-              "description": "",
+              "description": "Asset type - image, video or PDF",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             },
             "url": {
               "description": "Asset URL",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -436,22 +428,14 @@
             "type",
             "url"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "bonus": {
         "description": "Flat rate bonus paid for this task",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "budgetCostCode": {
@@ -470,7 +454,6 @@
       },
       "businessUnitId": {
         "description": "Service's Bussiness Unit Id",
-        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -479,28 +462,24 @@
       "categories": {
         "description": "Categories that this SKU belongs to",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "active": {
               "description": "Active shows if the Category is active or inactive",
               "type": [
-                "boolean",
-                "null"
+                "boolean"
               ]
             },
             "id": {
               "description": "Unique Category Id",
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             },
             "name": {
               "description": "Category name",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -509,45 +488,33 @@
             "name",
             "active"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "code": {
         "description": "Code for the SKU",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "commissionBonus": {
         "description": "Percentage rate bonus paid for this task",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "cost": {
         "description": "Service Cost",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "createdOn": {
         "description": "Timestamp when the item was created",
         "format": "date-time",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "crossSaleGroup": {
@@ -566,10 +533,8 @@
       },
       "description": {
         "description": "Description on the SKU that is displayed with the item",
-        "format": "html",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "displayName": {
@@ -580,22 +545,20 @@
         ]
       },
       "externalData": {
-        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
+        "description": "List of external data attached to this job, that corresponds to the application guid provided in the request.",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "key": {
               "description": "External data key.",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             },
             "value": {
               "description": "External data value.",
               "type": [
-                "string",
-                "null"
+                "string"
               ]
             }
           },
@@ -603,10 +566,7 @@
             "key",
             "value"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -622,16 +582,15 @@
       },
       "hours": {
         "description": "Hours needed to complete this service",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "id": {
         "description": "Unique id for the SKU",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer"
+        ]
       },
       "isLabor": {
         "description": "Is a labor service",
@@ -642,65 +601,53 @@
       },
       "memberPrice": {
         "description": "The price if the item is sold to a member",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "modifiedOn": {
         "description": "Timestamp when the item was last modified",
         "format": "date-time",
         "type": [
-          "string",
-          "null"
+          "string"
         ]
       },
       "paysCommission": {
         "description": "PaysCommissions shows if this task pays commission",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "price": {
         "description": "Price of this SKU sold",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "recommendations": {
         "description": "Recommended other service or materials to include with this SKU",
         "items": {
-          "format": "int64",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "serviceEquipment": {
         "description": "Array of equipment used with this service",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "quantity": {
               "description": "Quantity of linked SKUs",
-              "format": "decimal",
               "type": [
-                "number",
-                "null"
+                "number"
               ]
             },
             "skuId": {
               "description": "Linked SKU unique id",
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             }
           },
@@ -708,35 +655,25 @@
             "skuId",
             "quantity"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "serviceMaterials": {
         "description": "Array of materials that is used with this service",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "quantity": {
               "description": "Quantity of linked SKUs",
-              "format": "decimal",
               "type": [
-                "number",
-                "null"
+                "number"
               ]
             },
             "skuId": {
               "description": "Linked SKU unique id",
-              "format": "int64",
               "type": [
-                "integer",
-                "null"
+                "integer"
               ]
             }
           },
@@ -744,22 +681,14 @@
             "skuId",
             "quantity"
           ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "soldByCommission": {
         "description": "Sold by commission",
-        "format": "decimal",
         "type": [
-          "number",
-          "null"
+          "number"
         ]
       },
       "source": {
@@ -772,24 +701,21 @@
       "taxable": {
         "description": "Is this SKU taxable",
         "type": [
-          "boolean",
-          "null"
+          "boolean"
         ]
       },
       "upgrades": {
         "description": "Upgrades that can be sold for this SKU",
         "items": {
-          "format": "int64",
-          "type": "integer"
+          "type": [
+            "integer"
+          ]
         },
-        "type": [
-          "array",
-          "null"
-        ]
+        "type": "array"
       },
       "warranty": {
-        "additionalProperties": false,
-        "description": "Description of the warranty included in this SKU",
+        "additionalProperties": true,
+        "description": "Warranty included with this SKU",
         "properties": {
           "description": {
             "description": "Description of the warranty included in this SKU",
@@ -800,10 +726,8 @@
           },
           "duration": {
             "description": "Warranty duration",
-            "format": "int32",
             "type": [
-              "integer",
-              "null"
+              "integer"
             ]
           }
         },

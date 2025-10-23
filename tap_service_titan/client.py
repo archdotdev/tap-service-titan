@@ -2,23 +2,23 @@
 
 from __future__ import annotations
 
-import sys
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import cached_property
 from typing import Any
 
 import requests
-import requests.exceptions
-from singer_sdk.pagination import BaseAPIPaginator, BasePageNumberPaginator
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.pagination import (
+    BaseAPIPaginator,
+    BasePageNumberPaginator,
+)
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
+_Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 
 
 @dataclass
@@ -46,13 +46,7 @@ class DateRange:
 class DateRangePaginator(BaseAPIPaginator[DateRange]):
     """Paginator that uses date ranges for pagination."""
 
-    @override
-    def __init__(
-        self,
-        start_date: datetime,
-        interval: timedelta,
-        max_date: datetime,
-    ) -> None:
+    def __init__(self, start_date: datetime, interval: timedelta, max_date: datetime):
         """Initialize DateRangePaginator.
 
         Args:
@@ -63,7 +57,6 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
         date_range = DateRange(start_date, interval, max_date)
         super().__init__(start_value=date_range)
 
-    @override
     def get_next(self, response: requests.Response) -> DateRange | None:
         """Get the next date range for pagination.
 
@@ -79,26 +72,27 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
         new_range = self.current_value.increase()
         return new_range if new_range.is_valid() else None
 
-
 class ServiceTitanBaseStream(RESTStream):
     """ServiceTitan base stream class."""
-
-    records_jsonpath = "$.data[*]"  # Or override `parse_response`.
 
     _LOG_REQUEST_METRIC_URLS: bool = (
         True  # Safe as params don't have sensitive info, but very helpful for debugging
     )
 
-    @override
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
         return self.config["api_url"]
 
-    @override
+    records_jsonpath = "$.data[*]"  # Or override `parse_response`.
+
     @cached_property
-    def authenticator(self) -> ServiceTitanAuthenticator:
-        """Get an authenticator for Service Titan."""
+    def authenticator(self) -> _Auth:
+        """Return a new authenticator object.
+
+        Returns:
+            An authenticator instance.
+        """
         return ServiceTitanAuthenticator(
             client_id=self.config["client_id"],
             client_secret=self.config["client_secret"],
@@ -106,32 +100,58 @@ class ServiceTitanBaseStream(RESTStream):
             oauth_scopes="",
         )
 
-    @override
     @property
     def http_headers(self) -> dict:
-        """HTTP headers for each request."""
-        headers = super().http_headers
+        """Return the http headers needed.
+
+        Returns:
+            A dictionary of HTTP headers.
+        """
+        headers = {}
+        if "user_agent" in self.config:
+            headers["User-Agent"] = self.config.get("user_agent")
         headers["ST-App-Key"] = self.config["st_app_key"]
         return headers
 
-    @property
+    @cached_property
     def tenant_id(self) -> str:
         """The ServiceTitan tenant ID."""
         return self.config["tenant_id"]
-
-    @override
-    def backoff_max_tries(self) -> int:
-        """The number of attempts before giving up when retrying requests.
-
-        Had issues with 500's and 429's so we're going to try for a bit longer before
-        bailing.
+    
+    def backoff_max_tries(self) -> int:  # noqa: PLR6301
+        """The number of attempts before giving up when retrying requests. Had issues with 500's and 429's so we're going to try for a bit longer before bailing
 
         Returns:
             Number of max retries.
         """
         return 10
 
-    @override
+    def get_new_paginator(self) -> BaseAPIPaginator:
+        """Create a new pagination helper instance.
+
+        If the source API can make use of the `next_page_token_jsonpath`
+        attribute, or it contains a `X-Next-Page` header in the response
+        then you can remove this method.
+
+        If you need custom pagination that uses page numbers, "next" links, or
+        other approaches, please read the guide: https://sdk.meltano.com/en/v0.25.0/guides/pagination-classes.html.
+
+        Returns:
+            A pagination helper instance.
+        """
+        return super().get_new_paginator()
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result records.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each record from the source.
+        """
+        yield from extract_jsonpath(self.records_jsonpath, input=response.json())
+
     def response_error_message(self, response: requests.Response) -> str:
         """Build error message for invalid http statuses.
 
@@ -156,17 +176,27 @@ class ServiceTitanBaseStream(RESTStream):
                 return f"{default}. Response body: {response.text}"
         return default
 
+    def request_decorator(self, func):  # noqa: D401
+        """
+        `Authorization` header is refreshed for every retry attempt. 
+        Default doesn't refresh the auth header on retries.
+        """
+        base_decorator = super().request_decorator
+
+        def reauth_then_call(prepared_request: requests.PreparedRequest, context):
+                self.authenticator(prepared_request)
+                return func(prepared_request, context)
+        return base_decorator(reauth_then_call)
 
 class ServiceTitanExportStream(ServiceTitanBaseStream):
     """ServiceTitan stream class for export endpoints."""
 
     next_page_token_jsonpath = "$.continueFrom"  # noqa: S105
 
-    @override
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: str | None,
+        next_page_token: Any | None,  # noqa: ANN401
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -197,7 +227,6 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
 class ServiceTitanPaginator(BasePageNumberPaginator):
     """ServiceTitan paginator class."""
 
-    @override
     def has_more(self, response: requests.Response) -> bool:
         """Return True if there are more pages available."""
         return response.json().get("hasMore", False)
@@ -206,11 +235,10 @@ class ServiceTitanPaginator(BasePageNumberPaginator):
 class ServiceTitanStream(ServiceTitanBaseStream):
     """ServiceTitan stream class for endpoints without export support."""
 
-    @override
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: int | None,
+        next_page_token: Any | None,  # noqa: ANN401
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -235,7 +263,6 @@ class ServiceTitanStream(ServiceTitanBaseStream):
         params["page"] = next_page_token
         return params
 
-    @override
     def get_new_paginator(self) -> ServiceTitanPaginator:
         """Create a new pagination helper instance."""
         return ServiceTitanPaginator(start_value=1)

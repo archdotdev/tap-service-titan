@@ -6,15 +6,6 @@
     {
       "breadcrumb": [
         "properties",
-        "id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "email"
       ],
       "metadata": {
@@ -25,33 +16,6 @@
       "breadcrumb": [
         "properties",
         "reason"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "modifiedOn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "createdOn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "active"
       ],
       "metadata": {
         "inclusion": "available"
@@ -71,53 +35,21 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "createdOn": {
-        "format": "date-time",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
       "email": {
-        "type": "string"
-      },
-      "id": {
-        "format": "int64",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "modifiedOn": {
-        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
       "reason": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "email",
-      "modifiedOn",
-      "createdOn",
-      "active"
-    ],
     "type": "object"
   },
   "stream": "suppressions",

@@ -90,7 +90,9 @@ class CapacitiesStream(ServiceTitanStream):
             ]:
                 availability_dict.pop(unused_key)
             for technician in availability_dict.pop("technicians"):
-                technician_dict = {f"technician_{key}": val for key, val in technician.items()}
+                technician_dict = {
+                    f"technician_{key}": val for key, val in technician.items()
+                }
                 yield {**availability_dict, **technician_dict}
 
     @override
@@ -213,7 +215,7 @@ class BusinessHoursStream(ServiceTitanStream):
     """Define business hours stream."""
 
     name = "business_hours"
-    primary_keys = ()
+    primary_keys: t.ClassVar[list[str]] = []
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.BusinessHourModel")
 
     @override

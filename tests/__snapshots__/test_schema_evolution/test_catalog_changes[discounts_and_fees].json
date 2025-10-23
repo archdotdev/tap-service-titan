@@ -184,24 +184,6 @@
       }
     },
     {
-      "breadcrumb": [
-        "properties",
-        "budgetCostCode"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "budgetCostType"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -215,87 +197,62 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "account": {
-        "description": "The accounting account assigned to the SKU",
         "type": [
           "string",
           "null"
         ]
       },
       "active": {
-        "description": "Active shows if this item is currently active",
         "type": [
           "boolean",
           "null"
         ]
       },
       "amount": {
-        "description": "Amount is either the flat amount or percentage you want discounted/added",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "amountType": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       },
       "assets": {
-        "description": "Images, videos or PDFs attached to SKU",
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "alias": {
-              "description": "Asset alias",
               "type": [
                 "string",
                 "null"
               ]
             },
             "fileName": {
-              "description": "Asset file name when downloaded",
               "type": [
                 "string",
                 "null"
               ]
             },
-            "isDefault": {
-              "description": "It is the default asset",
-              "type": [
-                "boolean",
-                "null"
-              ]
-            },
             "type": {
-              "description": "",
               "type": [
                 "string",
                 "null"
               ]
             },
             "url": {
-              "description": "Asset URL",
               "type": [
                 "string",
                 "null"
               ]
             }
           },
-          "required": [
-            "isDefault",
-            "type",
-            "url"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -303,109 +260,15 @@
         ]
       },
       "bonus": {
-        "description": "Flat rate bonus paid for this item",
-        "format": "decimal",
         "type": [
           "number",
-          "null"
-        ]
-      },
-      "budgetCostCode": {
-        "description": "The Budget CostCode segment for this entity. (Note: BudgetCostType should also be provided)",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "budgetCostType": {
-        "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)",
-        "type": [
-          "string",
           "null"
         ]
       },
       "categories": {
-        "description": "The category technicians will use to find the item",
         "items": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "type": [
-          "array",
-          "null"
-        ]
-      },
-      "code": {
-        "description": "Code used for the discount or fee",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "commissionBonus": {
-        "description": "Percentage rate bonus paid for this item",
-        "format": "decimal",
-        "type": [
-          "number",
-          "null"
-        ]
-      },
-      "crossSaleGroup": {
-        "description": "A grouping of similar items that you'll then be able to track as a separate columns on the Technical Performance Board.",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "description": {
-        "description": "Description for the item",
-        "format": "html",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "displayName": {
-        "description": "Name for the discount of fee",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "excludeFromPayroll": {
-        "description": "Exclude from payroll",
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "externalData": {
-        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
-        "items": {
-          "additionalProperties": false,
-          "properties": {
-            "key": {
-              "description": "External data key.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "value": {
-              "description": "External data value.",
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "required": [
-            "key",
-            "value"
-          ],
           "type": [
-            "object",
-            "null"
+            "integer"
           ]
         },
         "type": [
@@ -413,65 +276,103 @@
           "null"
         ]
       },
+      "code": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "commissionBonus": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "crossSaleGroup": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "displayName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "excludeFromPayroll": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "externalData": {
+        "items": {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "hours": {
-        "description": "The number of hours associated with the SKU",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "id": {
-        "description": "Unique id for the discount or fee",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "limit": {
-        "description": "The maximum amount that can be applied for this item",
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "paysCommission": {
-        "description": "PaysCommissions shows if this task pays commission",
         "type": [
           "boolean",
           "null"
         ]
       },
       "taxable": {
-        "description": "Should tax be applied when the item is added on an estimate or invoice",
         "type": [
           "boolean",
           "null"
         ]
       },
       "type": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "type",
-      "code",
-      "description",
-      "amountType",
-      "amount",
-      "limit",
-      "taxable",
-      "hours",
-      "active",
-      "bonus",
-      "commissionBonus",
-      "paysCommission",
-      "excludeFromPayroll"
-    ],
     "type": "object"
   },
   "stream": "discounts_and_fees",

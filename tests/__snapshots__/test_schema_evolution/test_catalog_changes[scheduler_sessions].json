@@ -51,15 +51,6 @@
     {
       "breadcrumb": [
         "properties",
-        "schedulerId"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "jobId"
       ],
       "metadata": {
@@ -70,15 +61,6 @@
       "breadcrumb": [
         "properties",
         "bookingId"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "leadId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -209,17 +191,6 @@
         "properties",
         "customer",
         "properties",
-        "locationId"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
         "isNewLocation"
       ],
       "metadata": {
@@ -310,149 +281,6 @@
         "address",
         "properties",
         "country"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "browserName"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "browserVersion"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "cpuArchitecture"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "deviceModel"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "deviceType"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "deviceVendor"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "engineName"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "engineVersion"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "ipAddress"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "isBot"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "osName"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "osVersion"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customer",
-        "properties",
-        "userAgent"
       ],
       "metadata": {
         "inclusion": "available"
@@ -638,142 +466,6 @@
       }
     },
     {
-      "breadcrumb": [
-        "properties",
-        "sourceTracking",
-        "properties",
-        "bookedFrom"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "sourceTracking",
-        "properties",
-        "sourcedFromMarketingPro"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "sourceTracking",
-        "properties",
-        "gbraid"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "sourceTracking",
-        "properties",
-        "wbraid"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "sourceTracking",
-        "properties",
-        "marketingSource"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "mobileNotificationOptIn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "blockerType"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "blockerToBookAdditionalData"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "lastStep"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "dispatchFeeQuoted"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "isLocationTakeover"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "customOptIn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "marketingOptIn"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "membershipInterest"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -791,105 +483,70 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-      "blockerToBookAdditionalData": {
-        "description": "Additional data for the blocker to book",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "blockerType": {
-        "description": "Blocker Type",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
       "bookingId": {
-        "description": "Booking ID if a booking was created from this session",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "businessUnitId": {
-        "description": "Business unit ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "category": {
-        "description": "Category of the job",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
-        "description": "When this session was created",
         "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
-      "customOptIn": {
-        "description": "Custom Opt In",
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "customer": {
-        "additionalProperties": false,
-        "description": "Customer information",
+        "additionalProperties": true,
         "properties": {
           "address": {
-            "additionalProperties": false,
-            "description": "Customer Address Information",
+            "additionalProperties": true,
             "properties": {
               "city": {
-                "description": "City",
                 "type": [
                   "string",
                   "null"
                 ]
               },
               "country": {
-                "description": "Country",
                 "type": [
                   "string",
                   "null"
                 ]
               },
               "state": {
-                "description": "State",
                 "type": [
                   "string",
                   "null"
                 ]
               },
               "street": {
-                "description": "Street",
                 "type": [
                   "string",
                   "null"
                 ]
               },
               "unit": {
-                "description": "Unit",
                 "type": [
                   "string",
                   "null"
                 ]
               },
               "zip": {
-                "description": "Zip",
                 "type": [
                   "string",
                   "null"
@@ -901,256 +558,91 @@
               "null"
             ]
           },
-          "browserName": {
-            "description": "Browser Name",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "browserVersion": {
-            "description": "Browser Version",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "cpuArchitecture": {
-            "description": "CPU Architecture",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "deviceModel": {
-            "description": "Device Model",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "deviceType": {
-            "description": "Device Type",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "deviceVendor": {
-            "description": "Device Vendor",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "email": {
-            "description": "Customer email",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "engineName": {
-            "description": "Engine Name",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "engineVersion": {
-            "description": "Engine Version",
             "type": [
               "string",
               "null"
             ]
           },
           "firstName": {
-            "description": "Customer first name",
             "type": [
               "string",
               "null"
             ]
           },
           "id": {
-            "description": "Customer ID",
-            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
-          "ipAddress": {
-            "description": "IP Address",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "isBot": {
-            "description": "Flag whether this session was bot or not",
-            "type": [
-              "boolean",
-              "null"
-            ]
-          },
           "isNewCustomer": {
-            "description": "Whether this is a new customer",
             "type": [
               "boolean",
               "null"
             ]
           },
           "isNewLocation": {
-            "description": "Whether this is a new Location",
             "type": [
               "boolean",
               "null"
             ]
           },
           "lastName": {
-            "description": "Customer last name",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "locationId": {
-            "description": "Location ID",
-            "format": "int64",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
-          "osName": {
-            "description": "OS Name",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "osVersion": {
-            "description": "OS Version",
             "type": [
               "string",
               "null"
             ]
           },
           "phone": {
-            "description": "Customer phone",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "userAgent": {
-            "description": "User Agent",
             "type": [
               "string",
               "null"
             ]
           }
         },
-        "required": [
-          "isNewCustomer",
-          "isNewLocation",
-          "address"
-        ],
         "type": [
           "object",
           "null"
         ]
       },
       "customerResponses": {
-        "description": "Customer Responses",
         "items": {
-          "type": "string"
+          "type": [
+            "string"
+          ]
         },
         "type": [
           "array",
           "null"
         ]
       },
-      "dispatchFeeQuoted": {
-        "description": "Dispatch Fee Quoted",
+      "id": {
         "type": [
           "string",
           "null"
         ]
       },
-      "id": {
-        "description": "Session ID",
-        "type": "string"
-      },
-      "isLocationTakeover": {
-        "description": "Is Location Takeover",
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "jobId": {
-        "description": "Job ID if a job was created from this session",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "jobTypeId": {
-        "description": "Job type ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "lastCheckinDate": {
-        "description": "When the customer last interacted with the session",
         "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
-      "lastStep": {
-        "description": "Last Step",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "leadId": {
-        "description": "Lead ID if a lead was created from this session",
-        "format": "int64",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "marketingOptIn": {
-        "description": "Marketing Opt In",
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "membershipInterest": {
-        "description": "Membership Interest",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "mobileNotificationOptIn": {
-        "description": "Check if user opt in for mobile notifications",
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "modifiedOn": {
-        "description": "When this session was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -1158,151 +650,93 @@
         ]
       },
       "notes": {
-        "description": "Customer customer",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "schedulerId": {
-        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler",
         "type": [
           "string",
           "null"
         ]
       },
       "sessionOutcome": {
-        "description": "The outcome of the session",
         "type": [
           "string",
           "null"
         ]
       },
       "sourceTracking": {
-        "additionalProperties": false,
-        "description": "Source tracking information",
+        "additionalProperties": true,
         "properties": {
-          "bookedFrom": {
-            "description": "Booked From",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "campaignId": {
-            "description": "Campaign ID",
             "type": [
               "string",
               "null"
             ]
           },
           "fbclid": {
-            "description": "Facebook Click ID",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "gbraid": {
-            "description": "gbraid",
             "type": [
               "string",
               "null"
             ]
           },
           "gclid": {
-            "description": "Google Click ID",
             "type": [
               "string",
               "null"
             ]
           },
           "googleAnalyticsClientId": {
-            "description": "Google Analytics Client ID",
             "type": [
               "string",
               "null"
             ]
           },
           "isRWGSession": {
-            "description": "Whether the session came from Reserve with Google",
             "type": [
               "boolean",
               "null"
             ]
           },
           "landingPageUrl": {
-            "description": "Campaign Name",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "marketingSource": {
-            "description": "Marketing Source",
             "type": [
               "string",
               "null"
             ]
           },
           "msclkid": {
-            "description": "Microsoft Click ID",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "sourcedFromMarketingPro": {
-            "description": "Sourced From Marketing Pro",
             "type": [
               "string",
               "null"
             ]
           },
           "utmAdgroup": {
-            "description": "UTM Content",
             "type": [
               "string",
               "null"
             ]
           },
           "utmCampaign": {
-            "description": "UTM Campaign",
             "type": [
               "string",
               "null"
             ]
           },
           "utmContent": {
-            "description": "UTM Content",
             "type": [
               "string",
               "null"
             ]
           },
           "utmMedium": {
-            "description": "UTM Medium",
             "type": [
               "string",
               "null"
             ]
           },
           "utmSource": {
-            "description": "UTM Source",
             "type": [
               "string",
               "null"
             ]
           },
           "utmTerm": {
-            "description": "UTM Term",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "wbraid": {
-            "description": "wbraid",
             "type": [
               "string",
               "null"
@@ -1315,7 +749,6 @@
         ]
       },
       "timeslotEnd": {
-        "description": "Timeslot end",
         "format": "date-time",
         "type": [
           "string",
@@ -1323,7 +756,6 @@
         ]
       },
       "timeslotStart": {
-        "description": "Timeslot start",
         "format": "date-time",
         "type": [
           "string",
@@ -1331,22 +763,12 @@
         ]
       },
       "zoneId": {
-        "description": "Zone ID",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "createdOn",
-      "modifiedOn",
-      "lastCheckinDate",
-      "customer",
-      "sourceTracking"
-    ],
     "type": "object"
   },
   "stream": "scheduler_sessions",

@@ -2,16 +2,13 @@
 
 from __future__ import annotations
 
-import sys
+import typing as t
 from functools import cached_property
+
+from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_service_titan.client import ServiceTitanStream
 from tap_service_titan.openapi_specs import MARKETING, ServiceTitanSchema
-
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
 
 
 class CampaignsStream(ServiceTitanStream):
@@ -22,7 +19,6 @@ class CampaignsStream(ServiceTitanStream):
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignResponse")
 
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -37,7 +33,6 @@ class MarketingCategoriesStream(ServiceTitanStream):
     replication_key: str = "createdOn"
     schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignCategoryResponse")
 
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -48,25 +43,32 @@ class CostsStream(ServiceTitanStream):
     """Define costs stream."""
 
     name = "costs"
-    primary_keys = ("id",)
-    schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignCostResponse")
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("year", th.IntegerType),
+        th.Property("month", th.IntegerType),
+        th.Property("dailyCost", th.NumberType),
+        th.Property("campaignId", th.IntegerType),
+    ).to_dict()
 
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/marketing/v2/tenant/{self.tenant_id}/costs"
+        return f"/marketing/v2/tenant/{self._tap.config['tenant_id']}/costs"
 
 
 class SuppressionsStream(ServiceTitanStream):
     """Define suppressions stream."""
 
     name = "suppressions"
-    primary_keys = ("email",)
-    schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.SuppressionResponse")
+    primary_keys: t.ClassVar[list[str]] = ["email"]
+    schema = th.PropertiesList(
+        th.Property("email", th.StringType),
+        th.Property("reason", th.StringType),
+    ).to_dict()
 
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/marketing/v2/tenant/{self.tenant_id}/suppressions"
+        return f"/marketing/v2/tenant/{self._tap.config['tenant_id']}/suppressions"

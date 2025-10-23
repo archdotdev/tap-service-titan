@@ -35,51 +35,38 @@
   ],
   "replication_method": "FULL_TABLE",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "exceptions": {
         "items": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "skuId": {
-              "format": "int64",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "skuType": {
-              "description": "The type of ISku entity",
               "type": [
                 "string",
                 "null"
               ]
             },
             "value": {
-              "format": "decimal",
               "type": [
                 "number",
                 "null"
               ]
             },
             "valueType": {
-              "description": "Equipment and Material markup type for rateSheets",
               "type": [
                 "string",
                 "null"
               ]
             }
           },
-          "required": [
-            "skuId",
-            "skuType",
-            "value",
-            "valueType"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": "object"
         },
         "type": [
           "array",
@@ -87,14 +74,12 @@
         ]
       },
       "id": {
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       }
     },
-    "required": [
-      "id",
-      "exceptions"
-    ],
     "type": "object"
   },
   "stream": "client_specific_pricing",

@@ -2,28 +2,32 @@
 
 from __future__ import annotations
 
-import sys
+import typing as t
 from functools import cached_property
 
-from tap_service_titan.client import ServiceTitanStream
-from tap_service_titan.openapi_specs import JBCE, ServiceTitanSchema
+from singer_sdk import typing as th  # JSON Schema typing helpers
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
+from tap_service_titan.client import (
+    ServiceTitanStream,
+)
 
 
 class CallReasonsStream(ServiceTitanStream):
     """Define call reasons stream."""
 
     name = "call_reasons"
-    primary_keys = ("id",)
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key: str = "modifiedOn"
-    schema = ServiceTitanSchema(JBCE, key="Jbce.V2.CallReasonResponse")
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("isLead", th.BooleanType),
+        th.Property("active", th.BooleanType),
+        th.Property("createdOn", th.DateTimeType),
+        th.Property("modifiedOn", th.DateTimeType),
+    ).to_dict()
 
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
-        return f"/jbce/v2/tenant/{self.tenant_id}/call-reasons"
+        return f"/jbce/v2/tenant/{self._tap.config['tenant_id']}/call-reasons"

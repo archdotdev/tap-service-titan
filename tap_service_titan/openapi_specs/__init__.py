@@ -24,21 +24,13 @@ __all__ = [
     "ACCOUNTING",
     "CRM",
     "DISPATCH",
-    "EQUIPMENT_SYSTEMS",
     "FORMS",
     "INVENTORY",
-    "JBCE",
     "JPM",
-    "MARKETING_ADS",
     "MARKETING_REPUTATION",
-    "MEMBERSHIPS",
-    "PAYROLL",
     "PRICEBOOK",
     "SALESTECH",
-    "SCHEDULING_PRO",
-    "SERVICE_AGREEMENTS",
     "SETTINGS",
-    "TASK_MANAGEMENT",
     "TELECOM",
 ]
 
@@ -148,26 +140,6 @@ class ServiceTitanSchema(StreamSchema):
         if stream.name == "categories":
             normalized["required"].remove("modifiedOn")
 
-        if stream.name in ("campaign_performance", "keyword_performance", "adgroup_performance"):
-            normalized["properties"] |= {
-                "date": {
-                    "type": "string",
-                    "format": ["date", "null"],
-                },
-                "from_utc": {
-                    "type": "string",
-                    "format": ["date-time", "null"],
-                },
-                "to_utc": {
-                    "type": "string",
-                    "format": ["date-time", "null"],
-                },
-                "campaign_id": normalized["properties"]["campaign"]["properties"]["id"],
-                "campaign_name": normalized["properties"]["campaign"]["properties"]["name"],
-                "adGroup_id": normalized["properties"]["adGroup"]["properties"]["id"],
-                "keyword_id": normalized["properties"]["keyword"]["properties"]["id"],
-            }
-
         return normalized
 
 
@@ -175,20 +147,12 @@ SPECS = files("tap_service_titan") / "openapi_specs"
 ACCOUNTING = ServiceTitanOpenAPISchema(SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(SPECS / "crm-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(SPECS / "dispatch-v2.json")
-EQUIPMENT_SYSTEMS = ServiceTitanOpenAPISchema(SPECS / "equipment-systems-v2.json")
 FORMS = ServiceTitanOpenAPISchema(SPECS / "forms-v2.json")
 INVENTORY = ServiceTitanOpenAPISchema(SPECS / "inventory-v2.json")
-JBCE = ServiceTitanOpenAPISchema(SPECS / "jbce-v2.json")
 JPM = ServiceTitanOpenAPISchema(SPECS / "jpm-v2.json")
 MARKETING = ServiceTitanOpenAPISchema(SPECS / "marketing-v2.json")
-MARKETING_ADS = ServiceTitanOpenAPISchema(SPECS / "marketing-ads-v2.json")
 MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v2.json")
-MEMBERSHIPS = ServiceTitanOpenAPISchema(SPECS / "memberships-v2.json")
-PAYROLL = ServiceTitanOpenAPISchema(SPECS / "payroll-v2.json")
 PRICEBOOK = ServiceTitanOpenAPISchema(SPECS / "pricebook-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(SPECS / "salestech-v2.json")
-SCHEDULING_PRO = ServiceTitanOpenAPISchema(SPECS / "scheduling-pro-v2.json")
-SERVICE_AGREEMENTS = ServiceTitanOpenAPISchema(SPECS / "service-agreements-v2.json")
 SETTINGS = ServiceTitanOpenAPISchema(SPECS / "settings-v2.json")
-TASK_MANAGEMENT = ServiceTitanOpenAPISchema(SPECS / "task-management-v2.json")
 TELECOM = ServiceTitanOpenAPISchema(SPECS / "telecom.json")

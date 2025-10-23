@@ -7,6 +7,69 @@
     {
       "breadcrumb": [
         "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "from_utc"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "to_utc"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "campaign_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "adGroup_id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "keyword_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "campaign"
       ],
       "metadata": {
@@ -19,17 +82,6 @@
         "campaign",
         "properties",
         "id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "campaign",
-        "properties",
-        "externalId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -384,17 +436,6 @@
         "properties",
         "leadStats",
         "properties",
-        "potentialRevenue"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "leadStats",
-        "properties",
         "bookingRate"
       ],
       "metadata": {
@@ -422,69 +463,6 @@
       }
     },
     {
-      "breadcrumb": [
-        "properties",
-        "date"
-      ],
-      "metadata": {
-        "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "from_utc"
-      ],
-      "metadata": {
-        "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "to_utc"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "campaign_id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "campaign_name"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "adGroup_id"
-      ],
-      "metadata": {
-        "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "keyword_id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -503,10 +481,10 @@
   "replication_key": "from_utc",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "adGroup": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "id": {
             "type": [
@@ -521,17 +499,12 @@
             ]
           },
           "status": {
-            "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "id",
-          "name"
-        ],
         "type": [
           "object",
           "null"
@@ -544,7 +517,7 @@
         ]
       },
       "campaign": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "category": {
             "type": [
@@ -552,15 +525,7 @@
               "null"
             ]
           },
-          "externalId": {
-            "format": "int64",
-            "type": [
-              "integer",
-              "null"
-            ]
-          },
           "id": {
-            "format": "int64",
             "type": [
               "integer",
               "null"
@@ -579,26 +544,18 @@
             ]
           },
           "status": {
-            "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "name",
-          "category",
-          "launchDate",
-          "status"
-        ],
         "type": [
           "object",
           "null"
         ]
       },
       "campaign_id": {
-        "format": "int64",
         "type": [
           "integer",
           "null"
@@ -611,107 +568,90 @@
         ]
       },
       "date": {
-        "format": [
-          "date",
+        "format": "date",
+        "type": [
+          "string",
           "null"
-        ],
-        "type": "string"
+        ]
       },
       "digitalStats": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "allConversions": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "averageCPC": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "clickRate": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "clicks": {
-            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "conversionRate": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "conversions": {
-            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           },
           "cost": {
-            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "costPerConversion": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "impressionShare": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "impressions": {
-            "format": "int64",
             "type": [
               "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "impressions",
-          "clicks",
-          "averageCPC",
-          "conversions",
-          "cost"
-        ],
         "type": [
           "object",
           "null"
         ]
       },
       "from_utc": {
-        "format": [
-          "date-time",
+        "format": "date-time",
+        "type": [
+          "string",
           "null"
-        ],
-        "type": "string"
+        ]
       },
       "keyword": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "id": {
             "type": [
@@ -726,17 +666,12 @@
             ]
           },
           "status": {
-            "description": "",
             "type": [
-              "string",
+              "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "id",
-          "name"
-        ],
         "type": [
           "object",
           "null"
@@ -749,124 +684,88 @@
         ]
       },
       "leadStats": {
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "avgTicket": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "bookedJobs": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
           "bookingRate": {
-            "format": "double",
             "type": [
               "number",
               "null"
             ]
           },
           "leadCalls": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
           "leads": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
           "manualBooking": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
           "onlineBooking": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
-          "potentialRevenue": {
-            "format": "decimal",
-            "type": [
-              "number",
-              "null"
-            ]
-          },
           "ranJobs": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           },
           "revenue": {
-            "format": "decimal",
             "type": [
               "number",
               "null"
             ]
           },
           "soldJobs": {
-            "format": "int32",
             "type": [
               "integer",
               "null"
             ]
           }
         },
-        "required": [
-          "leads",
-          "leadCalls",
-          "onlineBooking",
-          "manualBooking",
-          "bookedJobs",
-          "ranJobs",
-          "soldJobs",
-          "revenue",
-          "potentialRevenue"
-        ],
         "type": [
           "object",
           "null"
         ]
       },
       "returnOnInvestment": {
-        "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
       "to_utc": {
-        "format": [
-          "date-time",
+        "format": "date-time",
+        "type": [
+          "string",
           "null"
-        ],
-        "type": "string"
+        ]
       }
     },
-    "required": [
-      "campaign",
-      "adGroup",
-      "keyword",
-      "digitalStats",
-      "leadStats"
-    ],
     "type": "object"
   },
   "stream": "adgroup_performance",

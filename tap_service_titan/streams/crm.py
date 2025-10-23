@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
+
 # CRM Streams
 class BookingProviderTagsStream(ServiceTitanStream):
     """Define booking provider tags stream."""

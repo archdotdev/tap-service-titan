@@ -129,25 +129,21 @@
   "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
-    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
       "active": {
-        "description": "Whether this event still exists, or was deleted already.",
         "type": [
           "boolean",
           "null"
         ]
       },
       "createdById": {
-        "description": "ID of the user that created this event (could happen as a result of\nediting recurring service, selling a new membership, etc.)",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "createdOn": {
-        "description": "Event creation date ",
         "format": "date-time",
         "type": [
           "string",
@@ -155,7 +151,6 @@
         ]
       },
       "date": {
-        "description": "Event date ",
         "format": "date-time",
         "type": [
           "string",
@@ -163,50 +158,42 @@
         ]
       },
       "id": {
-        "description": "Recurring service event ID ",
-        "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "jobId": {
-        "description": "ID of the job associated with this event ",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationRecurringServiceId": {
-        "description": "Recurring service ID ",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "locationRecurringServiceName": {
-        "description": "Recurring service name ",
         "type": [
           "string",
           "null"
         ]
       },
       "membershipId": {
-        "description": "Membership ID ",
-        "format": "int64",
         "type": [
           "integer",
           "null"
         ]
       },
       "membershipName": {
-        "description": "Membership name ",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
-        "description": "Event modification date ",
         "format": "date-time",
         "type": [
           "string",
@@ -214,22 +201,12 @@
         ]
       },
       "status": {
-        "description": "",
         "type": [
           "string",
           "null"
         ]
       }
     },
-    "required": [
-      "id",
-      "locationRecurringServiceId",
-      "status",
-      "date",
-      "createdOn",
-      "modifiedOn",
-      "active"
-    ],
     "type": "object"
   },
   "stream": "recurring_service_events",

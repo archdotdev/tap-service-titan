@@ -2,22 +2,15 @@
 
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING
+import typing as t
 
 from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_service_titan import streams
-from tap_service_titan.client import ServiceTitanBaseStream
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
-
-if TYPE_CHECKING:
-    from tap_service_titan.client import ServiceTitanBaseStream
+if t.TYPE_CHECKING:
+    from tap_service_titan.client import ServiceTitanStream
 
 
 class TapServiceTitan(Tap):
@@ -138,9 +131,12 @@ class TapServiceTitan(Tap):
         ),
     ).to_dict()
 
-    @override
-    def discover_streams(self) -> list[ServiceTitanBaseStream]:
-        """Return a list of discovered streams."""
+    def discover_streams(self) -> list[ServiceTitanStream]:
+        """Return a list of discovered streams.
+
+        Returns:
+            A list of discovered streams.
+        """
         streams_list = [
             streams.accounting.InvoiceItemsStream(self),
             streams.accounting.InvoicesStream(self),
@@ -266,7 +262,7 @@ class TapServiceTitan(Tap):
                     for report in custom_reports_config
                 ]
             )
-        return streams_list  # ty: ignore[invalid-return-type]
+        return streams_list
 
 
 if __name__ == "__main__":
