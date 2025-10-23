@@ -276,3 +276,17 @@ class GLAccountsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self.tenant_id}/gl-accounts"
+
+
+class GLAccountTypesStream(ServiceTitanStream):
+    """Define GL account types stream."""
+
+    name = "gl_account_types"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.GlAccountTypeResponse")
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self.tenant_id}/gl-accounts/types"
