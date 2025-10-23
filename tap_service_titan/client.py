@@ -222,13 +222,9 @@ class ServiceTitanStream(ServiceTitanBaseStream):
             A dictionary of URL query parameters.
         """
         params: dict = {}
-        starting_date = self.get_starting_timestamp(context)
-
-        # The Service Titan API uses the "from" param for both continuation tokens
-        # and for the starting timestamp for the first request of an export
-        if self.replication_key and starting_date:
-            # "from" param is inclusive of start date
-            # this prevents duplicating of single record in each run
+        if self.replication_key and (starting_date := self.get_starting_timestamp(context)):
+            # Some endpoints use the "modifiedOnOrAfter" param for incremental extraction.
+            # This is usually paired with a `modifiedOn` field in the response.
             starting_date += timedelta(milliseconds=1)
             params["modifiedOnOrAfter"] = starting_date.isoformat()
         params["pageSize"] = 5000
