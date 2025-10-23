@@ -1,4 +1,4 @@
-"""Tools for autogenerating streams."""
+"""Tools for autogenerating streams."""  # noqa: INP001
 
 import json
 import subprocess
@@ -14,19 +14,19 @@ app = typer.Typer()
 
 def get_response_spec_from_path(full_spec, path):
     """Get the response schema from a path."""
-    return full_spec["paths"][path]["get"]["responses"]["200"]["content"][
-        "application/json"
-    ]["schema"]["properties"]["data"]["items"]
+    return full_spec["paths"][path]["get"]["responses"]["200"]["content"]["application/json"][
+        "schema"
+    ]["properties"]["data"]["items"]
 
 
-def get_spec_from_path(path: Path):
+def get_spec_from_path(path: Path):  # noqa: D103
     with path.open("r") as spec_file:
         return jsonref.replace_refs(json.load(spec_file))
 
 
 def _get_paths_with_get(full_spec: dict):
     """Get all paths with a GET method."""
-    for path in full_spec["paths"].keys():
+    for path in full_spec["paths"]:
         if "get" in full_spec["paths"][path]:
             yield path
 
@@ -34,29 +34,41 @@ def _get_paths_with_get(full_spec: dict):
 @app.command()
 def get_paths_with_get(
     path: Annotated[
-        Path, typer.Option(exists=True, file_okay=True, dir_okay=False, readable=True)
+        Path,
+        typer.Option(
+            exists=True,
+            file_okay=True,
+            dir_okay=False,
+            readable=True,
+        ),
     ],
 ):
     """Get all paths."""
     full_spec = get_spec_from_path(path)
-    for path in _get_paths_with_get(full_spec):
+    for path in _get_paths_with_get(full_spec):  # noqa: PLR1704
         print(path)
 
 
 @app.command()
 def get_export_specs(
     path: Annotated[
-        Path, typer.Option(exists=True, file_okay=True, dir_okay=False, readable=True)
+        Path,
+        typer.Option(
+            exists=True,
+            file_okay=True,
+            dir_okay=False,
+            readable=True,
+        ),
     ],
 ):
     """Get export specs."""
     full_spec = get_spec_from_path(path)
-    for path in _get_paths_with_get(full_spec):
+    for path in _get_paths_with_get(full_spec):  # noqa: PLR1704
         if "/export/" in path:
             path_spec = full_spec["paths"][path]
-            items_schema = path_spec["get"]["responses"]["200"]["content"][
-                "application/json"
-            ]["schema"]["properties"]["data"]["items"]
+            items_schema = path_spec["get"]["responses"]["200"]["content"]["application/json"][
+                "schema"
+            ]["properties"]["data"]["items"]
             print(path)
             print(items_schema)
 
@@ -89,12 +101,14 @@ def get_prompts(
             response_spec = _get_response_spec_for_path(spec_path, path)
             text = f"This is for the {spec_path.stem.replace('-', ' ')} API.\nURL path segment: {path}\nJSON schema:\n{response_spec}"  # noqa: E501
             process = subprocess.Popen(
-                "pbcopy", env={"LANG": "en_US.UTF-8"}, stdin=subprocess.PIPE
+                "pbcopy",  # noqa: S607
+                env={"LANG": "en_US.UTF-8"},
+                stdin=subprocess.PIPE,
             )
             process.communicate(text.encode("utf-8"))
             print(path)
             click.pause()
-        except KeyError:
+        except KeyError:  # noqa: PERF203
             pass
 
 

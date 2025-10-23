@@ -1,15 +1,18 @@
-### A CI workflow template that runs linting and python testing
-
 name: Test tap-service-titan
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 env:
   FORCE_COLOR: "1"
 
 jobs:
   pytest:
-    runs-on: ubuntu-latest
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-24.04
     env:
       TAP_SERVICE_TITAN_CLIENT_ID: ${{secrets.TAP_SERVICE_TITAN_CLIENT_ID}}
       TAP_SERVICE_TITAN_CLIENT_SECRET: ${{secrets.TAP_SERVICE_TITAN_CLIENT_SECRET}}
@@ -23,6 +26,7 @@ jobs:
         - "3.11"
         - "3.12"
         - "3.13"
+        - "3.14"
     steps:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
     - name: Set up Python ${{ matrix.python-version }}
@@ -34,3 +38,10 @@ jobs:
     - name: Test with pytest
       run: |
         uv run --no-dev --group=test pytest
+
+  pre-commit:
+    name: Prek checks
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: j178/prek-action@91fd7d7cf70ae1dee9f4f44e7dfa5d1073fe6623 # v1.0.11

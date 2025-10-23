@@ -48,8 +48,10 @@ test = [
 ]
 typing = [
     { include-group = "test" },
-    "types-requests>=2",
     "backports-httpmethod",
+    "mypy>=1.18.2",
+    "ty>=0.0.1a24",
+    "types-requests>=2",
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -77,12 +79,17 @@ ignore = [
     "COM812", # missing-trailing-comma
     "ISC001", # single-line-implicit-string-concatenation
     "FIX",  # allow TODO comments
+    "ERA",  # allow commented-out code
 ]
 select = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**.py" = [
     "S101", # asserts in pytest functions is OK
+]
+"scripts/**.py" = [
+    "ANN",  # don't require annotations in scripts
+    "T201",  # allow `print` in scripts
 ]
 
 [tool.ruff.lint.flake8-annotations]

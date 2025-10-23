@@ -103,7 +103,7 @@ class CustomReports(ServiceTitanStream):
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:  # noqa: ARG004
-        # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
+        # TODO(maintainers): Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
         return th.StringType()
         # mapping = {
         #     # String , Number , Boolean , Date , Time
@@ -226,7 +226,7 @@ class CustomReports(ServiceTitanStream):
         resp = response.json()
         field_names = [field["name"] for field in resp["fields"]]
         for record in resp["data"]:
-            # TODO: Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
+            # TODO(maintainers): Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
             string_record = [str(val) if val is not None else "" for val in record]
             data = dict(zip(field_names, string_record, strict=False))
             # Add the backfill date to the record if configured
