@@ -59,10 +59,8 @@ class MembershipTypesStream(ServiceTitanExportStream):
         row: Record,
         context: Context | None = None,
     ) -> Record | None:
-        row["durationBilling"] = [
-            {} if item is None else item  # Replace null item with empty dict
-            for item in row["durationBilling"]
-        ]
+        # Remove null items from durationBilling
+        row["durationBilling"] = [item for item in row["durationBilling"] if item is not None]
         return row
 
 
