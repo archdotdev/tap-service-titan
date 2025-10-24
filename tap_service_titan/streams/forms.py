@@ -43,7 +43,7 @@ class SubmissionsStream(ServiceTitanStream):
     name = "submissions"
     primary_keys = ("id",)
     replication_key: str = "submittedOn"
-    is_sorted = True
+    is_sorted = False
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
