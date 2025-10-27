@@ -43,6 +43,7 @@ class SubmissionsStream(ServiceTitanStream):
     name = "submissions"
     primary_keys = ("id",)
     replication_key: str = "submittedOn"
+    is_sorted = False
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -151,6 +152,29 @@ class SubmissionsStream(ServiceTitanStream):
                 # Only process the units section, leaving the rest of the record unchanged
                 record["units"] = [process_units(unit) for unit in record["units"]]
             yield record
+
+    @override
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: int | None,
+    ) -> dict[str, Any]:
+        """Overrides the default URL parameters to use a custom param for incremental extraction.
+
+        The `modifiedOnOrAfter` param is not supported by this endpoint, so we're using
+        `submittedOnOrAfter` instead.
+        """
+        params: dict = {}
+        if self.replication_key and (starting_date := self.get_starting_timestamp(context)):
+            # isoformat includes timezone +00:00 etc which is not supported by the API,
+            # this format is better
+            params["submittedOnOrAfter"] = starting_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+        # We were getting Memory Issues with page size of 5000 so we're using a custom page size.
+        params["pageSize"] = 500
+        params["page"] = next_page_token
+        params["sort"] = "+SubmittedOn"  # Sort by submittedOn in ascending order
+        return params
 
 
 class JobAttachmentsStream(ServiceTitanStream):

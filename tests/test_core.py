@@ -12,6 +12,7 @@ dotenv.load_dotenv()
 
 SAMPLE_CONFIG = {
     "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
+    # "start_date": "2025-06-01",
     "client_id": environ["TAP_SERVICE_TITAN_CLIENT_ID"],
     "client_secret": environ["TAP_SERVICE_TITAN_CLIENT_SECRET"],
     "st_app_key": environ["TAP_SERVICE_TITAN_ST_APP_KEY"],
