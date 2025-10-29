@@ -150,6 +150,15 @@
     {
       "breadcrumb": [
         "properties",
+        "postDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "batch"
       ],
       "metadata": {
@@ -360,6 +369,15 @@
     {
       "breadcrumb": [
         "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "items"
       ],
       "metadata": {
@@ -469,6 +487,14 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "description": "Budget code ID associated with the bill",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },
@@ -592,6 +618,14 @@
               ],
               "type": [
                 "object",
+                "null"
+              ]
+            },
+            "budgetCodeId": {
+              "description": "Budget code ID associated with the item",
+              "format": "int64",
+              "type": [
+                "integer",
                 "null"
               ]
             },
@@ -790,6 +824,13 @@
         ]
       },
       "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "postDate": {
         "format": "date-time",
         "type": [
           "string",

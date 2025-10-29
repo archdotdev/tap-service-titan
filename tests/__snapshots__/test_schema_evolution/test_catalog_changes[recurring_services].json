@@ -310,6 +310,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "preferredTechnicianIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -511,6 +529,17 @@
           "null"
         ]
       },
+      "preferredTechnicianIds": {
+        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "priority": {
         "description": "",
         "type": [
@@ -588,6 +617,17 @@
           "null"
         ]
       },
+      "tagTypeIds": {
+        "description": "A list of tag IDs associated to this recurring service. ",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "to": {
         "description": "End date of recurring service",
         "format": "date-time",
@@ -615,7 +655,8 @@
       "recurrenceMonths",
       "recurrenceDaysOfWeek",
       "recurrenceWeek",
-      "recurrenceDaysOfMonth"
+      "recurrenceDaysOfMonth",
+      "tagTypeIds"
     ],
     "type": "object"
   },
