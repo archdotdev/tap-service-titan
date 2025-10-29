@@ -10,6 +10,970 @@
         }
     ],
     "paths": {
+        "/tenant/{tenant}/ap-bills": {
+            "get": {
+                "tags": [
+                    "ApBills"
+                ],
+                "summary": "Returns a paginated list of AP bills with detailed item information, filtering capabilities, and associated metadata",
+                "description": "Returns a paginated list of AP bills with detailed item information, filtering capabilities, and associated metadata",
+                "operationId": "ApBills_GetListPaginated",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Comma-separated list of specific AP bill IDs to retrieve",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "batchId",
+                        "in": "query",
+                        "description": "Filter by specific batch ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "batchNumber",
+                        "in": "query",
+                        "description": "Filter by batch number",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "billNumber",
+                        "in": "query",
+                        "description": "Filter by bill number (partial match supported)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "description": "Comma-separated list of business unit IDs to filter by",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Fields",
+                        "in": "query",
+                        "description": "Dictionary of name-value pairs",
+                        "schema": {
+                            "maxProperties": 50,
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Operator",
+                        "in": "query",
+                        "description": "Operator to be used between the name-value pairs. Can be \"Or\" or \"And\", default is \"And\".\\\nValues: [And, Or]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.LogicalOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "dateFrom",
+                        "in": "query",
+                        "description": "Filter bills created on or after this date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "dateTo",
+                        "in": "query",
+                        "description": "Filter bills created on or before this date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "jobNumber",
+                        "in": "query",
+                        "description": "Filter by job number (partial match supported)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "purchaseOrderNumber",
+                        "in": "query",
+                        "description": "Filter by purchase order number (partial match supported)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "purchaseOrderTypes",
+                        "in": "query",
+                        "description": "Comma-separated list of purchase order types to filter by",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "syncStatuses",
+                        "in": "query",
+                        "description": "Filter by sync status values",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.ApBillSyncStatus"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "description": "Filter by bill status values",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.ApBillStatus"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "description": "Filter by bill source values",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.ApBillSource"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "minCost",
+                        "in": "query",
+                        "description": "Filter bills with cost greater than or equal to this amount",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "maxCost",
+                        "in": "query",
+                        "description": "Filter bills with cost less than or equal to this amount",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "billType",
+                        "in": "query",
+                        "description": "Filter by bill type (defaults to Procurement)\\\nValues: [NotSet, Procurement, ApBill]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.ApBillType"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the paginated list of AP bills",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.ApBillResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "purchaseOrderId": 0,
+                                            "syncStatus": "string",
+                                            "status": "string",
+                                            "source": "string",
+                                            "billType": "string",
+                                            "postDate": "string",
+                                            "referenceNumber": "string",
+                                            "vendorNumber": "string",
+                                            "summary": "string",
+                                            "billDate": "string",
+                                            "earlyDiscountDate": "string",
+                                            "billAmount": "string",
+                                            "vendorInvoiceTotal": "string",
+                                            "taxAmount": "string",
+                                            "shippingAmount": "string",
+                                            "createdBy": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "termName": "string",
+                                            "dueDate": "string",
+                                            "doNotPay": true,
+                                            "dateCanceled": "string",
+                                            "canceledBy": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "shipToDescription": "string",
+                                            "batch": {
+                                                "id": 0,
+                                                "number": "string",
+                                                "name": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "taxZone": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "vendor": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "remittanceVendorInfo": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "shipTo": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            },
+                                            "budgetCodeId": 0,
+                                            "items": [
+                                                {
+                                                    "order": 0,
+                                                    "name": "string",
+                                                    "description": "string",
+                                                    "quantity": "string",
+                                                    "cost": "string",
+                                                    "inventoryLocation": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "type": "string"
+                                                    },
+                                                    "vendorPartNumber": "string",
+                                                    "serialNumber": "string",
+                                                    "generalLedgerAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "costOfSaleAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "assetAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "id": 0,
+                                                    "skuId": 0,
+                                                    "receiptItemId": 0,
+                                                    "skuType": "string",
+                                                    "skuCode": "string",
+                                                    "budgetCodeId": 0
+                                                }
+                                            ],
+                                            "expenseItems": [
+                                                {
+                                                    "id": 0,
+                                                    "amount": "string",
+                                                    "description": "string",
+                                                    "generalLedgerAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "job": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "businessUnit": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "budgetCodeId": 0,
+                                                    "projectLabelIds": [
+                                                        0
+                                                    ]
+                                                }
+                                            ],
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "jobId": 0,
+                                            "jobNumber": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/ap-bills/{billId}": {
+            "get": {
+                "tags": [
+                    "ApBills"
+                ],
+                "summary": "Returns a single AP bill by its unique identifier with complete details including items, expense items, and associated metadata",
+                "description": "Returns a single AP bill by its unique identifier with complete details including items, expense items, and associated metadata",
+                "operationId": "ApBills_GetById",
+                "parameters": [
+                    {
+                        "name": "billId",
+                        "in": "path",
+                        "description": "The unique identifier of the AP bill to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the AP bill",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.ApBillResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "purchaseOrderId": 0,
+                                    "syncStatus": "string",
+                                    "status": "string",
+                                    "source": "string",
+                                    "billType": "string",
+                                    "postDate": "string",
+                                    "referenceNumber": "string",
+                                    "vendorNumber": "string",
+                                    "summary": "string",
+                                    "billDate": "string",
+                                    "earlyDiscountDate": "string",
+                                    "billAmount": "string",
+                                    "vendorInvoiceTotal": "string",
+                                    "taxAmount": "string",
+                                    "shippingAmount": "string",
+                                    "createdBy": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "termName": "string",
+                                    "dueDate": "string",
+                                    "doNotPay": true,
+                                    "dateCanceled": "string",
+                                    "canceledBy": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "shipToDescription": "string",
+                                    "batch": {
+                                        "id": 0,
+                                        "number": "string",
+                                        "name": "string"
+                                    },
+                                    "businessUnit": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "taxZone": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "vendor": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "remittanceVendorInfo": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "shipTo": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "country": "string"
+                                    },
+                                    "budgetCodeId": 0,
+                                    "items": [
+                                        {
+                                            "order": 0,
+                                            "name": "string",
+                                            "description": "string",
+                                            "quantity": "string",
+                                            "cost": "string",
+                                            "inventoryLocation": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "type": "string"
+                                            },
+                                            "vendorPartNumber": "string",
+                                            "serialNumber": "string",
+                                            "generalLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "costOfSaleAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "assetAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "id": 0,
+                                            "skuId": 0,
+                                            "receiptItemId": 0,
+                                            "skuType": "string",
+                                            "skuCode": "string",
+                                            "budgetCodeId": 0
+                                        }
+                                    ],
+                                    "expenseItems": [
+                                        {
+                                            "id": 0,
+                                            "amount": "string",
+                                            "description": "string",
+                                            "generalLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "job": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "budgetCodeId": 0,
+                                            "projectLabelIds": [
+                                                0
+                                            ]
+                                        }
+                                    ],
+                                    "customFields": [
+                                        {
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ],
+                                    "jobId": 0,
+                                    "jobNumber": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "AP bill with the specified ID was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/ap-bills/custom-fields": {
+            "get": {
+                "tags": [
+                    "ApBills"
+                ],
+                "summary": "Returns a paginated list of filtered custom field types available for AP bills",
+                "description": "Returns a paginated list of filtered custom field types available for AP bills",
+                "operationId": "ApBills_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the custom field types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "ApBills"
+                ],
+                "summary": "Updates custom field values on multiple AP bills",
+                "description": "Updates custom field values on multiple AP bills",
+                "operationId": "ApBills_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The custom field update request containing bill IDs and field values to update",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated custom fields on the specified AP bills"
+                    },
+                    "400": {
+                        "description": "Invalid request data or validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/ap-bills/markasexported": {
+            "post": {
+                "tags": [
+                    "ApBills"
+                ],
+                "summary": "Marks multiple AP bills as exported, updating their sync status to indicate they have been exported to external systems",
+                "description": "Marks multiple AP bills as exported, updating their sync status to indicate they have been exported to external systems",
+                "operationId": "ApBills_MarkAsExported",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request containing AP bill IDs to mark as exported",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.MarkApBillAsExportedUpdateRequest"
+                            },
+                            "example": {
+                                "billIds": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully processed the mark as exported request for all bills",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Accounting.V2.MarkApBillAsExportedUpdateResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "billId": 0,
+                                        "success": true,
+                                        "errorMessage": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request data or validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/ap-credits": {
             "get": {
                 "tags": [
@@ -115,6 +1079,17 @@
                             "type": "string",
                             "nullable": true
                         }
+                    },
+                    {
+                        "name": "syncStatuses",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.InventoryBillSyncStatus"
+                            },
+                            "nullable": true
+                        }
                     }
                 ],
                 "responses": {
@@ -174,7 +1149,8 @@
                                                     "vendorCreditId": 0,
                                                     "amount": 0
                                                 }
-                                            ]
+                                            ],
+                                            "budgetCodeId": 0
                                         }
                                     ]
                                 }
@@ -383,6 +1359,17 @@
                         "description": "Applies sorting by specified fields",
                         "schema": {
                             "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "syncStatuses",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.InventoryBillSyncStatus"
+                            },
                             "nullable": true
                         }
                     }
@@ -616,6 +1603,7 @@
                                                     "quantity": "string",
                                                     "cost": "string",
                                                     "totalCost": "string",
+                                                    "budgetCodeId": 0,
                                                     "inventoryLocationId": 0,
                                                     "inventoryLocation": "string",
                                                     "price": "string",
@@ -688,6 +1676,7 @@
                                             "paidOn": "string",
                                             "id": 0,
                                             "syncStatus": "string",
+                                            "budgetCodeId": 0,
                                             "referenceNumber": "string",
                                             "invoiceDate": "string",
                                             "dueDate": "string",
@@ -850,6 +1839,7 @@
                                             "quantity": "string",
                                             "cost": "string",
                                             "totalCost": "string",
+                                            "budgetCodeId": 0,
                                             "inventoryLocationId": 0,
                                             "inventoryLocation": "string",
                                             "price": "string",
@@ -1130,6 +2120,7 @@
                                             "termName": "string",
                                             "dueDate": "string",
                                             "shipToDescription": "string",
+                                            "postDate": "string",
                                             "batch": {
                                                 "id": 0,
                                                 "number": "string",
@@ -1155,6 +2146,7 @@
                                                 "zip": "string",
                                                 "country": "string"
                                             },
+                                            "budgetCodeId": 0,
                                             "items": [
                                                 {
                                                     "order": 0,
@@ -1189,7 +2181,8 @@
                                                     "skuId": 0,
                                                     "receiptItemId": 0,
                                                     "skuType": "string",
-                                                    "skuCode": "string"
+                                                    "skuCode": "string",
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "customFields": [
@@ -2254,6 +3247,7 @@
                                         "termName": "string",
                                         "dueDate": "string",
                                         "shipToDescription": "string",
+                                        "postDate": "string",
                                         "batch": {
                                             "id": 0,
                                             "number": "string",
@@ -2279,6 +3273,7 @@
                                             "zip": "string",
                                             "country": "string"
                                         },
+                                        "budgetCodeId": 0,
                                         "items": [
                                             {
                                                 "order": 0,
@@ -2313,7 +3308,8 @@
                                                 "skuId": 0,
                                                 "receiptItemId": 0,
                                                 "skuType": "string",
-                                                "skuCode": "string"
+                                                "skuCode": "string",
+                                                "budgetCodeId": 0
                                             }
                                         ],
                                         "customFields": [
@@ -2623,6 +3619,7 @@
                                             "termName": "string",
                                             "dueDate": "string",
                                             "shipToDescription": "string",
+                                            "postDate": "string",
                                             "batch": {
                                                 "id": 0,
                                                 "number": "string",
@@ -2648,6 +3645,7 @@
                                                 "zip": "string",
                                                 "country": "string"
                                             },
+                                            "budgetCodeId": 0,
                                             "items": [
                                                 {
                                                     "order": 0,
@@ -2682,7 +3680,8 @@
                                                     "skuId": 0,
                                                     "receiptItemId": 0,
                                                     "skuType": "string",
-                                                    "skuCode": "string"
+                                                    "skuCode": "string",
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "customFields": [
@@ -3379,6 +4378,7 @@
                                         {
                                             "id": 0,
                                             "syncStatus": "string",
+                                            "budgetCodeId": 0,
                                             "referenceNumber": "string",
                                             "invoiceDate": "string",
                                             "dueDate": "string",
@@ -3466,6 +4466,7 @@
                                                     "quantity": "string",
                                                     "cost": "string",
                                                     "totalCost": "string",
+                                                    "budgetCodeId": 0,
                                                     "inventoryLocationId": 0,
                                                     "inventoryLocation": "string",
                                                     "price": "string",
@@ -3601,6 +4602,7 @@
                                 "exportId": "string",
                                 "reviewStatus": {},
                                 "assignedToId": 0,
+                                "budgetCodeId": 0,
                                 "items": [
                                     {
                                         "skuId": 0,
@@ -3620,6 +4622,7 @@
                                         "itemGroupRootId": 0,
                                         "inventoryLocationId": 0,
                                         "durationBillingId": 0,
+                                        "budgetCodeId": 0,
                                         "id": 0
                                     }
                                 ],
@@ -3923,6 +4926,7 @@
                                 "exportId": "string",
                                 "reviewStatus": {},
                                 "assignedToId": 0,
+                                "budgetCodeId": 0,
                                 "items": [
                                     {
                                         "skuId": 0,
@@ -3942,6 +4946,7 @@
                                         "itemGroupRootId": 0,
                                         "inventoryLocationId": 0,
                                         "durationBillingId": 0,
+                                        "budgetCodeId": 0,
                                         "id": 0
                                     }
                                 ],
@@ -4035,6 +5040,7 @@
                                 "itemGroupRootId": 0,
                                 "inventoryLocationId": 0,
                                 "durationBillingId": 0,
+                                "budgetCodeId": 0,
                                 "id": 0
                             }
                         }
@@ -4463,9 +5469,8 @@
                     {
                         "name": "refNumber",
                         "in": "query",
-                        "description": "Contains a transaction with reference number containing",
+                        "description": "Comma-delimited list of reference numbers, maximum 50 items",
                         "schema": {
-                            "maxLength": 255,
                             "type": "string",
                             "nullable": true
                         }
@@ -4865,7 +5870,8 @@
                                                 "type": {},
                                                 "code": "string"
                                             },
-                                            "transactionDate": "string"
+                                            "transactionDate": "string",
+                                            "budgetCodeId": 0
                                         }
                                     ]
                                 }
@@ -6571,10 +7577,1218 @@
                     }
                 }
             }
+        },
+        "/tenant/{tenant}/remittance-vendors": {
+            "get": {
+                "tags": [
+                    "RemittanceVendors"
+                ],
+                "summary": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
+                "description": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
+                "operationId": "RemittanceVendors_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Ids to filter by",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the paginated list of Remittance Vendors",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Inventory.V2.RemittanceVendorResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true,
+                                            "customerId": "string",
+                                            "isApproved": true,
+                                            "isVerified": true,
+                                            "contactInfo": {
+                                                "firstName": "string",
+                                                "lastName": "string",
+                                                "phone": "string",
+                                                "email": "string",
+                                                "fax": "string"
+                                            },
+                                            "address": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            },
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/remittance-vendors/{id}": {
+            "get": {
+                "tags": [
+                    "RemittanceVendors"
+                ],
+                "summary": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
+                "description": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
+                "operationId": "RemittanceVendors_GetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The unique identifier of the Remittance Vendor to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the Remittance Vendor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "customerId": "string",
+                                    "isApproved": true,
+                                    "isVerified": true,
+                                    "contactInfo": {
+                                        "firstName": "string",
+                                        "lastName": "string",
+                                        "phone": "string",
+                                        "email": "string",
+                                        "fax": "string"
+                                    },
+                                    "address": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "country": "string"
+                                    },
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Remittance Vendor with the specified ID was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "PaginatedResponse_Of_Accounting.V2.ApBillResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ApBillResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.ApBillResponse": {
+                "required": [
+                    "id",
+                    "doNotPay"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the AP bill",
+                        "format": "int64"
+                    },
+                    "purchaseOrderId": {
+                        "type": "integer",
+                        "description": "Associated purchase order ID, if applicable",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "syncStatus": {
+                        "type": "string",
+                        "description": "Current synchronization status of the bill (e.g., Pending, Posted, Exported)",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Current status of the bill (e.g., Unreconciled, Reconciled, Discrepancy, Canceled)",
+                        "nullable": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Source of the bill creation (e.g., Standalone, Purchasing, API, OCR)",
+                        "nullable": true
+                    },
+                    "billType": {
+                        "type": "string",
+                        "description": "Type of the bill (e.g., Procurement, ApBill)",
+                        "nullable": true
+                    },
+                    "postDate": {
+                        "type": "string",
+                        "description": "Date when the bill was posted to the accounting system",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "referenceNumber": {
+                        "type": "string",
+                        "description": "Reference number for the bill",
+                        "nullable": true
+                    },
+                    "vendorNumber": {
+                        "type": "string",
+                        "description": "Vendor's internal number or identifier",
+                        "nullable": true
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Brief summary or description of the bill",
+                        "nullable": true
+                    },
+                    "billDate": {
+                        "type": "string",
+                        "description": "Date of the bill as specified by the vendor",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "earlyDiscountDate": {
+                        "type": "string",
+                        "description": "Date by which early payment discount can be applied",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "billAmount": {
+                        "type": "string",
+                        "description": "Total amount of the bill as a formatted string",
+                        "nullable": true
+                    },
+                    "vendorInvoiceTotal": {
+                        "type": "string",
+                        "description": "Total amount from the vendor's invoice as a formatted string",
+                        "nullable": true
+                    },
+                    "taxAmount": {
+                        "type": "string",
+                        "description": "Tax amount as a formatted string",
+                        "nullable": true
+                    },
+                    "shippingAmount": {
+                        "type": "string",
+                        "description": "Shipping amount as a formatted string",
+                        "nullable": true
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "description": "Name of the user who created the bill",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date and time when the bill was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date and time when the bill was last modified",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "termName": {
+                        "type": "string",
+                        "description": "Name of the payment terms applied to this bill",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "description": "Due date for payment of the bill",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "doNotPay": {
+                        "type": "boolean",
+                        "description": "Indicates whether this bill should not be paid (hold status)"
+                    },
+                    "dateCanceled": {
+                        "type": "string",
+                        "description": "Date when the bill was canceled, if applicable",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "canceledBy": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Information about who canceled the bill",
+                        "nullable": true
+                    },
+                    "shipToDescription": {
+                        "type": "string",
+                        "description": "Description of the shipping destination",
+                        "nullable": true
+                    },
+                    "batch": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
+                            }
+                        ],
+                        "description": "Batch information if the bill is part of a batch",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Business unit associated with the bill",
+                        "nullable": true
+                    },
+                    "taxZone": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Tax zone information for tax calculations",
+                        "nullable": true
+                    },
+                    "vendor": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Vendor information for the bill",
+                        "nullable": true
+                    },
+                    "remittanceVendorInfo": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Remittance vendor information for payment processing",
+                        "nullable": true
+                    },
+                    "shipTo": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.AddressResponse"
+                            }
+                        ],
+                        "description": "Shipping address information",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the bill",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ApBillItemResponse"
+                        },
+                        "description": "List of line items on the bill (materials and equipment)",
+                        "nullable": true
+                    },
+                    "expenseItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ApBillExpenseItemResponse"
+                        },
+                        "description": "List of expense items on the bill",
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
+                        },
+                        "description": "Custom field values associated with the bill",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Job ID associated with the bill, if applicable",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobNumber": {
+                        "type": "string",
+                        "description": "Job number associated with the bill, if applicable",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a complete AP bill with all associated details, items, and metadata"
+            },
+            "Accounting.V2.NamedFieldResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.BatchResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.AddressResponse": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "unit": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "zip": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.ApBillItemResponse": {
+                "required": [
+                    "order",
+                    "id",
+                    "skuId",
+                    "skuType",
+                    "skuCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "order": {
+                        "type": "integer",
+                        "description": "Display order of the item on the bill",
+                        "format": "int32"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the item (material or equipment)",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Detailed description of the item (may contain HTML formatting)",
+                        "format": "html",
+                        "nullable": true
+                    },
+                    "quantity": {
+                        "type": "string",
+                        "description": "Quantity of the item as a formatted string",
+                        "nullable": true
+                    },
+                    "cost": {
+                        "type": "string",
+                        "description": "Cost per unit as a formatted string",
+                        "nullable": true
+                    },
+                    "inventoryLocation": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.InventoryLocationResponse"
+                            }
+                        ],
+                        "description": "Inventory location where the item is stored",
+                        "nullable": true
+                    },
+                    "vendorPartNumber": {
+                        "type": "string",
+                        "description": "Vendor's part number for the item",
+                        "nullable": true
+                    },
+                    "serialNumber": {
+                        "type": "string",
+                        "description": "Serial number of the item, if applicable",
+                        "nullable": true
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            }
+                        ],
+                        "description": "General ledger account information for accounting purposes",
+                        "nullable": true
+                    },
+                    "costOfSaleAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            }
+                        ],
+                        "description": "Cost of sale account information for accounting purposes",
+                        "nullable": true
+                    },
+                    "assetAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            }
+                        ],
+                        "description": "Asset account information for accounting purposes",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the bill item",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "description": "SKU (Stock Keeping Unit) identifier",
+                        "format": "int64"
+                    },
+                    "receiptItemId": {
+                        "type": "integer",
+                        "description": "Associated receipt item ID, if applicable",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "skuType": {
+                        "type": "string",
+                        "description": "Type of SKU (e.g., Material, Equipment)"
+                    },
+                    "skuCode": {
+                        "type": "string",
+                        "description": "SKU code identifier"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the item",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a line item on an AP bill, containing material or equipment details"
+            },
+            "Accounting.V2.InventoryLocationResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the inventory location",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the inventory location",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of inventory location (e.g., Warehouse, Truck, etc.)",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an inventory location where items are stored"
+            },
+            "Accounting.V2.GLAccountResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "detailType": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.ApBillExpenseItemResponse": {
+                "required": [
+                    "id",
+                    "amount"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the expense item",
+                        "format": "int64"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "Amount of the expense as a formatted string"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the expense item",
+                        "nullable": true
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            }
+                        ],
+                        "description": "General ledger account information for the expense",
+                        "nullable": true
+                    },
+                    "job": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Job associated with the expense, if applicable",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "description": "Business unit associated with the expense",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the expense",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabelIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of project label IDs associated with the expense",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an expense item on an AP bill for non-inventory costs"
+            },
+            "Accounting.V2.CustomFieldResponse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "value": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "Accounting.V2.LogicalOperator": {
+                "enum": [
+                    "And",
+                    "Or"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "And",
+                    "Or"
+                ]
+            },
+            "Accounting.V2.ApBillSyncStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported",
+                    "PostedAndExported"
+                ],
+                "type": "string",
+                "description": "Defines the synchronization status of an AP bill with external accounting systems\nValues: Pending (0), Posted (1), Exported (2), PostedAndExported (3)",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported",
+                    "PostedAndExported"
+                ]
+            },
+            "Accounting.V2.ApBillStatus": {
+                "enum": [
+                    "Unreconciled",
+                    "Discrepancy",
+                    "Reconciled",
+                    "Canceled"
+                ],
+                "type": "string",
+                "description": "Defines the reconciliation status of an AP bill\nValues: Unreconciled (0), Reconciled (1), Discrepancy (2), Canceled (3)",
+                "x-enumNames": [
+                    "Unreconciled",
+                    "Discrepancy",
+                    "Reconciled",
+                    "Canceled"
+                ]
+            },
+            "Accounting.V2.ApBillSource": {
+                "enum": [
+                    "Undefined",
+                    "Standalone",
+                    "Purchasing",
+                    "Recurring",
+                    "OCR",
+                    "API"
+                ],
+                "type": "string",
+                "description": "Defines the source or origin of an AP bill creation\nValues: Undefined (0), Standalone (1), Purchasing (2), Recurring (3), OCR (4), API (5)",
+                "x-enumNames": [
+                    "Undefined",
+                    "Standalone",
+                    "Purchasing",
+                    "Recurring",
+                    "OCR",
+                    "API"
+                ]
+            },
+            "Accounting.V2.ApBillType": {
+                "enum": [
+                    "NotSet",
+                    "Procurement",
+                    "ApBill"
+                ],
+                "type": "string",
+                "description": "Defines the type of AP bill\nValues: NotSet (0), Procurement (1), ApBill (2)",
+                "x-enumNames": [
+                    "NotSet",
+                    "Procurement",
+                    "ApBill"
+                ]
+            },
+            "PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldTypeResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "dataType",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "dataType": {
+                        "$ref": "#/components/schemas/Accounting.V2.CustomFieldDataType"
+                    },
+                    "dataTypeOptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CustomFieldDataType": {
+                "enum": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ]
+            },
+            "Accounting.V2.CustomFieldUpdateRequest": {
+                "required": [
+                    "operations"
+                ],
+                "type": "object",
+                "properties": {
+                    "operations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldOperationRequest"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CustomFieldOperationRequest": {
+                "required": [
+                    "objectId",
+                    "customFields"
+                ],
+                "type": "object",
+                "properties": {
+                    "objectId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldPairRequest"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CustomFieldPairRequest": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.MarkApBillAsExportedUpdateResponse": {
+                "required": [
+                    "billId",
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "billId": {
+                        "type": "integer",
+                        "description": "The ID of the AP bill that was processed",
+                        "format": "int64"
+                    },
+                    "success": {
+                        "type": "boolean",
+                        "description": "Indicates whether the operation was successful"
+                    },
+                    "errorMessage": {
+                        "type": "string",
+                        "description": "Error message if the operation failed, null if successful",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response model indicating the result of marking an AP bill as exported"
+            },
+            "Accounting.V2.MarkApBillAsExportedUpdateRequest": {
+                "required": [
+                    "billIds"
+                ],
+                "type": "object",
+                "properties": {
+                    "billIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of AP bill IDs to mark as exported"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Request model for marking one or more AP bills as exported"
+            },
             "PaginatedResponse_Of_Accounting.V2.ApCreditResponse": {
                 "required": [
                     "page",
@@ -6731,6 +8945,11 @@
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.ApCreditSplitModelResponse"
                         }
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -6760,44 +8979,6 @@
                     "Posted",
                     "Exported"
                 ]
-            },
-            "Accounting.V2.BatchResponse": {
-                "required": [
-                    "id"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "number": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.NamedFieldResponse": {
-                "required": [
-                    "id"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
             },
             "Accounting.V2.ApPaymentStatus": {
                 "enum": [
@@ -6860,52 +9041,21 @@
                 },
                 "additionalProperties": false
             },
-            "ApiErrorResponse": {
-                "required": [
-                    "type",
-                    "title",
-                    "status",
-                    "traceId",
-                    "errors",
-                    "data"
+            "Accounting.V2.InventoryBillSyncStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported",
+                    "PostedAndExported"
                 ],
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "description": "A URI reference that identifies the problem type"
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "A short, human-readable summary of the problem type"
-                    },
-                    "status": {
-                        "type": "integer",
-                        "description": "The HTTP status code generated by server",
-                        "format": "int32"
-                    },
-                    "traceId": {
-                        "type": "string",
-                        "description": "Internal trace ID for advanced diagnostics"
-                    },
-                    "errors": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
-                    },
-                    "data": {
-                        "type": "object",
-                        "additionalProperties": {},
-                        "description": "Provides additional data, intended for programmatical usage"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported",
+                    "PostedAndExported"
+                ]
             },
             "Accounting.V2.MarkApCreditAsExportedUpdateResponse": {
                 "required": [
@@ -7120,35 +9270,6 @@
                     "Exported"
                 ]
             },
-            "Accounting.V2.GLAccountResponse": {
-                "required": [
-                    "id"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "number": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "type": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "detailType": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
             "Accounting.V2.ApPaymentSplitApiModel": {
                 "required": [
                     "id",
@@ -7321,6 +9442,11 @@
                     },
                     "syncStatus": {
                         "type": "string",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "referenceNumber": {
@@ -7530,6 +9656,11 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "inventoryLocationId": {
                         "type": "integer",
                         "format": "int64",
@@ -7716,20 +9847,6 @@
                 },
                 "additionalProperties": false
             },
-            "Accounting.V2.CustomFieldResponse": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "value": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
             "Accounting.V2.SalesTaxResponse": {
                 "required": [
                     "id",
@@ -7748,36 +9865,6 @@
                     "taxRate": {
                         "type": "number",
                         "format": "decimal"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.AddressResponse": {
-                "type": "object",
-                "properties": {
-                    "street": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unit": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "city": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "state": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "zip": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "country": {
-                        "type": "string",
-                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -7940,6 +10027,11 @@
                     },
                     "totalCost": {
                         "type": "string",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "inventoryLocationId": {
@@ -8399,6 +10491,11 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "postDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
                     "batch": {
                         "oneOf": [
                             {
@@ -8437,6 +10534,12 @@
                                 "$ref": "#/components/schemas/Accounting.V2.AddressResponse"
                             }
                         ],
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the bill",
+                        "format": "int64",
                         "nullable": true
                     },
                     "items": {
@@ -8549,6 +10652,12 @@
                     },
                     "skuCode": {
                         "type": "string"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the item",
+                        "format": "int64",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -8971,6 +11080,11 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "postDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
                     "batch": {
                         "oneOf": [
                             {
@@ -9011,6 +11125,12 @@
                         ],
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Budget code ID associated with the bill",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "items": {
                         "type": "array",
                         "items": {
@@ -9036,34 +11156,6 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "Accounting.V2.LogicalOperator": {
-                "enum": [
-                    "And",
-                    "Or"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "And",
-                    "Or"
-                ]
-            },
-            "Accounting.V2.InventoryBillSyncStatus": {
-                "enum": [
-                    "Pending",
-                    "Posted",
-                    "Exported",
-                    "PostedAndExported"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Pending",
-                    "Posted",
-                    "Exported",
-                    "PostedAndExported"
-                ]
             },
             "Accounting.V2.BillType": {
                 "enum": [
@@ -9120,150 +11212,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents paginated API response."
-            },
-            "PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse": {
-                "required": [
-                    "page",
-                    "pageSize",
-                    "hasMore",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "From which page this output has started",
-                        "format": "int32"
-                    },
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "Page size for this query (i.e. how many records were requested to return)",
-                        "format": "int32"
-                    },
-                    "hasMore": {
-                        "type": "boolean",
-                        "description": "True if there are more records in the query than returned in this result"
-                    },
-                    "totalCount": {
-                        "type": "integer",
-                        "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldTypeResponse"
-                        },
-                        "description": "The collection of result items, will never have more than PageSize items"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Represents paginated API response."
-            },
-            "Accounting.V2.CustomFieldTypeResponse": {
-                "required": [
-                    "id",
-                    "name",
-                    "dataType",
-                    "createdOn",
-                    "modifiedOn"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "dataType": {
-                        "$ref": "#/components/schemas/Accounting.V2.CustomFieldDataType"
-                    },
-                    "dataTypeOptions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    },
-                    "createdOn": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "modifiedOn": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.CustomFieldDataType": {
-                "enum": [
-                    "Text",
-                    "Dropdown",
-                    "Numeric"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Text",
-                    "Dropdown",
-                    "Numeric"
-                ]
-            },
-            "Accounting.V2.CustomFieldUpdateRequest": {
-                "required": [
-                    "operations"
-                ],
-                "type": "object",
-                "properties": {
-                    "operations": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldOperationRequest"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.CustomFieldOperationRequest": {
-                "required": [
-                    "objectId",
-                    "customFields"
-                ],
-                "type": "object",
-                "properties": {
-                    "objectId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "customFields": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldPairRequest"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.CustomFieldPairRequest": {
-                "required": [
-                    "name"
-                ],
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "maxLength": 255,
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
             },
             "Accounting.V2.MarkInventoryBillAsExportedUpdateResponse": {
                 "required": [
@@ -9358,6 +11306,11 @@
                     },
                     "syncStatus": {
                         "type": "string",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "referenceNumber": {
@@ -9699,6 +11652,11 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "items": {
                         "type": "array",
                         "items": {
@@ -9810,6 +11768,11 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "id": {
                         "type": "integer",
                         "format": "int64",
@@ -9885,6 +11848,11 @@
                         "nullable": true
                     },
                     "assignedToId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
@@ -10485,6 +12453,11 @@
                     "transactionDate": {
                         "type": "string",
                         "format": "date",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     }
                 },
@@ -11579,6 +13552,185 @@
                     "Material"
                 ]
             },
+            "PaginatedResponse_Of_Inventory.V2.RemittanceVendorResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Inventory.V2.RemittanceVendorResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "isApproved",
+                    "isVerified",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Remittance vendor Id",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Remittance vendor name",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Active/Inactive status"
+                    },
+                    "customerId": {
+                        "type": "string",
+                        "description": "Customer Id",
+                        "nullable": true
+                    },
+                    "isApproved": {
+                        "type": "boolean",
+                        "description": "Indicates whether vendor validated by user during first payment approval"
+                    },
+                    "isVerified": {
+                        "type": "boolean",
+                        "description": "Indicates whether there were paid payments for this vendor"
+                    },
+                    "contactInfo": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorContactInfoResponse"
+                            }
+                        ],
+                        "description": "Remittance vendor contact information",
+                        "nullable": true
+                    },
+                    "address": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.AddressResponse"
+                            }
+                        ],
+                        "description": "Remittance vendor address",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "system created date",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "last time adjustment was modified date",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Remittance vendor response"
+            },
+            "Inventory.V2.RemittanceVendorContactInfoResponse": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "description": "Remittance vendor first name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Remittance vendor last name",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Remittance vendor phone",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Remittance vendor email",
+                        "nullable": true
+                    },
+                    "fax": {
+                        "type": "string",
+                        "description": "Remittance vendor fax",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Remittance vendor contact info response"
+            },
+            "Inventory.V2.AddressResponse": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "description": "Street",
+                        "nullable": true
+                    },
+                    "unit": {
+                        "type": "string",
+                        "description": "Unit",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City",
+                        "nullable": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State",
+                        "nullable": true
+                    },
+                    "zip": {
+                        "type": "string",
+                        "description": "Zip code",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country code",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents address response"
+            },
             "CloudEvent_Of_Accounting.V2.Webhook.InvoiceBatchedEventPayload": {
                 "required": [
                     "specversion",
@@ -11675,6 +13827,11 @@
                     },
                     "syncStatus": {
                         "type": "string",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "referenceNumber": {

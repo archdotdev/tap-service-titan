@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -64,7 +64,7 @@
                     {
                         "name": "duration",
                         "in": "query",
-                        "description": "Format - int32. Filters by membership duration (in months); use null for ongoing memberships",
+                        "description": "Filters by membership duration (in months); use null for ongoing memberships",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -102,7 +102,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -112,7 +112,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -122,7 +122,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -132,7 +132,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -142,7 +142,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -152,7 +152,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -266,7 +266,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -276,7 +276,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -286,7 +286,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -305,7 +305,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -315,7 +315,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -325,7 +325,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -335,7 +335,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -414,7 +414,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Customer membership ID",
+                        "description": "Customer membership ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -424,7 +424,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -537,7 +537,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Customer membership ID",
+                        "description": "Customer membership ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -547,7 +547,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -649,7 +649,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Customer membership ID",
+                        "description": "Customer membership ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -659,7 +659,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -742,7 +742,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -816,7 +816,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -915,7 +915,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1013,7 +1013,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1134,7 +1134,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1236,7 +1236,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1314,7 +1314,13 @@
                                                 0
                                             ],
                                             "jobStartTime": "string",
-                                            "estimatedPayrollCost": 0
+                                            "estimatedPayrollCost": 0,
+                                            "preferredTechnicianIds": [
+                                                0
+                                            ],
+                                            "tagTypeIds": [
+                                                0
+                                            ]
                                         }
                                     ]
                                 }
@@ -1354,7 +1360,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1444,7 +1450,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1529,7 +1535,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1623,7 +1629,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1701,7 +1707,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Invoice template ID",
+                        "description": "Invoice template ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1711,7 +1717,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1805,7 +1811,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Invoice template ID",
+                        "description": "Invoice template ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1815,7 +1821,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1916,7 +1922,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1935,7 +1941,7 @@
                     {
                         "name": "locationId",
                         "in": "query",
-                        "description": "Format - int64. Location ID ",
+                        "description": "Location ID ",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1945,7 +1951,7 @@
                     {
                         "name": "jobId",
                         "in": "query",
-                        "description": "Format - int64. Job ID ",
+                        "description": "Job ID ",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -1969,7 +1975,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1979,7 +1985,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -1989,7 +1995,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -1999,7 +2005,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2081,7 +2087,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Recurring service event ID",
+                        "description": "Recurring service event ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2091,7 +2097,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2177,7 +2183,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Recurring service event ID",
+                        "description": "Recurring service event ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2187,7 +2193,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2273,7 +2279,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2324,7 +2330,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2334,7 +2340,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2344,7 +2350,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2354,7 +2360,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2362,9 +2368,18 @@
                         }
                     },
                     {
+                        "name": "includeTechnicians",
+                        "in": "query",
+                        "description": "Whether technician IDs should be included in the result.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2374,7 +2389,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2445,7 +2460,13 @@
                                                 0
                                             ],
                                             "jobStartTime": "string",
-                                            "estimatedPayrollCost": 0
+                                            "estimatedPayrollCost": 0,
+                                            "preferredTechnicianIds": [
+                                                0
+                                            ],
+                                            "tagTypeIds": [
+                                                0
+                                            ]
                                         }
                                     ]
                                 }
@@ -2485,7 +2506,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Recurring service ID",
+                        "description": "Recurring service ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2495,7 +2516,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2551,7 +2572,13 @@
                                         0
                                     ],
                                     "jobStartTime": "string",
-                                    "estimatedPayrollCost": 0
+                                    "estimatedPayrollCost": 0,
+                                    "preferredTechnicianIds": [
+                                        0
+                                    ],
+                                    "tagTypeIds": [
+                                        0
+                                    ]
                                 }
                             }
                         }
@@ -2605,7 +2632,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Recurring service ID",
+                        "description": "Recurring service ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2615,7 +2642,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2656,7 +2683,13 @@
                                 "recurrenceWeek": {},
                                 "recurrenceDayOfNthWeek": {},
                                 "jobStartTime": "string",
-                                "estimatedPayrollCost": 0
+                                "estimatedPayrollCost": 0,
+                                "tagTypeIds": [
+                                    0
+                                ],
+                                "preferredTechnicianIds": [
+                                    0
+                                ]
                             }
                         }
                     }
@@ -2726,7 +2759,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2759,7 +2792,7 @@
                     {
                         "name": "duration",
                         "in": "query",
-                        "description": "Format - int32. Filters by membership duration (in months); use null for ongoing memberships",
+                        "description": "Filters by membership duration (in months); use null for ongoing memberships",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2792,7 +2825,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2802,7 +2835,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2812,7 +2845,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2822,7 +2855,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -2832,7 +2865,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2842,7 +2875,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -2934,7 +2967,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Membership type ID",
+                        "description": "Membership type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -2944,7 +2977,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3037,7 +3070,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Membership type ID",
+                        "description": "Membership type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3047,7 +3080,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3133,7 +3166,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Membership type ID",
+                        "description": "Membership type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3143,7 +3176,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3225,7 +3258,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Membership type ID",
+                        "description": "Membership type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3235,7 +3268,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3336,7 +3369,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3355,7 +3388,7 @@
                     {
                         "name": "membershipTypeId",
                         "in": "query",
-                        "description": "Format - int64. Filters by membership type ID",
+                        "description": "Filters by membership type ID",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -3407,7 +3440,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3417,7 +3450,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)",
+                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3427,7 +3460,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)",
+                        "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3437,7 +3470,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -3447,7 +3480,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3457,7 +3490,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -3557,7 +3590,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Recurring service type ID",
+                        "description": "Recurring service type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3567,7 +3600,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5352,7 +5385,8 @@
                     "recurrenceMonths",
                     "recurrenceDaysOfWeek",
                     "recurrenceWeek",
-                    "recurrenceDaysOfMonth"
+                    "recurrenceDaysOfMonth",
+                    "tagTypeIds"
                 ],
                 "type": "object",
                 "properties": {
@@ -5557,6 +5591,23 @@
                         "description": "Estimated payroll cost",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "preferredTechnicianIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field.",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of tag IDs associated to this recurring service. "
                     }
                 },
                 "additionalProperties": false
@@ -6246,7 +6297,8 @@
                     "recurrenceMonths",
                     "recurrenceDaysOfWeek",
                     "recurrenceWeek",
-                    "recurrenceDaysOfMonth"
+                    "recurrenceDaysOfMonth",
+                    "tagTypeIds"
                 ],
                 "type": "object",
                 "properties": {
@@ -6451,6 +6503,23 @@
                         "description": "Estimated payroll cost",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "preferredTechnicianIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field.",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "A list of tag IDs associated to this recurring service. "
                     }
                 },
                 "additionalProperties": false
@@ -6587,6 +6656,22 @@
                         "description": "Estimated payroll cost",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List specifying IDs of Tag Types associated with this location recurring service"
+                    },
+                    "preferredTechnicianIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List specifying IDs of preferred technicians for this location recurring service"
                     }
                 },
                 "additionalProperties": false

@@ -78,6 +78,12 @@
                                                 "positiveIncomeServiceId": 0,
                                                 "defaultLaborCostPerHour": 0,
                                                 "defaultExtraTravelCostPerHour": 0,
+                                                "defaultPricingStrategy": {},
+                                                "defaultTargetMarginValue": 0,
+                                                "defaultTargetMarginValueType": {},
+                                                "defaultFlatPrice": 0,
+                                                "defaultMarkupPercentage": 0,
+                                                "defaultSurcharge": 0,
                                                 "defaultLaborMarkupPercentage": 0,
                                                 "defaultMaterialMarkupPercentage": 0,
                                                 "defaultLaborSurcharge": 0,
@@ -318,6 +324,12 @@
                                                 "positiveIncomeServiceId": 0,
                                                 "defaultLaborCostPerHour": 0,
                                                 "defaultExtraTravelCostPerHour": 0,
+                                                "defaultPricingStrategy": {},
+                                                "defaultTargetMarginValue": 0,
+                                                "defaultTargetMarginValueType": {},
+                                                "defaultFlatPrice": 0,
+                                                "defaultMarkupPercentage": 0,
+                                                "defaultSurcharge": 0,
                                                 "defaultLaborMarkupPercentage": 0,
                                                 "defaultMaterialMarkupPercentage": 0,
                                                 "defaultLaborSurcharge": 0,
@@ -442,6 +454,12 @@
                                         "positiveIncomeServiceId": 0,
                                         "defaultLaborCostPerHour": 0,
                                         "defaultExtraTravelCostPerHour": 0,
+                                        "defaultPricingStrategy": {},
+                                        "defaultTargetMarginValue": 0,
+                                        "defaultTargetMarginValueType": {},
+                                        "defaultFlatPrice": 0,
+                                        "defaultMarkupPercentage": 0,
+                                        "defaultSurcharge": 0,
                                         "defaultLaborMarkupPercentage": 0,
                                         "defaultMaterialMarkupPercentage": 0,
                                         "defaultLaborSurcharge": 0,
@@ -876,6 +894,48 @@
                         "format": "decimal",
                         "nullable": true
                     },
+                    "defaultPricingStrategy": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.PricingStrategyType"
+                            }
+                        ],
+                        "description": "The default pricing strategy to be used when creating a service agreement.",
+                        "nullable": true
+                    },
+                    "defaultTargetMarginValue": {
+                        "type": "number",
+                        "description": "The default target margin value used in gross margin target strategies when creating a service agreement.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultTargetMarginValueType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.TargetMarginValueType"
+                            }
+                        ],
+                        "description": "The default target margin value type used in gross margin target strategies when creating a service agreement.",
+                        "nullable": true
+                    },
+                    "defaultFlatPrice": {
+                        "type": "number",
+                        "description": "The default price used in flat pricing strategies when creating a service agreement.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultMarkupPercentage": {
+                        "type": "number",
+                        "description": "The default percentage value used in markup and surcharge strategies when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "defaultSurcharge": {
+                        "type": "number",
+                        "description": "The default surcharge amount used in markup and surcharge strategies when creating a service agreement",
+                        "format": "decimal",
+                        "nullable": true
+                    },
                     "defaultLaborMarkupPercentage": {
                         "type": "number",
                         "description": "The default percentage value of the labor markup to be used in the UI when creating a service agreement",
@@ -974,6 +1034,40 @@
                     "Biannual",
                     "Annual",
                     "TimeOfService"
+                ]
+            },
+            "ServiceAgreements.PricingStrategyType": {
+                "enum": [
+                    "PerVisitCostBasedGrossMarginTarget",
+                    "PerVisitCostBasedMarkupAndSurcharge",
+                    "PerVisitFlatPrice",
+                    "PerVisitEvenDistributionGrossMarginTarget",
+                    "TotalAgreementGrossMarginTarget",
+                    "TotalAgreementFlatPrice",
+                    "TotalAgreementMarkupAndSurcharge"
+                ],
+                "type": "string",
+                "description": "Defines how prices are calculated for service agreements or visits.",
+                "x-enumNames": [
+                    "PerVisitCostBasedGrossMarginTarget",
+                    "PerVisitCostBasedMarkupAndSurcharge",
+                    "PerVisitFlatPrice",
+                    "PerVisitEvenDistributionGrossMarginTarget",
+                    "TotalAgreementGrossMarginTarget",
+                    "TotalAgreementFlatPrice",
+                    "TotalAgreementMarkupAndSurcharge"
+                ]
+            },
+            "ServiceAgreements.TargetMarginValueType": {
+                "enum": [
+                    "PercentageMargin",
+                    "DollarAmount"
+                ],
+                "type": "string",
+                "description": "Target margin value type.",
+                "x-enumNames": [
+                    "PercentageMargin",
+                    "DollarAmount"
                 ]
             },
             "ServiceAgreements.V2.AgreementStatus": {

@@ -13,8 +13,7 @@
         "/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings": {
             "post": {
                 "tags": [
-                    "Gps",
-                    "CustomerOnly"
+                    "Gps"
                 ],
                 "summary": "Creates new gps ping.",
                 "description": "Creates new gps ping.",

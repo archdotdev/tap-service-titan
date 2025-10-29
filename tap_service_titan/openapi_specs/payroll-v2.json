@@ -156,6 +156,8 @@
                                             "invoiceId": 0,
                                             "hours": 0,
                                             "rate": 0,
+                                            "quantity": 0,
+                                            "type": {},
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true
@@ -2198,6 +2200,8 @@
                                             "invoiceId": 0,
                                             "hours": 0,
                                             "rate": 0,
+                                            "quantity": 0,
+                                            "type": {},
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true
@@ -2285,6 +2289,8 @@
                                     "invoiceId": 0,
                                     "hours": 0,
                                     "rate": 0,
+                                    "quantity": 0,
+                                    "type": {},
                                     "createdOn": "string",
                                     "modifiedOn": "string",
                                     "active": true
@@ -4798,6 +4804,7 @@
                     "employeeId",
                     "postedOn",
                     "amount",
+                    "type",
                     "createdOn",
                     "modifiedOn",
                     "active"
@@ -4861,6 +4868,20 @@
                         "format": "decimal",
                         "nullable": true
                     },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity of the payroll adjustment",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.PayrollAdjustmentType"
+                            }
+                        ],
+                        "description": "Type of the payroll adjustment"
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "Date/time (on UTC) when the payroll adjustment was created",
@@ -4888,6 +4909,32 @@
                 "x-enumNames": [
                     "Technician",
                     "Employee"
+                ]
+            },
+            "Payroll.V2.PayrollAdjustmentType": {
+                "enum": [
+                    "Direct",
+                    "CommissionBased",
+                    "Labor",
+                    "Advance",
+                    "SoldAdvance",
+                    "Scheduled",
+                    "AddOn",
+                    "MonthlyBonus",
+                    "BonusWOT"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Direct",
+                    "CommissionBased",
+                    "Labor",
+                    "Advance",
+                    "SoldAdvance",
+                    "Scheduled",
+                    "AddOn",
+                    "MonthlyBonus",
+                    "BonusWOT"
                 ]
             },
             "ExportResponse_Of_Payroll.V2.Timesheets.JobTimesheetExportResponse": {
@@ -6444,6 +6491,7 @@
                     "employeeId",
                     "postedOn",
                     "amount",
+                    "type",
                     "createdOn",
                     "modifiedOn",
                     "active"
@@ -6506,6 +6554,20 @@
                         "description": "Rate of the payroll adjustment",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity of the payroll adjustment",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.PayrollAdjustmentType"
+                            }
+                        ],
+                        "description": "Type of the payroll adjustment"
                     },
                     "createdOn": {
                         "type": "string",
