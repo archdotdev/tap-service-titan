@@ -292,6 +292,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "budgetCodeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -359,6 +368,13 @@
         ],
         "type": [
           "object",
+          "null"
+        ]
+      },
+      "budgetCodeId": {
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

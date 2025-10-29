@@ -96,6 +96,24 @@
     {
       "breadcrumb": [
         "properties",
+        "quantity"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -230,11 +248,26 @@
           "null"
         ]
       },
+      "quantity": {
+        "description": "Quantity of the payroll adjustment",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "rate": {
         "description": "Rate of the payroll adjustment",
         "format": "decimal",
         "type": [
           "number",
+          "null"
+        ]
+      },
+      "type": {
+        "description": "",
+        "type": [
+          "string",
           "null"
         ]
       }
@@ -245,6 +278,7 @@
       "employeeId",
       "postedOn",
       "amount",
+      "type",
       "createdOn",
       "modifiedOn",
       "active"

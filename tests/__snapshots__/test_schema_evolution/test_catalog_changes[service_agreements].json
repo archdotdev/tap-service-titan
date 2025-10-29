@@ -181,6 +181,72 @@
         "properties",
         "templateFields",
         "properties",
+        "defaultPricingStrategy"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultTargetMarginValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultTargetMarginValueType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultFlatPrice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultMarkupPercentage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
+        "defaultSurcharge"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "templateFields",
+        "properties",
         "defaultLaborMarkupPercentage"
       ],
       "metadata": {
@@ -893,6 +959,14 @@
               "null"
             ]
           },
+          "defaultFlatPrice": {
+            "description": "The default price used in flat pricing strategies when creating a service agreement.",
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
           "defaultLaborCostPerHour": {
             "description": "The default labor cost / hour to be used in the UI when adding service agreement visits",
             "format": "decimal",
@@ -917,6 +991,14 @@
               "null"
             ]
           },
+          "defaultMarkupPercentage": {
+            "description": "The default percentage value used in markup and surcharge strategies when creating a service agreement",
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
           "defaultMaterialMarkupPercentage": {
             "description": "The default percentage value of the material markup to be used in the UI when creating a service agreement",
             "format": "decimal",
@@ -933,11 +1015,41 @@
               "null"
             ]
           },
+          "defaultPricingStrategy": {
+            "description": "Defines how prices are calculated for service agreements or visits.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "defaultRateSheetId": {
             "description": "The default rate sheet ID (Client-Specific Pricing Rule) to be used in the UI when creating a service agreement",
             "format": "int64",
             "type": [
               "integer",
+              "null"
+            ]
+          },
+          "defaultSurcharge": {
+            "description": "The default surcharge amount used in markup and surcharge strategies when creating a service agreement",
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultTargetMarginValue": {
+            "description": "The default target margin value used in gross margin target strategies when creating a service agreement.",
+            "format": "decimal",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "defaultTargetMarginValueType": {
+            "description": "Target margin value type.",
+            "type": [
+              "string",
               "null"
             ]
           },
