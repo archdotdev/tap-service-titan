@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 from functools import cached_property
+from typing import Any
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import PRICEBOOK, ServiceTitanSchema
@@ -116,6 +117,13 @@ class ServicesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/pricebook/v2/tenant/{self.tenant_id}/services"
+
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        return {
+            **super().get_url_params(*args, **kwargs),
+            "calculatePrices": True,
+        }
 
 
 class ExportEquipmentStream(ServiceTitanExportStream):
