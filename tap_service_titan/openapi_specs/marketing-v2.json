@@ -714,6 +714,84 @@
                 }
             }
         },
+        "/tenant/{tenant}/campaign-cost-summary": {
+            "get": {
+                "tags": [
+                    "CampaignCostSummary"
+                ],
+                "summary": "CampaignCostSummary_Get",
+                "operationId": "CampaignCostSummary_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.CampaignCostsSummaryResponse"
+                                },
+                                "example": {
+                                    "items": [
+                                        {
+                                            "campaignId": 0,
+                                            "campaignName": "string",
+                                            "totalCost": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/campaigns": {
             "get": {
                 "tags": [
@@ -1296,6 +1374,78 @@
                                             "campaignId": 0
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/email-channel-cost": {
+            "get": {
+                "tags": [
+                    "EmailChannelCost"
+                ],
+                "summary": "EmailChannelCost_Get",
+                "operationId": "EmailChannelCost_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.EmailChannelCostResponse"
+                                },
+                                "example": {
+                                    "totalCost": 0
                                 }
                             }
                         }
@@ -1981,6 +2131,43 @@
                 },
                 "additionalProperties": false
             },
+            "Marketing.V2.CampaignCostsSummaryResponse": {
+                "required": [
+                    "items"
+                ],
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.V2.CampaignCostsSummaryItem"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.CampaignCostsSummaryItem": {
+                "required": [
+                    "campaignId",
+                    "campaignName"
+                ],
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "campaignName": {
+                        "type": "string"
+                    },
+                    "totalCost": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
             "PaginatedResponse_Of_Marketing.V2.CampaignResponse": {
                 "required": [
                     "page",
@@ -2171,6 +2358,17 @@
                     },
                     "otherMedium": {
                         "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.EmailChannelCostResponse": {
+                "type": "object",
+                "properties": {
+                    "totalCost": {
+                        "type": "number",
+                        "format": "decimal",
                         "nullable": true
                     }
                 },
