@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import sys
 from copy import deepcopy
 from functools import cached_property
@@ -41,6 +42,8 @@ __all__ = [
     "TASK_MANAGEMENT",
     "TELECOM",
 ]
+
+logger = logging.getLogger(__name__)
 
 
 def _normalize_schema(
@@ -138,6 +141,12 @@ class ServiceTitanSchema(StreamSchema):
                 "format": "int64",
                 "type": "integer",
             }
+
+        if stream.name == "estimates":
+            if "proposalTagName" in normalized["properties"]:
+                logger.warning("proposalTagName is already present in the schema")
+            else:
+                normalized["properties"]["proposalTagName"] = {"type": ["string", "null"]}
 
         if stream.name == "estimate_items":
             normalized["properties"]["estimate_id"] = {

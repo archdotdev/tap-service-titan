@@ -242,6 +242,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "proposalTagName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -595,6 +604,12 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "proposalTagName": {
+        "type": [
+          "string",
           "null"
         ]
       },
