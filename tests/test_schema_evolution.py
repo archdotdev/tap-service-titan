@@ -11,7 +11,6 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import pytest
-    from pytest_subtests.plugin import SubTests
     from syrupy.assertion import SnapshotAssertion
 
 
@@ -19,7 +18,7 @@ def test_catalog_changes(
     pytester: pytest.Pytester,
     tmp_path: Path,
     snapshot: SnapshotAssertion,
-    subtests: SubTests,
+    subtests: pytest.Subtests,
 ) -> None:
     """Fail if the catalog has changed."""
     snapshot_json = snapshot.with_defaults(extension_class=JSONSnapshotExtension)

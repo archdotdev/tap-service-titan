@@ -40,8 +40,7 @@ dev = [
 ]
 scrapping = ["beautifulsoup4>=4.12.3", "playwright>=1.48.0,<2", "rich>=14.2.0"]
 test = [
-    "pytest>=8",
-    "pytest-subtests>=0.14.2",
+    "pytest>=9",
     "singer-sdk[testing]",
     "syrupy>=5.0.0",
     "time-machine>=2.19.0",
@@ -67,7 +66,8 @@ build-backend = "hatchling.build"
 [tool.mypy]
 warn_unused_configs = true
 
-[tool.pytest.ini_options]
+[tool.pytest]
+minversion = "9.0.0"
 addopts = ["-vv"]
 
 [tool.ruff]
