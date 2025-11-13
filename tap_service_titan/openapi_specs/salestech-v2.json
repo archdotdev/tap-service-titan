@@ -107,7 +107,8 @@
                                     "businessUnitName": "string",
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
-                                    "isChangeOrder": true
+                                    "isChangeOrder": true,
+                                    "proposalTagName": "string"
                                 }
                             }
                         }
@@ -189,7 +190,8 @@
                                         "itemGroupRootId": 0,
                                         "chargeable": true,
                                         "useDefaultProjectLabels": true,
-                                        "budgetCodeId": 0
+                                        "budgetCodeId": 0,
+                                        "unitCost": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -272,7 +274,8 @@
                                     "businessUnitName": "string",
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
-                                    "isChangeOrder": true
+                                    "isChangeOrder": true,
+                                    "proposalTagName": "string"
                                 }
                             }
                         }
@@ -596,7 +599,8 @@
                                             "businessUnitName": "string",
                                             "isRecommended": true,
                                             "budgetCodeId": 0,
-                                            "isChangeOrder": true
+                                            "isChangeOrder": true,
+                                            "proposalTagName": "string"
                                         }
                                     ]
                                 }
@@ -671,7 +675,8 @@
                                         "itemGroupRootId": 0,
                                         "chargeable": true,
                                         "useDefaultProjectLabels": true,
-                                        "budgetCodeId": 0
+                                        "budgetCodeId": 0,
+                                        "unitCost": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -757,7 +762,8 @@
                                     "businessUnitName": "string",
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
-                                    "isChangeOrder": true
+                                    "isChangeOrder": true,
+                                    "proposalTagName": "string"
                                 }
                             }
                         }
@@ -1060,7 +1066,8 @@
                                     "businessUnitName": "string",
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
-                                    "isChangeOrder": true
+                                    "isChangeOrder": true,
+                                    "proposalTagName": "string"
                                 }
                             }
                         }
@@ -1240,7 +1247,8 @@
                                 "itemGroupRootId": 0,
                                 "chargeable": true,
                                 "useDefaultProjectLabels": true,
-                                "budgetCodeId": 0
+                                "budgetCodeId": 0,
+                                "unitCost": 0
                             }
                         }
                     }
@@ -1479,7 +1487,8 @@
                                             "businessUnitName": "string",
                                             "isRecommended": true,
                                             "budgetCodeId": 0,
-                                            "isChangeOrder": true
+                                            "isChangeOrder": true,
+                                            "proposalTagName": "string"
                                         }
                                     ]
                                 }
@@ -2079,6 +2088,10 @@
                     },
                     "isChangeOrder": {
                         "type": "boolean"
+                    },
+                    "proposalTagName": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -2569,6 +2582,10 @@
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "unitCost": {
+                        "type": "number",
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -2912,6 +2929,10 @@
                     },
                     "isChangeOrder": {
                         "type": "boolean"
+                    },
+                    "proposalTagName": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false

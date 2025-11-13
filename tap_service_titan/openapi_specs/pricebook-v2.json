@@ -1454,8 +1454,8 @@
                 "tags": [
                     "Equipment"
                 ],
-                "summary": "Get data on all of the equipment in the pricebook.",
-                "description": "Get data on all of the equipment in the pricebook.",
+                "summary": "Get data on all the equipment in the pricebook.",
+                "description": "Get data on all the equipment in the pricebook.",
                 "operationId": "Equipment_GetList",
                 "parameters": [
                     {
@@ -1770,8 +1770,8 @@
                 "tags": [
                     "Equipment"
                 ],
-                "summary": "Post to add a new equipment to your pricebook",
-                "description": "Post to add a new equipment to your pricebook",
+                "summary": "Post to add new equipment to your pricebook",
+                "description": "Post to add new equipment to your pricebook",
                 "operationId": "Equipment_Create",
                 "parameters": [
                     {
@@ -2624,8 +2624,8 @@
                 "tags": [
                     "Equipment"
                 ],
-                "summary": "Deletes an equipment from your pricebook",
-                "description": "Deletes an equipment from your pricebook",
+                "summary": "Deletes equipment from your pricebook",
+                "description": "Deletes equipment from your pricebook",
                 "operationId": "Equipment_Delete",
                 "parameters": [
                     {
@@ -6761,7 +6761,7 @@
                         "format": "int64"
                     },
                     "skuType": {
-                        "$ref": "#/components/schemas/Pricebook.SkuType"
+                        "$ref": "#/components/schemas/Pricebook.Types.SkuType"
                     },
                     "value": {
                         "type": "number",
@@ -6773,7 +6773,7 @@
                 },
                 "additionalProperties": false
             },
-            "Pricebook.SkuType": {
+            "Pricebook.Types.SkuType": {
                 "enum": [
                     "Service",
                     "Material",

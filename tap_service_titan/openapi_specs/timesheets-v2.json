@@ -139,6 +139,7 @@
                                         {
                                             "id": 0,
                                             "employeeId": 0,
+                                            "activityTypeId": 0,
                                             "employeeType": {},
                                             "startTime": "string",
                                             "endTime": "string",
@@ -152,12 +153,121 @@
                                             "tagTypes": [
                                                 0
                                             ],
+                                            "startCoordinate": {
+                                                "latitude": 0,
+                                                "longitude": 0
+                                            },
+                                            "endCoordinate": {
+                                                "latitude": 0,
+                                                "longitude": 0
+                                            },
                                             "active": true,
                                             "modifiedById": 0,
                                             "createdOn": "string",
                                             "modifiedOn": "string"
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ActivitiesControllers"
+                ],
+                "summary": "Creates new activity",
+                "description": "Creates new activity",
+                "operationId": "ActivitiesControllers_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Activity model to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityCreateRequest"
+                            },
+                            "example": {
+                                "employeeId": 0,
+                                "employeeType": {},
+                                "activityTypeId": 0,
+                                "startTime": "string",
+                                "endTime": "string",
+                                "jobId": 0,
+                                "appointmentId": 0,
+                                "projectId": 0,
+                                "projectLabel": "string",
+                                "laborTypeId": 0,
+                                "budgetCodeId": 0,
+                                "budgetCodeName": "string",
+                                "milesDriven": 0,
+                                "nonJobEventAssignmentId": 0,
+                                "memo": "string",
+                                "tagTypes": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
                                 }
                             }
                         }
@@ -243,6 +353,7 @@
                                     "id": 0,
                                     "employeeId": 0,
                                     "employeeType": {},
+                                    "activityTypeId": 0,
                                     "startTime": "string",
                                     "endTime": "string",
                                     "jobId": 0,
@@ -255,6 +366,14 @@
                                     "tagTypes": [
                                         0
                                     ],
+                                    "startCoordinate": {
+                                        "latitude": 0,
+                                        "longitude": 0
+                                    },
+                                    "endCoordinate": {
+                                        "latitude": 0,
+                                        "longitude": 0
+                                    },
                                     "active": true,
                                     "modifiedById": 0,
                                     "createdOn": "string",
@@ -283,6 +402,169 @@
                     },
                     "404": {
                         "description": "Activity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ActivitiesControllers"
+                ],
+                "summary": "Updates the specified activity",
+                "description": "Updates the specified activity",
+                "operationId": "ActivitiesControllers_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Activity ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Activity to update",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityUpdateRequest"
+                            },
+                            "example": {
+                                "activityTypeId": 0,
+                                "startTime": "string",
+                                "endTime": "string",
+                                "jobId": 0,
+                                "appointmentId": 0,
+                                "projectId": 0,
+                                "projectLabel": "string",
+                                "laborTypeId": 0,
+                                "budgetCodeId": 0,
+                                "budgetCodeName": "string",
+                                "milesDriven": 0,
+                                "nonJobEventAssignmentId": 0,
+                                "memo": "string",
+                                "tagTypes": [
+                                    0
+                                ],
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ActivitiesControllers"
+                ],
+                "summary": "Deletes the specified activity",
+                "description": "Deletes the specified activity",
+                "operationId": "ActivitiesControllers_Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Activity ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1140,6 +1422,7 @@
                                             "id": 0,
                                             "employeeId": 0,
                                             "employeeType": {},
+                                            "activityTypeId": 0,
                                             "startTime": "string",
                                             "endTime": "string",
                                             "jobId": 0,
@@ -1152,6 +1435,14 @@
                                             "tagTypes": [
                                                 0
                                             ],
+                                            "startCoordinate": {
+                                                "latitude": 0,
+                                                "longitude": 0
+                                            },
+                                            "endCoordinate": {
+                                                "latitude": 0,
+                                                "longitude": 0
+                                            },
                                             "active": true,
                                             "modifiedById": 0,
                                             "createdOn": "string",
@@ -1230,6 +1521,7 @@
                 "required": [
                     "id",
                     "employeeId",
+                    "activityTypeId",
                     "employeeType",
                     "startTime",
                     "tagTypes",
@@ -1247,6 +1539,11 @@
                     "employeeId": {
                         "type": "integer",
                         "description": "ID of the employee associated with the activity.",
+                        "format": "int64"
+                    },
+                    "activityTypeId": {
+                        "type": "integer",
+                        "description": "ID of the activity type.",
                         "format": "int64"
                     },
                     "employeeType": {
@@ -1316,6 +1613,24 @@
                         },
                         "description": "List of tag type IDs associated with the activity."
                     },
+                    "startCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "Start Coordinate of the activity.",
+                        "nullable": true
+                    },
+                    "endCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "End Coordinate of the activity.",
+                        "nullable": true
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Indicates whether the activity is active."
@@ -1350,6 +1665,22 @@
                     "Technician",
                     "Employee"
                 ]
+            },
+            "Timesheets.V2.Activities.ActivityEntryCoordinate": {
+                "type": "object",
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
             },
             "ApiErrorResponse": {
                 "required": [
@@ -1417,6 +1748,7 @@
                     "id",
                     "employeeId",
                     "employeeType",
+                    "activityTypeId",
                     "startTime",
                     "tagTypes",
                     "active",
@@ -1442,6 +1774,11 @@
                             }
                         ],
                         "description": "Type of the employee."
+                    },
+                    "activityTypeId": {
+                        "type": "integer",
+                        "description": "ID of the activity type.",
+                        "format": "int64"
                     },
                     "startTime": {
                         "type": "string",
@@ -1502,6 +1839,24 @@
                         },
                         "description": "List of tag type IDs associated with the activity."
                     },
+                    "startCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "Start Coordinate of the activity.",
+                        "nullable": true
+                    },
+                    "endCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "End Coordinate of the activity.",
+                        "nullable": true
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Indicates whether the activity is active."
@@ -1521,6 +1876,225 @@
                         "type": "string",
                         "description": "Date and time when the activity was last modified  on UTC.",
                         "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ModificationResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of created/updated object",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Default response when creating object with a new ID, or updating object by specified ID."
+            },
+            "Timesheets.V2.Activities.ActivityCreateRequest": {
+                "required": [
+                    "employeeId",
+                    "employeeType",
+                    "activityTypeId",
+                    "startTime",
+                    "tagTypes"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "ID of the employee associated with the activity.",
+                        "format": "int64"
+                    },
+                    "employeeType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.EmployeeType"
+                            }
+                        ],
+                        "description": "Type of the employee."
+                    },
+                    "activityTypeId": {
+                        "type": "integer",
+                        "description": "ID of the activity type.",
+                        "format": "int64"
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "description": "Start time of the activity  on UTC.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "End time of the activity  on UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "ID of the job associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appointmentId": {
+                        "type": "integer",
+                        "description": "ID of the appointment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabel": {
+                        "type": "string",
+                        "description": "Label of the project associated with the activity.",
+                        "nullable": true
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "ID of the labor type associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "ID of the budget code associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeName": {
+                        "type": "string",
+                        "description": "Name of the budget code associated with the activity.",
+                        "nullable": true
+                    },
+                    "milesDriven": {
+                        "type": "number",
+                        "description": "Miles driven associated with the activity.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "nonJobEventAssignmentId": {
+                        "type": "integer",
+                        "description": "Non-job event assignment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo or notes related to the activity.",
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the activity."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Timesheets.V2.Activities.ActivityUpdateRequest": {
+                "required": [
+                    "activityTypeId",
+                    "startTime",
+                    "tagTypes",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "activityTypeId": {
+                        "type": "integer",
+                        "description": "ID of the activity type.",
+                        "format": "int64"
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "description": "Start time of the activity  on UTC.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "End time of the activity  on UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "ID of the job associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appointmentId": {
+                        "type": "integer",
+                        "description": "ID of the appointment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectLabel": {
+                        "type": "string",
+                        "description": "Label of the project associated with the activity.",
+                        "nullable": true
+                    },
+                    "laborTypeId": {
+                        "type": "integer",
+                        "description": "ID of the labor type associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "ID of the budget code associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeName": {
+                        "type": "string",
+                        "description": "Name of the budget code associated with the activity.",
+                        "nullable": true
+                    },
+                    "milesDriven": {
+                        "type": "number",
+                        "description": "Miles driven associated with the activity.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "nonJobEventAssignmentId": {
+                        "type": "integer",
+                        "description": "Non-job event assignment associated with the activity.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo or notes related to the activity.",
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the activity."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the activity is active."
                     }
                 },
                 "additionalProperties": false
@@ -2462,6 +3036,7 @@
                     "id",
                     "employeeId",
                     "employeeType",
+                    "activityTypeId",
                     "startTime",
                     "tagTypes",
                     "active",
@@ -2487,6 +3062,11 @@
                             }
                         ],
                         "description": "Type of the employee."
+                    },
+                    "activityTypeId": {
+                        "type": "integer",
+                        "description": "ID of the activity type.",
+                        "format": "int64"
                     },
                     "startTime": {
                         "type": "string",
@@ -2546,6 +3126,24 @@
                             "format": "int64"
                         },
                         "description": "List of tag type IDs associated with the activity."
+                    },
+                    "startCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "Start Coordinate of the activity.",
+                        "nullable": true
+                    },
+                    "endCoordinate": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            }
+                        ],
+                        "description": "End Coordinate of the activity.",
+                        "nullable": true
                     },
                     "active": {
                         "type": "boolean",

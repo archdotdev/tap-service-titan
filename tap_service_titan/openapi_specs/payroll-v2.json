@@ -630,6 +630,7 @@
                                             "externalPayrollId": "string",
                                             "hourlyRate": 0,
                                             "managerId": 0,
+                                            "payrollBusinessUnitId": 0,
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -3189,6 +3190,7 @@
                                             "externalPayrollId": "string",
                                             "hourlyRate": 0,
                                             "managerId": 0,
+                                            "payrollBusinessUnitId": 0,
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -3282,6 +3284,7 @@
                                     "externalPayrollId": "string",
                                     "hourlyRate": 0,
                                     "managerId": 0,
+                                    "payrollBusinessUnitId": 0,
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -3368,7 +3371,9 @@
                                 "externalPayrollId": "string",
                                 "hourlyRate": 0,
                                 "managerId": 0,
-                                "hireDate": "string"
+                                "payrollBusinessUnitId": 0,
+                                "hireDate": "string",
+                                "isIncludedInPayroll": true
                             }
                         }
                     }
@@ -3470,6 +3475,7 @@
                                     "externalPayrollId": "string",
                                     "hourlyRate": 0,
                                     "managerId": 0,
+                                    "payrollBusinessUnitId": 0,
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -3556,7 +3562,9 @@
                                 "externalPayrollId": "string",
                                 "hourlyRate": 0,
                                 "managerId": 0,
-                                "hireDate": "string"
+                                "payrollBusinessUnitId": 0,
+                                "hireDate": "string",
+                                "isIncludedInPayroll": true
                             }
                         }
                     }
@@ -5678,6 +5686,12 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "payrollBusinessUnitId": {
+                        "type": "integer",
+                        "description": "The ID of the payroll business unit (employee only)",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "hireDate": {
                         "type": "string",
                         "description": "The hire date",
@@ -6803,6 +6817,12 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "payrollBusinessUnitId": {
+                        "type": "integer",
+                        "description": "The ID of the payroll business unit (employee only)",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "hireDate": {
                         "type": "string",
                         "description": "The hire date",
@@ -6866,6 +6886,12 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "payrollBusinessUnitId": {
+                        "type": "integer",
+                        "description": "The ID of the payroll business unit (employee only)",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "hireDate": {
                         "type": "string",
                         "description": "The hire date",
@@ -6925,10 +6951,21 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "payrollBusinessUnitId": {
+                        "type": "integer",
+                        "description": "The ID of the payroll business unit (employee only)",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "hireDate": {
                         "type": "string",
                         "description": "The hire date",
                         "format": "date-time",
+                        "nullable": true
+                    },
+                    "isIncludedInPayroll": {
+                        "type": "boolean",
+                        "description": "Indicates if the employee should be included in payroll processing",
                         "nullable": true
                     }
                 },

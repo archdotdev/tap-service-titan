@@ -142,12 +142,6 @@ class ServiceTitanSchema(StreamSchema):
                 "type": "integer",
             }
 
-        if stream.name == "estimates":
-            if "proposalTagName" in normalized["properties"]:
-                logger.warning("proposalTagName is already present in the schema")
-            else:
-                normalized["properties"]["proposalTagName"] = {"type": ["string", "null"]}
-
         if stream.name == "estimate_items":
             normalized["properties"]["estimate_id"] = {
                 "format": "int64",

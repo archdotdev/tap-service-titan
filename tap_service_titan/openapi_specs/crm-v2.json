@@ -1933,6 +1933,80 @@
                 }
             }
         },
+        "/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/dismiss": {
+            "post": {
+                "tags": [
+                    "Bookings"
+                ],
+                "summary": "Bookings_DismissBooking",
+                "operationId": "Bookings_DismissBooking",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "booking_provider",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Crm.V2.DismissBookingModel"
+                            },
+                            "example": {
+                                "callReasonId": 0,
+                                "dismissingMemo": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/tags": {
             "put": {
                 "tags": [
@@ -8451,7 +8525,8 @@
                                 ],
                                 "priority": {},
                                 "callReasonId": 0,
-                                "followUpDate": "string"
+                                "followUpDate": "string",
+                                "bookingId": 0
                             }
                         }
                     }
@@ -11186,6 +11261,167 @@
                     }
                 }
             }
+        },
+        "/tenant/{tenant}/locations/{id}/preferredtechnician/{preferredTechnicianId}": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Locations_UpdatePreferredTechnician",
+                "operationId": "Locations_UpdatePreferredTechnician",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "preferredTechnicianId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/locations/{id}/preferredtechnician": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Locations_GetPreferredTechnician",
+                "operationId": "Locations_GetPreferredTechnician",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "nullable": true
+                                },
+                                "example": 0
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -12086,6 +12322,23 @@
                     },
                     "memo": {
                         "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Crm.V2.DismissBookingModel": {
+                "type": "object",
+                "properties": {
+                    "callReasonId": {
+                        "type": "integer",
+                        "description": "Call reason ID for dismissing the booking",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "dismissingMemo": {
+                        "type": "string",
+                        "description": "Memo for dismissing the booking",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -15394,6 +15647,12 @@
                         "type": "string",
                         "description": "Date of when to follow up. Required if call reason ID is not provided.",
                         "format": "date-time",
+                        "nullable": true
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "description": "Booking Id for associating to lead",
+                        "format": "int64",
                         "nullable": true
                     }
                 },

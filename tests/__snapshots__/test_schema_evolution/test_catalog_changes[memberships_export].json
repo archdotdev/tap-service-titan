@@ -645,7 +645,7 @@
         ]
       },
       "renewedById": {
-        "description": "ID of the user that renewed this membership",
+        "description": "ID of the renewal membership",
         "format": "int64",
         "type": [
           "integer",

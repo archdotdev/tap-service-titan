@@ -6,6 +6,24 @@
     {
       "breadcrumb": [
         "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "permissions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -105,15 +123,6 @@
     {
       "breadcrumb": [
         "properties",
-        "customFields"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "active"
       ],
       "metadata": {
@@ -124,15 +133,6 @@
       "breadcrumb": [
         "properties",
         "aadUserId"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "permissions"
       ],
       "metadata": {
         "inclusion": "available"
