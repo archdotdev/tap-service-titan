@@ -177,6 +177,9 @@
                                             "email": "string",
                                             "phoneNumber": "string",
                                             "loginName": "string",
+                                            "active": true,
+                                            "aadUserId": "string",
+                                            "accountLocked": true,
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -184,15 +187,12 @@
                                                     "value": "string"
                                                 }
                                             ],
-                                            "active": true,
-                                            "aadUserId": "string",
                                             "permissions": [
                                                 {
                                                     "id": 0,
                                                     "value": "string"
                                                 }
-                                            ],
-                                            "accountLocked": true
+                                            ]
                                         }
                                     ]
                                 }
@@ -354,6 +354,9 @@
                                     "email": "string",
                                     "phoneNumber": "string",
                                     "loginName": "string",
+                                    "active": true,
+                                    "aadUserId": "string",
+                                    "accountLocked": true,
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -361,15 +364,12 @@
                                             "value": "string"
                                         }
                                     ],
-                                    "active": true,
-                                    "aadUserId": "string",
                                     "permissions": [
                                         {
                                             "id": 0,
                                             "value": "string"
                                         }
-                                    ],
-                                    "accountLocked": true
+                                    ]
                                 }
                             }
                         }
@@ -649,6 +649,19 @@
                                     "continueFrom": "string",
                                     "data": [
                                         {
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "permissions": [
+                                                {
+                                                    "id": 0,
+                                                    "value": "string"
+                                                }
+                                            ],
                                             "id": 0,
                                             "userId": 0,
                                             "name": "string",
@@ -662,21 +675,8 @@
                                             "email": "string",
                                             "phoneNumber": "string",
                                             "loginName": "string",
-                                            "customFields": [
-                                                {
-                                                    "typeId": 0,
-                                                    "name": "string",
-                                                    "value": "string"
-                                                }
-                                            ],
                                             "active": true,
                                             "aadUserId": "string",
-                                            "permissions": [
-                                                {
-                                                    "id": 0,
-                                                    "value": "string"
-                                                }
-                                            ],
                                             "accountLocked": true
                                         }
                                     ]
@@ -1810,7 +1810,11 @@
                                                 "city": "string",
                                                 "state": "string",
                                                 "zip": "string",
-                                                "country": "string"
+                                                "country": "string",
+                                                "latitude": 0,
+                                                "longitude": 0,
+                                                "isManualCoordinates": true,
+                                                "isMilitary": true
                                             },
                                             "materialSku": "string",
                                             "quickbooksClass": "string",
@@ -1818,6 +1822,17 @@
                                             "franchiseId": "string",
                                             "conceptCode": "string",
                                             "corporateContractNumber": "string",
+                                            "trade": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "division": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "tagTypeIds": [
+                                                0
+                                            ],
                                             "tenant": {
                                                 "id": 0,
                                                 "name": "string",
@@ -1926,7 +1941,11 @@
                                         "city": "string",
                                         "state": "string",
                                         "zip": "string",
-                                        "country": "string"
+                                        "country": "string",
+                                        "latitude": 0,
+                                        "longitude": 0,
+                                        "isManualCoordinates": true,
+                                        "isMilitary": true
                                     },
                                     "materialSku": "string",
                                     "quickbooksClass": "string",
@@ -1934,6 +1953,17 @@
                                     "franchiseId": "string",
                                     "conceptCode": "string",
                                     "corporateContractNumber": "string",
+                                    "trade": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "division": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "tagTypeIds": [
+                                        0
+                                    ],
                                     "tenant": {
                                         "id": 0,
                                         "name": "string",
@@ -2165,7 +2195,11 @@
                                                 "city": "string",
                                                 "state": "string",
                                                 "zip": "string",
-                                                "country": "string"
+                                                "country": "string",
+                                                "latitude": 0,
+                                                "longitude": 0,
+                                                "isManualCoordinates": true,
+                                                "isMilitary": true
                                             },
                                             "materialSku": "string",
                                             "quickbooksClass": "string",
@@ -2173,6 +2207,17 @@
                                             "franchiseId": "string",
                                             "conceptCode": "string",
                                             "corporateContractNumber": "string",
+                                            "trade": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "division": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "tagTypeIds": [
+                                                0
+                                            ],
                                             "tenant": {
                                                 "id": 0,
                                                 "name": "string",
@@ -2274,6 +2319,7 @@
                                             "importance": {},
                                             "isConversionOpportunity": true,
                                             "allowToUseOnTimesheetActivity": true,
+                                            "isVisibleOnDispatchBoard": true,
                                             "active": true,
                                             "createdOn": "string",
                                             "modifiedOn": "string"
@@ -2433,6 +2479,7 @@
                                             "importance": {},
                                             "isConversionOpportunity": true,
                                             "allowToUseOnTimesheetActivity": true,
+                                            "isVisibleOnDispatchBoard": true,
                                             "active": true,
                                             "createdOn": "string",
                                             "modifiedOn": "string"
@@ -2492,7 +2539,8 @@
                                 "code": "string",
                                 "importance": {},
                                 "isConversionOpportunity": true,
-                                "allowToUseOnTimesheetActivity": true
+                                "allowToUseOnTimesheetActivity": true,
+                                "isVisibleOnDispatchBoard": true
                             }
                         }
                     }
@@ -2651,14 +2699,6 @@
                         "description": "Login name of the employee",
                         "nullable": true
                     },
-                    "customFields": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
-                        },
-                        "description": "Custom fields",
-                        "nullable": true
-                    },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the employee is active"
@@ -2668,17 +2708,25 @@
                         "description": "Azure Active Directory User Id",
                         "nullable": true
                     },
+                    "accountLocked": {
+                        "type": "boolean",
+                        "description": "Account Locked Status",
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
+                        },
+                        "description": "Custom fields",
+                        "nullable": true
+                    },
                     "permissions": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeePermissionResponse"
                         },
                         "description": "List of the all availible permissions for this user.",
-                        "nullable": true
-                    },
-                    "accountLocked": {
-                        "type": "boolean",
-                        "description": "Account Locked Status",
                         "nullable": true
                     }
                 },
@@ -3179,6 +3227,22 @@
                 ],
                 "type": "object",
                 "properties": {
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
+                        },
+                        "description": "Custom fields",
+                        "nullable": true
+                    },
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeePermissionResponse"
+                        },
+                        "description": "List of the all availible permissions for this user.",
+                        "nullable": true
+                    },
                     "id": {
                         "type": "integer",
                         "description": "ID of the employee",
@@ -3243,14 +3307,6 @@
                         "description": "Login name of the employee",
                         "nullable": true
                     },
-                    "customFields": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
-                        },
-                        "description": "Custom fields",
-                        "nullable": true
-                    },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the employee is active"
@@ -3258,14 +3314,6 @@
                     "aadUserId": {
                         "type": "string",
                         "description": "Azure Active Directory User Id",
-                        "nullable": true
-                    },
-                    "permissions": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TenantSettings.V2.EmployeePermissionResponse"
-                        },
-                        "description": "List of the all availible permissions for this user.",
                         "nullable": true
                     },
                     "accountLocked": {
@@ -4363,54 +4411,66 @@
                 "properties": {
                     "id": {
                         "type": "integer",
+                        "description": "ID of the business unit",
                         "format": "int64"
                     },
                     "active": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether the business unit is active"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The internal name of the business unit"
                     },
                     "officialName": {
                         "type": "string",
+                        "description": "The official name which customers see for the business unit",
                         "nullable": true
                     },
                     "email": {
                         "type": "string",
+                        "description": "The default email address associated with the business unit",
                         "format": "email",
                         "nullable": true
                     },
                     "currency": {
                         "type": "string",
+                        "description": "The currency code used by the business unit (e.g., USD, CAD)",
                         "nullable": true
                     },
                     "phoneNumber": {
                         "type": "string",
+                        "description": "The primary phone number for the business unit",
                         "format": "phone",
                         "nullable": true
                     },
                     "invoiceHeader": {
                         "type": "string",
+                        "description": "The header text displayed on invoices and estimates with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "invoiceMessage": {
                         "type": "string",
+                        "description": "The message text displayed at the footer of all invoices and estimates with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "defaultTaxRate": {
                         "type": "number",
+                        "description": "The default tax rate applied to taxable pricebook items this business unit",
                         "format": "decimal",
                         "nullable": true
                     },
                     "authorizationParagraph": {
                         "type": "string",
+                        "description": "The authorization paragraph for customers to authorize work with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "acknowledgementParagraph": {
                         "type": "string",
+                        "description": "The acknowledgement paragraph for customers to sign for completed work with this business unit",
                         "format": "html",
                         "nullable": true
                     },
@@ -4420,30 +4480,64 @@
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitAddressResponse"
                             }
                         ],
+                        "description": "The address information for the business unit",
                         "nullable": true
                     },
                     "materialSku": {
                         "type": "string",
+                        "description": "The SKU for materials associated with this business unit",
                         "nullable": true
                     },
                     "quickbooksClass": {
                         "type": "string",
+                        "description": "The QuickBooks class name for accounting integration",
                         "nullable": true
                     },
                     "accountCode": {
                         "type": "string",
+                        "description": "The account code for the business unit tenant",
                         "nullable": true
                     },
                     "franchiseId": {
                         "type": "string",
+                        "description": "The franchise ID for the business unit tenant",
                         "nullable": true
                     },
                     "conceptCode": {
                         "type": "string",
+                        "description": "The concept code for the business unit tenant",
                         "nullable": true
                     },
                     "corporateContractNumber": {
                         "type": "string",
+                        "description": "The corporate contract number associated with the business unit",
+                        "nullable": true
+                    },
+                    "trade": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Services.NamedModel"
+                            }
+                        ],
+                        "description": "The trade associated with the business unit",
+                        "nullable": true
+                    },
+                    "division": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Services.NamedModel"
+                            }
+                        ],
+                        "description": "The division within the company to which the business unit belongs",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs",
                         "nullable": true
                     },
                     "tenant": {
@@ -4452,14 +4546,17 @@
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitTenantResponse"
                             }
                         ],
+                        "description": "Tenant to which the business unit belongs",
                         "nullable": true
                     },
                     "createdOn": {
                         "type": "string",
+                        "description": "When the business unit was created",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
+                        "description": "When the business unit was modified",
                         "format": "date-time"
                     },
                     "externalData": {
@@ -4467,13 +4564,17 @@
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.ExternalDataModel"
                         },
-                        "description": "Optional model that contains a list of external data items\nthat should be attached to this business unit.",
+                        "description": "Optional list of external data items attached to this business unit",
                         "nullable": true
                     }
                 },
                 "additionalProperties": false
             },
             "TenantSettings.V2.BusinessUnitAddressResponse": {
+                "required": [
+                    "isManualCoordinates",
+                    "isMilitary"
+                ],
                 "type": "object",
                 "properties": {
                     "street": {
@@ -4499,6 +4600,39 @@
                     "country": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "isManualCoordinates": {
+                        "type": "boolean"
+                    },
+                    "isMilitary": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Services.NamedModel": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
                     }
                 },
                 "additionalProperties": false
@@ -4684,54 +4818,66 @@
                 "properties": {
                     "id": {
                         "type": "integer",
+                        "description": "ID of the business unit",
                         "format": "int64"
                     },
                     "active": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether the business unit is active"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The internal name of the business unit"
                     },
                     "officialName": {
                         "type": "string",
+                        "description": "The official name which customers see for the business unit",
                         "nullable": true
                     },
                     "email": {
                         "type": "string",
+                        "description": "The default email address associated with the business unit",
                         "format": "email",
                         "nullable": true
                     },
                     "currency": {
                         "type": "string",
+                        "description": "The currency code used by the business unit (e.g., USD, CAD)",
                         "nullable": true
                     },
                     "phoneNumber": {
                         "type": "string",
+                        "description": "The primary phone number for the business unit",
                         "format": "phone",
                         "nullable": true
                     },
                     "invoiceHeader": {
                         "type": "string",
+                        "description": "The header text displayed on invoices and estimates with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "invoiceMessage": {
                         "type": "string",
+                        "description": "The message text displayed at the footer of all invoices and estimates with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "defaultTaxRate": {
                         "type": "number",
+                        "description": "The default tax rate applied to taxable pricebook items this business unit",
                         "format": "decimal",
                         "nullable": true
                     },
                     "authorizationParagraph": {
                         "type": "string",
+                        "description": "The authorization paragraph for customers to authorize work with this business unit",
                         "format": "html",
                         "nullable": true
                     },
                     "acknowledgementParagraph": {
                         "type": "string",
+                        "description": "The acknowledgement paragraph for customers to sign for completed work with this business unit",
                         "format": "html",
                         "nullable": true
                     },
@@ -4741,30 +4887,64 @@
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitAddressResponse"
                             }
                         ],
+                        "description": "The address information for the business unit",
                         "nullable": true
                     },
                     "materialSku": {
                         "type": "string",
+                        "description": "The SKU for materials associated with this business unit",
                         "nullable": true
                     },
                     "quickbooksClass": {
                         "type": "string",
+                        "description": "The QuickBooks class name for accounting integration",
                         "nullable": true
                     },
                     "accountCode": {
                         "type": "string",
+                        "description": "The account code for the business unit tenant",
                         "nullable": true
                     },
                     "franchiseId": {
                         "type": "string",
+                        "description": "The franchise ID for the business unit tenant",
                         "nullable": true
                     },
                     "conceptCode": {
                         "type": "string",
+                        "description": "The concept code for the business unit tenant",
                         "nullable": true
                     },
                     "corporateContractNumber": {
                         "type": "string",
+                        "description": "The corporate contract number associated with the business unit",
+                        "nullable": true
+                    },
+                    "trade": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Services.NamedModel"
+                            }
+                        ],
+                        "description": "The trade associated with the business unit",
+                        "nullable": true
+                    },
+                    "division": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Services.NamedModel"
+                            }
+                        ],
+                        "description": "The division within the company to which the business unit belongs",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs",
                         "nullable": true
                     },
                     "tenant": {
@@ -4773,14 +4953,17 @@
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitTenantResponse"
                             }
                         ],
+                        "description": "Tenant to which the business unit belongs",
                         "nullable": true
                     },
                     "createdOn": {
                         "type": "string",
+                        "description": "When the business unit was created",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
+                        "description": "When the business unit was modified",
                         "format": "date-time"
                     },
                     "externalData": {
@@ -4788,7 +4971,7 @@
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.ExternalDataModel"
                         },
-                        "description": "Optional model that contains a list of external data items\nthat should be attached to this business unit.",
+                        "description": "Optional list of external data items attached to this business unit",
                         "nullable": true
                     }
                 },
@@ -4829,6 +5012,7 @@
                     "code",
                     "isConversionOpportunity",
                     "allowToUseOnTimesheetActivity",
+                    "isVisibleOnDispatchBoard",
                     "active",
                     "createdOn",
                     "modifiedOn"
@@ -4868,6 +5052,10 @@
                     "allowToUseOnTimesheetActivity": {
                         "type": "boolean",
                         "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity"
+                    },
+                    "isVisibleOnDispatchBoard": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board."
                     },
                     "active": {
                         "type": "boolean",
@@ -4946,6 +5134,7 @@
                     "code",
                     "isConversionOpportunity",
                     "allowToUseOnTimesheetActivity",
+                    "isVisibleOnDispatchBoard",
                     "active",
                     "createdOn",
                     "modifiedOn"
@@ -4986,6 +5175,10 @@
                         "type": "boolean",
                         "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity"
                     },
+                    "isVisibleOnDispatchBoard": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board."
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the tag type is active"
@@ -5006,9 +5199,7 @@
             "TenantSettings.V2.CreateTagTypeRequest": {
                 "required": [
                     "name",
-                    "color",
-                    "isConversionOpportunity",
-                    "allowToUseOnTimesheetActivity"
+                    "color"
                 ],
                 "type": "object",
                 "properties": {
@@ -5038,14 +5229,191 @@
                     },
                     "isConversionOpportunity": {
                         "type": "boolean",
-                        "description": "Indicates whether tags of this type should be considered as an opportunity"
+                        "description": "Indicates whether tags of this type should be considered as an opportunity",
+                        "nullable": true
                     },
                     "allowToUseOnTimesheetActivity": {
                         "type": "boolean",
-                        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity"
+                        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity",
+                        "nullable": true
+                    },
+                    "isVisibleOnDispatchBoard": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board.",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
+            },
+            "CloudEvent_Of_TenantSettings.V2.WebhookV2EmployeePayload": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.stt.employee-changed\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.WebhookV2EmployeePayload"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TenantSettings.V2.WebhookV2EmployeePayload": {
+                "required": [
+                    "employee",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "employee": {
+                        "$ref": "#/components/schemas/TenantSettings.V2.WebhookEmployeeModel"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TenantSettings.V2.WebhookEmployeeModel": {
+                "required": [
+                    "id",
+                    "userId",
+                    "name",
+                    "role",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the employee",
+                        "format": "int64"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "description": "ID of the user that belongs to the employee",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Employee's name"
+                    },
+                    "role": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.EmployeeUserRole"
+                            }
+                        ],
+                        "description": "[DEPRECATED] Please, use field RoleIds> instead.\nBuilt in user role. Built in role is a template for creating user role."
+                    },
+                    "roleIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of the user roles assigned to the technician.",
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "ID of business unit employee belongs to",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the employee was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the employee was modified",
+                        "format": "date-time"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Email address of the employee",
+                        "format": "email",
+                        "nullable": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "description": "Phone number of the employee",
+                        "format": "phone",
+                        "nullable": true
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "Login name of the employee",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the employee is active"
+                    },
+                    "aadUserId": {
+                        "type": "string",
+                        "description": "Azure Active Directory User Id",
+                        "nullable": true
+                    },
+                    "accountLocked": {
+                        "type": "boolean",
+                        "description": "Account Locked Status",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an employee model used in V2 webhook payloads."
             }
         },
         "securitySchemes": {

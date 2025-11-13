@@ -131,6 +131,7 @@
                                             "jobId": 0,
                                             "bookingId": 0,
                                             "leadId": 0,
+                                            "gbpName": "string",
                                             "timeslotStart": "string",
                                             "timeslotEnd": "string",
                                             "category": "string",
@@ -200,7 +201,10 @@
                                             "isLocationTakeover": true,
                                             "customOptIn": true,
                                             "marketingOptIn": true,
-                                            "membershipInterest": "string"
+                                            "membershipInterest": "string",
+                                            "paymentInfoCaptured": true,
+                                            "externalId": "string",
+                                            "recurringServiceId": 0
                                         }
                                     ]
                                 }
@@ -633,6 +637,7 @@
                                             "jobId": 0,
                                             "bookingId": 0,
                                             "leadId": 0,
+                                            "gbpName": "string",
                                             "timeslotStart": "string",
                                             "timeslotEnd": "string",
                                             "category": "string",
@@ -702,7 +707,10 @@
                                             "isLocationTakeover": true,
                                             "customOptIn": true,
                                             "marketingOptIn": true,
-                                            "membershipInterest": "string"
+                                            "membershipInterest": "string",
+                                            "paymentInfoCaptured": true,
+                                            "externalId": "string",
+                                            "recurringServiceId": 0
                                         }
                                     ]
                                 }
@@ -1019,6 +1027,11 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "gbpName": {
+                        "type": "string",
+                        "description": "GBP Name",
+                        "nullable": true
+                    },
                     "timeslotStart": {
                         "type": "string",
                         "description": "Timeslot start",
@@ -1126,6 +1139,22 @@
                     "membershipInterest": {
                         "type": "string",
                         "description": "Membership Interest",
+                        "nullable": true
+                    },
+                    "paymentInfoCaptured": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payment info was captured",
+                        "nullable": true
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "description": "External ID",
+                        "nullable": true
+                    },
+                    "recurringServiceId": {
+                        "type": "integer",
+                        "description": "Recurring Service ID",
+                        "format": "int64",
                         "nullable": true
                     }
                 },
@@ -1653,6 +1682,11 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "gbpName": {
+                        "type": "string",
+                        "description": "GBP Name",
+                        "nullable": true
+                    },
                     "timeslotStart": {
                         "type": "string",
                         "description": "Timeslot start",
@@ -1760,6 +1794,22 @@
                     "membershipInterest": {
                         "type": "string",
                         "description": "Membership Interest",
+                        "nullable": true
+                    },
+                    "paymentInfoCaptured": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payment info was captured",
+                        "nullable": true
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "description": "External ID",
+                        "nullable": true
+                    },
+                    "recurringServiceId": {
+                        "type": "integer",
+                        "description": "Recurring Service ID",
+                        "format": "int64",
                         "nullable": true
                     }
                 },

@@ -87,6 +87,15 @@
     {
       "breadcrumb": [
         "properties",
+        "gbpName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "timeslotStart"
       ],
       "metadata": {
@@ -774,6 +783,33 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "paymentInfoCaptured"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurringServiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -1078,6 +1114,20 @@
           "null"
         ]
       },
+      "externalId": {
+        "description": "External ID",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "gbpName": {
+        "description": "GBP Name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "id": {
         "description": "Session ID",
         "type": "string"
@@ -1161,6 +1211,21 @@
         "description": "Customer customer",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "paymentInfoCaptured": {
+        "description": "Indicates whether the payment info was captured",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "recurringServiceId": {
+        "description": "Recurring Service ID",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

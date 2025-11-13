@@ -69,6 +69,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isVisibleOnDispatchBoard"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -168,6 +177,13 @@
           "null"
         ]
       },
+      "isVisibleOnDispatchBoard": {
+        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "modifiedOn": {
         "description": "Date/time (in UTC) when the tag type was last modified",
         "format": "date-time",
@@ -191,6 +207,7 @@
       "code",
       "isConversionOpportunity",
       "allowToUseOnTimesheetActivity",
+      "isVisibleOnDispatchBoard",
       "active",
       "createdOn",
       "modifiedOn"

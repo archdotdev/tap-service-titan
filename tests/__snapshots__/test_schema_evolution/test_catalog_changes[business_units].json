@@ -189,6 +189,50 @@
     {
       "breadcrumb": [
         "properties",
+        "address",
+        "properties",
+        "latitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "longitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "isManualCoordinates"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "address",
+        "properties",
+        "isMilitary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "materialSku"
       ],
       "metadata": {
@@ -235,6 +279,77 @@
       "breadcrumb": [
         "properties",
         "corporateContractNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trade"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trade",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trade",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "division"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "division",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "division",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tagTypeIds"
       ],
       "metadata": {
         "inclusion": "available"
@@ -363,12 +478,14 @@
     "additionalProperties": false,
     "properties": {
       "accountCode": {
+        "description": "The account code for the business unit tenant",
         "type": [
           "string",
           "null"
         ]
       },
       "acknowledgementParagraph": {
+        "description": "The acknowledgement paragraph for customers to sign for completed work with this business unit",
         "format": "html",
         "type": [
           "string",
@@ -376,6 +493,7 @@
         ]
       },
       "active": {
+        "description": "Whether the business unit is active",
         "type": [
           "boolean",
           "null"
@@ -383,6 +501,7 @@
       },
       "address": {
         "additionalProperties": false,
+        "description": "The address information for the business unit",
         "properties": {
           "city": {
             "type": [
@@ -393,6 +512,32 @@
           "country": {
             "type": [
               "string",
+              "null"
+            ]
+          },
+          "isManualCoordinates": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "isMilitary": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "latitude": {
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "longitude": {
+            "format": "double",
+            "type": [
+              "number",
               "null"
             ]
           },
@@ -421,12 +566,17 @@
             ]
           }
         },
+        "required": [
+          "isManualCoordinates",
+          "isMilitary"
+        ],
         "type": [
           "object",
           "null"
         ]
       },
       "authorizationParagraph": {
+        "description": "The authorization paragraph for customers to authorize work with this business unit",
         "format": "html",
         "type": [
           "string",
@@ -434,18 +584,21 @@
         ]
       },
       "conceptCode": {
+        "description": "The concept code for the business unit tenant",
         "type": [
           "string",
           "null"
         ]
       },
       "corporateContractNumber": {
+        "description": "The corporate contract number associated with the business unit",
         "type": [
           "string",
           "null"
         ]
       },
       "createdOn": {
+        "description": "When the business unit was created",
         "format": "date-time",
         "type": [
           "string",
@@ -453,19 +606,49 @@
         ]
       },
       "currency": {
+        "description": "The currency code used by the business unit (e.g., USD, CAD)",
         "type": [
           "string",
           "null"
         ]
       },
       "defaultTaxRate": {
+        "description": "The default tax rate applied to taxable pricebook items this business unit",
         "format": "decimal",
         "type": [
           "number",
           "null"
         ]
       },
+      "division": {
+        "additionalProperties": false,
+        "description": "The division within the company to which the business unit belongs",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
       "email": {
+        "description": "The default email address associated with the business unit",
         "format": "email",
         "type": [
           "string",
@@ -473,7 +656,7 @@
         ]
       },
       "externalData": {
-        "description": "Optional model that contains a list of external data items\nthat should be attached to this business unit.",
+        "description": "Optional list of external data items attached to this business unit",
         "items": {
           "additionalProperties": false,
           "properties": {
@@ -507,16 +690,19 @@
         ]
       },
       "franchiseId": {
+        "description": "The franchise ID for the business unit tenant",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
+        "description": "ID of the business unit",
         "format": "int64",
         "type": "integer"
       },
       "invoiceHeader": {
+        "description": "The header text displayed on invoices and estimates with this business unit",
         "format": "html",
         "type": [
           "string",
@@ -524,6 +710,7 @@
         ]
       },
       "invoiceMessage": {
+        "description": "The message text displayed at the footer of all invoices and estimates with this business unit",
         "format": "html",
         "type": [
           "string",
@@ -531,12 +718,14 @@
         ]
       },
       "materialSku": {
+        "description": "The SKU for materials associated with this business unit",
         "type": [
           "string",
           "null"
         ]
       },
       "modifiedOn": {
+        "description": "When the business unit was modified",
         "format": "date-time",
         "type": [
           "string",
@@ -544,18 +733,21 @@
         ]
       },
       "name": {
+        "description": "The internal name of the business unit",
         "type": [
           "string",
           "null"
         ]
       },
       "officialName": {
+        "description": "The official name which customers see for the business unit",
         "type": [
           "string",
           "null"
         ]
       },
       "phoneNumber": {
+        "description": "The primary phone number for the business unit",
         "format": "phone",
         "type": [
           "string",
@@ -563,13 +755,26 @@
         ]
       },
       "quickbooksClass": {
+        "description": "The QuickBooks class name for accounting integration",
         "type": [
           "string",
           "null"
         ]
       },
+      "tagTypeIds": {
+        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "tenant": {
         "additionalProperties": false,
+        "description": "Tenant to which the business unit belongs",
         "properties": {
           "accountCode": {
             "type": [
@@ -614,6 +819,33 @@
           "id",
           "name",
           "modifiedOn"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "trade": {
+        "additionalProperties": false,
+        "description": "The trade associated with the business unit",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name"
         ],
         "type": [
           "object",
