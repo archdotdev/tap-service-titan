@@ -169,6 +169,7 @@ class TapServiceTitan(Tap):
             streams.crm.LocationNotesStream(self),
             streams.crm.LocationsCustomFieldsStream(self),
             streams.crm.CustomersCustomFieldsStream(self),
+            streams.customer_interactions.TechnicianRatingsStream(self),
             streams.dispatch.CapacitiesStream(self),
             streams.dispatch.AppointmentAssignmentsStream(self),
             streams.dispatch.ArrivalWindowsStream(self),
