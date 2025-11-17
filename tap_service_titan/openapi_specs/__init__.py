@@ -24,6 +24,7 @@ else:
 __all__ = [
     "ACCOUNTING",
     "CRM",
+    "CUSTOMER_INTERACTIONS",
     "DISPATCH",
     "EQUIPMENT_SYSTEMS",
     "FORMS",
@@ -191,6 +192,7 @@ class ServiceTitanSchema(StreamSchema):
 SPECS = files("tap_service_titan") / "openapi_specs"
 ACCOUNTING = ServiceTitanOpenAPISchema(SPECS / "accounting-v2.json")
 CRM = ServiceTitanOpenAPISchema(SPECS / "crm-v2.json")
+CUSTOMER_INTERACTIONS = ServiceTitanOpenAPISchema(SPECS / "customer-interactions-v2.json")
 DISPATCH = ServiceTitanOpenAPISchema(SPECS / "dispatch-v2.json")
 EQUIPMENT_SYSTEMS = ServiceTitanOpenAPISchema(SPECS / "equipment-systems-v2.json")
 FORMS = ServiceTitanOpenAPISchema(SPECS / "forms-v2.json")
