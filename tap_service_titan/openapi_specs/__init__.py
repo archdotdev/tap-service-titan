@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import sys
-from copy import deepcopy
 from functools import cached_property
 from importlib.resources import files
 from typing import TYPE_CHECKING, Any
@@ -12,8 +11,6 @@ from typing import TYPE_CHECKING, Any
 from singer_sdk import OpenAPISchema, StreamSchema
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
-
     from singer_sdk.streams import Stream
 
 if sys.version_info >= (3, 12):
@@ -45,49 +42,6 @@ __all__ = [
 ]
 
 logger = logging.getLogger(__name__)
-
-
-def _normalize_schema(
-    schema: dict[str, Any],
-    key_properties: Sequence[str] = (),
-) -> dict[str, Any]:
-    """Normalize OpenAPI attributes to standard JSON Schema features.
-
-    Args:
-        schema: A JSON Schema dictionary.
-        key_properties: The key properties of the stream.
-
-    - Converts 'nullable' to 'type': [<type>, "null"]
-    - Converts {'field': {'oneOf': [{...} (1 item only)]}} to {'field': {...}}
-
-    Returns:
-        A new JSON Schema dictionary, normalized.
-    """
-    result = deepcopy(schema)
-    schema_type: str | list[str] = result.get("type", [])
-
-    if "object" in schema_type:
-        result["nullable"] = len(key_properties) == 0
-        for prop, prop_schema in result.get("properties", {}).items():
-            prop_schema["nullable"] = prop not in key_properties
-            result["properties"][prop] = _normalize_schema(prop_schema)
-
-    elif "array" in schema_type:
-        result["items"] = _normalize_schema(result["items"])
-
-    if "oneOf" in result and len(result["oneOf"]) == 1:
-        inner = result.pop("oneOf")[0]
-        result.update(_normalize_schema(inner))
-        schema_type = result.get("type", [])
-
-    types = [schema_type] if isinstance(schema_type, str) else schema_type
-    if result.get("nullable", False) and "null" not in types:
-        result["type"] = [*types, "null"]
-
-    # Remove 'enum' keyword
-    result.pop("enum", None)
-
-    return result
 
 
 class ServiceTitanOpenAPISchema(OpenAPISchema):
@@ -125,49 +79,48 @@ class ServiceTitanSchema(StreamSchema):
     ) -> dict[str, Any]:
         """Get the schema for the given stream."""
         schema = super().get_stream_schema(stream, stream_class)
-        normalized = _normalize_schema(schema, key_properties=stream.primary_keys)
 
         if stream.name == "capacities":
-            normalized["required"].remove("isAvailable")
-            normalized["required"].remove("technicians")
-            normalized["properties"].pop("isAvailable")
-            technician_schema = normalized["properties"].pop("technicians")["items"]
+            schema["required"].remove("isAvailable")
+            schema["required"].remove("technicians")
+            schema["properties"].pop("isAvailable")
+            technician_schema = schema["properties"].pop("technicians")["items"]
             for prop, prop_schema in technician_schema["properties"].items():
-                normalized["properties"][f"technician_{prop}"] = prop_schema
+                schema["properties"][f"technician_{prop}"] = prop_schema
 
         if stream.name == "job_history":
-            normalized["required"].append("jobId")
-            normalized["properties"]["jobId"] = {
+            schema["required"].append("jobId")
+            schema["properties"]["jobId"] = {
                 "description": "ID of the job",
                 "format": "int64",
                 "type": "integer",
             }
 
         if stream.name == "estimate_items":
-            normalized["properties"]["estimate_id"] = {
+            schema["properties"]["estimate_id"] = {
                 "format": "int64",
                 "type": "integer",
             }
 
         if stream.name == "categories":
-            normalized["required"].remove("modifiedOn")
+            schema["required"].remove("modifiedOn")
 
         if stream.name in ("campaign_performance", "keyword_performance", "adgroup_performance"):
             # TODO(maintainers): Remove these `status` patches once ServiceTitan fixes this.
             # https://github.com/archdotdev/tap-service-titan/issues/163
-            normalized["properties"]["campaign"]["properties"]["status"]["type"] = [
+            schema["properties"]["campaign"]["properties"]["status"]["type"] = [
                 "integer",
                 "null",
             ]
-            normalized["properties"]["adGroup"]["properties"]["status"]["type"] = [
+            schema["properties"]["adGroup"]["properties"]["status"]["type"] = [
                 "integer",
                 "null",
             ]
-            normalized["properties"]["keyword"]["properties"]["status"]["type"] = [
+            schema["properties"]["keyword"]["properties"]["status"]["type"] = [
                 "integer",
                 "null",
             ]
-            normalized["properties"] |= {
+            schema["properties"] |= {
                 "date": {
                     "type": ["string", "null"],
                     "format": "date",
@@ -180,13 +133,13 @@ class ServiceTitanSchema(StreamSchema):
                     "type": ["string", "null"],
                     "format": "date-time",
                 },
-                "campaign_id": normalized["properties"]["campaign"]["properties"]["id"],
-                "campaign_name": normalized["properties"]["campaign"]["properties"]["name"],
-                "adGroup_id": normalized["properties"]["adGroup"]["properties"]["id"],
-                "keyword_id": normalized["properties"]["keyword"]["properties"]["id"],
+                "campaign_id": schema["properties"]["campaign"]["properties"]["id"],
+                "campaign_name": schema["properties"]["campaign"]["properties"]["name"],
+                "adGroup_id": schema["properties"]["adGroup"]["properties"]["id"],
+                "keyword_id": schema["properties"]["keyword"]["properties"]["id"],
             }
 
-        return normalized
+        return schema
 
 
 SPECS = files("tap_service_titan") / "openapi_specs"
