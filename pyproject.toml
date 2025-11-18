@@ -43,6 +43,7 @@ test = [
     "pytest>=9",
     "singer-sdk[testing]",
     "syrupy>=5.0.0",
+    "time-machine>=3.0.0",
 ]
 typing = [
     { include-group = "test" },
