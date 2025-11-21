@@ -5152,10 +5152,12 @@
                                     ],
                                     "doNotMail": true,
                                     "doNotService": true,
+                                    "nationalAccount": true,
                                     "createdOn": "string",
                                     "createdById": 0,
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
+                                    "paymentTermId": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -5269,10 +5271,13 @@
                                 },
                                 "doNotMail": true,
                                 "doNotService": true,
+                                "nationalAccount": true,
                                 "active": true,
                                 "tagTypeIds": [
                                     0
-                                ]
+                                ],
+                                "taxExempt": true,
+                                "paymentTermId": 0
                             }
                         }
                     }
@@ -5314,10 +5319,12 @@
                                     ],
                                     "doNotMail": true,
                                     "doNotService": true,
+                                    "nationalAccount": true,
                                     "createdOn": "string",
                                     "createdById": 0,
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
+                                    "paymentTermId": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -5658,10 +5665,12 @@
                                             ],
                                             "doNotMail": true,
                                             "doNotService": true,
+                                            "nationalAccount": true,
                                             "createdOn": "string",
                                             "createdById": 0,
                                             "modifiedOn": "string",
                                             "mergedToId": 0,
+                                            "paymentTermId": 0,
                                             "externalData": [
                                                 {
                                                     "key": "string",
@@ -5724,6 +5733,7 @@
                                 "type": {},
                                 "doNotMail": true,
                                 "doNotService": true,
+                                "nationalAccount": true,
                                 "locations": [
                                     {
                                         "name": "string",
@@ -5800,7 +5810,9 @@
                                             "value": "string"
                                         }
                                     ]
-                                }
+                                },
+                                "taxExempt": true,
+                                "paymentTermId": 0
                             }
                         }
                     }
@@ -5842,10 +5854,12 @@
                                     ],
                                     "doNotMail": true,
                                     "doNotService": true,
+                                    "nationalAccount": true,
                                     "createdOn": "string",
                                     "createdById": 0,
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
+                                    "paymentTermId": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -7702,10 +7716,12 @@
                                             ],
                                             "doNotMail": true,
                                             "doNotService": true,
+                                            "nationalAccount": true,
                                             "createdOn": "string",
                                             "createdById": 0,
                                             "modifiedOn": "string",
                                             "mergedToId": 0,
+                                            "paymentTermId": 0,
                                             "externalData": [
                                                 {
                                                     "key": "string",
@@ -8113,7 +8129,17 @@
                                 "campaignId": 0,
                                 "priority": {},
                                 "businessUnitId": 0,
-                                "jobTypeId": 0
+                                "jobTypeId": 0,
+                                "summary": "string",
+                                "leadCustomerName": "string",
+                                "leadPhone": "string",
+                                "leadEmail": "string",
+                                "leadStreet": "string",
+                                "leadUnit": "string",
+                                "leadCity": "string",
+                                "leadState": "string",
+                                "leadZip": "string",
+                                "leadCountry": "string"
                             }
                         }
                     }
@@ -8526,7 +8552,16 @@
                                 "priority": {},
                                 "callReasonId": 0,
                                 "followUpDate": "string",
-                                "bookingId": 0
+                                "bookingId": 0,
+                                "leadCustomerName": "string",
+                                "leadPhone": "string",
+                                "leadEmail": "string",
+                                "leadStreet": "string",
+                                "leadUnit": "string",
+                                "leadCity": "string",
+                                "leadState": "string",
+                                "leadZip": "string",
+                                "leadCountry": "string"
                             }
                         }
                     }
@@ -12915,6 +12950,7 @@
                     "tagTypeIds",
                     "doNotMail",
                     "doNotService",
+                    "nationalAccount",
                     "createdOn",
                     "createdById",
                     "modifiedOn",
@@ -12983,6 +13019,10 @@
                         "type": "boolean",
                         "description": "Customer has been flagged as “do not service”"
                     },
+                    "nationalAccount": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as National Account"
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "DateTime (UTC) that customer record was created",
@@ -13001,6 +13041,12 @@
                     "mergedToId": {
                         "type": "integer",
                         "description": "The customer ID of the record that this record was previously merged to.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "The Payment Term ID.",
                         "format": "int64",
                         "nullable": true
                     },
@@ -13173,6 +13219,7 @@
                     "tagTypeIds",
                     "doNotMail",
                     "doNotService",
+                    "nationalAccount",
                     "createdOn",
                     "createdById",
                     "modifiedOn",
@@ -13243,6 +13290,10 @@
                         "type": "boolean",
                         "description": "Customer has been flagged as “do not service”"
                     },
+                    "nationalAccount": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as National Account"
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "DateTime (UTC) that customer record was created",
@@ -13261,6 +13312,12 @@
                     "mergedToId": {
                         "type": "integer",
                         "description": "The customer ID of the record that this record was previously merged to.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "The Payment Term ID.",
                         "format": "int64",
                         "nullable": true
                     },
@@ -13497,6 +13554,11 @@
                         "description": "Customer has been flagged as “do not service”",
                         "nullable": true
                     },
+                    "nationalAccount": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as National Account",
+                        "nullable": true
+                    },
                     "locations": {
                         "type": "array",
                         "items": {
@@ -13544,6 +13606,17 @@
                             }
                         ],
                         "description": "Optional model that contains a list of external data items\nthat should be attached to this Customer.",
+                        "nullable": true
+                    },
+                    "taxExempt": {
+                        "type": "boolean",
+                        "description": "Optional Tax Exempt.",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "Optional Payment Term ID.",
+                        "format": "int64",
                         "nullable": true
                     }
                 },
@@ -13769,6 +13842,10 @@
                         "type": "boolean",
                         "description": "Customer has been flagged as “do not service”"
                     },
+                    "nationalAccount": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as National Account"
+                    },
                     "active": {
                         "type": "boolean",
                         "description": "Customer has been flagged as “active” ar \"innactive\""
@@ -13780,6 +13857,15 @@
                             "format": "int64"
                         },
                         "description": "IDs of the Tag Types"
+                    },
+                    "taxExempt": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as Tax Exempt"
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "Payment Term ID",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -14849,6 +14935,7 @@
                     "tagTypeIds",
                     "doNotMail",
                     "doNotService",
+                    "nationalAccount",
                     "createdOn",
                     "createdById",
                     "modifiedOn",
@@ -14917,6 +15004,10 @@
                         "type": "boolean",
                         "description": "Customer has been flagged as “do not service”"
                     },
+                    "nationalAccount": {
+                        "type": "boolean",
+                        "description": "Customer has been flagged as National Account"
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "DateTime (UTC) that customer record was created",
@@ -14935,6 +15026,12 @@
                     "mergedToId": {
                         "type": "integer",
                         "description": "The customer ID of the record that this record was previously merged to.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentTermId": {
+                        "type": "integer",
+                        "description": "The Payment Term ID.",
                         "format": "int64",
                         "nullable": true
                     },
@@ -15651,8 +15748,53 @@
                     },
                     "bookingId": {
                         "type": "integer",
-                        "description": "Booking Id for associating to lead",
+                        "description": "The associated Booking Id to use for creating the Lead.\nThis Booking will be dismissed and a Lead will get created associated to this Booking.",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "leadCustomerName": {
+                        "type": "string",
+                        "description": "Customer name provided for the lead",
+                        "nullable": true
+                    },
+                    "leadPhone": {
+                        "type": "string",
+                        "description": "Phone number provided for the lead",
+                        "nullable": true
+                    },
+                    "leadEmail": {
+                        "type": "string",
+                        "description": "Email provided for the lead",
+                        "nullable": true
+                    },
+                    "leadStreet": {
+                        "type": "string",
+                        "description": "Street provided for the lead",
+                        "nullable": true
+                    },
+                    "leadUnit": {
+                        "type": "string",
+                        "description": "Unit provided for the lead",
+                        "nullable": true
+                    },
+                    "leadCity": {
+                        "type": "string",
+                        "description": "City provided for the lead",
+                        "nullable": true
+                    },
+                    "leadState": {
+                        "type": "string",
+                        "description": "State provided for the lead",
+                        "nullable": true
+                    },
+                    "leadZip": {
+                        "type": "string",
+                        "description": "Zip provided for the lead",
+                        "nullable": true
+                    },
+                    "leadCountry": {
+                        "type": "string",
+                        "description": "Country provided for the lead",
                         "nullable": true
                     }
                 },
@@ -15683,6 +15825,46 @@
                         "type": "integer",
                         "description": "ID of job type",
                         "format": "int64"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Lead summary"
+                    },
+                    "leadCustomerName": {
+                        "type": "string",
+                        "description": "Customer name provided for the lead"
+                    },
+                    "leadPhone": {
+                        "type": "string",
+                        "description": "Phone number provided for the lead"
+                    },
+                    "leadEmail": {
+                        "type": "string",
+                        "description": "Email provided for the lead"
+                    },
+                    "leadStreet": {
+                        "type": "string",
+                        "description": "Street provided for the lead"
+                    },
+                    "leadUnit": {
+                        "type": "string",
+                        "description": "Unit provided for the lead"
+                    },
+                    "leadCity": {
+                        "type": "string",
+                        "description": "City provided for the lead"
+                    },
+                    "leadState": {
+                        "type": "string",
+                        "description": "State provided for the lead"
+                    },
+                    "leadZip": {
+                        "type": "string",
+                        "description": "Zip provided for the lead"
+                    },
+                    "leadCountry": {
+                        "type": "string",
+                        "description": "Country provided for the lead"
                     }
                 },
                 "additionalProperties": false

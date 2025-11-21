@@ -5785,6 +5785,86 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Trucks"
+                ],
+                "summary": "Create a new truck",
+                "description": "Create a new truck",
+                "operationId": "Trucks_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Inventory.V2.CreateTruckRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "memo": "string",
+                                "warehouseId": 0,
+                                "templateId": 0,
+                                "technicianIds": [
+                                    0
+                                ],
+                                "externalData": {
+                                    "applicationGuid": "string",
+                                    "externalData": [
+                                        {
+                                            "key": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/tenant/{tenant}/trucks/{id}": {
@@ -5825,6 +5905,14 @@
                                 "$ref": "#/components/schemas/Inventory.V2.UpdateTruckRequest"
                             },
                             "example": {
+                                "name": "string",
+                                "active": true,
+                                "memo": "string",
+                                "warehouseId": 0,
+                                "templateId": 0,
+                                "technicianIds": [
+                                    0
+                                ],
                                 "externalData": {
                                     "patchMode": {},
                                     "applicationGuid": "string",
@@ -11463,9 +11551,112 @@
                 "additionalProperties": false,
                 "description": "Represents truck response"
             },
+            "Inventory.V2.CreateTruckRequest": {
+                "required": [
+                    "name",
+                    "warehouseId"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Truck Name"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo",
+                        "format": "multiline",
+                        "nullable": true
+                    },
+                    "warehouseId": {
+                        "type": "integer",
+                        "description": "Warehouse Id for this truck",
+                        "format": "int64"
+                    },
+                    "templateId": {
+                        "type": "integer",
+                        "description": "Template Id for this truck",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "technicianIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Technician Ids to associate with this truck",
+                        "nullable": true
+                    },
+                    "externalData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.ExternalDataCreateRequest"
+                            }
+                        ],
+                        "description": "Optional model that contains a list of external data items\nthat should be attached to this truck.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a request to create a new truck"
+            },
+            "Inventory.V2.ExternalDataCreateRequest": {
+                "required": [
+                    "applicationGuid",
+                    "externalData"
+                ],
+                "type": "object",
+                "properties": {
+                    "applicationGuid": {
+                        "type": "string",
+                        "description": "Items that are created with a specific guid, could be fetched/updated/removed\nonly when the same application guid is provided.",
+                        "format": "guid"
+                    },
+                    "externalData": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.ExternalDataModel"
+                        },
+                        "description": "External data list."
+                    }
+                },
+                "additionalProperties": false
+            },
             "Inventory.V2.UpdateTruckRequest": {
                 "type": "object",
                 "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Truck Name"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Active status"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo"
+                    },
+                    "warehouseId": {
+                        "type": "integer",
+                        "description": "Warehouse Id for this truck",
+                        "format": "int64"
+                    },
+                    "templateId": {
+                        "type": "integer",
+                        "description": "Template Id for this truck",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "technicianIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Technician Ids to associate with this truck"
+                    },
                     "externalData": {
                         "oneOf": [
                             {
@@ -11627,28 +11818,6 @@
                     "EmailAsExcelAndPdf",
                     "VendorPortal"
                 ]
-            },
-            "Inventory.V2.ExternalDataCreateRequest": {
-                "required": [
-                    "applicationGuid",
-                    "externalData"
-                ],
-                "type": "object",
-                "properties": {
-                    "applicationGuid": {
-                        "type": "string",
-                        "description": "Items that are created with a specific guid, could be fetched/updated/removed\nonly when the same application guid is provided.",
-                        "format": "guid"
-                    },
-                    "externalData": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Inventory.V2.ExternalDataModel"
-                        },
-                        "description": "External data list."
-                    }
-                },
-                "additionalProperties": false
             },
             "Inventory.V2.TagRequest": {
                 "required": [

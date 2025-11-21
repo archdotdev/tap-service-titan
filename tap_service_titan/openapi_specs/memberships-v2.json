@@ -870,10 +870,29 @@
                                             "modifiedOn": "string",
                                             "importId": "string",
                                             "billingTemplateId": 0,
+                                            "discount": 0,
                                             "durationBilling": [
                                                 {
                                                     "duration": 0,
-                                                    "billingFrequency": {}
+                                                    "billingFrequency": {},
+                                                    "salePrice": 0,
+                                                    "billingPrice": 0,
+                                                    "renewalPrice": 0
+                                                }
+                                            ],
+                                            "discounts": [
+                                                {
+                                                    "targetId": 0,
+                                                    "discount": 0
+                                                }
+                                            ],
+                                            "recurringServices": [
+                                                {
+                                                    "membershipTypeId": 0,
+                                                    "recurringServiceTypeId": 0,
+                                                    "offset": 0,
+                                                    "offsetType": {},
+                                                    "allocation": 0
                                                 }
                                             ],
                                             "name": "string",
@@ -2872,6 +2891,24 @@
                         }
                     },
                     {
+                        "name": "includeDiscounts",
+                        "in": "query",
+                        "description": "Whether discounts should be included in the result",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecurringServices",
+                        "in": "query",
+                        "description": "Whether recurring service types associated with the membership type should be included in the result",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",
@@ -2980,10 +3017,29 @@
                                             "modifiedOn": "string",
                                             "importId": "string",
                                             "billingTemplateId": 0,
+                                            "discount": 0,
                                             "durationBilling": [
                                                 {
                                                     "duration": 0,
-                                                    "billingFrequency": {}
+                                                    "billingFrequency": {},
+                                                    "salePrice": 0,
+                                                    "billingPrice": 0,
+                                                    "renewalPrice": 0
+                                                }
+                                            ],
+                                            "discounts": [
+                                                {
+                                                    "targetId": 0,
+                                                    "discount": 0
+                                                }
+                                            ],
+                                            "recurringServices": [
+                                                {
+                                                    "membershipTypeId": 0,
+                                                    "recurringServiceTypeId": 0,
+                                                    "offset": 0,
+                                                    "offsetType": {},
+                                                    "allocation": 0
                                                 }
                                             ]
                                         }
@@ -3067,10 +3123,29 @@
                                     "modifiedOn": "string",
                                     "importId": "string",
                                     "billingTemplateId": 0,
+                                    "discount": 0,
                                     "durationBilling": [
                                         {
                                             "duration": 0,
-                                            "billingFrequency": {}
+                                            "billingFrequency": {},
+                                            "salePrice": 0,
+                                            "billingPrice": 0,
+                                            "renewalPrice": 0
+                                        }
+                                    ],
+                                    "discounts": [
+                                        {
+                                            "targetId": 0,
+                                            "discount": 0
+                                        }
+                                    ],
+                                    "recurringServices": [
+                                        {
+                                            "membershipTypeId": 0,
+                                            "recurringServiceTypeId": 0,
+                                            "offset": 0,
+                                            "offsetType": {},
+                                            "allocation": 0
                                         }
                                     ]
                                 }
@@ -3159,12 +3234,12 @@
                                 },
                                 "example": [
                                     {
-                                        "id": 0,
                                         "membershipTypeId": 0,
                                         "recurringServiceTypeId": 0,
                                         "offset": 0,
                                         "offsetType": {},
                                         "allocation": 0,
+                                        "id": 0,
                                         "importId": "string",
                                         "createdOn": "string",
                                         "createdById": 0
@@ -3255,9 +3330,9 @@
                                 },
                                 "example": [
                                     {
-                                        "id": 0,
                                         "targetId": 0,
                                         "discount": 0,
+                                        "id": 0,
                                         "createdOn": "string",
                                         "createdById": 0
                                     }
@@ -3361,12 +3436,12 @@
                                 },
                                 "example": [
                                     {
-                                        "id": 0,
                                         "duration": 0,
                                         "billingFrequency": {},
                                         "salePrice": 0,
                                         "billingPrice": 0,
                                         "renewalPrice": 0,
+                                        "id": 0,
                                         "importId": "string",
                                         "active": true,
                                         "createdOn": "string",
@@ -4554,6 +4629,7 @@
                     "id",
                     "createdOn",
                     "modifiedOn",
+                    "discount",
                     "name",
                     "active",
                     "discountMode",
@@ -4597,12 +4673,33 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "discount": {
+                        "type": "number",
+                        "description": "Membership type discount percentage (0 to 100). This is relevant only when the DiscountMode is `Basic`.",
+                        "format": "decimal"
+                    },
                     "durationBilling": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
                         },
-                        "description": "Membership type duration billing options",
+                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag.",
+                        "nullable": true
+                    },
+                    "discounts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDiscountEntry"
+                        },
+                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag.",
+                        "nullable": true
+                    },
+                    "recurringServices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
+                        },
+                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
                         "nullable": true
                     },
                     "name": {
@@ -4659,7 +4756,10 @@
             },
             "Memberships.V2.MembershipTypeDurationBillingEntry": {
                 "required": [
-                    "billingFrequency"
+                    "billingFrequency",
+                    "salePrice",
+                    "billingPrice",
+                    "renewalPrice"
                 ],
                 "type": "object",
                 "properties": {
@@ -4676,9 +4776,97 @@
                             }
                         ],
                         "description": "Billing frequency of the entry"
+                    },
+                    "salePrice": {
+                        "type": "number",
+                        "description": "Sale price of the entry",
+                        "format": "decimal"
+                    },
+                    "billingPrice": {
+                        "type": "number",
+                        "description": "Billing price of the entry",
+                        "format": "decimal"
+                    },
+                    "renewalPrice": {
+                        "type": "number",
+                        "description": "Renewal price of the entry",
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
+            },
+            "Memberships.V2.MembershipTypeDiscountEntry": {
+                "required": [
+                    "targetId",
+                    "discount"
+                ],
+                "type": "object",
+                "properties": {
+                    "targetId": {
+                        "type": "integer",
+                        "description": "ID of the discount's target, which can be either a business unit or pricebook category",
+                        "format": "int64"
+                    },
+                    "discount": {
+                        "type": "number",
+                        "description": "Percentage discount (0 to 100)",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.V2.MembershipTypeRecurringServiceEntry": {
+                "required": [
+                    "membershipTypeId",
+                    "recurringServiceTypeId",
+                    "offset",
+                    "offsetType",
+                    "allocation"
+                ],
+                "type": "object",
+                "properties": {
+                    "membershipTypeId": {
+                        "type": "integer",
+                        "description": "Membership type ID associated with the item",
+                        "format": "int64"
+                    },
+                    "recurringServiceTypeId": {
+                        "type": "integer",
+                        "description": "Recurring service type ID associated with the item",
+                        "format": "int64"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "description": "Number of weeks or months (depending on offset type) between membership start and recurring service start",
+                        "format": "int32"
+                    },
+                    "offsetType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Memberships.V2.OffsetType"
+                            }
+                        ],
+                        "description": "Offset type of the recurring service type associated with this item, can be weeks (0) or months (1)"
+                    },
+                    "allocation": {
+                        "type": "number",
+                        "description": "The percentage of deferred revenue allocated to the recurring service item",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Memberships.V2.OffsetType": {
+                "enum": [
+                    "Weeks",
+                    "Months"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Weeks",
+                    "Months"
+                ]
             },
             "Memberships.V2.DiscountMode": {
                 "enum": [
@@ -6816,7 +7004,8 @@
                     "showMembershipSavings",
                     "id",
                     "createdOn",
-                    "modifiedOn"
+                    "modifiedOn",
+                    "discount"
                 ],
                 "type": "object",
                 "properties": {
@@ -6901,12 +7090,33 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "discount": {
+                        "type": "number",
+                        "description": "Membership type discount percentage (0 to 100). This is relevant only when the DiscountMode is `Basic`.",
+                        "format": "decimal"
+                    },
                     "durationBilling": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
                         },
-                        "description": "Membership type duration billing options",
+                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag.",
+                        "nullable": true
+                    },
+                    "discounts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDiscountEntry"
+                        },
+                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag.",
+                        "nullable": true
+                    },
+                    "recurringServices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
+                        },
+                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
                         "nullable": true
                     }
                 },
@@ -6914,21 +7124,16 @@
             },
             "Memberships.V2.MembershipTypeRecurringServiceItemResponse": {
                 "required": [
-                    "id",
                     "membershipTypeId",
                     "recurringServiceTypeId",
                     "offset",
                     "offsetType",
                     "allocation",
+                    "id",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the recurring service item",
-                        "format": "int64"
-                    },
                     "membershipTypeId": {
                         "type": "integer",
                         "description": "Membership type ID associated with the item",
@@ -6957,6 +7162,11 @@
                         "description": "The percentage of deferred revenue allocated to the recurring service item",
                         "format": "decimal"
                     },
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the recurring service item",
+                        "format": "int64"
+                    },
                     "importId": {
                         "type": "string",
                         "description": "Import ID",
@@ -6976,32 +7186,15 @@
                 },
                 "additionalProperties": false
             },
-            "Memberships.V2.OffsetType": {
-                "enum": [
-                    "Weeks",
-                    "Months"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Weeks",
-                    "Months"
-                ]
-            },
             "Memberships.V2.MembershipTypeDiscountItemResponse": {
                 "required": [
-                    "id",
                     "targetId",
                     "discount",
+                    "id",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the discount item",
-                        "format": "int64"
-                    },
                     "targetId": {
                         "type": "integer",
                         "description": "ID of the discount's target, which can be either a business unit or pricebook category",
@@ -7011,6 +7204,11 @@
                         "type": "number",
                         "description": "Percentage discount (0 to 100)",
                         "format": "decimal"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the discount item",
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7028,21 +7226,16 @@
             },
             "Memberships.V2.MembershipTypeDurationBillingItemResponse": {
                 "required": [
-                    "id",
                     "billingFrequency",
                     "salePrice",
                     "billingPrice",
                     "renewalPrice",
+                    "id",
                     "active",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the duration/billing option",
-                        "format": "int64"
-                    },
                     "duration": {
                         "type": "integer",
                         "description": "Duration of the entry ",
@@ -7071,6 +7264,11 @@
                         "type": "number",
                         "description": "Renewal price of the entry",
                         "format": "decimal"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the duration/billing option",
+                        "format": "int64"
                     },
                     "importId": {
                         "type": "string",

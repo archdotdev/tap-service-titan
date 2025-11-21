@@ -109,7 +109,7 @@
                                     "data": [
                                         {
                                             "dateTime": "string",
-                                            "leadType": "Call",
+                                            "leadType": 1,
                                             "attribution": {
                                                 "utmSource": "string",
                                                 "utmMedium": "string",
@@ -771,7 +771,7 @@
                         "format": "date-time"
                     },
                     "leadType": {
-                        "$ref": "#/components/schemas/Marketing.Ads.Client.LeadType"
+                        "$ref": "#/components/schemas/Marketing.Ads.Client.LeadType_Int32"
                     },
                     "attribution": {
                         "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.Attribution"
@@ -1009,6 +1009,22 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Marketing.Ads.Client.LeadType_Int32": {
+                "enum": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "type": "integer",
+                "format": "int32",
+                "x-enumNames": [
+                    "Call",
+                    "WebBooking",
+                    "WebLeadForm",
+                    "ManualJob"
+                ]
             },
             "ApiErrorResponse": {
                 "required": [
