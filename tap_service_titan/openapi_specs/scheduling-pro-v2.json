@@ -204,7 +204,8 @@
                                             "membershipInterest": "string",
                                             "paymentInfoCaptured": true,
                                             "externalId": "string",
-                                            "recurringServiceId": 0
+                                            "recurringServiceId": 0,
+                                            "campaignName": "string"
                                         }
                                     ]
                                 }
@@ -710,7 +711,8 @@
                                             "membershipInterest": "string",
                                             "paymentInfoCaptured": true,
                                             "externalId": "string",
-                                            "recurringServiceId": 0
+                                            "recurringServiceId": 0,
+                                            "campaignName": "string"
                                         }
                                     ]
                                 }
@@ -821,6 +823,12 @@
                                     "totalBookingsCreated": 0,
                                     "totalAbandonedSessionsSentToBookings": 0,
                                     "totalAbandonedSessionsSentToLeads": 0,
+                                    "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink": 0,
+                                    "totalJobsRecoveredFromAbandonedSessionsRecoveryLink": 0,
+                                    "totalBookingsRecoveredFromAbandonedSessionsAiAgent": 0,
+                                    "totalJobsRecoveredFromAbandonedSessionsAiAgent": 0,
+                                    "totalSmsSentToRecoverAbandonedSessionRecoveryLink": 0,
+                                    "totalSmsSentToRecoverAbandonedSessionAiAgent": 0,
                                     "totalBookingsRecoveredFromAbandonedSessions": 0,
                                     "totalJobsRecoveredFromAbandonedSessions": 0,
                                     "totalMembershipInterest": 0,
@@ -1155,6 +1163,11 @@
                         "type": "integer",
                         "description": "Recurring Service ID",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "campaignName": {
+                        "type": "string",
+                        "description": "Campaign Name",
                         "nullable": true
                     }
                 },
@@ -1811,6 +1824,11 @@
                         "description": "Recurring Service ID",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "campaignName": {
+                        "type": "string",
+                        "description": "Campaign Name",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -1827,6 +1845,12 @@
                     "totalBookingsCreated",
                     "totalAbandonedSessionsSentToBookings",
                     "totalAbandonedSessionsSentToLeads",
+                    "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink",
+                    "totalJobsRecoveredFromAbandonedSessionsRecoveryLink",
+                    "totalBookingsRecoveredFromAbandonedSessionsAiAgent",
+                    "totalJobsRecoveredFromAbandonedSessionsAiAgent",
+                    "totalSmsSentToRecoverAbandonedSessionRecoveryLink",
+                    "totalSmsSentToRecoverAbandonedSessionAiAgent",
                     "totalBookingsRecoveredFromAbandonedSessions",
                     "totalJobsRecoveredFromAbandonedSessions",
                     "totalMembershipInterest",
@@ -1880,6 +1904,36 @@
                     "totalAbandonedSessionsSentToLeads": {
                         "type": "integer",
                         "description": "The total number of leads created from abandoned sessions",
+                        "format": "int32"
+                    },
+                    "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink": {
+                        "type": "integer",
+                        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session recovery link",
+                        "format": "int32"
+                    },
+                    "totalJobsRecoveredFromAbandonedSessionsRecoveryLink": {
+                        "type": "integer",
+                        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session recovery link",
+                        "format": "int32"
+                    },
+                    "totalBookingsRecoveredFromAbandonedSessionsAiAgent": {
+                        "type": "integer",
+                        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session AI agent interaction",
+                        "format": "int32"
+                    },
+                    "totalJobsRecoveredFromAbandonedSessionsAiAgent": {
+                        "type": "integer",
+                        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session AI agent interaction",
+                        "format": "int32"
+                    },
+                    "totalSmsSentToRecoverAbandonedSessionRecoveryLink": {
+                        "type": "integer",
+                        "description": "The total number of SMS sent to recover abandoned sessions via recovery link",
+                        "format": "int32"
+                    },
+                    "totalSmsSentToRecoverAbandonedSessionAiAgent": {
+                        "type": "integer",
+                        "description": "The total number of SMS sent to recover abandoned sessions via AI agent",
                         "format": "int32"
                     },
                     "totalBookingsRecoveredFromAbandonedSessions": {
