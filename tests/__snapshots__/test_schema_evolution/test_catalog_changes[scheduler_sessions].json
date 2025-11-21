@@ -810,6 +810,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "campaignName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -856,6 +865,13 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "campaignName": {
+        "description": "Campaign Name",
+        "type": [
+          "string",
           "null"
         ]
       },

@@ -60,7 +60,34 @@
     {
       "breadcrumb": [
         "properties",
+        "discount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "durationBilling"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "discounts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurringServices"
       ],
       "metadata": {
         "inclusion": "available"
@@ -205,10 +232,54 @@
           "null"
         ]
       },
+      "discount": {
+        "description": "Membership type discount percentage (0 to 100). This is relevant only when the DiscountMode is `Basic`.",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "discountMode": {
         "description": "",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "discounts": {
+        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "discount": {
+              "description": "Percentage discount (0 to 100)",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "targetId": {
+              "description": "ID of the discount's target, which can be either a business unit or pricebook category",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "targetId",
+            "discount"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
@@ -220,7 +291,7 @@
         ]
       },
       "durationBilling": {
-        "description": "Membership type duration billing options",
+        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag.",
         "items": {
           "additionalProperties": false,
           "properties": {
@@ -231,6 +302,14 @@
                 "null"
               ]
             },
+            "billingPrice": {
+              "description": "Billing price of the entry",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
             "duration": {
               "description": "Duration of the entry ",
               "format": "int32",
@@ -238,10 +317,29 @@
                 "integer",
                 "null"
               ]
+            },
+            "renewalPrice": {
+              "description": "Renewal price of the entry",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "salePrice": {
+              "description": "Sale price of the entry",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
             }
           },
           "required": [
-            "billingFrequency"
+            "billingFrequency",
+            "salePrice",
+            "billingPrice",
+            "renewalPrice"
           ],
           "type": [
             "object",
@@ -287,6 +385,68 @@
           "null"
         ]
       },
+      "recurringServices": {
+        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "allocation": {
+              "description": "The percentage of deferred revenue allocated to the recurring service item",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "membershipTypeId": {
+              "description": "Membership type ID associated with the item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "offset": {
+              "description": "Number of weeks or months (depending on offset type) between membership start and recurring service start",
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "offsetType": {
+              "description": "",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "recurringServiceTypeId": {
+              "description": "Recurring service type ID associated with the item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "membershipTypeId",
+            "recurringServiceTypeId",
+            "offset",
+            "offsetType",
+            "allocation"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "revenueRecognitionMode": {
         "description": "",
         "type": [
@@ -313,6 +473,7 @@
       "id",
       "createdOn",
       "modifiedOn",
+      "discount",
       "name",
       "active",
       "discountMode",

@@ -5066,7 +5066,7 @@
                     "frequency": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatFrequency"
+                                "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatFrequency_Int32"
                             }
                         ],
                         "description": "Frequency of the repeating non-job appointment",
@@ -5075,7 +5075,7 @@
                     "endType": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatEndType"
+                                "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatEndType_Int32"
                             }
                         ],
                         "description": "End type of the repeating non-job appointment",
@@ -5118,6 +5118,36 @@
                 ],
                 "type": "string",
                 "description": "",
+                "x-enumNames": [
+                    "Never",
+                    "After",
+                    "On"
+                ]
+            },
+            "Dispatch.Contracts.NonJobAppointment.RepeatFrequency_Int32": {
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3
+                ],
+                "type": "integer",
+                "format": "int32",
+                "x-enumNames": [
+                    "Daily",
+                    "Weekly",
+                    "Monthly",
+                    "Yearly"
+                ]
+            },
+            "Dispatch.Contracts.NonJobAppointment.RepeatEndType_Int32": {
+                "enum": [
+                    0,
+                    1,
+                    2
+                ],
+                "type": "integer",
+                "format": "int32",
                 "x-enumNames": [
                     "Never",
                     "After",

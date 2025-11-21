@@ -740,9 +740,9 @@
         ]
       },
       "leadType": {
-        "description": "",
+        "format": "int32",
         "type": [
-          "string",
+          "integer",
           "null"
         ]
       }

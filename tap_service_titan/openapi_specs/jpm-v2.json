@@ -5885,7 +5885,8 @@
                                                     "value": "string"
                                                 }
                                             ],
-                                            "active": true
+                                            "active": true,
+                                            "isSmartDispatched": true
                                         }
                                     ]
                                 }
@@ -6005,7 +6006,8 @@
                                             "value": "string"
                                         }
                                     ],
-                                    "active": true
+                                    "active": true,
+                                    "isSmartDispatched": true
                                 }
                             }
                         }
@@ -6106,7 +6108,8 @@
                                             "value": "string"
                                         }
                                     ],
-                                    "active": true
+                                    "active": true,
+                                    "isSmartDispatched": true
                                 }
                             }
                         }
@@ -6252,7 +6255,8 @@
                                             "value": "string"
                                         }
                                     ],
-                                    "active": true
+                                    "active": true,
+                                    "isSmartDispatched": true
                                 }
                             }
                         }
@@ -11458,7 +11462,8 @@
                     "modifiedOn",
                     "createdOn",
                     "externalData",
-                    "active"
+                    "active",
+                    "isSmartDispatched"
                 ],
                 "type": "object",
                 "properties": {
@@ -11551,6 +11556,10 @@
                     "active": {
                         "type": "boolean",
                         "description": "When true, job type is active"
+                    },
+                    "isSmartDispatched": {
+                        "type": "boolean",
+                        "description": "When true, job type is enabled for dispatch pro"
                     }
                 },
                 "additionalProperties": false

@@ -193,6 +193,15 @@
     {
       "breadcrumb": [
         "properties",
+        "nationalAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -221,6 +230,15 @@
       "breadcrumb": [
         "properties",
         "mergedToId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paymentTermId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -478,6 +496,21 @@
           "null"
         ]
       },
+      "nationalAccount": {
+        "description": "Customer has been flagged as National Account",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "paymentTermId": {
+        "description": "The Payment Term ID.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "tagTypeIds": {
         "description": "Tag Type IDs associated with the Customer",
         "items": {
@@ -516,6 +549,7 @@
       "tagTypeIds",
       "doNotMail",
       "doNotService",
+      "nationalAccount",
       "createdOn",
       "createdById",
       "modifiedOn",

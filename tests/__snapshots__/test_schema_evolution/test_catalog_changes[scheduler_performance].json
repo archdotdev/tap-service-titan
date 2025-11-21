@@ -96,6 +96,60 @@
     {
       "breadcrumb": [
         "properties",
+        "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalJobsRecoveredFromAbandonedSessionsRecoveryLink"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalBookingsRecoveredFromAbandonedSessionsAiAgent"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalJobsRecoveredFromAbandonedSessionsAiAgent"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalSmsSentToRecoverAbandonedSessionRecoveryLink"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "totalSmsSentToRecoverAbandonedSessionAiAgent"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "totalBookingsRecoveredFromAbandonedSessions"
       ],
       "metadata": {
@@ -412,6 +466,22 @@
           "null"
         ]
       },
+      "totalBookingsRecoveredFromAbandonedSessionsAiAgent": {
+        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session AI agent interaction",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink": {
+        "description": "The total number of bookings that were successfully completed after customers returned from an abandoned session recovery link",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "totalCustomerContactsCaptured": {
         "description": "The total number of customer contacts captured",
         "format": "int32",
@@ -436,6 +506,22 @@
           "null"
         ]
       },
+      "totalJobsRecoveredFromAbandonedSessionsAiAgent": {
+        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session AI agent interaction",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "totalJobsRecoveredFromAbandonedSessionsRecoveryLink": {
+        "description": "The total number of Jobs that were successfully created after customers returned from an abandoned session recovery link",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "totalMembershipInterest": {
         "description": "The total number of membership interest",
         "format": "int32",
@@ -446,6 +532,22 @@
       },
       "totalSessions": {
         "description": "The total number of sessions",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "totalSmsSentToRecoverAbandonedSessionAiAgent": {
+        "description": "The total number of SMS sent to recover abandoned sessions via AI agent",
+        "format": "int32",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "totalSmsSentToRecoverAbandonedSessionRecoveryLink": {
+        "description": "The total number of SMS sent to recover abandoned sessions via recovery link",
         "format": "int32",
         "type": [
           "integer",
@@ -464,6 +566,12 @@
       "totalBookingsCreated",
       "totalAbandonedSessionsSentToBookings",
       "totalAbandonedSessionsSentToLeads",
+      "totalBookingsRecoveredFromAbandonedSessionsRecoveryLink",
+      "totalJobsRecoveredFromAbandonedSessionsRecoveryLink",
+      "totalBookingsRecoveredFromAbandonedSessionsAiAgent",
+      "totalJobsRecoveredFromAbandonedSessionsAiAgent",
+      "totalSmsSentToRecoverAbandonedSessionRecoveryLink",
+      "totalSmsSentToRecoverAbandonedSessionAiAgent",
       "totalBookingsRecoveredFromAbandonedSessions",
       "totalJobsRecoveredFromAbandonedSessions",
       "totalMembershipInterest",
