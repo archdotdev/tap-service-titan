@@ -1544,6 +1544,965 @@
                 }
             }
         },
+        "/tenant/{tenant}/credit-memos": {
+            "get": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "CreditMemos_GetList",
+                "operationId": "CreditMemos_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "appliedToInvoiceIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "appliedToReferenceNumber",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "dateBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "dateOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "appliedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "appliedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "batchId",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "batchNumber",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Fields",
+                        "in": "query",
+                        "description": "Dictionary of name-value pairs",
+                        "schema": {
+                            "maxProperties": 50,
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Operator",
+                        "in": "query",
+                        "description": "Operator to be used between the name-value pairs. Can be \"Or\" or \"And\", default is \"And\".\\\nValues: [And, Or]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.LogicalOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "totalFilter.Amount",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "totalFilter.Comparer",
+                        "in": "query",
+                        "description": "Values: [Equal, NotEqual, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.Shared.AmountComparisonOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "balanceFilter.Amount",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "balanceFilter.Comparer",
+                        "in": "query",
+                        "description": "Values: [Equal, NotEqual, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.Shared.AmountComparisonOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemoPublicResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "date": "string",
+                                            "referenceNumber": "string",
+                                            "subTotal": 0,
+                                            "salesTax": 0,
+                                            "salesTaxCode": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "taxRate": 0
+                                            },
+                                            "total": 0,
+                                            "balance": 0,
+                                            "appliedTo": [
+                                                {
+                                                    "appliedId": 0,
+                                                    "appliedTo": 0,
+                                                    "appliedAmount": 0,
+                                                    "appliedOn": "string",
+                                                    "appliedBy": "string",
+                                                    "appliedToReferenceNumber": "string"
+                                                }
+                                            ],
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "customerAddress": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            },
+                                            "location": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "locationAddress": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "batch": {
+                                                "id": 0,
+                                                "number": "string",
+                                                "name": "string"
+                                            },
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "createdOn": "string",
+                                            "createdBy": "string",
+                                            "modifiedOn": "string",
+                                            "modifiedBy": "string",
+                                            "description": "string",
+                                            "active": true,
+                                            "importId": "string",
+                                            "exportId": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/credit-memos/{id}": {
+            "patch": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "CreditMemos_Update",
+                "operationId": "CreditMemos_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoUpdatePublicRequest"
+                            },
+                            "example": {
+                                "active": true,
+                                "summary": "string",
+                                "date": "string",
+                                "businessUnitId": 0,
+                                "splits": [
+                                    {
+                                        "invoiceId": 0,
+                                        "amount": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoUpdatePublicResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "active": true,
+                                    "summary": "string",
+                                    "date": "string",
+                                    "businessUnitId": 0,
+                                    "splits": [
+                                        {
+                                            "invoiceId": 0,
+                                            "amount": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/bank-deposits": {
+            "get": {
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "Gets a paginated list of deposits",
+                "description": "Gets a paginated list of deposits",
+                "operationId": "Deposits_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "depositDateBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "depositDateOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reviewedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reviewedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "reviewStatus",
+                        "in": "query",
+                        "description": "Values: [NeedsReview, Reviewed]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.DepositReviewStatus"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "depositStatus",
+                        "in": "query",
+                        "description": "Values: [Undefined, Open, Deposited]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.DepositStatus"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "syncStatus",
+                        "in": "query",
+                        "description": "Values: [Pending, Posted, Exported]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.SyncStatus"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "grossAmountGreater",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "grossAmountLess",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.DetailedDepositResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "depositStatus": "string",
+                                            "syncStatus": "string",
+                                            "batch": {
+                                                "id": 0,
+                                                "number": "string",
+                                                "name": "string"
+                                            },
+                                            "createdOn": "string",
+                                            "createdBy": "string",
+                                            "modifiedOn": "string",
+                                            "active": true,
+                                            "importId": "string",
+                                            "depositDate": "string",
+                                            "reviewStatus": "string",
+                                            "reviewedOn": "string",
+                                            "grossAmount": 0,
+                                            "netAmount": 0,
+                                            "fees": 0,
+                                            "bankAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "feeAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/bank-deposits/{id}/transactions": {
+            "get": {
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "Gets a paginated list of transactions",
+                "description": "Gets a paginated list of transactions",
+                "operationId": "Deposits_GetTransactionsList",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.DetailedTransactionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "syncStatus": "string",
+                                            "referenceNumber": "string",
+                                            "date": "string",
+                                            "type": "string",
+                                            "typeId": "string",
+                                            "total": "string",
+                                            "unappliedAmount": "string",
+                                            "memo": "string",
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "deposit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "batch": {
+                                                "id": 0,
+                                                "number": "string",
+                                                "name": "string"
+                                            },
+                                            "createdBy": "string",
+                                            "generalLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "appliedTo": [
+                                                {
+                                                    "appliedId": 0,
+                                                    "appliedTo": 0,
+                                                    "appliedAmount": "string",
+                                                    "appliedOn": "string",
+                                                    "appliedBy": "string",
+                                                    "appliedToReferenceNumber": "string"
+                                                }
+                                            ],
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "authCode": "string",
+                                            "checkNumber": "string",
+                                            "modifiedOn": "string",
+                                            "createdOn": "string",
+                                            "active": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/bank-deposits/markasexported": {
+            "post": {
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "Marks deposits as exported",
+                "description": "Marks deposits as exported",
+                "operationId": "Deposits_MarkAsExported",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.MarkDepositsAsExportedRequestArgs"
+                            },
+                            "example": {
+                                "ids": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/export/invoices": {
             "get": {
                 "tags": [
@@ -1687,6 +2646,7 @@
                                                 "name": "string",
                                                 "taxRate": 0
                                             },
+                                            "taxZoneId": 0,
                                             "total": "string",
                                             "balance": "string",
                                             "invoiceType": {
@@ -1989,6 +2949,10 @@
                                                 "name": "string"
                                             },
                                             "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "deposit": {
                                                 "id": 0,
                                                 "name": "string"
                                             },
@@ -4389,6 +5353,7 @@
                                                 "name": "string",
                                                 "taxRate": 0
                                             },
+                                            "taxZoneId": 0,
                                             "total": "string",
                                             "balance": "string",
                                             "invoiceType": {
@@ -4594,6 +5559,7 @@
                                 "invoicedOn": "string",
                                 "subtotal": 0,
                                 "tax": 0,
+                                "taxZoneId": 0,
                                 "summary": "string",
                                 "royaltyStatus": {},
                                 "royaltyDate": "string",
@@ -4918,6 +5884,7 @@
                                 "invoicedOn": "string",
                                 "subtotal": 0,
                                 "tax": 0,
+                                "taxZoneId": 0,
                                 "summary": "string",
                                 "royaltyStatus": {},
                                 "royaltyDate": "string",
@@ -6253,6 +7220,14 @@
                         }
                     },
                     {
+                        "name": "depositIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "The logical number of page to return, starting from 1",
@@ -6390,6 +7365,10 @@
                                                 "id": 0,
                                                 "name": "string"
                                             },
+                                            "deposit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
                                             "batch": {
                                                 "id": 0,
                                                 "number": "string",
@@ -6483,9 +7462,11 @@
                                 "checkNumber": "string",
                                 "exportId": "string",
                                 "status": {},
+                                "customerId": 0,
                                 "splits": [
                                     {
                                         "invoiceId": 0,
+                                        "invoiceNumber": "string",
                                         "amount": 0
                                     }
                                 ]
@@ -6512,9 +7493,11 @@
                                     "exportId": "string",
                                     "transactionStatus": {},
                                     "status": {},
+                                    "customerId": 0,
                                     "splits": [
                                         {
                                             "invoiceId": 0,
+                                            "invoiceNumber": "string",
                                             "amount": 0
                                         }
                                     ]
@@ -6802,6 +7785,7 @@
                                 "splits": [
                                     {
                                         "invoiceId": 0,
+                                        "invoiceNumber": "string",
                                         "amount": 0
                                     }
                                 ]
@@ -6828,9 +7812,11 @@
                                     "exportId": "string",
                                     "transactionStatus": {},
                                     "status": {},
+                                    "customerId": 0,
                                     "splits": [
                                         {
                                             "invoiceId": 0,
+                                            "invoiceNumber": "string",
                                             "amount": 0
                                         }
                                     ]
@@ -7400,6 +8386,301 @@
                 }
             }
         },
+        "/tenant/{tenant}/remittance-vendors": {
+            "get": {
+                "tags": [
+                    "RemittanceVendors"
+                ],
+                "summary": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
+                "description": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
+                "operationId": "RemittanceVendors_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Ids to filter by",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the paginated list of Remittance Vendors",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.RemittanceVendorResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true,
+                                            "customerId": "string",
+                                            "isApproved": true,
+                                            "isVerified": true,
+                                            "contactInfo": {
+                                                "firstName": "string",
+                                                "lastName": "string",
+                                                "phone": "string",
+                                                "email": "string",
+                                                "fax": "string"
+                                            },
+                                            "address": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            },
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/remittance-vendors/{id}": {
+            "get": {
+                "tags": [
+                    "RemittanceVendors"
+                ],
+                "summary": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
+                "description": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
+                "operationId": "RemittanceVendors_GetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The unique identifier of the Remittance Vendor to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the Remittance Vendor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.RemittanceVendorResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "customerId": "string",
+                                    "isApproved": true,
+                                    "isVerified": true,
+                                    "contactInfo": {
+                                        "firstName": "string",
+                                        "lastName": "string",
+                                        "phone": "string",
+                                        "email": "string",
+                                        "fax": "string"
+                                    },
+                                    "address": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "country": "string"
+                                    },
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Remittance Vendor with the specified ID was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/tax-zones": {
             "get": {
                 "tags": [
@@ -7559,301 +8840,6 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/remittance-vendors": {
-            "get": {
-                "tags": [
-                    "RemittanceVendors"
-                ],
-                "summary": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
-                "description": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
-                "operationId": "RemittanceVendors_GetList",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "ids",
-                        "in": "query",
-                        "description": "Ids to filter by",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer",
-                                "format": "int64"
-                            },
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "active",
-                        "in": "query",
-                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
-                        "schema": {
-                            "type": "string",
-                            "oneOf": [
-                                {
-                                    "$ref": "#/components/schemas/ActiveRequestArg"
-                                }
-                            ],
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "createdBefore",
-                        "in": "query",
-                        "description": "Return items created before certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "createdOnOrAfter",
-                        "in": "query",
-                        "description": "Return items created on or after certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "modifiedBefore",
-                        "in": "query",
-                        "description": "Return items modified before certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "modifiedOnOrAfter",
-                        "in": "query",
-                        "description": "Return items modified on or after certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "The logical number of page to return, starting from 1",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "description": "How many records to return (50 by default)",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "includeTotal",
-                        "in": "query",
-                        "description": "Whether total count should be returned",
-                        "schema": {
-                            "type": "boolean",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the paginated list of Remittance Vendors",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Inventory.V2.RemittanceVendorResponse"
-                                },
-                                "example": {
-                                    "page": 0,
-                                    "pageSize": 0,
-                                    "hasMore": true,
-                                    "totalCount": 0,
-                                    "data": [
-                                        {
-                                            "id": 0,
-                                            "name": "string",
-                                            "active": true,
-                                            "customerId": "string",
-                                            "isApproved": true,
-                                            "isVerified": true,
-                                            "contactInfo": {
-                                                "firstName": "string",
-                                                "lastName": "string",
-                                                "phone": "string",
-                                                "email": "string",
-                                                "fax": "string"
-                                            },
-                                            "address": {
-                                                "street": "string",
-                                                "unit": "string",
-                                                "city": "string",
-                                                "state": "string",
-                                                "zip": "string",
-                                                "country": "string"
-                                            },
-                                            "createdOn": "string",
-                                            "modifiedOn": "string"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/remittance-vendors/{id}": {
-            "get": {
-                "tags": [
-                    "RemittanceVendors"
-                ],
-                "summary": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
-                "description": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
-                "operationId": "RemittanceVendors_GetById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The unique identifier of the Remittance Vendor to retrieve",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the Remittance Vendor",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "customerId": "string",
-                                    "isApproved": true,
-                                    "isVerified": true,
-                                    "contactInfo": {
-                                        "firstName": "string",
-                                        "lastName": "string",
-                                        "phone": "string",
-                                        "email": "string",
-                                        "fax": "string"
-                                    },
-                                    "address": {
-                                        "street": "string",
-                                        "unit": "string",
-                                        "city": "string",
-                                        "state": "string",
-                                        "zip": "string",
-                                        "country": "string"
-                                    },
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Remittance Vendor with the specified ID was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9349,6 +10335,857 @@
                 },
                 "additionalProperties": false
             },
+            "PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemoPublicResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoPublicResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.CreditMemos.CreditMemoPublicResponse": {
+                "required": [
+                    "id",
+                    "date",
+                    "subTotal",
+                    "salesTax",
+                    "total",
+                    "balance",
+                    "createdOn",
+                    "modifiedOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "referenceNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "subTotal": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "salesTax": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "salesTaxCode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.SalesTaxResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "balance": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "appliedTo": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAppliedToCodeResponse"
+                        },
+                        "nullable": true
+                    },
+                    "customer": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "customerAddress": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.AddressResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "locationAddress": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.AddressResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "batch": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
+                        },
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "importId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "exportId": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.SalesTaxResponse": {
+                "required": [
+                    "id",
+                    "taxRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "taxRate": {
+                        "type": "number",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoAppliedToCodeResponse": {
+                "required": [
+                    "appliedId",
+                    "appliedTo",
+                    "appliedAmount",
+                    "appliedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "appliedId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appliedTo": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appliedAmount": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "appliedOn": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "appliedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "appliedToReferenceNumber": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "Accounting.V2.Shared.AmountComparisonOperator": {
+                "enum": [
+                    "Equal",
+                    "NotEqual",
+                    "GreaterThan",
+                    "GreaterThanOrEqual",
+                    "LessThan",
+                    "LessThanOrEqual"
+                ],
+                "type": "string",
+                "description": "Operators for amount comparison filter",
+                "x-enumNames": [
+                    "Equal",
+                    "NotEqual",
+                    "GreaterThan",
+                    "GreaterThanOrEqual",
+                    "LessThan",
+                    "LessThanOrEqual"
+                ]
+            },
+            "Accounting.V2.CreditMemos.CreditMemoUpdatePublicResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "date",
+                    "businessUnitId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "splits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAddSplitPublicResponse"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoAddSplitPublicResponse": {
+                "required": [
+                    "invoiceId",
+                    "amount"
+                ],
+                "type": "object",
+                "properties": {
+                    "invoiceId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "decimal"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoUpdatePublicRequest": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "splits": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAddSplitPublicRequest"
+                                }
+                            ],
+                            "nullable": true
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoAddSplitPublicRequest": {
+                "type": "object",
+                "properties": {
+                    "invoiceId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Accounting.V2.DetailedDepositResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.DetailedDepositResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.DetailedDepositResponse": {
+                "required": [
+                    "id",
+                    "createdOn",
+                    "active",
+                    "depositDate",
+                    "grossAmount",
+                    "netAmount"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "depositStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "syncStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "batch": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "importId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "depositDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "reviewStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "reviewedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "grossAmount": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "netAmount": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "fees": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "bankAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BankAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "feeAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.FeeAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.BankAccountResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "detailType": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.FeeAccountResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "detailType": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.DepositReviewStatus": {
+                "enum": [
+                    "NeedsReview",
+                    "Reviewed"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "NeedsReview",
+                    "Reviewed"
+                ]
+            },
+            "Accounting.V2.DepositStatus": {
+                "enum": [
+                    "Undefined",
+                    "Open",
+                    "Deposited"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Undefined",
+                    "Open",
+                    "Deposited"
+                ]
+            },
+            "Accounting.V2.SyncStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ]
+            },
+            "PaginatedResponse_Of_Accounting.V2.DetailedTransactionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.DetailedTransactionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.DetailedTransactionResponse": {
+                "required": [
+                    "id",
+                    "modifiedOn",
+                    "createdOn",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "syncStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "referenceNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "typeId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "unappliedAmount": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "customer": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "deposit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "batch": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "appliedTo": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.PaymentAppliedResponse"
+                        },
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.CustomFieldModel"
+                        },
+                        "nullable": true
+                    },
+                    "authCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "checkNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.PaymentAppliedResponse": {
+                "required": [
+                    "appliedId",
+                    "appliedTo"
+                ],
+                "type": "object",
+                "properties": {
+                    "appliedId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appliedTo": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "appliedAmount": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "appliedOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "appliedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "appliedToReferenceNumber": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.CustomFieldModel": {
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.MarkDepositsAsExportedRequestArgs": {
+                "type": "object",
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
             "ExportResponse_Of_Accounting.V2.ExportInvoiceResponse": {
                 "required": [
                     "hasMore",
@@ -9477,6 +11314,11 @@
                                 "$ref": "#/components/schemas/Accounting.V2.SalesTaxResponse"
                             }
                         ],
+                        "nullable": true
+                    },
+                    "taxZoneId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "total": {
@@ -9843,28 +11685,6 @@
                     "name": {
                         "type": "string",
                         "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.SalesTaxResponse": {
-                "required": [
-                    "id",
-                    "taxRate"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "taxRate": {
-                        "type": "number",
-                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -10281,6 +12101,14 @@
                         ],
                         "nullable": true
                     },
+                    "deposit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
                     "batch": {
                         "oneOf": [
                             {
@@ -10333,57 +12161,6 @@
                     },
                     "active": {
                         "type": "boolean"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.V2.PaymentAppliedResponse": {
-                "required": [
-                    "appliedId",
-                    "appliedTo"
-                ],
-                "type": "object",
-                "properties": {
-                    "appliedId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "appliedTo": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "appliedAmount": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "appliedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "appliedBy": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "appliedToReferenceNumber": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Accounting.CustomFieldModel": {
-                "required": [
-                    "name",
-                    "value"
-                ],
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string"
                     }
                 },
                 "additionalProperties": false
@@ -10859,20 +12636,6 @@
                     "GoodsReturnedNotCredited"
                 ]
             },
-            "ActiveRequestArg": {
-                "enum": [
-                    "True",
-                    "Any",
-                    "False"
-                ],
-                "type": "string",
-                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
-                "x-enumNames": [
-                    "True",
-                    "Any",
-                    "False"
-                ]
-            },
             "PaginatedResponse_Of_Accounting.V2.GlAccountTypeResponse": {
                 "required": [
                     "page",
@@ -11343,6 +13106,11 @@
                         ],
                         "nullable": true
                     },
+                    "taxZoneId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "total": {
                         "type": "string",
                         "nullable": true
@@ -11608,6 +13376,11 @@
                         "format": "decimal",
                         "nullable": true
                     },
+                    "taxZoneId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "summary": {
                         "type": "string",
                         "format": "html",
@@ -11806,6 +13579,11 @@
                     "tax": {
                         "type": "number",
                         "format": "decimal",
+                        "nullable": true
+                    },
+                    "taxZoneId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "summary": {
@@ -12138,7 +13916,8 @@
                     "GrossPayItem",
                     "PayrollPeriod",
                     "Manual",
-                    "External"
+                    "External",
+                    "ItemConsumption"
                 ],
                 "type": "string",
                 "description": "",
@@ -12161,7 +13940,8 @@
                     "GrossPayItem",
                     "PayrollPeriod",
                     "Manual",
-                    "External"
+                    "External",
+                    "ItemConsumption"
                 ]
             },
             "Accounting.V2.EmptyJeHandling": {
@@ -12718,6 +14498,14 @@
                         ],
                         "nullable": true
                     },
+                    "deposit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
                     "batch": {
                         "oneOf": [
                             {
@@ -12846,6 +14634,11 @@
                         ],
                         "nullable": true
                     },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "splits": {
                         "type": "array",
                         "items": {
@@ -12893,6 +14686,10 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "invoiceNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
                     "amount": {
                         "type": "number",
                         "format": "decimal",
@@ -12903,8 +14700,7 @@
             },
             "Accounting.V2.PaymentCreateRequest": {
                 "required": [
-                    "typeId",
-                    "splits"
+                    "typeId"
                 ],
                 "type": "object",
                 "properties": {
@@ -12942,11 +14738,17 @@
                         ],
                         "nullable": true
                     },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "splits": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
-                        }
+                        },
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -13400,6 +15202,148 @@
                 },
                 "additionalProperties": false
             },
+            "PaginatedResponse_Of_Accounting.V2.RemittanceVendorResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.RemittanceVendorResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.RemittanceVendorResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "isApproved",
+                    "isVerified",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Remittance vendor Id",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Remittance vendor name",
+                        "nullable": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Active/Inactive status"
+                    },
+                    "customerId": {
+                        "type": "string",
+                        "description": "Customer Id",
+                        "nullable": true
+                    },
+                    "isApproved": {
+                        "type": "boolean",
+                        "description": "Indicates whether vendor validated by user during first payment approval"
+                    },
+                    "isVerified": {
+                        "type": "boolean",
+                        "description": "Indicates whether there were paid payments for this vendor"
+                    },
+                    "contactInfo": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.RemittanceVendorContactInfoResponse"
+                            }
+                        ],
+                        "description": "Remittance vendor contact information",
+                        "nullable": true
+                    },
+                    "address": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.AddressResponse"
+                            }
+                        ],
+                        "description": "Remittance vendor address",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "system created date",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "last time adjustment was modified date",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Remittance vendor response"
+            },
+            "Accounting.V2.RemittanceVendorContactInfoResponse": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "description": "Remittance vendor first name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Remittance vendor last name",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Remittance vendor phone",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Remittance vendor email",
+                        "nullable": true
+                    },
+                    "fax": {
+                        "type": "string",
+                        "description": "Remittance vendor fax",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Remittance vendor contact info response"
+            },
             "PaginatedResponse_Of_Accounting.V2.TaxZoneResponse": {
                 "required": [
                     "page",
@@ -13552,185 +15496,6 @@
                     "Material"
                 ]
             },
-            "PaginatedResponse_Of_Inventory.V2.RemittanceVendorResponse": {
-                "required": [
-                    "page",
-                    "pageSize",
-                    "hasMore",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "From which page this output has started",
-                        "format": "int32"
-                    },
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "Page size for this query (i.e. how many records were requested to return)",
-                        "format": "int32"
-                    },
-                    "hasMore": {
-                        "type": "boolean",
-                        "description": "True if there are more records in the query than returned in this result"
-                    },
-                    "totalCount": {
-                        "type": "integer",
-                        "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorResponse"
-                        },
-                        "description": "The collection of result items, will never have more than PageSize items"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Represents paginated API response."
-            },
-            "Inventory.V2.RemittanceVendorResponse": {
-                "required": [
-                    "id",
-                    "active",
-                    "isApproved",
-                    "isVerified",
-                    "createdOn",
-                    "modifiedOn"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "Remittance vendor Id",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Remittance vendor name",
-                        "nullable": true
-                    },
-                    "active": {
-                        "type": "boolean",
-                        "description": "Active/Inactive status"
-                    },
-                    "customerId": {
-                        "type": "string",
-                        "description": "Customer Id",
-                        "nullable": true
-                    },
-                    "isApproved": {
-                        "type": "boolean",
-                        "description": "Indicates whether vendor validated by user during first payment approval"
-                    },
-                    "isVerified": {
-                        "type": "boolean",
-                        "description": "Indicates whether there were paid payments for this vendor"
-                    },
-                    "contactInfo": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Inventory.V2.RemittanceVendorContactInfoResponse"
-                            }
-                        ],
-                        "description": "Remittance vendor contact information",
-                        "nullable": true
-                    },
-                    "address": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Inventory.V2.AddressResponse"
-                            }
-                        ],
-                        "description": "Remittance vendor address",
-                        "nullable": true
-                    },
-                    "createdOn": {
-                        "type": "string",
-                        "description": "system created date",
-                        "format": "date-time"
-                    },
-                    "modifiedOn": {
-                        "type": "string",
-                        "description": "last time adjustment was modified date",
-                        "format": "date-time"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Remittance vendor response"
-            },
-            "Inventory.V2.RemittanceVendorContactInfoResponse": {
-                "type": "object",
-                "properties": {
-                    "firstName": {
-                        "type": "string",
-                        "description": "Remittance vendor first name",
-                        "nullable": true
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "description": "Remittance vendor last name",
-                        "nullable": true
-                    },
-                    "phone": {
-                        "type": "string",
-                        "description": "Remittance vendor phone",
-                        "nullable": true
-                    },
-                    "email": {
-                        "type": "string",
-                        "description": "Remittance vendor email",
-                        "nullable": true
-                    },
-                    "fax": {
-                        "type": "string",
-                        "description": "Remittance vendor fax",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Remittance vendor contact info response"
-            },
-            "Inventory.V2.AddressResponse": {
-                "type": "object",
-                "properties": {
-                    "street": {
-                        "type": "string",
-                        "description": "Street",
-                        "nullable": true
-                    },
-                    "unit": {
-                        "type": "string",
-                        "description": "Unit",
-                        "nullable": true
-                    },
-                    "city": {
-                        "type": "string",
-                        "description": "City",
-                        "nullable": true
-                    },
-                    "state": {
-                        "type": "string",
-                        "description": "State",
-                        "nullable": true
-                    },
-                    "zip": {
-                        "type": "string",
-                        "description": "Zip code",
-                        "nullable": true
-                    },
-                    "country": {
-                        "type": "string",
-                        "description": "Country code",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Represents address response"
-            },
             "CloudEvent_Of_Accounting.V2.Webhook.InvoiceBatchedEventPayload": {
                 "required": [
                     "specversion",
@@ -13862,6 +15627,11 @@
                                 "$ref": "#/components/schemas/Accounting.V2.SalesTaxResponse"
                             }
                         ],
+                        "nullable": true
+                    },
+                    "taxZoneId": {
+                        "type": "integer",
+                        "format": "int64",
                         "nullable": true
                     },
                     "total": {
