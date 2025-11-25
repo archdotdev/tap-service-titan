@@ -139,6 +139,12 @@ class ServiceTitanSchema(StreamSchema):
                 "keyword_id": schema["properties"]["keyword"]["properties"]["id"],
             }
 
+        if stream.name == "bank_deposit_transactions":
+            schema["properties"]["bankDepositId"] = {
+                "format": "int64",
+                "type": "integer",
+            }
+
         return schema
 
 

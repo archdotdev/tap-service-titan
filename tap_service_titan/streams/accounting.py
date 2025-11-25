@@ -15,7 +15,9 @@ else:
     from typing_extensions import override
 
 if TYPE_CHECKING:
-    from singer_sdk.helpers.types import Context
+    from collections.abc import Iterable
+
+    from singer_sdk.helpers.types import Context, Record
 
 
 class InvoicesStream(ServiceTitanExportStream):
@@ -290,3 +292,57 @@ class GLAccountTypesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/accounting/v2/tenant/{self.tenant_id}/gl-accounts/types"
+
+
+class CreditMemosStream(ServiceTitanStream):
+    """Define credit memos stream."""
+
+    name = "credit_memos"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        ACCOUNTING,
+        key="Accounting.V2.CreditMemos.CreditMemoPublicResponse",
+    )
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self.tenant_id}/credit-memos"
+
+
+class BankDepositsStream(ServiceTitanStream):
+    """Define bank deposits stream."""
+
+    name = "bank_deposits"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.DetailedDepositResponse")
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/accounting/v2/tenant/{self.tenant_id}/bank-deposits"
+
+    @override
+    def generate_child_contexts(
+        self, record: Record, context: Context | None
+    ) -> Iterable[Context | None]:
+        yield {"bankDepositId": record["id"]}
+
+
+class BankDepositTransactionsStream(ServiceTitanStream):
+    """Define bank deposit transactions stream."""
+
+    name = "bank_deposit_transactions"
+    primary_keys = ("id",)
+    replication_key = None
+    parent_stream_type = BankDepositsStream
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.DetailedTransactionResponse")
+
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return (
+            f"/accounting/v2/tenant/{self.tenant_id}/bank-deposits/{{bankDepositId}}/transactions"
+        )
