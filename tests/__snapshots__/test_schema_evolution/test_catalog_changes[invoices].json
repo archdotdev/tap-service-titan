@@ -210,6 +210,15 @@
     {
       "breadcrumb": [
         "properties",
+        "taxZoneId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "total"
       ],
       "metadata": {
@@ -1805,6 +1814,13 @@
       "syncStatus": {
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "taxZoneId": {
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },
