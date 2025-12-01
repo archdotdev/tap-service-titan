@@ -1,9 +1,9 @@
 [project]
 name = "tap-service-titan"
-version = "0.0.1"
+dynamic = [ "version" ]
 description = "Singer tap for ServiceTitan, built with the Meltano Singer SDK."
-authors = [{ name = "Cody Hanson", email = "cody@arch.dev" }]
-maintainers = [{ name = "Meltano", email = "hello@meltano.com" }]
+authors = [ { name = "Cody Hanson", email = "cody@arch.dev" } ]
+maintainers = [ { name = "Meltano", email = "hello@meltano.com" } ]
 requires-python = ">=3.10"
 readme = "README.md"
 license = "Apache-2.0"
@@ -25,7 +25,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-s3 = ["s3fs~=2025.10.0"]
+s3 = [ "s3fs~=2025.10.0" ]
 
 [project.scripts]
 tap-service-titan = "tap_service_titan.tap:TapServiceTitan.cli"
@@ -54,13 +54,20 @@ typing = [
 ]
 
 [tool.hatch.build.targets.sdist]
-include = ["tap_service_titan"]
+include = [ "tap_service_titan" ]
 
 [tool.hatch.build.targets.wheel]
-include = ["tap_service_titan"]
+include = [ "tap_service_titan" ]
+
+[tool.hatch.version]
+fallback-version = "0.0.0"
+source = "vcs"
 
 [build-system]
-requires = ["hatchling>=1.27,<2"]
+requires = [
+    "hatchling==1.27",
+    "hatch-vcs==0.5",
+]
 build-backend = "hatchling.build"
 
 [tool.mypy]
@@ -68,11 +75,11 @@ warn_unused_configs = true
 
 [tool.pytest]
 minversion = "9.0.0"
-addopts = ["-vv"]
+addopts = [ "-vv" ]
 
 [tool.ruff]
 line-length = 100
-src = ["tap_service_titan"]
+src = [ "tap_service_titan" ]
 
 [tool.ruff.lint]
 ignore = [
@@ -81,7 +88,7 @@ ignore = [
     "FIX",  # allow TODO comments
     "ERA",  # allow commented-out code
 ]
-select = ["ALL"]
+select = [ "ALL" ]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**.py" = [
@@ -96,7 +103,7 @@ select = ["ALL"]
 allow-star-arg-any = true
 
 [tool.ruff.lint.isort]
-known-first-party = ["tap_service_titan"]
+known-first-party = [ "tap_service_titan" ]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
