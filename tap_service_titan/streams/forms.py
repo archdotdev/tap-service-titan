@@ -187,6 +187,7 @@ class JobAttachmentsStream(ServiceTitanStream):
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
+        th.Property("job_id", th.IntegerType),
         th.Property("fileName", th.StringType),
         th.Property("createdById", th.IntegerType),
         th.Property("createdOn", th.DateTimeType),
