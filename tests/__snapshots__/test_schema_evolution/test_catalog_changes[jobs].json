@@ -334,6 +334,24 @@
     {
       "breadcrumb": [
         "properties",
+        "createdFromEstimateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimateIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -415,6 +433,14 @@
           "null"
         ]
       },
+      "createdFromEstimateId": {
+        "description": "ID of the sold estimate from which this job was created",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "createdOn": {
         "description": "Date/time (in UTC) when the job was created",
         "format": "date-time",
@@ -478,8 +504,19 @@
           "null"
         ]
       },
+      "estimateIds": {
+        "description": "IDs of estimates that are related to this job",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "externalData": {
-        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
+        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.\n            ",
         "items": {
           "additionalProperties": false,
           "properties": {
@@ -535,7 +572,7 @@
       },
       "jobGeneratedLeadSource": {
         "additionalProperties": false,
-        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
         "properties": {
           "employeeId": {
             "format": "int64",
@@ -731,6 +768,7 @@
       "tagTypeIds",
       "customerPo",
       "invoiceId",
+      "estimateIds",
       "active"
     ],
     "type": "object"

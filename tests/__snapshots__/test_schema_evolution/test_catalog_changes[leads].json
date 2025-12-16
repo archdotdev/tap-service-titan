@@ -141,6 +141,15 @@
     {
       "breadcrumb": [
         "properties",
+        "captureSource"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -336,6 +345,13 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "captureSource": {
+        "description": "Capture source of the lead",
+        "type": [
+          "string",
           "null"
         ]
       },
