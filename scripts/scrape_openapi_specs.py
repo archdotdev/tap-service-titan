@@ -1,6 +1,7 @@
 """Scrape the ServiceTitan OpenAPI specs."""  # noqa: INP001
 
 import asyncio
+from collections.abc import Generator
 from pathlib import Path
 
 import rich
@@ -16,10 +17,7 @@ def get_api_name_from_url(url: str) -> str:
     return url.split("api=")[-1].replace("tenant-", "")
 
 
-async def get_soup_from_url(
-    playwright: Playwright,
-    url: str,
-) -> tuple[str, BeautifulSoup]:
+async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
     """Get a BeautifulSoup object from a URL."""
     rich.print(f"Getting soup from {url}")
     browser = await playwright.chromium.launch()
@@ -27,21 +25,7 @@ async def get_soup_from_url(
     page.set_default_timeout(100000)
     await page.goto(url, wait_until="networkidle")
     html = await page.content()
-    return (url, BeautifulSoup(html, "html.parser"))
-
-
-async def get_all_service_titan_soups() -> dict[str, BeautifulSoup]:
-    """Get all ServiceTitan API docs as BeautifulSoup objects."""
-    async with async_playwright() as playwright:
-        _, soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
-        api_urls = [
-            f"{DOCS_ROOT}{href}"
-            for href in [a.get("href") for a in soup.find_all("a")]
-            if "api-details" in href
-        ]
-        tasks = [get_soup_from_url(playwright, api_url) for api_url in api_urls]
-        api_defs = await asyncio.gather(*tasks)
-        return {get_api_name_from_url(url): api_doc for (url, api_doc) in api_defs}
+    return BeautifulSoup(html, "html.parser")
 
 
 async def download_openapi_spec(
@@ -62,19 +46,23 @@ async def download_openapi_spec(
     await browser.close()
 
 
+def _extract_links(soup: BeautifulSoup) -> Generator[str, None, None]:
+    """Extract all API details page links from the root BeautifulSoup object."""
+    for a in soup.find_all("a"):
+        href = a.get("href")
+        if href and isinstance(href, str) and "api-details" in href:
+            yield f"{DOCS_ROOT}{href}"
+
+
 async def download_all_openapi_specs() -> None:
     """Download all ServiceTitan OpenAPI specs."""
     async with async_playwright() as playwright:
-        _, soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
-        api_urls = [
-            f"{DOCS_ROOT}{href}"
-            for href in [a.get("href") for a in soup.find_all("a")]
-            if "api-details" in href
-        ]
+        soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         tasks = []
-        for api_url in api_urls:
+        for api_url in _extract_links(soup):
             download_path = OUTPUT_DIR / f"{get_api_name_from_url(api_url)}.json"
+            rich.print(f"Downloading {api_url} to {download_path}")
             tasks.append(download_openapi_spec(playwright, api_url, download_path))
         await asyncio.gather(*tasks)
 
