@@ -5158,6 +5158,8 @@
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
                                     "paymentTermId": 0,
+                                    "creditLimit": 0,
+                                    "creditLimitBalance": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -5277,7 +5279,9 @@
                                     0
                                 ],
                                 "taxExempt": true,
-                                "paymentTermId": 0
+                                "paymentTermId": 0,
+                                "creditLimit": 0,
+                                "creditLimitBalance": 0
                             }
                         }
                     }
@@ -5325,6 +5329,8 @@
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
                                     "paymentTermId": 0,
+                                    "creditLimit": 0,
+                                    "creditLimitBalance": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -5671,6 +5677,8 @@
                                             "modifiedOn": "string",
                                             "mergedToId": 0,
                                             "paymentTermId": 0,
+                                            "creditLimit": 0,
+                                            "creditLimitBalance": 0,
                                             "externalData": [
                                                 {
                                                     "key": "string",
@@ -5812,7 +5820,9 @@
                                     ]
                                 },
                                 "taxExempt": true,
-                                "paymentTermId": 0
+                                "paymentTermId": 0,
+                                "creditLimit": 0,
+                                "creditLimitBalance": 0
                             }
                         }
                     }
@@ -5860,6 +5870,8 @@
                                     "modifiedOn": "string",
                                     "mergedToId": 0,
                                     "paymentTermId": 0,
+                                    "creditLimit": 0,
+                                    "creditLimitBalance": 0,
                                     "externalData": [
                                         {
                                             "key": "string",
@@ -7722,6 +7734,8 @@
                                             "modifiedOn": "string",
                                             "mergedToId": 0,
                                             "paymentTermId": 0,
+                                            "creditLimit": 0,
+                                            "creditLimitBalance": 0,
                                             "externalData": [
                                                 {
                                                     "key": "string",
@@ -7821,6 +7835,7 @@
                                             "leadState": "string",
                                             "leadZip": "string",
                                             "leadCountry": "string",
+                                            "captureSource": "string",
                                             "id": 0,
                                             "status": {},
                                             "priority": {},
@@ -8048,7 +8063,8 @@
                                     "leadCity": "string",
                                     "leadState": "string",
                                     "leadZip": "string",
-                                    "leadCountry": "string"
+                                    "leadCountry": "string",
+                                    "captureSource": "string"
                                 }
                             }
                         }
@@ -8183,7 +8199,8 @@
                                     "leadCity": "string",
                                     "leadState": "string",
                                     "leadZip": "string",
-                                    "leadCountry": "string"
+                                    "leadCountry": "string",
+                                    "captureSource": "string"
                                 }
                             }
                         }
@@ -8226,6 +8243,15 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "isCaptureSourceForm",
+                        "in": "query",
+                        "description": "Filters by capture source",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
                         }
                     },
                     {
@@ -8487,7 +8513,8 @@
                                             "leadCity": "string",
                                             "leadState": "string",
                                             "leadZip": "string",
-                                            "leadCountry": "string"
+                                            "leadCountry": "string",
+                                            "captureSource": "string"
                                         }
                                     ]
                                 }
@@ -8605,7 +8632,8 @@
                                     "leadCity": "string",
                                     "leadState": "string",
                                     "leadZip": "string",
-                                    "leadCountry": "string"
+                                    "leadCountry": "string",
+                                    "captureSource": "string"
                                 }
                             }
                         }
@@ -13050,6 +13078,18 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "creditLimit": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "creditLimitBalance": {
+                        "type": "number",
+                        "description": "Credit Limit Balance for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
                     "externalData": {
                         "type": "array",
                         "items": {
@@ -13319,6 +13359,18 @@
                         "type": "integer",
                         "description": "The Payment Term ID.",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "creditLimit": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "creditLimitBalance": {
+                        "type": "number",
+                        "description": "Credit Limit Balance for the customer.",
+                        "format": "decimal",
                         "nullable": true
                     },
                     "externalData": {
@@ -13618,6 +13670,18 @@
                         "description": "Optional Payment Term ID.",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "creditLimit": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "creditLimitBalance": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.",
+                        "format": "decimal",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -13866,6 +13930,16 @@
                         "type": "integer",
                         "description": "Payment Term ID",
                         "format": "int64"
+                    },
+                    "creditLimit": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.\n/// ",
+                        "format": "decimal"
+                    },
+                    "creditLimitBalance": {
+                        "type": "number",
+                        "description": "Credit Limit Balance for the customer.",
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -15035,6 +15109,18 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "creditLimit": {
+                        "type": "number",
+                        "description": "Credit Limit for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "creditLimitBalance": {
+                        "type": "number",
+                        "description": "Credit Limit Balance for the customer.",
+                        "format": "decimal",
+                        "nullable": true
+                    },
                     "externalData": {
                         "type": "array",
                         "items": {
@@ -15162,6 +15248,11 @@
                     "leadCountry": {
                         "type": "string",
                         "description": "Country provided for the lead",
+                        "nullable": true
+                    },
+                    "captureSource": {
+                        "type": "string",
+                        "description": "Capture source of the lead",
                         "nullable": true
                     },
                     "id": {
@@ -15577,6 +15668,11 @@
                     "leadCountry": {
                         "type": "string",
                         "description": "Country provided for the lead",
+                        "nullable": true
+                    },
+                    "captureSource": {
+                        "type": "string",
+                        "description": "Capture source of the lead",
                         "nullable": true
                     }
                 },

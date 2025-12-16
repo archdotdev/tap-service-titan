@@ -62,7 +62,8 @@
                                     "customerId": 0,
                                     "unused": true,
                                     "createdById": 0,
-                                    "isConfirmed": true
+                                    "isConfirmed": true,
+                                    "active": true
                                 }
                             }
                         }
@@ -219,6 +220,20 @@
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
                             "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
                             "nullable": true
                         }
                     },
@@ -422,7 +437,8 @@
                                             "customerId": 0,
                                             "unused": true,
                                             "createdById": 0,
-                                            "isConfirmed": true
+                                            "isConfirmed": true,
+                                            "active": true
                                         }
                                     ]
                                 }
@@ -511,7 +527,8 @@
                                     "customerId": 0,
                                     "unused": true,
                                     "createdById": 0,
-                                    "isConfirmed": true
+                                    "isConfirmed": true,
+                                    "active": true
                                 }
                             }
                         }
@@ -622,7 +639,8 @@
                                     "customerId": 0,
                                     "unused": true,
                                     "createdById": 0,
-                                    "isConfirmed": true
+                                    "isConfirmed": true,
+                                    "active": true
                                 }
                             }
                         }
@@ -938,7 +956,8 @@
                                     "customerId": 0,
                                     "unused": true,
                                     "createdById": 0,
-                                    "isConfirmed": true
+                                    "isConfirmed": true,
+                                    "active": true
                                 }
                             }
                         }
@@ -2683,6 +2702,10 @@
                                             "invoiceId": 0,
                                             "membershipId": 0,
                                             "total": 0,
+                                            "createdFromEstimateId": 0,
+                                            "estimateIds": [
+                                                0
+                                            ],
                                             "active": true
                                         }
                                     ]
@@ -2845,6 +2868,20 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (all items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
                         }
                     },
                     {
@@ -3616,7 +3653,7 @@
                     {
                         "name": "externalDataApplicationGuid",
                         "in": "query",
-                        "description": "If this guid is provided, external data corresponding to\nthis application guid will be returned.",
+                        "description": "If this guid is provided, external data corresponding to\nthis application guid will be returned.\n            ",
                         "schema": {
                             "type": "string",
                             "format": "guid",
@@ -3669,6 +3706,10 @@
                                     "invoiceId": 0,
                                     "membershipId": 0,
                                     "total": 0,
+                                    "createdFromEstimateId": 0,
+                                    "estimateIds": [
+                                        0
+                                    ],
                                     "summary": "string",
                                     "customFields": [
                                         {
@@ -3842,6 +3883,10 @@
                                     "invoiceId": 0,
                                     "membershipId": 0,
                                     "total": 0,
+                                    "createdFromEstimateId": 0,
+                                    "estimateIds": [
+                                        0
+                                    ],
                                     "summary": "string",
                                     "customFields": [
                                         {
@@ -3970,7 +4015,9 @@
                                 "invoiceSignatureIsRequired": true,
                                 "customerPo": "string",
                                 "soldById": 0,
-                                "partnerLeadCallId": 0
+                                "partnerLeadCallId": 0,
+                                "leadId": 0,
+                                "bookingId": 0
                             }
                         }
                     }
@@ -4020,6 +4067,10 @@
                                     "invoiceId": 0,
                                     "membershipId": 0,
                                     "total": 0,
+                                    "createdFromEstimateId": 0,
+                                    "estimateIds": [
+                                        0
+                                    ],
                                     "summary": "string",
                                     "customFields": [
                                         {
@@ -4146,7 +4197,7 @@
                     {
                         "name": "jobStatus",
                         "in": "query",
-                        "description": "Filters by job status\\\nValues: [Scheduled, Dispatched, InProgress, Hold, Completed, Canceled]",
+                        "description": "Filters by job status\n            \\\nValues: [Scheduled, Dispatched, InProgress, Hold, Completed, Canceled]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -4160,7 +4211,7 @@
                     {
                         "name": "appointmentStatus",
                         "in": "query",
-                        "description": "Filters by appointment status. Return a job if it has any appointment with the specified status.\\\nValues: [Scheduled, Dispatched, Working, Hold, Done, Canceled]",
+                        "description": "Filters by appointment status. Return a job if it has any appointment with the specified status.\n            \\\nValues: [Scheduled, Dispatched, Working, Hold, Done, Canceled]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -4174,7 +4225,7 @@
                     {
                         "name": "priority",
                         "in": "query",
-                        "description": "Filters by priority. Supported priorities are \"Low\", \"Normal\", \"High\", \"Urgent\"",
+                        "description": "Filters by priority. Supported priorities are \"Low\", \"Normal\", \"High\", \"Urgent\"\n            ",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -4183,7 +4234,7 @@
                     {
                         "name": "firstAppointmentStartsOnOrAfter",
                         "in": "query",
-                        "description": "Return jobs whose first appointment starts on or after date/time (in UTC). Use with\n\"firstAppointmentStartsBefore\" to find jobs whose first appointment is within the specified date range.",
+                        "description": "Return jobs whose first appointment starts on or after date/time (in UTC). Use with\n\"firstAppointmentStartsBefore\" to find jobs whose first appointment is within the specified date range.\n            ",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -4301,6 +4352,25 @@
                         }
                     },
                     {
+                        "name": "createdFromEstimateId",
+                        "in": "query",
+                        "description": "Filters by the sold estimate ID from which the job was created",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "estimateIds",
+                        "in": "query",
+                        "description": "Filters by estimate IDs that are related to the job",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",
@@ -4372,7 +4442,7 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn, Priority.",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn, Priority.\n            ",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -4381,7 +4451,7 @@
                     {
                         "name": "externalDataApplicationGuid",
                         "in": "query",
-                        "description": "If this guid is provided, external data corresponding to\nthis application guid will be returned.",
+                        "description": "If this guid is provided, external data corresponding to\nthis application guid will be returned.\n            ",
                         "schema": {
                             "type": "string",
                             "format": "guid",
@@ -4409,7 +4479,7 @@
                     {
                         "name": "hasUnusedAppointments",
                         "in": "query",
-                        "description": "If set to true, return jobs that have unused appointments.",
+                        "description": "If set to true, return jobs that have unused appointments.\n            ",
                         "schema": {
                             "type": "boolean",
                             "nullable": true
@@ -4467,6 +4537,10 @@
                                             "invoiceId": 0,
                                             "membershipId": 0,
                                             "total": 0,
+                                            "createdFromEstimateId": 0,
+                                            "estimateIds": [
+                                                0
+                                            ],
                                             "summary": "string",
                                             "customFields": [
                                                 {
@@ -8359,7 +8433,8 @@
                     "customerId",
                     "unused",
                     "createdById",
-                    "isConfirmed"
+                    "isConfirmed",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -8441,6 +8516,10 @@
                     "isConfirmed": {
                         "type": "boolean",
                         "description": "Returns true if the appointment is confirmed"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether this appointment is active"
                     }
                 },
                 "additionalProperties": false,
@@ -8552,6 +8631,20 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents paginated API response."
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
             },
             "Jpm.V2.AppointmentAddRequest": {
                 "required": [
@@ -9115,6 +9208,7 @@
                     "tagTypeIds",
                     "customerPo",
                     "invoiceId",
+                    "estimateIds",
                     "active"
                 ],
                 "type": "object",
@@ -9137,7 +9231,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Jpm.V2.ExternalDataModel"
                         },
-                        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request."
+                        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.\n            "
                     },
                     "id": {
                         "type": "integer",
@@ -9226,7 +9320,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.Base.JobGeneratedLeadSource"
                             }
                         ],
-                        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+                        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
                         "nullable": true
                     },
                     "noCharge": {
@@ -9304,6 +9398,20 @@
                         "description": "Total amount of the job",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "createdFromEstimateId": {
+                        "type": "integer",
+                        "description": "ID of the sold estimate from which this job was created",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "estimateIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of estimates that are related to this job"
                     },
                     "active": {
                         "type": "boolean",
@@ -9666,7 +9774,7 @@
                     },
                     "active": {
                         "type": "boolean",
-                        "description": "Whether this appointment is active, or not anymore."
+                        "description": "Whether this appointment is active"
                     }
                 },
                 "additionalProperties": false
@@ -10089,20 +10197,6 @@
                 },
                 "additionalProperties": false
             },
-            "ActiveRequestArg": {
-                "enum": [
-                    "True",
-                    "Any",
-                    "False"
-                ],
-                "type": "string",
-                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
-                "x-enumNames": [
-                    "True",
-                    "Any",
-                    "False"
-                ]
-            },
             "PaginatedResponse_Of_Jpm.V2.JobHoldReasonResponse": {
                 "required": [
                     "page",
@@ -10201,6 +10295,7 @@
                     "tagTypeIds",
                     "customerPo",
                     "invoiceId",
+                    "estimateIds",
                     "customFields",
                     "externalData"
                 ],
@@ -10293,7 +10388,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.Base.JobGeneratedLeadSource"
                             }
                         ],
-                        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+                        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
                         "nullable": true
                     },
                     "noCharge": {
@@ -10372,6 +10467,20 @@
                         "format": "decimal",
                         "nullable": true
                     },
+                    "createdFromEstimateId": {
+                        "type": "integer",
+                        "description": "ID of the sold estimate from which this job was created",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "estimateIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of estimates that are related to this job"
+                    },
                     "summary": {
                         "type": "string",
                         "description": "Job summary",
@@ -10390,7 +10499,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Jpm.V2.ExternalDataModel"
                         },
-                        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request."
+                        "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.\n            "
                     }
                 },
                 "additionalProperties": false
@@ -10434,7 +10543,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.Base.JobGeneratedLeadSource"
                             }
                         ],
-                        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+                        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
                         "nullable": true
                     },
                     "jobTypeId": {
@@ -10487,12 +10596,12 @@
                                 "$ref": "#/components/schemas/Jpm.V2.ExternalDataCreateRequest"
                             }
                         ],
-                        "description": "Optional model that contains a list of external data items\nthat should be attached to this job.",
+                        "description": "Optional model that contains a list of external data items\nthat should be attached to this job.\n            ",
                         "nullable": true
                     },
                     "invoiceSignatureIsRequired": {
                         "type": "boolean",
-                        "description": "Optional model that informs if invoice should requires a signature or not\nif not informed will follow the rules for location and job type",
+                        "description": "Optional model that informs if invoice should requires a signature or not\nif not informed will follow the rules for location and job type\n            ",
                         "nullable": true
                     },
                     "customerPo": {
@@ -10509,6 +10618,18 @@
                     "partnerLeadCallId": {
                         "type": "integer",
                         "description": "ID of the Call that 3rd-party agents are enabled to set.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "leadId": {
+                        "type": "integer",
+                        "description": "ID of the Lead associated with this job",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "bookingId": {
+                        "type": "integer",
+                        "description": "ID of the Booking that resulted in this job",
                         "format": "int64",
                         "nullable": true
                     }
@@ -10645,7 +10766,7 @@
                 "properties": {
                     "completedOn": {
                         "type": "string",
-                        "description": "Date on which the job was completed",
+                        "description": "Date on which the job was completed\n            ",
                         "format": "date-time"
                     }
                 },
@@ -10675,7 +10796,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.Base.JobGeneratedLeadSource"
                             }
                         ],
-                        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+                        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
                         "nullable": true
                     },
                     "jobTypeId": {
@@ -10706,7 +10827,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Jpm.V2.CustomFieldModel"
                         },
-                        "description": "List of custom fields and their values. This list must describe the full list of custom fields on the job.\nIf job A has values for custom fields X and Y and this field only contains a model for custom field X, then\nthe value for custom field Y on job A will be removed."
+                        "description": "List of custom fields and their values. This list must describe the full list of custom fields on the job.\nIf job A has values for custom fields X and Y and this field only contains a model for custom field X, then\nthe value for custom field Y on job A will be removed.\n            "
                     },
                     "tagTypeIds": {
                         "type": "array",
@@ -10714,7 +10835,7 @@
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and\nthis field only contains a ID for tag X, then tag Y on job A will be removed."
+                        "description": "List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and\nthis field only contains a ID for tag X, then tag Y on job A will be removed.\n            "
                     },
                     "externalData": {
                         "oneOf": [
@@ -10722,7 +10843,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.ExternalDataUpdateRequest"
                             }
                         ],
-                        "description": "External data update model."
+                        "description": "External data update model.\n            "
                     },
                     "customerPo": {
                         "type": "string",
@@ -10730,7 +10851,7 @@
                     },
                     "soldById": {
                         "type": "integer",
-                        "description": "ID of the Technician who sold the job.",
+                        "description": "ID of the Technician who sold the job.\n            ",
                         "format": "int64",
                         "nullable": true
                     }
@@ -12446,7 +12567,8 @@
                     "customerId",
                     "unused",
                     "createdById",
-                    "isConfirmed"
+                    "isConfirmed",
+                    "active"
                 ],
                 "type": "object",
                 "properties": {
@@ -12528,6 +12650,10 @@
                     "isConfirmed": {
                         "type": "boolean",
                         "description": "Returns true if the appointment is confirmed"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether this appointment is active"
                     }
                 },
                 "additionalProperties": false
@@ -12637,7 +12763,8 @@
                     "modifiedOn",
                     "tagTypeIds",
                     "customerPo",
-                    "invoiceId"
+                    "invoiceId",
+                    "estimateIds"
                 ],
                 "type": "object",
                 "properties": {
@@ -12728,7 +12855,7 @@
                                 "$ref": "#/components/schemas/Jpm.V2.Base.JobGeneratedLeadSource"
                             }
                         ],
-                        "description": "Object that contains:\n            JobId: ID of the job from which this job was generated\n            EmployeeId: ID of the office user or technician\n            ",
+                        "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
                         "nullable": true
                     },
                     "noCharge": {
@@ -12806,6 +12933,20 @@
                         "description": "Total amount of the job",
                         "format": "decimal",
                         "nullable": true
+                    },
+                    "createdFromEstimateId": {
+                        "type": "integer",
+                        "description": "ID of the sold estimate from which this job was created",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "estimateIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of estimates that are related to this job"
                     }
                 },
                 "additionalProperties": false
