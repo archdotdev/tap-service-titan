@@ -631,6 +631,7 @@
                                             "hourlyRate": 0,
                                             "managerId": 0,
                                             "payrollBusinessUnitId": 0,
+                                            "isIncludedInPayroll": true,
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -3191,6 +3192,7 @@
                                             "hourlyRate": 0,
                                             "managerId": 0,
                                             "payrollBusinessUnitId": 0,
+                                            "isIncludedInPayroll": true,
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -3285,6 +3287,7 @@
                                     "hourlyRate": 0,
                                     "managerId": 0,
                                     "payrollBusinessUnitId": 0,
+                                    "isIncludedInPayroll": true,
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -3476,6 +3479,7 @@
                                     "hourlyRate": 0,
                                     "managerId": 0,
                                     "payrollBusinessUnitId": 0,
+                                    "isIncludedInPayroll": true,
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -5651,6 +5655,7 @@
                     "employeeId",
                     "employeeType",
                     "hourlyRate",
+                    "isIncludedInPayroll",
                     "createdOn",
                     "modifiedOn",
                     "active"
@@ -5691,6 +5696,10 @@
                         "description": "The ID of the payroll business unit (employee only)",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "isIncludedInPayroll": {
+                        "type": "boolean",
+                        "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
                         "type": "string",
@@ -6782,6 +6791,7 @@
                     "employeeId",
                     "employeeType",
                     "hourlyRate",
+                    "isIncludedInPayroll",
                     "createdOn",
                     "modifiedOn",
                     "active"
@@ -6822,6 +6832,10 @@
                         "description": "The ID of the payroll business unit (employee only)",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "isIncludedInPayroll": {
+                        "type": "boolean",
+                        "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
                         "type": "string",
@@ -6851,6 +6865,7 @@
                     "employeeId",
                     "employeeType",
                     "hourlyRate",
+                    "isIncludedInPayroll",
                     "createdOn",
                     "modifiedOn",
                     "active"
@@ -6891,6 +6906,10 @@
                         "description": "The ID of the payroll business unit (employee only)",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "isIncludedInPayroll": {
+                        "type": "boolean",
+                        "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
                         "type": "string",

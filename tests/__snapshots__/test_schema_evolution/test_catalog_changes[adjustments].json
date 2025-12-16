@@ -69,6 +69,24 @@
     {
       "breadcrumb": [
         "properties",
+        "projectId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdById"
       ],
       "metadata": {
@@ -443,6 +461,14 @@
           "null"
         ]
       },
+      "invoiceId": {
+        "description": "Id of invoice associated with adjustment",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "items": {
         "description": "Collection of adjustment items",
         "items": {
@@ -453,6 +479,14 @@
               "description": "Is active",
               "type": [
                 "boolean",
+                "null"
+              ]
+            },
+            "budgetCodeId": {
+              "description": "Id of the budget code for this adjustment item",
+              "format": "int64",
+              "type": [
+                "integer",
                 "null"
               ]
             },
@@ -604,6 +638,14 @@
         "description": "Number",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "projectId": {
+        "description": "Id of project associated with adjustment",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

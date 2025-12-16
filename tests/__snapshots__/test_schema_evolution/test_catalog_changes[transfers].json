@@ -536,6 +536,14 @@
                 "null"
               ]
             },
+            "budgetCodeId": {
+              "description": "Id of the budget code for transfer item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "code": {
               "description": "Item code",
               "type": [

@@ -247,6 +247,24 @@
     {
       "breadcrumb": [
         "properties",
+        "creditLimit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditLimitBalance"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "externalData"
       ],
       "metadata": {
@@ -376,6 +394,22 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "creditLimit": {
+        "description": "Credit Limit for the customer.",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "creditLimitBalance": {
+        "description": "Credit Limit Balance for the customer.",
+        "format": "decimal",
+        "type": [
+          "number",
           "null"
         ]
       },

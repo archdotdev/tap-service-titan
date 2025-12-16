@@ -168,7 +168,7 @@
     "additionalProperties": false,
     "properties": {
       "active": {
-        "description": "Whether this appointment is active, or not anymore.",
+        "description": "Whether this appointment is active",
         "type": [
           "boolean",
           "null"

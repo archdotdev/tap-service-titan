@@ -96,6 +96,15 @@
     {
       "breadcrumb": [
         "properties",
+        "invoiceConfiguration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -1121,6 +1130,13 @@
           "null"
         ]
       },
+      "invoiceConfiguration": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "invoiceDate": {
         "format": "date-time",
         "type": [
@@ -1839,6 +1855,7 @@
     },
     "required": [
       "active",
+      "invoiceConfiguration",
       "id",
       "createdOn",
       "sentStatus",

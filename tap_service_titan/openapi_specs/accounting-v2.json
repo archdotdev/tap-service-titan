@@ -1549,8 +1549,8 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_GetList",
-                "operationId": "CreditMemos_GetList",
+                "summary": "CreditMemos_GetCreditMemosList",
+                "operationId": "CreditMemos_GetCreditMemosList",
                 "parameters": [
                     {
                         "name": "tenant",
@@ -1916,13 +1916,359 @@
                 }
             }
         },
+        "/tenant/{tenant}/credit-memos/{id}/items": {
+            "get": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "CreditMemos_GetCreditMemoItemsList",
+                "operationId": "CreditMemos_GetCreditMemoItemsList",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemoItemsPublicResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "active": true,
+                                            "description": "string",
+                                            "quantity": 0,
+                                            "cost": 0,
+                                            "price": 0,
+                                            "type": "string",
+                                            "skuName": "string",
+                                            "skuId": 0,
+                                            "total": 0,
+                                            "taxable": true,
+                                            "revenueGeneralLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string"
+                                            },
+                                            "expensesGeneralLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string"
+                                            },
+                                            "createdOn": "string",
+                                            "createdBy": "string",
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/credit-memos/credit-memo-items": {
+            "get": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "CreditMemos_GetCreditMemosItemsList",
+                "operationId": "CreditMemos_GetCreditMemosItemsList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "creditMemoIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemosItemsPublicResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "active": true,
+                                            "description": "string",
+                                            "quantity": 0,
+                                            "cost": 0,
+                                            "price": 0,
+                                            "type": "string",
+                                            "skuName": "string",
+                                            "skuId": 0,
+                                            "total": 0,
+                                            "taxable": true,
+                                            "revenueGeneralLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string"
+                                            },
+                                            "expensesGeneralLedgerAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string"
+                                            },
+                                            "createdOn": "string",
+                                            "createdBy": "string",
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "creditMemoId": 0
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/credit-memos/{id}": {
             "patch": {
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_Update",
-                "operationId": "CreditMemos_Update",
+                "summary": "CreditMemos_UpdateCreditMemo",
+                "operationId": "CreditMemos_UpdateCreditMemo",
                 "parameters": [
                     {
                         "name": "id",
@@ -2398,11 +2744,11 @@
                                             },
                                             "appliedTo": [
                                                 {
-                                                    "appliedId": 0,
-                                                    "appliedTo": 0,
                                                     "appliedAmount": "string",
-                                                    "appliedOn": "string",
                                                     "appliedBy": "string",
+                                                    "appliedId": 0,
+                                                    "appliedOn": "string",
+                                                    "appliedTo": 0,
                                                     "appliedToReferenceNumber": "string"
                                                 }
                                             ],
@@ -2633,6 +2979,7 @@
                                             "materialSkuId": 0,
                                             "membershipId": 0,
                                             "paidOn": "string",
+                                            "invoiceConfiguration": "JobInvoice",
                                             "id": 0,
                                             "syncStatus": "string",
                                             "budgetCodeId": 0,
@@ -2935,33 +3282,45 @@
                                     "continueFrom": "string",
                                     "data": [
                                         {
-                                            "id": 0,
-                                            "syncStatus": "string",
-                                            "referenceNumber": "string",
-                                            "date": "string",
-                                            "type": "string",
-                                            "typeId": "string",
-                                            "total": "string",
-                                            "unappliedAmount": "string",
-                                            "memo": "string",
-                                            "customer": {
+                                            "active": true,
+                                            "appliedTo": [
+                                                {
+                                                    "appliedAmount": "string",
+                                                    "appliedBy": "string",
+                                                    "appliedId": 0,
+                                                    "appliedOn": "string",
+                                                    "appliedTo": 0,
+                                                    "appliedToReferenceNumber": "string"
+                                                }
+                                            ],
+                                            "authCode": "string",
+                                            "batch": {
                                                 "id": 0,
+                                                "number": "string",
                                                 "name": "string"
                                             },
                                             "businessUnit": {
                                                 "id": 0,
                                                 "name": "string"
                                             },
+                                            "checkNumber": "string",
+                                            "createdBy": "string",
+                                            "createdOn": "string",
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "date": "string",
                                             "deposit": {
                                                 "id": 0,
                                                 "name": "string"
                                             },
-                                            "batch": {
-                                                "id": 0,
-                                                "number": "string",
-                                                "name": "string"
-                                            },
-                                            "createdBy": "string",
                                             "generalLedgerAccount": {
                                                 "id": 0,
                                                 "name": "string",
@@ -2969,27 +3328,16 @@
                                                 "type": "string",
                                                 "detailType": "string"
                                             },
-                                            "appliedTo": [
-                                                {
-                                                    "appliedId": 0,
-                                                    "appliedTo": 0,
-                                                    "appliedAmount": "string",
-                                                    "appliedOn": "string",
-                                                    "appliedBy": "string",
-                                                    "appliedToReferenceNumber": "string"
-                                                }
-                                            ],
-                                            "customFields": [
-                                                {
-                                                    "name": "string",
-                                                    "value": "string"
-                                                }
-                                            ],
-                                            "authCode": "string",
-                                            "checkNumber": "string",
+                                            "id": 0,
+                                            "memo": "string",
                                             "modifiedOn": "string",
-                                            "createdOn": "string",
-                                            "active": true
+                                            "referenceNumber": "string",
+                                            "refundedPaymentId": 0,
+                                            "syncStatus": "string",
+                                            "total": "string",
+                                            "type": "string",
+                                            "typeId": "string",
+                                            "unappliedAmount": "string"
                                         }
                                     ]
                                 }
@@ -5316,6 +5664,18 @@
                         }
                     },
                     {
+                        "name": "invoiceConfigurations",
+                        "in": "query",
+                        "description": "Invoice configuration associated with invoices.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.InvoiceConfiguration"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "sort",
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\",
@@ -5501,7 +5861,8 @@
                                             "exportId": "string",
                                             "materialSkuId": 0,
                                             "membershipId": 0,
-                                            "paidOn": "string"
+                                            "paidOn": "string",
+                                            "invoiceConfiguration": "JobInvoice"
                                         }
                                     ]
                                 }
@@ -6158,6 +6519,292 @@
                                         "errorMessage": "string"
                                     }
                                 ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/invoices/{invoiceId}/tasks": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Invoices_GetInvoiceTasks",
+                "operationId": "Invoices_GetInvoiceTasks",
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.GetInvoiceTasksResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "taskId": "string",
+                                            "type": "string",
+                                            "name": "string",
+                                            "status": "string",
+                                            "assigneeId": "string",
+                                            "dueDate": "string",
+                                            "description": "string",
+                                            "templateId": "string",
+                                            "relations": [
+                                                {
+                                                    "type": "string",
+                                                    "taskId": "string"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Creates an invoice task from a template",
+                "description": "Creates an invoice task from a template",
+                "operationId": "Invoices_CreateInvoiceTask",
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CreateInvoiceTaskRequest"
+                            },
+                            "example": {
+                                "templateId": "string",
+                                "variables": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.CreateInvoiceTaskResponse"
+                                },
+                                "example": {
+                                    "executionId": "string",
+                                    "tasks": [
+                                        {
+                                            "taskId": "string",
+                                            "key": "string"
+                                        }
+                                    ],
+                                    "status": "string",
+                                    "errors": [
+                                        {
+                                            "message": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/invoices/{invoiceId}/tasks/{taskId}": {
+            "patch": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Updates an invoice task",
+                "description": "Updates an invoice task",
+                "operationId": "Invoices_UpdateInvoiceTask",
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.UpdateInvoiceTaskRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "status": "string",
+                                "assigneeId": "string",
+                                "dueDate": "string",
+                                "description": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.UpdateInvoiceTaskResponse"
+                                },
+                                "example": {
+                                    "taskId": "string"
+                                }
                             }
                         }
                     },
@@ -7088,18 +7735,9 @@
                         }
                     },
                     {
-                        "name": "ids",
-                        "in": "query",
-                        "description": "Perform lookup by multiple IDs (maximum 50)",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    {
                         "name": "activeState",
                         "in": "query",
-                        "description": "Default: null (ActiveOnly)\\\nValues: [ActiveOnly, InactiveOnly, All]",
+                        "description": "Default: null (ActiveOnly)\n            \\\nValues: [ActiveOnly, InactiveOnly, All]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -7127,36 +7765,11 @@
                         }
                     },
                     {
-                        "name": "statuses",
+                        "name": "batchId",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "paidOnAfter",
-                        "in": "query",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "paidOnBefore",
-                        "in": "query",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "businessUnitIds",
-                        "in": "query",
-                        "schema": {
-                            "type": "string",
+                            "type": "integer",
+                            "format": "int64",
                             "nullable": true
                         }
                     },
@@ -7170,25 +7783,30 @@
                         }
                     },
                     {
-                        "name": "batchId",
+                        "name": "businessUnitIds",
                         "in": "query",
                         "schema": {
-                            "type": "integer",
-                            "format": "int64",
+                            "type": "string",
                             "nullable": true
                         }
                     },
                     {
-                        "name": "transactionType",
+                        "name": "createdBefore",
                         "in": "query",
-                        "description": "Values: [Undefined, JournalEntry, ReceivePayment]",
+                        "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "oneOf": [
-                                {
-                                    "$ref": "#/components/schemas/Accounting.V2.PaymentTransactionType"
-                                }
-                            ],
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
                             "nullable": true
                         }
                     },
@@ -7198,61 +7816,6 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "totalGreater",
-                        "in": "query",
-                        "schema": {
-                            "type": "number",
-                            "format": "decimal",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "totalLess",
-                        "in": "query",
-                        "schema": {
-                            "type": "number",
-                            "format": "decimal",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "depositIds",
-                        "in": "query",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "The logical number of page to return, starting from 1",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "description": "How many records to return (50 by default)",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "includeTotal",
-                        "in": "query",
-                        "description": "Whether total count should be returned",
-                        "schema": {
-                            "type": "boolean",
                             "nullable": true
                         }
                     },
@@ -7284,6 +7847,32 @@
                         }
                     },
                     {
+                        "name": "depositIds",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "modifiedBefore",
                         "in": "query",
                         "description": "Return items modified before certain date/time (in UTC)",
@@ -7304,9 +7893,28 @@
                         }
                     },
                     {
-                        "name": "createdBefore",
+                        "name": "page",
                         "in": "query",
-                        "description": "Return items created before certain date/time (in UTC)",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "paidOnAfter",
+                        "in": "query",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -7314,9 +7922,8 @@
                         }
                     },
                     {
-                        "name": "createdOnOrAfter",
+                        "name": "paidOnBefore",
                         "in": "query",
-                        "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -7326,9 +7933,49 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n            ",
                         "schema": {
                             "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "totalGreater",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "totalLess",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "transactionType",
+                        "in": "query",
+                        "description": "Values: [Undefined, JournalEntry, ReceivePayment]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.PaymentTransactionType"
+                                }
+                            ],
                             "nullable": true
                         }
                     }
@@ -7348,33 +7995,45 @@
                                     "totalCount": 0,
                                     "data": [
                                         {
-                                            "id": 0,
-                                            "syncStatus": "string",
-                                            "referenceNumber": "string",
-                                            "date": "string",
-                                            "type": "string",
-                                            "typeId": "string",
-                                            "total": "string",
-                                            "unappliedAmount": "string",
-                                            "memo": "string",
-                                            "customer": {
+                                            "active": true,
+                                            "appliedTo": [
+                                                {
+                                                    "appliedAmount": "string",
+                                                    "appliedBy": "string",
+                                                    "appliedId": 0,
+                                                    "appliedOn": "string",
+                                                    "appliedTo": 0,
+                                                    "appliedToReferenceNumber": "string"
+                                                }
+                                            ],
+                                            "authCode": "string",
+                                            "batch": {
                                                 "id": 0,
+                                                "number": "string",
                                                 "name": "string"
                                             },
                                             "businessUnit": {
                                                 "id": 0,
                                                 "name": "string"
                                             },
+                                            "checkNumber": "string",
+                                            "createdBy": "string",
+                                            "createdOn": "string",
+                                            "customer": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
+                                            "date": "string",
                                             "deposit": {
                                                 "id": 0,
                                                 "name": "string"
                                             },
-                                            "batch": {
-                                                "id": 0,
-                                                "number": "string",
-                                                "name": "string"
-                                            },
-                                            "createdBy": "string",
                                             "generalLedgerAccount": {
                                                 "id": 0,
                                                 "name": "string",
@@ -7382,27 +8041,16 @@
                                                 "type": "string",
                                                 "detailType": "string"
                                             },
-                                            "appliedTo": [
-                                                {
-                                                    "appliedId": 0,
-                                                    "appliedTo": 0,
-                                                    "appliedAmount": "string",
-                                                    "appliedOn": "string",
-                                                    "appliedBy": "string",
-                                                    "appliedToReferenceNumber": "string"
-                                                }
-                                            ],
-                                            "customFields": [
-                                                {
-                                                    "name": "string",
-                                                    "value": "string"
-                                                }
-                                            ],
-                                            "authCode": "string",
-                                            "checkNumber": "string",
+                                            "id": 0,
+                                            "memo": "string",
                                             "modifiedOn": "string",
-                                            "createdOn": "string",
-                                            "active": true
+                                            "referenceNumber": "string",
+                                            "refundedPaymentId": 0,
+                                            "syncStatus": "string",
+                                            "total": "string",
+                                            "type": "string",
+                                            "typeId": "string",
+                                            "unappliedAmount": "string"
                                         }
                                     ]
                                 }
@@ -7455,21 +8103,22 @@
                                 "$ref": "#/components/schemas/Accounting.V2.PaymentCreateRequest"
                             },
                             "example": {
-                                "typeId": 0,
-                                "memo": "string",
-                                "paidOn": "string",
+                                "amount": 0,
                                 "authCode": "string",
                                 "checkNumber": "string",
-                                "exportId": "string",
-                                "status": {},
                                 "customerId": 0,
+                                "exportId": "string",
+                                "memo": "string",
+                                "paidOn": "string",
                                 "splits": [
                                     {
+                                        "amount": 0,
                                         "invoiceId": 0,
-                                        "invoiceNumber": "string",
-                                        "amount": 0
+                                        "invoiceNumber": "string"
                                     }
-                                ]
+                                ],
+                                "status": {},
+                                "typeId": 0
                             }
                         }
                     }
@@ -7483,24 +8132,24 @@
                                     "$ref": "#/components/schemas/Accounting.V2.PaymentResponse"
                                 },
                                 "example": {
-                                    "id": 0,
-                                    "typeId": 0,
                                     "active": true,
-                                    "memo": "string",
-                                    "paidOn": "string",
                                     "authCode": "string",
                                     "checkNumber": "string",
-                                    "exportId": "string",
-                                    "transactionStatus": {},
-                                    "status": {},
                                     "customerId": 0,
+                                    "exportId": "string",
+                                    "id": 0,
+                                    "memo": "string",
+                                    "paidOn": "string",
                                     "splits": [
                                         {
+                                            "amount": 0,
                                             "invoiceId": 0,
-                                            "invoiceNumber": "string",
-                                            "amount": 0
+                                            "invoiceNumber": "string"
                                         }
-                                    ]
+                                    ],
+                                    "status": {},
+                                    "transactionStatus": {},
+                                    "typeId": 0
                                 }
                             }
                         }
@@ -7774,21 +8423,21 @@
                                 "$ref": "#/components/schemas/Accounting.V2.PaymentUpdateRequest"
                             },
                             "example": {
-                                "typeId": 0,
                                 "active": true,
-                                "memo": "string",
-                                "paidOn": "string",
                                 "authCode": "string",
                                 "checkNumber": "string",
                                 "exportId": "string",
-                                "status": "Pending",
+                                "memo": "string",
+                                "paidOn": "string",
                                 "splits": [
                                     {
+                                        "amount": 0,
                                         "invoiceId": 0,
-                                        "invoiceNumber": "string",
-                                        "amount": 0
+                                        "invoiceNumber": "string"
                                     }
-                                ]
+                                ],
+                                "status": "Pending",
+                                "typeId": 0
                             }
                         }
                     }
@@ -7802,24 +8451,24 @@
                                     "$ref": "#/components/schemas/Accounting.V2.PaymentResponse"
                                 },
                                 "example": {
-                                    "id": 0,
-                                    "typeId": 0,
                                     "active": true,
-                                    "memo": "string",
-                                    "paidOn": "string",
                                     "authCode": "string",
                                     "checkNumber": "string",
-                                    "exportId": "string",
-                                    "transactionStatus": {},
-                                    "status": {},
                                     "customerId": 0,
+                                    "exportId": "string",
+                                    "id": 0,
+                                    "memo": "string",
+                                    "paidOn": "string",
                                     "splits": [
                                         {
+                                            "amount": 0,
                                             "invoiceId": 0,
-                                            "invoiceNumber": "string",
-                                            "amount": 0
+                                            "invoiceNumber": "string"
                                         }
-                                    ]
+                                    ],
+                                    "status": {},
+                                    "transactionStatus": {},
+                                    "typeId": 0
                                 }
                             }
                         }
@@ -7872,10 +8521,10 @@
                                 "$ref": "#/components/schemas/Accounting.V2.PaymentStatusBatchRequest"
                             },
                             "example": {
-                                "status": "Pending",
                                 "paymentIds": [
                                     0
-                                ]
+                                ],
+                                "status": "Pending"
                             }
                         }
                     }
@@ -10613,6 +11262,315 @@
                     "LessThanOrEqual"
                 ]
             },
+            "PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemoItemsPublicResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemsPublicResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.CreditMemos.CreditMemoItemsPublicResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "quantity",
+                    "cost",
+                    "price",
+                    "skuId",
+                    "total",
+                    "taxable",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "cost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "skuName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "total": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "taxable": {
+                        "type": "boolean"
+                    },
+                    "revenueGeneralLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemGLAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "expensesGeneralLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemGLAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemNamedEntityResponse"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoItemGLAccountResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoItemNamedEntityResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Accounting.V2.CreditMemos.CreditMemosItemsPublicResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemosItemsPublicResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.CreditMemos.CreditMemosItemsPublicResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "quantity",
+                    "cost",
+                    "price",
+                    "skuId",
+                    "total",
+                    "taxable",
+                    "createdOn",
+                    "creditMemoId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "cost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "skuName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "total": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "taxable": {
+                        "type": "boolean"
+                    },
+                    "revenueGeneralLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemGLAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "expensesGeneralLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemGLAccountResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoItemNamedEntityResponse"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "creditMemoId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
             "Accounting.V2.CreditMemos.CreditMemoUpdatePublicResponse": {
                 "required": [
                     "id",
@@ -11128,26 +12086,26 @@
                 ],
                 "type": "object",
                 "properties": {
-                    "appliedId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "appliedTo": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
                     "appliedAmount": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "appliedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "appliedId": {
+                        "type": "integer",
+                        "format": "int64"
                     },
                     "appliedOn": {
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
                     },
-                    "appliedBy": {
-                        "type": "string",
-                        "nullable": true
+                    "appliedTo": {
+                        "type": "integer",
+                        "format": "int64"
                     },
                     "appliedToReferenceNumber": {
                         "type": "string",
@@ -11216,6 +12174,7 @@
             "Accounting.V2.ExportInvoiceResponse": {
                 "required": [
                     "active",
+                    "invoiceConfiguration",
                     "id",
                     "createdOn",
                     "sentStatus",
@@ -11272,6 +12231,9 @@
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
+                    },
+                    "invoiceConfiguration": {
+                        "$ref": "#/components/schemas/Accounting.V2.InvoiceConfiguration"
                     },
                     "id": {
                         "type": "integer",
@@ -11689,6 +12651,26 @@
                 },
                 "additionalProperties": false
             },
+            "Accounting.V2.InvoiceConfiguration": {
+                "enum": [
+                    "JobInvoice",
+                    "ProjectInvoice",
+                    "CounterSales",
+                    "MembershipInvoice",
+                    "InterestChargeInvoice",
+                    "ARImportInvoice"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "JobInvoice",
+                    "ProjectInvoice",
+                    "CounterSales",
+                    "MembershipInvoice",
+                    "InterestChargeInvoice",
+                    "ARImportInvoice"
+                ]
+            },
             "Accounting.V2.JobResponse": {
                 "required": [
                     "id"
@@ -11774,14 +12756,22 @@
                 "enum": [
                     "NeedsReview",
                     "OnHold",
-                    "Reviewed"
+                    "Reviewed",
+                    "PendingApproval",
+                    "Rejected",
+                    "ReadyForBilling",
+                    "Invoiced"
                 ],
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
                     "NeedsReview",
                     "OnHold",
-                    "Reviewed"
+                    "Reviewed",
+                    "PendingApproval",
+                    "Rejected",
+                    "ReadyForBilling",
+                    "Invoiced"
                 ]
             },
             "ExportResponse_Of_Accounting.V2.ExportInvoiceItemResponse": {
@@ -12041,54 +13031,31 @@
             },
             "Accounting.V2.ExportPaymentResponse": {
                 "required": [
-                    "id",
-                    "modifiedOn",
+                    "active",
                     "createdOn",
-                    "active"
+                    "id",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
+                    "active": {
+                        "type": "boolean"
                     },
-                    "syncStatus": {
+                    "appliedTo": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.PaymentAppliedResponse"
+                        },
+                        "nullable": true
+                    },
+                    "authCode": {
                         "type": "string",
                         "nullable": true
                     },
-                    "referenceNumber": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "type": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "typeId": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "total": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unappliedAmount": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "memo": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "customer": {
+                    "batch": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
                             }
                         ],
                         "nullable": true
@@ -12101,7 +13068,19 @@
                         ],
                         "nullable": true
                     },
-                    "deposit": {
+                    "checkNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "customer": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
@@ -12109,16 +13088,24 @@
                         ],
                         "nullable": true
                     },
-                    "batch": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
-                            }
-                        ],
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.CustomFieldModel"
+                        },
                         "nullable": true
                     },
-                    "createdBy": {
+                    "date": {
                         "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "deposit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
                         "nullable": true
                     },
                     "generalLedgerAccount": {
@@ -12129,25 +13116,11 @@
                         ],
                         "nullable": true
                     },
-                    "appliedTo": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.PaymentAppliedResponse"
-                        },
-                        "nullable": true
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
                     },
-                    "customFields": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.CustomFieldModel"
-                        },
-                        "nullable": true
-                    },
-                    "authCode": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "checkNumber": {
+                    "memo": {
                         "type": "string",
                         "nullable": true
                     },
@@ -12155,12 +13128,34 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "createdOn": {
+                    "referenceNumber": {
                         "type": "string",
-                        "format": "date-time"
+                        "nullable": true
                     },
-                    "active": {
-                        "type": "boolean"
+                    "refundedPaymentId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "syncStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "typeId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "unappliedAmount": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -12596,7 +13591,9 @@
                     "GoodsReceivedNotInvoiced",
                     "VendorDiscount",
                     "ProcessingFees",
-                    "GoodsReturnedNotCredited"
+                    "GoodsReturnedNotCredited",
+                    "UseTaxExpense",
+                    "UseTaxLiability"
                 ],
                 "type": "string",
                 "description": "",
@@ -12633,7 +13630,9 @@
                     "GoodsReceivedNotInvoiced",
                     "VendorDiscount",
                     "ProcessingFees",
-                    "GoodsReturnedNotCredited"
+                    "GoodsReturnedNotCredited",
+                    "UseTaxExpense",
+                    "UseTaxLiability"
                 ]
             },
             "PaginatedResponse_Of_Accounting.V2.GlAccountTypeResponse": {
@@ -13059,7 +14058,8 @@
                     "createdOn",
                     "sentStatus",
                     "reviewStatus",
-                    "active"
+                    "active",
+                    "invoiceConfiguration"
                 ],
                 "type": "object",
                 "properties": {
@@ -13298,6 +14298,9 @@
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
+                    },
+                    "invoiceConfiguration": {
+                        "$ref": "#/components/schemas/Accounting.V2.InvoiceConfiguration"
                     }
                 },
                 "additionalProperties": false
@@ -13731,6 +14734,232 @@
                         "nullable": true
                     },
                     "externalMessage": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Accounting.V2.GetInvoiceTasksResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.GetInvoiceTasksResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.GetInvoiceTasksResponse": {
+                "required": [
+                    "taskId",
+                    "relations"
+                ],
+                "type": "object",
+                "properties": {
+                    "taskId": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "assigneeId": {
+                        "type": "string",
+                        "format": "guid",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "templateId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "relations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.InvoiceTaskRelationResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.InvoiceTaskRelationResponse": {
+                "required": [
+                    "taskId"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "taskId": {
+                        "type": "string",
+                        "format": "guid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreateInvoiceTaskResponse": {
+                "required": [
+                    "executionId",
+                    "tasks",
+                    "status",
+                    "errors"
+                ],
+                "type": "object",
+                "properties": {
+                    "executionId": {
+                        "type": "string"
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CreatedTaskResponse"
+                        }
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.TemplateExecutionErrorResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreatedTaskResponse": {
+                "required": [
+                    "taskId",
+                    "key"
+                ],
+                "type": "object",
+                "properties": {
+                    "taskId": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "key": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.TemplateExecutionErrorResponse": {
+                "required": [
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreateInvoiceTaskRequest": {
+                "required": [
+                    "templateId"
+                ],
+                "type": "object",
+                "properties": {
+                    "templateId": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.UpdateInvoiceTaskResponse": {
+                "required": [
+                    "taskId"
+                ],
+                "type": "object",
+                "properties": {
+                    "taskId": {
+                        "type": "string",
+                        "format": "guid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.UpdateInvoiceTaskRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "assigneeId": {
+                        "type": "string",
+                        "format": "guid",
+                        "nullable": true
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "description": {
                         "type": "string",
                         "nullable": true
                     }
@@ -14438,54 +15667,31 @@
             },
             "Accounting.V2.DetailedPaymentResponse": {
                 "required": [
-                    "id",
-                    "modifiedOn",
+                    "active",
                     "createdOn",
-                    "active"
+                    "id",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
+                    "active": {
+                        "type": "boolean"
                     },
-                    "syncStatus": {
+                    "appliedTo": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.PaymentAppliedResponse"
+                        },
+                        "nullable": true
+                    },
+                    "authCode": {
                         "type": "string",
                         "nullable": true
                     },
-                    "referenceNumber": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "type": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "typeId": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "total": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unappliedAmount": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "memo": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "customer": {
+                    "batch": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
                             }
                         ],
                         "nullable": true
@@ -14498,7 +15704,19 @@
                         ],
                         "nullable": true
                     },
-                    "deposit": {
+                    "checkNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "customer": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
@@ -14506,16 +15724,24 @@
                         ],
                         "nullable": true
                     },
-                    "batch": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
-                            }
-                        ],
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.CustomFieldModel"
+                        },
                         "nullable": true
                     },
-                    "createdBy": {
+                    "date": {
                         "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "deposit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            }
+                        ],
                         "nullable": true
                     },
                     "generalLedgerAccount": {
@@ -14526,25 +15752,11 @@
                         ],
                         "nullable": true
                     },
-                    "appliedTo": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.PaymentAppliedResponse"
-                        },
-                        "nullable": true
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
                     },
-                    "customFields": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.CustomFieldModel"
-                        },
-                        "nullable": true
-                    },
-                    "authCode": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "checkNumber": {
+                    "memo": {
                         "type": "string",
                         "nullable": true
                     },
@@ -14552,12 +15764,34 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "createdOn": {
+                    "referenceNumber": {
                         "type": "string",
-                        "format": "date-time"
+                        "nullable": true
                     },
-                    "active": {
-                        "type": "boolean"
+                    "refundedPaymentId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "syncStatus": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "typeId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "unappliedAmount": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -14579,30 +15813,13 @@
             "Accounting.V2.PaymentResponse": {
                 "required": [
                     "id",
-                    "typeId",
-                    "splits"
+                    "splits",
+                    "typeId"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "typeId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
                     "active": {
                         "type": "boolean",
-                        "nullable": true
-                    },
-                    "memo": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "paidOn": {
-                        "type": "string",
-                        "format": "date-time",
                         "nullable": true
                     },
                     "authCode": {
@@ -14613,9 +15830,41 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "exportId": {
                         "type": "string",
                         "description": "Gets or sets the identifier when exported.",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "paidOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "splits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
+                        }
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
+                            }
+                        ],
                         "nullable": true
                     },
                     "transactionStatus": {
@@ -14626,27 +15875,46 @@
                         ],
                         "nullable": true
                     },
-                    "status": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
-                            }
-                        ],
+                    "typeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.PaymentSplitApiModel": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "type": "number",
+                        "format": "decimal",
                         "nullable": true
                     },
-                    "customerId": {
+                    "invoiceId": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
                     },
-                    "splits": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
-                        }
+                    "invoiceNumber": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
+            },
+            "Accounting.V2.PaymentStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ],
+                "type": "string",
+                "description": "Indicates a payment's status.",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ]
             },
             "Accounting.V2.TransactionProcessingStatus": {
                 "enum": [
@@ -14664,57 +15932,15 @@
                     "Rejected"
                 ]
             },
-            "Accounting.V2.PaymentStatus": {
-                "enum": [
-                    "Pending",
-                    "Posted",
-                    "Exported"
-                ],
-                "type": "string",
-                "description": "Indicates a payment's status.",
-                "x-enumNames": [
-                    "Pending",
-                    "Posted",
-                    "Exported"
-                ]
-            },
-            "Accounting.V2.PaymentSplitApiModel": {
-                "type": "object",
-                "properties": {
-                    "invoiceId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "invoiceNumber": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
             "Accounting.V2.PaymentCreateRequest": {
                 "required": [
                     "typeId"
                 ],
                 "type": "object",
                 "properties": {
-                    "typeId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "memo": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "paidOn": {
-                        "type": "string",
-                        "format": "date-time",
+                    "amount": {
+                        "type": "number",
+                        "format": "decimal",
                         "nullable": true
                     },
                     "authCode": {
@@ -14725,9 +15951,30 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "exportId": {
                         "type": "string",
                         "description": "Gets or sets the identifier when exported.",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "paidOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "splits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
+                        },
                         "nullable": true
                     },
                     "status": {
@@ -14738,41 +15985,22 @@
                         ],
                         "nullable": true
                     },
-                    "customerId": {
+                    "typeId": {
                         "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "splits": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
-                        },
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
             },
             "Accounting.V2.PaymentUpdateRequest": {
                 "required": [
-                    "typeId",
-                    "splits"
+                    "splits",
+                    "typeId"
                 ],
                 "type": "object",
                 "properties": {
-                    "typeId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
                     "active": {
                         "type": "boolean"
-                    },
-                    "memo": {
-                        "type": "string"
-                    },
-                    "paidOn": {
-                        "type": "string",
-                        "format": "date-time"
                     },
                     "authCode": {
                         "type": "string"
@@ -14784,34 +16012,45 @@
                         "type": "string",
                         "description": "Gets or sets the identifier when exported."
                     },
-                    "status": {
-                        "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
+                    "memo": {
+                        "type": "string"
+                    },
+                    "paidOn": {
+                        "type": "string",
+                        "format": "date-time"
                     },
                     "splits": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.PaymentSplitApiModel"
                         }
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
+                    },
+                    "typeId": {
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
             },
             "Accounting.V2.PaymentStatusBatchRequest": {
                 "required": [
-                    "status",
-                    "paymentIds"
+                    "paymentIds",
+                    "status"
                 ],
                 "type": "object",
                 "properties": {
-                    "status": {
-                        "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
-                    },
                     "paymentIds": {
                         "type": "array",
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Accounting.V2.PaymentStatus"
                     }
                 },
                 "additionalProperties": false
@@ -15924,6 +17163,214 @@
                             }
                         ],
                         "description": "The invoice model."
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Accounting.V2.Webhook.InvoiceTaskCreatedEventPayload": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.acc.invoice-task-created\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskCreatedEventPayload"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.Webhook.InvoiceTaskCreatedEventPayload": {
+                "required": [
+                    "invoice",
+                    "task",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "invoice": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskEventInvoiceModel"
+                            }
+                        ],
+                        "description": "The invoice associated with the invoice task."
+                    },
+                    "task": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskEventTaskModel"
+                            }
+                        ],
+                        "description": "The task associated with the invoice."
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.Webhook.InvoiceTaskEventInvoiceModel": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the invoice associated with the Invoice Task Event.",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.Webhook.InvoiceTaskEventTaskModel": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the task associated with the Invoice Task Event.",
+                        "format": "guid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_Accounting.V2.Webhook.InvoiceTaskUpdatedEventPayload": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.acc.invoice-task-updated\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskUpdatedEventPayload"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.Webhook.InvoiceTaskUpdatedEventPayload": {
+                "required": [
+                    "invoice",
+                    "task",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "invoice": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskEventInvoiceModel"
+                            }
+                        ],
+                        "description": "The invoice associated with the invoice task."
+                    },
+                    "task": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskEventTaskModel"
+                            }
+                        ],
+                        "description": "The task associated with the invoice."
                     },
                     "tenantId": {
                         "type": "integer",

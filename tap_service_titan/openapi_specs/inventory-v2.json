@@ -300,6 +300,8 @@
                                             "type": "string",
                                             "inventoryLocationId": 0,
                                             "businessUnitId": 0,
+                                            "projectId": 0,
+                                            "invoiceId": 0,
                                             "createdById": 0,
                                             "memo": "string",
                                             "date": "string",
@@ -333,6 +335,7 @@
                                                     "quantity": 0,
                                                     "createdById": 0,
                                                     "active": true,
+                                                    "budgetCodeId": 0,
                                                     "serialNumbers": [
                                                         {
                                                             "id": 0,
@@ -605,6 +608,8 @@
                                             "type": "string",
                                             "inventoryLocationId": 0,
                                             "businessUnitId": 0,
+                                            "projectId": 0,
+                                            "invoiceId": 0,
                                             "createdById": 0,
                                             "memo": "string",
                                             "date": "string",
@@ -638,6 +643,7 @@
                                                     "quantity": 0,
                                                     "createdById": 0,
                                                     "active": true,
+                                                    "budgetCodeId": 0,
                                                     "serialNumbers": [
                                                         {
                                                             "id": 0,
@@ -1086,7 +1092,8 @@
                                                         }
                                                     ],
                                                     "createdById": 0,
-                                                    "active": true
+                                                    "active": true,
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "customFields": [
@@ -5365,7 +5372,8 @@
                                                         }
                                                     ],
                                                     "createdById": 0,
-                                                    "active": true
+                                                    "active": true,
+                                                    "budgetCodeId": 0
                                                 }
                                             ],
                                             "customFields": [
@@ -7000,6 +7008,18 @@
                         "format": "int64",
                         "nullable": true
                     },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "Id of project associated with adjustment",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "invoiceId": {
+                        "type": "integer",
+                        "description": "Id of invoice associated with adjustment",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "createdById": {
                         "type": "integer",
                         "description": "Employee who created this adjustment",
@@ -7239,6 +7259,12 @@
                     "active": {
                         "type": "boolean",
                         "description": "Is active"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Id of the budget code for this adjustment item",
+                        "format": "int64",
+                        "nullable": true
                     },
                     "serialNumbers": {
                         "type": "array",
@@ -7595,6 +7621,18 @@
                     "businessUnitId": {
                         "type": "integer",
                         "description": "Business Unit Id",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "Id of project associated with adjustment",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "invoiceId": {
+                        "type": "integer",
+                        "description": "Id of invoice associated with adjustment",
                         "format": "int64",
                         "nullable": true
                     },
@@ -8735,6 +8773,12 @@
                     "active": {
                         "type": "boolean",
                         "description": "Is active"
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "description": "Id of the budget code for transfer item",
+                        "format": "int64",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false,
