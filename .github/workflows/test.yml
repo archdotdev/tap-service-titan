@@ -1,6 +1,7 @@
 name: Test tap-service-titan
 
 on:
+  merge_queue:
   push:
     branches:
       - main
