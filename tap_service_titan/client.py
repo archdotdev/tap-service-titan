@@ -6,7 +6,7 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import cached_property
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import requests
 import requests.exceptions
@@ -19,6 +19,14 @@ if sys.version_info >= (3, 12):
     from typing import override
 else:
     from typing_extensions import override
+
+if sys.version_info >= (3, 13):
+    from typing import TypeVar
+else:
+    from typing_extensions import TypeVar
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 @dataclass
@@ -80,7 +88,10 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
         return new_range if new_range.is_valid() else None
 
 
-class ServiceTitanBaseStream(RESTStream):
+_TToken = TypeVar("_TToken", default=int)
+
+
+class ServiceTitanBaseStream(RESTStream[_TToken]):
     """ServiceTitan base stream class."""
 
     records_jsonpath = "$.data[*]"  # Or override `parse_response`.
@@ -165,7 +176,7 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
     @override
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: str | None,
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
@@ -203,15 +214,15 @@ class ServiceTitanPaginator(BasePageNumberPaginator):
         return response.json().get("hasMore", False)
 
 
-class ServiceTitanStream(ServiceTitanBaseStream):
+class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
     """ServiceTitan stream class for endpoints without export support."""
 
     @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: int | None,
-    ) -> dict[str, Any]:
+        context: Context | None,
+        next_page_token: _TToken | None,
+    ) -> dict[str, Any] | str:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -232,6 +243,6 @@ class ServiceTitanStream(ServiceTitanBaseStream):
         return params
 
     @override
-    def get_new_paginator(self) -> ServiceTitanPaginator:
+    def get_new_paginator(self) -> BaseAPIPaginator:
         """Create a new pagination helper instance."""
         return ServiceTitanPaginator(start_value=1)

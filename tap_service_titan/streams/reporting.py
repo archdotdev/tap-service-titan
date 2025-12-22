@@ -23,7 +23,13 @@ if sys.version_info >= (3, 11):
 else:
     from backports.httpmethod import HTTPMethod
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
 if t.TYPE_CHECKING:
+    from collections.abc import Iterable, Mapping
     from datetime import date
 
     from singer_sdk.streams.rest import _TToken
@@ -37,7 +43,8 @@ class CustomReports(ServiceTitanStream):
     replication_method = REPLICATION_FULL_TABLE
     is_sorted = True
 
-    def __init__(self, *args, **kwargs) -> None:  # noqa: ANN002 ANN003
+    @override
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize the stream."""
         self._report = kwargs.pop("report")
         self._backfill_params = [
@@ -55,6 +62,7 @@ class CustomReports(ServiceTitanStream):
     # This data is sorted but we use a lookback window to get overlapping historical
     # data. This causes the sort check to fail because the bookmark gets updated to
     # and older value than previously saved.
+    @override
     @property
     def check_sorted(self) -> bool:
         """Check if stream is sorted.
@@ -127,6 +135,7 @@ class CustomReports(ServiceTitanStream):
         resp.raise_for_status()
         return resp.json()
 
+    @override
     @cached_property
     def schema(self) -> dict:
         """Get schema.
@@ -150,6 +159,7 @@ class CustomReports(ServiceTitanStream):
             )
         return th.PropertiesList(*properties).to_dict()
 
+    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
@@ -160,9 +170,10 @@ class CustomReports(ServiceTitanStream):
             f"/{report_category}/reports/{report_id}/data"
         )
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: _TToken | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization.
@@ -179,11 +190,20 @@ class CustomReports(ServiceTitanStream):
         params["pageSize"] = 25000
         return params
 
+    @override
     def prepare_request_payload(
         self,
-        context: types.Context | None,  # noqa: ARG002
-        next_page_token: _TToken | None,  # noqa: ARG002
-    ) -> dict | None:
+        context: types.Context | None,
+        next_page_token: int | None,
+    ) -> (
+        Iterable[bytes]
+        | str
+        | bytes
+        | list[tuple[t.Any, t.Any]]
+        | tuple[tuple[t.Any, t.Any]]
+        | Mapping[str, t.Any]
+        | None
+    ):
         """Prepare the data payload for the REST API request.
 
         By default, no payload will be sent (return None).
@@ -214,6 +234,7 @@ class CustomReports(ServiceTitanStream):
             self.logger.info(msg)
         return {"parameters": params}
 
+    @override
     def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result records.
 
@@ -237,6 +258,7 @@ class CustomReports(ServiceTitanStream):
                 )
             yield data
 
+    @override
     def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
         """Return a generator of record-type dictionary objects.
 
@@ -257,6 +279,7 @@ class CustomReports(ServiceTitanStream):
                 # Increment date for next iteration
                 self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)
 
+    @override
     def backoff_wait_generator(self) -> t.Generator[float, None, None]:
         """Return a generator for backoff wait times."""
 

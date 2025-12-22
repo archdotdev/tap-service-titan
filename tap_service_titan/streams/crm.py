@@ -15,7 +15,7 @@ else:
     from typing_extensions import override
 
 if TYPE_CHECKING:
-    from singer_sdk.helpers.types import Context
+    from singer_sdk.helpers.types import Context, Record
 
 
 # CRM Streams
@@ -64,7 +64,7 @@ class CustomersStream(ServiceTitanExportStream):
         return f"/crm/v2/tenant/{self.tenant_id}/export/customers"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         """Return a context dictionary for a child stream."""
         return {"customer_id": record["id"]}
 
@@ -153,7 +153,7 @@ class LocationsStream(ServiceTitanExportStream):
         return f"/crm/v2/tenant/{self.tenant_id}/export/locations"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         """Return a context dictionary for a child stream."""
         return {"location_id": record["id"]}
 

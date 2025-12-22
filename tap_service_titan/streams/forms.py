@@ -156,7 +156,7 @@ class SubmissionsStream(ServiceTitanStream):
     @override
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, Any]:
         """Overrides the default URL parameters to use a custom param for incremental extraction.

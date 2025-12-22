@@ -19,6 +19,7 @@ else:
 
 if t.TYPE_CHECKING:
     import requests
+    from singer_sdk.helpers.types import Context, Record
 
 
 # JPM Streams
@@ -52,7 +53,7 @@ class JobsStream(ServiceTitanExportStream):
         return f"/jpm/v2/tenant/{self.tenant_id}/export/jobs"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         """Return a context dictionary for a child stream."""
         return {"job_id": record["id"]}
 
