@@ -24,6 +24,8 @@ else:
     from typing_extensions import override
 
 if t.TYPE_CHECKING:
+    from collections.abc import Iterable, Mapping
+
     import requests
     from singer_sdk.helpers.types import Context
 
@@ -32,14 +34,9 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
     """Define paginator for the capacities stream."""
 
     @override
-    def __init__(
-        self,
-        start_value: datetime,
-        *args: t.Any,
-        **kwargs: t.Any,
-    ) -> None:
+    def __init__(self, start_value: datetime, **kwargs: t.Any) -> None:
         """Initialize the paginator."""
-        super().__init__(start_value=start_value, *args, **kwargs)  # noqa: B026
+        super().__init__(start_value=start_value, **kwargs)
         self.end_value = datetime.now(timezone.utc) + timedelta(days=7)
 
     @override
@@ -48,12 +45,12 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
         return self.current_value <= self.end_value
 
     @override
-    def get_next(self, response: requests.Response) -> dict | None:
+    def get_next(self, response: requests.Response) -> datetime | None:
         """Get the next page token."""
         return self.current_value + timedelta(days=1)
 
 
-class CapacitiesStream(ServiceTitanStream):
+class CapacitiesStream(ServiceTitanStream[datetime]):
     """Define capacities stream."""
 
     name = "capacities"
@@ -96,15 +93,26 @@ class CapacitiesStream(ServiceTitanStream):
     @override
     def get_new_paginator(self) -> CapacitiesPaginator:
         """Get the paginator."""
-        return CapacitiesPaginator(self.get_starting_timestamp(self.context))
+        start_date = self.get_starting_timestamp(self.context)
+        assert start_date is not None  # noqa: S101
+        return CapacitiesPaginator(start_date)
 
     @override
     def prepare_request_payload(
         self,
         context: Context | None,
-        next_page_token: datetime,
-    ) -> dict | None:
+        next_page_token: datetime | None,
+    ) -> (
+        Iterable[bytes]
+        | str
+        | bytes
+        | list[tuple[t.Any, t.Any]]
+        | tuple[tuple[t.Any, t.Any]]
+        | Mapping[str, t.Any]
+        | None
+    ):
         """Prepare the request payload."""
+        assert next_page_token is not None  # noqa: S101
         return {
             "startsOnOrAfter": next_page_token.isoformat(),
             "endsOnOrBefore": (next_page_token + timedelta(days=1)).isoformat(),

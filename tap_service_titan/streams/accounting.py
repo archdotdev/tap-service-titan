@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import sys
 from functools import cached_property
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
+
+from singer_sdk import RESTStream
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import ACCOUNTING, ServiceTitanSchema
@@ -151,13 +153,14 @@ class TaxZonesStream(ServiceTitanStream):
         return f"/accounting/v2/tenant/{self.tenant_id}/tax-zones"
 
 
-class PageSizeLimitMixin:
+class PageSizeLimitMixin(RESTStream):
     """Mixin for streams that have a page size limit."""
 
+    @override
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: Any | None,  # noqa: ANN401
+        context: Context | None,
+        next_page_token: Any | None,
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
@@ -168,7 +171,7 @@ class PageSizeLimitMixin:
         Returns:
             A dictionary of URL query parameters.
         """
-        params = super().get_url_params(context, next_page_token)
+        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
         # This endpoint has an undocumented max page size of 500
         params["pageSize"] = 500
         return params
@@ -181,26 +184,6 @@ class JournalEntriesStream(PageSizeLimitMixin, ServiceTitanStream):
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.JournalEntryResponse")
-
-    @override
-    def get_url_params(
-        self,
-        context: dict | None,
-        next_page_token: Any | None,
-    ) -> dict[str, Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: The stream context.
-            next_page_token: The next page index or value.
-
-        Returns:
-            A dictionary of URL query parameters.
-        """
-        params = super().get_url_params(context, next_page_token)
-        # Some endpoints have an undocumented max page size of 500
-        params["pageSize"] = 500
-        return params
 
     @override
     @cached_property
