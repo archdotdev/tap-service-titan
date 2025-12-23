@@ -1,5 +1,5 @@
 send_anonymous_usage_stats: true
-requires_meltano: ">=4.0"
+requires_meltano: '>=4.0'
 project_id: tap-service-titan
 default_environment: test
 venv:
@@ -45,3 +45,6 @@ plugins:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+  - name: target-duckdb
+    variant: jwills
+    pip_url: target-duckdb~=0.8

@@ -1,8 +1,7 @@
 {
   "key_properties": [
     "startUtc",
-    "businessUnitIds",
-    "technician_id"
+    "businessUnitIds"
   ],
   "metadata": [
     {
@@ -71,43 +70,25 @@
     {
       "breadcrumb": [
         "properties",
+        "technicians"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isAvailable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "isExceedingIdealBookingPercentage"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "technician_id"
-      ],
-      "metadata": {
-        "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "technician_name"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "technician_status"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "technician_hasRequiredSkills"
       ],
       "metadata": {
         "inclusion": "available"
@@ -121,8 +102,7 @@
         "selected-by-default": true,
         "table-key-properties": [
           "startUtc",
-          "businessUnitIds",
-          "technician_id"
+          "businessUnitIds"
         ],
         "valid-replication-keys": [
           "startUtc"
@@ -159,6 +139,13 @@
           "null"
         ]
       },
+      "isAvailable": {
+        "description": "Indicate if time slot is available",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "isExceedingIdealBookingPercentage": {
         "description": "Indicate if Ideal Booking Percentage is exceeded",
         "type": [
@@ -187,32 +174,53 @@
         "format": "date-time",
         "type": "string"
       },
-      "technician_hasRequiredSkills": {
-        "description": "Whether the technician has all the skills required for the job type",
+      "technicians": {
+        "description": "Technician details for this availability time frame",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "hasRequiredSkills": {
+              "description": "Whether the technician has all the skills required for the job type",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique Id of technician",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Name of technician",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "description": "",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "status"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
         "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "technician_id": {
-        "description": "Unique Id of technician",
-        "format": "int64",
-        "type": [
-          "integer",
-          "null"
-        ]
-      },
-      "technician_name": {
-        "description": "Name of technician",
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "technician_status": {
-        "description": "",
-        "type": [
-          "string",
+          "array",
           "null"
         ]
       },
@@ -233,6 +241,8 @@
       "businessUnitIds",
       "totalAvailability",
       "openAvailability",
+      "technicians",
+      "isAvailable",
       "isExceedingIdealBookingPercentage"
     ],
     "type": "object"
