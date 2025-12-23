@@ -57,7 +57,6 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
     primary_keys = (
         "startUtc",
         "businessUnitIds",
-        "technician_id",
     )
     replication_key = "startUtc"
     http_method = HTTPMethod.POST
@@ -77,18 +76,9 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         Yields:
             Each record from the source.
         """
-        for availability_dict in extract_jsonpath(
-            self.records_jsonpath,
-            input=response.json(),
-        ):
-            # We're only looking to get technician availabilities here
-            for unused_key in [
-                "isAvailable",
-            ]:
-                availability_dict.pop(unused_key)
-            for technician in availability_dict.pop("technicians"):
-                technician_dict = {f"technician_{key}": val for key, val in technician.items()}
-                yield {**availability_dict, **technician_dict}
+        for availability_dict in extract_jsonpath(self.records_jsonpath, input=response.json()):
+            if availability_dict.get("technicians", []):
+                yield availability_dict
 
     @override
     def get_new_paginator(self) -> CapacitiesPaginator:

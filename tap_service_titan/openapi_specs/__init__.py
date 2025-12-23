@@ -80,14 +80,6 @@ class ServiceTitanSchema(StreamSchema):
         """Get the schema for the given stream."""
         schema = super().get_stream_schema(stream, stream_class)
 
-        if stream.name == "capacities":
-            schema["required"].remove("isAvailable")
-            schema["required"].remove("technicians")
-            schema["properties"].pop("isAvailable")
-            technician_schema = schema["properties"].pop("technicians")["items"]
-            for prop, prop_schema in technician_schema["properties"].items():
-                schema["properties"][f"technician_{prop}"] = prop_schema
-
         if stream.name == "job_history":
             schema["required"].append("jobId")
             schema["properties"]["jobId"] = {
