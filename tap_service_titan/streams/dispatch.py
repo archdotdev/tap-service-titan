@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import sys
-import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
+from typing import TYPE_CHECKING, Any, cast
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
@@ -23,7 +23,7 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
 
     import requests
@@ -34,7 +34,7 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
     """Define paginator for the capacities stream."""
 
     @override
-    def __init__(self, start_value: datetime, **kwargs: t.Any) -> None:
+    def __init__(self, start_value: datetime, **kwargs: Any) -> None:
         """Initialize the paginator."""
         super().__init__(start_value=start_value, **kwargs)
         self.end_value = datetime.now(timezone.utc) + timedelta(days=7)
@@ -67,7 +67,7 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
     )
 
     @override
-    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result records.
 
         Args:
@@ -96,9 +96,9 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         Iterable[bytes]
         | str
         | bytes
-        | list[tuple[t.Any, t.Any]]
-        | tuple[tuple[t.Any, t.Any]]
-        | Mapping[str, t.Any]
+        | list[tuple[Any, Any]]
+        | tuple[tuple[Any, Any]]
+        | Mapping[str, Any]
         | None
     ):
         """Prepare the request payload."""
@@ -190,6 +190,14 @@ class TechnicianShiftsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self.tenant_id}/technician-shifts"
+
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+        # Return both active and inactive shifts
+        # https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
+        params["active"] = "Any"
+        return params
 
 
 class ZonesStream(ServiceTitanStream):
