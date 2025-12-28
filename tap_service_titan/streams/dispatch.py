@@ -35,8 +35,18 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
 
     @override
     def __init__(self, start_value: datetime, **kwargs: Any) -> None:
-        """Initialize the paginator."""
-        super().__init__(start_value=start_value, **kwargs)
+        """Initialize the paginator.
+
+        For capacity data, we fetch from the earlier of:
+        - The provided start_value (for backfills)
+        - 7 days ago (to capture recent updates)
+
+        This ensures we always capture updates to recent dates while still
+        supporting historical backfills.
+        """
+        lookback_start = datetime.now(timezone.utc) - timedelta(days=7)
+        adjusted_start = min(start_value, lookback_start)
+        super().__init__(start_value=adjusted_start, **kwargs)
         self.end_value = datetime.now(timezone.utc) + timedelta(days=7)
 
     @override
