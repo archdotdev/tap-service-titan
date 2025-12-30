@@ -38,26 +38,20 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
         self,
         start_value: datetime,
         *,
-        lookback_days: int = 7,
         lookahead_days: int = 14,
         **kwargs: Any,
     ) -> None:
         """Initialize the paginator.
 
-        For capacity data, we fetch from the earlier of:
-        - The provided start_value (for backfills)
-        - `lookback_days` days ago (to capture recent updates)
-
-        This ensures we always capture updates to recent dates while still
-        supporting historical backfills.
+        Args:
+            start_value: The starting date for pagination.
+            lookahead_days: The number of days to look ahead.
+            **kwargs: Additional keyword arguments.
         """
-        self.lookback_days = lookback_days
-        self.lookahead_days = lookahead_days
-        now = datetime.now(timezone.utc)
-        self.end_value = now + timedelta(days=self.lookahead_days)
-        lookback_start = now - timedelta(days=self.lookback_days)
+        super().__init__(start_value=start_value, **kwargs)
 
-        super().__init__(start_value=min(start_value, lookback_start), **kwargs)
+        self.lookahead_days = lookahead_days
+        self.end_value = datetime.now(timezone.utc) + timedelta(days=self.lookahead_days)
 
     @override
     def has_more(self, response: requests.Response) -> bool:
@@ -105,7 +99,9 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         """Get the paginator."""
         start_date = self.get_starting_timestamp(self.context)
         assert start_date is not None  # noqa: S101
-        return CapacitiesPaginator(start_date)
+
+        # Set the time to the start of the day to capture late updates
+        return CapacitiesPaginator(start_date.replace(hour=0, minute=0, second=0, microsecond=0))
 
     @override
     def prepare_request_payload(
