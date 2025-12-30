@@ -12,58 +12,55 @@ from tap_service_titan.streams.dispatch import CapacitiesPaginator
 
 
 def test_capacities_paginator_with_recent_start() -> None:
-    """Test capacities paginator with recent start value (should use 7-day lookback)."""
+    """Test capacities paginator with recent start value (should use N-day lookback)."""
     fake_now = datetime(2025, 1, 25, tzinfo=timezone.utc)
-    three_days_ago = fake_now - timedelta(days=3)
-    seven_days_ago = fake_now - timedelta(days=7)
-    seven_days_from_now = fake_now + timedelta(days=7)
+    start_date = fake_now - timedelta(hours=1)
     response = Mock(spec=requests.Response)
 
     with time_machine.travel(fake_now):
-        paginator = CapacitiesPaginator(start_value=three_days_ago)
+        paginator = CapacitiesPaginator(start_value=start_date)
 
-        # Should start at 7 days ago, not 3 days ago
-        assert paginator.current_value == seven_days_ago
-        assert paginator.end_value.replace(microsecond=0) == seven_days_from_now
+        # Initial value should be looking back `lookback_days` days from the current time
+        assert (fake_now - paginator.current_value).days == paginator.lookback_days
+
+        # Upper bound should be `lookahead_days` days from the current time
+        assert (paginator.end_value - fake_now).days == paginator.lookahead_days
         assert paginator.has_more(response=response)
 
         paginator.advance(response=response)
-        assert paginator.current_value == seven_days_ago + timedelta(days=1)
+        assert (paginator.current_value - fake_now).days == 1 - paginator.lookback_days
         assert paginator.has_more(response=response)
 
-        # Advance through all remaining days (13 more times to reach end_value)
-        for _ in range(13):
+        # Advance through all remaining days to reach end_value
+        for _ in range(paginator.lookahead_days + paginator.lookback_days - 1):
             paginator.advance(response=response)
 
         # After reaching end_value, should still have_more (because <= check)
-        assert paginator.current_value.replace(microsecond=0) == seven_days_from_now
+        assert paginator.current_value == paginator.end_value
         assert paginator.has_more(response=response)
 
         # One more advance to go past end_value
         paginator.advance(response=response)
         assert not paginator.has_more(response=response)
 
-        # Final value should be 1 day after the end value (within microsecond precision)
-        assert abs((paginator.current_value - paginator.end_value) - timedelta(days=1)) < timedelta(
-            microseconds=1000
-        )
+        # Final value should be 1 day after the end value
+        assert (paginator.current_value - paginator.end_value).days == 1
 
 
 def test_capacities_paginator_with_old_start() -> None:
     """Test capacities paginator with old start value (should use provided start for backfill)."""
     fake_now = datetime(2025, 1, 25, tzinfo=timezone.utc)
-    thirty_days_ago = fake_now - timedelta(days=30)
-    seven_days_from_now = fake_now + timedelta(days=7)
+    start_date = fake_now - timedelta(days=30)
     response = Mock(spec=requests.Response)
 
     with time_machine.travel(fake_now):
-        paginator = CapacitiesPaginator(start_value=thirty_days_ago)
+        paginator = CapacitiesPaginator(start_value=start_date)
 
-        # Should start at 30 days ago (the provided value, not 7 days ago)
-        assert paginator.current_value == thirty_days_ago
-        assert paginator.end_value.replace(microsecond=0) == seven_days_from_now
+        # Should start at 30 days ago (the provided value, not from the lookback days)
+        assert paginator.current_value == start_date
+        assert (paginator.end_value - fake_now).days == paginator.lookahead_days
         assert paginator.has_more(response=response)
 
         paginator.advance(response=response)
-        assert paginator.current_value == thirty_days_ago + timedelta(days=1)
+        assert paginator.current_value == start_date + timedelta(days=1)
         assert paginator.has_more(response=response)
