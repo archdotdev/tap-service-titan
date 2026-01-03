@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 from functools import cached_property
-from typing import Any
+from typing import TYPE_CHECKING, Any, cast
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import PRICEBOOK, ServiceTitanSchema
@@ -13,6 +13,9 @@ if sys.version_info >= (3, 12):
     from typing import override
 else:
     from typing_extensions import override
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 class ClientSpecificPricingStream(ServiceTitanStream):
@@ -44,6 +47,18 @@ class PricebookCategoriesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/pricebook/v2/tenant/{self.tenant_id}/categories"
+
+    @override
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any] | str:
+        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
+        # Return both active and inactive pricebook categories
+        # https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Categories_GetList
+        params["active"] = "Any"
+        return params
 
 
 class DiscountsAndFeesStream(ServiceTitanStream):
