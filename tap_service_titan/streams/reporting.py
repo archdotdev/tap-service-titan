@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import math
 import sys
-import typing as t
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
+from typing import TYPE_CHECKING, Any, cast
 
 import requests
 import requests.exceptions
@@ -28,11 +28,9 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
-if t.TYPE_CHECKING:
-    from collections.abc import Iterable, Mapping
+if TYPE_CHECKING:
+    from collections.abc import Generator, Iterable, Mapping
     from datetime import date
-
-    from singer_sdk.streams.rest import _TToken
 
 
 class CustomReports(ServiceTitanStream):
@@ -44,7 +42,7 @@ class CustomReports(ServiceTitanStream):
     is_sorted = True
 
     @override
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the stream."""
         self._report = kwargs.pop("report")
         self._backfill_params = [
@@ -52,11 +50,8 @@ class CustomReports(ServiceTitanStream):
             for obj in self._report["parameters"]
             if obj["name"] == self._report.get("backfill_date_parameter", "")
         ]
-        super().__init__(
-            *args,
-            **kwargs,
-            name=f"custom_report_{self._report['report_name']}",
-        )
+        kwargs["name"] = f"custom_report_{self._report['report_name']}"
+        super().__init__(*args, **kwargs)
         self._curr_backfill_date_param: date | None = None
 
     # This data is sorted but we use a lookback window to get overlapping historical
@@ -88,7 +83,7 @@ class CustomReports(ServiceTitanStream):
         return self._curr_backfill_date_param
 
     @curr_backfill_date_param.setter
-    def curr_backfill_date_param(self, value: datetime) -> None:
+    def curr_backfill_date_param(self, value: date) -> None:
         """Set  the current backfill date parameter."""
         self._curr_backfill_date_param = value
 
@@ -174,8 +169,8 @@ class CustomReports(ServiceTitanStream):
     def get_url_params(
         self,
         context: Context | None,
-        next_page_token: _TToken | None,
-    ) -> dict[str, t.Any]:
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -185,7 +180,7 @@ class CustomReports(ServiceTitanStream):
         Returns:
             A dictionary of URL query parameters.
         """
-        params = super().get_url_params(context, next_page_token)
+        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
         params.pop("modifiedOnOrAfter", "")
         params["pageSize"] = 25000
         return params
@@ -199,9 +194,9 @@ class CustomReports(ServiceTitanStream):
         Iterable[bytes]
         | str
         | bytes
-        | list[tuple[t.Any, t.Any]]
-        | tuple[tuple[t.Any, t.Any]]
-        | Mapping[str, t.Any]
+        | list[tuple[Any, Any]]
+        | tuple[tuple[Any, Any]]
+        | Mapping[str, Any]
         | None
     ):
         """Prepare the data payload for the REST API request.
@@ -235,7 +230,7 @@ class CustomReports(ServiceTitanStream):
         return {"parameters": params}
 
     @override
-    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result records.
 
         Args:
@@ -259,7 +254,7 @@ class CustomReports(ServiceTitanStream):
             yield data
 
     @override
-    def get_records(self, context: Context | None) -> t.Iterable[dict[str, t.Any]]:
+    def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
         """Return a generator of record-type dictionary objects.
 
         Each record emitted should be a dictionary of property names to their values.
@@ -280,7 +275,7 @@ class CustomReports(ServiceTitanStream):
                 self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)
 
     @override
-    def backoff_wait_generator(self) -> t.Generator[float, None, None]:
+    def backoff_wait_generator(self) -> Generator[float, None, None]:
         """Return a generator for backoff wait times."""
 
         def _backoff_from_headers(retriable_api_error: Exception) -> int:

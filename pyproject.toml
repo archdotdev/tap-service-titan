@@ -35,10 +35,14 @@ dev = [
     { include-group = "scrapping" },
     { include-group = "test" },
     { include-group = "typing" },
-    "typer>=0.12.5",
-    "jsonref>=1.1.0,<2",
 ]
-scrapping = ["beautifulsoup4>=4.12.3", "playwright>=1.48.0,<2", "rich>=14.2.0"]
+scrapping = [
+    "beautifulsoup4>=4.12.3",
+    "jsonref>=1.1.0,<2",
+    "playwright>=1.48.0,<2",
+    "rich>=14.2.0",
+    "typer>=0.12.5",
+]
 test = [
     "pytest>=9",
     "singer-sdk[testing]",
@@ -46,6 +50,7 @@ test = [
     "time-machine>=3.0.0",
 ]
 typing = [
+    { include-group = "scrapping" },
     { include-group = "test" },
     "backports-httpmethod",
     "mypy>=1.18.2",

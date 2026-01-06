@@ -41,8 +41,8 @@ class EstimatesStream(ServiceTitanExportStream):
         # Was polluting our context with too many items causing logs to be >500 MB per run
         # for some tenants
         if not hasattr(self._tap, "_estimate_items_cache"):
-            self._tap._estimate_items_cache = {}  # noqa: SLF001
-        self._tap._estimate_items_cache[record["id"]] = record.get("items", [])  # noqa: SLF001
+            self._tap._estimate_items_cache = {}  # noqa: SLF001  # ty: ignore[invalid-assignment]
+        self._tap._estimate_items_cache[record["id"]] = record.get("items", [])  # noqa: SLF001  # ty: ignore[possibly-missing-attribute]
 
         return {
             "estimate_id": record["id"],
@@ -85,4 +85,4 @@ class EstimateItemsStream(Stream):
                 yield transformed_item
         finally:
             if hasattr(self._tap, "_estimate_items_cache"):
-                self._tap._estimate_items_cache.pop(estimate_id, None)  # noqa: SLF001
+                self._tap._estimate_items_cache.pop(estimate_id, None)  # noqa: SLF001  # ty: ignore[unresolved-attribute]
