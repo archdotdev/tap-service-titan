@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from tap_service_titan.client import DateRange, DateRangePaginator, ServiceTitanStream
 from tap_service_titan.openapi_specs import MARKETING_ADS, ServiceTitanSchema
@@ -43,7 +43,7 @@ class AttributedLeadsStream(ServiceTitanStream):
         context: types.Context | None,
         next_page_token: Any | None,
     ) -> dict[str, Any]:
-        params: dict = super().get_url_params(context, next_page_token)
+        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
         params["fromUtc"] = params.pop("modifiedOnOrAfter")
         params["toUtc"] = datetime.now(timezone.utc).isoformat()
         return params
@@ -67,7 +67,7 @@ class CapacityWarningsStream(ServiceTitanStream):
         return f"/marketingads/v2/tenant/{self.tenant_id}/capacity-warnings"
 
 
-class _PerformanceStream(ServiceTitanStream):
+class _PerformanceStream(ServiceTitanStream[DateRange]):
     """Define marketing performance stream."""
 
     name = "performance"
@@ -193,7 +193,7 @@ class KeywordPerformanceStream(_PerformanceStream):
         context: types.Context | None,
         next_page_token: DateRange | None,
     ) -> dict[str, Any]:
-        params: dict = super().get_url_params(context, next_page_token)
+        params = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "Keyword"
         return params
 
