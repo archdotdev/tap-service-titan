@@ -163,6 +163,14 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream):
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self.tenant_id}/export/appointment-assignments"
 
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        params = super().get_url_params(*args, **kwargs)
+        # Return both active and inactive shifts
+        # https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=Export_AppointmentAssignments
+        params["active"] = "Any"
+        return params
+
 
 class NonJobAppointmentsStream(ServiceTitanStream):
     """Define non job appointments stream."""
