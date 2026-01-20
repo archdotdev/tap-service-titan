@@ -1,6 +1,6 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
-import datetime
+from datetime import datetime, timedelta, timezone
 from os import environ
 
 import dotenv
@@ -11,8 +11,7 @@ from tap_service_titan.tap import TapServiceTitan
 dotenv.load_dotenv()
 
 SAMPLE_CONFIG = {
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
-    # "start_date": "2025-06-01",
+    "start_date": (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d"),
     "client_id": environ["TAP_SERVICE_TITAN_CLIENT_ID"],
     "client_secret": environ["TAP_SERVICE_TITAN_CLIENT_SECRET"],
     "st_app_key": environ["TAP_SERVICE_TITAN_ST_APP_KEY"],
