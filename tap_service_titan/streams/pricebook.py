@@ -55,8 +55,9 @@ class PricebookCategoriesStream(ServiceTitanStream):
         next_page_token: Any | None,
     ) -> dict[str, Any] | str:
         params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
-        # Return both active and inactive pricebook categories
         # https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Categories_GetList
+
+        # Return both active and inactive pricebook categories
         params["active"] = "Any"
         return params
 
@@ -104,6 +105,15 @@ class MaterialsStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/pricebook/v2/tenant/{self.tenant_id}/materials"
 
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+        # https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Materials_GetList
+
+        # Return both active and inactive materials
+        params["active"] = "Any"
+        return params
+
 
 class MaterialsMarkupStream(ServiceTitanStream):
     """Define materials markup stream."""
@@ -135,10 +145,15 @@ class ServicesStream(ServiceTitanStream):
 
     @override
     def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        return {
-            **super().get_url_params(*args, **kwargs),
-            "calculatePrices": True,
-        }
+        # https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Services_GetList
+        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+
+        # If true, the prices will be calculated based on the current dynamic pricing rules.
+        params["calculatePrices"] = True
+
+        # Return both active and inactive materials
+        params["active"] = "Any"
+        return params
 
 
 class ExportEquipmentStream(ServiceTitanExportStream):

@@ -76,10 +76,12 @@ requires = [
 build-backend = "hatchling.build"
 
 [tool.mypy]
+warn_redundant_casts = true
 warn_unused_configs = true
+warn_unused_ignores = false
 
 [tool.pytest]
-minversion = "9.0.0"
+minversion = "9"
 addopts = [ "-vv" ]
 
 [tool.ruff]
