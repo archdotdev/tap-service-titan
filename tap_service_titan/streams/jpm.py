@@ -105,7 +105,7 @@ class ProjectsStream(ServiceTitanExportStream):
         return f"/jpm/v2/tenant/{self.tenant_id}/export/projects"
 
 
-class JobCancelledLogsStream(ServiceTitanExportStream):
+class JobCanceledLogsStream(ServiceTitanExportStream):
     """Define cancelled job stream."""
 
     name = "job_canceled_logs"
