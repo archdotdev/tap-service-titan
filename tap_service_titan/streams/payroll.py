@@ -136,6 +136,13 @@ class LocationRatesStream(ServiceTitanStream):
         """Return the API path for the stream."""
         return f"/payroll/v2/tenant/{self.tenant_id}/locations/rates"
 
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+        # https://developer.servicetitan.io/api-details/#api=tenant-payroll-v2&operation=LocationLaborType_GetListByLocations
+        params["active"] = "Any"
+        return params
+
 
 class PayrollsStream(ServiceTitanStream):
     """Define payrolls stream."""
@@ -175,3 +182,10 @@ class NonJobTimesheetsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/payroll/v2/tenant/{self.tenant_id}/non-job-timesheets"
+
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+        # https://developer.servicetitan.io/api-details/#api=tenant-payroll-v2&operation=Timesheets_GetNonJobTimesheets
+        params["active"] = "Any"
+        return params
