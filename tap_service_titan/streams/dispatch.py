@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
@@ -146,8 +146,11 @@ class ArrivalWindowsStream(ServiceTitanStream):
         return f"/dispatch/v2/tenant/{self.tenant_id}/arrival-windows"
 
 
-class AppointmentAssignmentsStream(ServiceTitanExportStream):
-    """Define appointment assignments stream."""
+class AppointmentAssignmentsStream(ServiceTitanExportStream, active_any=True):
+    """Define appointment assignments stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=Export_AppointmentAssignments
+    """
 
     name = "appointment_assignments"
     primary_keys = ("id",)
@@ -162,14 +165,6 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self.tenant_id}/export/appointment-assignments"
-
-    @override
-    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        params = super().get_url_params(*args, **kwargs)
-        # Return both active and inactive shifts
-        # https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=Export_AppointmentAssignments
-        params["active"] = "Any"
-        return params
 
 
 class NonJobAppointmentsStream(ServiceTitanStream):
@@ -202,8 +197,11 @@ class TeamsStream(ServiceTitanStream):
         return f"/dispatch/v2/tenant/{self.tenant_id}/teams"
 
 
-class TechnicianShiftsStream(ServiceTitanStream):
-    """Define technician shifts stream."""
+class TechnicianShiftsStream(ServiceTitanStream, active_any=True):
+    """Define technician shifts stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
+    """
 
     name = "technician_shifts"
     primary_keys = ("id",)
@@ -214,14 +212,6 @@ class TechnicianShiftsStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self.tenant_id}/technician-shifts"
-
-    @override
-    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
-        # Return both active and inactive shifts
-        # https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
-        params["active"] = "Any"
-        return params
 
 
 class ZonesStream(ServiceTitanStream):

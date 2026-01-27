@@ -62,7 +62,7 @@ class PurchaseOrderTypesStream(ServiceTitanStream):
         return f"/inventory/v2/tenant/{self.tenant_id}/purchase-order-types"
 
 
-class ReceiptsStream(ServiceTitanStream):
+class ReceiptsStream(ServiceTitanStream, active_any=True):
     """Define receipts stream."""
 
     name = "receipts"
@@ -71,41 +71,19 @@ class ReceiptsStream(ServiceTitanStream):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryReceiptResponse")
 
     @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: Any | None,
-    ) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
-        # This endpoint has an undocumented max page size of 500
-        params["active"] = "Any"
-        return params
-
-    @override
     @cached_property
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/inventory/v2/tenant/{self.tenant_id}/receipts"
 
 
-class ReturnsStream(ServiceTitanStream):
+class ReturnsStream(ServiceTitanStream, active_any=True):
     """Define returns stream."""
 
     name = "returns"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryReturnResponse")
-
-    @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: Any | None,
-    ) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
-        # This endpoint has an undocumented max page size of 500
-        params["active"] = "Any"
-        return params
 
     @override
     @cached_property

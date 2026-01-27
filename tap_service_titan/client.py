@@ -100,6 +100,17 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
         True  # Safe as params don't have sensitive info, but very helpful for debugging
     )
 
+    _active_any: bool = False
+
+    def __init_subclass__(cls, *, active_any: bool = False) -> None:
+        """Initialize the stream subclass.
+
+        Args:
+            active_any: Whether to include active and inactive records in the stream.
+        """
+        cls._active_any = active_any
+        return super().__init_subclass__()
+
     @override
     @property
     def url_base(self) -> str:
@@ -202,6 +213,9 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
             starting_date += timedelta(milliseconds=1)
             params["from"] = starting_date.isoformat()
 
+        if self._active_any:
+            params["active"] = "Any"
+
         return params
 
 
@@ -238,8 +252,13 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
             # This is usually paired with a `modifiedOn` field in the response.
             starting_date += timedelta(milliseconds=1)
             params["modifiedOnOrAfter"] = starting_date.isoformat()
+
+        if self._active_any:
+            params["active"] = "Any"
+
         params["pageSize"] = 5000
         params["page"] = next_page_token
+
         return params
 
     @override
