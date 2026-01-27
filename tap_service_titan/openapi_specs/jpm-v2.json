@@ -12498,7 +12498,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
                     },
                     "type": {
                         "type": "string",
@@ -12515,7 +12515,7 @@
                     },
                     "userassignedid": {
                         "type": "string",
-                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                        "description": "A value that uniquely identifies this occurrence of the event."
                     },
                     "datacontenttype": {
                         "type": "string",
@@ -12677,7 +12677,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
                     },
                     "type": {
                         "type": "string",
@@ -12694,7 +12694,7 @@
                     },
                     "userassignedid": {
                         "type": "string",
-                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                        "description": "A value that uniquely identifies this occurrence of the event."
                     },
                     "datacontenttype": {
                         "type": "string",
@@ -12970,7 +12970,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
                     },
                     "type": {
                         "type": "string",
@@ -12987,7 +12987,7 @@
                     },
                     "userassignedid": {
                         "type": "string",
-                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                        "description": "A value that uniquely identifies this occurrence of the event."
                     },
                     "datacontenttype": {
                         "type": "string",
@@ -13063,7 +13063,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
                     },
                     "type": {
                         "type": "string",
@@ -13080,7 +13080,7 @@
                     },
                     "userassignedid": {
                         "type": "string",
-                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                        "description": "A value that uniquely identifies this occurrence of the event."
                     },
                     "datacontenttype": {
                         "type": "string",
@@ -13147,7 +13147,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "A value that uniquely identifies this event. Consumers should assume that events with the same source and id are duplicates."
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
                     },
                     "type": {
                         "type": "string",
@@ -13164,7 +13164,7 @@
                     },
                     "userassignedid": {
                         "type": "string",
-                        "description": "A value that identifies this event. This value is for diagnostic purposes only, and it may or may not be unique."
+                        "description": "A value that uniquely identifies this occurrence of the event."
                     },
                     "datacontenttype": {
                         "type": "string",

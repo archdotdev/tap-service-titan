@@ -9617,7 +9617,6 @@
             "Inventory.V2.PurchaseOrderCancellationReason": {
                 "enum": [
                     "NotRequired",
-                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -9627,7 +9626,6 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
-                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
@@ -10518,7 +10516,6 @@
             "Inventory.V2.ReceiptCancellationReason": {
                 "enum": [
                     "NotRequired",
-                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -10528,7 +10525,6 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
-                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
@@ -10925,7 +10921,6 @@
             "Inventory.V2.ReturnCancellationReason": {
                 "enum": [
                     "NotRequired",
-                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -10935,7 +10930,6 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
-                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
