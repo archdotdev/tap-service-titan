@@ -2028,6 +2028,158 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "CloudEvent_Of_SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.sp.session-abandoned-qualified\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this occurrence of the event."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent": {
+                "required": [
+                    "session",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "session": {
+                        "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerSessionResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CloudEvent_Of_SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent": {
+                "required": [
+                    "specversion",
+                    "id",
+                    "type",
+                    "time",
+                    "source",
+                    "userassignedid",
+                    "datacontenttype",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "specversion": {
+                        "type": "string",
+                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "A value that identifies the type of this event (\"tn.sp.session-completed\")."
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "The date and time when this event occurred.",
+                        "format": "date-time"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
+                    },
+                    "userassignedid": {
+                        "type": "string",
+                        "description": "A value that uniquely identifies this occurrence of the event."
+                    },
+                    "datacontenttype": {
+                        "type": "string",
+                        "description": "The content type of the data (\"application/json\")."
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent"
+                            }
+                        ],
+                        "description": "The event payload."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent": {
+                "required": [
+                    "session",
+                    "tenantId",
+                    "tenantName"
+                ],
+                "type": "object",
+                "properties": {
+                    "session": {
+                        "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerSessionResponse"
+                    },
+                    "tenantId": {
+                        "type": "integer",
+                        "description": "The ID of the tenant",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string",
+                        "description": "The name of the tenant"
+                    }
+                },
+                "additionalProperties": false
             }
         },
         "securitySchemes": {
