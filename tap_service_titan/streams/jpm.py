@@ -1,4 +1,4 @@
-"""JPM streams for the ServiceTitan tap."""
+"""Job Planning and Management streams for the ServiceTitan tap."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ if t.TYPE_CHECKING:
 
 
 # JPM Streams
-class AppointmentsStream(ServiceTitanExportStream):
+class AppointmentsStream(ServiceTitanExportStream, active_any=True):
     """Define appointments stream."""
 
     name = "appointments"
