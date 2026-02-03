@@ -2,19 +2,19 @@
 
 import asyncio
 from collections.abc import Generator
-from pathlib import Path
 
+import anyio
 import rich
 from bs4 import BeautifulSoup
 from playwright.async_api import Playwright, async_playwright
 
 DOCS_ROOT = "https://developer.servicetitan.io"
-OUTPUT_DIR = Path("tap_service_titan/openapi_specs")
+OUTPUT_DIR = anyio.Path("tap_service_titan/openapi_specs")
 
 
 def get_api_name_from_url(url: str) -> str:
     """Get the API name from a URL."""
-    return url.split("api=")[-1].replace("tenant-", "")
+    return url.rsplit("api=", maxsplit=1)[-1].replace("tenant-", "")
 
 
 async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
@@ -31,7 +31,7 @@ async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
 async def download_openapi_spec(
     playwright: Playwright,
     url: str,
-    download_path: Path,
+    download_path: anyio.Path,
 ) -> None:
     """Download an OpenAPI spec from a URL."""
     browser = await playwright.chromium.launch()
@@ -42,7 +42,7 @@ async def download_openapi_spec(
         await page.select_option("#apiDefinitions", "openapi+json")
 
     download = await download_info.value
-    await download.save_as(download_path)
+    await download.save_as(download_path.as_posix())
     await browser.close()
 
 
