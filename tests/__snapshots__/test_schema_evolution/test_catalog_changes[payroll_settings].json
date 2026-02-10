@@ -1,6 +1,6 @@
 {
   "key_properties": [
-    "id"
+    "employeeId"
   ],
   "metadata": [
     {
@@ -9,7 +9,7 @@
         "employeeId"
       ],
       "metadata": {
-        "inclusion": "available"
+        "inclusion": "automatic"
       }
     },
     {
@@ -109,7 +109,7 @@
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
-          "id"
+          "employeeId"
         ],
         "valid-replication-keys": [
           "modifiedOn"
@@ -140,10 +140,7 @@
       "employeeId": {
         "description": "The employee ID",
         "format": "int64",
-        "type": [
-          "integer",
-          "null"
-        ]
+        "type": "integer"
       },
       "employeeType": {
         "description": "",

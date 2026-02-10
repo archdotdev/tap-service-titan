@@ -164,7 +164,7 @@ class PayrollSettingsStream(ServiceTitanStream, active_any=True):
     """
 
     name = "payroll_settings"
-    primary_keys = ("id",)
+    primary_keys = ("employeeId",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
         PAYROLL,
