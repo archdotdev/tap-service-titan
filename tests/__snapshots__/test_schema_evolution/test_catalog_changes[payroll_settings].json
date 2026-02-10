@@ -1,0 +1,223 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "employeeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "employeeType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalPayrollId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hourlyRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "managerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "payrollBusinessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isIncludedInPayroll"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hireDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "active": {
+        "description": "The active status of the record",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "The date the record was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "employeeId": {
+        "description": "The employee ID",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "employeeType": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalPayrollId": {
+        "description": "The external payroll ID",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "hireDate": {
+        "description": "The hire date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "hourlyRate": {
+        "description": "The hourly rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "isIncludedInPayroll": {
+        "description": "Indicates if the employee should be included in payroll processing",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "managerId": {
+        "description": "The ID of the manager",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "The date the record was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "payrollBusinessUnitId": {
+        "description": "The ID of the payroll business unit (employee only)",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "employeeId",
+      "employeeType",
+      "hourlyRate",
+      "isIncludedInPayroll",
+      "createdOn",
+      "modifiedOn",
+      "active"
+    ],
+    "type": "object"
+  },
+  "stream": "payroll_settings",
+  "tap_stream_id": "payroll_settings"
+}

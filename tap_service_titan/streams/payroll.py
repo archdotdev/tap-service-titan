@@ -157,6 +157,27 @@ class PayrollsStream(ServiceTitanStream, active_any=True):
         return f"/payroll/v2/tenant/{self.tenant_id}/payrolls"
 
 
+class PayrollSettingsStream(ServiceTitanStream, active_any=True):
+    """Payroll settings.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-payroll-v2&operation=PayrollSettings_GetPayrollSettingsList
+    """
+
+    name = "payroll_settings"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        PAYROLL,
+        key="Payroll.V2.PayrollSettings.PayrollSettingsListResponse",
+    )
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/payroll/v2/tenant/{self.tenant_id}/payroll-settings"
+
+
 class NonJobTimesheetsStream(ServiceTitanStream, active_any=True):
     """Define non-job timesheets stream.
 
