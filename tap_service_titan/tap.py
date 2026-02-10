@@ -236,6 +236,7 @@ class TapServiceTitan(Tap):
             streams.payroll.LocationRatesStream(self),
             streams.payroll.NonJobTimesheetsStream(self),
             streams.payroll.PayrollAdjustmentsStream(self),
+            streams.payroll.PayrollSettingsStream(self),
             streams.payroll.PayrollsStream(self),
             streams.payroll.TimesheetCodesStream(self),
             streams.pricebook.ClientSpecificPricingStream(self),
