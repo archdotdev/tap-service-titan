@@ -18,6 +18,7 @@ plugins:
     - discover
     - about
     - stream-maps
+    - structured-logging
     settings:
     - name: client_id
       kind: string
