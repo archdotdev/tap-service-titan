@@ -22,7 +22,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -92,7 +92,6 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -102,7 +101,6 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -112,7 +110,6 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -122,7 +119,6 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -132,7 +128,6 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -142,7 +137,6 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -229,7 +223,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -262,7 +256,7 @@
                     {
                         "name": "createdById",
                         "in": "query",
-                        "description": "Format - int64. Creator user Id",
+                        "description": "Creator user Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -286,7 +280,7 @@
                     {
                         "name": "submittedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Submission modified date on or after",
+                        "description": "Submission modified date on or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -296,7 +290,7 @@
                     {
                         "name": "submittedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Submission modified date before",
+                        "description": "Submission modified date before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -332,7 +326,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -342,7 +336,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -458,7 +452,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. Job Id",
+                        "description": "Job Id",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -468,7 +462,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -541,7 +535,7 @@
                     {
                         "name": "jobId",
                         "in": "path",
-                        "description": "Format - int64. Job Id",
+                        "description": "Job Id",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -551,7 +545,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -561,7 +555,6 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -571,7 +564,6 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339).",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -589,7 +581,6 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -599,7 +590,6 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32.",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -652,7 +642,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64. The id of the job attachment to retrieve, as returned by other job API endpoints.",
+                        "description": "The id of the job attachment to retrieve, as returned by other job API endpoints.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -662,7 +652,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1050,26 +1040,6 @@
                     "ServiceAgreement",
                     "InvoiceItem"
                 ]
-            },
-            "Forms.Contracts.FormSubmissions.FormUnitApiDto": {
-                "required": [
-                    "id",
-                    "name",
-                    "type"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    }
-                },
-                "additionalProperties": false
             },
             "Forms.Contracts.FormSubmissions.FormSectionApiDto": {
                 "required": [

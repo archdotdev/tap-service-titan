@@ -2,6 +2,7 @@
     "openapi": "3.0.1",
     "info": {
         "title": "Inventory",
+        "description": "Adjustments, purchase orders, purchase order markups, purchase order types, receipts, returns, return types, transfers, trucks, vendors, warehouses, inventory templates",
         "version": "1.0"
     },
     "servers": [

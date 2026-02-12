@@ -21,7 +21,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -131,7 +131,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -141,7 +141,7 @@
                     {
                         "name": "page",
                         "in": "query",
-                        "description": "Format - int32. The logical number of page to return, starting from 1",
+                        "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -151,7 +151,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Format - int32. How many records to return (50 by default)",
+                        "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
                             "format": "int32",
@@ -184,7 +184,7 @@
                     {
                         "name": "createdBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Created date before",
+                        "description": "Created date before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -194,7 +194,7 @@
                     {
                         "name": "createdOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Created date on or after",
+                        "description": "Created date on or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -204,7 +204,7 @@
                     {
                         "name": "modifiedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Modified date before",
+                        "description": "Modified date before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -214,7 +214,7 @@
                     {
                         "name": "modifiedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Modified date on or after",
+                        "description": "Modified date on or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -224,7 +224,7 @@
                     {
                         "name": "reportedBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Reported date before",
+                        "description": "Reported date before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -234,7 +234,7 @@
                     {
                         "name": "reportedOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Reported On or After",
+                        "description": "Reported On or After",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -244,7 +244,7 @@
                     {
                         "name": "completeBefore",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Completed Before",
+                        "description": "Completed Before",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -254,7 +254,7 @@
                     {
                         "name": "completeOnOrAfter",
                         "in": "query",
-                        "description": "Format - date-time (as date-time in RFC3339). Completed On or After",
+                        "description": "Completed On or After",
                         "schema": {
                             "type": "string",
                             "format": "date-time",
@@ -345,7 +345,7 @@
                     {
                         "name": "reportedById",
                         "in": "query",
-                        "description": "Format - int64. Reported By Id",
+                        "description": "Reported By Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -355,7 +355,7 @@
                     {
                         "name": "assignedToId",
                         "in": "query",
-                        "description": "Format - int64. Assigned to Id",
+                        "description": "Assigned to Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -374,7 +374,7 @@
                     {
                         "name": "customerId",
                         "in": "query",
-                        "description": "Format - int64. Customer Id",
+                        "description": "Customer Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -384,7 +384,7 @@
                     {
                         "name": "jobId",
                         "in": "query",
-                        "description": "Format - int64. Job Id",
+                        "description": "Job Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -394,7 +394,7 @@
                     {
                         "name": "projectId",
                         "in": "query",
-                        "description": "Format - int64. Project Id",
+                        "description": "Project Id",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -413,7 +413,7 @@
                     {
                         "name": "taskNumber",
                         "in": "query",
-                        "description": "Format - int64. Task Number",
+                        "description": "Task Number",
                         "schema": {
                             "type": "integer",
                             "format": "int64",
@@ -565,7 +565,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -679,7 +679,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -689,7 +688,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -843,7 +842,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Format - int64.",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -853,7 +851,7 @@
                     {
                         "name": "tenant",
                         "in": "path",
-                        "description": "Format - int64. Tenant ID",
+                        "description": "Tenant ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
