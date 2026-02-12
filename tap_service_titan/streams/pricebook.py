@@ -15,8 +15,11 @@ else:
     from typing_extensions import override
 
 
-class ClientSpecificPricingStream(ServiceTitanStream):
-    """Define client-specific pricing stream."""
+class ClientSpecificPricingStream(ServiceTitanStream, active_any=True):
+    """Define client-specific pricing stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=ClientSpecificPricing_GetAllRateSheets
+    """
 
     name = "client_specific_pricing"
     primary_keys = ("id",)
@@ -49,8 +52,11 @@ class PricebookCategoriesStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/categories"
 
 
-class DiscountsAndFeesStream(ServiceTitanStream):
-    """Define discounts and fees stream."""
+class DiscountsAndFeesStream(ServiceTitanStream, active_any=True):
+    """Define discounts and fees stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=DiscountAndFees_GetList
+    """
 
     name = "discounts_and_fees"
     primary_keys = ("id",)
@@ -63,8 +69,11 @@ class DiscountsAndFeesStream(ServiceTitanStream):
         return f"/pricebook/v2/tenant/{self.tenant_id}/discounts-and-fees"
 
 
-class EquipmentStream(ServiceTitanStream):
-    """Define equipment stream."""
+class EquipmentStream(ServiceTitanStream, active_any=True):
+    """Define equipment stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Equipment_GetList
+    """
 
     name = "equipment"
     primary_keys = ("id",)
@@ -78,7 +87,7 @@ class EquipmentStream(ServiceTitanStream):
         return f"/pricebook/v2/tenant/{self.tenant_id}/equipment"
 
 
-class MaterialsStream(ServiceTitanStream):
+class MaterialsStream(ServiceTitanStream, active_any=True):
     """Define materials stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Materials_GetList
@@ -97,7 +106,10 @@ class MaterialsStream(ServiceTitanStream):
 
 
 class MaterialsMarkupStream(ServiceTitanStream):
-    """Define materials markup stream."""
+    """Define materials markup stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=MaterialsMarkup_GetList
+    """
 
     name = "materials_markup"
     primary_keys = ("id",)
@@ -110,7 +122,7 @@ class MaterialsMarkupStream(ServiceTitanStream):
         return f"/pricebook/v2/tenant/{self.tenant_id}/materialsmarkup"
 
 
-class ServicesStream(ServiceTitanStream):
+class ServicesStream(ServiceTitanStream, active_any=True):
     """Define services stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Services_GetList
