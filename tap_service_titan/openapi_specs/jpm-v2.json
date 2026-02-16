@@ -22,6 +22,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -117,6 +118,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -584,6 +586,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -602,6 +605,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The rescheduling request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -714,6 +718,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -732,6 +737,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The hold request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -815,6 +821,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -898,12 +905,14 @@
                 "tags": [
                     "Appointments"
                 ],
-                "summary": "Appointments_UpdateSpecialInstructions",
+                "summary": "Updates special instructions for the specified appointment.",
+                "description": "Updates special instructions for the specified appointment.",
                 "operationId": "Appointments_UpdateSpecialInstructions",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -922,6 +931,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The update special instructions request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1031,6 +1041,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1112,13 +1123,14 @@
                 "tags": [
                     "Appointments"
                 ],
-                "summary": "Adds a confirmation to the specified appointment.",
-                "description": "Adds a confirmation to the specified appointment.",
+                "summary": "Removes a confirmation to the specified appointment.",
+                "description": "Removes a confirmation to the specified appointment.",
                 "operationId": "Appointments_RemoveConfirmation",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The appointment ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3221,8 +3233,8 @@
                 "tags": [
                     "Export"
                 ],
-                "summary": "Provides export feed for job canceled logs",
-                "description": "Provides export feed for job canceled logs",
+                "summary": "Provides export feed for job status history.",
+                "description": "Provides export feed for job status history.",
                 "operationId": "Export_JobHistory",
                 "parameters": [
                     {
@@ -3634,6 +3646,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3777,6 +3790,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -3795,6 +3809,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The update request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -3965,6 +3980,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The job creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -4594,6 +4610,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -4612,6 +4629,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The cancel request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -4679,6 +4697,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -4733,6 +4752,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -4751,6 +4771,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The hold request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -4818,6 +4839,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -4836,6 +4858,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The complete request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -4920,6 +4943,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5041,6 +5065,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5059,6 +5084,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The note creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -5216,6 +5242,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5248,7 +5275,7 @@
                                             "employeeId": 0,
                                             "eventType": "string",
                                             "date": "string",
-                                            "usedSchedulingTool": "Manual",
+                                            "usedSchedulingTool": {},
                                             "memo": "string"
                                         }
                                     ]
@@ -5307,6 +5334,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5325,6 +5353,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The message creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -5389,6 +5418,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5514,6 +5544,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -5683,6 +5714,7 @@
                     {
                         "name": "sort",
                         "in": "query",
+                        "description": "Applies sorting by the specified field: Id, Name.",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -5706,7 +5738,7 @@
                                         {
                                             "id": 0,
                                             "name": "string",
-                                            "dataType": "Text",
+                                            "dataType": {},
                                             "dataTypeOptions": [
                                                 "string"
                                             ],
@@ -6007,6 +6039,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The job type creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -6119,6 +6152,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -6237,6 +6271,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The job type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -6255,6 +6290,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The update request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -6368,6 +6404,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -6495,6 +6532,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -6513,6 +6551,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The update request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -7037,6 +7076,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The project creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -7162,6 +7202,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7283,6 +7324,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7301,6 +7343,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The note creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -7382,6 +7425,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7391,6 +7435,7 @@
                     {
                         "name": "jobId",
                         "in": "path",
+                        "description": "The job ID to attach",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7445,6 +7490,7 @@
                     {
                         "name": "jobId",
                         "in": "path",
+                        "description": "The job ID to detach",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7499,6 +7545,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -7517,6 +7564,7 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "The message creation request details",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -7660,6 +7708,7 @@
                     {
                         "name": "sort",
                         "in": "query",
+                        "description": "Applies sorting by the specified field: Id, Name.",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -7683,7 +7732,7 @@
                                         {
                                             "id": 0,
                                             "name": "string",
-                                            "dataType": "Text",
+                                            "dataType": {},
                                             "dataTypeOptions": [
                                                 "string"
                                             ],
@@ -7890,6 +7939,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project status ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -8163,6 +8213,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project sub status ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -8250,6 +8301,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The project type ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -9430,13 +9482,16 @@
                 "properties": {
                     "typeId": {
                         "type": "integer",
+                        "description": "Custom Field Type Id",
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Custom Field Name"
                     },
                     "value": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Custom Field Value"
                     }
                 },
                 "additionalProperties": false
@@ -9464,11 +9519,13 @@
                 "properties": {
                     "jobId": {
                         "type": "integer",
+                        "description": "ID of the job",
                         "format": "int64",
                         "nullable": true
                     },
                     "employeeId": {
                         "type": "integer",
+                        "description": "ID of the employee",
                         "format": "int64",
                         "nullable": true
                     }
@@ -11190,25 +11247,35 @@
                 "properties": {
                     "id": {
                         "type": "integer",
+                        "description": "ID of the log",
                         "format": "int64"
                     },
                     "employeeId": {
                         "type": "integer",
+                        "description": "ID of the employee",
                         "format": "int64",
                         "nullable": true
                     },
                     "eventType": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Type of the job status"
                     },
                     "date": {
                         "type": "string",
+                        "description": "Date of the log",
                         "format": "date-time"
                     },
                     "usedSchedulingTool": {
-                        "$ref": "#/components/schemas/Jpm.Jobs.JobSchedulingTool"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.Jobs.JobSchedulingTool"
+                            }
+                        ],
+                        "description": "Scheduling tool used"
                     },
                     "memo": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Memo associated with the log"
                     }
                 },
                 "additionalProperties": false
@@ -11487,27 +11554,37 @@
                 "properties": {
                     "id": {
                         "type": "integer",
+                        "description": "The ID of the custom field type.",
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the custom field type."
                     },
                     "dataType": {
-                        "$ref": "#/components/schemas/Jpm.V2.CustomFieldDataType"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.CustomFieldDataType"
+                            }
+                        ],
+                        "description": "Indicates the data type of the custom field."
                     },
                     "dataTypeOptions": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
+                        "description": "Indicates the dropdown options if the custom field is a dropdown data type.",
                         "nullable": true
                     },
                     "createdOn": {
                         "type": "string",
+                        "description": "The date and time when the custom field type was created.",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
+                        "description": "The date and time when the custom field type was last modified.",
                         "format": "date-time"
                     }
                 },
@@ -12423,21 +12500,26 @@
                 "properties": {
                     "id": {
                         "type": "integer",
+                        "description": "The unique identifier of the project type.",
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the project type."
                     },
                     "description": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The description of the project type."
                     },
                     "createdById": {
                         "type": "integer",
+                        "description": "The ID of the user who created this project type.",
                         "format": "int64",
                         "nullable": true
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "description": "Represents a project type."
             },
             "PaginatedResponse_Of_Jpm.V2.ProjectTypeResponse": {
                 "required": [

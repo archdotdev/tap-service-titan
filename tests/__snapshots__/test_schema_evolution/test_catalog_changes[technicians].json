@@ -310,6 +310,228 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "commissionRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "currentValue"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "firstName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lastName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hourlyRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "jobId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "mobilePhone"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "outboundCallerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "payrollId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "payrollProfileId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "appoitmentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shiftStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shiftEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "soldByRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "startDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "skills"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "positions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "location"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "location",
+        "properties",
+        "latitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "location",
+        "properties",
+        "longitude"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "location",
+        "properties",
+        "coordinatesUpdatedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "bio"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "memo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -350,6 +572,22 @@
           "null"
         ]
       },
+      "appoitmentId": {
+        "description": "Id of job appointment on which the technician is currently working.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bio": {
+        "description": "Biography",
+        "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "burdenRate": {
         "description": "Technician's burden rate",
         "format": "decimal",
@@ -366,11 +604,27 @@
           "null"
         ]
       },
+      "commissionRate": {
+        "description": "Technician Commision Rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "createdOn": {
         "description": "When the technician was created",
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "currentValue": {
+        "description": "Technician today statistic current value",
+        "format": "decimal",
+        "type": [
+          "number",
           "null"
         ]
       },
@@ -423,6 +677,13 @@
       "email": {
         "description": "Email address of the technician",
         "format": "email",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "firstName": {
+        "description": "Technician First name",
         "type": [
           "string",
           "null"
@@ -494,6 +755,14 @@
           "null"
         ]
       },
+      "hourlyRate": {
+        "description": "Technician hourly rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "id": {
         "description": "ID of the technician",
         "format": "int64",
@@ -513,6 +782,55 @@
           "null"
         ]
       },
+      "jobId": {
+        "description": "Technician Job id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "lastName": {
+        "description": "Technician Last name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "location": {
+        "additionalProperties": false,
+        "description": "Location: Lat, Long, Last update time",
+        "properties": {
+          "coordinatesUpdatedOn": {
+            "description": "Timestamp when coordinates updated last time",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "latitude": {
+            "description": "Latitude",
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "longitude": {
+            "description": "Longitude",
+            "format": "double",
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
       "loginName": {
         "description": "Login name of the technician",
         "type": [
@@ -528,6 +846,21 @@
           "null"
         ]
       },
+      "memo": {
+        "description": "Memo",
+        "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "mobilePhone": {
+        "description": "Mobile phone",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "modifiedOn": {
         "description": "When the technician was modified",
         "format": "date-time",
@@ -540,6 +873,28 @@
         "description": "Technician's name",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "outboundCallerId": {
+        "description": "OutboundCallerId",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "payrollId": {
+        "description": "Payroll id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "payrollProfileId": {
+        "description": "Payroll profile id",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },
@@ -583,6 +938,17 @@
           "null"
         ]
       },
+      "positions": {
+        "description": "Company positions",
+        "items": {
+          "description": "",
+          "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "roleIds": {
         "description": "IDs of the user roles assigned to the technician.",
         "items": {
@@ -591,6 +957,79 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "shiftEnd": {
+        "description": "Shift End",
+        "format": "duration",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shiftStart": {
+        "description": "Shift Start",
+        "format": "duration",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "skills": {
+        "description": "Skills",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "description": "SkillId",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Skill name",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "soldByRate": {
+        "description": "Sold By Rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "startDate": {
+        "description": "Start Date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "description": "",
+        "type": [
+          "string",
           "null"
         ]
       },
@@ -630,7 +1069,11 @@
       "dailyGoal",
       "isManagedTech",
       "active",
-      "burdenRate"
+      "burdenRate",
+      "commissionRate",
+      "hourlyRate",
+      "soldByRate",
+      "status"
     ],
     "type": "object"
   },

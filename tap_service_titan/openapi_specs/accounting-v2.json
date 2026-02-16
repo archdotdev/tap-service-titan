@@ -1081,6 +1081,33 @@
                         }
                     },
                     {
+                        "name": "customField.Fields",
+                        "in": "query",
+                        "description": "Dictionary of name-value pairs",
+                        "schema": {
+                            "maxProperties": 50,
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Operator",
+                        "in": "query",
+                        "description": "Operator to be used between the name-value pairs. Can be \"Or\" or \"And\", default is \"And\".\\\nValues: [And, Or]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.LogicalOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "syncStatuses",
                         "in": "query",
                         "schema": {
@@ -1150,7 +1177,13 @@
                                                     "amount": 0
                                                 }
                                             ],
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -1159,6 +1192,219 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/ap-credits/custom-fields": {
+            "get": {
+                "tags": [
+                    "ApCredits"
+                ],
+                "summary": "Returns a paginated list of filtered custom field types available for AP credits",
+                "description": "Returns a paginated list of filtered custom field types available for AP credits",
+                "operationId": "ApCredits_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the custom field types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "ApCredits"
+                ],
+                "summary": "Updates custom field values on multiple AP credits",
+                "description": "Updates custom field values on multiple AP credits",
+                "operationId": "ApCredits_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The custom field update request containing credit IDs and field values to update",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated custom fields on the specified AP credits"
+                    },
+                    "400": {
+                        "description": "Invalid request data or validation errors",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1363,6 +1609,33 @@
                         }
                     },
                     {
+                        "name": "customField.Fields",
+                        "in": "query",
+                        "description": "Dictionary of name-value pairs",
+                        "schema": {
+                            "maxProperties": 50,
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "customField.Operator",
+                        "in": "query",
+                        "description": "Operator to be used between the name-value pairs. Can be \"Or\" or \"And\", default is \"And\".\\\nValues: [And, Or]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.LogicalOperator"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "syncStatuses",
                         "in": "query",
                         "schema": {
@@ -1435,6 +1708,12 @@
                                                     "inventoryBillId": 0,
                                                     "amount": 0
                                                 }
+                                            ],
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
                                             ]
                                         }
                                     ]
@@ -1444,6 +1723,219 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/ap-payments/custom-fields": {
+            "get": {
+                "tags": [
+                    "ApPayments"
+                ],
+                "summary": "Returns a paginated list of filtered custom field types available for AP payments",
+                "description": "Returns a paginated list of filtered custom field types available for AP payments",
+                "operationId": "ApPayments_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the custom field types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "ApPayments"
+                ],
+                "summary": "Updates custom field values on multiple AP payments",
+                "description": "Updates custom field values on multiple AP payments",
+                "operationId": "ApPayments_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The custom field update request containing payment IDs and field values to update",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated custom fields on the specified AP payments"
+                    },
+                    "400": {
+                        "description": "Invalid request data or validation errors",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1870,6 +2362,7 @@
                                                 "id": 0,
                                                 "name": "string"
                                             },
+                                            "syncStatus": "string",
                                             "batch": {
                                                 "id": 0,
                                                 "number": "string",
@@ -2262,6 +2755,218 @@
                 }
             }
         },
+        "/tenant/{tenant}/credit-memos/custom-fields": {
+            "get": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "Returns a paginated list of filtered custom field types available for credit memos",
+                "description": "Returns a paginated list of filtered custom field types available for credit memos",
+                "operationId": "CreditMemos_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "Update custom fields for specified credit memos",
+                "description": "Update custom fields for specified credit memos",
+                "operationId": "CreditMemos_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/credit-memos/{id}": {
             "patch": {
                 "tags": [
@@ -2300,13 +3005,7 @@
                                 "active": true,
                                 "summary": "string",
                                 "date": "string",
-                                "businessUnitId": 0,
-                                "splits": [
-                                    {
-                                        "invoiceId": 0,
-                                        "amount": 0
-                                    }
-                                ]
+                                "businessUnitId": 0
                             }
                         }
                     }
@@ -2324,7 +3023,87 @@
                                     "active": true,
                                     "summary": "string",
                                     "date": "string",
-                                    "businessUnitId": 0,
+                                    "businessUnitId": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/credit-memos/{id}/splits": {
+            "post": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "CreditMemos_AddCreditMemoSplits",
+                "operationId": "CreditMemos_AddCreditMemoSplits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAddSplitsPublicRequest"
+                            },
+                            "example": {
+                                "splits": [
+                                    {
+                                        "invoiceId": 0,
+                                        "amount": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAddSplitsPublicResponse"
+                                },
+                                "example": {
+                                    "id": 0,
                                     "splits": [
                                         {
                                             "invoiceId": 0,
@@ -2332,6 +3111,87 @@
                                         }
                                     ]
                                 }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/credit-memos/markasexported": {
+            "post": {
+                "tags": [
+                    "CreditMemos"
+                ],
+                "summary": "mark credit memo as exported. Id = creditMemoId",
+                "description": "mark credit memo as exported. Id = creditMemoId",
+                "operationId": "CreditMemos_MarkAsExported",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Accounting.V2.CreditMemos.MarkCreditMemoAsExportedRequest"
+                                }
+                            },
+                            "example": [
+                                {
+                                    "creditMemoId": 0,
+                                    "externalId": "string",
+                                    "externalMessage": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Accounting.V2.CreditMemos.MarkCreditMemoAsExportedResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "creditMemoId": 0,
+                                        "success": true,
+                                        "errorMessage": "string"
+                                    }
+                                ]
                             }
                         }
                     },
@@ -6829,6 +7689,353 @@
                 }
             }
         },
+        "/tenant/{tenant}/journal-entries/{id}": {
+            "get": {
+                "tags": [
+                    "JournalEntries"
+                ],
+                "summary": "Gets a journal entry by ID",
+                "description": "Gets a journal entry by ID",
+                "operationId": "JournalEntries_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.JournalEntryResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "number": 0,
+                                    "name": "string",
+                                    "source": "ServiceTitan",
+                                    "status": "Open",
+                                    "syncStatus": "NotSynced",
+                                    "versionId": 0,
+                                    "lastSyncVersionId": 0,
+                                    "message": "string",
+                                    "postDate": "string",
+                                    "exportedOn": "string",
+                                    "exportedBy": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "customFields": [
+                                        {
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ],
+                                    "url": "string",
+                                    "isEmpty": true
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "JournalEntries"
+                ],
+                "summary": "Updates journal entry, supports only for external journal entry records.\nTo add a line, supply all the original lines along with the new one. To delete a line, supply only the lines you want to keep.",
+                "description": "Updates journal entry, supports only for external journal entry records.\nTo add a line, supply all the original lines along with the new one. To delete a line, supply only the lines you want to keep.",
+                "operationId": "JournalEntries_FullUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntrySaveRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "status": "Open",
+                                "versionId": 0,
+                                "message": "string",
+                                "postDate": "string",
+                                "customFields": {},
+                                "lines": [
+                                    {
+                                        "postDate": "string",
+                                        "accountId": 0,
+                                        "debit": 0,
+                                        "credit": 0,
+                                        "memo": "string",
+                                        "quantity": 0,
+                                        "unitAmount": 0,
+                                        "externalObjects": [
+                                            {
+                                                "id": "string",
+                                                "type": "string",
+                                                "name": "string",
+                                                "url": "string"
+                                            }
+                                        ],
+                                        "businessUnitId": 0,
+                                        "customerId": 0,
+                                        "vendorId": 0,
+                                        "inventoryLocationId": 0,
+                                        "jobId": 0,
+                                        "customerLocationId": 0,
+                                        "paymentTypeId": 0,
+                                        "projectId": 0,
+                                        "budgetCodeId": 0,
+                                        "employeeId": 0,
+                                        "serviceAgreementId": 0,
+                                        "appliedTo": {
+                                            "id": 0,
+                                            "type": "Unspecified",
+                                            "refNumber": "string"
+                                        },
+                                        "sku": {
+                                            "id": 0,
+                                            "type": "Service"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "JournalEntries"
+                ],
+                "summary": "Deletes journal entry, supports only for external journal entry records.",
+                "description": "Deletes journal entry, supports only for external journal entry records.",
+                "operationId": "JournalEntries_DeleteJournalEntry",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "JournalEntries"
+                ],
+                "summary": "Updates a journal entry.",
+                "description": "Updates a journal entry.",
+                "operationId": "JournalEntries_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryUpdateRequest"
+                            },
+                            "example": {
+                                "status": {},
+                                "customFields": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.JournalEntryResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "number": 0,
+                                    "name": "string",
+                                    "source": "ServiceTitan",
+                                    "status": "Open",
+                                    "syncStatus": "NotSynced",
+                                    "versionId": 0,
+                                    "lastSyncVersionId": 0,
+                                    "message": "string",
+                                    "postDate": "string",
+                                    "exportedOn": "string",
+                                    "exportedBy": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "customFields": [
+                                        {
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ],
+                                    "url": "string",
+                                    "isEmpty": true
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/journal-entries": {
             "get": {
                 "tags": [
@@ -7188,6 +8395,7 @@
                                             "modifiedOn": "string",
                                             "number": 0,
                                             "name": "string",
+                                            "source": "ServiceTitan",
                                             "status": "Open",
                                             "syncStatus": "NotSynced",
                                             "versionId": 0,
@@ -7212,6 +8420,105 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "JournalEntries"
+                ],
+                "summary": "Creates a new journal entry record, automatically marks it as external.",
+                "description": "Creates a new journal entry record, automatically marks it as external.",
+                "operationId": "JournalEntries_CreateJournalEntry",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryCreateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "status": "Open",
+                                "versionId": 0,
+                                "message": "string",
+                                "postDate": "string",
+                                "customFields": {},
+                                "lines": [
+                                    {
+                                        "postDate": "string",
+                                        "accountId": 0,
+                                        "debit": 0,
+                                        "credit": 0,
+                                        "memo": "string",
+                                        "quantity": 0,
+                                        "unitAmount": 0,
+                                        "externalObjects": [
+                                            {
+                                                "id": "string",
+                                                "type": "string",
+                                                "name": "string",
+                                                "url": "string"
+                                            }
+                                        ],
+                                        "businessUnitId": 0,
+                                        "customerId": 0,
+                                        "vendorId": 0,
+                                        "inventoryLocationId": 0,
+                                        "jobId": 0,
+                                        "customerLocationId": 0,
+                                        "paymentTypeId": 0,
+                                        "projectId": 0,
+                                        "budgetCodeId": 0,
+                                        "employeeId": 0,
+                                        "serviceAgreementId": 0,
+                                        "appliedTo": {
+                                            "id": 0,
+                                            "type": "Unspecified",
+                                            "refNumber": "string"
+                                        },
+                                        "sku": {
+                                            "id": 0,
+                                            "type": "Service"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
@@ -7433,6 +8740,16 @@
                                             "debit": 0,
                                             "credit": 0,
                                             "memo": "string",
+                                            "quantity": 0,
+                                            "unitAmount": 0,
+                                            "externalObjects": [
+                                                {
+                                                    "id": "string",
+                                                    "type": "string",
+                                                    "name": "string",
+                                                    "url": "string"
+                                                }
+                                            ],
                                             "transaction": {
                                                 "id": 0,
                                                 "type": "Unspecified",
@@ -7488,106 +8805,6 @@
                                             "budgetCodeId": 0
                                         }
                                     ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/journal-entries/{id}": {
-            "patch": {
-                "tags": [
-                    "JournalEntries"
-                ],
-                "summary": "Updates a journal entry.",
-                "description": "Updates a journal entry.",
-                "operationId": "JournalEntries_Update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "guid"
-                        }
-                    },
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryUpdateRequest"
-                            },
-                            "example": {
-                                "status": {},
-                                "customFields": {}
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Accounting.V2.JournalEntryResponse"
-                                },
-                                "example": {
-                                    "id": "string",
-                                    "createdOn": "string",
-                                    "modifiedOn": "string",
-                                    "number": 0,
-                                    "name": "string",
-                                    "status": "Open",
-                                    "syncStatus": "NotSynced",
-                                    "versionId": 0,
-                                    "lastSyncVersionId": 0,
-                                    "message": "string",
-                                    "postDate": "string",
-                                    "exportedOn": "string",
-                                    "exportedBy": {
-                                        "id": 0,
-                                        "name": "string"
-                                    },
-                                    "customFields": [
-                                        {
-                                            "name": "string",
-                                            "value": "string"
-                                        }
-                                    ],
-                                    "url": "string",
-                                    "isEmpty": true
                                 }
                             }
                         }
@@ -7671,6 +8888,7 @@
                                     "modifiedOn": "string",
                                     "number": 0,
                                     "name": "string",
+                                    "source": "ServiceTitan",
                                     "status": "Open",
                                     "syncStatus": "NotSynced",
                                     "versionId": 0,
@@ -10585,6 +11803,13 @@
                         "type": "integer",
                         "format": "int64",
                         "nullable": true
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
+                        },
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -10875,6 +12100,13 @@
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.ApPaymentSplitApiModel"
                         }
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
+                        },
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -11119,6 +12351,10 @@
                                 "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
                             }
                         ],
+                        "nullable": true
+                    },
+                    "syncStatus": {
+                        "type": "string",
                         "nullable": true
                     },
                     "batch": {
@@ -11598,6 +12834,39 @@
                     "businessUnitId": {
                         "type": "integer",
                         "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoUpdatePublicRequest": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.CreditMemoAddSplitsPublicResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
                     },
                     "splits": {
                         "type": "array",
@@ -11627,23 +12896,9 @@
                 },
                 "additionalProperties": false
             },
-            "Accounting.V2.CreditMemos.CreditMemoUpdatePublicRequest": {
+            "Accounting.V2.CreditMemos.CreditMemoAddSplitsPublicRequest": {
                 "type": "object",
                 "properties": {
-                    "active": {
-                        "type": "boolean"
-                    },
-                    "summary": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "businessUnitId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
                     "splits": {
                         "type": "array",
                         "items": {
@@ -11670,6 +12925,48 @@
                     "amount": {
                         "type": "number",
                         "format": "decimal",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.MarkCreditMemoAsExportedResponse": {
+                "required": [
+                    "creditMemoId",
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "creditMemoId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "errorMessage": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.CreditMemos.MarkCreditMemoAsExportedRequest": {
+                "required": [
+                    "creditMemoId"
+                ],
+                "type": "object",
+                "properties": {
+                    "creditMemoId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "externalMessage": {
+                        "type": "string",
                         "nullable": true
                     }
                 },
@@ -14966,51 +16263,12 @@
                 },
                 "additionalProperties": false
             },
-            "Accounting.V2.JournalEntryPagingResponse_Of_Accounting.V2.JournalEntryResponse": {
-                "required": [
-                    "pageSize",
-                    "page",
-                    "hasMore",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "Page size for this query (i.e. how many records were requested to return)",
-                        "format": "int32"
-                    },
-                    "page": {
-                        "type": "integer",
-                        "description": "Page number for this query",
-                        "format": "int32"
-                    },
-                    "hasMore": {
-                        "type": "boolean",
-                        "description": "True if there are more records in the query than returned in this result"
-                    },
-                    "totalCount": {
-                        "type": "integer",
-                        "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Accounting.V2.JournalEntryResponse"
-                        },
-                        "description": "The collection of result items, will never have more than PageSize items"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Represents paginated API response."
-            },
             "Accounting.V2.JournalEntryResponse": {
                 "required": [
                     "createdOn",
                     "modifiedOn",
                     "number",
+                    "source",
                     "status",
                     "syncStatus",
                     "versionId",
@@ -15038,6 +16296,9 @@
                     "name": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/Accounting.V2.JournalEntrySource"
                     },
                     "status": {
                         "$ref": "#/components/schemas/Accounting.V2.JournalEntryPostingStatus"
@@ -15093,6 +16354,18 @@
                 },
                 "additionalProperties": false
             },
+            "Accounting.V2.JournalEntrySource": {
+                "enum": [
+                    "ServiceTitan",
+                    "External"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "ServiceTitan",
+                    "External"
+                ]
+            },
             "Accounting.V2.JournalEntryPostingStatus": {
                 "enum": [
                     "Open",
@@ -15125,6 +16398,46 @@
                     "Excluded"
                 ]
             },
+            "Accounting.V2.JournalEntryPagingResponse_Of_Accounting.V2.JournalEntryResponse": {
+                "required": [
+                    "pageSize",
+                    "page",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number for this query",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.JournalEntryResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
             "Accounting.V2.JournalEntryTransactionType": {
                 "enum": [
                     "Unspecified",
@@ -15145,8 +16458,10 @@
                     "GrossPayItem",
                     "PayrollPeriod",
                     "Manual",
+                    "ItemConsumption",
                     "External",
-                    "ItemConsumption"
+                    "CreditMemo",
+                    "CreditMemoApplication"
                 ],
                 "type": "string",
                 "description": "",
@@ -15169,8 +16484,10 @@
                     "GrossPayItem",
                     "PayrollPeriod",
                     "Manual",
+                    "ItemConsumption",
                     "External",
-                    "ItemConsumption"
+                    "CreditMemo",
+                    "CreditMemoApplication"
                 ]
             },
             "Accounting.V2.EmptyJeHandling": {
@@ -15363,6 +16680,23 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "unitAmount": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "externalObjects": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ExternalObjectResponse"
+                        },
+                        "nullable": true
+                    },
                     "transaction": {
                         "oneOf": [
                             {
@@ -15472,6 +16806,28 @@
                 },
                 "additionalProperties": false
             },
+            "Accounting.V2.ExternalObjectResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
             "Accounting.V2.JournalEntryTransaction": {
                 "required": [
                     "id",
@@ -15552,6 +16908,255 @@
                     "PriceModifier",
                     "Unspecified"
                 ]
+            },
+            "Accounting.V2.JournalEntryCreateRequest": {
+                "required": [
+                    "status",
+                    "versionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Accounting.V2.JournalEntryPostingStatus"
+                    },
+                    "versionId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "nullable": true
+                    },
+                    "lines": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.JournalEntryLineCreateRequest"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.JournalEntryLineCreateRequest": {
+                "required": [
+                    "debit",
+                    "credit"
+                ],
+                "type": "object",
+                "properties": {
+                    "postDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "accountId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "debit": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "credit": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "unitAmount": {
+                        "type": "number",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "externalObjects": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ExternalObjectSaveRequest"
+                        },
+                        "nullable": true
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "vendorId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "inventoryLocationId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "customerLocationId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "paymentTypeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "budgetCodeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "employeeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "serviceAgreementId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appliedTo": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryTransaction"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "sku": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntrySkuSaveRequest"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.ExternalObjectSaveRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "url": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.JournalEntrySkuSaveRequest": {
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/Accounting.V2.JournalEntrySkuType"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Accounting.V2.JournalEntrySaveRequest": {
+                "required": [
+                    "status",
+                    "versionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Accounting.V2.JournalEntryPostingStatus"
+                    },
+                    "versionId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "customFields": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "nullable": true
+                    },
+                    "lines": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.JournalEntryLineCreateRequest"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
             },
             "Accounting.V2.JournalEntryUpdateRequest": {
                 "type": "object",

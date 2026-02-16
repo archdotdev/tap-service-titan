@@ -104,6 +104,33 @@
     {
       "breadcrumb": [
         "properties",
+        "quantity"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "unitAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalObjects"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "transaction"
       ],
       "metadata": {
@@ -710,6 +737,45 @@
           "null"
         ]
       },
+      "externalObjects": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "inventoryLocation": {
         "additionalProperties": false,
         "properties": {
@@ -823,6 +889,13 @@
           "null"
         ]
       },
+      "quantity": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "serviceAgreement": {
         "additionalProperties": false,
         "properties": {
@@ -917,6 +990,13 @@
         "format": "date",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "unitAmount": {
+        "format": "decimal",
+        "type": [
+          "number",
           "null"
         ]
       },

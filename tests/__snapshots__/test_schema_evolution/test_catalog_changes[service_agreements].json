@@ -603,6 +603,15 @@
     {
       "breadcrumb": [
         "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -906,6 +915,17 @@
         "description": "Optional text summary of the agreement",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

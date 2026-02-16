@@ -10,6 +10,471 @@
         }
     ],
     "paths": {
+        "/tenant/{tenant}/equipment-types": {
+            "get": {
+                "tags": [
+                    "EquipmentTypes"
+                ],
+                "summary": "Gets a list of equipment types",
+                "description": "Gets a list of equipment types",
+                "operationId": "EquipmentTypes_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID, Name, CreatedOn, ModifiedOn",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "active": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EquipmentTypes"
+                ],
+                "summary": "Creates a new equipment type",
+                "description": "Creates a new equipment type",
+                "operationId": "EquipmentTypes_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeCreateRequest"
+                            },
+                            "example": {
+                                "name": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/equipment-types/{id}": {
+            "get": {
+                "tags": [
+                    "EquipmentTypes"
+                ],
+                "summary": "Gets equipment type specified by ID",
+                "description": "Gets equipment type specified by ID",
+                "operationId": "EquipmentTypes_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "EquipmentTypes"
+                ],
+                "summary": "Updates an existing equipment type",
+                "description": "Updates an existing equipment type",
+                "operationId": "EquipmentTypes_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeUpdateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/export/installed-equipment": {
             "get": {
                 "tags": [
@@ -363,6 +828,8 @@
                             "example": {
                                 "locationId": 0,
                                 "name": "string",
+                                "equipmentTypeId": 0,
+                                "status": {},
                                 "installedOn": "string",
                                 "actualReplacementDate": "string",
                                 "serialNumber": "string",
@@ -468,6 +935,42 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -657,6 +1160,8 @@
                             },
                             "example": {
                                 "name": "string",
+                                "equipmentTypeId": 0,
+                                "status": "Installed",
                                 "installedOn": "string",
                                 "actualReplacementDate": "string",
                                 "serialNumber": "string",
@@ -780,6 +1285,24 @@
                     },
                     "404": {
                         "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1094,6 +1617,173 @@
     },
     "components": {
         "schemas": {
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_EquipmentSystems.V2.EquipmentTypeResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "EquipmentSystems.V2.EquipmentTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The unique identifier for the equipment type record",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the equipment type"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates if this equipment type is active"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the equipment type was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the equipment type was modified",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an equipment type in the API responses.\nEquipment types categorize and classify equipment items within the system."
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "EquipmentSystems.V2.EquipmentTypeCreateRequest": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Equipment type name"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Contract for creating a new equipment type"
+            },
+            "EquipmentSystems.V2.EquipmentTypeUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Equipment type name"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the equipment type is active"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Contract for updating an equipment type"
+            },
             "EquipmentSystems.V2.InstalledEquipmentListExportResponse": {
                 "required": [
                     "hasMore",
@@ -1324,53 +2014,6 @@
                 },
                 "additionalProperties": false
             },
-            "ApiErrorResponse": {
-                "required": [
-                    "type",
-                    "title",
-                    "status",
-                    "traceId",
-                    "errors",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "description": "A URI reference that identifies the problem type"
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "A short, human-readable summary of the problem type"
-                    },
-                    "status": {
-                        "type": "integer",
-                        "description": "The HTTP status code generated by server",
-                        "format": "int32"
-                    },
-                    "traceId": {
-                        "type": "string",
-                        "description": "Internal trace ID for advanced diagnostics"
-                    },
-                    "errors": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
-                    },
-                    "data": {
-                        "type": "object",
-                        "additionalProperties": {},
-                        "description": "Provides additional data, intended for programmatical usage"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
-            },
             "PaginatedResponse_Of_EquipmentSystems.V2.InstalledEquipmentResponse": {
                 "required": [
                     "page",
@@ -1410,20 +2053,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents paginated API response."
-            },
-            "ActiveRequestArg": {
-                "enum": [
-                    "True",
-                    "Any",
-                    "False"
-                ],
-                "type": "string",
-                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
-                "x-enumNames": [
-                    "True",
-                    "Any",
-                    "False"
-                ]
             },
             "EquipmentSystems.V2.InstalledEquipmentDetailedResponse": {
                 "required": [
@@ -1609,12 +2238,12 @@
                 "properties": {
                     "alias": {
                         "type": "string",
-                        "description": "Attachment Alias",
+                        "description": "Display name or label for the attachment (optional)",
                         "nullable": true
                     },
                     "fileName": {
                         "type": "string",
-                        "description": "Attachment file name when downloaded",
+                        "description": "Original file name",
                         "nullable": true
                     },
                     "type": {
@@ -1623,13 +2252,15 @@
                                 "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
                             }
                         ],
-                        "description": "Attachment type - Image, Video, Document, or Video Link"
+                        "description": "Media type of the attachment"
                     },
                     "url": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URL to access or download the file"
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "description": "Attachment file to associate with installed equipment"
             },
             "EquipmentSystems.V2.AttachmentAssetType": {
                 "enum": [
@@ -1640,7 +2271,7 @@
                     "Document"
                 ],
                 "type": "string",
-                "description": "",
+                "description": "Types of media files that can be attached",
                 "x-enumNames": [
                     "Other",
                     "Image",
@@ -1661,6 +2292,19 @@
                     },
                     "name": {
                         "type": "string",
+                        "nullable": true
+                    },
+                    "equipmentTypeId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
+                            }
+                        ],
                         "nullable": true
                     },
                     "installedOn": {
@@ -1769,6 +2413,13 @@
                     "name": {
                         "type": "string"
                     },
+                    "equipmentTypeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
+                    },
                     "installedOn": {
                         "type": "string",
                         "format": "date-time",
@@ -1858,10 +2509,12 @@
                 "type": "object",
                 "properties": {
                     "path": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URL of the uploaded file to use in subsequent API requests"
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "description": "Result of an attachment file upload operation"
             },
             "LocationEquipment.Repositories.Types.RepositoryPageResult_Of_LocationEquipment.CustomFieldTypeModel": {
                 "required": [

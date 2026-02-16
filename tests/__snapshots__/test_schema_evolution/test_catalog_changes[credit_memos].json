@@ -363,6 +363,15 @@
     {
       "breadcrumb": [
         "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "batch"
       ],
       "metadata": {
@@ -905,6 +914,12 @@
         "format": "decimal",
         "type": [
           "number",
+          "null"
+        ]
+      },
+      "syncStatus": {
+        "type": [
+          "string",
           "null"
         ]
       },

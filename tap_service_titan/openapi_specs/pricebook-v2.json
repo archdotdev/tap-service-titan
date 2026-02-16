@@ -914,7 +914,9 @@
                                                 }
                                             ],
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -1055,7 +1057,9 @@
                                         }
                                     ],
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -1166,7 +1170,9 @@
                                         }
                                     ],
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -1334,7 +1340,9 @@
                                         }
                                     ],
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -6987,7 +6995,9 @@
                     "active",
                     "position",
                     "categoryType",
-                    "hideInMobile"
+                    "hideInMobile",
+                    "createdOn",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -7079,6 +7089,16 @@
                     "hideInMobile": {
                         "type": "boolean",
                         "description": "If a category is available in mobile or not"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date and time when the category was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The date and time when the category was last modified",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -7289,7 +7309,9 @@
                     "bonus",
                     "commissionBonus",
                     "paysCommission",
-                    "excludeFromPayroll"
+                    "excludeFromPayroll",
+                    "createdOn",
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -7413,6 +7435,16 @@
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)",
                         "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date and time when the discount or fee was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The date and time when the discount or fee was last modified",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -9035,6 +9067,7 @@
                     "position",
                     "categoryType",
                     "hideInMobile",
+                    "createdOn",
                     "modifiedOn"
                 ],
                 "type": "object",
@@ -9128,8 +9161,14 @@
                         "type": "boolean",
                         "description": "If a category is available in mobile or not"
                     },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date and time when the category was created",
+                        "format": "date-time"
+                    },
                     "modifiedOn": {
                         "type": "string",
+                        "description": "The date and time when the category was last modified",
                         "format": "date-time"
                     }
                 },

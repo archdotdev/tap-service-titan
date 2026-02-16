@@ -1,0 +1,1992 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Findings",
+        "description": "Finding assets, location findings",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api-integration.servicetitan.io/findings/v2"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/assets": {
+            "post": {
+                "tags": [
+                    "FindingAssets"
+                ],
+                "summary": "Uploads a file and returns the asset path for use in /findings endpoint requests",
+                "description": "Uploads a file and returns the asset path for use in /findings endpoint requests",
+                "operationId": "FindingAssets_PostAttachment",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "file": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAssetUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FindingAssets"
+                ],
+                "summary": "Downloads an asset by path. Redirects to a temporary download URL",
+                "description": "Downloads an asset by path. Redirects to a temporary download URL",
+                "operationId": "FindingAssets_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/location-findings": {
+            "get": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Gets a list of findings",
+                "description": "Gets a list of findings",
+                "operationId": "Findings_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID, CreatedOn, ModifiedOn",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "locationId",
+                        "in": "query",
+                        "description": "Filters by location ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sourceJobId",
+                        "in": "query",
+                        "description": "Filters by source job ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "installedEquipmentId",
+                        "in": "query",
+                        "description": "Filters by installed equipment ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_EquipmentSystems.V2.FindingResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "locationId": 0,
+                                            "name": "string",
+                                            "description": "string",
+                                            "recommendedSolution": "string",
+                                            "internalNotes": "string",
+                                            "installedEquipmentId": 0,
+                                            "urgencyLevel": {},
+                                            "sourceJobId": 0,
+                                            "archived": true,
+                                            "active": true,
+                                            "createdBy": 0,
+                                            "modifiedBy": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Creates a new finding to document an issue or observation at a customer location",
+                "description": "Creates a new finding to document an issue or observation at a customer location",
+                "operationId": "Findings_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingCreateRequest"
+                            },
+                            "example": {
+                                "locationId": 0,
+                                "name": "string",
+                                "description": "string",
+                                "urgencyLevel": {},
+                                "recommendedSolution": "string",
+                                "internalNotes": "string",
+                                "installedEquipmentId": 0,
+                                "sourceJobId": 0,
+                                "attachments": [
+                                    {
+                                        "fileName": "string",
+                                        "url": "string",
+                                        "type": {}
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingDetailedResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "locationId": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "recommendedSolution": "string",
+                                    "internalNotes": "string",
+                                    "installedEquipmentId": 0,
+                                    "urgencyLevel": {},
+                                    "sourceJobId": 0,
+                                    "archived": true,
+                                    "active": true,
+                                    "createdBy": 0,
+                                    "modifiedBy": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "status": {},
+                                    "attachments": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "url": "string",
+                                            "type": {}
+                                        }
+                                    ],
+                                    "linkedEstimateIds": [
+                                        0
+                                    ],
+                                    "linkedJobIds": [
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/location-findings/{id}": {
+            "get": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Gets finding specified by ID",
+                "description": "Gets finding specified by ID",
+                "operationId": "Findings_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingDetailedResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "locationId": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "recommendedSolution": "string",
+                                    "internalNotes": "string",
+                                    "installedEquipmentId": 0,
+                                    "urgencyLevel": {},
+                                    "sourceJobId": 0,
+                                    "archived": true,
+                                    "active": true,
+                                    "createdBy": 0,
+                                    "modifiedBy": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "status": {},
+                                    "attachments": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "url": "string",
+                                            "type": {}
+                                        }
+                                    ],
+                                    "linkedEstimateIds": [
+                                        0
+                                    ],
+                                    "linkedJobIds": [
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Updates a finding",
+                "description": "Updates a finding",
+                "operationId": "Findings_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingUpdateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "description": "string",
+                                "urgencyLevel": {},
+                                "recommendedSolution": "string",
+                                "internalNotes": "string",
+                                "archived": true,
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingDetailedResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "locationId": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "recommendedSolution": "string",
+                                    "internalNotes": "string",
+                                    "installedEquipmentId": 0,
+                                    "urgencyLevel": {},
+                                    "sourceJobId": 0,
+                                    "archived": true,
+                                    "active": true,
+                                    "createdBy": 0,
+                                    "modifiedBy": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "status": {},
+                                    "attachments": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "url": "string",
+                                            "type": {}
+                                        }
+                                    ],
+                                    "linkedEstimateIds": [
+                                        0
+                                    ],
+                                    "linkedJobIds": [
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/location-findings/{id}/attachments": {
+            "get": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Gets a paginated list of attachments for a finding",
+                "description": "Gets a paginated list of attachments for a finding",
+                "operationId": "Findings_GetFindingAttachments",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Perform lookup by multiple IDs (maximum 50)",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "url": "string",
+                                            "type": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Creates a new attachment for a finding",
+                "description": "Creates a new attachment for a finding",
+                "operationId": "Findings_CreateFindingAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentCreateRequest"
+                            },
+                            "example": {
+                                "fileName": "string",
+                                "url": "string",
+                                "type": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/location-findings/{id}/attachments/{attachmentId}": {
+            "get": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Gets an attachment for a finding by ID",
+                "description": "Gets an attachment for a finding by ID",
+                "operationId": "Findings_GetFindingAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Updates an attachment associated with a finding",
+                "description": "Updates an attachment associated with a finding",
+                "operationId": "Findings_UpdateFindingAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentUpdateRequest"
+                            },
+                            "example": {
+                                "fileName": "string",
+                                "url": "string",
+                                "type": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Findings"
+                ],
+                "summary": "Removes an attachment associated with a finding",
+                "description": "Removes an attachment associated with a finding",
+                "operationId": "Findings_DeleteFindingAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "EquipmentSystems.V2.FindingAssetUploadResponse": {
+                "required": [
+                    "path"
+                ],
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "File path returned from upload, used to reference this asset in finding operations"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of an asset file upload operation"
+            },
+            "PaginatedResponse_Of_EquipmentSystems.V2.FindingResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.FindingResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "EquipmentSystems.V2.FindingResponse": {
+                "required": [
+                    "id",
+                    "locationId",
+                    "urgencyLevel",
+                    "archived",
+                    "active",
+                    "createdBy",
+                    "modifiedBy",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the finding",
+                        "format": "int64"
+                    },
+                    "locationId": {
+                        "type": "integer",
+                        "description": "ID of the customer location where the finding was identified",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Title summarizing the issue or observation",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Detailed description of the issue, condition, or observation",
+                        "nullable": true
+                    },
+                    "recommendedSolution": {
+                        "type": "string",
+                        "description": "Suggested action or repair to address the finding",
+                        "nullable": true
+                    },
+                    "internalNotes": {
+                        "type": "string",
+                        "description": "Private notes for internal use, not visible to customers",
+                        "nullable": true
+                    },
+                    "installedEquipmentId": {
+                        "type": "integer",
+                        "description": "ID of the specific equipment where the finding was observed (if applicable)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "urgencyLevel": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingUrgencyLevel"
+                            }
+                        ],
+                        "description": "Priority level indicating how urgently the finding should be addressed"
+                    },
+                    "sourceJobId": {
+                        "type": "integer",
+                        "description": "ID of the job during which this finding was discovered (if applicable)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Whether the finding has been archived and is no longer active"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the finding is currently active in the system"
+                    },
+                    "createdBy": {
+                        "type": "integer",
+                        "description": "ID of the user who created the finding",
+                        "format": "int64"
+                    },
+                    "modifiedBy": {
+                        "type": "integer",
+                        "description": "ID of the user who last updated the finding",
+                        "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Timestamp when the finding was created (UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Timestamp when the finding was last updated (UTC)",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a documented issue or observation about a customer location or equipment"
+            },
+            "EquipmentSystems.V2.FindingUrgencyLevel": {
+                "enum": [
+                    "NotSpecified",
+                    "Low",
+                    "Medium",
+                    "High",
+                    "Critical"
+                ],
+                "type": "string",
+                "description": "Priority levels for addressing findings",
+                "x-enumNames": [
+                    "NotSpecified",
+                    "Low",
+                    "Medium",
+                    "High",
+                    "Critical"
+                ]
+            },
+            "ActiveRequestArg": {
+                "enum": [
+                    "True",
+                    "Any",
+                    "False"
+                ],
+                "type": "string",
+                "description": "Represents possible HTTP query argument values, when applying filters based on active status.",
+                "x-enumNames": [
+                    "True",
+                    "Any",
+                    "False"
+                ]
+            },
+            "EquipmentSystems.V2.FindingDetailedResponse": {
+                "required": [
+                    "id",
+                    "locationId",
+                    "urgencyLevel",
+                    "archived",
+                    "active",
+                    "createdBy",
+                    "modifiedBy",
+                    "createdOn",
+                    "modifiedOn",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the finding",
+                        "format": "int64"
+                    },
+                    "locationId": {
+                        "type": "integer",
+                        "description": "ID of the customer location where the finding was identified",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Title summarizing the issue or observation",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Detailed description of the issue, condition, or observation",
+                        "nullable": true
+                    },
+                    "recommendedSolution": {
+                        "type": "string",
+                        "description": "Suggested action or repair to address the finding",
+                        "nullable": true
+                    },
+                    "internalNotes": {
+                        "type": "string",
+                        "description": "Private notes for internal use, not visible to customers",
+                        "nullable": true
+                    },
+                    "installedEquipmentId": {
+                        "type": "integer",
+                        "description": "ID of the specific equipment where the finding was observed (if applicable)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "urgencyLevel": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingUrgencyLevel"
+                            }
+                        ],
+                        "description": "Priority level indicating how urgently the finding should be addressed"
+                    },
+                    "sourceJobId": {
+                        "type": "integer",
+                        "description": "ID of the job during which this finding was discovered (if applicable)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Whether the finding has been archived and is no longer active"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the finding is currently active in the system"
+                    },
+                    "createdBy": {
+                        "type": "integer",
+                        "description": "ID of the user who created the finding",
+                        "format": "int64"
+                    },
+                    "modifiedBy": {
+                        "type": "integer",
+                        "description": "ID of the user who last updated the finding",
+                        "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Timestamp when the finding was created (UTC)",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Timestamp when the finding was last updated (UTC)",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingStatus"
+                            }
+                        ],
+                        "description": "Current status in the finding-to-job workflow (e.g., estimate created, job completed)"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentModel"
+                        },
+                        "description": "Photos, videos, and documents attached to the finding",
+                        "nullable": true
+                    },
+                    "linkedEstimateIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of estimates created to address this finding",
+                        "nullable": true
+                    },
+                    "linkedJobIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of jobs scheduled to resolve this finding",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Finding response with additional workflow and relationship details"
+            },
+            "EquipmentSystems.V2.FindingStatus": {
+                "enum": [
+                    "New",
+                    "EstimateCreated",
+                    "EstimateAccepted",
+                    "EstimateRejected",
+                    "JobBooked",
+                    "JobCompleted",
+                    "Archived"
+                ],
+                "type": "string",
+                "description": "Status of a finding in the workflow from discovery to resolution",
+                "x-enumNames": [
+                    "New",
+                    "EstimateCreated",
+                    "EstimateAccepted",
+                    "EstimateRejected",
+                    "JobBooked",
+                    "JobCompleted",
+                    "Archived"
+                ]
+            },
+            "EquipmentSystems.V2.FindingAttachmentModel": {
+                "required": [
+                    "id",
+                    "fileName",
+                    "url",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the attachment",
+                        "format": "int64"
+                    },
+                    "fileName": {
+                        "type": "string",
+                        "description": "Original file name"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "URL to access or download the file"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
+                            }
+                        ],
+                        "description": "Media type of the attachment"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Attachment associated with a finding"
+            },
+            "EquipmentSystems.V2.AttachmentAssetType": {
+                "enum": [
+                    "Other",
+                    "Image",
+                    "VideoFile",
+                    "VideoLink",
+                    "Document"
+                ],
+                "type": "string",
+                "description": "Types of media files that can be attached",
+                "x-enumNames": [
+                    "Other",
+                    "Image",
+                    "VideoFile",
+                    "VideoLink",
+                    "Document"
+                ]
+            },
+            "EquipmentSystems.V2.FindingCreateRequest": {
+                "required": [
+                    "locationId",
+                    "urgencyLevel"
+                ],
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "integer",
+                        "description": "ID of the customer location where the finding was identified",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Title summarizing the issue or observation (e.g., \"Leaking pipe\", \"Worn brake pads\")",
+                        "nullable": true
+                    },
+                    "description": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Detailed description of the issue, condition, or observation",
+                        "nullable": true
+                    },
+                    "urgencyLevel": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingUrgencyLevel"
+                            }
+                        ],
+                        "description": "Priority level indicating how urgently the finding should be addressed"
+                    },
+                    "recommendedSolution": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Suggested action or repair to address the finding",
+                        "nullable": true
+                    },
+                    "internalNotes": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Private notes for internal use, not visible to customers",
+                        "nullable": true
+                    },
+                    "installedEquipmentId": {
+                        "type": "integer",
+                        "description": "ID of the specific equipment where the finding was observed (optional)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "sourceJobId": {
+                        "type": "integer",
+                        "description": "ID of the job during which this finding was discovered (optional)",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentCreateModel"
+                        },
+                        "description": "Photos, videos, or documents supporting the finding",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Creates a finding to document equipment or location issues discovered during service"
+            },
+            "EquipmentSystems.V2.FindingAttachmentCreateModel": {
+                "required": [
+                    "fileName",
+                    "url",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Original file name (e.g., \"motor-inspection.jpg\")"
+                    },
+                    "url": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "URL of the uploaded file obtained from the upload endpoint"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
+                            }
+                        ],
+                        "description": "Media type of the attachment"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Attachment file to include with a finding"
+            },
+            "EquipmentSystems.V2.FindingUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Title summarizing the issue or observation (e.g., \"Leaking pipe\", \"Worn brake pads\")"
+                    },
+                    "description": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Detailed description of the issue, condition, or observation"
+                    },
+                    "urgencyLevel": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingUrgencyLevel"
+                            }
+                        ],
+                        "description": "Priority level indicating how urgently the finding should be addressed"
+                    },
+                    "recommendedSolution": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Suggested action or repair to address the finding"
+                    },
+                    "internalNotes": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Private notes for internal use, not visible to customers"
+                    },
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Whether the finding has been archived and is no longer active"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the finding is active"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Contract for updating a finding"
+            },
+            "PaginatedResponse_Of_EquipmentSystems.V2.FindingAttachmentResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "EquipmentSystems.V2.FindingAttachmentResponse": {
+                "required": [
+                    "id",
+                    "fileName",
+                    "url",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the attachment",
+                        "format": "int64"
+                    },
+                    "fileName": {
+                        "type": "string",
+                        "description": "Original file name"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "URL to access or download the file"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
+                            }
+                        ],
+                        "description": "Media type of the attachment"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an attachment associated with a location finding."
+            },
+            "EquipmentSystems.V2.FindingAttachmentCreateRequest": {
+                "required": [
+                    "fileName",
+                    "url",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Original file name (e.g., \"motor-inspection.jpg\")"
+                    },
+                    "url": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "URL of the uploaded file obtained from the upload endpoint"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
+                            }
+                        ],
+                        "description": "Media type of the attachment"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a request to create a new attachment for a location finding."
+            },
+            "EquipmentSystems.V2.FindingAttachmentUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "Original file name (e.g., \"motor-inspection.jpg\")"
+                    },
+                    "url": {
+                        "maxLength": 4000,
+                        "type": "string",
+                        "description": "URL of the uploaded file obtained from the upload endpoint"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentAssetType"
+                            }
+                        ],
+                        "description": "Media type of the attachment"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a request to update an existing attachment on a location finding."
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "servicetitanapplicationkey",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}

@@ -895,6 +895,9 @@
                                                     "allocation": 0
                                                 }
                                             ],
+                                            "tagTypeIds": [
+                                                0
+                                            ],
                                             "name": "string",
                                             "displayName": "string",
                                             "active": true,
@@ -2909,6 +2912,15 @@
                         }
                     },
                     {
+                        "name": "includeTags",
+                        "in": "query",
+                        "description": "Whether tag type IDs associated with the membership type should be included in the result",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",
@@ -3041,6 +3053,9 @@
                                                     "offsetType": {},
                                                     "allocation": 0
                                                 }
+                                            ],
+                                            "tagTypeIds": [
+                                                0
                                             ]
                                         }
                                     ]
@@ -3147,6 +3162,9 @@
                                             "offsetType": {},
                                             "allocation": 0
                                         }
+                                    ],
+                                    "tagTypeIds": [
+                                        0
                                     ]
                                 }
                             }
@@ -4700,6 +4718,15 @@
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
                         },
                         "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag.",
                         "nullable": true
                     },
                     "name": {
@@ -7117,6 +7144,15 @@
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
                         },
                         "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag.",
                         "nullable": true
                     }
                 },

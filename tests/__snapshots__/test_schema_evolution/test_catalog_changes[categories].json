@@ -141,6 +141,15 @@
     {
       "breadcrumb": [
         "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -188,6 +197,14 @@
           "null"
         ]
       },
+      "createdOn": {
+        "description": "The date and time when the category was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "description": {
         "description": "A description that described the category",
         "type": [
@@ -222,6 +239,7 @@
         ]
       },
       "modifiedOn": {
+        "description": "The date and time when the category was last modified",
         "format": "date-time",
         "type": [
           "string",
@@ -308,6 +326,14 @@
                 "null"
               ]
             },
+            "createdOn": {
+              "description": "The date and time when the category was created",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "description": {
               "description": "A description that described the category",
               "type": [
@@ -339,6 +365,14 @@
             },
             "image": {
               "description": "The image to display as the category",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "modifiedOn": {
+              "description": "The date and time when the category was last modified",
+              "format": "date-time",
               "type": [
                 "string",
                 "null"
@@ -409,7 +443,9 @@
             "active",
             "position",
             "categoryType",
-            "hideInMobile"
+            "hideInMobile",
+            "createdOn",
+            "modifiedOn"
           ],
           "type": [
             "object",
@@ -428,7 +464,8 @@
       "active",
       "position",
       "categoryType",
-      "hideInMobile"
+      "hideInMobile",
+      "createdOn"
     ],
     "type": "object"
   },

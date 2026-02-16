@@ -60,6 +60,15 @@
     {
       "breadcrumb": [
         "properties",
+        "inventoryTemplateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -158,6 +167,14 @@
         "description": "Truck Id",
         "format": "int64",
         "type": "integer"
+      },
+      "inventoryTemplateId": {
+        "description": "Inventory Template Id for this truck",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "memo": {
         "description": "Memo",

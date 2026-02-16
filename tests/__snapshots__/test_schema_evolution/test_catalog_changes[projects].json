@@ -260,12 +260,14 @@
           "additionalProperties": false,
           "properties": {
             "name": {
+              "description": "Custom Field Name",
               "type": [
                 "string",
                 "null"
               ]
             },
             "typeId": {
+              "description": "Custom Field Type Id",
               "format": "int64",
               "type": [
                 "integer",
@@ -273,6 +275,7 @@
               ]
             },
             "value": {
+              "description": "Custom Field Value",
               "type": [
                 "string",
                 "null"

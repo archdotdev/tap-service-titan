@@ -54,8 +54,10 @@
   "replication_method": "FULL_TABLE",
   "schema": {
     "additionalProperties": false,
+    "description": "Represents a project type.",
     "properties": {
       "createdById": {
+        "description": "The ID of the user who created this project type.",
         "format": "int64",
         "type": [
           "integer",
@@ -63,16 +65,19 @@
         ]
       },
       "description": {
+        "description": "The description of the project type.",
         "type": [
           "string",
           "null"
         ]
       },
       "id": {
+        "description": "The unique identifier of the project type.",
         "format": "int64",
         "type": "integer"
       },
       "name": {
+        "description": "The name of the project type.",
         "type": [
           "string",
           "null"

@@ -242,6 +242,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -378,6 +387,49 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents custom field response",
+          "properties": {
+            "name": {
+              "description": "Custom field name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "Id of custom field type",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name",
+            "value"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

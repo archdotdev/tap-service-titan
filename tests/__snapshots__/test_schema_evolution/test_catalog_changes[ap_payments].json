@@ -329,6 +329,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -428,6 +437,33 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
