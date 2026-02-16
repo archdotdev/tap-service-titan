@@ -1,0 +1,90 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "_sdc_report_category"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "_sdc_report_category": {
+        "description": "Report category",
+        "type": "string"
+      },
+      "description": {
+        "description": "Description about the report ",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Report unique identifier.\nUse this value to request detailed report information, the actual data, etc.\nOnce the report is created the ID cannot be changed",
+        "format": "int64",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Display name of the report.\nDo not use the name as the report identifier because it can be modified\nand any references based on the old value would stop working",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "name"
+    ],
+    "type": "object"
+  },
+  "stream": "reports",
+  "tap_stream_id": "reports"
+}

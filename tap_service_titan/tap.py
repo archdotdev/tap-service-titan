@@ -249,6 +249,8 @@ class TapServiceTitan(Tap):
             streams.pricebook.MaterialsStream(self),
             streams.pricebook.PricebookCategoriesStream(self),
             streams.pricebook.ServicesStream(self),
+            streams.reporting.ReportCategoriesStream(self),
+            streams.reporting.ReportsStream(self),
             streams.sales_and_estimates.EstimateItemsStream(self),
             streams.sales_and_estimates.EstimatesStream(self),
             streams.service_agreements.ServiceAgreementsStream(self),

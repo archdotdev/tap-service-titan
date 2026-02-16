@@ -33,6 +33,7 @@ __all__ = [
     "MEMBERSHIPS",
     "PAYROLL",
     "PRICEBOOK",
+    "REPORTING",
     "SALESTECH",
     "SCHEDULING_PRO",
     "SERVICE_AGREEMENTS",
@@ -137,6 +138,12 @@ class ServiceTitanSchema(StreamSchema):
                 "type": "integer",
             }
 
+        if stream.name == "reports":
+            schema["properties"]["_sdc_report_category"] = {
+                "description": "Report category",
+                "type": "string",
+            }
+
         return schema
 
 
@@ -156,6 +163,7 @@ MARKETING_REPUTATION = ServiceTitanOpenAPISchema(SPECS / "marketing-reputation-v
 MEMBERSHIPS = ServiceTitanOpenAPISchema(SPECS / "memberships-v2.json")
 PAYROLL = ServiceTitanOpenAPISchema(SPECS / "payroll-v2.json")
 PRICEBOOK = ServiceTitanOpenAPISchema(SPECS / "pricebook-v2.json")
+REPORTING = ServiceTitanOpenAPISchema(SPECS / "reporting-v2.json")
 SALESTECH = ServiceTitanOpenAPISchema(SPECS / "salestech-v2.json")
 SCHEDULING_PRO = ServiceTitanOpenAPISchema(SPECS / "scheduling-pro-v2.json")
 SERVICE_AGREEMENTS = ServiceTitanOpenAPISchema(SPECS / "service-agreements-v2.json")

@@ -17,6 +17,7 @@ from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan.client import ServiceTitanStream
+from tap_service_titan.openapi_specs import REPORTING, ServiceTitanSchema
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod
@@ -31,6 +32,43 @@ else:
 if TYPE_CHECKING:
     from collections.abc import Generator, Iterable, Mapping
     from datetime import date
+
+
+class ReportCategoriesStream(ServiceTitanStream):
+    """Define report categories stream."""
+
+    name = "report_categories"
+    primary_keys = ("id",)
+    schema = ServiceTitanSchema(REPORTING, key="Reporting.V2.ReportCategoryListItem")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/reporting/v2/tenant/{self.tenant_id}/report-categories"
+
+    @override
+    def generate_child_contexts(
+        self,
+        record: types.Record,
+        context: types.Context | None,
+    ) -> Iterable[types.Context | None]:
+        yield {"_sdc_report_category": record["id"]}
+
+
+class ReportsStream(ServiceTitanStream):
+    """Define reports stream."""
+
+    name = "reports"
+    primary_keys = ("id",)
+    parent_stream_type = ReportCategoriesStream
+    schema = ServiceTitanSchema(REPORTING, key="Reporting.V2.ReportListItem")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/reporting/v2/tenant/{self.tenant_id}/report-category/{self.context['_sdc_report_category']}/reports"  # noqa: E501
 
 
 class CustomReports(ServiceTitanStream):
