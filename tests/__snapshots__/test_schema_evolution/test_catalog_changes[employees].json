@@ -51,6 +51,33 @@
     {
       "breadcrumb": [
         "properties",
+        "firstName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lastName"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "managerId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "role"
       ],
       "metadata": {
@@ -148,6 +175,126 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "home"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "street"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "unit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "city"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "state"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "home",
+        "properties",
+        "zip"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "agentId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "startDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "terminationDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "hourlyRate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "overtimeProfileId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -185,6 +332,14 @@
         "description": "Whether the employee is active",
         "type": [
           "boolean",
+          "null"
+        ]
+      },
+      "agentId": {
+        "description": "Agent id",
+        "format": "int32",
+        "type": [
+          "integer",
           "null"
         ]
       },
@@ -250,15 +405,97 @@
           "null"
         ]
       },
+      "firstName": {
+        "description": "Employee first name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "home": {
+        "additionalProperties": false,
+        "description": "Employee home address details",
+        "properties": {
+          "city": {
+            "description": "City",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "description": "Country",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "State",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "description": "Street",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "description": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "zip": {
+            "description": "Zip",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "hourlyRate": {
+        "description": "Hourly rate",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "id": {
         "description": "ID of the employee",
         "format": "int64",
         "type": "integer"
       },
+      "lastName": {
+        "description": "Employee last name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "loginName": {
         "description": "Login name of the employee",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "managerId": {
+        "description": "Employee manager id",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },
@@ -274,6 +511,14 @@
         "description": "Employee's name",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "overtimeProfileId": {
+        "description": "Overtime profile id",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },
@@ -335,6 +580,22 @@
           "null"
         ]
       },
+      "startDate": {
+        "description": "Start date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "terminationDate": {
+        "description": "Termination date",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "userId": {
         "description": "ID of the user that belongs to the employee",
         "format": "int64",
@@ -351,7 +612,9 @@
       "role",
       "createdOn",
       "modifiedOn",
-      "active"
+      "active",
+      "agentId",
+      "hourlyRate"
     ],
     "type": "object"
   },

@@ -681,6 +681,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found"
                     }
                 }
             }

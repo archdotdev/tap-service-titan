@@ -125,6 +125,9 @@
                                             "rateSheetId": 0,
                                             "accountManagerId": 0,
                                             "soldById": 0,
+                                            "tagTypeIds": [
+                                                0
+                                            ],
                                             "active": true
                                         }
                                     ]
@@ -370,7 +373,10 @@
                                             "estimatedGrossMarginPercentage": 0,
                                             "rateSheetId": 0,
                                             "accountManagerId": 0,
-                                            "soldById": 0
+                                            "soldById": 0,
+                                            "tagTypeIds": [
+                                                0
+                                            ]
                                         }
                                     ]
                                 }
@@ -500,7 +506,10 @@
                                     "estimatedGrossMarginPercentage": 0,
                                     "rateSheetId": 0,
                                     "accountManagerId": 0,
-                                    "soldById": 0
+                                    "soldById": 0,
+                                    "tagTypeIds": [
+                                        0
+                                    ]
                                 }
                             }
                         }
@@ -811,6 +820,15 @@
                         "type": "integer",
                         "description": "ID of the employee or technician that sold this agreement",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag.",
                         "nullable": true
                     },
                     "active": {
@@ -1431,6 +1449,15 @@
                         "type": "integer",
                         "description": "ID of the employee or technician that sold this agreement",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "tagTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag.",
                         "nullable": true
                     }
                 },

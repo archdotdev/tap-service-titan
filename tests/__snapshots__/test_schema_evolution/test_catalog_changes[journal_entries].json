@@ -51,6 +51,15 @@
     {
       "breadcrumb": [
         "properties",
+        "source"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "status"
       ],
       "metadata": {
@@ -305,6 +314,13 @@
           "null"
         ]
       },
+      "source": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "status": {
         "description": "",
         "type": [
@@ -337,6 +353,7 @@
       "createdOn",
       "modifiedOn",
       "number",
+      "source",
       "status",
       "syncStatus",
       "versionId",

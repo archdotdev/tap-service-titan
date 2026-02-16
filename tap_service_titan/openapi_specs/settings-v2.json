@@ -167,6 +167,9 @@
                                             "id": 0,
                                             "userId": 0,
                                             "name": "string",
+                                            "firstName": "string",
+                                            "lastName": "string",
+                                            "managerId": 0,
                                             "role": {},
                                             "roleIds": [
                                                 0
@@ -180,6 +183,19 @@
                                             "active": true,
                                             "aadUserId": "string",
                                             "accountLocked": true,
+                                            "home": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "country": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string"
+                                            },
+                                            "agentId": 0,
+                                            "startDate": "string",
+                                            "terminationDate": "string",
+                                            "hourlyRate": 0,
+                                            "overtimeProfileId": 0,
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -344,6 +360,9 @@
                                     "id": 0,
                                     "userId": 0,
                                     "name": "string",
+                                    "firstName": "string",
+                                    "lastName": "string",
+                                    "managerId": 0,
                                     "role": {},
                                     "roleIds": [
                                         0
@@ -357,6 +376,19 @@
                                     "active": true,
                                     "aadUserId": "string",
                                     "accountLocked": true,
+                                    "home": {
+                                        "street": "string",
+                                        "unit": "string",
+                                        "country": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string"
+                                    },
+                                    "agentId": 0,
+                                    "startDate": "string",
+                                    "terminationDate": "string",
+                                    "hourlyRate": 0,
+                                    "overtimeProfileId": 0,
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -665,6 +697,9 @@
                                             "id": 0,
                                             "userId": 0,
                                             "name": "string",
+                                            "firstName": "string",
+                                            "lastName": "string",
+                                            "managerId": 0,
                                             "role": {},
                                             "roleIds": [
                                                 0
@@ -677,7 +712,20 @@
                                             "loginName": "string",
                                             "active": true,
                                             "aadUserId": "string",
-                                            "accountLocked": true
+                                            "accountLocked": true,
+                                            "home": {
+                                                "street": "string",
+                                                "unit": "string",
+                                                "country": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string"
+                                            },
+                                            "agentId": 0,
+                                            "startDate": "string",
+                                            "terminationDate": "string",
+                                            "hourlyRate": 0,
+                                            "overtimeProfileId": 0
                                         }
                                     ]
                                 }
@@ -803,7 +851,39 @@
                                                     "value": "string"
                                                 }
                                             ],
-                                            "accountLocked": true
+                                            "accountLocked": true,
+                                            "commissionRate": 0,
+                                            "currentValue": 0,
+                                            "firstName": "string",
+                                            "lastName": "string",
+                                            "hourlyRate": 0,
+                                            "jobId": 0,
+                                            "mobilePhone": "string",
+                                            "outboundCallerId": "string",
+                                            "payrollId": "string",
+                                            "payrollProfileId": 0,
+                                            "appoitmentId": 0,
+                                            "shiftStart": "string",
+                                            "shiftEnd": "string",
+                                            "soldByRate": 0,
+                                            "startDate": "string",
+                                            "status": {},
+                                            "skills": [
+                                                {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                }
+                                            ],
+                                            "positions": [
+                                                "Installer"
+                                            ],
+                                            "location": {
+                                                "latitude": 0,
+                                                "longitude": 0,
+                                                "coordinatesUpdatedOn": "string"
+                                            },
+                                            "bio": "string",
+                                            "memo": "string"
                                         }
                                     ]
                                 }
@@ -1023,7 +1103,39 @@
                                                     "value": "string"
                                                 }
                                             ],
-                                            "accountLocked": true
+                                            "accountLocked": true,
+                                            "commissionRate": 0,
+                                            "currentValue": 0,
+                                            "firstName": "string",
+                                            "lastName": "string",
+                                            "hourlyRate": 0,
+                                            "jobId": 0,
+                                            "mobilePhone": "string",
+                                            "outboundCallerId": "string",
+                                            "payrollId": "string",
+                                            "payrollProfileId": 0,
+                                            "appoitmentId": 0,
+                                            "shiftStart": "string",
+                                            "shiftEnd": "string",
+                                            "soldByRate": 0,
+                                            "startDate": "string",
+                                            "status": {},
+                                            "skills": [
+                                                {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                }
+                                            ],
+                                            "positions": [
+                                                "Installer"
+                                            ],
+                                            "location": {
+                                                "latitude": 0,
+                                                "longitude": 0,
+                                                "coordinatesUpdatedOn": "string"
+                                            },
+                                            "bio": "string",
+                                            "memo": "string"
                                         }
                                     ]
                                 }
@@ -1236,7 +1348,39 @@
                                             "value": "string"
                                         }
                                     ],
-                                    "accountLocked": true
+                                    "accountLocked": true,
+                                    "commissionRate": 0,
+                                    "currentValue": 0,
+                                    "firstName": "string",
+                                    "lastName": "string",
+                                    "hourlyRate": 0,
+                                    "jobId": 0,
+                                    "mobilePhone": "string",
+                                    "outboundCallerId": "string",
+                                    "payrollId": "string",
+                                    "payrollProfileId": 0,
+                                    "appoitmentId": 0,
+                                    "shiftStart": "string",
+                                    "shiftEnd": "string",
+                                    "soldByRate": 0,
+                                    "startDate": "string",
+                                    "status": {},
+                                    "skills": [
+                                        {
+                                            "id": 0,
+                                            "name": "string"
+                                        }
+                                    ],
+                                    "positions": [
+                                        "Installer"
+                                    ],
+                                    "location": {
+                                        "latitude": 0,
+                                        "longitude": 0,
+                                        "coordinatesUpdatedOn": "string"
+                                    },
+                                    "bio": "string",
+                                    "memo": "string"
                                 }
                             }
                         }
@@ -2631,7 +2775,9 @@
                     "role",
                     "createdOn",
                     "modifiedOn",
-                    "active"
+                    "active",
+                    "agentId",
+                    "hourlyRate"
                 ],
                 "type": "object",
                 "properties": {
@@ -2648,6 +2794,22 @@
                     "name": {
                         "type": "string",
                         "description": "Employee's name"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "Employee first name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Employee last name",
+                        "nullable": true
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "Employee manager id",
+                        "format": "int64",
+                        "nullable": true
                     },
                     "role": {
                         "oneOf": [
@@ -2711,6 +2873,43 @@
                     "accountLocked": {
                         "type": "boolean",
                         "description": "Account Locked Status",
+                        "nullable": true
+                    },
+                    "home": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.EmployeeAddressResponse"
+                            }
+                        ],
+                        "description": "Employee home address details",
+                        "nullable": true
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "description": "Agent id",
+                        "format": "int32"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "terminationDate": {
+                        "type": "string",
+                        "description": "Termination date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "Hourly rate",
+                        "format": "decimal"
+                    },
+                    "overtimeProfileId": {
+                        "type": "integer",
+                        "description": "Overtime profile id",
+                        "format": "int64",
                         "nullable": true
                     },
                     "customFields": {
@@ -2777,6 +2976,42 @@
                     "EmptyEmployee",
                     "EmptyTechnician"
                 ]
+            },
+            "TenantSettings.V2.EmployeeAddressResponse": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "description": "Street",
+                        "nullable": true
+                    },
+                    "unit": {
+                        "type": "string",
+                        "description": "Unit",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City",
+                        "nullable": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State",
+                        "nullable": true
+                    },
+                    "zip": {
+                        "type": "string",
+                        "description": "Zip",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
             },
             "TenantSettings.V2.EmployeeCustomFieldResponse": {
                 "required": [
@@ -3223,7 +3458,9 @@
                     "role",
                     "createdOn",
                     "modifiedOn",
-                    "active"
+                    "active",
+                    "agentId",
+                    "hourlyRate"
                 ],
                 "type": "object",
                 "properties": {
@@ -3256,6 +3493,22 @@
                     "name": {
                         "type": "string",
                         "description": "Employee's name"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "Employee first name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Employee last name",
+                        "nullable": true
+                    },
+                    "managerId": {
+                        "type": "integer",
+                        "description": "Employee manager id",
+                        "format": "int64",
+                        "nullable": true
                     },
                     "role": {
                         "oneOf": [
@@ -3320,6 +3573,43 @@
                         "type": "boolean",
                         "description": "Account Locked Status",
                         "nullable": true
+                    },
+                    "home": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.EmployeeAddressResponse"
+                            }
+                        ],
+                        "description": "Employee home address details",
+                        "nullable": true
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "description": "Agent id",
+                        "format": "int32"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "terminationDate": {
+                        "type": "string",
+                        "description": "Termination date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "Hourly rate",
+                        "format": "decimal"
+                    },
+                    "overtimeProfileId": {
+                        "type": "integer",
+                        "description": "Overtime profile id",
+                        "format": "int64",
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
@@ -3361,7 +3651,11 @@
                     "dailyGoal",
                     "isManagedTech",
                     "active",
-                    "burdenRate"
+                    "burdenRate",
+                    "commissionRate",
+                    "hourlyRate",
+                    "soldByRate",
+                    "status"
                 ],
                 "type": "object",
                 "properties": {
@@ -3501,6 +3795,133 @@
                     "accountLocked": {
                         "type": "boolean",
                         "description": "Account Locked Status",
+                        "nullable": true
+                    },
+                    "commissionRate": {
+                        "type": "number",
+                        "description": "Technician Commision Rate",
+                        "format": "decimal"
+                    },
+                    "currentValue": {
+                        "type": "number",
+                        "description": "Technician today statistic current value",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "Technician First name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Technician Last name",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "Technician hourly rate",
+                        "format": "decimal"
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Technician Job id",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "mobilePhone": {
+                        "type": "string",
+                        "description": "Mobile phone",
+                        "nullable": true
+                    },
+                    "outboundCallerId": {
+                        "type": "string",
+                        "description": "OutboundCallerId",
+                        "nullable": true
+                    },
+                    "payrollId": {
+                        "type": "string",
+                        "description": "Payroll id",
+                        "nullable": true
+                    },
+                    "payrollProfileId": {
+                        "type": "integer",
+                        "description": "Payroll profile id",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appoitmentId": {
+                        "type": "integer",
+                        "description": "Id of job appointment on which the technician is currently working.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "shiftStart": {
+                        "type": "string",
+                        "description": "Shift Start",
+                        "format": "duration",
+                        "nullable": true
+                    },
+                    "shiftEnd": {
+                        "type": "string",
+                        "description": "Shift End",
+                        "format": "duration",
+                        "nullable": true
+                    },
+                    "soldByRate": {
+                        "type": "number",
+                        "description": "Sold By Rate",
+                        "format": "decimal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start Date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.TechnicianStatus"
+                            }
+                        ],
+                        "description": "Status"
+                    },
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.TechnicianSkillResponse"
+                        },
+                        "description": "Skills",
+                        "nullable": true
+                    },
+                    "positions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPosition"
+                        },
+                        "description": "Company positions",
+                        "nullable": true
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.TechnicianLocationResponse"
+                            }
+                        ],
+                        "description": "Location: Lat, Long, Last update time",
+                        "nullable": true
+                    },
+                    "bio": {
+                        "type": "string",
+                        "description": "Biography",
+                        "format": "html",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo",
+                        "format": "html",
                         "nullable": true
                     }
                 },
@@ -3614,6 +4035,93 @@
                 },
                 "additionalProperties": false
             },
+            "TenantSettings.V2.TechnicianStatus": {
+                "enum": [
+                    "Idle",
+                    "Dispatched",
+                    "Working",
+                    "Meal"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Idle",
+                    "Dispatched",
+                    "Working",
+                    "Meal"
+                ]
+            },
+            "TenantSettings.V2.TechnicianSkillResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "SkillId",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Skill name",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TenantSettings.V2.TechnicianPosition": {
+                "enum": [
+                    "Installer",
+                    "Service",
+                    "Sales",
+                    "Maintenance",
+                    "Helper",
+                    "InstallProductionManager",
+                    "ServiceManager",
+                    "SalesManager",
+                    "PartRunner",
+                    "DummyTech"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Installer",
+                    "Service",
+                    "Sales",
+                    "Maintenance",
+                    "Helper",
+                    "InstallProductionManager",
+                    "ServiceManager",
+                    "SalesManager",
+                    "PartRunner",
+                    "DummyTech"
+                ]
+            },
+            "TenantSettings.V2.TechnicianLocationResponse": {
+                "type": "object",
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "Latitude",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "Longitude",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "coordinatesUpdatedOn": {
+                        "type": "string",
+                        "description": "Timestamp when coordinates updated last time",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
             "PaginatedResponse_Of_TenantSettings.V2.TechnicianResponse": {
                 "required": [
                     "page",
@@ -3664,7 +4172,11 @@
                     "dailyGoal",
                     "isManagedTech",
                     "active",
-                    "burdenRate"
+                    "burdenRate",
+                    "commissionRate",
+                    "hourlyRate",
+                    "soldByRate",
+                    "status"
                 ],
                 "type": "object",
                 "properties": {
@@ -3804,6 +4316,133 @@
                     "accountLocked": {
                         "type": "boolean",
                         "description": "Account Locked Status",
+                        "nullable": true
+                    },
+                    "commissionRate": {
+                        "type": "number",
+                        "description": "Technician Commision Rate",
+                        "format": "decimal"
+                    },
+                    "currentValue": {
+                        "type": "number",
+                        "description": "Technician today statistic current value",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "Technician First name",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "Technician Last name",
+                        "nullable": true
+                    },
+                    "hourlyRate": {
+                        "type": "number",
+                        "description": "Technician hourly rate",
+                        "format": "decimal"
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Technician Job id",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "mobilePhone": {
+                        "type": "string",
+                        "description": "Mobile phone",
+                        "nullable": true
+                    },
+                    "outboundCallerId": {
+                        "type": "string",
+                        "description": "OutboundCallerId",
+                        "nullable": true
+                    },
+                    "payrollId": {
+                        "type": "string",
+                        "description": "Payroll id",
+                        "nullable": true
+                    },
+                    "payrollProfileId": {
+                        "type": "integer",
+                        "description": "Payroll profile id",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "appoitmentId": {
+                        "type": "integer",
+                        "description": "Id of job appointment on which the technician is currently working.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "shiftStart": {
+                        "type": "string",
+                        "description": "Shift Start",
+                        "format": "duration",
+                        "nullable": true
+                    },
+                    "shiftEnd": {
+                        "type": "string",
+                        "description": "Shift End",
+                        "format": "duration",
+                        "nullable": true
+                    },
+                    "soldByRate": {
+                        "type": "number",
+                        "description": "Sold By Rate",
+                        "format": "decimal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start Date",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.TechnicianStatus"
+                            }
+                        ],
+                        "description": "Status"
+                    },
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.TechnicianSkillResponse"
+                        },
+                        "description": "Skills",
+                        "nullable": true
+                    },
+                    "positions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPosition"
+                        },
+                        "description": "Company positions",
+                        "nullable": true
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.TechnicianLocationResponse"
+                            }
+                        ],
+                        "description": "Location: Lat, Long, Last update time",
+                        "nullable": true
+                    },
+                    "bio": {
+                        "type": "string",
+                        "description": "Biography",
+                        "format": "html",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo",
+                        "format": "html",
                         "nullable": true
                     }
                 },
@@ -3965,34 +4604,6 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "TenantSettings.V2.TechnicianPosition": {
-                "enum": [
-                    "Installer",
-                    "Service",
-                    "Sales",
-                    "Maintenance",
-                    "Helper",
-                    "InstallProductionManager",
-                    "ServiceManager",
-                    "SalesManager",
-                    "PartRunner",
-                    "DummyTech"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Installer",
-                    "Service",
-                    "Sales",
-                    "Maintenance",
-                    "Helper",
-                    "InstallProductionManager",
-                    "ServiceManager",
-                    "SalesManager",
-                    "PartRunner",
-                    "DummyTech"
-                ]
             },
             "TenantSettings.V2.LicenseType": {
                 "enum": [

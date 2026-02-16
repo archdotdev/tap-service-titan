@@ -455,12 +455,14 @@
           "additionalProperties": false,
           "properties": {
             "name": {
+              "description": "Custom Field Name",
               "type": [
                 "string",
                 "null"
               ]
             },
             "typeId": {
+              "description": "Custom Field Type Id",
               "format": "int64",
               "type": [
                 "integer",
@@ -468,6 +470,7 @@
               ]
             },
             "value": {
+              "description": "Custom Field Value",
               "type": [
                 "string",
                 "null"
@@ -575,6 +578,7 @@
         "description": "Object that contains:\nJobId: ID of the job from which this job was generated\nEmployeeId: ID of the office user or technician\n            ",
         "properties": {
           "employeeId": {
+            "description": "ID of the employee",
             "format": "int64",
             "type": [
               "integer",
@@ -582,6 +586,7 @@
             ]
           },
           "jobId": {
+            "description": "ID of the job",
             "format": "int64",
             "type": [
               "integer",

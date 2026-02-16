@@ -2771,13 +2771,16 @@
                 "properties": {
                     "typeId": {
                         "type": "integer",
+                        "description": "Custom Field Type Id",
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Custom Field Name"
                     },
                     "value": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Custom Field Value"
                     }
                 },
                 "additionalProperties": false

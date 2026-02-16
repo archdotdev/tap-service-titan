@@ -202,6 +202,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -350,6 +368,14 @@
           "null"
         ]
       },
+      "createdOn": {
+        "description": "The date and time when the discount or fee was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "crossSaleGroup": {
         "description": "A grouping of similar items that you'll then be able to track as a separate columns on the Technical Performance Board.",
         "type": [
@@ -434,6 +460,14 @@
           "null"
         ]
       },
+      "modifiedOn": {
+        "description": "The date and time when the discount or fee was last modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "paysCommission": {
         "description": "PaysCommissions shows if this task pays commission",
         "type": [
@@ -470,7 +504,9 @@
       "bonus",
       "commissionBonus",
       "paysCommission",
-      "excludeFromPayroll"
+      "excludeFromPayroll",
+      "createdOn",
+      "modifiedOn"
     ],
     "type": "object"
   },

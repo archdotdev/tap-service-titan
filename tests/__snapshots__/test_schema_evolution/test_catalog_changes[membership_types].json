@@ -96,6 +96,15 @@
     {
       "breadcrumb": [
         "properties",
+        "tagTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "name"
       ],
       "metadata": {
@@ -458,6 +467,17 @@
         "description": "Whether membership savings should be displayed",
         "type": [
           "boolean",
+          "null"
+        ]
+      },
+      "tagTypeIds": {
+        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

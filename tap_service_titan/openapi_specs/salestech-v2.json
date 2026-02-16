@@ -460,8 +460,18 @@
                         }
                     },
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
                         "name": "orderBy",
                         "in": "query",
+                        "description": "Deprecated: Use Sort parameter instead. Field to sort by (Id, CreatedOn, ModifiedOn).",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -470,6 +480,7 @@
                     {
                         "name": "orderByDirection",
                         "in": "query",
+                        "description": "Deprecated: Use Sort parameter instead. Sort direction (asc/desc).",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -856,6 +867,35 @@
                         "schema": {
                             "type": "string",
                             "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string",
                             "nullable": true
                         }
                     },
@@ -1376,7 +1416,7 @@
                 }
             }
         },
-        "/tenant/{tenant}/estimates/export": {
+        "/tenant/{tenant}/export/estimates": {
             "get": {
                 "tags": [
                     "EstimatesExport"
@@ -1497,6 +1537,238 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/estimates/export": {
+            "get": {
+                "tags": [
+                    "EstimatesExport"
+                ],
+                "summary": "Provides export feed for estimates (legacy endpoint)",
+                "description": "Provides export feed for estimates (legacy endpoint)",
+                "operationId": "EstimatesExport_EstimatesAsyncLegacy",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeRecentChanges",
+                        "in": "query",
+                        "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExportResponse_Of_Estimates.V2.ExportEstimatesResponse"
+                                },
+                                "example": {
+                                    "hasMore": true,
+                                    "continueFrom": "string",
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "jobId": 0,
+                                            "projectId": 0,
+                                            "locationId": 0,
+                                            "customerId": 0,
+                                            "name": "string",
+                                            "jobNumber": "string",
+                                            "status": {
+                                                "value": 0,
+                                                "name": "string"
+                                            },
+                                            "reviewStatus": "None",
+                                            "summary": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "soldOn": "string",
+                                            "soldBy": 0,
+                                            "active": true,
+                                            "items": [
+                                                {
+                                                    "id": 0,
+                                                    "sku": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "displayName": "string",
+                                                        "type": "string",
+                                                        "soldHours": 0,
+                                                        "generalLedgerAccountId": 0,
+                                                        "generalLedgerAccountName": "string",
+                                                        "modifiedOn": "string"
+                                                    },
+                                                    "skuAccount": "string",
+                                                    "description": "string",
+                                                    "membershipTypeId": 0,
+                                                    "qty": 0,
+                                                    "unitRate": 0,
+                                                    "total": 0,
+                                                    "unitCost": 0,
+                                                    "totalCost": 0,
+                                                    "itemGroupName": "string",
+                                                    "itemGroupRootId": 0,
+                                                    "createdOn": "string",
+                                                    "modifiedOn": "string",
+                                                    "chargeable": true,
+                                                    "invoiceItemId": 0,
+                                                    "budgetCodeId": 0
+                                                }
+                                            ],
+                                            "externalLinks": [
+                                                {
+                                                    "name": "string",
+                                                    "url": "string"
+                                                }
+                                            ],
+                                            "subtotal": 0,
+                                            "tax": 0,
+                                            "businessUnitId": 0,
+                                            "businessUnitName": "string",
+                                            "isRecommended": true,
+                                            "budgetCodeId": 0,
+                                            "isChangeOrder": true,
+                                            "proposalTagName": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/status/estimates/{id}/changes": {
+            "get": {
+                "tags": [
+                    "EstimatesStatus"
+                ],
+                "summary": "Get estimate status change details along with UTC timestamp.",
+                "description": "Get estimate status change details along with UTC timestamp.",
+                "operationId": "EstimatesStatus_GetEstimateStatusChanges",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Estimate ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estimates.V2.EstimateStatusChangesResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 0,
+                                        "oldStatus": "string",
+                                        "newStatus": "string",
+                                        "createdOn": "string",
+                                        "createdById": 0
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Estimate not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2932,6 +3204,42 @@
                     },
                     "proposalTagName": {
                         "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.EstimateStatusChangesResponse": {
+                "required": [
+                    "id",
+                    "createdOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the status change record",
+                        "format": "int64"
+                    },
+                    "oldStatus": {
+                        "type": "string",
+                        "description": "Previous status value",
+                        "nullable": true
+                    },
+                    "newStatus": {
+                        "type": "string",
+                        "description": "New status value",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When this status change record was created",
+                        "format": "date-time"
+                    },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "ID of the user that created this status change record",
+                        "format": "int64",
                         "nullable": true
                     }
                 },

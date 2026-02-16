@@ -108,6 +108,15 @@
     {
       "breadcrumb": [
         "properties",
+        "inventoryTemplateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -258,6 +267,14 @@
         "description": "Warehouse Id",
         "format": "int64",
         "type": "integer"
+      },
+      "inventoryTemplateId": {
+        "description": "Inventory Template Id for this warehouse",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "modifiedOn": {
         "description": "Last time warehouse was modified date",

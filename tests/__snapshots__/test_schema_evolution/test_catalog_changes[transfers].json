@@ -551,6 +551,14 @@
                 "null"
               ]
             },
+            "cost": {
+              "description": "Cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
             "createdById": {
               "description": "Employee who canceled this transfer",
               "format": "int64",
@@ -657,6 +665,14 @@
                 "integer",
                 "null"
               ]
+            },
+            "totalCost": {
+              "description": "Total cost",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
             }
           },
           "required": [
@@ -669,6 +685,8 @@
             "code",
             "quantity",
             "quantityPicked",
+            "cost",
+            "totalCost",
             "active"
           ],
           "type": [
