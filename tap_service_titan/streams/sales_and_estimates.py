@@ -42,7 +42,7 @@ class EstimatesStream(ServiceTitanExportStream):
         # for some tenants
         if not hasattr(self._tap, "_estimate_items_cache"):
             self._tap._estimate_items_cache = {}  # noqa: SLF001  # ty: ignore[invalid-assignment]
-        self._tap._estimate_items_cache[record["id"]] = record.get("items", [])  # noqa: SLF001  # ty: ignore[possibly-missing-attribute]
+        self._tap._estimate_items_cache[record["id"]] = record.get("items", [])  # noqa: SLF001  # ty: ignore[unresolved-attribute]
 
         return {
             "estimate_id": record["id"],

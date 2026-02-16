@@ -269,10 +269,10 @@ class CustomReports(ServiceTitanStream):
             # No backfill date parameter, just get the records
             yield from super().get_records(context)
         else:
-            while datetime.now(timezone.utc).date() >= self.curr_backfill_date_param:
+            while datetime.now(timezone.utc).date() >= self.curr_backfill_date_param:  # ty: ignore[unsupported-operator]
                 yield from super().get_records(context)
                 # Increment date for next iteration
-                self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)
+                self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)  # ty: ignore[unsupported-operator]
 
     @override
     def backoff_wait_generator(self) -> Generator[float, None, None]:
