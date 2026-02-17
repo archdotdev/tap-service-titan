@@ -35,7 +35,7 @@ class ClientSpecificPricingStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/clientspecificpricing"
 
 
-class PricebookCategoriesStream(ServiceTitanStream, active_any=True):
+class PricebookCategoriesStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define pricebook categories stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Categories_GetList
@@ -43,7 +43,8 @@ class PricebookCategoriesStream(ServiceTitanStream, active_any=True):
 
     name = "categories"
     primary_keys = ("id",)
-    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ExportCategoryResponse")
+    replication_key = "modifiedOn"
+    schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.CategoryResponse")
 
     @override
     @cached_property
@@ -52,7 +53,7 @@ class PricebookCategoriesStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/categories"
 
 
-class DiscountsAndFeesStream(ServiceTitanStream, active_any=True):
+class DiscountsAndFeesStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define discounts and fees stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=DiscountAndFees_GetList
@@ -60,6 +61,7 @@ class DiscountsAndFeesStream(ServiceTitanStream, active_any=True):
 
     name = "discounts_and_fees"
     primary_keys = ("id",)
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.DiscountAndFeesResponse")
 
     @override
@@ -69,7 +71,7 @@ class DiscountsAndFeesStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/discounts-and-fees"
 
 
-class EquipmentStream(ServiceTitanStream, active_any=True):
+class EquipmentStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define equipment stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Equipment_GetList
@@ -77,7 +79,7 @@ class EquipmentStream(ServiceTitanStream, active_any=True):
 
     name = "equipment"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.EquipmentResponse")
 
     @override
@@ -87,7 +89,7 @@ class EquipmentStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/equipment"
 
 
-class MaterialsStream(ServiceTitanStream, active_any=True):
+class MaterialsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define materials stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Materials_GetList
@@ -95,7 +97,7 @@ class MaterialsStream(ServiceTitanStream, active_any=True):
 
     name = "materials"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.MaterialResponse")
 
     @override
@@ -122,7 +124,7 @@ class MaterialsMarkupStream(ServiceTitanStream):
         return f"/pricebook/v2/tenant/{self.tenant_id}/materialsmarkup"
 
 
-class ServicesStream(ServiceTitanStream, active_any=True):
+class ServicesStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define services stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Services_GetList
@@ -130,7 +132,7 @@ class ServicesStream(ServiceTitanStream, active_any=True):
 
     name = "services"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ServiceGetResponse")
 
     @override
@@ -153,7 +155,7 @@ class ExportEquipmentStream(ServiceTitanExportStream):
 
     name = "export_equipment"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ExportEquipmentResponse")
 
     @override
@@ -168,7 +170,7 @@ class ExportMaterialsStream(ServiceTitanExportStream):
 
     name = "export_materials"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ExportMaterialResponse")
 
     @override
@@ -183,7 +185,7 @@ class ExportServicesStream(ServiceTitanExportStream):
 
     name = "export_services"
     primary_keys = ("id",)
-    replication_key: str = "modifiedOn"
+    replication_key = "modifiedOn"
     schema = ServiceTitanSchema(PRICEBOOK, key="Pricebook.V2.ExportServiceResponse")
 
     @override

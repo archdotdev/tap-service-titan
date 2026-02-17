@@ -101,14 +101,17 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
     )
 
     _active_any: bool = False
+    _sort_by: str | None = None
 
-    def __init_subclass__(cls, *, active_any: bool = False) -> None:
+    def __init_subclass__(cls, *, active_any: bool = False, sort_by: str | None = None) -> None:
         """Initialize the stream subclass.
 
         Args:
             active_any: Whether to include active and inactive records in the stream.
+            sort_by: The field to sort the stream by.
         """
         cls._active_any = active_any
+        cls._sort_by = sort_by
         return super().__init_subclass__()
 
     @override
@@ -256,10 +259,19 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
         if self._active_any:
             params["active"] = "Any"
 
+        if self._sort_by:
+            params["sort"] = f"+{self._sort_by}"
+
         params["pageSize"] = 5000
         params["page"] = next_page_token
 
         return params
+
+    @override
+    @cached_property
+    def is_sorted(self) -> bool:
+        """Check if the stream is sorted."""
+        return self._sort_by is not None
 
     @override
     def get_new_paginator(self) -> BaseAPIPaginator:
