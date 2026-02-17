@@ -153,7 +153,7 @@
         "modifiedOn"
       ],
       "metadata": {
-        "inclusion": "available"
+        "inclusion": "automatic"
       }
     },
     {
@@ -164,11 +164,15 @@
         "selected-by-default": true,
         "table-key-properties": [
           "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
         ]
       }
     }
   ],
-  "replication_method": "FULL_TABLE",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
   "schema": {
     "additionalProperties": false,
     "properties": {
@@ -298,160 +302,7 @@
       },
       "subcategories": {
         "description": "The array of the subcategories",
-        "items": {
-          "additionalProperties": false,
-          "properties": {
-            "active": {
-              "description": "Active shows if this category is currently active",
-              "type": [
-                "boolean",
-                "null"
-              ]
-            },
-            "businessUnitIds": {
-              "description": "The business units that are associated with this category",
-              "items": {
-                "format": "int64",
-                "type": "integer"
-              },
-              "type": [
-                "array",
-                "null"
-              ]
-            },
-            "categoryType": {
-              "description": "",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "createdOn": {
-              "description": "The date and time when the category was created",
-              "format": "date-time",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "description": {
-              "description": "A description that described the category",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "externalId": {
-              "description": "External id is the id of the original source of the item when it comes from a catalog",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "hideInMobile": {
-              "description": "If a category is available in mobile or not",
-              "type": [
-                "boolean",
-                "null"
-              ]
-            },
-            "id": {
-              "description": "The id for the category",
-              "format": "int64",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "image": {
-              "description": "The image to display as the category",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "modifiedOn": {
-              "description": "The date and time when the category was last modified",
-              "format": "date-time",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "name": {
-              "description": "The name of the category",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "parentId": {
-              "description": "The id of the category that is the parent of this item",
-              "format": "int64",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "position": {
-              "description": "The position location of this item",
-              "format": "int32",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "skuImages": {
-              "description": "The images that will be used for the SKUs under this category",
-              "items": {
-                "type": "string"
-              },
-              "type": [
-                "array",
-                "null"
-              ]
-            },
-            "skuVideos": {
-              "description": "The videos that will be used for the videos under this category",
-              "items": {
-                "type": "string"
-              },
-              "type": [
-                "array",
-                "null"
-              ]
-            },
-            "source": {
-              "description": "The source of the category if it was imported from a catalog",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "subcategories": {
-              "description": "The array of the subcategories",
-              "items": {},
-              "type": [
-                "array",
-                "null"
-              ]
-            }
-          },
-          "required": [
-            "id",
-            "name",
-            "active",
-            "position",
-            "categoryType",
-            "hideInMobile",
-            "createdOn",
-            "modifiedOn"
-          ],
-          "type": [
-            "object",
-            "null"
-          ]
-        },
+        "items": {},
         "type": [
           "array",
           "null"
