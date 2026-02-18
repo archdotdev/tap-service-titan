@@ -10,8 +10,7 @@ plugins:
   extractors:
   - name: tap-service-titan
     namespace: tap_service_titan
-    pip_url: -e .
-    executable: tap-service-titan
+    executable: .venv/bin/tap-service-titan
     capabilities:
     - state
     - catalog
@@ -47,5 +46,10 @@ plugins:
     variant: andyh1203
     pip_url: target-jsonl
   - name: target-duckdb
-    variant: jwills
-    pip_url: target-duckdb~=0.8
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-duckdb.git@main
+    config:
+      primary_key_required: false
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: meltanolabs-target-csv
