@@ -197,7 +197,7 @@ class TeamsStream(ServiceTitanStream):
         return f"/dispatch/v2/tenant/{self.tenant_id}/teams"
 
 
-class TechnicianShiftsStream(ServiceTitanStream, active_any=True):
+class TechnicianShiftsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
     """Define technician shifts stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
@@ -205,6 +205,7 @@ class TechnicianShiftsStream(ServiceTitanStream, active_any=True):
 
     name = "technician_shifts"
     primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianShiftResponse")
 
     @override
