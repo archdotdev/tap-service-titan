@@ -14,8 +14,11 @@ else:
     from typing_extensions import override
 
 
-class CampaignsStream(ServiceTitanStream):
-    """Define campaigns stream."""
+class CampaignsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+    """Define campaigns stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-marketing-v2&operation=Campaigns_GetList
+    """
 
     name = "campaigns"
     primary_keys = ("id",)
@@ -30,11 +33,14 @@ class CampaignsStream(ServiceTitanStream):
 
 
 class MarketingCategoriesStream(ServiceTitanStream):
-    """Define categories stream."""
+    """Define categories stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-marketing-v2&operation=CampaignCategories_GetList
+    """
 
     name = "marketing_categories"
     primary_keys = ("id",)
-    replication_key: str = "createdOn"
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignCategoryResponse")
 
     @override
@@ -58,11 +64,15 @@ class CostsStream(ServiceTitanStream):
         return f"/marketing/v2/tenant/{self.tenant_id}/costs"
 
 
-class SuppressionsStream(ServiceTitanStream):
-    """Define suppressions stream."""
+class SuppressionsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+    """Define suppressions stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-marketing-v2&operation=Suppressions_GetList
+    """
 
     name = "suppressions"
     primary_keys = ("email",)
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.SuppressionResponse")
 
     @override
