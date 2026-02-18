@@ -99,7 +99,7 @@
         "modifiedOn"
       ],
       "metadata": {
-        "inclusion": "available"
+        "inclusion": "automatic"
       }
     },
     {
@@ -110,11 +110,15 @@
         "selected-by-default": true,
         "table-key-properties": [
           "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
         ]
       }
     }
   ],
-  "replication_method": "FULL_TABLE",
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
   "schema": {
     "additionalProperties": false,
     "properties": {
