@@ -35,7 +35,7 @@ class ClientSpecificPricingStream(ServiceTitanStream, active_any=True):
         return f"/pricebook/v2/tenant/{self.tenant_id}/clientspecificpricing"
 
 
-class PricebookCategoriesStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+class PricebookCategoriesStream(ServiceTitanStream, active_any=True):
     """Define pricebook categories stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Categories_GetList
