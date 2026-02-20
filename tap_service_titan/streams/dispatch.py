@@ -197,7 +197,7 @@ class TeamsStream(ServiceTitanStream):
         return f"/dispatch/v2/tenant/{self.tenant_id}/teams"
 
 
-class TechnicianShiftsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+class TechnicianShiftsStream(ServiceTitanStream, active_any=True):
     """Define technician shifts stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
