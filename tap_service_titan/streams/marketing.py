@@ -14,7 +14,7 @@ else:
     from typing_extensions import override
 
 
-class CampaignsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+class CampaignsStream(ServiceTitanStream, active_any=True):
     """Define campaigns stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-marketing-v2&operation=Campaigns_GetList
