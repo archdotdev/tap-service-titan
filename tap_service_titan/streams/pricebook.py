@@ -89,7 +89,7 @@ class EquipmentStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn")
         return f"/pricebook/v2/tenant/{self.tenant_id}/equipment"
 
 
-class MaterialsStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+class MaterialsStream(ServiceTitanStream, active_any=True):
     """Define materials stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Materials_GetList
