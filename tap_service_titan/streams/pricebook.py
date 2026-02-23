@@ -124,7 +124,7 @@ class MaterialsMarkupStream(ServiceTitanStream):
         return f"/pricebook/v2/tenant/{self.tenant_id}/materialsmarkup"
 
 
-class ServicesStream(ServiceTitanStream, active_any=True, sort_by="ModifiedOn"):
+class ServicesStream(ServiceTitanStream, active_any=True):
     """Define services stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-pricebook-v2&operation=Services_GetList
