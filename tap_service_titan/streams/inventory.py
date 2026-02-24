@@ -34,10 +34,14 @@ class PurchaseOrdersStream(ServiceTitanExportStream):
 
 
 class PurchaseOrderMarkupsStream(ServiceTitanStream):
-    """Define purchase order markups stream."""
+    """Define purchase order markups stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-inventory-v2&operation=PurchaseOrdersMarkup_Get
+    """
 
     name = "purchase_order_markups"
     primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.Markups.PurchaseOrderMarkupResponse")
 
     @override
@@ -108,10 +112,14 @@ class AdjustmentsStream(ServiceTitanStream):
 
 
 class ReturnTypesStream(ServiceTitanStream):
-    """Define return types stream."""
+    """Define return types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-inventory-v2&operation=ReturnTypes_GetList
+    """
 
     name = "return_types"
     primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.ListReturnTypesResponse")
 
     @override
