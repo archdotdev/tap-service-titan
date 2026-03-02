@@ -132,8 +132,11 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         return f"/dispatch/v2/tenant/{self.tenant_id}/capacity"
 
 
-class ArrivalWindowsStream(ServiceTitanStream):
-    """Define arrival windows stream."""
+class ArrivalWindowsStream(ServiceTitanStream, active_any=True):
+    """Define arrival windows stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=ArrivalWindows_GetList
+    """
 
     name = "arrival_windows"
     primary_keys = ("id",)
