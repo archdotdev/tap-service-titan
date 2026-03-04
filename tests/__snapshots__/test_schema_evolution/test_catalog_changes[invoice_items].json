@@ -141,6 +141,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isChargeable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "generalLedgerAccount"
       ],
       "metadata": {
@@ -858,6 +867,12 @@
           "null"
         ]
       },
+      "isChargeable": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "itemGroup": {
         "additionalProperties": false,
         "properties": {
@@ -988,6 +1003,7 @@
       "skuId",
       "inventory",
       "taxable",
+      "isChargeable",
       "membershipTypeId",
       "createdOn",
       "modifiedOn",

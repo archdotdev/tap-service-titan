@@ -10,6 +10,321 @@
         }
     ],
     "paths": {
+        "/tenant/{tenant}/adcap/availability": {
+            "post": {
+                "tags": [
+                    "AdaptiveCapacity"
+                ],
+                "summary": "Generates availability report.",
+                "description": "Request must contain at least:\n1. start date [time] - UTC\n2. end date [time] - UTC\n3. xType - type of dimension used to generate columns/x-axis (e.g., \"BusinessHour\", \"ArrivalWindow\")\n4. JobDurationInMinutes - required, duration of the job in minutes\n5. Optional filters such as TechnicianIds, JobType (required in most cases), Skills, Zones, Business Unit\n6. Optional JobStartUtc - earliest allowable start time (UTC)\n            \nRows are **always technicians** — you cannot configure the Y-axis in this endpoint.\nColumns are defined by `xType`, typically business hours or arrival windows.\nThe endpoint returns one or more 2D grids, each representing a subset of the schedule:\n- `rowHeaders`: technician IDs and names\n- `columnHeaders`: time slots (with availability flags)\n- `table`: 2D array of cell objects indicating capacity and bookability\n            \nEach cell includes:\n- `total`: total minutes available in the time slot (e.g., 120 minutes for a 2-hour slot)\n- `assigned`: total minutes already assigned (can exceed total due to overlaps)\n- `booked`: minutes of unassigned jobs that could be booked\n- `done`: minutes of completed jobs\n- `isBookable`: whether a job of the specified duration can be scheduled to **start** in this slot\n- `jobStartUtc` / `jobEndUtc`: proposed booking window for this job (if bookable)\n            \nNotes:\n- `isBookable = true` means the job *can start* in this slot. It may extend into the next slot(s) if needed.\n- `columnHeader.isBookable = true` means **at least one technician** is available in that slot.\n- Job duration may span multiple slots if there’s enough cumulative time.\n            \nExample request:\n{\n  \"StartUtc\": \"2024-10-29\",\n  \"EndUtc\": \"2024-10-30\",\n  \"xType\": \"BusinessHour\",\n  \"JobDurationInMinutes\": 60,\n  \"Technicians\": [68136905, 21604928],\n  \"JobStartUtc\": \"2024-10-29T08:00:00Z\",\n  \"JobType\": \"Install\",\n  \"Skills\": [\"Plumbing\"],\n  \"Zones\": [\"Zone1\"]\n}\n            \nSimplified output:\n{\n  \"grids\": [{\n    \"rowHeaders\": [{\"id\": 1, \"name\": \"tech1\"}, {\"id\": 2, \"name\": \"tech2\"}],\n    \"columnHeaders\": [{\"id\": 101, \"name\": \"BH1\", \"isBookable\": true}, ...],\n    \"table\": [\n      [\n        {\"total\": 120, \"assigned\": 60, \"booked\": 0, \"done\": 0, \"isBookable\": true, \"jobStartUtc\": \"...\", \"jobEndUtc\": \"...\"},\n        ...\n      ],\n      ...\n    ]\n  }]\n}\n            \nThis format supports booking UIs and APIs that need to visualize tech availability across various dimensions of time.",
+                "operationId": "Availability_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityRequestArgs"
+                            },
+                            "example": {
+                                "startUtc": "string",
+                                "endUtc": "string",
+                                "xType": {},
+                                "startMinuteTtz": 0,
+                                "endMinuteTtz": 0,
+                                "arrivalWindows": [
+                                    0
+                                ],
+                                "businessHours": [
+                                    0
+                                ],
+                                "businessUnits": [
+                                    0
+                                ],
+                                "businessUnitGroups": [
+                                    0
+                                ],
+                                "jobPriorities": [
+                                    "Low"
+                                ],
+                                "jobTypes": [
+                                    0
+                                ],
+                                "jobTypeGroups": [
+                                    0
+                                ],
+                                "shiftTypes": [
+                                    "Scheduled"
+                                ],
+                                "skills": [
+                                    0
+                                ],
+                                "tagTypes": [
+                                    0
+                                ],
+                                "teams": [
+                                    0
+                                ],
+                                "technicians": [
+                                    0
+                                ],
+                                "technicianTypes": [
+                                    "Unmanaged"
+                                ],
+                                "trades": [
+                                    0
+                                ],
+                                "zones": [
+                                    0
+                                ],
+                                "weekdays": [
+                                    "Sunday"
+                                ],
+                                "useTenantSettings": true,
+                                "jobDurationInMinutes": 0,
+                                "existingJobAppointmentId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityResponse"
+                                },
+                                "example": {
+                                    "timeStamp": "string",
+                                    "grids": [
+                                        {
+                                            "rowHeaders": [
+                                                {
+                                                    "index": 0,
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "total": 0,
+                                                    "assigned": 0,
+                                                    "booked": 0,
+                                                    "done": 0,
+                                                    "startUtc": "string",
+                                                    "endUtc": "string",
+                                                    "isBookable": true,
+                                                    "isAssignable": true,
+                                                    "jobStartUtc": "string",
+                                                    "jobEndUtc": "string"
+                                                }
+                                            ],
+                                            "columnHeaders": [
+                                                {
+                                                    "index": 0,
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "total": 0,
+                                                    "assigned": 0,
+                                                    "booked": 0,
+                                                    "done": 0,
+                                                    "startUtc": "string",
+                                                    "endUtc": "string",
+                                                    "isBookable": true,
+                                                    "isAssignable": true,
+                                                    "jobStartUtc": "string",
+                                                    "jobEndUtc": "string"
+                                                }
+                                            ],
+                                            "table": [
+                                                [
+                                                    {
+                                                        "index": 0,
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "total": 0,
+                                                        "assigned": 0,
+                                                        "booked": 0,
+                                                        "done": 0,
+                                                        "startUtc": "string",
+                                                        "endUtc": "string",
+                                                        "isBookable": true,
+                                                        "isAssignable": true,
+                                                        "jobStartUtc": "string",
+                                                        "jobEndUtc": "string"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input date range or required conditions are missing.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/adcap/availability/slots": {
+            "post": {
+                "tags": [
+                    "AdaptiveCapacity"
+                ],
+                "summary": "Returns a flattened list of bookable job slots based on technician availability.",
+                "description": "Request arguments are the same as the availability endpoint:\n1. StartUtc / EndUtc – the date range to search (UTC)\n2. xType – defines the column/time dimension, e.g., \"BusinessHour\" or \"ArrivalWindow\"\n3. JobDurationInMinutes – required; how long the job is (in minutes)\n4. Optional filters such as TechnicianIds, JobType (recommended), Skills, Zones, or Business Unit\n5. Optional JobStartUtc – the earliest UTC time the job may begin\n            \nThis endpoint **does not return a table/grid**. Instead, it returns a **flattened list** of slots, each representing a window of time where the job can be booked and the technicians who are available to take it.\n            \n### Response Format\n            \n```json\n{\n  \"timeStamp\": \"2024-10-29T12:00:00Z\",\n  \"availableSlots\": [\n    {\n      \"slotStart\": \"2024-10-29T08:00:00Z\",\n      \"slotEnd\": \"2024-10-29T09:00:00Z\",\n      \"technicians\": [\n        {\n          \"technicianId\": 123,\n          \"technicianName\": \"John Doe\",\n          \"jobStart\": \"2024-10-29T08:00:00Z\",\n          \"jobEnd\": \"2024-10-29T09:00:00Z\"\n        },\n        ...\n      ]\n    },\n    ...\n  ]\n}\n```\n            \n### Notes:\n- `slotStart` and `slotEnd` represent a discrete scheduling slot (from the time-based xType).\n- Each technician listed within a slot is **individually bookable** for that time window.\n- `jobStart` / `jobEnd` reflect the exact start and end time that would be used when booking the job, which may differ from the slot boundaries (e.g., if the job spills into the next slot).\n- If no technicians are available in a slot, it will be excluded from the response.\n            \nThis output format is ideal for booking workflows, calendar UIs, or Schedule Assistant-type selectors that need a concise, per-slot list of options with assigned techs.",
+                "operationId": "Availability_GetSlots",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityRequestArgs"
+                            },
+                            "example": {
+                                "startUtc": "string",
+                                "endUtc": "string",
+                                "xType": {},
+                                "startMinuteTtz": 0,
+                                "endMinuteTtz": 0,
+                                "arrivalWindows": [
+                                    0
+                                ],
+                                "businessHours": [
+                                    0
+                                ],
+                                "businessUnits": [
+                                    0
+                                ],
+                                "businessUnitGroups": [
+                                    0
+                                ],
+                                "jobPriorities": [
+                                    "Low"
+                                ],
+                                "jobTypes": [
+                                    0
+                                ],
+                                "jobTypeGroups": [
+                                    0
+                                ],
+                                "shiftTypes": [
+                                    "Scheduled"
+                                ],
+                                "skills": [
+                                    0
+                                ],
+                                "tagTypes": [
+                                    0
+                                ],
+                                "teams": [
+                                    0
+                                ],
+                                "technicians": [
+                                    0
+                                ],
+                                "technicianTypes": [
+                                    "Unmanaged"
+                                ],
+                                "trades": [
+                                    0
+                                ],
+                                "zones": [
+                                    0
+                                ],
+                                "weekdays": [
+                                    "Sunday"
+                                ],
+                                "useTenantSettings": true,
+                                "jobDurationInMinutes": 0,
+                                "existingJobAppointmentId": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlotsResponse"
+                                },
+                                "example": {
+                                    "timeStamp": "string",
+                                    "availableSlots": [
+                                        {
+                                            "slotStart": "string",
+                                            "slotEnd": "string",
+                                            "technicians": [
+                                                {
+                                                    "technicianId": 0,
+                                                    "technicianName": "string",
+                                                    "jobStart": "string",
+                                                    "jobEnd": "string"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input date range or required conditions are missing.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings": {
             "post": {
                 "tags": [
@@ -3094,6 +3409,544 @@
                 }
             }
         },
+        "/tenant/{tenant}/technician-skills": {
+            "get": {
+                "tags": [
+                    "TechnicianSkills"
+                ],
+                "summary": "Gets a list of technician skills",
+                "description": "Gets a list of technician skills",
+                "operationId": "TechnicianSkills_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "technicianId",
+                        "in": "query",
+                        "description": "Gets or sets the unique Id of the technician the skill must apply to.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ],
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Gets or sets the sorting configuration.\nApplies sorting by the specified field:\n\"?sort=+FieldName\" for ascending order,\n\"?sort=-FieldName\" for descending order.\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of technician skills",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Dispatch.V2.TechnicianSkillResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "name": "string",
+                                            "active": true,
+                                            "technicianId": 0,
+                                            "jobTypeIds": [
+                                                0
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "TechnicianSkills"
+                ],
+                "summary": "Assigns or replaces skills on a technician.\nReturns the updated status and complete list of all technician skills after the operation.",
+                "description": "Assigns or replaces skills on a technician.\nReturns the updated status and complete list of all technician skills after the operation.",
+                "operationId": "TechnicianSkills_AssignTechnicianSkills",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request containing technician ID and skill IDs to assign",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dispatch.V2.UpdateTechnicianSkillsRequest"
+                            },
+                            "example": {
+                                "technicianId": 0,
+                                "skillIds": [
+                                    0
+                                ],
+                                "replaceExistingSkills": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update result with all technician skills",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.UpdateTechnicianSkillsResponse"
+                                },
+                                "example": {
+                                    "updated": true,
+                                    "technicianSkills": [
+                                        {
+                                            "id": "string",
+                                            "name": "string",
+                                            "active": true,
+                                            "technicianId": 0,
+                                            "jobTypeIds": [
+                                                0
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TechnicianSkills"
+                ],
+                "summary": "Creates a new skill and assigns it to a technician",
+                "description": "Creates a new skill and assigns it to a technician",
+                "operationId": "TechnicianSkills_CreateTechnicianSkill",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request containing skill details and technician ID",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dispatch.V2.CreateTechnicianSkillRequest"
+                            },
+                            "example": {
+                                "technicianId": 0,
+                                "name": "string",
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The created technician skill",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.TechnicianSkillResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "name": "string",
+                                    "active": true,
+                                    "technicianId": 0,
+                                    "jobTypeIds": [
+                                        0
+                                    ],
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/technician-skills/{id}": {
+            "get": {
+                "tags": [
+                    "TechnicianSkills"
+                ],
+                "summary": "Gets a specific technician skill",
+                "description": "Gets a specific technician skill",
+                "operationId": "TechnicianSkills_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The unique identifier of the technician skill",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The technician skill details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.V2.TechnicianSkillResponse"
+                                },
+                                "example": {
+                                    "id": "string",
+                                    "name": "string",
+                                    "active": true,
+                                    "technicianId": 0,
+                                    "jobTypeIds": [
+                                        0
+                                    ],
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TechnicianSkills"
+                ],
+                "summary": "Deletes a technician skill association",
+                "description": "Deletes a technician skill association",
+                "operationId": "TechnicianSkills_Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The unique identifier of the technician skill (format: {TechnicianId}_{SkillId})",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.Contracts.TechnicianSkill.DeleteTechnicianSkillResult"
+                                },
+                                "example": {
+                                    "id": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tenant/{tenant}/technician-tracking": {
             "get": {
                 "tags": [
@@ -3714,45 +4567,143 @@
     },
     "components": {
         "schemas": {
-            "Dispatch.V2.GpsPingResponse": {
+            "Capacity.V2.GetAvailabilityResponse": {
                 "required": [
-                    "externalId",
-                    "status",
-                    "message"
+                    "timeStamp"
                 ],
                 "type": "object",
                 "properties": {
-                    "externalId": {
+                    "timeStamp": {
                         "type": "string",
-                        "description": "Unique External ID for data point"
+                        "format": "date-time"
                     },
-                    "status": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Dispatch.V2.GpsPingResultStatus"
-                            }
-                        ],
-                        "description": "Request status"
-                    },
-                    "message": {
-                        "type": "string",
-                        "description": "Gets or sets the response message received from the GPS provider about the unit at the time of recording",
-                        "format": "html"
+                    "grids": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.V2.GetAvailiabilityGrid"
+                        },
+                        "nullable": true
                     }
                 },
                 "additionalProperties": false
             },
-            "Dispatch.V2.GpsPingResultStatus": {
-                "enum": [
-                    "Fail",
-                    "Success"
+            "Capacity.V2.GetAvailiabilityGrid": {
+                "required": [
+                    "rowHeaders",
+                    "columnHeaders",
+                    "table"
                 ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Fail",
-                    "Success"
-                ]
+                "type": "object",
+                "properties": {
+                    "rowHeaders": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
+                        },
+                        "description": "Names for each row in grid."
+                    },
+                    "columnHeaders": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
+                        },
+                        "description": "Names for each column in grid."
+                    },
+                    "table": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
+                            }
+                        },
+                        "description": "Grid's data, Table[row][column]."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Capacity.V2.GetAvailabilityCell": {
+                "required": [
+                    "index",
+                    "total",
+                    "assigned",
+                    "booked",
+                    "done",
+                    "isBookable",
+                    "isAssignable"
+                ],
+                "type": "object",
+                "properties": {
+                    "index": {
+                        "type": "integer",
+                        "description": "Row/Column index",
+                        "format": "int32"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "Optional id of the entity represented by this cell, for example it could be technician Id or business hour Id.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Optional name for the entity, just for internal purposes, should not be presented directly to end-user.",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "integer",
+                        "description": "Adjusted capacity, constraints/rules are applied and in case of multiple rules - minimal is picked.\nRepresents total capacity which can be theoretically used (minutes).",
+                        "format": "int64"
+                    },
+                    "assigned": {
+                        "type": "integer",
+                        "description": "Total time consumed by assigned jobs (minutes).",
+                        "format": "int64"
+                    },
+                    "booked": {
+                        "type": "integer",
+                        "description": "Total time consumed by booked, but not yet assigned jobs (minutes).",
+                        "format": "int64"
+                    },
+                    "done": {
+                        "type": "integer",
+                        "description": "Total time consumed by finished/done jobs (minutes).",
+                        "format": "int64"
+                    },
+                    "startUtc": {
+                        "type": "string",
+                        "description": "If present indicates start time of the cell (usually arrival window or business hour).",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "endUtc": {
+                        "type": "string",
+                        "description": "If present indicates end time of the cell (usually arrival window or business hour).",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "isBookable": {
+                        "type": "boolean",
+                        "description": "Indicates that time slot can be used to book new job:\n            \n* For arrival window (column) it means that there is at least one tech with assignable slot and total number of assigned + unassigned jobs is within limits.\n* For technician (table) it means that slot is assignable and arrival window level constraints are not violated.\n            \nAssignable slot for tech means that slot has some continuous unassigned time, i.e. capacity - assigned jobs >= new job duration."
+                    },
+                    "isAssignable": {
+                        "type": "boolean",
+                        "description": "Indicates that slot has some unassigned time, so it can be used to assign/reschedule existing job."
+                    },
+                    "jobStartUtc": {
+                        "type": "string",
+                        "description": "earliest datetime when job can start.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "jobEndUtc": {
+                        "type": "string",
+                        "description": "JobStartUtc + duration of the job passed in request or default to 2 hours if none is passed.",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
             },
             "ApiErrorResponse": {
                 "required": [
@@ -3800,6 +4751,394 @@
                 },
                 "additionalProperties": false,
                 "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "Capacity.V2.GetAvailabilityRequestArgs": {
+                "required": [
+                    "startUtc",
+                    "endUtc",
+                    "xType"
+                ],
+                "type": "object",
+                "properties": {
+                    "startUtc": {
+                        "type": "string",
+                        "description": "Inclusive start date for report, usually should contain only date, ie 2020-01-01, ie get report from the start of the day.",
+                        "format": "date-time"
+                    },
+                    "endUtc": {
+                        "type": "string",
+                        "description": "Exclusive end date for report, usually should contain only date, ie 2020-01-02, if start is 2020-01-01, then report is for 24 hours (from midnight to midnight)",
+                        "format": "date-time"
+                    },
+                    "xType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Capacity.Contracts.DimensionType"
+                            }
+                        ],
+                        "description": "Type of dimension to be used for X axis (columns)."
+                    },
+                    "startMinuteTtz": {
+                        "type": "integer",
+                        "description": "first minute of custom arrival window, in tenant time zone.\nfor example, 8am is 8*60 = 480",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "endMinuteTtz": {
+                        "type": "integer",
+                        "description": "end of custom arrival window (exclusive) in tenant time zone.\nfor example, for arrival window 8am-10am: 8*60 = 480 - 10*60 = 600",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "arrivalWindows": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "businessHours": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "businessUnitGroups": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "jobPriorities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.Contracts.JobPriority"
+                        },
+                        "nullable": true
+                    },
+                    "jobTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "jobTypeGroups": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "shiftTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.Contracts.ShiftType"
+                        },
+                        "nullable": true
+                    },
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "tagTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "teams": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "technicians": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "technicianTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.Contracts.TechnicianType"
+                        },
+                        "nullable": true
+                    },
+                    "trades": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "zones": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "nullable": true
+                    },
+                    "weekdays": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DayOfWeek"
+                        },
+                        "nullable": true
+                    },
+                    "useTenantSettings": {
+                        "type": "boolean",
+                        "description": "true if server should respect tenant's settings and ignore BU/Zones from request or convert BU to BUG.\ndefault false means that client uses the settings and avoid sending conditions like Zone/BU.",
+                        "nullable": true
+                    },
+                    "jobDurationInMinutes": {
+                        "type": "integer",
+                        "description": "indicates duration of the new job being booked, used to determine whether some time slot can be used for booking.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "existingJobAppointmentId": {
+                        "type": "integer",
+                        "description": "optional field to indicate that we're rescheduling existing job appointment, not new one.",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Capacity.Contracts.DimensionType": {
+                "enum": [
+                    "ArrivalWindow",
+                    "BusinessHour",
+                    "BusinessUnit",
+                    "BusinessUnitGroup",
+                    "JobType",
+                    "JobTypeGroup",
+                    "Skill",
+                    "Team",
+                    "Technician",
+                    "TechnicianType",
+                    "Trade",
+                    "Zone"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "ArrivalWindow",
+                    "BusinessHour",
+                    "BusinessUnit",
+                    "BusinessUnitGroup",
+                    "JobType",
+                    "JobTypeGroup",
+                    "Skill",
+                    "Team",
+                    "Technician",
+                    "TechnicianType",
+                    "Trade",
+                    "Zone"
+                ]
+            },
+            "Capacity.Contracts.JobPriority": {
+                "enum": [
+                    "Low",
+                    "Normal",
+                    "High",
+                    "Urgent"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Low",
+                    "Normal",
+                    "High",
+                    "Urgent"
+                ]
+            },
+            "Capacity.Contracts.ShiftType": {
+                "enum": [
+                    "Scheduled",
+                    "OnCall"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Scheduled",
+                    "OnCall"
+                ]
+            },
+            "Capacity.Contracts.TechnicianType": {
+                "enum": [
+                    "Unmanaged",
+                    "Managed"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Unmanaged",
+                    "Managed"
+                ]
+            },
+            "DayOfWeek": {
+                "enum": [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ]
+            },
+            "Capacity.V2.GetAvailabilitySlotsResponse": {
+                "required": [
+                    "timeStamp"
+                ],
+                "type": "object",
+                "properties": {
+                    "timeStamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "availableSlots": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlot"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Capacity.V2.GetAvailabilitySlot": {
+                "required": [
+                    "slotStart",
+                    "slotEnd",
+                    "technicians"
+                ],
+                "type": "object",
+                "properties": {
+                    "slotStart": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "slotEnd": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "technicians": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlotTechnician"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Capacity.V2.GetAvailabilitySlotTechnician": {
+                "required": [
+                    "technicianId",
+                    "technicianName",
+                    "jobStart",
+                    "jobEnd"
+                ],
+                "type": "object",
+                "properties": {
+                    "technicianId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "technicianName": {
+                        "type": "string"
+                    },
+                    "jobStart": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "jobEnd": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.GpsPingResponse": {
+                "required": [
+                    "externalId",
+                    "status",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "externalId": {
+                        "type": "string",
+                        "description": "Unique External ID for data point"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Dispatch.V2.GpsPingResultStatus"
+                            }
+                        ],
+                        "description": "Request status"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Gets or sets the response message received from the GPS provider about the unit at the time of recording",
+                        "format": "html"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Dispatch.V2.GpsPingResultStatus": {
+                "enum": [
+                    "Fail",
+                    "Success"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Fail",
+                    "Success"
+                ]
             },
             "Dispatch.V2.GpsPingCreateRequest": {
                 "required": [
@@ -5852,6 +7191,186 @@
                 },
                 "additionalProperties": false
             },
+            "PaginatedResponse_Of_Dispatch.V2.TechnicianSkillResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Dispatch.V2.TechnicianSkillResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Dispatch.V2.TechnicianSkillResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "technicianId",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique id of the technician skill record."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Descriptive identifier."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the technician skill is enabled."
+                    },
+                    "technicianId": {
+                        "type": "integer",
+                        "description": "Unique id of the technician this technician skill applies to.",
+                        "format": "int64"
+                    },
+                    "jobTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Unique ids of job types this technician skill applies to.",
+                        "nullable": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "When the technician skill was created (in UTC).",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "When the technician skill was modified (in UTC).",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a technician skill response."
+            },
+            "Dispatch.V2.UpdateTechnicianSkillsResponse": {
+                "required": [
+                    "updated",
+                    "technicianSkills"
+                ],
+                "type": "object",
+                "properties": {
+                    "updated": {
+                        "type": "boolean",
+                        "description": "Whether the update was successful"
+                    },
+                    "technicianSkills": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Dispatch.V2.TechnicianSkillResponse"
+                        },
+                        "description": "List of all technician skills after the update"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response for updating technician skills"
+            },
+            "Dispatch.V2.UpdateTechnicianSkillsRequest": {
+                "required": [
+                    "technicianId",
+                    "skillIds",
+                    "replaceExistingSkills"
+                ],
+                "type": "object",
+                "properties": {
+                    "technicianId": {
+                        "type": "integer",
+                        "description": "Technician Id to assign Skills to",
+                        "format": "int64"
+                    },
+                    "skillIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Skills Id to associate with the Technician"
+                    },
+                    "replaceExistingSkills": {
+                        "type": "boolean",
+                        "description": "Whether this replaces all existing skills or just appends the skills"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Assigns or replaces skills on a technician"
+            },
+            "Dispatch.V2.CreateTechnicianSkillRequest": {
+                "required": [
+                    "technicianId",
+                    "name",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "technicianId": {
+                        "type": "integer",
+                        "description": "Technician Id to assign the newly created skill to",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the skill"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "If the skill is active"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Creates a new skill and assigns it to a technician"
+            },
+            "Dispatch.Contracts.TechnicianSkill.DeleteTechnicianSkillResult": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of deleting a technician skill association."
+            },
             "Dispatch.V2.TechnicianTrackingResponse": {
                 "required": [
                     "technicianTrackingUrl"
@@ -6714,6 +8233,11 @@
         },
         {
             "apiKeyQuery": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "AdaptiveCapacity"
         }
     ]
 }

@@ -3778,6 +3778,7 @@
                                                     "total": "string",
                                                     "inventory": true,
                                                     "taxable": true,
+                                                    "isChargeable": true,
                                                     "generalLedgerAccount": {
                                                         "id": 0,
                                                         "name": "string",
@@ -4016,6 +4017,7 @@
                                             "total": "string",
                                             "inventory": true,
                                             "taxable": true,
+                                            "isChargeable": true,
                                             "generalLedgerAccount": {
                                                 "id": 0,
                                                 "name": "string",
@@ -6661,6 +6663,7 @@
                                                     "total": "string",
                                                     "inventory": true,
                                                     "taxable": true,
+                                                    "isChargeable": true,
                                                     "generalLedgerAccount": {
                                                         "id": 0,
                                                         "name": "string",
@@ -13728,6 +13731,7 @@
                     "skuId",
                     "inventory",
                     "taxable",
+                    "isChargeable",
                     "membershipTypeId",
                     "createdOn",
                     "modifiedOn",
@@ -13794,6 +13798,9 @@
                         "type": "boolean"
                     },
                     "taxable": {
+                        "type": "boolean"
+                    },
+                    "isChargeable": {
                         "type": "boolean"
                     },
                     "generalLedgerAccount": {
@@ -14105,6 +14112,7 @@
                     "skuId",
                     "inventory",
                     "taxable",
+                    "isChargeable",
                     "membershipTypeId",
                     "createdOn",
                     "modifiedOn",
@@ -14173,6 +14181,9 @@
                         "type": "boolean"
                     },
                     "taxable": {
+                        "type": "boolean"
+                    },
+                    "isChargeable": {
                         "type": "boolean"
                     },
                     "generalLedgerAccount": {
