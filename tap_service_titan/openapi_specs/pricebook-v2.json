@@ -719,8 +719,8 @@
                 "tags": [
                     "DiscountAndFees"
                 ],
-                "summary": "Get data on all of the discounts or fees in the pricebook.",
-                "description": "Get data on all of the discounts or fees in the pricebook.",
+                "summary": "Get data on all of the discounts or fees in the pricebook. Supports optional search filtering.",
+                "description": "Get data on all of the discounts or fees in the pricebook. Supports optional search filtering.",
                 "operationId": "DiscountAndFees_GetList",
                 "parameters": [
                     {
@@ -860,6 +860,18 @@
                         "schema": {
                             "type": "string",
                             "nullable": true
+                        }
+                    },
+                    {
+                        "name": "searchText",
+                        "in": "query",
+                        "description": "Optional search text to filter by. Performs case-insensitive partial match on\nDisplay Name, Code, and Description fields.",
+                        "schema": {
+                            "maxLength": 200,
+                            "minLength": 2,
+                            "type": "string",
+                            "nullable": true,
+                            "example": "dispatch"
                         }
                     }
                 ],
@@ -1090,8 +1102,8 @@
                 "tags": [
                     "DiscountAndFees"
                 ],
-                "summary": "Get details if a discount or fees in the pricebook.",
-                "description": "Get details if a discount or fees in the pricebook.",
+                "summary": "Get details of a discount or fee in the pricebook.",
+                "description": "Get details of a discount or fee in the pricebook.",
                 "operationId": "DiscountAndFees_Get",
                 "parameters": [
                     {
@@ -1462,8 +1474,8 @@
                 "tags": [
                     "Equipment"
                 ],
-                "summary": "Get data on all the equipment in the pricebook.",
-                "description": "Get data on all the equipment in the pricebook.",
+                "summary": "Get data on all the equipment in the pricebook. Supports optional search filtering.",
+                "description": "Get data on all the equipment in the pricebook. Supports optional search filtering.",
                 "operationId": "Equipment_GetList",
                 "parameters": [
                     {
@@ -1603,6 +1615,18 @@
                         "schema": {
                             "type": "string",
                             "nullable": true
+                        }
+                    },
+                    {
+                        "name": "searchText",
+                        "in": "query",
+                        "description": "Optional search text to filter by. Performs case-insensitive partial match on\nDisplay Name, Code, and Description fields.",
+                        "schema": {
+                            "maxLength": 200,
+                            "minLength": 2,
+                            "type": "string",
+                            "nullable": true,
+                            "example": "dispatch"
                         }
                     }
                 ],
@@ -2083,8 +2107,8 @@
                 "tags": [
                     "Equipment"
                 ],
-                "summary": "Get details a equipment in the pricebook.",
-                "description": "Get details a equipment in the pricebook.",
+                "summary": "Get details of equipment in the pricebook.",
+                "description": "Get details of equipment in the pricebook.",
                 "operationId": "Equipment_Get",
                 "parameters": [
                     {
@@ -3450,8 +3474,8 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "Get details on materials in the pricebook.",
-                "description": "Get details on materials in the pricebook.",
+                "summary": "Get details on materials in the pricebook. Supports optional search filtering.",
+                "description": "Get details on materials in the pricebook. Supports optional search filtering.",
                 "operationId": "Materials_GetList",
                 "parameters": [
                     {
@@ -3609,6 +3633,18 @@
                         "schema": {
                             "type": "string",
                             "nullable": true
+                        }
+                    },
+                    {
+                        "name": "searchText",
+                        "in": "query",
+                        "description": "Optional search text to filter by. Performs case-insensitive partial match on\nDisplay Name, Code, and Description fields.",
+                        "schema": {
+                            "maxLength": 200,
+                            "minLength": 2,
+                            "type": "string",
+                            "nullable": true,
+                            "example": "dispatch"
                         }
                     }
                 ],
@@ -5759,8 +5795,8 @@
                 "tags": [
                     "Services"
                 ],
-                "summary": "Get data on all of the services in the pricebook.",
-                "description": "Get data on all of the services in the pricebook.",
+                "summary": "Get data on all of the services in the pricebook. Supports optional search filtering.",
+                "description": "Get data on all of the services in the pricebook. Supports optional search filtering.",
                 "operationId": "Services_GetList",
                 "parameters": [
                     {
@@ -5909,6 +5945,18 @@
                         "schema": {
                             "type": "string",
                             "nullable": true
+                        }
+                    },
+                    {
+                        "name": "searchText",
+                        "in": "query",
+                        "description": "Optional search text to filter by. Performs case-insensitive partial match on\nDisplay Name, Code, and Description fields.",
+                        "schema": {
+                            "maxLength": 200,
+                            "minLength": 2,
+                            "type": "string",
+                            "nullable": true,
+                            "example": "dispatch"
                         }
                     }
                 ],

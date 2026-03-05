@@ -833,6 +833,7 @@
                                             },
                                             "dailyGoal": 0,
                                             "isManagedTech": true,
+                                            "licenseType": {},
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -1085,6 +1086,7 @@
                                             },
                                             "dailyGoal": 0,
                                             "isManagedTech": true,
+                                            "licenseType": {},
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -1330,6 +1332,7 @@
                                     },
                                     "dailyGoal": 0,
                                     "isManagedTech": true,
+                                    "licenseType": {},
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -2657,7 +2660,8 @@
                 "tags": [
                     "TagTypes"
                 ],
-                "summary": "TagTypes_Create",
+                "summary": "Creates a tag type",
+                "description": "Creates a tag type",
                 "operationId": "TagTypes_Create",
                 "parameters": [
                     {
@@ -2705,6 +2709,106 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenant/{tenant}/tag-types/{id}": {
+            "patch": {
+                "tags": [
+                    "TagTypes"
+                ],
+                "summary": "Updates a tag type",
+                "description": "Updates a tag type",
+                "operationId": "TagTypes_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TenantSettings.V2.UpdateTagTypeRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "color": "string",
+                                "code": "string",
+                                "importance": {},
+                                "isConversionOpportunity": true,
+                                "allowToUseOnTimesheetActivity": true,
+                                "isVisibleOnDispatchBoard": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3748,6 +3852,15 @@
                         "type": "boolean",
                         "description": "Whether the technician is managed"
                     },
+                    "licenseType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.LicenseType"
+                            }
+                        ],
+                        "description": "License type",
+                        "nullable": true
+                    },
                     "customFields": {
                         "type": "array",
                         "items": {
@@ -3970,6 +4083,20 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "TenantSettings.V2.LicenseType": {
+                "enum": [
+                    "NonManagedTech",
+                    "ManagedTech",
+                    "ManagedInstaller"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "NonManagedTech",
+                    "ManagedTech",
+                    "ManagedInstaller"
+                ]
             },
             "TenantSettings.V2.TechnicianCustomFieldResponse": {
                 "required": [
@@ -4268,6 +4395,15 @@
                     "isManagedTech": {
                         "type": "boolean",
                         "description": "Whether the technician is managed"
+                    },
+                    "licenseType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.LicenseType"
+                            }
+                        ],
+                        "description": "License type",
+                        "nullable": true
                     },
                     "customFields": {
                         "type": "array",
@@ -4604,20 +4740,6 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "TenantSettings.V2.LicenseType": {
-                "enum": [
-                    "NonManagedTech",
-                    "ManagedTech",
-                    "ManagedInstaller"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "NonManagedTech",
-                    "ManagedTech",
-                    "ManagedInstaller"
-                ]
             },
             "TenantSettings.V2.JobHistoryDateFilter": {
                 "enum": [
@@ -5852,6 +5974,47 @@
                         "type": "boolean",
                         "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board.",
                         "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TenantSettings.V2.UpdateTagTypeRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the tag type"
+                    },
+                    "color": {
+                        "pattern": "^#([0-9A-Fa-f]{6})$",
+                        "type": "string",
+                        "description": "Color hex string of the tag type"
+                    },
+                    "code": {
+                        "maxLength": 20,
+                        "type": "string",
+                        "description": "Code associated with the tag type"
+                    },
+                    "importance": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantSettings.V2.TagImportance"
+                            }
+                        ],
+                        "description": "The TagImportance of the tag type",
+                        "nullable": true
+                    },
+                    "isConversionOpportunity": {
+                        "type": "boolean",
+                        "description": "Indicates whether tags of this type should be considered as an opportunity"
+                    },
+                    "allowToUseOnTimesheetActivity": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity"
+                    },
+                    "isVisibleOnDispatchBoard": {
+                        "type": "boolean",
+                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board."
                     }
                 },
                 "additionalProperties": false

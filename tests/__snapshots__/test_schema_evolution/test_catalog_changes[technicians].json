@@ -240,6 +240,15 @@
     {
       "breadcrumb": [
         "properties",
+        "licenseType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customFields"
       ],
       "metadata": {
@@ -792,6 +801,13 @@
       },
       "lastName": {
         "description": "Technician Last name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "licenseType": {
+        "description": "",
         "type": [
           "string",
           "null"
