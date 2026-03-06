@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
@@ -141,7 +141,7 @@ class TapServiceTitan(Tap):
     @override
     def discover_streams(self) -> list[ServiceTitanBaseStream]:
         """Return a list of discovered streams."""
-        streams_list = [
+        streams_list: list[ServiceTitanBaseStream[Any]] = [
             streams.accounting.ApCreditsStream(self),
             streams.accounting.ApPaymentsStream(self),
             streams.accounting.BankDepositTransactionsStream(self),
@@ -271,7 +271,7 @@ class TapServiceTitan(Tap):
                     for report in custom_reports_config
                 ]
             )
-        return streams_list  # ty: ignore[invalid-return-type]
+        return streams_list
 
 
 if __name__ == "__main__":
