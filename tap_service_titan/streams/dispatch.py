@@ -95,13 +95,20 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
                 yield availability_dict
 
     @override
-    def get_new_paginator(self) -> CapacitiesPaginator:
+    def get_new_paginator(self) -> CapacitiesPaginator | None:
         """Get the paginator."""
-        start_date = self.get_starting_timestamp(self.context)
-        assert start_date is not None  # noqa: S101
+        if start_date := self.get_starting_timestamp(self.context):
+            # Set the time to the start of the day to capture late updates
+            return CapacitiesPaginator(
+                start_date.replace(
+                    hour=0,
+                    minute=0,
+                    second=0,
+                    microsecond=0,
+                )
+            )
 
-        # Set the time to the start of the day to capture late updates
-        return CapacitiesPaginator(start_date.replace(hour=0, minute=0, second=0, microsecond=0))
+        return None
 
     @override
     def prepare_request_payload(
@@ -118,12 +125,20 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         | None
     ):
         """Prepare the request payload."""
-        assert next_page_token is not None  # noqa: S101
-        return {
-            "startsOnOrAfter": next_page_token.isoformat(),
-            "endsOnOrBefore": (next_page_token + timedelta(days=1)).isoformat(),
-            "skillBasedAvailability": "false",
-        }
+        payload = {"skillBasedAvailability": "false"}
+        if next_page_token:
+            payload["startsOnOrAfter"] = next_page_token.isoformat()
+            payload["endsOnOrBefore"] = (next_page_token + timedelta(days=1)).isoformat()
+
+        return payload
+
+    @override
+    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """Return an empty dictionary of URL parameters.
+
+        This endpoint does not accept any URL parameters.
+        """
+        return {}
 
     @override
     @cached_property
