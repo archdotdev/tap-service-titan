@@ -274,6 +274,6 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
         return self._sort_by is not None
 
     @override
-    def get_new_paginator(self) -> BaseAPIPaginator:
+    def get_new_paginator(self) -> BaseAPIPaginator | None:
         """Create a new pagination helper instance."""
         return ServiceTitanPaginator(start_value=1)
