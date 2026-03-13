@@ -58,7 +58,7 @@ async def download_all_openapi_specs() -> None:
     """Download all ServiceTitan OpenAPI specs."""
     async with async_playwright() as playwright:
         soup = await get_soup_from_url(playwright, f"{DOCS_ROOT}/apis/")
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        await OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         tasks = []
         for api_url in _extract_links(soup):
             download_path = OUTPUT_DIR / f"{get_api_name_from_url(api_url)}.json"
